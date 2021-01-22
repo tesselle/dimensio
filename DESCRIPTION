@@ -2,15 +2,38 @@ Package: dimensio
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    c(person(given = "Nicolas",
+             family = "Frerebeau",
+             role = c("aut", "cre"),
+             email = "nicolas.frerebeau@u-bordeaux-montaigne.fr",
+             comment = c(ORCID = "0000-0001-5759-4944")),
+      person(given = "Brice",
+             family = "Lebrun",
+             role = "ctb",
+             email = "brice.lebrun@u-bordeaux-montaigne.fr",
+             comment = c(ORCID = "0000-0001-7503-8685")))
+Maintainer: Nicolas Frerebeau
+    <nicolas.frerebeau@u-bordeaux-montaigne.fr>
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+License: GPL (>= 3)
+URL: http://dimensio.archaeo.science,
+    https://github.com/nfrerebeau/dimensio
+BugReports: https://github.com/nfrerebeau/dimensio/issues
+Depends: 
+    R (>= 3.3)
+Imports: 
+    methods
+Suggests: 
+    ca,
+    testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Config/testthat/edition: 3
+Collate: 
+    'AllClasses.R'
+    'AllGenerics.R'
+    'ca.R'
+    'dimensio-package.R'
+    'subset.R'
