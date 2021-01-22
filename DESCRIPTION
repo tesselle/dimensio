@@ -38,4 +38,6 @@ Collate:
     'AllGenerics.R'
     'ca.R'
     'dimensio-package.R'
+    'helpers.R'
+    'mutators.R'
     'subset.R'

@@ -20,7 +20,7 @@ NULL
 #' @param ... Currently not used.
 #' @details
 #'  \code{get_eigenvalues()} returns a \code{data.frame} with the following
-#'  columns: \code{eigenvalues}, \code{percentage} (percentage of variance) and
+#'  columns: \code{eigenvalues}, \code{variance} (percentage of variance) and
 #'  \code{cumulative} (cumulative percentage of variance).
 #'
 #'  \code{get_contribution()} returns a \code{data.frame} of contributions to
@@ -32,6 +32,9 @@ NULL
 #'
 #'  \code{get_cos2()} returns a \code{data.frame} of \eqn{cos^2}{cos2} values
 #'  (i.e. quality of the representation of the points on the factor map).
+#'
+#'  \code{get_variance} returns a \code{numeric} vector giving the percentage
+#'  of variance of each dimension.
 #' @return
 #'  \code{get_*()} returns a \code{\link{numeric}} vector or a
 #'  \code{\link{data.frame}}.
@@ -92,6 +95,14 @@ setGeneric(
 setGeneric(
   name = "get_inertia",
   def = function(x, ...) standardGeneric("get_inertia"),
+  valueClass = "numeric"
+)
+
+#' @rdname mutator
+#' @aliases get_variance-method
+setGeneric(
+  name = "get_variance",
+  def = function(x, ...) standardGeneric("get_variance"),
   valueClass = "numeric"
 )
 

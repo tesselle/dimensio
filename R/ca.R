@@ -73,11 +73,14 @@ setMethod(
       n_sup <- nrow(extra_row)
       row_sup <- extra_row / rowSums(extra_row)
       sv_row_sup <- matrix(data = sv, nrow = n_sup, ncol = ndim, byrow = TRUE)
+
       # Standard coordinates
       coord_row_sup <- crossprod(t(row_sup) - w_col, coord_col) / sv_row_sup
+
       # Distances
       dist_row_sup <- sqrt(rowSums(t((t(row_sup) - w_col) / sqrt(w_col))^2))
       dist_row <- c(dist_row, dist_row_sup)
+
       # Inertias
       inertia_row <- c(inertia_row, rep(NA_real_, n_sup))
     }
@@ -86,11 +89,14 @@ setMethod(
       n_sup <- ncol(extra_col)
       col_sup <- t(t(extra_col) / colSums(extra_col))
       sv_col_sup <- matrix(data = sv, nrow = n_sup, ncol = ndim, byrow = TRUE)
+
       # Standard coordinates
       coord_col_sup <- crossprod(col_sup - w_row, coord_row) / sv_col_sup
+
       # Distances
       dist_col_sup <- sqrt(colSums(((col_sup - w_row) / sqrt(w_row))^2))
       dist_col <- c(dist_col, dist_col_sup)
+
       # Inertia
       inertia_col <- c(inertia_col, rep(NA_real_, n_sup))
     }
@@ -115,25 +121,6 @@ setMethod(
   }
 )
 
-#' @param index A \code{\link{numeric}} vector.
-#' @param n An \code{\link{integer}} value.
-#' @return A \code{\link{logical}} vector.
-#' @keywords internal
-#' @noRd
-is_supplementary <- function(index, n) {
-  x <- rep(FALSE, times = n)
-
-  if (!is.null(index) && (!is.numeric(index) & !is.logical(index))) {
-    arg <- deparse(substitute(index))
-    msg <- sprintf("%s must be a numeric vector of indices.", sQuote(arg))
-    stop(msg, call. = FALSE)
-  } else {
-    x[index] <- TRUE
-  }
-
-  x
-}
-
 #' @export
 #' @rdname predict
 #' @aliases predict,CA-method
@@ -157,15 +144,6 @@ setMethod(
     coords <- data %*% as.matrix(std)
     as.data.frame(coords)
   }
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases dim,CA-method
-setMethod(
-  f = "dim",
-  signature = signature(x = "CA"),
-  definition = function(x) x@dimension
 )
 
 #' @export
@@ -210,44 +188,6 @@ setMethod(
 
 #' @export
 #' @rdname mutator
-#' @aliases get_inertia,CA-method
-setMethod(
-  f = "get_inertia",
-  signature = signature(x = "CA"),
-  definition = function(x, margin = 1) {
-    if (margin == 1) {
-      i <- x@row_inertias
-      names(i) <- x@row_names
-    }
-    if (margin == 2) {
-      i <- x@column_inertias
-      names(i) <- x@column_names
-    }
-    i
-  }
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_distances,CA-method
-setMethod(
-  f = "get_distances",
-  signature = signature(x = "CA"),
-  definition = function(x, margin = 1) {
-    if (margin == 1) {
-      d <- x@row_distances
-      names(d) <- x@row_names
-    }
-    if (margin == 2) {
-      d <- x@column_distances
-      names(d) <- x@column_names
-    }
-    d
-  }
-)
-
-#' @export
-#' @rdname mutator
 #' @aliases get_contributions,CA-method
 setMethod(
   f = "get_contributions",
@@ -264,25 +204,5 @@ setMethod(
     keep_dim <- seq_len(ncol(coords))
     contrib <- t(t(coords^2 * masses) / sv[keep_dim]^2) * 100
     as.data.frame(contrib)
-  }
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_eigenvalues,CA-method
-setMethod(
-  f = "get_eigenvalues",
-  signature = signature(x = "CA"),
-  definition = function(x) {
-    eig <- x@singular_values^2 # Eigenvalues
-    pvar <- eig / sum(eig) * 100 # Percentage of variance
-    cvar <- cumsum(pvar) # Cumulative percentage of variance
-
-    data.frame(
-      eigenvalues = eig,
-      percentage = pvar,
-      cumulative = cvar,
-      row.names =  paste0("CA", seq_along(eig))
-    )
   }
 )
