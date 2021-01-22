@@ -9,6 +9,8 @@
 \alias{get_coordinates-method}
 \alias{get_contributions}
 \alias{get_contributions-method}
+\alias{get_cos2}
+\alias{get_cos2-method}
 \alias{get_distances}
 \alias{get_distances-method}
 \alias{get_eigenvalues}
@@ -16,11 +18,18 @@
 \alias{get_inertia}
 \alias{get_inertia-method}
 \alias{dim,CA-method}
+\alias{get_coordinates,CA-method}
+\alias{get_inertia,CA-method}
+\alias{get_distances,CA-method}
+\alias{get_contributions,CA-method}
+\alias{get_eigenvalues,CA-method}
 \title{Get or Set Parts of an Object}
 \usage{
 get_coordinates(x, ...)
 
 get_contributions(x, ...)
+
+get_cos2(x, ...)
 
 get_distances(x, ...)
 
@@ -29,21 +38,60 @@ get_eigenvalues(x)
 get_inertia(x, ...)
 
 \S4method{dim}{CA}(x)
+
+\S4method{get_coordinates}{CA}(x, margin = 1, standard = FALSE, sup = TRUE, sup_name = ".sup")
+
+\S4method{get_inertia}{CA}(x, margin = 1)
+
+\S4method{get_distances}{CA}(x, margin = 1)
+
+\S4method{get_contributions}{CA}(x, margin = 1)
+
+\S4method{get_eigenvalues}{CA}(x)
 }
 \arguments{
 \item{x}{An object from which to get or set element(s) (typically a
 \linkS4class{CA} object).}
 
 \item{...}{Currently not used.}
+
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
+which the data will be returned: \code{1} indicates individuals/rows (the
+default), \code{2} indicates variables/columns.}
+
+\item{standard}{A \code{\link{logical}} scalar: should standard coordinates
+be returned instead of principal coordinates (the default)?}
+
+\item{sup}{A \code{\link{logical}} scalar: should supplementary points be
+returned?}
+
+\item{sup_name}{A \code{\link{character}} string specifying the name of the
+column to create for supplementary points attribution (see below).}
 }
 \value{
-\code{get_*} returns a \code{\link{data.frame}}.
+\code{get_*()} returns a \code{\link{numeric}} vector or a
+\code{\link{data.frame}}.
 
-\code{set_*} returns an object of the same sort as \code{x} with the new
+\code{set_*()} returns an object of the same sort as \code{x} with the new
 values assigned.
 }
 \description{
 Getters and setters to retrieve or set parts of an object.
+}
+\details{
+\code{get_eigenvalues()} returns a \code{data.frame} with the following
+columns: \code{eigenvalues}, \code{percentage} (percentage of variance) and
+\code{cumulative} (cumulative percentage of variance).
+
+\code{get_contribution()} returns a \code{data.frame} of contributions to
+the definition of the principal dimensions.
+
+\code{get_coordinates()} returns a \code{data.frame} of coordinates. If
+\code{sup} is \code{TRUE}, an extra column (named after \code{sup_name}) is
+added specifying whether an observation is a supplementary point or not.
+
+\code{get_cos2()} returns a \code{data.frame} of \eqn{cos^2}{cos2} values
+(i.e. quality of the representation of the points on the factor map).
 }
 \seealso{
 Other mutator: 

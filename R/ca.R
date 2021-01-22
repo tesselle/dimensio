@@ -140,9 +140,9 @@ is_supplementary <- function(index, n) {
 setMethod(
   f = "predict",
   signature = signature(object = "CA"),
-  definition = function(object, data, margin = 1) {
+  definition = function(object, newdata, margin = 1) {
     # Coerce to matrix
-    data <- as.matrix(data)
+    data <- as.matrix(newdata)
     if (margin == 1) data <- data / rowSums(data)
     if (margin == 2) data <- t(data) / colSums(data)
 
@@ -169,7 +169,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname correspondence
+#' @rdname mutator
 #' @aliases get_coordinates,CA-method
 setMethod(
   f = "get_coordinates",
@@ -209,7 +209,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname correspondence
+#' @rdname mutator
 #' @aliases get_inertia,CA-method
 setMethod(
   f = "get_inertia",
@@ -228,7 +228,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname correspondence
+#' @rdname mutator
 #' @aliases get_distances,CA-method
 setMethod(
   f = "get_distances",
@@ -247,7 +247,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname correspondence
+#' @rdname mutator
 #' @aliases get_contributions,CA-method
 setMethod(
   f = "get_contributions",
@@ -268,7 +268,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname correspondence
+#' @rdname mutator
 #' @aliases get_eigenvalues,CA-method
 setMethod(
   f = "get_eigenvalues",

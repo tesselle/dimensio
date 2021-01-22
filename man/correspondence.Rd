@@ -6,26 +6,11 @@
 \alias{ca}
 \alias{ca-method}
 \alias{ca,matrix-method}
-\alias{get_coordinates,CA-method}
-\alias{get_inertia,CA-method}
-\alias{get_distances,CA-method}
-\alias{get_contributions,CA-method}
-\alias{get_eigenvalues,CA-method}
 \title{Correspondence Analysis}
 \usage{
 ca(object, ...)
 
 \S4method{ca}{matrix}(object, n = NULL, sup_rows = NULL, sup_columns = NULL)
-
-\S4method{get_coordinates}{CA}(x, margin = 1, standard = FALSE, sup = TRUE, sup_name = ".sup")
-
-\S4method{get_inertia}{CA}(x, margin = 1)
-
-\S4method{get_distances}{CA}(x, margin = 1)
-
-\S4method{get_contributions}{CA}(x, margin = 1)
-
-\S4method{get_eigenvalues}{CA}(x)
 }
 \arguments{
 \item{object}{A \code{\link{matrix}} or a \code{\link{data.frame}}.}
@@ -40,39 +25,13 @@ specifying the indices of the supplementary rows.}
 
 \item{sup_columns}{A \code{\link{numeric}} or \code{\link{logical}} vector
 specifying the indices of the supplementary columns.}
-
-\item{x}{A \linkS4class{CA} object.}
-
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
-which the data will be returned: \code{1} indicates rows (the default),
-\code{2} indicates columns.}
-
-\item{standard}{A \code{\link{logical}} scalar: should standard coordinates
-be returned instead of principal coordinates (the default)?}
-
-\item{sup}{A \code{\link{logical}} scalar: should supplementary points be
-returned?}
-
-\item{sup_name}{A \code{\link{character}} string specifying the name of the
-column to create for supplementary points attribution (see below).}
 }
 \value{
-\code{ca} returns a \linkS4class{CA} object.
-
-\code{get_*} returns a \code{data.frame}.
+A \linkS4class{CA} object.
 }
 \description{
 Computes a simple correspondence analysis based on the singular value
 decomposition.
-}
-\details{
-\code{get_coordinates} returns a \code{data.frame} of coordinates. If
-\code{sup} is \code{TRUE}, an extra column (named after \code{sup_name}) is
-added specifying whether an observation is a supplementary point or not.
-
-\code{get_eigenvalues} returns a \code{data.frame} with the following
-columns: \code{eigenvalues}, \code{percentage} (percentage of variance) and
-\code{cumulative} (cumulative percentage of variance).
 }
 \examples{
 ## Create count data matrix
@@ -101,6 +60,8 @@ get_contributions(X, margin = 1)
 get_eigenvalues(X)
 }
 \seealso{
+\link{mutator}, \link{predict}
+
 Other multivariate analysis: 
 \code{\link{CA-class}},
 \code{\link{predict}()}
