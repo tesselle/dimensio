@@ -4,22 +4,86 @@
 \name{subset}
 \alias{subset}
 \alias{[[,CA,character,missing-method}
-\title{Extract or Replace Parts of an Object}
+\alias{[[,PCA,character,missing-method}
+\title{Extract Parts of an Object}
 \usage{
 \S4method{[[}{CA,character,missing}(x, i)
+
+\S4method{[[}{PCA,character,missing}(x, i)
 }
 \arguments{
 \item{x}{An object from which to extract element(s) or in which to replace
 element(s).}
 
-\item{i}{A \code{\link{character}} string specifying elements to extract or
-replace.}
+\item{i}{A \code{\link{character}} string specifying elements to extract.
+Any unambiguous substring can be given (see details).}
 }
 \value{
-A subsetted object of the same sort as \code{x}.
+A \code{\link{list}}.
 }
 \description{
-Operators acting on objects to extract or replace parts.
+Operators acting on objects to extract parts.
+}
+\details{
+If \code{i} is "\code{data}", returns a list with the following elements:
+\describe{
+\item{\code{data}}{A \code{\link{numeric}} matrix of raw data.}
+\item{\code{mean}}{A \code{\link{numeric}} vector giving the variables
+means (\code{PCA}).}
+\item{\code{sd}}{A \code{\link{numeric}} vector giving the variables
+standard deviations (\code{PCA}).}
+}
+
+If \code{i} is "\code{rows}" (\code{CA}) or "\code{individuals}"
+(\code{PCA}), returns a list with the following elements:
+\describe{
+\item{\code{coord}}{A \code{\link{numeric}} matrix of rows/individuals
+coordinates.}
+\item{\code{cos2}}{A \code{\link{numeric}} matrix of rows/individuals
+squared cosine.}
+\item{\code{masses}}{A \code{\link{numeric}} vector giving the rows masses
+(\code{CA}).}
+\item{\code{weights}}{A \code{\link{numeric}} vector giving the individuals
+weights (\code{PCA}).}
+\item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
+point is a supplementary observation or not.}
+}
+
+If \code{i} is "\code{columns}" (\code{CA}) or "\code{variables}"
+(\code{PCA}), returns a list with the following elements:
+\describe{
+\item{\code{coord}}{A \code{\link{numeric}} matrix of columns/variables
+coordinates.}
+\item{\code{cor}}{A \code{\link{numeric}} matrix of correlation between
+variables and the dimensions (\code{PCA}).}
+\item{\code{cos2}}{A \code{\link{numeric}} matrix of columns/variables
+squared cosine.}
+\item{\code{masses}}{A \code{\link{numeric}} vector giving the columns
+masses (\code{CA}).}
+\item{\code{weights}}{A \code{\link{numeric}} vector giving the variables
+weights (\code{PCA}).}
+\item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
+point is a supplementary observation or not.}
+}
+
+If \code{i} is "\code{eigenvalues}", returns a \code{\link{numeric}} vector
+of eigenvalues.
+}
+\examples{
+## Create a matrix
+A <- matrix(data = sample(1:10, 100, TRUE), nrow = 10, ncol = 10)
+
+## Compute principal components analysis
+X <- pca(A, scale = TRUE, sup_ind = 8:10, sup_var = 7:10)
+
+## Get results for the individuals
+X[["ind"]]
+
+## Compute correspondence analysis
+Y <- ca(A, sup_row = 8:10, sup_col = 7:10)
+
+## Get results for the columns
+Y[["col"]]
 }
 \seealso{
 Other mutator: 

@@ -14,9 +14,10 @@ Authors@R:
              comment = c(ORCID = "0000-0001-7503-8685")))
 Maintainer: Nicolas Frerebeau
     <nicolas.frerebeau@u-bordeaux-montaigne.fr>
-Description: Simple Principal Components Analysis (PCA) and Correspondence 
-    Analysis (CA). This package provides methods to analyse, summarize and 
-    visualize results of multivariate data analysis.
+Description: Simple Principal Components Analysis (PCA) and
+    Correspondence Analysis (CA). This package provides classes and methods to
+    compute, extract, summarize and visualize results of multivariate data
+    analysis.
 License: GPL (>= 3)
 URL: http://dimensio.archaeo.science,
     https://github.com/nfrerebeau/dimensio
@@ -26,7 +27,7 @@ Depends:
 Imports: 
     methods
 Suggests: 
-    ca,
+    FactoMineR,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
@@ -40,4 +41,5 @@ Collate:
     'dimensio-package.R'
     'helpers.R'
     'mutators.R'
+    'pca.R'
     'subset.R'

@@ -1,16 +1,14 @@
-test_that("Correspondence Analysis", {
+test_that("Principal Components Analysis", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
 
-  row_zeros <- col_zeros <- cts
-  row_zeros[1, ] <- 0
-  expect_error(ca(row_zeros), "Empty rows detected.")
-  col_zeros[, 1] <- 0
-  expect_error(ca(col_zeros), "Empty columns detected.")
+  row_zeros <- cts
+  row_zeros[1, ] <- NA
+  expect_error(pca(row_zeros), "Missing values detected.")
 
-  expect_error(ca(cts, sup_row = "row1"), "must be a numeric vector")
-  expect_error(ca(cts, sup_col = "col1"), "must be a numeric vector")
+  expect_error(pca(cts, sup_ind = "row1"), "must be a numeric vector")
+  expect_error(pca(cts, sup_var = "col1"), "must be a numeric vector")
 
-  res <- ca(cts, n = 10)
+  res <- pca(cts, n = 10)
   expect_error(res[["X"]])
 
   # Points coordinates
@@ -38,11 +36,11 @@ test_that("Correspondence Analysis", {
 test_that("Predict new coordinates", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)
 
-  res <- ca(cts[1:7, 1:6])
+  res <- pca(cts[1:7, 1:6])
   new_rows <- predict(res, cts[8:10, 1:6], margin = 1)
   new_cols <- predict(res, cts[1:7, 7:10], margin = 2)
 
-  res_sup <- ca(cts, sup_row = 8:10, sup_col = 7:10)
+  res_sup <- pca(cts, sup_ind = 8:10, sup_var = 7:10)
   sup_rows <- get_coordinates(res_sup, margin = 1, sup = TRUE)
   sup_cols <- get_coordinates(res_sup, margin = 2, sup = TRUE)
 
@@ -56,8 +54,9 @@ test_that("Compare with {FactoMineR}", {
   mtx <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)
   df <- as.data.frame(mtx)
 
-  res_facto <- FactoMineR::CA(df, row.sup = 8:10, col.sup = 7:10, graph = FALSE)
-  res_arkhe <- ca(df, sup_row = 8:10, sup_col = 7:10)
+  res_facto <- FactoMineR::PCA(df, scale.unit = TRUE, ind.sup = 8:10,
+                               quanti.sup = 7:10, graph = FALSE)
+  res_arkhe <- pca(df, scale = TRUE, sup_ind = 8:10, sup_var = 7:10)
 
   # Get coordinates
   coord_row <- get_coordinates(res_arkhe, margin = 1, sup = TRUE)
@@ -65,50 +64,38 @@ test_that("Compare with {FactoMineR}", {
 
   # Row principal coordinates
   expect_equal(
-    object = abs(as.data.frame(res_facto$row$coord)),
+    object = abs(as.data.frame(res_facto$ind$coord)),
     expected = abs(coord_row[!coord_row$.sup, -ncol(coord_row)]),
     ignore_attr = TRUE
   )
   # Supplementary row coordinates
   expect_equal(
-    object = abs(as.data.frame(res_facto$row.sup$coord)),
+    object = abs(as.data.frame(res_facto$ind.sup$coord)),
     expected = abs(coord_row[coord_row$.sup, -ncol(coord_row)]),
     ignore_attr = TRUE
   )
   # Column principal coordinates
   expect_equal(
-    object = abs(as.data.frame(res_facto$col$coord)),
+    object = abs(as.data.frame(res_facto$var$coord)),
     expected = abs(coord_col[!coord_col$.sup, -ncol(coord_col)]),
     ignore_attr = TRUE
   )
   # Supplementary column coordinates
   expect_equal(
-    object = abs(as.data.frame(res_facto$col.sup$coord)),
+    object = abs(as.data.frame(res_facto$quanti.sup$coord)),
     expected = abs(coord_col[coord_col$.sup, -ncol(coord_col)]),
     ignore_attr = TRUE
   )
   # Row contributions
   expect_equal(
-    object = as.data.frame(res_facto$row$contrib),
+    object = as.data.frame(res_facto$ind$contrib),
     expected = get_contributions(res_arkhe, margin = 1),
     ignore_attr = TRUE
   )
   # Column contributions
   expect_equal(
-    object = as.data.frame(res_facto$col$contrib),
+    object = as.data.frame(res_facto$var$contrib),
     expected = get_contributions(res_arkhe, margin = 2),
-    ignore_attr = TRUE
-  )
-  # Row inertias
-  expect_equal(
-    object = res_facto$row$inertia,
-    expected = get_inertia(res_arkhe, margin = 1),
-    ignore_attr = TRUE
-  )
-  # Column inertias
-  expect_equal(
-    object = res_facto$col$inertia,
-    expected = get_inertia(res_arkhe, margin = 2),
     ignore_attr = TRUE
   )
 
@@ -118,25 +105,25 @@ test_that("Compare with {FactoMineR}", {
 
   # Row cos2
   expect_equal(
-    object = as.data.frame(res_facto$row$cos2),
+    object = as.data.frame(res_facto$ind$cos2),
     expected = cos2_row[!cos2_row$.sup, -ncol(cos2_row)],
     ignore_attr = TRUE
   )
   # Supplementary row cos2
   expect_equal(
-    object = as.data.frame(res_facto$row.sup$cos2),
+    object = as.data.frame(res_facto$ind.sup$cos2),
     expected = cos2_row[cos2_row$.sup, -ncol(cos2_row)],
     ignore_attr = TRUE
   )
   # Column cos2
   expect_equal(
-    object = as.data.frame(res_facto$col$cos2),
+    object = as.data.frame(res_facto$var$cos2),
     expected = cos2_col[!cos2_col$.sup, -ncol(cos2_col)],
     ignore_attr = TRUE
   )
   # Supplementary column cos2
   expect_equal(
-    object = as.data.frame(res_facto$col.sup$cos2),
+    object = as.data.frame(res_facto$quanti.sup$cos2),
     expected = cos2_col[cos2_col$.sup, -ncol(cos2_col)],
     ignore_attr = TRUE
   )

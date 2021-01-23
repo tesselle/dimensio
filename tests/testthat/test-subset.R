@@ -1,0 +1,28 @@
+test_that("Correspondence Analysis", {
+  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
+  res <- ca(cts)
+
+  expect_error(res[["X"]])
+  expect_type(res[["data"]], "list")
+  expect_length(res[["data"]], 1)
+  expect_type(res[["row"]], "list")
+  expect_length(res[["row"]], 4)
+  expect_type(res[["col"]], "list")
+  expect_length(res[["col"]], 4)
+  expect_type(res[["eig"]], "double")
+  expect_length(res[["eig"]], 4)
+})
+test_that("Principal Components Analysis", {
+  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
+  res <- pca(cts)
+
+  expect_error(res[["X"]])
+  expect_type(res[["data"]], "list")
+  expect_length(res[["data"]], 3)
+  expect_type(res[["ind"]], "list")
+  expect_length(res[["ind"]], 4)
+  expect_type(res[["var"]], "list")
+  expect_length(res[["var"]], 5)
+  expect_type(res[["eig"]], "double")
+  expect_length(res[["eig"]], 4)
+})

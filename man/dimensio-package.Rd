@@ -7,9 +7,10 @@
 \alias{dimensio}
 \title{dimensio: Multivariate Data Analysis}
 \description{
-Simple Principal Components Analysis (PCA) and Correspondence 
-    Analysis (CA). This package provides methods to analyse, summarize and 
-    visualize results of multivariate data analysis.
+Simple Principal Components Analysis (PCA) and
+    Correspondence Analysis (CA). This package provides classes and methods to
+    compute, extract, summarize and visualize results of multivariate data
+    analysis.
 }
 \details{
 \tabular{ll}{
