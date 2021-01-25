@@ -59,7 +59,7 @@ decreasing? Only used if \code{sort} is \code{TRUE}.}
 to be displayed.}
 
 \item{fill, border}{A \code{\link{character}} string specifying the bars
-infilling and border colours.}
+infilling and border colors.}
 
 \item{active}{A \code{\link{logical}} scalar: should the active
 observations be plotted?}

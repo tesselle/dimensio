@@ -31,7 +31,7 @@ plot_variance(object, ...)
 \item{...}{Currently not used.}
 
 \item{fill, border}{A \code{\link{character}} string specifying the bars
-infilling and border colours.}
+infilling and border colors.}
 
 \item{variance}{A \code{\link{logical}} scalar: should percentages of
 variance be plotted instead of eigenvalues?}
@@ -40,7 +40,7 @@ variance be plotted instead of eigenvalues?}
 percentages of variance be plotted ? Only used if \code{variance} is
 \code{TRUE}.}
 
-\item{colour}{A \code{\link{character}} string specifying the line colour.}
+\item{colour}{A \code{\link{character}} string specifying the line color.}
 }
 \description{
 Plot eigenvalues or variances histogram.

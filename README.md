@@ -24,9 +24,7 @@ as [**FactoMineR**](http://factominer.free.fr/),
 is designed to have as few dependencies as possible: computation and
 exploration of the results depends only on the R base packages.
 Visualization methods require
-[**ggplot2**](https://ggplot2.tidyverse.org/) but it is not
-automatically installed (you will have to install it yourself if
-necessary).
+[**ggplot2**](https://ggplot2.tidyverse.org/).
 
 ## Installation
 
@@ -82,7 +80,7 @@ plot_individuals(X, group = iris$Species, active = FALSE, sup = TRUE) +
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_contrast() # Custom colour scale
 
-## Plot active individuals by cos2
+## Plot individuals by cos2
 plot_individuals(X, highlight = "cos2", active = TRUE, sup = TRUE) +
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_iridescent() # Custom colour scale

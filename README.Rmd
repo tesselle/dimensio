@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 
 Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis.
 
-There are many very good packages for multivariate data analysis (such as [**FactoMineR**](http://factominer.free.fr/), [**ade4**](https://pbil.univ-lyon1.fr/ade4/) or [**ca**](https://cran.r-project.org/package=ca), all extended by [**FactoExtra**](https://rpkgs.datanovia.com/factoextra)). **dimensio** is designed to have as few dependencies as possible: computation and exploration of the results depends only on the R base packages. Visualization methods require [**ggplot2**](https://ggplot2.tidyverse.org/) but it is not automatically installed (you will have to install it yourself if necessary).
+There are many very good packages for multivariate data analysis (such as [**FactoMineR**](http://factominer.free.fr/), [**ade4**](https://pbil.univ-lyon1.fr/ade4/) or [**ca**](https://cran.r-project.org/package=ca), all extended by [**FactoExtra**](https://rpkgs.datanovia.com/factoextra)). **dimensio** is designed to have as few dependencies as possible: computation and exploration of the results depends only on the R base packages. Visualization methods require [**ggplot2**](https://ggplot2.tidyverse.org/).
 
 ## Installation
 
@@ -75,7 +75,7 @@ plot_individuals(X, group = iris$Species, active = FALSE, sup = TRUE) +
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_contrast() # Custom colour scale
 
-## Plot active individuals by cos2
+## Plot individuals by cos2
 plot_individuals(X, highlight = "cos2", active = TRUE, sup = TRUE) +
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_iridescent() # Custom colour scale

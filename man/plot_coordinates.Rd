@@ -83,18 +83,30 @@ It must be one of "\code{coordinates}", "\code{contributions}",
 If \code{NULL} (the default), no highlighting is applied.}
 
 \item{group}{A vector of categories specifying the categorical
-variable from which to color the individuals (see details).}
+variable from which to color the individuals (only used if \code{highlight}
+is \code{NULL}; see below).}
 }
 \description{
 Plots factor map.
 }
-\details{
+\section{Aesthetic}{
+
 Point shapes and line types are set whether an observation is a
 row/individual or a column/variable and is active or supplementary.
 
-Colours are set according to \code{highlight} or \code{group}
-(if both are \code{NULL}, the same rule as for shapes is used).
+Colors are set according to \code{highlight} and \code{group}:
+\itemize{
+\item{If \code{highlight} is not \code{NULL}, the color gradient will vary
+according to the value of the selected parameter.}
+\item{If \code{group} is a \code{numeric} vector, the color gradient and
+size will vary by the value of \code{group}.}
+\item{If \code{group} is not a \code{numeric} vector, the colors will be
+mapped to the levels of \code{group}.}
+\item{If both are \code{NULL} (the default), then the same rule as for
+shapes is used.}
 }
+}
+
 \examples{
 ## Create a matrix
 A <- matrix(data = sample(1:10, 100, TRUE), nrow = 20)

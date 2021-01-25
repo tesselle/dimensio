@@ -232,10 +232,13 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
                         group = group, several.ok = several.ok)
 
   ## Highlight or groups, if any
+  aes_group <- ggplot2::aes(color = .data$value)
   if (!is.null(highlight) | !is.null(group)) {
-    aes_group <- ggplot2::aes(color = .data$group)
-  } else {
-    aes_group <- ggplot2::aes(color = .data$value)
+    if (is.null(highlight) & is.numeric(group)) {
+      aes_group <- ggplot2::aes(color = .data$group, size = .data$group)
+    } else {
+      aes_group <- ggplot2::aes(color = .data$group)
+    }
   }
 
   ## ggplot2
