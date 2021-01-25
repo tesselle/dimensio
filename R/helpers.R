@@ -39,18 +39,3 @@ is_supplementary <- function(index, n) {
     stop(msg, call. = FALSE)
   }
 }
-
-#' Check Package
-#'
-#' Checks if a package is installed.
-#' @param x A \code{\link{character}} string giving the package name.
-#' @return Rises an error or invisibly returns \code{TRUE}.
-#' @keywords internal
-#' @noRd
-check_package <- function(x) {
-  if (!requireNamespace(x, quietly = TRUE)) {
-    msg <- sprintf("Package %s needed for this function to work.", sQuote(x))
-    stop(msg, "\nPlease install it.", call. = FALSE)
-  }
-  invisible(TRUE)
-}

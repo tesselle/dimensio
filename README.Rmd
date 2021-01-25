@@ -22,23 +22,84 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA). This package provides methods to analyze, summarize and visualize results of multivariate data analysis. It is designed to have as few dependencies as possible (nothing outside the R base packages).
-    
+Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis.
+
+There are many very good packages for multivariate data analysis (such as [**FactoMineR**](http://factominer.free.fr/), [**ade4**](https://pbil.univ-lyon1.fr/ade4/) or [**ca**](https://cran.r-project.org/package=ca), all extended by [**FactoExtra**](https://rpkgs.datanovia.com/factoextra)). **dimensio** is designed to have as few dependencies as possible: computation and exploration of the results depends only on the R base packages. Visualization methods require [**ggplot2**](https://ggplot2.tidyverse.org/) but it is not automatically installed (you will have to install it yourself if necessary).
+
 ## Installation
 
 You can install the released version of **dimensio** from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
+```{r, eval=FALSE}
 install.packages("dimensio")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
-``` r
+```{r, eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("nfrerebeau/dimensio")
 ```
+
 ## Usage
+
+```{r pca}
+library(dimensio)
+
+X <- pca(iris, scale = TRUE, sup_ind = 50:75)
+```
+
+### Summarize
+
+### Extract
+
+### Visualize
+
+Visualization methods produce graphics with as few elements as possible. **dimensio** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting informations. This makes it easy to customize diagrams (e.g. using extra layers, themes and scales).
+
+```{r pacakges}
+# install.packages(c("ggplot2", "ggrepel"))
+library(ggplot2)
+library(ggrepel)
+library(khroma)
+```
+
+```{r plot-coord, fig.width=5, fig.height=3.5, fig.show='hold'}
+## Plot active individuals
+plot_individuals(X, group = iris$Species, active = TRUE, sup = FALSE) +
+  ggplot2::stat_ellipse() + # Add ellipses
+  ggplot2::theme_bw() + # Change theme
+  khroma::scale_color_contrast() # Custom colour scale
+
+## Plot supplementary individuals
+plot_individuals(X, group = iris$Species, active = FALSE, sup = TRUE) +
+  ggplot2::theme_bw() + # Change theme
+  khroma::scale_color_contrast() # Custom colour scale
+
+## Plot variables factor map
+plot_variables(X) +
+  ggrepel::geom_label_repel() + # Add repelling labels
+  ggplot2::theme_bw() # Change theme
+```
+
+```{r plot-eig, fig.width=3.5, fig.height=3.5, fig.show='hold'}
+## Plot eigenvalues
+plot_eigenvalues(X) +
+  ggplot2::theme_bw() # Change theme
+
+## Plot percentages of variance
+plot_variance(X, variance = TRUE, cumulative = TRUE) +
+  ggplot2::geom_text(nudge_y = 3) + # Add labels
+  ggplot2::theme_bw() # Change theme
+
+## Plot variables contributions
+plot_contributions(X, margin = 2, axes = 1) +
+  ggplot2::theme_bw() + # Change theme
+  ggplot2::theme( # Edit theme
+    # Rotate x axis labels
+    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, vjust = 1)
+  )
+```
 
 ## Contributing
 Please note that the **dimensio** project is released with a [Contributor Code of Conduct](https://github.com/nfrerebeau/dimensio/blob/master/.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

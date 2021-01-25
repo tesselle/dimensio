@@ -126,7 +126,7 @@ columns: \code{eigenvalues}, \code{variance} (percentage of variance) and
 \code{cumulative} (cumulative percentage of variance).
 
 \code{get_variance} returns a \code{numeric} vector giving the percentage
-of variance of each dimension.
+of explained variance of each dimension.
 
 \code{loadings} returns variable loadings (i.e. the coefficients of the
 linear combination of the original variables).

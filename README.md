@@ -13,9 +13,20 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 Simple Principal Components Analysis (PCA) and Correspondence Analysis
-(CA). This package provides methods to analyze, summarize and visualize
-results of multivariate data analysis. It is designed to have as few
-dependencies as possible (nothing outside the R base packages).
+(CA). This package provides S4 classes and methods to compute, extract,
+summarize and visualize results of multivariate data analysis.
+
+There are many very good packages for multivariate data analysis (such
+as [**FactoMineR**](http://factominer.free.fr/),
+[**ade4**](https://pbil.univ-lyon1.fr/ade4/) or
+[**ca**](https://cran.r-project.org/package=ca), all extended by
+[**FactoExtra**](https://rpkgs.datanovia.com/factoextra)). **dimensio**
+is designed to have as few dependencies as possible: computation and
+exploration of the results depends only on the R base packages.
+Visualization methods require
+[**ggplot2**](https://ggplot2.tidyverse.org/) but it is not
+automatically installed (you will have to install it yourself if
+necessary).
 
 ## Installation
 
@@ -34,6 +45,72 @@ remotes::install_github("nfrerebeau/dimensio")
 ```
 
 ## Usage
+
+``` r
+library(dimensio)
+
+X <- pca(iris, scale = TRUE, sup_ind = 50:75)
+#> 1 qualitative variable was removed: Species.
+```
+
+### Summarize
+
+### Extract
+
+### Visualize
+
+Visualization methods produce graphics with as few elements as possible.
+**dimensio** uses [**ggplot2**](https://github.com/tidyverse/ggplot2)
+for plotting informations. This makes it easy to customize diagrams
+(e.g. using extra layers, themes and scales).
+
+``` r
+# install.packages(c("ggplot2", "ggrepel"))
+library(ggplot2)
+library(ggrepel)
+library(khroma)
+```
+
+``` r
+## Plot active individuals
+plot_individuals(X, group = iris$Species, active = TRUE, sup = FALSE) +
+  ggplot2::stat_ellipse() + # Add ellipses
+  ggplot2::theme_bw() + # Change theme
+  khroma::scale_color_contrast() # Custom colour scale
+
+## Plot supplementary individuals
+plot_individuals(X, group = iris$Species, active = FALSE, sup = TRUE) +
+  ggplot2::theme_bw() + # Change theme
+  khroma::scale_color_contrast() # Custom colour scale
+
+## Plot variables factor map
+plot_variables(X) +
+  ggrepel::geom_label_repel() + # Add repelling labels
+  ggplot2::theme_bw() # Change theme
+```
+
+![](man/figures/README-plot-coord-1.png)![](man/figures/README-plot-coord-2.png)![](man/figures/README-plot-coord-3.png)
+
+``` r
+## Plot eigenvalues
+plot_eigenvalues(X) +
+  ggplot2::theme_bw() # Change theme
+
+## Plot percentages of variance
+plot_variance(X, variance = TRUE, cumulative = TRUE) +
+  ggplot2::geom_text(nudge_y = 3) + # Add labels
+  ggplot2::theme_bw() # Change theme
+
+## Plot variables contributions
+plot_contributions(X, margin = 2, axes = 1) +
+  ggplot2::theme_bw() + # Change theme
+  ggplot2::theme( # Edit theme
+    # Rotate x axis labels
+    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, vjust = 1)
+  )
+```
+
+![](man/figures/README-plot-eig-1.png)![](man/figures/README-plot-eig-2.png)![](man/figures/README-plot-eig-3.png)
 
 ## Contributing
 

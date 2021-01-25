@@ -43,7 +43,7 @@ setGeneric("loadings")
 #'  \code{cumulative} (cumulative percentage of variance).
 #'
 #'  \code{get_variance} returns a \code{numeric} vector giving the percentage
-#'  of variance of each dimension.
+#'  of explained variance of each dimension.
 #'
 #'  \code{loadings} returns variable loadings (i.e. the coefficients of the
 #'  linear combination of the original variables).
@@ -289,3 +289,140 @@ setGeneric(
 #' @name predict
 #' @rdname predict
 NULL
+
+# Plot =========================================================================
+## Coordinates -----------------------------------------------------------------
+#' Visualize Factor Map
+#'
+#' Plots factor map.
+#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
+#' @param margin A length-one \code{\link{numeric}} vector giving the subscript
+#'  which the data will be returned: \code{1} indicates individuals/rows (the
+#'  default), \code{2} indicates variables/columns, \code{c(1, 2)} indicates
+#'  rows and columns (\code{CA}).
+#' @param axes A length-two \code{\link{numeric}} vector giving the dimensions
+#'  to be plotted.
+#' @param active A \code{\link{logical}} scalar: should the active
+#'  observations be plotted?
+#' @param sup A \code{\link{logical}} scalar: should the supplementary
+#'  observations be plotted?
+#' @param select NULL
+#' @param group  A vector of categories specifying the categorical
+#'  variable from which to color the individuals (see details).
+#' @param ... Currently not used.
+#' @details
+#'  Point shapes and line types are set whether an observation is a
+#'  row/individual or a column/variable and is active or supplementary.
+#'
+#'  Colours are set according to \code{group} (if \code{NULL}, the same rule as
+#'  for shapes is used).
+#' @example inst/examples/ex-plot.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family visualization
+#' @name plot_coordinates
+#' @rdname plot_coordinates
+NULL
+
+#' @rdname plot_coordinates
+#' @aliases plot_coordinates-method
+setGeneric(
+  name = "plot_coordinates",
+  def = function(object, ...) standardGeneric("plot_coordinates")
+)
+
+#' @rdname plot_coordinates
+#' @aliases plot_individuals-method
+setGeneric(
+  name = "plot_individuals",
+  def = function(object, ...) standardGeneric("plot_individuals")
+)
+
+#' @rdname plot_coordinates
+#' @aliases plot_variables-method
+setGeneric(
+  name = "plot_variables",
+  def = function(object, ...) standardGeneric("plot_variables")
+)
+
+## Eigenvalues -----------------------------------------------------------------
+#' Visualize Eigenvalues
+#'
+#' Plot eigenvalues or variances histogram.
+#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
+#' @param variance A \code{\link{logical}} scalar: should percentages of
+#'  variance be plotted instead of eigenvalues?
+#' @param cumulative A \code{\link{logical}} scalar: should cumulative
+#'  percentages of variance be plotted ? Only used if \code{variance} is
+#'  \code{TRUE}.
+#' @param fill,border A \code{\link{character}} string specifying the bars
+#'  infilling and border colours.
+#' @param colour A \code{\link{character}} string specifying the line colour.
+#' @param ... Currently not used.
+#' @example inst/examples/ex-plot.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family visualization
+#' @name plot_eigenvalues
+#' @rdname plot_eigenvalues
+NULL
+
+#' @rdname plot_eigenvalues
+#' @aliases plot_eigenvalues-method
+setGeneric(
+  name = "plot_eigenvalues",
+  def = function(object, ...) standardGeneric("plot_eigenvalues")
+)
+
+#' @rdname plot_eigenvalues
+#' @aliases plot_variance-method
+setGeneric(
+  name = "plot_variance",
+  def = function(object, ...) standardGeneric("plot_variance")
+)
+
+## Contributions ---------------------------------------------------------------
+#' Visualize Contributions and cos2
+#'
+#' Plots eigenvalues and variances.
+#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
+#' @param margin A length-one \code{\link{numeric}} vector giving the subscript
+#'  which the data will be returned: \code{1} indicates individuals/rows (the
+#'  default), \code{2} indicates variables/columns.
+#' @param axes A length-one \code{\link{numeric}} vector giving the dimensions
+#'  to be plotted.
+#' @param sup A \code{\link{logical}} scalar: should the supplementary
+#'  observations be plotted instead of active observations?
+#' @param sort A \code{\link{logical}} scalar: should the data be sorted?
+#' @param decreasing A \code{\link{logical}} scalar: should the sort order be
+#'  decreasing? Only used if \code{sort} is \code{TRUE}.
+#' @param limit An \code{\link{integer}} specifying the number of top elements
+#'  to be displayed.
+#' @param active A \code{\link{logical}} scalar: should the active
+#'  observations be plotted?
+#' @param sup A \code{\link{logical}} scalar: should the supplementary
+#'  observations be plotted?
+#' @param fill,border A \code{\link{character}} string specifying the bars
+#'  infilling and border colours.
+#' @param ... Currently not used.
+#' @example inst/examples/ex-plot.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family visualization
+#' @name plot_contributions
+#' @rdname plot_contributions
+NULL
+
+#' @rdname plot_contributions
+#' @aliases plot_contributions-method
+setGeneric(
+  name = "plot_contributions",
+  def = function(object, ...) standardGeneric("plot_contributions")
+)
+
+#' @rdname plot_contributions
+#' @aliases plot_cos2-method
+setGeneric(
+  name = "plot_cos2",
+  def = function(object, ...) standardGeneric("plot_cos2")
+)
