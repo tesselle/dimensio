@@ -65,14 +65,13 @@ for plotting informations. This makes it easy to customize diagrams
 (e.g. using extra layers, themes and scales).
 
 ``` r
-# install.packages(c("ggplot2", "ggrepel"))
 library(ggplot2)
 library(ggrepel)
 library(khroma)
 ```
 
 ``` r
-## Plot active individuals
+## Plot active individuals by group
 plot_individuals(X, group = iris$Species, active = TRUE, sup = FALSE) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
@@ -83,13 +82,28 @@ plot_individuals(X, group = iris$Species, active = FALSE, sup = TRUE) +
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_contrast() # Custom colour scale
 
+## Plot active individuals by cos2
+plot_individuals(X, highlight = "cos2", active = TRUE, sup = TRUE) +
+  ggplot2::theme_bw() + # Change theme
+  khroma::scale_color_iridescent() # Custom colour scale
+```
+
+![](man/figures/README-plot-ind-1.png)![](man/figures/README-plot-ind-2.png)![](man/figures/README-plot-ind-3.png)
+
+``` r
 ## Plot variables factor map
 plot_variables(X) +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() # Change theme
+
+## Highlight contributions
+plot_variables(X, highlight = "contrib") +
+  ggrepel::geom_label_repel() + # Add repelling labels
+  ggplot2::theme_bw() + # Change theme
+  khroma::scale_color_YlOrBr() # Custom colour scale
 ```
 
-![](man/figures/README-plot-coord-1.png)![](man/figures/README-plot-coord-2.png)![](man/figures/README-plot-coord-3.png)
+![](man/figures/README-plot-var-1.png)![](man/figures/README-plot-var-2.png)
 
 ``` r
 ## Plot eigenvalues

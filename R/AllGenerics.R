@@ -306,16 +306,20 @@ NULL
 #'  observations be plotted?
 #' @param sup A \code{\link{logical}} scalar: should the supplementary
 #'  observations be plotted?
-#' @param select NULL
-#' @param group  A vector of categories specifying the categorical
+# @param select NULL
+#' @param highlight A \code{\link{character}} string giving XXX.
+#'  It must be one of "\code{coordinates}", "\code{contributions}",
+#'  "\code{cos2}" or "\code{distances}". Any unambiguous substring can be given.
+#'  If \code{NULL} (the default), no highlighting is applied.
+#' @param group A vector of categories specifying the categorical
 #'  variable from which to color the individuals (see details).
 #' @param ... Currently not used.
 #' @details
 #'  Point shapes and line types are set whether an observation is a
 #'  row/individual or a column/variable and is active or supplementary.
 #'
-#'  Colours are set according to \code{group} (if \code{NULL}, the same rule as
-#'  for shapes is used).
+#'  Colours are set according to \code{highlight} or \code{group}
+#'  (if both are \code{NULL}, the same rule as for shapes is used).
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -426,3 +430,5 @@ setGeneric(
   name = "plot_cos2",
   def = function(object, ...) standardGeneric("plot_cos2")
 )
+
+# Summarize ====================================================================

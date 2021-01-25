@@ -12,7 +12,7 @@ setMethod(
   signature = signature(object = "CA"),
   definition = function(object, margin = c(1, 2), axes = c(1, 2),
                         active = TRUE, sup = TRUE,
-                        select = NULL, group = NULL) {
+                        highlight = NULL, group = NULL) {
     ## ggplot2
     gg <- plot_points(
       object,
@@ -20,6 +20,7 @@ setMethod(
       axes = axes,
       active = active,
       sup = sup,
+      highlight = highlight,
       group = group,
       several.ok = TRUE
     )
@@ -37,15 +38,15 @@ setMethod(
   signature = signature(object = "PCA"),
   definition = function(object, margin = 1, axes = c(1, 2),
                         active = TRUE, sup = TRUE,
-                        select = NULL, group = NULL) {
+                        highlight = NULL, group = NULL) {
     gg <- switch (
       margin[[1L]],
       ## Plot individuals factor map
       `1` = plot_individuals(object, axes = axes, active = active, sup = sup,
-                           select = select, group = group),
+                             highlight = highlight, group = group),
       ## Plot variables factor map
       `2` = plot_variables(object, axes = axes, active = active, sup = sup,
-                         select = select, group = group)
+                           highlight = highlight, group = group)
     )
     return(gg)
   }
@@ -58,7 +59,7 @@ setMethod(
   f = "plot_individuals",
   signature = signature(object = "PCA"),
   definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        select = NULL, group = NULL) {
+                        highlight = NULL, group = NULL) {
     ## ggplot2
     gg <- plot_points(
       object,
@@ -66,6 +67,7 @@ setMethod(
       axes = axes,
       active = active,
       sup = sup,
+      highlight = highlight,
       group = group,
       several.ok = FALSE
     )
@@ -80,7 +82,7 @@ setMethod(
   f = "plot_variables",
   signature = signature(object = "PCA"),
   definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        select = NULL, group = NULL) {
+                        highlight = NULL, group = NULL) {
     ## ggplot2
     gg <- plot_arrows(
       object,
@@ -88,6 +90,7 @@ setMethod(
       axes = axes,
       active = active,
       sup = sup,
+      highlight = highlight,
       group = group,
       several.ok = FALSE
     )
@@ -222,14 +225,14 @@ setMethod(
 
 # Helpers ======================================================================
 plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
-                        group = NULL, several.ok = FALSE) {
+                        highlight = NULL, group = NULL, several.ok = FALSE) {
   ## Prepare data
   data <- prepare_coord(object, margin = margin, axes = axes,
-                        active = active, sup = sup,
+                        active = active, sup = sup, highlight = highlight,
                         group = group, several.ok = several.ok)
 
-  ## Set group, if any
-  if (!is.null(group)) {
+  ## Highlight or groups, if any
+  if (!is.null(highlight) | !is.null(group)) {
     aes_group <- ggplot2::aes(color = .data$group)
   } else {
     aes_group <- ggplot2::aes(color = .data$value)
@@ -255,15 +258,15 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
 }
 
 plot_arrows <- function(object, margin, axes, active = TRUE, sup = TRUE,
-                        group = NULL, several.ok = FALSE) {
+                        highlight = NULL, group = NULL, several.ok = FALSE) {
   ## Prepare data
   data <- prepare_coord(object, margin = margin, axes = axes,
-                        active = active, sup = sup,
+                        active = active, sup = sup, highlight = highlight,
                         group = group, several.ok = several.ok)
   data$z <- 0 # Set the origin of arrows
 
-  ## Set group, if any
-  if (!is.null(group)) {
+  ## Highlight or groups, if any
+  if (!is.null(highlight) | !is.null(group)) {
     aes_group <- ggplot2::aes(color = .data$group)
   } else {
     aes_group <- ggplot2::aes(color = .data$value)
@@ -316,7 +319,7 @@ print_variance <- function(object, axis) {
 
 # Must returns a data.frame
 prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
-                          group = NULL, several.ok = FALSE) {
+                          highlight = NULL, group = NULL, several.ok = FALSE) {
   ## Validation
   choices <- switch(
     class(object),
@@ -352,10 +355,24 @@ prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
   data$value <- active
   data$label <- rownames(data)
 
-  ## Subset group
+  ## Variables factor map?
+  is_var <- all(margin == 2)
+
+  ## Group
   if (!is.null(group)) {
-    group <- if (all(margin == 2)) group[col_i] else group[row_i]
+    group_k <- get_order(object, margin = ifelse(is_var, 2, 1))
+    group_i <- if (is_var) col_i else row_i # Subset
+    group <- group[group_k][group_i]
     data$group <- group
+  }
+
+  ## Highlight
+  if (!is.null(highlight)) {
+    highlight_i <- if (is_var) col_i else row_i # Subset
+    highlight <- joint(object, what = highlight, margin = margin,
+                       axes = axes, sup = TRUE)
+    highlight <- highlight[highlight_i]
+    data$group <- highlight
   }
 
   return(data)

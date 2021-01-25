@@ -58,14 +58,13 @@ X <- pca(iris, scale = TRUE, sup_ind = 50:75)
 Visualization methods produce graphics with as few elements as possible. **dimensio** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting informations. This makes it easy to customize diagrams (e.g. using extra layers, themes and scales).
 
 ```{r pacakges}
-# install.packages(c("ggplot2", "ggrepel"))
 library(ggplot2)
 library(ggrepel)
 library(khroma)
 ```
 
-```{r plot-coord, fig.width=5, fig.height=3.5, fig.show='hold'}
-## Plot active individuals
+```{r plot-ind, fig.width=5, fig.height=3.5, fig.show='hold'}
+## Plot active individuals by group
 plot_individuals(X, group = iris$Species, active = TRUE, sup = FALSE) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
@@ -76,10 +75,23 @@ plot_individuals(X, group = iris$Species, active = FALSE, sup = TRUE) +
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_contrast() # Custom colour scale
 
+## Plot active individuals by cos2
+plot_individuals(X, highlight = "cos2", active = TRUE, sup = TRUE) +
+  ggplot2::theme_bw() + # Change theme
+  khroma::scale_color_iridescent() # Custom colour scale
+```
+
+```{r plot-var, fig.width=5, fig.height=3.5, fig.show='hold'}
 ## Plot variables factor map
 plot_variables(X) +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() # Change theme
+
+## Highlight contributions
+plot_variables(X, highlight = "contrib") +
+  ggrepel::geom_label_repel() + # Add repelling labels
+  ggplot2::theme_bw() + # Change theme
+  khroma::scale_color_YlOrBr() # Custom colour scale
 ```
 
 ```{r plot-eig, fig.width=3.5, fig.height=3.5, fig.show='hold'}

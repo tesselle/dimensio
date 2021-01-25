@@ -1,9 +1,11 @@
 # JOINT
+#' @include AllClasses.R
 NULL
 
 #' Joint
 #'
 #' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
+#' @param what A \code{\link{character}} string.
 #' @param margin A length-one \code{\link{numeric}} vector giving the subscript
 #'  which the data will be returned: \code{1} indicates individuals/rows (the
 #'  default), \code{2} indicates variables/columns.
@@ -11,6 +13,7 @@ NULL
 #'  to be for which to compute results.
 #' @param sup A \code{\link{logical}} scalar: should supplementary points be
 #'  returned?
+#' @param ... Extra parameters to be passed to internal methods.
 #' @seealso \link[=mutator]{get_*()}
 #' @example inst/examples/ex-joint.R
 #' @author N. Frerebeau
@@ -21,13 +24,29 @@ NULL
 #' @noRd
 NULL
 
-joint_coordinates <- function(object, margin = 1, axes = c(1, 2), sup = TRUE) {
+joint <- function(object, what, ...) {
+  choices <- c("coordinates", "contributions", "cos2", "distances")
+  what <- match.arg(what, choices = choices, several.ok = FALSE)
+
+  fun <- switch (
+    what,
+    coordinates = joint_coordinates,
+    contributions = joint_contributions,
+    cos2 = joint_cos2,
+    distances = joint_distances
+  )
+
+  fun(object, ...)
+}
+
+joint_coordinates <- function(object, margin = 1, axes = c(1, 2),
+                              sup = TRUE, ...) {
   axes <- axes[c(1, 2)]
   coord <- get_coordinates(object, margin = margin, sup = sup)
   rowSums(coord[, axes]^2)
 }
 
-joint_contributions <- function(object, margin = 1, axes = c(1, 2)) {
+joint_contributions <- function(object, margin = 1, axes = c(1, 2), ...) {
   axes <- axes[c(1, 2)]
   contrib <- get_contributions(object, margin = margin)
   eig <- matrix(
@@ -39,13 +58,14 @@ joint_contributions <- function(object, margin = 1, axes = c(1, 2)) {
   rowSums(contrib[, axes] * eig)
 }
 
-joint_cos2 <- function(object, margin = 1, axes = c(1, 2), sup = TRUE) {
+joint_cos2 <- function(object, margin = 1, axes = c(1, 2), sup = TRUE, ...) {
   axes <- axes[c(1, 2)]
   cos2 <- get_cos2(object, margin = margin, sup = sup)
   rowSums(cos2[, axes])
 }
 
-joint_distances <- function(object, margin = 1, axes = c(1, 2), sup = TRUE) {
+joint_distances <- function(object, margin = 1, axes = c(1, 2),
+                            sup = TRUE, ...) {
   axes <- axes[c(1, 2)]
   d <- get_distances(object, margin = margin, sup = sup)
   rowSums(d[, axes])

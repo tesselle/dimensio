@@ -12,6 +12,14 @@ setMethod(
   definition = function(x) x@dimension
 )
 
+get_order <- function(x, margin = 1) {
+  margin <- margin[[1L]]
+  if (margin == 1) o <- x@rows@order
+  if (margin == 2) o <- x@columns@order
+
+  return(o)
+}
+
 # Contributions ================================================================
 #' @export
 #' @rdname mutator

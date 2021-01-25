@@ -18,6 +18,9 @@
 #' @slot weights A \code{\link{numeric}} vector giving the masses/weights.
 #' @slot supplement A \code{\link{logical}} vector specifying the supplementary
 #'  points.
+#' @slot order An \code{\link{integer}} vector giving the original indices
+#'  of the data (computation moves all supplementary points at the end of the
+#'  results).
 #' @author N. Frerebeau
 #' @family multivariate analysis
 #' @docType class
@@ -32,7 +35,8 @@
     cosine = "matrix",
     distances = "numeric",
     weights = "numeric",
-    supplement = "logical"
+    supplement = "logical",
+    order = "integer"
   )
 )
 
@@ -118,19 +122,11 @@ setMethod(
                         prefix = "PC") {
 
     ## /!\ Reorder active/supplementary points /!\
-    ## Computation moves all suppl. points at the end of the results
-    ## We need to restore the original order of the data
+    ## Computation moves all supplementary points at the end of the results
+    new_i <- seq_len(nrow(coordinates))
     if (any(supplement)) {
-      n <- nrow(coordinates)
-      row_i <- seq_len(n)
-      sup_i <- utils::tail(row_i, sum(supplement))
-      new_i <- integer(n)
-      new_i[supplement] <- sup_i
-      new_i[new_i == 0] <- row_i[-sup_i]
-
-      coordinates <- coordinates[new_i, ]
-      cosine <- cosine[new_i, ]
-      distances <- distances[new_i]
+      new_i <- c(new_i[!supplement], new_i[supplement])
+      names <- names[new_i]
     }
 
     ## Prepare names
@@ -153,7 +149,8 @@ setMethod(
       cosine = cosine,
       distances = distances,
       weights = weights,
-      supplement = supplement
+      supplement = sort(supplement),
+      order = new_i
     )
     validObject(.Object)
     .Object

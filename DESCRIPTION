@@ -43,6 +43,7 @@ Collate:
     'ca.R'
     'dimensio-package.R'
     'helpers.R'
+    'joint.R'
     'mutators.R'
     'pca.R'
     'plot.R'

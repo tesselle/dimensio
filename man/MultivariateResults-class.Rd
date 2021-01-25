@@ -32,6 +32,10 @@ centroid.}
 
 \item{\code{supplement}}{A \code{\link{logical}} vector specifying the supplementary
 points.}
+
+\item{\code{order}}{An \code{\link{integer}} vector giving the original indices
+of the data (computation moves all supplementary points at the end of the
+results).}
 }}
 
 \seealso{

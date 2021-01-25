@@ -26,7 +26,7 @@ plot_variables(object, ...)
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  select = NULL,
+  highlight = NULL,
   group = NULL
 )
 
@@ -36,7 +36,7 @@ plot_variables(object, ...)
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  select = NULL,
+  highlight = NULL,
   group = NULL
 )
 
@@ -45,7 +45,7 @@ plot_variables(object, ...)
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  select = NULL,
+  highlight = NULL,
   group = NULL
 )
 
@@ -54,7 +54,7 @@ plot_variables(object, ...)
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  select = NULL,
+  highlight = NULL,
   group = NULL
 )
 }
@@ -77,15 +77,13 @@ observations be plotted?}
 \item{sup}{A \code{\link{logical}} scalar: should the supplementary
 observations be plotted?}
 
-\item{select}{NULL}
+\item{highlight}{A \code{\link{character}} string giving XXX.
+It must be one of "\code{coordinates}", "\code{contributions}",
+"\code{cos2}" or "\code{distances}". Any unambiguous substring can be given.
+If \code{NULL} (the default), no highlighting is applied.}
 
 \item{group}{A vector of categories specifying the categorical
 variable from which to color the individuals (see details).}
-
-\item{highlight}{A \code{\link{character}} string giving XXX.
-It must be one of "\code{}".
-Any unambiguous substring can be given.
-If \code{NULL} (the default), no highlighting is applied.}
 }
 \description{
 Plots factor map.
