@@ -95,7 +95,7 @@
 #' An S4 class to store the results of a principal components analysis.
 #' @slot center A \code{\link{numeric}} vector giving the column mean of the
 #'  initial dataset (active individuals only).
-#' @slot standard_deviation A \code{\link{numeric}} vector giving the column
+#' @slot scale A \code{\link{numeric}} vector giving the column
 #'  standard deviations of the initial dataset (active individuals only).
 #' @example inst/examples/ex-pca.R
 #' @author N. Frerebeau
@@ -108,7 +108,7 @@
   Class = "PCA",
   slots = c(
     center = "numeric",
-    standard_deviation = "numeric"
+    scale = "numeric"
   ),
   contains = "MultivariateAnalysis"
 )

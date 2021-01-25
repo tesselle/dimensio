@@ -9,7 +9,7 @@ NULL
 setMethod(
   f = "ca",
   signature = signature(object = "data.frame"),
-  definition = function(object, n = NULL, sup_row = NULL, sup_col = NULL) {
+  definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL) {
     # Remove non-numeric variables, if any
     quali <- !vapply(object, FUN = is.numeric, FUN.VALUE = logical(1))
     if (any(quali)) {
@@ -28,7 +28,7 @@ setMethod(
     }
 
     object <- as.matrix(object)
-    methods::callGeneric(object = object, n = n,
+    methods::callGeneric(object = object, rank = rank,
                          sup_row = sup_row, sup_col = sup_col)
   }
 )
@@ -39,7 +39,7 @@ setMethod(
 setMethod(
   f = "ca",
   signature = signature(object = "matrix"),
-  definition = function(object, n = NULL, sup_row = NULL, sup_col = NULL) {
+  definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL) {
     # Check missing values
     if (anyNA(object))
       stop("Missing values detected.", call. = FALSE)
@@ -56,7 +56,7 @@ setMethod(
     N <- object[!is_row_sup, !is_col_sup, drop = FALSE]
 
     # Dimension of the solution
-    ndim <- min(n, dim(N) - 1)
+    ndim <- min(rank, dim(N) - 1)
     dim_keep <- seq_len(ndim)
     i <- nrow(N)
     j <- ncol(N)

@@ -10,9 +10,9 @@
 \usage{
 ca(object, ...)
 
-\S4method{ca}{data.frame}(object, n = NULL, sup_row = NULL, sup_col = NULL)
+\S4method{ca}{data.frame}(object, rank = NULL, sup_row = NULL, sup_col = NULL)
 
-\S4method{ca}{matrix}(object, n = NULL, sup_row = NULL, sup_col = NULL)
+\S4method{ca}{matrix}(object, rank = NULL, sup_row = NULL, sup_col = NULL)
 }
 \arguments{
 \item{object}{A \eqn{m \times p}{m x p} numeric \code{\link{matrix}} or a
@@ -20,9 +20,9 @@ ca(object, ...)
 
 \item{...}{Currently not used.}
 
-\item{n}{An \code{\link{integer}} value specifying the number of dimensions
-to be kept in the results. If \code{NULL} (the default),
-\eqn{min(m, p) - 1} dimensions will be returned.}
+\item{rank}{An \code{\link{integer}} value specifying the maximal number of
+components to be kept in the results. If \code{NULL} (the default),
+\eqn{min(m, p) - 1} components will be returned.}
 
 \item{sup_row}{A \code{\link{numeric}} or \code{\link{logical}} vector
 specifying the indices of the supplementary rows.}

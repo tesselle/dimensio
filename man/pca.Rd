@@ -12,8 +12,9 @@ pca(object, ...)
 
 \S4method{pca}{data.frame}(
   object,
+  center = TRUE,
   scale = TRUE,
-  n = NULL,
+  rank = NULL,
   sup_ind = NULL,
   sup_var = NULL,
   weight_ind = NULL,
@@ -22,8 +23,9 @@ pca(object, ...)
 
 \S4method{pca}{matrix}(
   object,
+  center = TRUE,
   scale = TRUE,
-  n = NULL,
+  rank = NULL,
   sup_ind = NULL,
   sup_var = NULL,
   weight_ind = NULL,
@@ -36,12 +38,15 @@ pca(object, ...)
 
 \item{...}{Currently not used.}
 
-\item{scale}{A \code{\link{logical}} scalar: should data be scaled to unit
-variance?}
+\item{center}{A \code{\link{logical}} scalar: should the variables be shifted
+to be zero centered?}
 
-\item{n}{An \code{\link{integer}} value specifying the number of dimensions
-to be kept in the results. If \code{NULL} (the default),
-\eqn{p - 1} dimensions will be returned.}
+\item{scale}{A \code{\link{logical}} scalar: should the variables be scaled
+to unit variance?}
+
+\item{rank}{An \code{\link{integer}} value specifying the maximal number of
+components to be kept in the results. If \code{NULL} (the default),
+\eqn{p - 1} components will be returned.}
 
 \item{sup_ind}{A \code{\link{numeric}} or \code{\link{logical}} vector
 specifying the indices of the supplementary individuals.}

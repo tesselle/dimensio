@@ -8,7 +8,7 @@ test_that("Principal Components Analysis", {
   expect_error(pca(cts, sup_ind = "row1"), "must be a numeric vector")
   expect_error(pca(cts, sup_var = "col1"), "must be a numeric vector")
 
-  res <- pca(cts, n = 10)
+  res <- pca(cts, rank = 10)
   expect_null(res[["X"]])
 
   # Points coordinates
@@ -39,11 +39,12 @@ test_that("Predict new coordinates", {
   is_sup_rows <- sort(sample(1:10, 3, FALSE))
   is_sup_cols <- sort(sample(1:10, 4, FALSE))
 
-  res <- pca(cts[-is_sup_rows, -is_sup_cols])
+  res <- pca(cts[-is_sup_rows, -is_sup_cols], center = FALSE, scale = FALSE)
   new_rows <- predict(res, cts[is_sup_rows, -is_sup_cols], margin = 1)
   new_cols <- predict(res, cts[-is_sup_rows, is_sup_cols], margin = 2)
 
-  res_sup <- pca(cts, sup_ind = is_sup_rows, sup_var = is_sup_cols)
+  res_sup <- pca(cts, sup_ind = is_sup_rows, sup_var = is_sup_cols,
+                 center = FALSE, scale = FALSE)
   sup_rows <- get_coordinates(res_sup, margin = 1, sup = TRUE)
   sup_cols <- get_coordinates(res_sup, margin = 2, sup = TRUE)
 

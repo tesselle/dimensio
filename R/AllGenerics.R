@@ -203,9 +203,9 @@ NULL
 #' decomposition.
 #' @param object A \eqn{m \times p}{m x p} numeric \code{\link{matrix}} or a
 #'  \code{\link{data.frame}}.
-#' @param n An \code{\link{integer}} value specifying the number of dimensions
-#'  to be kept in the results. If \code{NULL} (the default),
-#'  \eqn{min(m, p) - 1} dimensions will be returned.
+#' @param rank An \code{\link{integer}} value specifying the maximal number of
+#'  components to be kept in the results. If \code{NULL} (the default),
+#'  \eqn{min(m, p) - 1} components will be returned.
 #' @param sup_row A \code{\link{numeric}} or \code{\link{logical}} vector
 #'  specifying the indices of the supplementary rows.
 #' @param sup_col A \code{\link{numeric}} or \code{\link{logical}} vector
@@ -237,11 +237,13 @@ setGeneric(
 #' decomposition.
 #' @param object A \eqn{m \times p}{m x p} numeric \code{\link{matrix}} or a
 #'  \code{\link{data.frame}}.
-#' @param scale A \code{\link{logical}} scalar: should data be scaled to unit
-#'  variance?
-#' @param n An \code{\link{integer}} value specifying the number of dimensions
-#'  to be kept in the results. If \code{NULL} (the default),
-#'  \eqn{p - 1} dimensions will be returned.
+#' @param center A \code{\link{logical}} scalar: should the variables be shifted
+#'  to be zero centered?
+#' @param scale A \code{\link{logical}} scalar: should the variables be scaled
+#'  to unit variance?
+#' @param rank An \code{\link{integer}} value specifying the maximal number of
+#'  components to be kept in the results. If \code{NULL} (the default),
+#'  \eqn{p - 1} components will be returned.
 #' @param sup_ind A \code{\link{numeric}} or \code{\link{logical}} vector
 #'  specifying the indices of the supplementary individuals.
 #' @param sup_var A \code{\link{numeric}} or \code{\link{logical}} vector

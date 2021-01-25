@@ -8,7 +8,7 @@ NULL
 setMethod(
   f = "pca",
   signature = signature(object = "data.frame"),
-  definition = function(object, scale = TRUE, n = NULL,
+  definition = function(object, center = TRUE, scale = TRUE, rank = NULL,
                         sup_ind = NULL, sup_var = NULL,
                         weight_ind = NULL, weight_var = NULL) {
     # Remove non-numeric variables, if any
@@ -29,8 +29,8 @@ setMethod(
     }
 
     object <- as.matrix(object)
-    methods::callGeneric(object = object, scale = scale, n = n,
-                         sup_ind = sup_ind, sup_var = sup_var,
+    methods::callGeneric(object = object, center = center, scale = scale,
+                         rank = rank, sup_ind = sup_ind, sup_var = sup_var,
                          weight_ind = weight_ind, weight_var = weight_var)
   }
 )
@@ -41,7 +41,7 @@ setMethod(
 setMethod(
   f = "pca",
   signature = signature(object = "matrix"),
-  definition = function(object, scale = TRUE, n = NULL,
+  definition = function(object, center = TRUE, scale = TRUE, rank = NULL,
                         sup_ind = NULL, sup_var = NULL,
                         weight_ind = NULL, weight_var = NULL) {
     # Check missing values
@@ -60,7 +60,7 @@ setMethod(
     N <- object[!is_ind_sup, !is_var_sup, drop = FALSE]
 
     # Dimension of the solution
-    ndim <- min(n, ncol(N) - 1)
+    ndim <- min(rank, ncol(N) - 1)
     dim_keep <- seq_len(ndim)
     i <- nrow(N)
     j <- ncol(N)
@@ -85,17 +85,21 @@ setMethod(
     W_var3 <- matrix(s_var, nrow = j, ncol = ndim, byrow = FALSE)
 
     # Center data
-    center <- weighted_mean(N, w_ind)
-    ctr <- matrix(center, nrow = i, ncol = j, byrow = TRUE)
+    if (center) {
+      var_mean <- weighted_mean(N, w_ind)
+    } else {
+      var_mean <- rep(0, j)
+    }
+    ctr <- matrix(var_mean, nrow = i, ncol = j, byrow = TRUE)
     P <- N - ctr
 
     # Scale data
     if (scale) {
-      std_dev <- weighted_sd(P, w_ind)
+      var_sd <- weighted_sd(P, w_ind)
     } else {
-      std_dev <- rep(1, j)
+      var_sd <- rep(1, j)
     }
-    std <- matrix(std_dev, nrow = i, ncol = j, byrow = TRUE)
+    std <- matrix(var_sd, nrow = i, ncol = j, byrow = TRUE)
     M <- P / std
 
     # Matrix of standardized residuals
@@ -129,7 +133,7 @@ setMethod(
     # Supplementary points
     if (any(is_ind_sup)) {
       extra_ind <- object[is_ind_sup, !is_var_sup, drop = FALSE]
-      ind_sup <- (t(extra_ind) - center) * w_var / std_dev
+      ind_sup <- (t(extra_ind) - var_mean) * w_var / var_sd
 
       # Coordinates
       coord_ind_sup <- crossprod(ind_sup, V)
@@ -142,7 +146,9 @@ setMethod(
     if (any(is_var_sup)) {
       extra_var <- object[!is_ind_sup, is_var_sup, drop = FALSE]
       # Center and scale
-      extra_var <- t(t(extra_var) - weighted_mean(extra_var, w_ind))
+      if (center) {
+        extra_var <- t(t(extra_var) - weighted_mean(extra_var, w_ind))
+      }
       if (scale) {
         extra_var <- t(t(extra_var) / weighted_sd(extra_var, w_ind))
       }
@@ -187,8 +193,8 @@ setMethod(
         supplement = is_var_sup,
         prefix = "PC"
       ),
-      center = center,
-      standard_deviation = std_dev
+      center = var_mean,
+      scale = var_sd
     )
   }
 )
@@ -206,23 +212,25 @@ setMethod(
     # TODO: keep only matching rows/columns
 
     # Get standard coordinates
+    var_mean <- object@center
+    var_sd <- object@scale
+
     if (margin == 1) {
       std <- object@columns@standard
-      weights <- object@columns@weights
-      center <- object@center
-      std_dev <- object@standard_deviation
+      w <- object@columns@weights
 
-      newdata <- (t(newdata) - center) * weights / std_dev
+      newdata <- (t(newdata) - var_mean) * w / var_sd
     }
     if (margin == 2) {
       std <- object@rows@standard
-      weights <- object@rows@weights
-      center <- weighted_mean(newdata, weights)
-      std_dev <- object@standard_deviation
+      w <- object@rows@weights
+      j <- ncol(newdata)
 
-      newdata <- t(t(newdata) - weighted_mean(newdata, weights))
-      newdata <- t(t(newdata) / weighted_sd(newdata, weights))
-      newdata <- newdata * weights
+      X <- if (all(var_mean == 0)) rep(0, j) else weighted_mean(newdata, w)
+      newdata <- t(t(newdata) - X)
+      Y <- if (all(var_sd == 1)) rep(1, j) else weighted_sd(newdata, w)
+      newdata <- t(t(newdata) / Y)
+      newdata <- newdata * w
     }
 
     # Compute principal coordinates

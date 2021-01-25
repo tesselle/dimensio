@@ -51,7 +51,7 @@ setMethod(
     data[[1]] <- list(
       data = x@data,
       mean = x@center,
-      sd = x@standard_deviation
+      sd = x@scale
     )
     data[[3]][["cor"]] <- sqrt(x@columns@cosine)
     names(data) <- c("data", "individuals", "variables", "eigenvalues")
