@@ -371,7 +371,7 @@ setGeneric(
 #'  \code{TRUE}.
 #' @param fill,border A \code{\link{character}} string specifying the bars
 #'  infilling and border colors.
-#' @param colour A \code{\link{character}} string specifying the line color.
+#' @param color A \code{\link{character}} string specifying the line color.
 #' @param ... Currently not used.
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau

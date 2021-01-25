@@ -57,9 +57,9 @@ X <- pca(iris, scale = TRUE, sup_ind = 50:75)
 
 ### Visualize
 
-Visualization methods produce graphics with as few elements as possible.
 **dimensio** uses [**ggplot2**](https://github.com/tidyverse/ggplot2)
-for plotting informations. This makes it easy to customize diagrams
+for plotting informations. Visualization methods produce graphics with
+as few elements as possible: this makes it easy to customize diagrams
 (e.g. using extra layers, themes and scales).
 
 ``` r
@@ -73,32 +73,29 @@ library(khroma)
 plot_individuals(X, group = iris$Species, active = TRUE, sup = FALSE) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
-  khroma::scale_color_contrast() # Custom colour scale
+  khroma::scale_color_contrast() # Custom color scale
 
-## Plot supplementary individuals
-plot_individuals(X, group = iris$Species, active = FALSE, sup = TRUE) +
-  ggplot2::theme_bw() + # Change theme
-  khroma::scale_color_contrast() # Custom colour scale
-
-## Plot individuals by cos2
+## Plot all individuals by cos2
 plot_individuals(X, highlight = "cos2", active = TRUE, sup = TRUE) +
   ggplot2::theme_bw() + # Change theme
-  khroma::scale_color_iridescent() # Custom colour scale
+  khroma::scale_color_iridescent() # Custom color scale
 ```
 
-![](man/figures/README-plot-ind-1.png)![](man/figures/README-plot-ind-2.png)![](man/figures/README-plot-ind-3.png)
+![](man/figures/README-plot-ind-1.png)![](man/figures/README-plot-ind-2.png)
 
 ``` r
 ## Plot variables factor map
 plot_variables(X) +
   ggrepel::geom_label_repel() + # Add repelling labels
-  ggplot2::theme_bw() # Change theme
+  ggplot2::theme_bw() + # Change theme
+  ggplot2::theme(legend.position = "bottom") # Edit theme
 
 ## Highlight contributions
 plot_variables(X, highlight = "contrib") +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() + # Change theme
-  khroma::scale_color_YlOrBr() # Custom colour scale
+  ggplot2::theme(legend.position = "bottom") + # Edit theme
+  khroma::scale_color_YlOrBr(range = c(0.5, 1)) # Custom color scale
 ```
 
 ![](man/figures/README-plot-var-1.png)![](man/figures/README-plot-var-2.png)

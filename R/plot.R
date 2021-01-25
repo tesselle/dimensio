@@ -181,7 +181,7 @@ setMethod(
   f = "plot_variance",
   signature = signature(object = "MultivariateAnalysis"),
   definition = function(object, variance = TRUE, cumulative = TRUE,
-                        fill = "grey30", border = "grey10", colour = "red") {
+                        fill = "grey30", border = "grey10", color = "red") {
     ## Prepare data
     data <- get_eigenvalues(object)
 
@@ -194,8 +194,8 @@ setMethod(
         k <- max(data$y) / max(data$cumulative)
         aes_var <- ggplot2::aes(y = .data$cumulative * k)
         gg_var <- list(
-          ggplot2::geom_line(mapping = aes_var, colour = colour),
-          ggplot2::geom_point(mapping = aes_var, colour = colour)
+          ggplot2::geom_line(mapping = aes_var, colour = color),
+          ggplot2::geom_point(mapping = aes_var, colour = color)
         )
         gg_scale <- ggplot2::sec_axis(
           trans = ~ . / k,
@@ -233,12 +233,15 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
 
   ## Highlight or groups, if any
   aes_group <- ggplot2::aes(color = .data$value)
-  if (!is.null(highlight) | !is.null(group)) {
-    if (is.null(highlight) & is.numeric(group)) {
+  if (!is.null(group)) {
+    if (is.numeric(group)) {
       aes_group <- ggplot2::aes(color = .data$group, size = .data$group)
     } else {
       aes_group <- ggplot2::aes(color = .data$group)
     }
+  }
+  if (!is.null(highlight)) {
+    aes_group <- ggplot2::aes(color = .data[[highlight]])
   }
 
   ## ggplot2
@@ -269,10 +272,16 @@ plot_arrows <- function(object, margin, axes, active = TRUE, sup = TRUE,
   data$z <- 0 # Set the origin of arrows
 
   ## Highlight or groups, if any
-  if (!is.null(highlight) | !is.null(group)) {
-    aes_group <- ggplot2::aes(color = .data$group)
-  } else {
-    aes_group <- ggplot2::aes(color = .data$value)
+  aes_group <- ggplot2::aes(color = .data$value)
+  if (!is.null(group)) {
+    if (is.numeric(group)) {
+      aes_group <- ggplot2::aes(color = .data$group, size = .data$group)
+    } else {
+      aes_group <- ggplot2::aes(color = .data$group)
+    }
+  }
+  if (!is.null(highlight)) {
+    aes_group <- ggplot2::aes(color = .data[[highlight]])
   }
 
   ## Scaled variables?
@@ -286,6 +295,7 @@ plot_arrows <- function(object, margin, axes, active = TRUE, sup = TRUE,
     gg_circle <- ggplot2::geom_path(
       mapping = ggplot2::aes(x = .data$x, y = .data$y),
       data = circle,
+      colour = "grey30",
       size = 0.5,
       inherit.aes = FALSE
     )
@@ -372,10 +382,10 @@ prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
   ## Highlight
   if (!is.null(highlight)) {
     highlight_i <- if (is_var) col_i else row_i # Subset
-    highlight <- joint(object, what = highlight, margin = margin,
+    highlight_k <- joint(object, what = highlight, margin = margin,
                        axes = axes, sup = TRUE)
-    highlight <- highlight[highlight_i]
-    data$group <- highlight
+    highlight_k <- highlight_k[highlight_i]
+    data[[highlight]] <- highlight_k
   }
 
   return(data)

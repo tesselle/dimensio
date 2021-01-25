@@ -22,7 +22,7 @@ plot_variance(object, ...)
   cumulative = TRUE,
   fill = "grey30",
   border = "grey10",
-  colour = "red"
+  color = "red"
 )
 }
 \arguments{
@@ -40,7 +40,7 @@ variance be plotted instead of eigenvalues?}
 percentages of variance be plotted ? Only used if \code{variance} is
 \code{TRUE}.}
 
-\item{colour}{A \code{\link{character}} string specifying the line color.}
+\item{color}{A \code{\link{character}} string specifying the line color.}
 }
 \description{
 Plot eigenvalues or variances histogram.
