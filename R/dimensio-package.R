@@ -38,3 +38,9 @@
 #' setGeneric setMethod slot slot<- slotNames validObject .valueClassTest
 #' @importFrom rlang .data
 NULL
+
+# Notes:
+# matrix * vector is faster (!) than:
+# matrix %*% t(vector)
+# t(t(matrix) * vector)
+# https://stackoverflow.com/questions/18349053/fastest-way-for-multiplying-a-matrix-to-a-vector

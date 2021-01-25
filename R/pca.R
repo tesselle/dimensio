@@ -62,6 +62,8 @@ setMethod(
     # Dimension of the solution
     ndim <- min(n, ncol(N) - 1)
     dim_keep <- seq_len(ndim)
+    i <- nrow(N)
+    j <- ncol(N)
 
     # Weights
     w_ind <- if (is.null(weight_ind)) rep(1, nrow(N)) else weight_ind
@@ -70,40 +72,59 @@ setMethod(
     W_ind <- sqrt(w_ind)
     W_var <- sqrt(w_var)
 
+    # Build matrix
+    # matrix * vector is faster (!) than:
+    # matrix %*% t(vector)
+    # t(t(matrix) * vector)
+    s_ind <- sqrt(w_ind)
+    s_var <- sqrt(w_var)
+    W_ind1 <- matrix(s_ind, nrow = i, ncol = j, byrow = FALSE)
+    W_var1 <- matrix(s_var, nrow = i, ncol = j, byrow = TRUE)
+    W_var2 <- matrix(s_var, nrow = j, ncol = j, byrow = FALSE)
+    W_ind3 <- matrix(s_ind, nrow = i, ncol = ndim, byrow = FALSE)
+    W_var3 <- matrix(s_var, nrow = j, ncol = ndim, byrow = FALSE)
+
     # Center data
     center <- weighted_mean(N, w_ind)
-    P <- t(t(N) - center)
+    ctr <- matrix(center, nrow = i, ncol = j, byrow = TRUE)
+    P <- N - ctr
 
     # Scale data
     if (scale) {
       std_dev <- weighted_sd(P, w_ind)
     } else {
-      std_dev <- rep(1, length(center))
+      std_dev <- rep(1, j)
     }
-    M <- t(t(P) / std_dev)
+    std <- matrix(std_dev, nrow = i, ncol = j, byrow = TRUE)
+    M <- P / std
 
     # Matrix of standardized residuals
-    S <- t(t(M) * W_var * W_ind)
+    S <- M * W_var1 * W_ind1
 
     # Singular Value Decomposition
     D <- svd(S)
     sv <- D$d[dim_keep] # Singular values
 
     # Standard coordinates
-    U <- D$u[, dim_keep, drop = FALSE] / W_ind
-    V <- D$v[, dim_keep, drop = FALSE] / W_var
+    U <- D$u / W_ind1
+    V <- D$v / W_var2
+    U <- U[, dim_keep, drop = FALSE]
+    V <- V[, dim_keep, drop = FALSE]
+
+    sv_U <- matrix(sv, nrow = i, ncol = ndim, byrow = TRUE)
+    sv_V <- matrix(sv, nrow = j, ncol = ndim, byrow = TRUE)
 
     # Principal coordinates
-    coord_ind <- t(t(U) * sv)
-    coord_var <- t(t(V) * sv)
+    coord_ind <- U * sv_U
+    coord_var <- V * sv_V
 
     # Contributions
-    contrib_ind <- t(t(coord_ind^2 * w_ind) / sv^2) * 100
-    contrib_var <- t(t(coord_var^2 * w_var) / sv^2) * 100
+    contrib_ind <- ((coord_ind * W_ind3) / sv_U)^2 * 100
+    contrib_var <- ((coord_var * W_var3) / sv_V)^2 * 100
 
     # Squared distance to centroide
-    dist_ind <- colSums(t(M^2) * w_var)
-    dist_var <- colSums(M^2 * w_ind)
+    dist_ind <- rowSums((M * W_var1)^2)
+    dist_var <- colSums((M * W_ind1)^2)
 
     # Supplementary points
     if (any(is_ind_sup)) {

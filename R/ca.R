@@ -58,6 +58,8 @@ setMethod(
     # Dimension of the solution
     ndim <- min(n, dim(N) - 1)
     dim_keep <- seq_len(ndim)
+    i <- nrow(N)
+    j <- ncol(N)
 
     # Grand total
     total <- sum(N, na.rm = FALSE)
@@ -67,8 +69,18 @@ setMethod(
     # Calcul des marges
     w_row <- rowSums(P, na.rm = FALSE)
     w_col <- colSums(P, na.rm = FALSE)
-    W_row <- sqrt(diag(1 / w_row))
-    W_col <- sqrt(diag(1 / w_col))
+
+    # Build matrix
+    # matrix * vector is faster (!) than:
+    # matrix %*% t(vector)
+    # t(t(matrix) * vector)
+    s_row <- sqrt(w_row)
+    s_col <- sqrt(w_col)
+    W_row1 <- matrix(s_row, nrow = i, ncol = j, byrow = FALSE)
+    W_col1 <- matrix(s_col, nrow = i, ncol = j, byrow = TRUE)
+    W_col2 <- matrix(s_col, nrow = j, ncol = j, byrow = FALSE)
+    W_row3 <- matrix(s_row, nrow = i, ncol = ndim, byrow = FALSE)
+    W_col3 <- matrix(s_col, nrow = j, ncol = ndim, byrow = FALSE)
 
     # /!\ Important: we need to clean the data before processing
     # Empty rows/columns must be removed to avoid error in svd()
@@ -81,23 +93,28 @@ setMethod(
     M <- P - tcrossprod(w_row, w_col)
 
     # Matrix of standardized residuals
-    S <- W_row %*% M %*% W_col
+    S <- M / W_row1 / W_col1
 
     # Singular Value Decomposition
     D <- svd(S)
     sv <- D$d[dim_keep] # Singular values
 
     # Standard coordinates
-    U <- W_row %*% D$u[, dim_keep, drop = FALSE]
-    V <- W_col %*% D$v[, dim_keep, drop = FALSE]
+    U <- D$u / W_row1
+    V <- D$v / W_col2
+    U <- U[, dim_keep, drop = FALSE]
+    V <- V[, dim_keep, drop = FALSE]
+
+    sv_U <- matrix(sv, nrow = i, ncol = ndim, byrow = TRUE)
+    sv_V <- matrix(sv, nrow = j, ncol = ndim, byrow = TRUE)
 
     # Principal coordinates
-    coord_row <- U %*% diag(sv)
-    coord_col <- V %*% diag(sv)
+    coord_row <- U * sv_U
+    coord_col <- V * sv_V
 
     # Contributions
-    contrib_row <- t(t(coord_row^2 * w_row) / sv^2) * 100
-    contrib_col <- t(t(coord_col^2 * w_col) / sv^2) * 100
+    contrib_row <- ((coord_row * W_row3) / sv_U)^2 * 100
+    contrib_col <- ((coord_col * W_col3) / sv_V)^2 * 100
 
     # Squared distance to centroide
     dist_row <- rowSums(S^2) / w_row
