@@ -11,7 +11,7 @@ test_that("Correspondence Analysis", {
   expect_error(ca(cts, sup_col = "col1"), "must be a numeric vector")
 
   res <- ca(cts, n = 10)
-  expect_error(res[["X"]])
+  expect_null(res[["X"]])
 
   # Points coordinates
   coord_row <- get_coordinates(res, margin = 1, sup = TRUE)
@@ -38,11 +38,14 @@ test_that("Correspondence Analysis", {
 test_that("Predict new coordinates", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)
 
-  res <- ca(cts[1:7, 1:6])
-  new_rows <- predict(res, cts[8:10, 1:6], margin = 1)
-  new_cols <- predict(res, cts[1:7, 7:10], margin = 2)
+  is_sup_rows <- sort(sample(1:10, 3, FALSE))
+  is_sup_cols <- sort(sample(1:10, 4, FALSE))
 
-  res_sup <- ca(cts, sup_row = 8:10, sup_col = 7:10)
+  res <- ca(cts[-is_sup_rows, -is_sup_cols])
+  new_rows <- predict(res, cts[is_sup_rows, -is_sup_cols], margin = 1)
+  new_cols <- predict(res, cts[-is_sup_rows, is_sup_cols], margin = 2)
+
+  res_sup <- ca(cts, sup_row = is_sup_rows, sup_col = is_sup_cols)
   sup_rows <- get_coordinates(res_sup, margin = 1, sup = TRUE)
   sup_cols <- get_coordinates(res_sup, margin = 2, sup = TRUE)
 
@@ -56,8 +59,11 @@ test_that("Compare with {FactoMineR}", {
   mtx <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)
   df <- as.data.frame(mtx)
 
-  res_facto <- FactoMineR::CA(df, row.sup = 8:10, col.sup = 7:10, graph = FALSE)
-  res_arkhe <- ca(df, sup_row = 8:10, sup_col = 7:10)
+  is_sup_rows <- sort(sample(1:10, 3, FALSE))
+  is_sup_cols <- sort(sample(1:10, 4, FALSE))
+
+  res_facto <- FactoMineR::CA(df, row.sup = is_sup_rows, col.sup = is_sup_cols, graph = FALSE)
+  res_arkhe <- ca(df, sup_row = is_sup_rows, sup_col = is_sup_cols)
 
   # Get coordinates
   coord_row <- get_coordinates(res_arkhe, margin = 1, sup = TRUE)

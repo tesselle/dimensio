@@ -34,7 +34,7 @@
 \alias{get_variance,MultivariateAnalysis-method}
 \alias{get_correlations,PCA-method}
 \alias{loadings,PCA-method}
-\title{Get Parts of an Object}
+\title{Get Results}
 \usage{
 get_coordinates(x, ...)
 

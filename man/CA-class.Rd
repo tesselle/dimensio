@@ -36,6 +36,7 @@ get_eigenvalues(X)
 \seealso{
 Other multivariate analysis: 
 \code{\link{MultivariateAnalysis-class}},
+\code{\link{MultivariateResults-class}},
 \code{\link{PCA-class}},
 \code{\link{ca}()},
 \code{\link{pca}()},

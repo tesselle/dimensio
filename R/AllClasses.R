@@ -4,38 +4,48 @@
 #' Multivariate Data Analysis Results
 #'
 #' An S4 class to store the results of a multivariate data analysis.
+#' @slot names A \code{\link{character}} vector specifying the row names.
+#' @slot coordinates A \code{\link{numeric}} \code{\link{matrix}}
+#'  giving the principal coordinates.
+#' @slot standard A \code{\link{numeric}} \code{\link{matrix}}
+#'  giving the standard coordinates.
+#' @slot contributions A \code{\link{numeric}} \code{\link{matrix}}
+#'  giving the contributions to the definition of the dimensions.
+#' @slot cosine A \code{\link{numeric}} \code{\link{matrix}}
+#'  giving the \eqn{cos^2}{cos2} values.
+#' @slot distances A \code{\link{numeric}} vector giving the distances to
+#'  centroid.
+#' @slot weights A \code{\link{numeric}} vector giving the masses/weights.
+#' @slot supplement A \code{\link{logical}} vector specifying the supplementary
+#'  points.
+#' @author N. Frerebeau
+#' @family multivariate analysis
+#' @docType class
+#' @aliases MultivariateResults-class
+.MultivariateResults <- setClass(
+  Class = "MultivariateResults",
+  slots = c(
+    names = "character",
+    coordinates = "matrix",
+    standard = "matrix",
+    contributions = "matrix",
+    cosine = "matrix",
+    distances = "numeric",
+    weights = "numeric",
+    supplement = "logical"
+  )
+)
+
+#' Output of Multivariate Data Analysis
+#'
+#' An S4 class to store the output of a multivariate data analysis.
 #' @slot data A \code{\link{numeric}} \code{\link{matrix}}
 #' @slot dimension An \code{\link{integer}} giving the dimension of the
 #'  solution.
-#' @slot row_names A \code{\link{character}} vector specifying the row names.
-#' @slot row_coordinates A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the individual/row principal coordinates.
-#' @slot row_standard A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the individual/row standard coordinates.
-#' @slot row_distances A \code{\link{numeric}} vector giving the individual/row
-#'  chi-square distances to centroid.
-#' @slot row_cosine A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the individual/row \eqn{cos^2}{cos2} values.
-#' @slot row_weights A \code{\link{numeric}} vector giving the row masses/
-#'  individual weights.
-#' @slot row_supplement A \code{\link{logical}} vector specifying if a row is a
-#'  supplementary point.
-#' @slot column_names A \code{\link{character}} vector specifying the column
-#'  names.
-#' @slot column_coordinates A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the variable/column principal coordinates.
-#' @slot column_standard A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the variable/column standard coordinates.
-#' @slot column_distances A \code{\link{numeric}} vector giving the
-#'  variable/column chi-square distances to centroid.
-#' @slot column_cosine A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the variable/column \eqn{cos^2}{cos2} values.
-#' @slot column_weights A \code{\link{numeric}} vector giving the column masses/
-#'  variable weights.
-#' @slot column_supplement A \code{\link{logical}} vector specifying if a column
-#'  is a supplementary point.
 #' @slot singular_values A \code{\link{numeric}} vector giving the singular
 #'  values.
+#' @slot rows A \linkS4class{MultivariateResults} object.
+#' @slot columns A \linkS4class{MultivariateResults} object.
 #' @section Subset:
 #'  In the code snippets below, \code{x} is a \code{MultivariateAnalysis}
 #'  object.
@@ -53,23 +63,9 @@
   slots = c(
     data = "matrix",
     dimension = "integer",
-    row_names = "character",
-    row_coordinates = "matrix",
-    row_standard = "matrix",
-    row_distances = "numeric",
-    row_cosine = "matrix",
-    row_inertias = "numeric",
-    row_weights = "numeric",
-    row_supplement = "logical",
-    column_names = "character",
-    column_coordinates = "matrix",
-    column_standard = "matrix",
-    column_distances = "numeric",
-    column_cosine = "matrix",
-    column_inertias = "numeric",
-    column_weights = "numeric",
-    column_supplement = "logical",
-    singular_values = "numeric"
+    singular_values = "numeric",
+    rows = "MultivariateResults",
+    columns = "MultivariateResults"
   )
 )
 
@@ -111,4 +107,55 @@
     standard_deviation = "numeric"
   ),
   contains = "MultivariateAnalysis"
+)
+
+# Initialize ===================================================================
+setMethod(
+  f = "initialize",
+  signature = "MultivariateResults",
+  definition = function(.Object, names, coordinates, standard, contributions,
+                        distances, cosine, weights, supplement, ...,
+                        prefix = "PC") {
+
+    ## /!\ Reorder active/supplementary points /!\
+    ## Computation moves all suppl. points at the end of the results
+    ## We need to restore the original order of the data
+    if (any(supplement)) {
+      n <- nrow(coordinates)
+      row_i <- seq_len(n)
+      sup_i <- utils::tail(row_i, sum(supplement))
+      new_i <- integer(n)
+      new_i[supplement] <- sup_i
+      new_i[new_i == 0] <- row_i[-sup_i]
+
+      coordinates <- coordinates[new_i, ]
+      cosine <- cosine[new_i, ]
+      distances <- distances[new_i]
+    }
+
+    ## Prepare names
+    col_names <- paste0(prefix, seq_len(ncol(coordinates)))
+    dim_names0 <- list(names[!supplement], col_names)
+    dim_names1 <- list(names, col_names)
+
+    ## Set names
+    dimnames(coordinates) <- dimnames(cosine) <- dim_names1
+    dimnames(standard) <- dimnames(contributions) <- dim_names0
+    names(distances) <- names
+    names(weights) <- names[!supplement]
+
+    .Object <- methods::callNextMethod(
+      .Object,
+      names = names,
+      coordinates = coordinates,
+      standard = standard,
+      contributions = contributions,
+      cosine = cosine,
+      distances = distances,
+      weights = weights,
+      supplement = supplement
+    )
+    validObject(.Object)
+    .Object
+  }
 )

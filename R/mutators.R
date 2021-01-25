@@ -20,14 +20,10 @@ setMethod(
   f = "get_contributions",
   signature = signature(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1) {
-    coords <- get_coordinates(x, margin = margin, sup = FALSE)
+    margin <- margin[[1L]]
+    if (margin == 1) contrib <- x@rows@contributions
+    if (margin == 2) contrib <- x@columns@contributions
 
-    sv <- x@singular_values
-    if (margin == 1) weights <- x@row_weights
-    if (margin == 2) weights <- x@column_weights
-
-    coords <- as.matrix(coords)
-    contrib <- t(t(coords^2 * weights) / sv^2) * 100
     as.data.frame(contrib)
   }
 )
@@ -41,19 +37,17 @@ setMethod(
   signature = signature(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1, sup = TRUE, sup_name = ".sup") {
 
+    margin <- margin[[1L]]
     if (margin == 1) {
-      coords <- x@row_coordinates
-      suppl <- x@row_supplement
-      name <- x@row_names
+      coords <- x@rows@coordinates
+      suppl <- x@rows@supplement
     }
     if (margin == 2) {
-      coords <- x@column_coordinates
-      suppl <- x@column_supplement
-      name <- x@column_names
+      coords <- x@columns@coordinates
+      suppl <- x@columns@supplement
     }
 
     coords <- as.data.frame(coords)
-    rownames(coords) <- name
 
     if (sup) {
       coords[[sup_name]] <- suppl
@@ -73,19 +67,18 @@ setMethod(
   f = "get_cos2",
   signature = signature(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1, sup = TRUE, sup_name = ".sup") {
+
+    margin <- margin[[1L]]
     if (margin == 1) {
-      cos2 <- x@row_cosine
-      suppl <- x@row_supplement
-      name <- x@row_names
+      cos2 <- x@rows@cosine
+      suppl <- x@rows@supplement
     }
     if (margin == 2) {
-      cos2 <- x@column_cosine
-      suppl <- x@column_supplement
-      name <- x@column_names
+      cos2 <- x@columns@cosine
+      suppl <- x@columns@supplement
     }
 
     cos2 <- as.data.frame(cos2)
-    rownames(cos2) <- name
 
     if (sup) {
       cos2[[sup_name]] <- suppl
@@ -117,13 +110,15 @@ setMethod(
   f = "get_distances",
   signature = signature(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1) {
+
+    margin <- margin[[1L]]
     if (margin == 1) {
-      d2 <- x@row_distances
-      names(d2) <- x@row_names
+      d2 <- x@rows@distances
+      names(d2) <- x@rows@names
     }
     if (margin == 2) {
-      d2 <- x@column_distances
-      names(d2) <- x@column_names
+      d2 <- x@columns@distances
+      names(d2) <- x@columns@names
     }
     d2
   }
@@ -158,16 +153,16 @@ setMethod(
   signature = signature(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1) {
     if (margin == 1) {
-      masses <- x@row_weights
-      d2 <- x@row_distances
-      suppl <- x@row_supplement
-      name <- x@row_names
+      masses <- x@rows@weights
+      d2 <- x@rows@distances
+      suppl <- x@rows@supplement
+      name <- x@rows@names
     }
     if (margin == 2) {
-      masses <- x@column_weights
-      d2 <- x@column_distances
-      suppl <- x@column_supplement
-      name <- x@column_names
+      masses <- x@columns@weights
+      d2 <- x@columns@distances
+      suppl <- x@columns@supplement
+      name <- x@columns@names
     }
 
     i <- masses * d2[!suppl]

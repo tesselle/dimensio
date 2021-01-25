@@ -22,15 +22,35 @@ weighted_sd <- function(x, w) {
 #' @keywords internal
 #' @noRd
 is_supplementary <- function(index, n) {
-  x <- rep(FALSE, times = n)
+  x <- logical(n)
 
-  if (!is.null(index) && (!is.numeric(index) & !is.logical(index))) {
+  if (is.null(index)) {
+    return(x)
+  } else {
+    if (is.numeric(index)) {
+      x[index] <- TRUE
+      return(x)
+    }
+    if (is.logical(index)) {
+      return(index)
+    }
     arg <- deparse(substitute(index))
     msg <- sprintf("%s must be a numeric vector of indices.", sQuote(arg))
     stop(msg, call. = FALSE)
-  } else {
-    x[index] <- TRUE
   }
+}
 
-  x
+#' Check Package
+#'
+#' Checks if a package is installed.
+#' @param x A \code{\link{character}} string giving the package name.
+#' @return Rises an error or invisibly returns \code{TRUE}.
+#' @keywords internal
+#' @noRd
+check_package <- function(x) {
+  if (!requireNamespace(x, quietly = TRUE)) {
+    msg <- sprintf("Package %s needed for this function to work.", sQuote(x))
+    stop(msg, "\nPlease install it.", call. = FALSE)
+  }
+  invisible(TRUE)
 }

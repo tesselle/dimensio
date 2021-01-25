@@ -9,7 +9,7 @@ test_that("Principal Components Analysis", {
   expect_error(pca(cts, sup_var = "col1"), "must be a numeric vector")
 
   res <- pca(cts, n = 10)
-  expect_error(res[["X"]])
+  expect_null(res[["X"]])
 
   # Points coordinates
   coord_row <- get_coordinates(res, margin = 1, sup = TRUE)
@@ -36,11 +36,14 @@ test_that("Principal Components Analysis", {
 test_that("Predict new coordinates", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)
 
-  res <- pca(cts[1:7, 1:6])
-  new_rows <- predict(res, cts[8:10, 1:6], margin = 1)
-  new_cols <- predict(res, cts[1:7, 7:10], margin = 2)
+  is_sup_rows <- sort(sample(1:10, 3, FALSE))
+  is_sup_cols <- sort(sample(1:10, 4, FALSE))
 
-  res_sup <- pca(cts, sup_ind = 8:10, sup_var = 7:10)
+  res <- pca(cts[-is_sup_rows, -is_sup_cols])
+  new_rows <- predict(res, cts[is_sup_rows, -is_sup_cols], margin = 1)
+  new_cols <- predict(res, cts[-is_sup_rows, is_sup_cols], margin = 2)
+
+  res_sup <- pca(cts, sup_ind = is_sup_rows, sup_var = is_sup_cols)
   sup_rows <- get_coordinates(res_sup, margin = 1, sup = TRUE)
   sup_cols <- get_coordinates(res_sup, margin = 2, sup = TRUE)
 
@@ -51,12 +54,16 @@ test_that("Compare with {FactoMineR}", {
   skip_on_cran()
   skip_if_not_installed("FactoMineR")
 
-  mtx <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)
+  mtx <- matrix(data = sample(1:100, 100, TRUE), ncol = 10)
   df <- as.data.frame(mtx)
 
-  res_facto <- FactoMineR::PCA(df, scale.unit = TRUE, ind.sup = 8:10,
-                               quanti.sup = 7:10, graph = FALSE)
-  res_arkhe <- pca(df, scale = TRUE, sup_ind = 8:10, sup_var = 7:10)
+  is_sup_rows <- sort(sample(1:10, 3, FALSE))
+  is_sup_cols <- sort(sample(1:10, 4, FALSE))
+
+  res_facto <- FactoMineR::PCA(df, scale.unit = TRUE, ind.sup = is_sup_rows,
+                               quanti.sup = is_sup_cols, graph = FALSE)
+  res_arkhe <- pca(df, scale = TRUE, sup_ind = is_sup_rows,
+                   sup_var = is_sup_cols)
 
   # Get coordinates
   coord_row <- get_coordinates(res_arkhe, margin = 1, sup = TRUE)

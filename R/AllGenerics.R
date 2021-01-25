@@ -6,7 +6,8 @@ NULL
 setGeneric("loadings")
 
 # Extract ======================================================================
-#' Get Parts of an Object
+## Get -------------------------------------------------------------------------
+#' Get Results
 #'
 #' Getters to retrieve parts of an object.
 #' @param x An object from which to get element(s) (a \linkS4class{CA} or
@@ -133,7 +134,7 @@ setGeneric(
   valueClass = "numeric"
 )
 
-# Subset =======================================================================
+## Subset ----------------------------------------------------------------------
 #' Extract Parts of an Object
 #'
 #' Operators acting on objects to extract parts.
@@ -237,8 +238,7 @@ setGeneric(
 #' @param object A \eqn{m \times p}{m x p} numeric \code{\link{matrix}} or a
 #'  \code{\link{data.frame}}.
 #' @param scale A \code{\link{logical}} scalar: should data be scaled to unit
-#'  variance? If \code{TRUE} (the default), the correlation matrix is used for
-#'  computation instead of the covariance matrix.
+#'  variance?
 #' @param n An \code{\link{integer}} value specifying the number of dimensions
 #'  to be kept in the results. If \code{NULL} (the default),
 #'  \eqn{p - 1} dimensions will be returned.

@@ -10,7 +10,15 @@
 \usage{
 pca(object, ...)
 
-\S4method{pca}{data.frame}(object, scale = TRUE, n = NULL, sup_ind = NULL, sup_var = NULL)
+\S4method{pca}{data.frame}(
+  object,
+  scale = TRUE,
+  n = NULL,
+  sup_ind = NULL,
+  sup_var = NULL,
+  weight_ind = NULL,
+  weight_var = NULL
+)
 
 \S4method{pca}{matrix}(
   object,
@@ -29,8 +37,7 @@ pca(object, ...)
 \item{...}{Currently not used.}
 
 \item{scale}{A \code{\link{logical}} scalar: should data be scaled to unit
-variance? If \code{TRUE} (the default), the correlation matrix is used for
-computation instead of the covariance matrix.}
+variance?}
 
 \item{n}{An \code{\link{integer}} value specifying the number of dimensions
 to be kept in the results. If \code{NULL} (the default),
@@ -83,6 +90,7 @@ get_eigenvalues(X)
 Other multivariate analysis: 
 \code{\link{CA-class}},
 \code{\link{MultivariateAnalysis-class}},
+\code{\link{MultivariateResults-class}},
 \code{\link{PCA-class}},
 \code{\link{ca}()},
 \code{\link{predict}()}

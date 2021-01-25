@@ -4,9 +4,9 @@
 \name{MultivariateAnalysis-class}
 \alias{MultivariateAnalysis-class}
 \alias{.MultivariateAnalysis}
-\title{Multivariate Data Analysis Results}
+\title{Output of Multivariate Data Analysis}
 \description{
-An S4 class to store the results of a multivariate data analysis.
+An S4 class to store the output of a multivariate data analysis.
 }
 \section{Slots}{
 
@@ -16,49 +16,12 @@ An S4 class to store the results of a multivariate data analysis.
 \item{\code{dimension}}{An \code{\link{integer}} giving the dimension of the
 solution.}
 
-\item{\code{row_names}}{A \code{\link{character}} vector specifying the row names.}
-
-\item{\code{row_coordinates}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the individual/row principal coordinates.}
-
-\item{\code{row_standard}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the individual/row standard coordinates.}
-
-\item{\code{row_distances}}{A \code{\link{numeric}} vector giving the individual/row
-chi-square distances to centroid.}
-
-\item{\code{row_cosine}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the individual/row \eqn{cos^2}{cos2} values.}
-
-\item{\code{row_weights}}{A \code{\link{numeric}} vector giving the row masses/
-individual weights.}
-
-\item{\code{row_supplement}}{A \code{\link{logical}} vector specifying if a row is a
-supplementary point.}
-
-\item{\code{column_names}}{A \code{\link{character}} vector specifying the column
-names.}
-
-\item{\code{column_coordinates}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the variable/column principal coordinates.}
-
-\item{\code{column_standard}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the variable/column standard coordinates.}
-
-\item{\code{column_distances}}{A \code{\link{numeric}} vector giving the
-variable/column chi-square distances to centroid.}
-
-\item{\code{column_cosine}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the variable/column \eqn{cos^2}{cos2} values.}
-
-\item{\code{column_weights}}{A \code{\link{numeric}} vector giving the column masses/
-variable weights.}
-
-\item{\code{column_supplement}}{A \code{\link{logical}} vector specifying if a column
-is a supplementary point.}
-
 \item{\code{singular_values}}{A \code{\link{numeric}} vector giving the singular
 values.}
+
+\item{\code{rows}}{A \linkS4class{MultivariateResults} object.}
+
+\item{\code{columns}}{A \linkS4class{MultivariateResults} object.}
 }}
 
 \section{Subset}{
@@ -75,6 +38,7 @@ vector.}
 \seealso{
 Other multivariate analysis: 
 \code{\link{CA-class}},
+\code{\link{MultivariateResults-class}},
 \code{\link{PCA-class}},
 \code{\link{ca}()},
 \code{\link{pca}()},

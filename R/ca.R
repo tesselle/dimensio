@@ -10,8 +10,26 @@ setMethod(
   f = "ca",
   signature = signature(object = "data.frame"),
   definition = function(object, n = NULL, sup_row = NULL, sup_col = NULL) {
+    # Remove non-numeric variables, if any
+    quali <- !vapply(object, FUN = is.numeric, FUN.VALUE = logical(1))
+    if (any(quali)) {
+      old <- object
+      object <- object[, -c(which(quali), sup_var), drop = FALSE]
+      if (!is.null(sup_var)) {
+        object <- cbind(object, old[, sup_var, drop = FALSE])
+        sup_var <- utils::tail(seq_along(object), length(sup_var))
+      }
+      # Generate message
+      tot <- sum(quali)
+      msg <- "%d qualitative %s removed: %s."
+      txt <- ngettext(tot, "variable was", "variables were")
+      col <- paste(colnames(old)[quali], collapse = ", ")
+      message(sprintf(msg, tot, txt, col))
+    }
+
     object <- as.matrix(object)
-    ca(object = object, n = n, sup_row = sup_row, sup_col = sup_col)
+    methods::callGeneric(object = object, n = n,
+                         sup_row = sup_row, sup_col = sup_col)
   }
 )
 
@@ -39,7 +57,7 @@ setMethod(
 
     # Dimension of the solution
     ndim <- min(n, dim(N) - 1)
-    keep_dim <- seq_len(ndim)
+    dim_keep <- seq_len(ndim)
 
     # Grand total
     total <- sum(N, na.rm = FALSE)
@@ -67,18 +85,19 @@ setMethod(
 
     # Singular Value Decomposition
     D <- svd(S)
-    sv <- D$d[keep_dim] # Singular values
+    sv <- D$d[dim_keep] # Singular values
 
     # Standard coordinates
-    U <- W_row %*% D$u[, keep_dim, drop = FALSE]
-    V <- W_col %*% D$v[, keep_dim, drop = FALSE]
-
-    # Set names
-    colnames(U) <- colnames(V) <- names(sv) <- paste0("PC", keep_dim)
+    U <- W_row %*% D$u[, dim_keep, drop = FALSE]
+    V <- W_col %*% D$v[, dim_keep, drop = FALSE]
 
     # Principal coordinates
     coord_row <- U %*% diag(sv)
     coord_col <- V %*% diag(sv)
+
+    # Contributions
+    contrib_row <- t(t(coord_row^2 * w_row) / sv^2) * 100
+    contrib_col <- t(t(coord_col^2 * w_col) / sv^2) * 100
 
     # Squared distance to centroide
     dist_row <- rowSums(S^2) / w_row
@@ -117,21 +136,29 @@ setMethod(
     .CA(
       data = object,
       dimension = as.integer(ndim),
-      row_names = names_row,
-      row_coordinates = coord_row,
-      row_standard = U,
-      row_distances = dist_row,
-      row_cosine = cos_row,
-      row_weights = w_row,
-      row_supplement = is_row_sup,
-      column_names = names_col,
-      column_coordinates = coord_col,
-      column_standard = V,
-      column_distances = dist_col,
-      column_cosine = cos_col,
-      column_weights = w_col,
-      column_supplement = is_col_sup,
-      singular_values = sv
+      singular_values = sv,
+      rows = .MultivariateResults(
+        names = names_row,
+        coordinates = coord_row,
+        standard = U,
+        contributions = contrib_row,
+        distances = dist_row,
+        cosine = cos_row,
+        weights = w_row,
+        supplement = is_row_sup,
+        prefix = "CA"
+      ),
+      columns = .MultivariateResults(
+        names = names_col,
+        coordinates = coord_col,
+        standard = V,
+        contributions = contrib_col,
+        distances = dist_col,
+        cosine = cos_col,
+        weights = w_col,
+        supplement = is_col_sup,
+        prefix = "CA"
+      )
     )
   }
 )
@@ -151,11 +178,11 @@ setMethod(
     # Get standard coordinates
     if (margin == 1) {
       data <- data / rowSums(data)
-      std <- object@column_standard
+      std <- object@columns@standard
     }
     if (margin == 2) {
       data <- t(data) / colSums(data)
-      std <- object@row_standard
+      std <- object@rows@standard
     }
 
     # Compute principal coordinates

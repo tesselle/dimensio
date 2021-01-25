@@ -2,75 +2,59 @@
 #' @include AllClasses.R
 NULL
 
+# Coerce =======================================================================
+#' @method as.list MultivariateResults
+as.list.MultivariateResults <- function(x, ...) {
+  list(
+    # names = x@names,
+    coordinates = x@coordinates,
+    # standard = x@standard,
+    contributions = x@contributions,
+    cos2 = x@cosine,
+    # distances = x@distances,
+    # weights = x@weights,
+    supplement = x@supplement
+  )
+}
+
+#' @method as.list MultivariateAnalysis
+#' @export
+as.list.MultivariateAnalysis <- function(x, ...) {
+  list(
+    data = x@data,
+    rows = as.list(x@rows),
+    columns = as.list(x@columns),
+    eigenvalues = x@singular_values^2
+  )
+}
+
 #' @export
 #' @rdname subset
-#' @aliases [[,PCA,character,missing-method
+#' @aliases [[,CA,ANY,missing-method
 setMethod(
   f = "[[",
-  signature = c(x = "CA", i = "character", j = "missing"),
+  signature = c(x = "CA", i = "ANY", j = "missing"),
   definition = function(x, i) {
-    choice <- match.arg(
-      arg = i,
-      choices = c("data", "rows", "columns", "eigenvalues"),
-      several.ok = FALSE
-    )
-
-    switch (
-      choice,
-      data = list(
-        x@data
-      ),
-      rows = list(
-        coord = x@row_coordinates,
-        cos2 = x@row_cosine,
-        masses = x@row_weights,
-        sup = x@row_supplement
-      ),
-      columns = list(
-        coord = x@column_coordinates,
-        cos2 = x@column_cosine,
-        masses = x@column_weights,
-        sup = x@column_supplement
-      ),
-      eigenvalues = x@singular_values^2
-    )
+    data <- as.list(x)
+    methods::callGeneric(x = data, i = i)
   }
 )
 
 #' @export
 #' @rdname subset
-#' @aliases [[,PCA,character,missing-method
+#' @aliases [[,PCA,ANY,missing-method
 setMethod(
   f = "[[",
-  signature = c(x = "PCA", i = "character", j = "missing"),
+  signature = c(x = "PCA", i = "ANY", j = "missing"),
   definition = function(x, i) {
-    choice <- match.arg(
-      arg = i,
-      choices = c("data", "individuals", "variables", "eigenvalues"),
-      several.ok = FALSE
+    data <- as.list(x)
+    data[[1]] <- list(
+      data = x@data,
+      mean = x@center,
+      sd = x@standard_deviation
     )
-
-    switch (
-      choice,
-      data = list(
-        data = x@data,
-        mean = x@center,
-        sd = x@standard_deviation
-      ),
-      individuals = list(
-        coord = x@row_coordinates,
-        cos2 = x@row_cosine,
-        weights = x@row_weights,
-        sup = x@row_supplement
-      ),
-      variables = list(
-        coord = x@column_coordinates,
-        cor = sqrt(x@column_cosine),
-        cos2 = x@column_cosine,
-        weights = x@column_weights,
-        sup = x@column_supplement
-      ),
-      eigenvalues = x@singular_values^2
-    )
+    data[[3]][["cor"]] <- sqrt(x@columns@cosine)
+    names(data) <- c("data", "individuals", "variables", "eigenvalues")
+    methods::callGeneric(x = data, i = i)
   }
 )

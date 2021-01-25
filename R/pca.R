@@ -9,10 +9,29 @@ setMethod(
   f = "pca",
   signature = signature(object = "data.frame"),
   definition = function(object, scale = TRUE, n = NULL,
-                        sup_ind = NULL, sup_var = NULL) {
+                        sup_ind = NULL, sup_var = NULL,
+                        weight_ind = NULL, weight_var = NULL) {
+    # Remove non-numeric variables, if any
+    quali <- !vapply(object, FUN = is.numeric, FUN.VALUE = logical(1))
+    if (any(quali)) {
+      old <- object
+      object <- object[, -c(which(quali), sup_var), drop = FALSE]
+      if (!is.null(sup_var)) {
+        object <- cbind(object, old[, sup_var, drop = FALSE])
+        sup_var <- utils::tail(seq_along(object), length(sup_var))
+      }
+      # Generate message
+      tot <- sum(quali)
+      msg <- "%d qualitative %s removed: %s."
+      txt <- ngettext(tot, "variable was", "variables were")
+      col <- paste(colnames(old)[quali], collapse = ", ")
+      message(sprintf(msg, tot, txt, col))
+    }
+
     object <- as.matrix(object)
-    pca(object = object, scale = scale, n = n,
-        sup_ind = sup_ind, sup_var = sup_var)
+    methods::callGeneric(object = object, scale = scale, n = n,
+                         sup_ind = sup_ind, sup_var = sup_var,
+                         weight_ind = weight_ind, weight_var = weight_var)
   }
 )
 
@@ -42,7 +61,7 @@ setMethod(
 
     # Dimension of the solution
     ndim <- min(n, ncol(N) - 1)
-    keep_dim <- seq_len(ndim)
+    dim_keep <- seq_len(ndim)
 
     # Weights
     w_ind <- if (is.null(weight_ind)) rep(1, nrow(N)) else weight_ind
@@ -68,18 +87,19 @@ setMethod(
 
     # Singular Value Decomposition
     D <- svd(S)
-    sv <- D$d[keep_dim] # Singular values
+    sv <- D$d[dim_keep] # Singular values
 
     # Standard coordinates
-    U <- D$u[, keep_dim, drop = FALSE] / W_ind
-    V <- D$v[, keep_dim, drop = FALSE] / W_var
-
-    # Set names
-    colnames(U) <- colnames(V) <- names(sv) <- paste0("PC", keep_dim)
+    U <- D$u[, dim_keep, drop = FALSE] / W_ind
+    V <- D$v[, dim_keep, drop = FALSE] / W_var
 
     # Principal coordinates
     coord_ind <- t(t(U) * sv)
     coord_var <- t(t(V) * sv)
+
+    # Contributions
+    contrib_ind <- t(t(coord_ind^2 * w_ind) / sv^2) * 100
+    contrib_var <- t(t(coord_var^2 * w_var) / sv^2) * 100
 
     # Squared distance to centroide
     dist_ind <- colSums(t(M^2) * w_var)
@@ -123,21 +143,29 @@ setMethod(
     .PCA(
       data = object,
       dimension = as.integer(ndim),
-      row_names = names_ind,
-      row_coordinates = coord_ind,
-      row_standard = U,
-      row_distances = sqrt(dist_ind),
-      row_cosine = cos_ind,
-      row_weights = w_ind,
-      row_supplement = is_ind_sup,
-      column_names = names_var,
-      column_coordinates = coord_var,
-      column_standard = V,
-      column_distances = sqrt(dist_var),
-      column_cosine = cos_var,
-      column_weights = w_var,
-      column_supplement = is_var_sup,
       singular_values = sv,
+      rows = .MultivariateResults(
+        names = names_ind,
+        coordinates = coord_ind,
+        standard = U,
+        contributions = contrib_ind,
+        distances = sqrt(dist_ind),
+        cosine = cos_ind,
+        weights = w_ind,
+        supplement = is_ind_sup,
+        prefix = "PC"
+      ),
+      columns = .MultivariateResults(
+        names = names_var,
+        coordinates = coord_var,
+        standard = V,
+        contributions = contrib_var,
+        distances = sqrt(dist_var),
+        cosine = cos_var,
+        weights = w_var,
+        supplement = is_var_sup,
+        prefix = "PC"
+      ),
       center = center,
       standard_deviation = std_dev
     )
@@ -158,16 +186,16 @@ setMethod(
 
     # Get standard coordinates
     if (margin == 1) {
-      std <- object@column_standard
-      weights <- object@column_weights
+      std <- object@columns@standard
+      weights <- object@columns@weights
       center <- object@center
       std_dev <- object@standard_deviation
 
       newdata <- (t(newdata) - center) * weights / std_dev
     }
     if (margin == 2) {
-      std <- object@row_standard
-      weights <- object@row_weights
+      std <- object@rows@standard
+      weights <- object@rows@weights
       center <- weighted_mean(newdata, weights)
       std_dev <- object@standard_deviation
 
@@ -191,11 +219,10 @@ setMethod(
   f = "get_correlations",
   signature = signature(x = "PCA"),
   definition = function(x, sup = TRUE, sup_name = ".sup") {
-    corr <- sqrt(x@column_cosine)
-    suppl <- x@column_supplement
+    corr <- sqrt(x@columns@cosine)
+    suppl <- x@columns@supplement
 
     corr <- as.data.frame(corr)
-    rownames(corr) <- x@column_names
 
     if (sup) {
       corr[[sup_name]] <- suppl
@@ -214,9 +241,7 @@ setMethod(
   f = "loadings",
   signature = signature(x = "PCA"),
   definition = function(x) {
-    loads <- x@column_coordinates / x@singular_values
-    rownames(loads) <- x@column_names
-    colnames(loads) <- paste0("PC", seq_len(ncol(loads)))
+    loads <- x@columns@coordinates / x@singular_values
     class(loads) <- "loadings"
     return(loads)
   }

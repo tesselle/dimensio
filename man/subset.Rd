@@ -3,13 +3,13 @@
 \docType{methods}
 \name{subset}
 \alias{subset}
-\alias{[[,CA,character,missing-method}
-\alias{[[,PCA,character,missing-method}
+\alias{[[,CA,ANY,missing-method}
+\alias{[[,PCA,ANY,missing-method}
 \title{Extract Parts of an Object}
 \usage{
-\S4method{[[}{CA,character,missing}(x, i)
+\S4method{[[}{CA,ANY,missing}(x, i)
 
-\S4method{[[}{PCA,character,missing}(x, i)
+\S4method{[[}{PCA,ANY,missing}(x, i)
 }
 \arguments{
 \item{x}{An object from which to extract element(s) or in which to replace
@@ -77,13 +77,13 @@ A <- matrix(data = sample(1:10, 100, TRUE), nrow = 10, ncol = 10)
 X <- pca(A, scale = TRUE, sup_ind = 8:10, sup_var = 7:10)
 
 ## Get results for the individuals
-X[["ind"]]
+X[["individuals"]]
 
 ## Compute correspondence analysis
 Y <- ca(A, sup_row = 8:10, sup_col = 7:10)
 
-## Get results for the columns
-Y[["col"]]
+## Get results for the rows
+Y[["rows"]]
 }
 \seealso{
 Other mutator: 
