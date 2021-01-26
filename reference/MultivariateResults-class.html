@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>dimensio: Multivariate Data Analysis — dimensio-package • dimensio</title>
+<title>Multivariate Data Analysis Results — MultivariateResults-class • dimensio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,12 +46,8 @@
 
 
 
-<meta property="og:title" content="dimensio: Multivariate Data Analysis — dimensio-package" />
-<meta property="og:description" content="
-Simple Principal Components Analysis (PCA) and
-    Correspondence Analysis (CA). This package provides classes and methods to
-    compute, extract, summarize and visualize results of multivariate data
-    analysis." />
+<meta property="og:title" content="Multivariate Data Analysis Results — MultivariateResults-class" />
+<meta property="og:description" content="An S4 class to store the results of a multivariate data analysis." />
 <meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@nfrerebeau" />
@@ -126,59 +122,61 @@ Simple Principal Components Analysis (PCA) and
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>dimensio: Multivariate Data Analysis</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/dimensio-package.R'><code>R/dimensio-package.R</code></a></small>
-    <div class="hidden name"><code>dimensio-package.Rd</code></div>
+    <h1>Multivariate Data Analysis Results</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a></small>
+    <div class="hidden name"><code>MultivariateResults-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><img src='figures/logo.png' align='right' alt='logo' width='120' /></p>
-<p>Simple Principal Components Analysis (PCA) and
-    Correspondence Analysis (CA). This package provides classes and methods to
-    compute, extract, summarize and visualize results of multivariate data
-    analysis.</p>
+    <p>An S4 class to store the results of a multivariate data analysis.</p>
     </div>
 
 
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
     
-<table class='table'>
-<tr><td><strong>Package:</strong></td><td>dimensio</td></tr>
-<tr><td><strong>Type:</strong></td><td>Package</td></tr>
-<tr><td><strong>Version:</strong></td><td>1.0.0</td></tr>
-<tr><td><strong>License:</strong></td><td>GPL-3</td></tr>
-<tr><td><strong>DOI:</strong></td><td><a href='https://doi.org/xxx'>xxx</a></td></tr>
-</table>
 
+<dl>
+<dt><code>names</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> vector specifying the row names.</p></dd>
 
+<dt><code>coordinates</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>
+giving the principal coordinates.</p></dd>
+
+<dt><code>standard</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>
+giving the standard coordinates.</p></dd>
+
+<dt><code>contributions</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>
+giving the contributions to the definition of the dimensions.</p></dd>
+
+<dt><code>cosine</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>
+giving the \(cos^2\) values.</p></dd>
+
+<dt><code>distances</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the distances to
+centroid.</p></dd>
+
+<dt><code>weights</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the masses/weights.</p></dd>
+
+<dt><code>supplement</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> vector specifying the supplementary
+points.</p></dd>
+
+<dt><code>order</code></dt><dd><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> vector giving the original indices
+of the data (computation moves all supplementary points at the end of the
+results).</p></dd>
+
+</dl>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='http://dimensio.tesselle.org'>http://dimensio.tesselle.org</a></p></li>
-<li><p><a href='https://github.com/tesselle/dimensio'>https://github.com/tesselle/dimensio</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/tesselle/dimensio/issues'>https://github.com/tesselle/dimensio/issues</a></p></li>
-</ul>
-
-</div>
+    <div class='dont-index'><p>Other multivariate analysis: 
+<code><a href='CA-class.html'>CA-class</a></code>,
+<code><a href='MultivariateAnalysis-class.html'>MultivariateAnalysis-class</a></code>,
+<code><a href='PCA-class.html'>PCA-class</a></code>,
+<code><a href='ca.html'>ca</a>()</code>,
+<code><a href='pca.html'>pca</a>()</code>,
+<code><a href='predict.html'>predict</a>()</code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p><strong>Full list of authors and contributors</strong> (alphabetic order)</p>
-<table class='table'>
-<tr><td>Nicolas Frerebeau</td><td><em>Université Bordeaux Montaigne, France</em></td></tr>
-<tr><td>Brice Lebrun</td><td><em>Université Bordeaux Montaigne, France</em></td></tr>
-</table>
-
-
-<p><strong>Package maintainer</strong></p>
-<p>Nicolas Frerebeau<br />
-<a href='mailto:nicolas.frerebeau@u-bordeaux-montaigne.fr'>nicolas.frerebeau@u-bordeaux-montaigne.fr</a></p>
-<p>IRAMAT-CRP2A (UMR 5060)<br />
-Maison de l'Archéologie<br />
-Université Bordeaux Montaigne<br />
-F-33607 Pessac cedex<br />
-France</p>
+    <p>N. Frerebeau</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

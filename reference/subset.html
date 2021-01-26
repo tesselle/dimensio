@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract or Replace Parts of an Object — subset • dimensio</title>
+<title>Extract Parts of an Object — subset • dimensio</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -39,8 +46,12 @@
 
 
 
-<meta property="og:title" content="Extract or Replace Parts of an Object — subset" />
-<meta property="og:description" content="Operators acting on objects to extract or replace parts." />
+<meta property="og:title" content="Extract Parts of an Object — subset" />
+<meta property="og:description" content="Operators acting on objects to extract parts." />
+<meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@nfrerebeau" />
+<meta name="twitter:site" content="@nfrerebeau" />
 
 
 
@@ -72,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dimensio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
       </span>
     </div>
 
@@ -87,10 +98,13 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/nfrerebeau/dimensio/">
+  <a href="https://github.com/tesselle/dimensio/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -108,16 +122,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract or Replace Parts of an Object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/nfrerebeau/dimensio/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/nfrerebeau/dimensio/blob/master/R/subset.R'><code>R/subset.R</code></a></small>
+    <h1>Extract Parts of an Object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/tesselle/dimensio/blob/master/R/subset.R'><code>R/subset.R</code></a></small>
     <div class="hidden name"><code>subset.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Operators acting on objects to extract or replace parts.</p>
+    <p>Operators acting on objects to extract parts.</p>
     </div>
 
-    <pre class="usage"># S4 method for CA,character,missing
+    <pre class="usage"># S4 method for CA,ANY,missing
+[[(x, i)
+
+# S4 method for PCA,ANY,missing
 [[(x, i)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -130,14 +147,59 @@ element(s).</p></td>
     </tr>
     <tr>
       <th>i</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> string specifying elements to extract or
-replace.</p></td>
+      <td><p>A <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> string specifying elements to extract.
+Any unambiguous substring can be given (see details).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A subsetted object of the same sort as <code>x</code>.</p>
+    <p>A <code><a href='https://rdrr.io/r/base/list.html'>list</a></code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If <code>i</code> is "<code>data</code>", returns a list with the following elements:</p><dl>
+<dt><code>data</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> matrix of raw data.</p></dd>
+<dt><code>mean</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the variables
+means (<code>PCA</code>).</p></dd>
+<dt><code>sd</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the variables
+standard deviations (<code>PCA</code>).</p></dd>
+
+</dl>
+
+<p>If <code>i</code> is "<code>rows</code>" (<code>CA</code>) or "<code>individuals</code>"
+(<code>PCA</code>), returns a list with the following elements:</p><dl>
+<dt><code>coord</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> matrix of rows/individuals
+coordinates.</p></dd>
+<dt><code>cos2</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> matrix of rows/individuals
+squared cosine.</p></dd>
+<dt><code>masses</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the rows masses
+(<code>CA</code>).</p></dd>
+<dt><code>weights</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the individuals
+weights (<code>PCA</code>).</p></dd>
+<dt><code>sup</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> vector specifying whether a
+point is a supplementary observation or not.</p></dd>
+
+</dl>
+
+<p>If <code>i</code> is "<code>columns</code>" (<code>CA</code>) or "<code>variables</code>"
+(<code>PCA</code>), returns a list with the following elements:</p><dl>
+<dt><code>coord</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> matrix of columns/variables
+coordinates.</p></dd>
+<dt><code>cor</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> matrix of correlation between
+variables and the dimensions (<code>PCA</code>).</p></dd>
+<dt><code>cos2</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> matrix of columns/variables
+squared cosine.</p></dd>
+<dt><code>masses</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the columns
+masses (<code>CA</code>).</p></dd>
+<dt><code>weights</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the variables
+weights (<code>PCA</code>).</p></dd>
+<dt><code>sup</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> vector specifying whether a
+point is a supplementary observation or not.</p></dd>
+
+</dl>
+
+<p>If <code>i</code> is "<code>eigenvalues</code>", returns a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector
+of eigenvalues.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other mutator: 
@@ -146,6 +208,161 @@ replace.</p></td>
 
     <p>N. Frerebeau</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Load data</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tesselle/codex'>codex</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"mississippi"</span><span class='op'>)</span>
+
+<span class='co'>## Compute principal components analysis</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='pca.html'>pca</a></span><span class='op'>(</span><span class='va'>mississippi</span>, scale <span class='op'>=</span> <span class='cn'>TRUE</span>, sup_ind <span class='op'>=</span> <span class='fl'>8</span><span class='op'>:</span><span class='fl'>10</span>, sup_var <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+
+<span class='co'>## Get results for the individuals</span>
+<span class='va'>X</span><span class='op'>[[</span><span class='st'>"individuals"</span><span class='op'>]</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; $coordinates
+#&gt;                     PC1         PC2         PC3         PC4         PC5
+#&gt; 10-P-1      -2.09154338 -0.15765965  0.16260659 -0.18750389 -0.32086579
+#&gt; 11-N-9      -0.07566124  0.54599944 -0.53180191 -1.56533285 -0.12896176
+#&gt; 11-N-1       2.43211395 -0.49846180 -0.43725386 -1.17809124  1.50695917
+#&gt; 11-O-10     -0.23902087 -1.02986630 -1.46304818  0.12326518 -0.07988097
+#&gt; 11-N-4       0.95286425 -0.59330721 -0.58797087 -1.10322275 -1.33962617
+#&gt; 13-N-5      -2.28192749 -0.01153164 -0.10412923 -0.26336640 -0.24819247
+#&gt; 13-N-4      -1.65384897 -0.13115852  1.32271870  0.16112262  0.09115012
+#&gt; 13-P-1      -0.52012747  2.12741765 -0.11730450  0.43095305  0.10437793
+#&gt; 13-P-8      -0.86443965  1.88158088  0.31294144  0.35503906  0.51793608
+#&gt; 13-P-10     -1.46655755  1.52754578 -0.43420075  0.13507996  0.10317822
+#&gt; 13-O-7       2.12539765  0.66156368  0.39469025  0.67302181 -0.32787048
+#&gt; 13-O-5       3.90721526  1.53305516 -0.09151446  0.47643126 -0.41788203
+#&gt; 13-N-21     -0.89203062 -0.86890258  1.39650502 -0.37920241  0.31009655
+#&gt; 12-O-5      -0.76467900 -0.11466697 -0.23707644  0.10118556  0.07438576
+#&gt; Holden Lake -0.39449567 -1.55614975 -2.06322129  1.33203104  0.20022215
+#&gt; 13-N-15      1.14837177 -1.38408257  2.52066105  0.42515880 -0.16640155
+#&gt; 12-N-3       0.67836903 -1.93137560 -0.04260156  0.46343120  0.12137524
+#&gt; 13-N-16     -1.91867431 -0.06359919  0.71963153  0.07928648 -0.13904030
+#&gt; 13-O-11     -2.08520224  0.15238917 -0.28239189 -0.12876890 -0.50541811
+#&gt; 13-O-10     -1.61947431  0.24496545  1.03028334  0.42353099 -0.15677783
+#&gt; 
+#&gt; $contributions
+#&gt;                     PC1         PC2         PC3        PC4        PC5
+#&gt; 10-P-1       9.62070585  0.10346288  0.14829172  0.4119349  2.0519052
+#&gt; 11-N-9       0.01258984  1.24087445  1.58613584 28.7092192  0.3314609
+#&gt; 11-N-1      13.00891342  1.03420637  1.07227921 16.2616959 45.2598811
+#&gt; 11-O-10      0.12564489  4.41474012 12.00488054  0.1780282  0.1271736
+#&gt; 11-N-4       1.99680313  1.46521953  1.93888569 14.2604884 35.7666020
+#&gt; 13-N-5      11.45188208  0.00055351  0.06081152  0.8126971  1.2276869
+#&gt; 13-N-4       6.01540509  0.07160387  9.81240738  0.3041732  0.1655865
+#&gt; 13-O-7       0.59496686 18.83861469  0.07717380  2.1760452  0.2171340
+#&gt; 13-O-5       1.64339721 14.73632629  0.54924578  1.4769311  5.3464163
+#&gt; 13-N-21      4.73011182  9.71251981  1.05735718  0.2137912  0.2121713
+#&gt; 12-O-5       9.93467302  1.82174154  0.87368198  5.3072099  2.1424716
+#&gt; Holden Lake 33.57436913  9.78270616  0.04696994  2.6595519  3.4803092
+#&gt; 13-N-15      1.74997847  3.14257478 10.93768941  1.6848070  1.9164801
+#&gt; 12-N-3       1.28597199  0.05472933  0.31522261  0.1199624  0.1102783
+#&gt; 13-N-16      0.34226119 10.07966786 23.87438577 20.7891473  0.7989777
+#&gt; 13-O-11      2.90026847  7.97383873 35.63440294  2.1179238  0.5518552
+#&gt; 13-O-10      1.01205755 15.52662009  0.01017868  2.5163933  0.2936099
+#&gt; 
+#&gt; $cos2
+#&gt;                     PC1          PC2          PC3         PC4         PC5
+#&gt; 10-P-1      0.947292193 5.382590e-03 0.0057256727 0.007613262 0.022294465
+#&gt; 11-N-9      0.001866946 9.722306e-02 0.0922326538 0.799094808 0.005423840
+#&gt; 11-N-1      0.589892508 2.477815e-02 0.0190665599 0.138408542 0.226468609
+#&gt; 11-O-10     0.016171118 3.002134e-01 0.6058786689 0.004300800 0.001806155
+#&gt; 11-N-4      0.196637119 7.623645e-02 0.0748712456 0.263590562 0.388660749
+#&gt; 13-N-5      0.973256904 2.485454e-05 0.0020266050 0.012964165 0.011513331
+#&gt; 13-N-4      0.586117187 3.686259e-03 0.3749106238 0.005562958 0.001780358
+#&gt; 13-P-1      0.050951691 8.524021e-01 0.0025916022 0.034978320 0.002051901
+#&gt; 13-P-8      0.156174025 7.399208e-01 0.0204675371 0.026344606 0.056064994
+#&gt; 13-P-10     0.457426275 4.962624e-01 0.0400962741 0.003880652 0.002264118
+#&gt; 13-O-7      0.782305883 7.579482e-02 0.0269779531 0.078443052 0.018616620
+#&gt; 13-O-5      0.846840925 1.303715e-01 0.0004645651 0.012591215 0.009686671
+#&gt; 13-N-21     0.208639194 1.979605e-01 0.5113536675 0.037703229 0.025213333
+#&gt; 12-O-5      0.852455064 1.916858e-02 0.0819388658 0.014926233 0.008066643
+#&gt; Holden Lake 0.017811456 2.771518e-01 0.4871992086 0.203069007 0.004588167
+#&gt; 13-N-15     0.134357910 1.951741e-01 0.6473320705 0.018416223 0.002821064
+#&gt; 12-N-3      0.102940404 8.344250e-01 0.0004059802 0.048042365 0.003295445
+#&gt; 13-N-16     0.858753400 9.435590e-04 0.1208053918 0.001466440 0.004509697
+#&gt; 13-O-11     0.918959560 4.908042e-03 0.0168540576 0.003504467 0.053988547
+#&gt; 13-O-10     0.659616640 1.509222e-02 0.2669665399 0.045114262 0.006181769
+#&gt; 
+#&gt; $supplement
+#&gt;  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; [13] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
+#&gt; </div><div class='input'>
+<span class='co'>## Compute correspondence analysis</span>
+<span class='va'>Y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>mississippi</span>, sup_row <span class='op'>=</span> <span class='fl'>8</span><span class='op'>:</span><span class='fl'>10</span>, sup_col <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+
+<span class='co'>## Get results for the rows</span>
+<span class='va'>Y</span><span class='op'>[[</span><span class='st'>"rows"</span><span class='op'>]</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; $coordinates
+#&gt;                     CA1         CA2         CA3         CA4           CA5
+#&gt; 10-P-1      -0.63476459 -0.73633440  0.18667611 -0.16132977 -0.0656217217
+#&gt; 11-N-9       0.12169770  0.28512184  0.07856042 -0.03607450 -0.0896117098
+#&gt; 11-N-1       0.04595754  0.19968749  0.07970267  0.09115564 -0.0847258272
+#&gt; 11-O-10      0.25859302  0.09304158  0.08260003  0.11838467  0.0553742492
+#&gt; 11-N-4       0.24077386  0.06750704  0.06646524 -0.09513256  0.0009655576
+#&gt; 13-N-5      -1.16884200 -0.48017952  0.44457413  0.01683417 -0.0206568191
+#&gt; 13-N-4      -1.06533594 -0.66178676  0.14461260 -0.06657448 -0.0388853355
+#&gt; 13-P-1      -0.28884259  0.50913975 -0.39184795  0.05594568  0.1473332892
+#&gt; 13-P-8      -0.96636124  0.11874858 -0.77742337  0.07068909 -0.0651207329
+#&gt; 13-P-10     -0.89064524  0.30796351 -1.52627088  0.05944679 -0.0625008518
+#&gt; 13-O-7       0.09739016 -0.10237009 -0.12313237 -0.08052930  0.0066372956
+#&gt; 13-O-5       0.16060580  0.03574911 -0.12260043 -0.06836349  0.0105672618
+#&gt; 13-N-21     -0.43394022  0.14097422  0.32778812  0.09206517  0.0305766900
+#&gt; 12-O-5      -0.04007019 -0.16140880 -0.03623131  0.02899504 -0.0258888730
+#&gt; Holden Lake  0.68130724 -0.97589329 -0.33270354  0.18407890 -0.0096910911
+#&gt; 13-N-15     -0.17347764 -0.05475653  0.13775105 -0.02116356  0.0503738075
+#&gt; 12-N-3       0.04612360 -0.07557412  0.11869423  0.06180249  0.0358650762
+#&gt; 13-N-16     -1.03902462 -0.76782458  0.12964824 -0.10734659 -0.0071382023
+#&gt; 13-O-11     -0.23313831 -0.59943076 -0.06375723 -0.23797577  0.0340262000
+#&gt; 13-O-10     -0.93548663 -0.63519549 -0.05334415 -0.12279379  0.0888660561
+#&gt; 
+#&gt; $contributions
+#&gt;                     CA1        CA2         CA3         CA4          CA5
+#&gt; 10-P-1       4.88885458  9.8278871  0.87061039  4.98057572  1.947769881
+#&gt; 11-N-9       0.92661289  7.5984118  0.79507090  1.28411265 18.729397358
+#&gt; 11-N-1       0.22645773  6.3870971  1.40243893 14.05106924 28.692332595
+#&gt; 11-O-10      3.52142686  0.6810320  0.73979281 11.63978029  6.019514299
+#&gt; 11-N-4       6.05782581  0.7114174  0.95049942 14.91506918  0.003631743
+#&gt; 13-N-5       8.90846967  2.2460892  2.65365517  0.02914364  0.103723952
+#&gt; 13-N-4      22.57639509 13.0150497  0.85656110  1.39048351  1.121279325
+#&gt; 13-O-7       2.34134701 10.8678984  8.87244031  1.38530439 22.709405016
+#&gt; 13-O-5      14.33693607  0.3234167 19.10544401  1.20990386  2.427037985
+#&gt; 13-N-21      5.30345539  0.9472752 32.06839808  0.37262765  0.973603130
+#&gt; 12-O-5       0.94336895  1.5571336  3.10499242 10.17250769  0.163340710
+#&gt; Holden Lake  3.56403788  0.2638022  4.27630256 10.18443894  0.575182231
+#&gt; 13-N-15      9.44991263  1.4899635 11.10245500  6.70853180  1.749079666
+#&gt; 12-N-3       0.05579424  1.3524748  0.09392457  0.46074714  0.868227338
+#&gt; 13-N-16     13.56293462 41.5719659  6.65958427 15.61508955  0.102299541
+#&gt; 13-O-11      3.16461476  0.4710141  4.10854690  0.74281368  9.947273380
+#&gt; 13-O-10      0.17155581  0.6880713  2.33928314  4.85780106  3.866901849
+#&gt; 
+#&gt; $cos2
+#&gt;                    CA1        CA2         CA3          CA4          CA5
+#&gt; 10-P-1      0.39881987 0.53666292 0.034492836 0.0257620513 4.262326e-03
+#&gt; 11-N-9      0.13269934 0.72839175 0.055298287 0.0116601672 7.195046e-02
+#&gt; 11-N-1      0.03309067 0.62473198 0.099526288 0.1301844345 1.124666e-01
+#&gt; 11-O-10     0.67252960 0.08706267 0.068618026 0.1409511868 3.083852e-02
+#&gt; 11-N-4      0.76281006 0.05996473 0.058128200 0.1190847439 1.226744e-05
+#&gt; 13-N-5      0.76105855 0.12844397 0.110101906 0.0001578665 2.377023e-04
+#&gt; 13-N-4      0.70944459 0.27376724 0.013072469 0.0027705178 9.451854e-04
+#&gt; 13-P-1      0.16012363 0.49751592 0.294691848 0.0060071169 4.166148e-02
+#&gt; 13-P-8      0.59801870 0.00903010 0.387035618 0.0031999302 2.715653e-03
+#&gt; 13-P-10     0.24596611 0.02940792 0.722318935 0.0010957782 1.211261e-03
+#&gt; 13-O-7      0.22769954 0.25158122 0.363979149 0.1556825110 1.057583e-03
+#&gt; 13-O-5      0.55012044 0.02725623 0.320567343 0.0996744395 2.381553e-03
+#&gt; 13-N-21     0.57933698 0.06114358 0.330565755 0.0260772723 2.876420e-03
+#&gt; 12-O-5      0.05267424 0.85469250 0.043064911 0.0275805442 2.198780e-02
+#&gt; Holden Lake 0.29731888 0.61001589 0.070900832 0.0217042374 6.015640e-05
+#&gt; 13-N-15     0.54664049 0.05446113 0.344670868 0.0081356464 4.609187e-02
+#&gt; 12-N-3      0.07869590 0.21127683 0.521152539 0.1412920195 4.758271e-02
+#&gt; 13-N-16     0.63597409 0.34730559 0.009901956 0.0067883502 3.001687e-05
+#&gt; 13-O-11     0.11430180 0.75562069 0.008548398 0.1190943787 2.434741e-03
+#&gt; 13-O-10     0.67089493 0.30931014 0.002181488 0.0115593158 6.054122e-03
+#&gt; 
+#&gt; $supplement
+#&gt;  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; [13] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

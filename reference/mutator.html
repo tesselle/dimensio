@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get or Set Parts of an Object — mutator • dimensio</title>
+<title>Get Results — mutator • dimensio</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -39,8 +46,12 @@
 
 
 
-<meta property="og:title" content="Get or Set Parts of an Object — mutator" />
-<meta property="og:description" content="Getters and setters to retrieve or set parts of an object." />
+<meta property="og:title" content="Get Results — mutator" />
+<meta property="og:description" content="Getters to retrieve parts of an object." />
+<meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@nfrerebeau" />
+<meta name="twitter:site" content="@nfrerebeau" />
 
 
 
@@ -72,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dimensio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
       </span>
     </div>
 
@@ -87,10 +98,13 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/nfrerebeau/dimensio/">
+  <a href="https://github.com/tesselle/dimensio/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -108,18 +122,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get or Set Parts of an Object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/nfrerebeau/dimensio/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/nfrerebeau/dimensio/blob/master/R/ca.R'><code>R/ca.R</code></a></small>
+    <h1>Get Results</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/tesselle/dimensio/blob/master/R/mutators.R'><code>R/mutators.R</code></a>, <a href='https://github.com/tesselle/dimensio/blob/master/R/pca.R'><code>R/pca.R</code></a></small>
     <div class="hidden name"><code>mutator.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Getters and setters to retrieve or set parts of an object.</p>
+    <p>Getters to retrieve parts of an object.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_coordinates</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='fu'>get_contributions</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>get_correlations</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>get_cos2</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>get_data</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='fu'>get_distances</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
@@ -127,28 +147,101 @@
 
 <span class='fu'>get_inertia</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for CA</span>
-<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+<span class='fu'>get_variance</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>get_contributions</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>get_coordinates</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, sup <span class='op'>=</span> <span class='cn'>TRUE</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>get_cos2</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, sup <span class='op'>=</span> <span class='cn'>TRUE</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>get_data</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>get_distances</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>get_eigenvalues</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>get_inertia</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>get_variance</span><span class='op'>(</span><span class='va'>x</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+
+<span class='co'># S4 method for PCA</span>
+<span class='fu'>get_correlations</span><span class='op'>(</span><span class='va'>x</span>, sup <span class='op'>=</span> <span class='cn'>TRUE</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
+
+<span class='co'># S4 method for PCA</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/loadings.html'>loadings</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An object from which to get or set element(s) (typically a
-<a href='CA-class.html'>CA</a> object).</p></td>
+      <td><p>An object from which to get element(s) (a <a href='CA-class.html'>CA</a> or
+<a href='PCA-class.html'>PCA</a> object).</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Currently not used.</p></td>
     </tr>
+    <tr>
+      <th>margin</th>
+      <td><p>A length-one <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the subscript
+which the data will be returned: <code>1</code> indicates individuals/rows (the
+default), <code>2</code> indicates variables/columns.</p></td>
+    </tr>
+    <tr>
+      <th>sup</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should supplementary points be
+returned?</p></td>
+    </tr>
+    <tr>
+      <th>sup_name</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> string specifying the name of the
+column to create for supplementary points attribution (see below).</p></td>
+    </tr>
+    <tr>
+      <th>digits</th>
+      <td><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> indicating the number of decimal
+places to be used.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>get_*</code> returns a <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p>
-<p><code>set_*</code> returns an object of the same sort as <code>x</code> with the new
-values assigned.</p>
+    <p><code>get_*()</code> returns a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector or matrix or a
+<code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p>
+<p><code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> returns of a <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code> of class
+<code><a href='https://rdrr.io/r/stats/loadings.html'>loadings</a></code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>get_data()</code> returns a <code>data.frame</code> of original data.</p>
+<p><code>get_contributions()</code> returns a <code>data.frame</code> of contributions to
+the definition of the principal dimensions.</p>
+<p><code>get_coordinates()</code> returns a <code>data.frame</code> of coordinates. If
+<code>sup</code> is <code>TRUE</code>, an extra column (named after <code>sup_name</code>) is
+added specifying whether an observation is a supplementary point or not.</p>
+<p><code>get_correlations()</code> returns a <code>data.frame</code> of correlations
+between variables and dimensions (<code>PCA</code>).</p>
+<p><code>get_cos2()</code> returns a <code>data.frame</code> of \(cos^2\) values
+(i.e. quality of the representation of the points on the factor map).</p>
+<p><code>get_eigenvalues()</code> returns a <code>data.frame</code> with the following
+columns: <code>eigenvalues</code>, <code>variance</code> (percentage of variance) and
+<code>cumulative</code> (cumulative percentage of variance).</p>
+<p><code>get_variance</code> returns a <code>numeric</code> vector giving the percentage
+of explained variance of each dimension.</p>
+<p><code>loadings</code> returns variable loadings (i.e. the coefficients of the
+linear combination of the original variables).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other mutator: 

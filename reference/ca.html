@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CA Results — CA-class • dimensio</title>
+<title>Correspondence Analysis — ca • dimensio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="CA Results — CA-class" />
-<meta property="og:description" content="An S4 class to store the results of a simple correspondence analysis." />
+<meta property="og:title" content="Correspondence Analysis — ca" />
+<meta property="og:description" content="Computes a simple correspondence analysis based on the singular value
+decomposition." />
 <meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@nfrerebeau" />
@@ -122,24 +123,65 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>CA Results</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a></small>
-    <div class="hidden name"><code>CA-class.Rd</code></div>
+    <h1>Correspondence Analysis</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/tesselle/dimensio/blob/master/R/ca.R'><code>R/ca.R</code></a></small>
+    <div class="hidden name"><code>ca.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An S4 class to store the results of a simple correspondence analysis.</p>
+    <p>Computes a simple correspondence analysis based on the singular value
+decomposition.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>ca</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
+<span class='co'># S4 method for data.frame</span>
+<span class='fu'>ca</span><span class='op'>(</span><span class='va'>object</span>, rank <span class='op'>=</span> <span class='cn'>NULL</span>, sup_row <span class='op'>=</span> <span class='cn'>NULL</span>, sup_col <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
+<span class='co'># S4 method for matrix</span>
+<span class='fu'>ca</span><span class='op'>(</span><span class='va'>object</span>, rank <span class='op'>=</span> <span class='cn'>NULL</span>, sup_row <span class='op'>=</span> <span class='cn'>NULL</span>, sup_col <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>A \(m \times p\) numeric <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code> or a
+<code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Currently not used.</p></td>
+    </tr>
+    <tr>
+      <th>rank</th>
+      <td><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> value specifying the maximal number of
+components to be kept in the results. If <code>NULL</code> (the default),
+\(min(m, p) - 1\) components will be returned.</p></td>
+    </tr>
+    <tr>
+      <th>sup_row</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> or <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> vector
+specifying the indices of the supplementary rows.</p></td>
+    </tr>
+    <tr>
+      <th>sup_col</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> or <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> vector
+specifying the indices of the supplementary columns.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <a href='CA-class.html'>CA</a> object.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other multivariate analysis: 
+    <div class='dont-index'><p><a href='mutator.html'>mutator</a>, <a href='predict.html'>predict</a>, <a href='https://rdrr.io/r/base/svd.html'>svd</a></p>
+<p>Other multivariate analysis: 
+<code><a href='CA-class.html'>CA-class</a></code>,
 <code><a href='MultivariateAnalysis-class.html'>MultivariateAnalysis-class</a></code>,
 <code><a href='MultivariateResults-class.html'>MultivariateResults-class</a></code>,
 <code><a href='PCA-class.html'>PCA-class</a></code>,
-<code><a href='ca.html'>ca</a>()</code>,
 <code><a href='pca.html'>pca</a>()</code>,
 <code><a href='predict.html'>predict</a>()</code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
@@ -152,7 +194,7 @@
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"compiegne"</span><span class='op'>)</span>
 
 <span class='co'>## Compute correspondence analysis</span>
-<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>compiegne</span>, sup_col <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>ca</span><span class='op'>(</span><span class='va'>compiegne</span>, sup_col <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
 
 <span class='co'>## Get row coordinates</span>
 <span class='fu'><a href='mutator.html'>get_coordinates</a></span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>

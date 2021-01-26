@@ -8,6 +8,13 @@
 
 <title>Function reference • dimensio</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -40,6 +47,10 @@
 
 
 <meta property="og:title" content="Function reference" />
+<meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@nfrerebeau" />
+<meta name="twitter:site" content="@nfrerebeau" />
 
 
 
@@ -71,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dimensio</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
       </span>
     </div>
 
@@ -86,10 +97,13 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/nfrerebeau/dimensio/">
+  <a href="https://github.com/tesselle/dimensio/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -121,7 +135,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-analysis" class="hasAnchor"><a href="#section-analysis" class="anchor"></a>Analysis</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -135,31 +149,94 @@
         <td>
           <p><code><a href="CA-class.html">CA-class</a></code> </p>
         </td>
-        <td><p>Correspondence Analysis Results</p></td>
+        <td><p>CA Results</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="correspondence.html">ca()</a></code> <code><a href="correspondence.html">get_coordinates(<i>&lt;CA&gt;</i>)</a></code> <code><a href="correspondence.html">get_inertia(<i>&lt;CA&gt;</i>)</a></code> <code><a href="correspondence.html">get_distances(<i>&lt;CA&gt;</i>)</a></code> <code><a href="correspondence.html">get_contributions(<i>&lt;CA&gt;</i>)</a></code> <code><a href="correspondence.html">get_eigenvalues(<i>&lt;CA&gt;</i>)</a></code> </p>
+          <p><code><a href="MultivariateAnalysis-class.html">MultivariateAnalysis-class</a></code> </p>
+        </td>
+        <td><p>Output of Multivariate Data Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="MultivariateResults-class.html">MultivariateResults-class</a></code> </p>
+        </td>
+        <td><p>Multivariate Data Analysis Results</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="PCA-class.html">PCA-class</a></code> </p>
+        </td>
+        <td><p>PCA Results</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ca.html">ca()</a></code> </p>
         </td>
         <td><p>Correspondence Analysis</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="mutator.html">get_coordinates()</a></code> <code><a href="mutator.html">get_contributions()</a></code> <code><a href="mutator.html">get_distances()</a></code> <code><a href="mutator.html">get_eigenvalues()</a></code> <code><a href="mutator.html">get_inertia()</a></code> <code><a href="mutator.html">dim(<i>&lt;CA&gt;</i>)</a></code> </p>
+          <p><code><a href="pca.html">pca()</a></code> </p>
         </td>
-        <td><p>Get or Set Parts of an Object</p></td>
+        <td><p>Principal Components Analysis</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="predict.html">predict(<i>&lt;CA&gt;</i>)</a></code> </p>
+          <p><code><a href="predict.html">predict(<i>&lt;CA&gt;</i>)</a></code> <code><a href="predict.html">predict(<i>&lt;PCA&gt;</i>)</a></code> </p>
         </td>
         <td><p>Predict New Coordinates</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-visualization" class="hasAnchor"><a href="#section-visualization" class="anchor"></a>Visualization</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-classes" class="hasAnchor"><a href="#section-classes" class="anchor"></a>Classes</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-getters-and-setters" class="hasAnchor"><a href="#section-getters-and-setters" class="anchor"></a>Getters and Setters</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="mutator.html">get_coordinates()</a></code> <code><a href="mutator.html">get_contributions()</a></code> <code><a href="mutator.html">get_correlations()</a></code> <code><a href="mutator.html">get_cos2()</a></code> <code><a href="mutator.html">get_data()</a></code> <code><a href="mutator.html">get_distances()</a></code> <code><a href="mutator.html">get_eigenvalues()</a></code> <code><a href="mutator.html">get_inertia()</a></code> <code><a href="mutator.html">get_variance()</a></code> <code><a href="mutator.html">dim(<i>&lt;MultivariateAnalysis&gt;</i>)</a></code> <code><a href="mutator.html">loadings(<i>&lt;PCA&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Get Results</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="subset.html">`[[`(<i>&lt;CA&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;missing&gt;</i>)</a></code> </p>
+          <p><code><a href="subset.html">`[[`(<i>&lt;CA&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;missing&gt;</i>)</a></code> <code><a href="subset.html">`[[`(<i>&lt;PCA&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;missing&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Extract or Replace Parts of an Object</p></td>
+        <td><p>Extract Parts of an Object</p></td>
       </tr>
     </tbody>
     </table>

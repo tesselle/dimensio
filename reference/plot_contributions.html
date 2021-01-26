@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Predict New Coordinates — predict • dimensio</title>
+<title>Visualize Contributions and cos2 — plot_contributions • dimensio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Predict New Coordinates — predict" />
-<meta property="og:description" content="Predict the projection of new individuals/rows or variables/columns." />
+<meta property="og:title" content="Visualize Contributions and cos2 — plot_contributions" />
+<meta property="og:description" content="Plots eigenvalues and variances." />
 <meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@nfrerebeau" />
@@ -122,20 +122,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Predict New Coordinates</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/tesselle/dimensio/blob/master/R/ca.R'><code>R/ca.R</code></a>, <a href='https://github.com/tesselle/dimensio/blob/master/R/pca.R'><code>R/pca.R</code></a></small>
-    <div class="hidden name"><code>predict.Rd</code></div>
+    <h1>Visualize Contributions and cos2</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/tesselle/dimensio/blob/master/R/plot.R'><code>R/plot.R</code></a></small>
+    <div class="hidden name"><code>plot_contributions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Predict the projection of new individuals/rows or variables/columns.</p>
+    <p>Plots eigenvalues and variances.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for CA</span>
-<span class='fu'>predict</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>newdata</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>plot_contributions</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for PCA</span>
-<span class='fu'>predict</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>newdata</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
+<span class='fu'>plot_cos2</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>plot_contributions</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  margin <span class='op'>=</span> <span class='fl'>2</span>,
+  axes <span class='op'>=</span> <span class='fl'>1</span>,
+  sort <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  decreasing <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  limit <span class='op'>=</span> <span class='fl'>10</span>,
+  fill <span class='op'>=</span> <span class='st'>"grey30"</span>,
+  border <span class='op'>=</span> <span class='st'>"grey10"</span>
+<span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'>plot_cos2</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  margin <span class='op'>=</span> <span class='fl'>1</span>,
+  axes <span class='op'>=</span> <span class='fl'>1</span>,
+  sort <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  decreasing <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  limit <span class='op'>=</span> <span class='fl'>10</span>,
+  active <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  sup <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  fill <span class='op'>=</span> <span class='st'>"grey30"</span>,
+  border <span class='op'>=</span> <span class='st'>"grey10"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,9 +169,8 @@
       <td><p>A <a href='CA-class.html'>CA</a> or <a href='PCA-class.html'>PCA</a> object.</p></td>
     </tr>
     <tr>
-      <th>newdata</th>
-      <td><p>An object of supplementary points coercible to a
-<code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code> for which to compute principal coordinates.</p></td>
+      <th>...</th>
+      <td><p>Currently not used.</p></td>
     </tr>
     <tr>
       <th>margin</th>
@@ -155,51 +178,62 @@
 which the data will be returned: <code>1</code> indicates individuals/rows (the
 default), <code>2</code> indicates variables/columns.</p></td>
     </tr>
+    <tr>
+      <th>axes</th>
+      <td><p>A length-one <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the dimensions
+to be plotted.</p></td>
+    </tr>
+    <tr>
+      <th>sort</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should the data be sorted?</p></td>
+    </tr>
+    <tr>
+      <th>decreasing</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should the sort order be
+decreasing? Only used if <code>sort</code> is <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> specifying the number of top elements
+to be displayed.</p></td>
+    </tr>
+    <tr>
+      <th>fill, border</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> string specifying the bars
+infilling and border colors.</p></td>
+    </tr>
+    <tr>
+      <th>active</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should the active
+observations be plotted?</p></td>
+    </tr>
+    <tr>
+      <th>sup</th>
+      <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should the supplementary
+observations be plotted?</p></td>
+    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code> of coordinates.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other multivariate analysis: 
-<code><a href='CA-class.html'>CA-class</a></code>,
-<code><a href='MultivariateAnalysis-class.html'>MultivariateAnalysis-class</a></code>,
-<code><a href='MultivariateResults-class.html'>MultivariateResults-class</a></code>,
-<code><a href='PCA-class.html'>PCA-class</a></code>,
-<code><a href='ca.html'>ca</a>()</code>,
-<code><a href='pca.html'>pca</a>()</code></p></div>
+    <div class='dont-index'><p>Other visualization: 
+<code><a href='plot_coordinates.html'>plot_coordinates</a>()</code>,
+<code><a href='plot_eigenvalues.html'>plot_eigenvalues</a>()</code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>N. Frerebeau</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Create a matrix</span>
-<span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fl'>100</span>, <span class='cn'>TRUE</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>10</span>, ncol <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>B</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>12</span><span class='op'>:</span><span class='fl'>20</span>, <span class='fl'>42</span>, <span class='cn'>TRUE</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>7</span>, ncol <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'>## Load data</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tesselle/codex'>codex</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"mississippi"</span><span class='op'>)</span>
 
 <span class='co'>## Compute correspondence analysis</span>
-<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>A</span>, sup_row <span class='op'>=</span> <span class='fl'>8</span><span class='op'>:</span><span class='fl'>10</span>, sup_col <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>mississippi</span>, sup_row <span class='op'>=</span> <span class='fl'>11</span><span class='op'>:</span><span class='fl'>15</span><span class='op'>)</span>
 
-<span class='co'>## Predict new row coordinates</span>
-<span class='fu'>predict</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>B</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            CA1         CA2         CA3         CA4         CA5
-#&gt; 1 -0.001073038 -0.10066293 -0.20068860  0.03346268 -0.02620775
-#&gt; 2  0.070660845 -0.17454894 -0.08836254  0.05261030 -0.05859957
-#&gt; 3  0.020940889  0.03995943 -0.12703625 -0.05814714  0.04501811
-#&gt; 4 -0.028426354 -0.18993050 -0.04315184  0.02615534 -0.01221765
-#&gt; 5 -0.009495666 -0.19306965 -0.19820790  0.03736164  0.06193045
-#&gt; 6  0.080967488 -0.10316589 -0.11403191  0.14686376 -0.03513175
-#&gt; 7 -0.075976701 -0.32651999 -0.13868808  0.03658090  0.04787106</div><div class='input'>
-<span class='co'>## Predict new column coordinates</span>
-<span class='fu'>predict</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>B</span>, margin <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            CA1        CA2         CA3        CA4         CA5
-#&gt; 1  0.008994679 0.27270769 -0.03820861 0.07450022 -0.06754504
-#&gt; 2  0.081188937 0.16238340 -0.01740599 0.01981337  0.04824950
-#&gt; 3  0.010446682 0.12980920 -0.01752916 0.03390532 -0.02708950
-#&gt; 4 -0.069476397 0.12464696  0.05303257 0.21558566  0.09618081
-#&gt; 5 -0.100292066 0.12104253  0.08339428 0.16123895  0.08965816
-#&gt; 6  0.005439078 0.04344376  0.15390297 0.09967242  0.11017732</div></pre>
+<span class='co'>## Plot observations</span>
+<span class='fu'><a href='plot_coordinates.html'>plot_coordinates</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+</div><div class='img'><img src='plot_contributions-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
