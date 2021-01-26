@@ -39,14 +39,23 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("nfrerebeau/dimensio")
+remotes::install_github("tesselle/dimensio")
 ```
 
 ## Usage
 
 ``` r
+## Load packages
 library(dimensio)
 
+library(ggplot2)
+library(ggrepel)
+library(khroma)
+```
+
+``` r
+## Compute PCA
+## (non numeric variables are automatically removed)
 X <- pca(iris, scale = TRUE, sup_ind = 50:75)
 #> 1 qualitative variable was removed: Species.
 ```
@@ -61,12 +70,6 @@ X <- pca(iris, scale = TRUE, sup_ind = 50:75)
 for plotting informations. Visualization methods produce graphics with
 as few elements as possible: this makes it easy to customize diagrams
 (e.g. using extra layers, themes and scales).
-
-``` r
-library(ggplot2)
-library(ggrepel)
-library(khroma)
-```
 
 ``` r
 ## Plot active individuals by group
@@ -125,5 +128,5 @@ plot_contributions(X, margin = 2, axes = 1) +
 
 Please note that the **dimensio** project is released with a
 [Contributor Code of
-Conduct](https://github.com/nfrerebeau/dimensio/blob/master/.github/CODE_OF_CONDUCT.md).
+Conduct](https://github.com/tesselle/dimensio/blob/master/.github/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
