@@ -1,0 +1,23 @@
+url: http://dimensio.tesselle.org
+development:
+  mode: auto
+
+template:
+  opengraph:
+    twitter:
+      creator: "@nfrerebeau"
+      card: summary_large_image
+
+reference:
+- title: Analysis
+  contents:
+  - has_concept("multivariate analysis")
+- title: Visualization
+  contents:
+  - has_concept("plot")
+- title: Classes
+  contents:
+  - has_concept("class")
+- title: Getters and Setters
+  contents:
+  - has_concept("mutator")
