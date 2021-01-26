@@ -60,7 +60,7 @@ setMethod(
     N <- object[!is_ind_sup, !is_var_sup, drop = FALSE]
 
     # Dimension of the solution
-    ndim <- min(rank, ncol(N) - 1)
+    ndim <- min(rank, dim(N) - 1)
     dim_keep <- seq_len(ndim)
     i <- nrow(N)
     j <- ncol(N)
@@ -80,9 +80,8 @@ setMethod(
     s_var <- sqrt(w_var)
     W_ind1 <- matrix(s_ind, nrow = i, ncol = j, byrow = FALSE)
     W_var1 <- matrix(s_var, nrow = i, ncol = j, byrow = TRUE)
-    W_var2 <- matrix(s_var, nrow = j, ncol = j, byrow = FALSE)
-    W_ind3 <- matrix(s_ind, nrow = i, ncol = ndim, byrow = FALSE)
-    W_var3 <- matrix(s_var, nrow = j, ncol = ndim, byrow = FALSE)
+    W_ind2 <- matrix(s_ind, nrow = i, ncol = ndim, byrow = FALSE)
+    W_var2 <- matrix(s_var, nrow = j, ncol = ndim, byrow = FALSE)
 
     # Center data
     if (center) {
@@ -110,10 +109,8 @@ setMethod(
     sv <- D$d[dim_keep] # Singular values
 
     # Standard coordinates
-    U <- D$u / W_ind1
-    V <- D$v / W_var2
-    U <- U[, dim_keep, drop = FALSE]
-    V <- V[, dim_keep, drop = FALSE]
+    U <- D$u[, dim_keep, drop = FALSE] / W_ind2
+    V <- D$v[, dim_keep, drop = FALSE] / W_var2
 
     sv_U <- matrix(sv, nrow = i, ncol = ndim, byrow = TRUE)
     sv_V <- matrix(sv, nrow = j, ncol = ndim, byrow = TRUE)
@@ -123,8 +120,8 @@ setMethod(
     coord_var <- V * sv_V
 
     # Contributions
-    contrib_ind <- ((coord_ind * W_ind3) / sv_U)^2 * 100
-    contrib_var <- ((coord_var * W_var3) / sv_V)^2 * 100
+    contrib_ind <- ((coord_ind * W_ind2) / sv_U)^2 * 100
+    contrib_var <- ((coord_var * W_var2) / sv_V)^2 * 100
 
     # Squared distance to centroide
     dist_ind <- rowSums((M * W_var1)^2)

@@ -26,7 +26,7 @@ Simple Principal Components Analysis (PCA) and
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://dimensio.archaeo.science}
+  \item \url{http://dimensio.tesselle.org}
   \item \url{https://github.com/tesselle/dimensio}
   \item Report bugs at \url{https://github.com/tesselle/dimensio/issues}
 }

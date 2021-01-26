@@ -71,11 +71,12 @@ observations be plotted?}
 Plots eigenvalues and variances.
 }
 \examples{
-## Create a matrix
-A <- matrix(data = sample(1:10, 100, TRUE), nrow = 20)
+## Load data
+library(codex)
+data("mississippi")
 
 ## Compute correspondence analysis
-X <- ca(A, sup_row = 11:15)
+X <- ca(mississippi, sup_row = 11:15)
 
 ## Plot observations
 plot_coordinates(X)

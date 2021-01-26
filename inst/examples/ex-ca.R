@@ -1,8 +1,9 @@
-## Create a matrix
-A <- matrix(data = sample(1:10, 100, TRUE), nrow = 10, ncol = 10)
+## Load data
+library(codex)
+data("compiegne")
 
 ## Compute correspondence analysis
-X <- ca(A, sup_row = 8:10, sup_col = 7:10)
+X <- ca(compiegne, sup_col = 7:10)
 
 ## Get row coordinates
 get_coordinates(X, margin = 1)

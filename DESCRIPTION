@@ -19,7 +19,7 @@ Description: Simple Principal Components Analysis (PCA) and
     compute, extract, summarize and visualize results of multivariate data
     analysis.
 License: GPL (>= 3)
-URL: http://dimensio.archaeo.science,
+URL: http://dimensio.tesselle.org,
     https://github.com/tesselle/dimensio
 BugReports: https://github.com/tesselle/dimensio/issues
 Depends: 
@@ -29,6 +29,7 @@ Imports:
     ggplot2,
     rlang
 Suggests: 
+    codex,
     FactoMineR,
     khroma,
     testthat (>= 3.0.0)

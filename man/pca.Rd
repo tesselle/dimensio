@@ -68,11 +68,12 @@ Computes a principal components analysis based on the singular value
 decomposition.
 }
 \examples{
-## Create a matrix
-A <- matrix(data = sample(1:10, 100, TRUE), nrow = 10, ncol = 10)
+## Load data
+library(codex)
+data("compiegne")
 
 ## Compute principal components analysis
-X <- pca(A, scale = TRUE, sup_ind = 8:10, sup_var = 7:10)
+X <- pca(compiegne, scale = TRUE, sup_var = 7:10)
 
 ## Get row coordinates
 get_coordinates(X, margin = 1)

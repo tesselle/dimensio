@@ -78,9 +78,8 @@ setMethod(
     s_col <- sqrt(w_col)
     W_row1 <- matrix(s_row, nrow = i, ncol = j, byrow = FALSE)
     W_col1 <- matrix(s_col, nrow = i, ncol = j, byrow = TRUE)
-    W_col2 <- matrix(s_col, nrow = j, ncol = j, byrow = FALSE)
-    W_row3 <- matrix(s_row, nrow = i, ncol = ndim, byrow = FALSE)
-    W_col3 <- matrix(s_col, nrow = j, ncol = ndim, byrow = FALSE)
+    W_row2 <- matrix(s_row, nrow = i, ncol = ndim, byrow = FALSE)
+    W_col2 <- matrix(s_col, nrow = j, ncol = ndim, byrow = FALSE)
 
     # /!\ Important: we need to clean the data before processing
     # Empty rows/columns must be removed to avoid error in svd()
@@ -100,10 +99,8 @@ setMethod(
     sv <- D$d[dim_keep] # Singular values
 
     # Standard coordinates
-    U <- D$u / W_row1
-    V <- D$v / W_col2
-    U <- U[, dim_keep, drop = FALSE]
-    V <- V[, dim_keep, drop = FALSE]
+    U <- D$u[, dim_keep, drop = FALSE] / W_row2
+    V <- D$v[, dim_keep, drop = FALSE] / W_col2
 
     sv_U <- matrix(sv, nrow = i, ncol = ndim, byrow = TRUE)
     sv_V <- matrix(sv, nrow = j, ncol = ndim, byrow = TRUE)
@@ -113,8 +110,8 @@ setMethod(
     coord_col <- V * sv_V
 
     # Contributions
-    contrib_row <- ((coord_row * W_row3) / sv_U)^2 * 100
-    contrib_col <- ((coord_col * W_col3) / sv_V)^2 * 100
+    contrib_row <- ((coord_row * W_row2) / sv_U)^2 * 100
+    contrib_col <- ((coord_col * W_col2) / sv_V)^2 * 100
 
     # Squared distance to centroide
     dist_row <- rowSums(S^2) / w_row
