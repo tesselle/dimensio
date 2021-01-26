@@ -7,6 +7,8 @@
 \alias{dimensio}
 \title{dimensio: Multivariate Data Analysis}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Simple Principal Components Analysis (PCA) and
     Correspondence Analysis (CA). This package provides classes and methods to
     compute, extract, summarize and visualize results of multivariate data
