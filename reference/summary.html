@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualize Contributions and cos2 — plot_contributions • dimensio</title>
+<title>Object Summaries — summary • dimensio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Visualize Contributions and cos2 — plot_contributions" />
-<meta property="og:description" content="Plots eigenvalues and variances." />
+<meta property="og:title" content="Object Summaries — summary" />
+<meta property="og:description" content="Provides a summary of the results of a multivariate data analysis." />
 <meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@nfrerebeau" />
@@ -122,44 +122,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Visualize Contributions and cos2</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/tesselle/dimensio/blob/master/R/plot.R'><code>R/plot.R</code></a></small>
-    <div class="hidden name"><code>plot_contributions.Rd</code></div>
+    <h1>Object Summaries</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a>, <a href='https://github.com/tesselle/dimensio/blob/master/R/summary.R'><code>R/summary.R</code></a></small>
+    <div class="hidden name"><code>summary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Plots eigenvalues and variances.</p>
+    <p>Provides a summary of the results of a multivariate data analysis.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_contributions</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='co'># S4 method for CA</span>
+<span class='fu'>summary</span><span class='op'>(</span><span class='va'>object</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, active <span class='op'>=</span> <span class='cn'>TRUE</span>, sup <span class='op'>=</span> <span class='cn'>TRUE</span>, rank <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 
-<span class='fu'>plot_cos2</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S4 method for MultivariateAnalysis</span>
-<span class='fu'>plot_contributions</span><span class='op'>(</span>
-  <span class='va'>object</span>,
-  margin <span class='op'>=</span> <span class='fl'>2</span>,
-  axes <span class='op'>=</span> <span class='fl'>1</span>,
-  sort <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  decreasing <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  limit <span class='op'>=</span> <span class='fl'>10</span>,
-  fill <span class='op'>=</span> <span class='st'>"grey30"</span>,
-  border <span class='op'>=</span> <span class='st'>"grey10"</span>
-<span class='op'>)</span>
-
-<span class='co'># S4 method for MultivariateAnalysis</span>
-<span class='fu'>plot_cos2</span><span class='op'>(</span>
-  <span class='va'>object</span>,
-  margin <span class='op'>=</span> <span class='fl'>1</span>,
-  axes <span class='op'>=</span> <span class='fl'>1</span>,
-  sort <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  decreasing <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  limit <span class='op'>=</span> <span class='fl'>10</span>,
-  active <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  sup <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  fill <span class='op'>=</span> <span class='st'>"grey30"</span>,
-  border <span class='op'>=</span> <span class='st'>"grey10"</span>
-<span class='op'>)</span></pre>
+<span class='co'># S4 method for PCA</span>
+<span class='fu'>summary</span><span class='op'>(</span><span class='va'>object</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, active <span class='op'>=</span> <span class='cn'>TRUE</span>, sup <span class='op'>=</span> <span class='cn'>TRUE</span>, rank <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,56 +145,28 @@
       <td><p>A <a href='CA-class.html'>CA</a> or <a href='PCA-class.html'>PCA</a> object.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Currently not used.</p></td>
-    </tr>
-    <tr>
       <th>margin</th>
       <td><p>A length-one <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the subscript
-which the data will be returned: <code>1</code> indicates individuals/rows (the
+which the data will be summarized: <code>1</code> indicates individuals/rows (the
 default), <code>2</code> indicates variables/columns.</p></td>
-    </tr>
-    <tr>
-      <th>axes</th>
-      <td><p>A length-one <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the dimensions
-to be plotted.</p></td>
-    </tr>
-    <tr>
-      <th>sort</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should the data be sorted?</p></td>
-    </tr>
-    <tr>
-      <th>decreasing</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should the sort order be
-decreasing? Only used if <code>sort</code> is <code>TRUE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>limit</th>
-      <td><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> specifying the number of top elements
-to be displayed.</p></td>
-    </tr>
-    <tr>
-      <th>fill, border</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> string specifying the bars
-infilling and border colors.</p></td>
     </tr>
     <tr>
       <th>active</th>
       <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should the active
-observations be plotted?</p></td>
+observations be summarized?</p></td>
     </tr>
     <tr>
       <th>sup</th>
       <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should the supplementary
-observations be plotted?</p></td>
+observations be summarized?</p></td>
+    </tr>
+    <tr>
+      <th>rank</th>
+      <td><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> value specifying the maximal number of
+components to be kept in the results.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other visualization: 
-<code><a href='plot_coordinates.html'>plot_coordinates</a></code>,
-<code><a href='plot_eigenvalues.html'>plot_eigenvalues</a>()</code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>N. Frerebeau</p>
@@ -229,11 +177,94 @@ observations be plotted?</p></td>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"zuni"</span><span class='op'>)</span>
 
 <span class='co'>## Compute correspondence analysis</span>
-<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>zuni</span><span class='op'>)</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>zuni</span>, rank <span class='op'>=</span> <span class='fl'>5</span>, sup_row <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span><span class='op'>)</span>
 
-<span class='co'>## Plot observations</span>
-<span class='fu'><a href='https://rdrr.io/pkg/khroma/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
-</div><div class='img'><img src='plot_contributions-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='co'>## Rows summary</span>
+<span class='fu'>summary</span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; --- Correspondence Analysis -----------------------------------------------------
+#&gt; 
+#&gt; Eigenvalues:
+#&gt;      eigenvalues variance cumulative
+#&gt; [1,]       0.795   39.122     39.122
+#&gt; [2,]       0.547   26.948     66.071
+#&gt; [3,]       0.305   15.018     81.088
+#&gt; [4,]       0.218   10.748     91.837
+#&gt; [5,]       0.166    8.163    100.000
+#&gt; 
+#&gt; Active rows:
+#&gt;        inertia CA1_coord CA1_contrib CA1_cos2 CA2_coord CA2_contrib CA2_cos2
+#&gt; LZ1009   3.883    -0.880       0.037    0.076    -1.167       0.094    0.133
+#&gt; LZ1008   2.198    -0.560       0.011    0.039    -1.717       0.146    0.364
+#&gt; LZ1007   5.146    -0.120       0.001    0.001    -1.001       0.089    0.095
+#&gt; LZ1004   4.303    -0.107       0.001    0.002    -0.642       0.057    0.073
+#&gt; LZ1001   1.833    -1.562       0.100    0.433    -0.189       0.002    0.006
+#&gt; LZ0988  11.161    -2.861       0.950    0.676     1.884       0.598    0.293
+#&gt; LZ0987   1.865    -0.321       0.004    0.015    -1.184       0.069    0.204
+#&gt; LZ0986   5.433    -0.810       0.045    0.065    -2.080       0.429    0.432
+#&gt; LZ0983  19.695    -2.861       1.676    0.676     1.884       1.055    0.293
+#&gt; LZ0982  29.543    -2.861       2.514    0.676     1.884       1.582    0.293
+#&gt;        CA3_coord CA3_contrib CA3_cos2
+#&gt; LZ1009    -0.891       0.099    0.078
+#&gt; LZ1008    -1.180       0.124    0.172
+#&gt; LZ1007    -1.122       0.202    0.119
+#&gt; LZ1004    -0.446       0.049    0.035
+#&gt; LZ1001     0.976       0.102    0.169
+#&gt; LZ0988    -0.536       0.087    0.024
+#&gt; LZ0987    -0.444       0.018    0.029
+#&gt; LZ0986    -1.083       0.208    0.117
+#&gt; LZ0983    -0.536       0.153    0.024
+#&gt; LZ0982    -0.536       0.230    0.024
+#&gt; (370 more)
+#&gt; 
+#&gt; Supplementary rows:
+#&gt;        CA1_coord CA1_cos2 CA2_coord CA2_cos2 CA3_coord CA3_cos2
+#&gt; LZ1105    -0.056    0.001    -0.920    0.165    -1.042    0.211
+#&gt; LZ1103    -0.318    0.067    -0.396    0.105    -0.469    0.147
+#&gt; LZ1100    -0.134    0.014    -0.626    0.295     0.106    0.008
+#&gt; LZ1099    -0.841    0.054    -2.064    0.323    -0.523    0.021
+#&gt; LZ1097    -0.617    0.041    -0.774    0.064    -0.465    0.023
+#&gt; LZ1096    -2.246    0.696     0.788    0.086    -0.791    0.086
+#&gt; LZ1095    -0.293    0.024    -1.078    0.330    -0.322    0.029
+#&gt; LZ1092    -0.542    0.074    -1.288    0.420    -0.115    0.003
+#&gt; LZ1091    -0.270    0.034    -0.961    0.427    -0.028    0.000
+#&gt; LZ1090    -2.656    0.728     1.538    0.244    -0.448    0.021
+#&gt; (50 more)</div><div class='input'>
+<span class='co'>## Columns summary</span>
+<span class='fu'>summary</span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; --- Correspondence Analysis -----------------------------------------------------
+#&gt; 
+#&gt; Eigenvalues:
+#&gt;      eigenvalues variance cumulative
+#&gt; [1,]       0.795   39.122     39.122
+#&gt; [2,]       0.547   26.948     66.071
+#&gt; [3,]       0.305   15.018     81.088
+#&gt; [4,]       0.218   10.748     91.837
+#&gt; [5,]       0.166    8.163    100.000
+#&gt; 
+#&gt; Active columns:
+#&gt;      inertia CA1_coord CA1_contrib CA1_cos2 CA2_coord CA2_contrib CA2_cos2
+#&gt; LINO 651.912    -2.550      62.455    0.761     1.394      27.076    0.227
+#&gt; KIAT 148.177    -1.246       2.382    0.128    -0.492       0.539    0.020
+#&gt; RED  322.621    -1.376       7.560    0.186    -1.403      11.403    0.193
+#&gt; GALL 150.034    -0.997       1.823    0.097    -1.795       8.590    0.313
+#&gt; ESC  119.395    -0.537       0.395    0.026    -1.264       3.183    0.146
+#&gt; PUBW 255.598    -0.632       2.620    0.081    -1.445      19.891    0.426
+#&gt; RES  159.994    -0.604       1.505    0.075    -1.339      10.740    0.367
+#&gt; TULA 143.094     0.367       3.882    0.216     0.063       0.168    0.006
+#&gt; PINE  23.086     0.476       0.372    0.128     0.229       0.125    0.030
+#&gt; PUBR 147.602    -0.731       0.846    0.046    -1.619       6.024    0.223
+#&gt;      CA3_coord CA3_contrib CA3_cos2
+#&gt; LINO    -0.296       2.195    0.010
+#&gt; KIAT     1.441       8.301    0.171
+#&gt; RED      2.353      57.559    0.544
+#&gt; GALL     0.162       0.126    0.003
+#&gt; ESC     -0.340       0.414    0.011
+#&gt; PUBW    -0.789      10.654    0.127
+#&gt; RES     -0.439       2.069    0.039
+#&gt; TULA    -0.130       1.268    0.027
+#&gt; PINE     0.095       0.039    0.005
+#&gt; PUBR    -0.959       3.792    0.078
+#&gt; (18 more)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

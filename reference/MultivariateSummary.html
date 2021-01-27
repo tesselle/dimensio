@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CA Results — CA-class • dimensio</title>
+<title>Summary of Multivariate Data Analysis — MultivariateSummary • dimensio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="CA Results — CA-class" />
-<meta property="og:description" content="An S4 class to store the results of a simple correspondence analysis." />
+<meta property="og:title" content="Summary of Multivariate Data Analysis — MultivariateSummary" />
+<meta property="og:description" content="A virtual S4 class to store the summary of a multivariate data analysis." />
 <meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@nfrerebeau" />
@@ -122,23 +122,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>CA Results</h1>
+    <h1>Summary of Multivariate Data Analysis</h1>
     <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a></small>
-    <div class="hidden name"><code>CA-class.Rd</code></div>
+    <div class="hidden name"><code>MultivariateSummary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An S4 class to store the results of a simple correspondence analysis.</p>
+    <p>A virtual S4 class to store the summary of a multivariate data analysis.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
+
+    
+
+<dl>
+<dt><code>data</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>.</p></dd>
+
+<dt><code>eigenvalues</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>.</p></dd>
+
+<dt><code>results</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>.</p></dd>
+
+<dt><code>supplement</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> vector specifying the supplementary
+points.</p></dd>
+
+<dt><code>margin</code></dt><dd><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code>.</p></dd>
+
+</dl>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other multivariate analysis: 
+<code><a href='CA-class.html'>CA-class</a></code>,
 <code><a href='MultivariateAnalysis-class.html'>MultivariateAnalysis-class</a></code>,
 <code><a href='MultivariateResults-class.html'>MultivariateResults-class</a></code>,
-<code><a href='MultivariateSummary.html'>MultivariateSummary</a></code>,
 <code><a href='PCA-class.html'>PCA-class</a></code>,
 <code><a href='ca.html'>ca</a>()</code>,
 <code><a href='pca.html'>pca</a>()</code>,
@@ -147,72 +164,6 @@
 
     <p>N. Frerebeau</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Load data</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tesselle/codex'>codex</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"compiegne"</span><span class='op'>)</span>
-
-<span class='co'>## The chi square of independence between the two variables</span>
-<span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test</a></span><span class='op'>(</span><span class='va'>compiegne</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; 
-#&gt; 	Pearson's Chi-squared test
-#&gt; 
-#&gt; data:  compiegne
-#&gt; X-squared = 67342, df = 60, p-value &lt; 2.2e-16
-#&gt; </div><div class='input'>
-<span class='co'>## Compute correspondence analysis</span>
-<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>compiegne</span>, sup_col <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
-
-<span class='co'>## Get row coordinates</span>
-<span class='fu'><a href='mutator.html'>get_coordinates</a></span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;          CA1        CA2          CA3           CA4  .sup
-#&gt; 5 -0.6173651  0.2304056 -0.171327462 -0.0256156412 FALSE
-#&gt; 4 -0.2445848 -0.0902560  0.227869066  0.0009719754 FALSE
-#&gt; 3  0.1446483 -0.4759092 -0.099562140  0.0515217147 FALSE
-#&gt; 2  0.3880319  0.1299915 -0.012410526 -0.1763300900 FALSE
-#&gt; 1  0.3426913  0.4717792  0.002915709  0.1476656291 FALSE</div><div class='input'>
-<span class='co'>## Get column coordinates</span>
-<span class='fu'><a href='mutator.html'>get_coordinates</a></span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;           CA1          CA2          CA3          CA4  .sup
-#&gt; A -0.26427888 -0.002106395 -0.077200851  0.007388896 FALSE
-#&gt; B  0.46579472 -0.265657215 -0.154574599  0.082193083 FALSE
-#&gt; C -0.18480877  0.261017642  0.083303541  0.003280442 FALSE
-#&gt; D  0.70606307  0.478395251 -0.005216167 -0.183986480 FALSE
-#&gt; E  0.40464014 -0.164513952  0.178014560 -0.196317101 FALSE
-#&gt; F  0.73946815  0.415115174 -0.016745192  0.159141489 FALSE
-#&gt; K -0.09746209 -0.435491389  0.243454796  0.049741374 FALSE
-#&gt; L  0.31510500 -0.633198145 -0.184727450 -0.040600432 FALSE
-#&gt; M  0.64089862  0.336922595  0.145420743 -0.135857618 FALSE
-#&gt; N -0.80499701  0.394831734 -0.376091538 -0.261346933 FALSE
-#&gt; O  0.23619808  0.865964911  0.031396693  0.420363758 FALSE
-#&gt; P  0.24789451 -0.245701716  0.420019296 -0.424330190 FALSE
-#&gt; G  0.71818947  0.404225421 -0.002320782 -0.101761055  TRUE
-#&gt; H  0.86789801  0.917187746 -0.003955767  0.487586192  TRUE
-#&gt; I  1.01229735  0.704811250 -0.069378353 -0.581275667  TRUE
-#&gt; J  0.90561140  0.703631246 -0.068820407  0.104582825  TRUE</div><div class='input'>
-<span class='co'>## Get row distances to centroid</span>
-<span class='fu'><a href='mutator.html'>get_distances</a></span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         5         4         3         2         1 
-#&gt; 0.4642357 0.1198931 0.2599798 0.1987129 0.3618266 </div><div class='input'>
-<span class='co'>## Get row inertias</span>
-<span class='fu'><a href='mutator.html'>get_inertia</a></span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;          5          4          3          2          1 
-#&gt; 0.07771673 0.02891810 0.06388755 0.03658339 0.05845345 </div><div class='input'>
-<span class='co'>## Get row contributions</span>
-<span class='fu'><a href='mutator.html'>get_contributions</a></span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         CA1       CA2          CA3          CA4
-#&gt; 5 49.055540  8.417617 24.688593097  1.097458438
-#&gt; 4 11.093341  1.861036 62.923451874  0.002276605
-#&gt; 3  3.953042 52.717159 12.238590957  6.517166729
-#&gt; 2 21.311824  2.946559  0.142463831 57.188980025
-#&gt; 1 14.586254 34.057629  0.006900241 35.194118203</div><div class='input'>
-<span class='co'>## Get eigenvalues</span>
-<span class='fu'><a href='mutator.html'>get_eigenvalues</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   eigenvalues  variance cumulative
-#&gt; 1  0.13006850 48.979094   48.97909
-#&gt; 2  0.10557785 39.756801   88.73590
-#&gt; 3  0.01990369  7.495010   96.23091
-#&gt; 4  0.01000918  3.769094  100.00000</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

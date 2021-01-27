@@ -166,6 +166,7 @@ default), <code>2</code> indicates variables/columns.</p></td>
 <code><a href='CA-class.html'>CA-class</a></code>,
 <code><a href='MultivariateAnalysis-class.html'>MultivariateAnalysis-class</a></code>,
 <code><a href='MultivariateResults-class.html'>MultivariateResults-class</a></code>,
+<code><a href='MultivariateSummary.html'>MultivariateSummary</a></code>,
 <code><a href='PCA-class.html'>PCA-class</a></code>,
 <code><a href='ca.html'>ca</a>()</code>,
 <code><a href='pca.html'>pca</a>()</code></p></div>
@@ -176,30 +177,58 @@ default), <code>2</code> indicates variables/columns.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Create a matrix</span>
 <span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fl'>100</span>, <span class='cn'>TRUE</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>10</span>, ncol <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>B</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>12</span><span class='op'>:</span><span class='fl'>20</span>, <span class='fl'>42</span>, <span class='cn'>TRUE</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>7</span>, ncol <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
 
 <span class='co'>## Compute correspondence analysis</span>
 <span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>A</span>, sup_row <span class='op'>=</span> <span class='fl'>8</span><span class='op'>:</span><span class='fl'>10</span>, sup_col <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
 
 <span class='co'>## Predict new row coordinates</span>
-<span class='fu'>predict</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>B</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            CA1         CA2         CA3         CA4         CA5
-#&gt; 1 -0.001073038 -0.10066293 -0.20068860  0.03346268 -0.02620775
-#&gt; 2  0.070660845 -0.17454894 -0.08836254  0.05261030 -0.05859957
-#&gt; 3  0.020940889  0.03995943 -0.12703625 -0.05814714  0.04501811
-#&gt; 4 -0.028426354 -0.18993050 -0.04315184  0.02615534 -0.01221765
-#&gt; 5 -0.009495666 -0.19306965 -0.19820790  0.03736164  0.06193045
-#&gt; 6  0.080967488 -0.10316589 -0.11403191  0.14686376 -0.03513175
-#&gt; 7 -0.075976701 -0.32651999 -0.13868808  0.03658090  0.04787106</div><div class='input'>
+<span class='va'>Y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fl'>120</span>, <span class='cn'>TRUE</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>20</span>, ncol <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
+<span class='fu'>predict</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>Y</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;            CA1          CA2         CA3         CA4         CA5
+#&gt; 1  -0.26310025 -0.319993962  0.13962702  0.06999116  0.14113471
+#&gt; 2  -0.06821901 -0.150823784 -0.15673721 -0.26870632 -0.29972501
+#&gt; 3   0.19378526 -0.124887078 -0.51497068 -0.49649503  0.68824356
+#&gt; 4  -0.14814982 -0.325207918 -0.11182528  0.12284549 -0.16118129
+#&gt; 5  -0.20430209 -0.229795708  0.03266171  0.37746067 -0.04723501
+#&gt; 6  -0.14514126 -0.161380172 -0.30376738  0.12724360 -0.20080141
+#&gt; 7   0.19065221 -0.020002582 -0.07844325  0.22824642 -0.48405752
+#&gt; 8  -0.10834874 -0.017735509 -0.13232860 -0.29954598  0.21218811
+#&gt; 9   0.11457036 -0.047713307 -0.30532216 -0.41504297  0.09339018
+#&gt; 10 -0.19878519 -0.003225746  0.12555267  0.23816223 -0.13783604
+#&gt; 11  0.18307318 -0.309379534  0.08142047 -0.31325968 -0.09470154
+#&gt; 12 -0.11846867 -0.092618567  0.06512530  0.36634198 -0.37948591
+#&gt; 13 -0.26576809 -0.310175263 -0.21815995 -0.12495089 -0.12256998
+#&gt; 14  0.33611401  0.004625258  0.29357350  0.26631157  0.26761369
+#&gt; 15  0.03132380 -0.435744023  0.26922840 -0.01445938 -0.25167750
+#&gt; 16  0.17038171 -0.348175347 -0.41153532 -0.17535648  0.19682126
+#&gt; 17  0.16336733  0.317299104 -0.48420857  0.45880400  0.11149019
+#&gt; 18  0.18141750 -0.060733176 -0.21254195 -0.35653235  0.23035301
+#&gt; 19 -0.13391785 -0.115098185 -0.37223759 -0.37871763  0.27627281
+#&gt; 20  0.14553621  0.117931763  0.12277983  0.25976805 -0.17476193</div><div class='input'>
 <span class='co'>## Predict new column coordinates</span>
-<span class='fu'>predict</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>B</span>, margin <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            CA1        CA2         CA3        CA4         CA5
-#&gt; 1  0.008994679 0.27270769 -0.03820861 0.07450022 -0.06754504
-#&gt; 2  0.081188937 0.16238340 -0.01740599 0.01981337  0.04824950
-#&gt; 3  0.010446682 0.12980920 -0.01752916 0.03390532 -0.02708950
-#&gt; 4 -0.069476397 0.12464696  0.05303257 0.21558566  0.09618081
-#&gt; 5 -0.100292066 0.12104253  0.08339428 0.16123895  0.08965816
-#&gt; 6  0.005439078 0.04344376  0.15390297 0.09967242  0.11017732</div></pre>
+<span class='va'>Z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fl'>140</span>, <span class='cn'>TRUE</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>7</span>, ncol <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
+<span class='fu'>predict</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>Z</span>, margin <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;             CA1          CA2          CA3         CA4         CA5
+#&gt; 1   0.152504594 -0.229352303  0.180468031  0.20877614 -0.45724437
+#&gt; 2  -0.163954296  0.126801098  0.224986726  0.34159781 -0.08459503
+#&gt; 3  -0.123278363  0.176317824 -0.136462621  0.14171388 -0.06439708
+#&gt; 4  -0.138082055  0.166997321  0.036861437  0.16397205 -0.16824257
+#&gt; 5  -0.014542605  0.180900451  0.037690539 -0.04496971  0.03821410
+#&gt; 6  -0.066955759 -0.247722708  0.138591402  0.34669893 -0.08951825
+#&gt; 7   0.079390554  0.348719309  0.006440379 -0.24717338 -0.20718286
+#&gt; 8   0.312218605  0.176472102  0.318345557  0.34513378  0.18084205
+#&gt; 9   0.105284832  0.173587553 -0.036948854  0.10377186  0.05027168
+#&gt; 10 -0.239512798  0.287700526  0.063952507 -0.22224979 -0.02335059
+#&gt; 11 -0.306800767  0.169060711  0.188407406 -0.09361800  0.13915461
+#&gt; 12  0.524241600 -0.224136843 -0.243741677  0.48540372 -0.07856375
+#&gt; 13  0.002623805  0.821326732  0.259699972 -0.15692498 -0.00547570
+#&gt; 14  0.224584069 -0.120857376 -0.171035132  0.32985462 -0.08157549
+#&gt; 15  0.061811802  0.293084885 -0.024059126  0.21994626  0.24678748
+#&gt; 16  0.069508054 -0.007768587 -0.031221425 -0.05919848  0.19128374
+#&gt; 17 -0.154787306 -0.015512396 -0.312220306 -0.08813826 -0.14910468
+#&gt; 18 -0.233371408  0.470404835 -0.147178868 -0.02633813  0.02287626
+#&gt; 19  0.235274907  0.237388001 -0.322919766 -0.03848287 -0.06424274
+#&gt; 20  0.303989426  0.303692312  0.017141352 -0.06450347 -0.07332883</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

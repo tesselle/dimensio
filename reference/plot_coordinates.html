@@ -131,15 +131,13 @@
     <p>Plots factor map.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_coordinates</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='fu'>plot_individuals</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>plot_individuals</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='fu'>plot_variables</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S4 method for CA</span>
-<span class='fu'>plot_coordinates</span><span class='op'>(</span>
-  <span class='va'>object</span>,
+<span class='co'># S4 method for CA,missing</span>
+<span class='fu'><a href='https://rdrr.io/pkg/khroma/man/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
   margin <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>,
   axes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>,
   active <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -148,9 +146,9 @@
   group <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span>
 
-<span class='co'># S4 method for PCA</span>
-<span class='fu'>plot_coordinates</span><span class='op'>(</span>
-  <span class='va'>object</span>,
+<span class='co'># S4 method for PCA,missing</span>
+<span class='fu'><a href='https://rdrr.io/pkg/khroma/man/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
   margin <span class='op'>=</span> <span class='fl'>1</span>,
   axes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>,
   active <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -183,7 +181,7 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
+      <th>object, x</th>
       <td><p>A <a href='CA-class.html'>CA</a> or <a href='PCA-class.html'>PCA</a> object.</p></td>
     </tr>
     <tr>
@@ -256,13 +254,13 @@ shapes is used.</p></li>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Load data</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tesselle/codex'>codex</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"mississippi"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"zuni"</span><span class='op'>)</span>
 
 <span class='co'>## Compute correspondence analysis</span>
-<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>mississippi</span>, sup_row <span class='op'>=</span> <span class='fl'>11</span><span class='op'>:</span><span class='fl'>15</span><span class='op'>)</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ca.html'>ca</a></span><span class='op'>(</span><span class='va'>zuni</span><span class='op'>)</span>
 
 <span class='co'>## Plot observations</span>
-<span class='fu'>plot_coordinates</span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/khroma/man/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
 </div><div class='img'><img src='plot_coordinates-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -13,6 +13,9 @@
     <loc>http://dimensio.tesselle.org/reference/MultivariateResults-class.html</loc>
   </url>
   <url>
+    <loc>http://dimensio.tesselle.org/reference/MultivariateSummary.html</loc>
+  </url>
+  <url>
     <loc>http://dimensio.tesselle.org/reference/PCA-class.html</loc>
   </url>
   <url>
@@ -41,5 +44,8 @@
   </url>
   <url>
     <loc>http://dimensio.tesselle.org/reference/subset.html</loc>
+  </url>
+  <url>
+    <loc>http://dimensio.tesselle.org/reference/summary.html</loc>
   </url>
 </urlset>
