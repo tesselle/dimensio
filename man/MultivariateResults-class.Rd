@@ -42,6 +42,7 @@ results).}
 Other multivariate analysis: 
 \code{\link{CA-class}},
 \code{\link{MultivariateAnalysis-class}},
+\code{\link{MultivariateSummary}},
 \code{\link{PCA-class}},
 \code{\link{ca}()},
 \code{\link{pca}()},

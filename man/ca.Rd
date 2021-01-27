@@ -42,6 +42,9 @@ decomposition.
 library(codex)
 data("compiegne")
 
+## The chi square of independence between the two variables
+stats::chisq.test(compiegne)
+
 ## Compute correspondence analysis
 X <- ca(compiegne, sup_col = 7:10)
 
@@ -70,6 +73,7 @@ Other multivariate analysis:
 \code{\link{CA-class}},
 \code{\link{MultivariateAnalysis-class}},
 \code{\link{MultivariateResults-class}},
+\code{\link{MultivariateSummary}},
 \code{\link{PCA-class}},
 \code{\link{pca}()},
 \code{\link{predict}()}

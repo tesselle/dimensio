@@ -297,7 +297,7 @@ NULL
 #' Visualize Factor Map
 #'
 #' Plots factor map.
-#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
+#' @param object,x A \linkS4class{CA} or \linkS4class{PCA} object.
 #' @param margin A length-one \code{\link{numeric}} vector giving the subscript
 #'  which the data will be returned: \code{1} indicates individuals/rows (the
 #'  default), \code{2} indicates variables/columns, \code{c(1, 2)} indicates
@@ -340,12 +340,8 @@ NULL
 #' @rdname plot_coordinates
 NULL
 
-#' @rdname plot_coordinates
-#' @aliases plot_coordinates-method
-setGeneric(
-  name = "plot_coordinates",
-  def = function(object, ...) standardGeneric("plot_coordinates")
-)
+if (!isGeneric("plot"))
+  setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
 
 #' @rdname plot_coordinates
 #' @aliases plot_individuals-method
@@ -444,3 +440,23 @@ setGeneric(
 )
 
 # Summarize ====================================================================
+#' Object Summaries
+#'
+#' Provides a summary of the results of a multivariate data analysis.
+#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
+#' @param margin A length-one \code{\link{numeric}} vector giving the subscript
+#'  which the data will be summarized: \code{1} indicates individuals/rows (the
+#'  default), \code{2} indicates variables/columns.
+#' @param rank An \code{\link{integer}} value specifying the maximal number of
+#'  components to be kept in the results.
+#' @param active A \code{\link{logical}} scalar: should the active
+#'  observations be summarized?
+#' @param sup A \code{\link{logical}} scalar: should the supplementary
+#'  observations be summarized?
+#' @example inst/examples/ex-summary.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family summary
+#' @name summary
+#' @rdname summary
+NULL

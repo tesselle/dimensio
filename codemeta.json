@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "dimensio",
   "description": "Simple Principal Components Analysis (PCA) and\n    Correspondence Analysis (CA). This package provides classes and methods to\n    compute, extract, summarize and visualize results of multivariate data\n    analysis.",
@@ -128,7 +131,11 @@
   ],
   "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
   "readme": "https://github.com/tesselle/dimensio/blob/master/README.md",
-  "fileSize": "461.956KB",
+  "fileSize": "476.675KB",
   "developmentStatus": ["https://www.repostatus.org/#wip", "https://www.tidyverse.org/lifecycle/#experimental"],
-  "keywords": ["r-package", "multivariate-analysis", "data-analysis"]
+  "keywords": [
+    "r-package",
+    "multivariate-analysis",
+    "data-analysis"
+  ]
 }

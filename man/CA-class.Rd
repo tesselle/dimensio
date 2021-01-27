@@ -13,6 +13,9 @@ An S4 class to store the results of a simple correspondence analysis.
 library(codex)
 data("compiegne")
 
+## The chi square of independence between the two variables
+stats::chisq.test(compiegne)
+
 ## Compute correspondence analysis
 X <- ca(compiegne, sup_col = 7:10)
 
@@ -38,6 +41,7 @@ get_eigenvalues(X)
 Other multivariate analysis: 
 \code{\link{MultivariateAnalysis-class}},
 \code{\link{MultivariateResults-class}},
+\code{\link{MultivariateSummary}},
 \code{\link{PCA-class}},
 \code{\link{ca}()},
 \code{\link{pca}()},

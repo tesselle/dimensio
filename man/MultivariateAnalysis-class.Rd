@@ -6,12 +6,12 @@
 \alias{.MultivariateAnalysis}
 \title{Output of Multivariate Data Analysis}
 \description{
-An S4 class to store the output of a multivariate data analysis.
+A virtual S4 class to store the output of a multivariate data analysis.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{data}}{A \code{\link{numeric}} \code{\link{matrix}}}
+\item{\code{data}}{A \code{\link{numeric}} \code{\link{matrix}}.}
 
 \item{\code{dimension}}{An \code{\link{integer}} giving the dimension of the
 solution.}
@@ -39,6 +39,7 @@ vector.}
 Other multivariate analysis: 
 \code{\link{CA-class}},
 \code{\link{MultivariateResults-class}},
+\code{\link{MultivariateSummary}},
 \code{\link{PCA-class}},
 \code{\link{ca}()},
 \code{\link{pca}()},

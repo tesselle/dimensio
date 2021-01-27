@@ -3,25 +3,22 @@
 \docType{methods}
 \name{plot_coordinates}
 \alias{plot_coordinates}
-\alias{plot_coordinates-method}
 \alias{plot_individuals}
 \alias{plot_individuals-method}
 \alias{plot_variables}
 \alias{plot_variables-method}
-\alias{plot_coordinates,CA-method}
-\alias{plot_coordinates,PCA-method}
+\alias{plot,CA,missing-method}
+\alias{plot,PCA,missing-method}
 \alias{plot_individuals,PCA-method}
 \alias{plot_variables,PCA-method}
 \title{Visualize Factor Map}
 \usage{
-plot_coordinates(object, ...)
-
 plot_individuals(object, ...)
 
 plot_variables(object, ...)
 
-\S4method{plot_coordinates}{CA}(
-  object,
+\S4method{plot}{CA,missing}(
+  x,
   margin = c(1, 2),
   axes = c(1, 2),
   active = TRUE,
@@ -30,8 +27,8 @@ plot_variables(object, ...)
   group = NULL
 )
 
-\S4method{plot_coordinates}{PCA}(
-  object,
+\S4method{plot}{PCA,missing}(
+  x,
   margin = 1,
   axes = c(1, 2),
   active = TRUE,
@@ -59,7 +56,7 @@ plot_variables(object, ...)
 )
 }
 \arguments{
-\item{object}{A \linkS4class{CA} or \linkS4class{PCA} object.}
+\item{object, x}{A \linkS4class{CA} or \linkS4class{PCA} object.}
 
 \item{...}{Currently not used.}
 
@@ -110,13 +107,13 @@ shapes is used.}
 \examples{
 ## Load data
 library(codex)
-data("mississippi")
+data("zuni")
 
 ## Compute correspondence analysis
-X <- ca(mississippi, sup_row = 11:15)
+X <- ca(zuni)
 
 ## Plot observations
-plot_coordinates(X)
+plot(X)
 }
 \seealso{
 Other visualization: 

@@ -6,16 +6,16 @@ NULL
 ## Coordinates -----------------------------------------------------------------
 #' @export
 #' @rdname plot_coordinates
-#' @aliases plot_coordinates,CA-method
+#' @aliases plot,CA,missing-method
 setMethod(
-  f = "plot_coordinates",
-  signature = signature(object = "CA"),
-  definition = function(object, margin = c(1, 2), axes = c(1, 2),
+  f = "plot",
+  signature = signature(x = "CA", y = "missing"),
+  definition = function(x, margin = c(1, 2), axes = c(1, 2),
                         active = TRUE, sup = TRUE,
                         highlight = NULL, group = NULL) {
     ## ggplot2
     gg <- plot_points(
-      object,
+      x,
       margin = margin,
       axes = axes,
       active = active,
@@ -32,20 +32,20 @@ setMethod(
 ## Coordinates -----------------------------------------------------------------
 #' @export
 #' @rdname plot_coordinates
-#' @aliases plot_coordinates,PCA-method
+#' @aliases plot,PCA,missing-method
 setMethod(
-  f = "plot_coordinates",
-  signature = signature(object = "PCA"),
-  definition = function(object, margin = 1, axes = c(1, 2),
+  f = "plot",
+  signature = signature(x = "PCA", y = "missing"),
+  definition = function(x, margin = 1, axes = c(1, 2),
                         active = TRUE, sup = TRUE,
                         highlight = NULL, group = NULL) {
     gg <- switch (
       margin[[1L]],
       ## Plot individuals factor map
-      `1` = plot_individuals(object, axes = axes, active = active, sup = sup,
+      `1` = plot_individuals(x, axes = axes, active = active, sup = sup,
                              highlight = highlight, group = group),
       ## Plot variables factor map
-      `2` = plot_variables(object, axes = axes, active = active, sup = sup,
+      `2` = plot_variables(x, axes = axes, active = active, sup = sup,
                            highlight = highlight, group = group)
     )
     return(gg)

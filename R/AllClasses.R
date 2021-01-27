@@ -42,8 +42,8 @@
 
 #' Output of Multivariate Data Analysis
 #'
-#' An S4 class to store the output of a multivariate data analysis.
-#' @slot data A \code{\link{numeric}} \code{\link{matrix}}
+#' A virtual S4 class to store the output of a multivariate data analysis.
+#' @slot data A \code{\link{numeric}} \code{\link{matrix}}.
 #' @slot dimension An \code{\link{integer}} giving the dimension of the
 #'  solution.
 #' @slot singular_values A \code{\link{numeric}} vector giving the singular
@@ -70,7 +70,48 @@
     singular_values = "numeric",
     rows = "MultivariateResults",
     columns = "MultivariateResults"
-  )
+  ),
+  contains = "VIRTUAL"
+)
+
+#' Summary of Multivariate Data Analysis
+#'
+#' A virtual S4 class to store the summary of a multivariate data analysis.
+#' @slot data A \code{\link{numeric}} \code{\link{matrix}}.
+#' @slot eigenvalues A \code{\link{numeric}} \code{\link{matrix}}.
+#' @slot results A \code{\link{numeric}} \code{\link{matrix}}.
+#' @slot supplement A \code{\link{logical}} vector specifying the supplementary
+#'  points.
+#' @slot margin An \code{\link{integer}}.
+#' @author N. Frerebeau
+#' @family multivariate analysis
+#' @docType class
+#' @name MultivariateSummary
+#' @aliases MultivariateSummary-class
+.MultivariateSummary <- setClass(
+  Class = "MultivariateSummary",
+  slots = c(
+    data = "matrix",
+    eigenvalues = "matrix",
+    results = "matrix",
+    supplement = "logical",
+    margin = "integer"
+  ),
+  contains = "VIRTUAL"
+)
+
+#' @rdname MultivariateSummary
+#' @aliases SummaryCA-class
+.SummaryCA <- setClass(
+  Class = "SummaryCA",
+  contains = "MultivariateSummary"
+)
+
+#' @rdname MultivariateSummary
+#' @aliases SummaryPCA-class
+.SummaryPCA <- setClass(
+  Class = "SummaryPCA",
+  contains = "MultivariateSummary"
 )
 
 # CA ===========================================================================

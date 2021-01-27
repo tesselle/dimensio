@@ -48,18 +48,18 @@ Plot eigenvalues or variances histogram.
 \examples{
 ## Load data
 library(codex)
-data("mississippi")
+data("zuni")
 
 ## Compute correspondence analysis
-X <- ca(mississippi, sup_row = 11:15)
+X <- ca(zuni)
 
 ## Plot observations
-plot_coordinates(X)
+plot(X)
 }
 \seealso{
 Other visualization: 
 \code{\link{plot_contributions}()},
-\code{\link{plot_coordinates}()}
+\code{\link{plot_coordinates}}
 }
 \author{
 N. Frerebeau

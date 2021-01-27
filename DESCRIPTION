@@ -50,4 +50,7 @@ Collate:
     'mutators.R'
     'pca.R'
     'plot.R'
+    'show.R'
     'subset.R'
+    'summary.R'
+    'zzz.R'

@@ -2,6 +2,9 @@
 library(codex)
 data("compiegne")
 
+## The chi square of independence between the two variables
+stats::chisq.test(compiegne)
+
 ## Compute correspondence analysis
 X <- ca(compiegne, sup_col = 7:10)
 

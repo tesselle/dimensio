@@ -1,9 +1,9 @@
 ## Load data
 library(codex)
-data("mississippi")
+data("zuni")
 
 ## Compute correspondence analysis
-X <- ca(mississippi, sup_row = 11:15)
+X <- ca(zuni)
 
 ## Plot observations
-plot_coordinates(X)
+plot(X)
