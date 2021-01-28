@@ -5,13 +5,13 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "dimensio",
-  "description": "Simple Principal Components Analysis (PCA) and\n    Correspondence Analysis (CA)based on the Singular Value Decomposition (SVD). \n    This package provides S4 classes and methods to compute, extract, summarize \n    and visualize results of multivariate data analysis.",
+  "description": "Simple Principal Components Analysis (PCA) and\n    Correspondence Analysis (CA) based on the Singular Value Decomposition\n    (SVD). This package provides S4 classes and methods to compute,\n    extract, summarize and visualize results of multivariate data\n    analysis.",
   "name": "dimensio: Multivariate Data Analysis",
   "codeRepository": "https://github.com/tesselle/dimensio",
   "relatedLink": "http://dimensio.tesselle.org",
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.0.0.9000",
+  "version": "0.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -113,11 +113,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "methods",
-      "name": "methods"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "provider": {
@@ -127,6 +122,11 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "methods",
+      "name": "methods"
     },
     {
       "@type": "SoftwareApplication",
@@ -143,12 +143,27 @@
   ],
   "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
   "readme": "https://github.com/tesselle/dimensio/blob/master/README.md",
-  "fileSize": "1096.939KB",
+  "fileSize": "1099.129KB",
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#stable"],
   "keywords": [
     "r-package",
     "multivariate-analysis",
     "data-analysis"
   ],
-  "contIntegration": "https://codecov.io/gh/tesselle/dimensio"
+  "contIntegration": "https://codecov.io/gh/tesselle/dimensio",
+  "citation": [
+    {
+      "@type": "SoftwareSourceCode",
+      "datePublished": "2021",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Nicolas",
+          "familyName": "Frerebeau"
+        }
+      ],
+      "name": "dimensio: Multivariate Data Analysis",
+      "description": "R package version 0.1.0"
+    }
+  ]
 }
