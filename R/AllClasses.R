@@ -25,6 +25,7 @@
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
+#' @name MultivariateResults
 #' @aliases MultivariateResults-class
 .MultivariateResults <- setClass(
   Class = "MultivariateResults",
@@ -63,6 +64,7 @@
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
+#' @name MultivariateAnalysis
 #' @aliases MultivariateAnalysis-class
 .MultivariateAnalysis <- setClass(
   Class = "MultivariateAnalysis",
@@ -125,7 +127,6 @@
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
-#' @export .CA
 #' @exportClass CA
 #' @aliases CA-class
 .CA <- setClass(
@@ -145,7 +146,6 @@
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
-#' @export .PCA
 #' @exportClass PCA
 #' @aliases PCA-class
 .PCA <- setClass(

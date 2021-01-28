@@ -91,7 +91,8 @@ get_correlations(X)
 get_eigenvalues(X)
 }
 \seealso{
-\link{mutator}, \link{predict}, \link{svd}
+\link[=mutator]{get_*()}, \link[=predict]{predict()},
+\link[=svd]{svd()}
 
 Other multivariate analysis: 
 \code{\link{ca}()},

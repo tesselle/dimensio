@@ -8,7 +8,7 @@ test_that("Principal Components Analysis", {
   expect_error(pca(cts, sup_ind = "row1"), "must be a numeric vector")
   expect_error(pca(cts, sup_var = "col1"), "must be a numeric vector")
 
-  res <- pca(cts, rank = 10)
+  res <- pca(cts, center = TRUE, scale = TRUE, rank = 10)
   expect_output(show(res), "Principal Components Analysis")
 
   # Points coordinates
@@ -104,6 +104,12 @@ test_that("Compare with {FactoMineR}", {
   expect_equal(
     object = as.data.frame(res_facto$var$contrib),
     expected = get_contributions(res_arkhe, margin = 2),
+    ignore_attr = TRUE
+  )
+  # Column correlations
+  expect_equal(
+    object = abs(as.data.frame(res_facto$var$cor)),
+    expected = abs(get_correlations(res_arkhe, sup = FALSE)),
     ignore_attr = TRUE
   )
 

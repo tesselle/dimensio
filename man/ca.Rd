@@ -40,13 +40,13 @@ decomposition.
 \examples{
 ## Load data
 library(codex)
-data("compiegne")
+data("zuni")
 
 ## The chi square of independence between the two variables
-stats::chisq.test(compiegne)
+stats::chisq.test(zuni)
 
 ## Compute correspondence analysis
-X <- ca(compiegne, sup_col = 7:10)
+X <- ca(zuni)
 
 ## Get row coordinates
 get_coordinates(X, margin = 1)
@@ -67,7 +67,8 @@ get_contributions(X, margin = 1)
 get_eigenvalues(X)
 }
 \seealso{
-\link{mutator}, \link{predict}, \link{svd}
+\link[=mutator]{get_*()}, \link[=predict]{predict()},
+\link[=svd]{svd()}
 
 Other multivariate analysis: 
 \code{\link{pca}()},

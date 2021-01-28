@@ -55,13 +55,18 @@ X <- ca(zuni)
 
 ## Plot observations
 plot(X)
+
+## Screeplot
+plot_variance(X)
 }
 \seealso{
-Other visualization: 
+\link[ggplot2:ggplot]{ggplot()}
+
+Other plot: 
 \code{\link{plot_contributions}()},
 \code{\link{plot_coordinates}}
 }
 \author{
 N. Frerebeau
 }
-\concept{visualization}
+\concept{plot}

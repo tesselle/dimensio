@@ -96,7 +96,7 @@ column to create for supplementary points attribution (see below).}
 places to be used.}
 }
 \value{
-\code{get_*()} returns a \code{\link{numeric}} vector or matrix or a
+\code{get_*()} returns a \code{\link{numeric}} vector or a
 \code{\link{data.frame}}.
 
 \code{loadings()} returns of a \code{\link{matrix}} of class
@@ -125,11 +125,12 @@ between variables and dimensions (\code{PCA}).
 columns: \code{eigenvalues}, \code{variance} (percentage of variance) and
 \code{cumulative} (cumulative percentage of variance).
 
-\code{get_variance} returns a \code{numeric} vector giving the percentage
+\code{get_variance()} returns a \code{numeric} vector giving the percentage
 of explained variance of each dimension.
 
-\code{loadings} returns variable loadings (i.e. the coefficients of the
-linear combination of the original variables).
+\code{loadings()} returns variable loadings (i.e. the coefficients of the
+linear combination of the original variables). \code{loadings()} is only
+implemented for consistency with \pkg{\link[stats:loadings]{stats}}.
 }
 \seealso{
 Other mutator: 

@@ -7,3 +7,6 @@ X <- ca(zuni)
 
 ## Plot observations
 plot(X)
+
+## Screeplot
+plot_variance(X)

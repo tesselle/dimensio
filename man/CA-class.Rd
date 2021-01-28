@@ -11,13 +11,13 @@ An S4 class to store the results of a simple correspondence analysis.
 \examples{
 ## Load data
 library(codex)
-data("compiegne")
+data("zuni")
 
 ## The chi square of independence between the two variables
-stats::chisq.test(compiegne)
+stats::chisq.test(zuni)
 
 ## Compute correspondence analysis
-X <- ca(compiegne, sup_col = 7:10)
+X <- ca(zuni)
 
 ## Get row coordinates
 get_coordinates(X, margin = 1)
@@ -39,8 +39,8 @@ get_eigenvalues(X)
 }
 \seealso{
 Other class: 
-\code{\link{MultivariateAnalysis-class}},
-\code{\link{MultivariateResults-class}},
+\code{\link{MultivariateAnalysis}},
+\code{\link{MultivariateResults}},
 \code{\link{MultivariateSummary}},
 \code{\link{PCA-class}}
 }

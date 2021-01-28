@@ -44,8 +44,8 @@ get_eigenvalues(X)
 \seealso{
 Other class: 
 \code{\link{CA-class}},
-\code{\link{MultivariateAnalysis-class}},
-\code{\link{MultivariateResults-class}},
+\code{\link{MultivariateAnalysis}},
+\code{\link{MultivariateResults}},
 \code{\link{MultivariateSummary}}
 }
 \author{

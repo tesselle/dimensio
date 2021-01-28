@@ -271,7 +271,7 @@ setMethod(
   f = "loadings",
   signature = signature(x = "PCA"),
   definition = function(x) {
-    loads <- x@columns@coordinates / x@singular_values
+    loads <- x@columns@standard
     class(loads) <- "loadings"
     return(loads)
   }

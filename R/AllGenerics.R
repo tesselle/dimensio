@@ -42,13 +42,14 @@ setGeneric("loadings")
 #'  columns: \code{eigenvalues}, \code{variance} (percentage of variance) and
 #'  \code{cumulative} (cumulative percentage of variance).
 #'
-#'  \code{get_variance} returns a \code{numeric} vector giving the percentage
+#'  \code{get_variance()} returns a \code{numeric} vector giving the percentage
 #'  of explained variance of each dimension.
 #'
-#'  \code{loadings} returns variable loadings (i.e. the coefficients of the
-#'  linear combination of the original variables).
+#'  \code{loadings()} returns variable loadings (i.e. the coefficients of the
+#'  linear combination of the original variables). \code{loadings()} is only
+#'  implemented for consistency with \pkg{\link[stats:loadings]{stats}}.
 #' @return
-#'  \code{get_*()} returns a \code{\link{numeric}} vector or matrix or a
+#'  \code{get_*()} returns a \code{\link{numeric}} vector or a
 #'  \code{\link{data.frame}}.
 #'
 #'  \code{loadings()} returns of a \code{\link{matrix}} of class
@@ -214,7 +215,8 @@ NULL
 #' @return
 #'  A \linkS4class{CA} object.
 #' @example inst/examples/ex-ca.R
-#' @seealso \link{mutator}, \link{predict}, \link{svd}
+#' @seealso \link[=mutator]{get_*()}, \link[=predict]{predict()},
+#'  \link[=svd]{svd()}
 #' @author N. Frerebeau
 #' @docType methods
 #' @family multivariate analysis
@@ -256,7 +258,8 @@ setGeneric(
 #' @return
 #'  A \linkS4class{PCA} object.
 #' @example inst/examples/ex-pca.R
-#' @seealso \link{mutator}, \link{predict}, \link{svd}
+#' @seealso \link[=mutator]{get_*()}, \link[=predict]{predict()},
+#'  \link[=svd]{svd()}
 #' @author N. Frerebeau
 #' @docType methods
 #' @family multivariate analysis
@@ -332,10 +335,11 @@ NULL
 #'   \item{If both are \code{NULL} (the default), then the same rule as for
 #'   shapes is used.}
 #'  }
+#' @seealso \link[ggplot2:ggplot]{ggplot()}
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family visualization
+#' @family plot
 #' @name plot_coordinates
 #' @rdname plot_coordinates
 NULL
@@ -371,10 +375,11 @@ setGeneric(
 #'  infilling and border colors.
 #' @param color A \code{\link{character}} string specifying the line color.
 #' @param ... Currently not used.
+#' @seealso \link[ggplot2:ggplot]{ggplot()}
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family visualization
+#' @family plot
 #' @name plot_eigenvalues
 #' @rdname plot_eigenvalues
 NULL
@@ -417,10 +422,11 @@ setGeneric(
 #' @param fill,border A \code{\link{character}} string specifying the bars
 #'  infilling and border colors.
 #' @param ... Currently not used.
+#' @seealso \link[ggplot2:ggplot]{ggplot()}
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family visualization
+#' @family plot
 #' @name plot_contributions
 #' @rdname plot_contributions
 NULL
