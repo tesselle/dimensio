@@ -6,12 +6,8 @@ setMethod(
   f = "show",
   signature = "MultivariateAnalysis",
   definition = function(object) {
-    analysis <- switch (
-      class(object),
-      CA = "Correspondence Analysis (CA)",
-      PCA = "Principal Components Analysis (CA)"
-    )
-    cat(analysis, sep = "\n")
+    header <- format_header(object)
+    cat(header, sep = "\n")
     invisible(object)
   }
 )
@@ -19,38 +15,30 @@ setMethod(
   f = "show",
   signature = "MultivariateSummary",
   definition = function(object) {
-    txt_ca <- c("Correspondence Analysis", "rows", "columns")
-    txt_pca <- c("Principal Components Analysis", "individuals", "variables")
+    ## Get options
+    n_dig <- getOption("dimensio.digits")
+    n_max <- getOption("dimensio.max.print")
+
     analysis <- switch (
       class(object),
-      SummaryCA = txt_ca,
-      SummaryPCA = txt_pca
+      SummaryCA = c("rows", "columns"),
+      SummaryPCA = c("individuals", "variables")
     )
 
     ## Get data
-    eig <- round(object@eigenvalues, digits = getOption("dimensio.digits"))
-    res <- round(object@results, digits = getOption("dimensio.digits"))
-    mar <- analysis[[object@margin + 1]]
-
-    ## Split data
-    is_sup <- object@supplement
-    res_act <- res[!is_sup, ] # Active points
-    res_sup <- res[is_sup, ] # Supplementary points
+    eig <- round(object@eigenvalues, digits = n_dig)
+    res <- round(object@results, digits = n_dig)
+    mar <- analysis[[object@margin]]
 
     ## Prepare data
-    n_act <- nrow(res_act)
-    n_sup <- nrow(res_sup)
-    n_max <- getOption("dimensio.max.print")
-    sum_act <- sum_sup <- NULL
-    extra_act <- extra_sup <- NULL
-    if (n_act > 0) {
-      if (n_act > n_max) {
-        res_act <- res_act[seq_len(n_max), ]
-        extra_act <- sprintf("(%s more)", n_act)
-      }
-      sum_act <- c(sprintf("\nActive %s:", mar), utils::capture.output(res_act))
-    }
-    if (n_sup > 0) {
+    is_sup <- object@supplement
+    eigen <- c("\nEigenvalues:", utils::capture.output(eig))
+
+    ## Supplementary points
+    sum_sup <- extra_sup <- NULL
+    if (any(is_sup)) {
+      res_sup <- res[is_sup, ]
+      n_sup <- nrow(res_sup)
       if (n_sup > n_max) {
         res_sup <- res_sup[seq_len(n_max), ]
         extra_sup <- sprintf("(%s more)", n_sup)
@@ -60,13 +48,36 @@ setMethod(
       sum_sup <- c(sprintf("\nSupplementary %s:", mar),
                    utils::capture.output(res_sup))
     }
-    eigen <- c("\nEigenvalues:", utils::capture.output(eig))
+
+    ## Active points
+    sum_act <- extra_act <- NULL
+    if (any(!is_sup)) {
+      res_act <- res[!is_sup, ]
+      n_act <- nrow(res_act)
+      if (n_act > n_max) {
+        res_act <- res_act[seq_len(n_max), ]
+        extra_act <- sprintf("(%s more)", n_act)
+      }
+      sum_act <- c(sprintf("\nActive %s:", mar), utils::capture.output(res_act))
+    }
 
     ## Print
-    n_dashes <- getOption("width") - nchar(analysis[[1]]) - 4
-    dashes <- paste0(rep("-", n_dashes), collapse = "")
-    header <- sprintf("--- %s %s", analysis[[1]], dashes)
+    header <- format_header(object)
     cat(header, eigen, sum_act, extra_act, sum_sup, extra_sup, sep = "\n")
-    invisible(NULL)
+    invisible(object)
   }
 )
+
+format_header <- function(object, width = getOption("width")) {
+  analysis <- switch (
+    class(object),
+    CA = "Correspondence Analysis (CA)",
+    SummaryCA = "Correspondence Analysis (CA)",
+    PCA = "Principal Components Analysis (PCA)",
+    SummaryPCA = "Principal Components Analysis (PCA)"
+  )
+
+  n_dashes <- width - nchar(analysis) - 4
+  dashes <- paste0(rep("-", n_dashes), collapse = "")
+  sprintf("--- %s %s", analysis, dashes)
+}

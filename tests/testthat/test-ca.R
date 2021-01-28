@@ -11,7 +11,7 @@ test_that("Correspondence Analysis", {
   expect_error(ca(cts, sup_col = "col1"), "must be a numeric vector")
 
   res <- ca(cts, rank = 10)
-  expect_null(res[["X"]])
+  expect_output(show(res), "Correspondence Analysis")
 
   # Points coordinates
   coord_row <- get_coordinates(res, margin = 1, sup = TRUE)

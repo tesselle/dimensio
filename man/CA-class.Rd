@@ -38,16 +38,13 @@ get_contributions(X, margin = 1)
 get_eigenvalues(X)
 }
 \seealso{
-Other multivariate analysis: 
+Other class: 
 \code{\link{MultivariateAnalysis-class}},
 \code{\link{MultivariateResults-class}},
 \code{\link{MultivariateSummary}},
-\code{\link{PCA-class}},
-\code{\link{ca}()},
-\code{\link{pca}()},
-\code{\link{predict}()}
+\code{\link{PCA-class}}
 }
 \author{
 N. Frerebeau
 }
-\concept{multivariate analysis}
+\concept{class}

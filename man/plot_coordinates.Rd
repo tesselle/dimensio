@@ -75,8 +75,8 @@ observations be plotted?}
 observations be plotted?}
 
 \item{highlight}{A \code{\link{character}} string giving XXX.
-It must be one of "\code{coordinates}", "\code{contributions}",
-"\code{cos2}" or "\code{distances}". Any unambiguous substring can be given.
+It must be one of "\code{coordinates}", "\code{contributions}" or
+"\code{cos2}". Any unambiguous substring can be given.
 If \code{NULL} (the default), no highlighting is applied.}
 
 \item{group}{A vector of categories specifying the categorical

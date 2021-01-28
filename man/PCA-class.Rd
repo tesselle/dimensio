@@ -42,16 +42,13 @@ get_correlations(X)
 get_eigenvalues(X)
 }
 \seealso{
-Other multivariate analysis: 
+Other class: 
 \code{\link{CA-class}},
 \code{\link{MultivariateAnalysis-class}},
 \code{\link{MultivariateResults-class}},
-\code{\link{MultivariateSummary}},
-\code{\link{ca}()},
-\code{\link{pca}()},
-\code{\link{predict}()}
+\code{\link{MultivariateSummary}}
 }
 \author{
 N. Frerebeau
 }
-\concept{multivariate analysis}
+\concept{class}

@@ -33,7 +33,7 @@ plot_cos2(object, ...)
   decreasing = TRUE,
   limit = 10,
   active = TRUE,
-  sup = TRUE,
+  sup = FALSE,
   fill = "grey30",
   border = "grey10"
 )

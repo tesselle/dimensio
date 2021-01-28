@@ -106,7 +106,7 @@ setMethod(
   f = "plot_contributions",
   signature = signature(object = "MultivariateAnalysis"),
   definition = function(object, margin = 2, axes = 1,
-                        sort = TRUE, decreasing = TRUE,  limit = 10,
+                        sort = TRUE, decreasing = TRUE, limit = 10,
                         fill = "grey30", border = "grey10") {
     ## Prepare data
     contrib <- get_contributions(object, margin = margin)
@@ -138,7 +138,7 @@ setMethod(
   signature = signature(object = "MultivariateAnalysis"),
   definition = function(object, margin = 1, axes = 1,
                         sort = TRUE, decreasing = TRUE, limit = 10,
-                        active = TRUE, sup = TRUE,
+                        active = TRUE, sup = FALSE,
                         fill = "grey30", border = "grey10") {
     ## Prepare data
     cos2 <- get_cos2(object, margin = margin, sup = sup)
@@ -186,10 +186,12 @@ setMethod(
     data <- get_eigenvalues(object)
 
     ## Eigenvalues
+    gg_var <- NULL
+    gg_scale <- ggplot2::waiver()
     if (variance) {
       data$y <- data[[2L]]
       data$label <- paste0(round(data$y, digits = 1), "%")
-      y_name <- "Variance"
+      y_name <- "Variance (%)"
       if (cumulative) {
         k <- max(data$y) / max(data$cumulative)
         aes_var <- ggplot2::aes(y = .data$cumulative * k)
@@ -206,7 +208,6 @@ setMethod(
       data$y <- data[[1L]]
       data$label <- round(data$y, digits = 1)
       y_name <- "Eigenvalues"
-      gg_var <- NULL
       gg_scale <- ggplot2::waiver()
     }
     data$x <- seq_len(nrow(data))
@@ -272,7 +273,7 @@ plot_arrows <- function(object, margin, axes, active = TRUE, sup = TRUE,
   data$z <- 0 # Set the origin of arrows
 
   ## Highlight or groups, if any
-  aes_group <- ggplot2::aes(color = .data$value)
+  aes_group <- ggplot2::aes(color = .data$value, linetype = .data$value)
   if (!is.null(group)) {
     if (is.numeric(group)) {
       aes_group <- ggplot2::aes(color = .data$group, size = .data$group)
@@ -383,7 +384,7 @@ prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
   if (!is.null(highlight)) {
     highlight_i <- if (is_var) col_i else row_i # Subset
     highlight_k <- joint(object, what = highlight, margin = margin,
-                       axes = axes, sup = TRUE)
+                         axes = axes, sup = TRUE)
     highlight_k <- highlight_k[highlight_i]
     data[[highlight]] <- highlight_k
   }

@@ -310,8 +310,8 @@ NULL
 #'  observations be plotted?
 # @param select NULL
 #' @param highlight A \code{\link{character}} string giving XXX.
-#'  It must be one of "\code{coordinates}", "\code{contributions}",
-#'  "\code{cos2}" or "\code{distances}". Any unambiguous substring can be given.
+#'  It must be one of "\code{coordinates}", "\code{contributions}" or
+#'  "\code{cos2}". Any unambiguous substring can be given.
 #'  If \code{NULL} (the default), no highlighting is applied.
 #' @param group A vector of categories specifying the categorical
 #'  variable from which to color the individuals (only used if \code{highlight}

@@ -64,7 +64,7 @@ get_variance(x, ...)
 
 \S4method{get_data}{MultivariateAnalysis}(x)
 
-\S4method{get_distances}{MultivariateAnalysis}(x, margin = 1)
+\S4method{get_distances}{MultivariateAnalysis}(x, margin = 1, sup = TRUE)
 
 \S4method{get_eigenvalues}{MultivariateAnalysis}(x)
 

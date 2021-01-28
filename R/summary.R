@@ -24,13 +24,15 @@ setMethod(
                             cos2 = cos2, rank = rank, active = active,
                             sup = sup, prefix = "CA")
 
-    ## Remove data data
+    ## Remove data
     is_sup <- coord$.sup
     if (!active) {
       values <- values[is_sup, ]
+      is_sup <- is_sup[is_sup]
     }
     if (!sup) {
       values <- values[!is_sup, ]
+      is_sup <- is_sup[!is_sup]
     }
 
     .SummaryCA(
@@ -65,13 +67,15 @@ setMethod(
                             cos2 = cos2, rank = rank, active = active,
                             sup = sup, prefix = "PC")
 
-    ## Remove data data
+    ## Remove data
     is_sup <- coord$.sup
     if (!active) {
       values <- values[is_sup, ]
+      is_sup <- is_sup[is_sup]
     }
     if (!sup) {
       values <- values[!is_sup, ]
+      is_sup <- is_sup[!is_sup]
     }
 
     .SummaryPCA(

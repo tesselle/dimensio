@@ -25,15 +25,14 @@ NULL
 NULL
 
 joint <- function(object, what, ...) {
-  choices <- c("coordinates", "contributions", "cos2", "distances")
+  choices <- c("coordinates", "contributions", "cos2")
   what <- match.arg(what, choices = choices, several.ok = FALSE)
 
   fun <- switch (
     what,
     coordinates = joint_coordinates,
     contributions = joint_contributions,
-    cos2 = joint_cos2,
-    distances = joint_distances
+    cos2 = joint_cos2
   )
 
   fun(object, ...)
@@ -62,11 +61,4 @@ joint_cos2 <- function(object, margin = 1, axes = c(1, 2), sup = TRUE, ...) {
   axes <- axes[c(1, 2)]
   cos2 <- get_cos2(object, margin = margin, sup = sup)
   rowSums(cos2[, axes])
-}
-
-joint_distances <- function(object, margin = 1, axes = c(1, 2),
-                            sup = TRUE, ...) {
-  axes <- axes[c(1, 2)]
-  d <- get_distances(object, margin = margin, sup = sup)
-  rowSums(d[, axes])
 }

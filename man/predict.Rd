@@ -44,11 +44,6 @@ predict(X, Z, margin = 2)
 }
 \seealso{
 Other multivariate analysis: 
-\code{\link{CA-class}},
-\code{\link{MultivariateAnalysis-class}},
-\code{\link{MultivariateResults-class}},
-\code{\link{MultivariateSummary}},
-\code{\link{PCA-class}},
 \code{\link{ca}()},
 \code{\link{pca}()}
 }

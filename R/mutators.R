@@ -117,17 +117,24 @@ setMethod(
 setMethod(
   f = "get_distances",
   signature = signature(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1) {
+  definition = function(x, margin = 1, sup = TRUE) {
 
     margin <- margin[[1L]]
     if (margin == 1) {
       d2 <- x@rows@distances
       names(d2) <- x@rows@names
+      suppl <- x@rows@supplement
     }
     if (margin == 2) {
       d2 <- x@columns@distances
       names(d2) <- x@columns@names
+      suppl <- x@columns@supplement
     }
+
+    if (!sup) {
+      d2 <- d2[!suppl, ]
+    }
+
     d2
   }
 )

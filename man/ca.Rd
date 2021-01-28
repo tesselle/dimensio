@@ -70,11 +70,6 @@ get_eigenvalues(X)
 \link{mutator}, \link{predict}, \link{svd}
 
 Other multivariate analysis: 
-\code{\link{CA-class}},
-\code{\link{MultivariateAnalysis-class}},
-\code{\link{MultivariateResults-class}},
-\code{\link{MultivariateSummary}},
-\code{\link{PCA-class}},
 \code{\link{pca}()},
 \code{\link{predict}()}
 }

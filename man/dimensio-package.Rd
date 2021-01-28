@@ -10,9 +10,9 @@
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
 Simple Principal Components Analysis (PCA) and
-    Correspondence Analysis (CA). This package provides classes and methods to
-    compute, extract, summarize and visualize results of multivariate data
-    analysis.
+    Correspondence Analysis (CA)based on the Singular Value Decomposition (SVD). 
+    This package provides S4 classes and methods to compute, extract, summarize 
+    and visualize results of multivariate data analysis.
 }
 \details{
 \tabular{ll}{

@@ -5,8 +5,7 @@
 
 <!-- badges: start -->
 
-[![R build
-status](https://github.com/tesselle/dimensio/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/dimensio/actions)
+[![R-CMD-check](https://github.com/tesselle/dimensio/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/dimensio/actions)
 [![codecov](https://codecov.io/gh/tesselle/dimensio/branch/master/graph/badge.svg)](https://codecov.io/gh/tesselle/dimensio)
 
 [![Project Status: Active – The project has reached a stable, usable
@@ -72,7 +71,7 @@ X <- pca(iris, scale = TRUE, sup_ind = sup)
 ``` r
 ## Summarize results for the individuals (first two components)
 summary(X, margin = 1, rank = 2)
-#> --- Principal Components Analysis -----------------------------------------------
+#> --- Principal Components Analysis (PCA) -----------------------------------------
 #> 
 #> Eigenvalues:
 #>     eigenvalues variance cumulative

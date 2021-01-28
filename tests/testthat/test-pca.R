@@ -9,7 +9,7 @@ test_that("Principal Components Analysis", {
   expect_error(pca(cts, sup_var = "col1"), "must be a numeric vector")
 
   res <- pca(cts, rank = 10)
-  expect_null(res[["X"]])
+  expect_output(show(res), "Principal Components Analysis")
 
   # Points coordinates
   coord_row <- get_coordinates(res, margin = 1, sup = TRUE)

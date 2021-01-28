@@ -29,16 +29,13 @@ points.}
 }}
 
 \seealso{
-Other multivariate analysis: 
+Other class: 
 \code{\link{CA-class}},
 \code{\link{MultivariateAnalysis-class}},
 \code{\link{MultivariateResults-class}},
-\code{\link{PCA-class}},
-\code{\link{ca}()},
-\code{\link{pca}()},
-\code{\link{predict}()}
+\code{\link{PCA-class}}
 }
 \author{
 N. Frerebeau
 }
-\concept{multivariate analysis}
+\concept{class}

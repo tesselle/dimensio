@@ -1,6 +1,7 @@
 # CLASSES DEFINITION
 
 # MultivariateAnalysis =========================================================
+## Results ---------------------------------------------------------------------
 #' Multivariate Data Analysis Results
 #'
 #' An S4 class to store the results of a multivariate data analysis.
@@ -22,7 +23,7 @@
 #'  of the data (computation moves all supplementary points at the end of the
 #'  results).
 #' @author N. Frerebeau
-#' @family multivariate analysis
+#' @family class
 #' @docType class
 #' @aliases MultivariateResults-class
 .MultivariateResults <- setClass(
@@ -40,6 +41,7 @@
   )
 )
 
+## Output ----------------------------------------------------------------------
 #' Output of Multivariate Data Analysis
 #'
 #' A virtual S4 class to store the output of a multivariate data analysis.
@@ -59,7 +61,7 @@
 #'   vector.}
 #'  }
 #' @author N. Frerebeau
-#' @family multivariate analysis
+#' @family class
 #' @docType class
 #' @aliases MultivariateAnalysis-class
 .MultivariateAnalysis <- setClass(
@@ -74,6 +76,7 @@
   contains = "VIRTUAL"
 )
 
+## Summary ---------------------------------------------------------------------
 #' Summary of Multivariate Data Analysis
 #'
 #' A virtual S4 class to store the summary of a multivariate data analysis.
@@ -84,7 +87,7 @@
 #'  points.
 #' @slot margin An \code{\link{integer}}.
 #' @author N. Frerebeau
-#' @family multivariate analysis
+#' @family class
 #' @docType class
 #' @name MultivariateSummary
 #' @aliases MultivariateSummary-class
@@ -120,7 +123,7 @@
 #' An S4 class to store the results of a simple correspondence analysis.
 #' @example inst/examples/ex-ca.R
 #' @author N. Frerebeau
-#' @family multivariate analysis
+#' @family class
 #' @docType class
 #' @export .CA
 #' @exportClass CA
@@ -140,7 +143,7 @@
 #'  standard deviations of the initial dataset (active individuals only).
 #' @example inst/examples/ex-pca.R
 #' @author N. Frerebeau
-#' @family multivariate analysis
+#' @family class
 #' @docType class
 #' @export .PCA
 #' @exportClass PCA
