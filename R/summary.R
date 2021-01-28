@@ -63,7 +63,7 @@ setMethod(
 
     values <- build_summary(inertia = inert, coord = coord, contrib = contrib,
                             cos2 = cos2, rank = rank, active = active,
-                            sup = sup, prefix = "PCA")
+                            sup = sup, prefix = "PC")
 
     ## Remove data data
     is_sup <- coord$.sup
@@ -86,7 +86,7 @@ setMethod(
 
 build_summary <- function(inertia, coord, contrib, cos2,
                           rank = 3, active = TRUE, sup = TRUE,
-                          prefix = "PCA") {
+                          prefix = "PC") {
   ## Fix lengths
   n <- nrow(coord)
   m <- nrow(contrib)
@@ -104,6 +104,7 @@ build_summary <- function(inertia, coord, contrib, cos2,
     values[[j]] <- v
   }
   values <- data.frame(inertia = inertia, values)
+  if (prefix == "PC") colnames(values)[1] <- "dist"
   rownames(values) <- rownames(coord)
 
   values

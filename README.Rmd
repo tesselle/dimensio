@@ -18,13 +18,13 @@ knitr::opts_chunk$set(
 # dimensio <img width=120px src="man/figures/logo.png" align="right" />
 
 <!-- badges: start -->
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 <!-- badges: end -->
 
-Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis.
+Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis.
 
-There are many very good packages for multivariate data analysis (such as [**FactoMineR**](http://factominer.free.fr/), [**ade4**](https://pbil.univ-lyon1.fr/ade4/) or [**ca**](https://cran.r-project.org/package=ca), all extended by [**FactoExtra**](https://rpkgs.datanovia.com/factoextra)). **dimensio** is designed to have as few dependencies as possible: computation and exploration of the results depends only on the R base packages. Visualization methods require [**ggplot2**](https://ggplot2.tidyverse.org/).
+There are many very good packages for multivariate data analysis (such as [**FactoMineR**](http://factominer.free.fr/), [**ade4**](https://pbil.univ-lyon1.fr/ade4/) or [**ca**](https://cran.r-project.org/package=ca), all extended by [**FactoExtra**](https://rpkgs.datanovia.com/factoextra)). **dimensio** is designed to be as simple as possible, providing all the necessary tools to explore the results of the analysis.
 
 ## Installation
 
@@ -53,14 +53,37 @@ library(khroma)
 ```
 
 ```{r pca}
+## Select 25 random supplementary individuals
+set.seed(12345)
+sup <- sample(nrow(iris), size = 25, replace = TRUE)
+
 ## Compute PCA
 ## (non numeric variables are automatically removed)
-X <- pca(iris, scale = TRUE, sup_ind = 50:75)
+X <- pca(iris, scale = TRUE, sup_ind = sup)
 ```
 
 ### Summarize
 
+```{r summary}
+## Summarize results for the individuals (first two components)
+summary(X, margin = 1, rank = 2)
+```
+
 ### Extract
+
+**dimesion** provides several methods to extract the results: 
+
+* `get_data()` returns the original data.
+* `get_contributions()` returns the contributions to the definition of the principal dimensions.
+* `get_coordinates()` returns the principal coordinates.
+* `get_correlations()` returns the correlations between variables and dimensions.
+* `get_cos2()` returns the cos^2^ values (i.e. the quality of the representation of the points on the factor map).
+* `get_eigenvalues()` returns the eigenvalues, the percentages of variance and the cumulative percentages of variance.
+
+```{r extract}
+## Eigenvalues
+get_eigenvalues(X)
+```
 
 ### Visualize
 
@@ -100,11 +123,11 @@ plot_eigenvalues(X) +
   ggplot2::theme_bw() # Change theme
 
 ## Plot percentages of variance
-plot_variance(X, variance = TRUE, cumulative = TRUE) +
+plot_variance(X, cumulative = TRUE) +
   ggplot2::geom_text(nudge_y = 3) + # Add labels
   ggplot2::theme_bw() # Change theme
 
-## Plot variables contributions
+## Plot variables contributions to the definition of the first component
 plot_contributions(X, margin = 2, axes = 1) +
   ggplot2::theme_bw() + # Change theme
   ggplot2::theme( # Edit theme

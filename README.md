@@ -5,26 +5,25 @@
 
 <!-- badges: start -->
 
-[![Project Status: WIP – Initial development is in progress, but there
-has not yet been a stable, usable release suitable for the
-public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 <!-- badges: end -->
 
 Simple Principal Components Analysis (PCA) and Correspondence Analysis
-(CA). This package provides S4 classes and methods to compute, extract,
-summarize and visualize results of multivariate data analysis.
+(CA) based on the Singular Value Decomposition (SVD). This package
+provides S4 classes and methods to compute, extract, summarize and
+visualize results of multivariate data analysis.
 
 There are many very good packages for multivariate data analysis (such
 as [**FactoMineR**](http://factominer.free.fr/),
 [**ade4**](https://pbil.univ-lyon1.fr/ade4/) or
 [**ca**](https://cran.r-project.org/package=ca), all extended by
 [**FactoExtra**](https://rpkgs.datanovia.com/factoextra)). **dimensio**
-is designed to have as few dependencies as possible: computation and
-exploration of the results depends only on the R base packages.
-Visualization methods require
-[**ggplot2**](https://ggplot2.tidyverse.org/).
+is designed to be as simple as possible, providing all the necessary
+tools to explore the results of the analysis.
 
 ## Installation
 
@@ -54,15 +53,81 @@ library(khroma)
 ```
 
 ``` r
+## Select 25 random supplementary individuals
+set.seed(12345)
+sup <- sample(nrow(iris), size = 25, replace = TRUE)
+
 ## Compute PCA
 ## (non numeric variables are automatically removed)
-X <- pca(iris, scale = TRUE, sup_ind = 50:75)
+X <- pca(iris, scale = TRUE, sup_ind = sup)
 #> 1 qualitative variable was removed: Species.
 ```
 
 ### Summarize
 
+``` r
+## Summarize results for the individuals (first two components)
+summary(X, margin = 1, rank = 2)
+#> --- Principal Components Analysis -----------------------------------------------
+#> 
+#> Eigenvalues:
+#>     eigenvalues variance cumulative
+#> PC1       2.923   73.461     73.461
+#> PC2       0.898   22.575     96.037
+#> PC3       0.158    3.963    100.000
+#> 
+#> Active individuals:
+#>     dist PC1_coord PC1_contrib PC1_cos2 PC2_coord PC2_contrib PC2_cos2
+#> 4  2.478    -2.380       1.526    0.922    -0.682       0.408    0.076
+#> 5  2.532    -2.477       1.652    0.956     0.526       0.243    0.043
+#> 6  2.552    -2.162       1.259    0.717     1.356       1.612    0.282
+#> 7  2.553    -2.529       1.723    0.981    -0.071       0.004    0.001
+#> 8  2.321    -2.316       1.445    0.995     0.125       0.014    0.003
+#> 9  2.693    -2.413       1.568    0.803    -1.188       1.238    0.195
+#> 11 2.452    -2.252       1.366    0.843     0.933       0.762    0.145
+#> 13 2.442    -2.297       1.421    0.885    -0.792       0.550    0.105
+#> 15 2.915    -2.287       1.409    0.615     1.735       2.639    0.354
+#> 16 3.445    -2.356       1.495    0.468     2.512       5.532    0.532
+#> (127 more)
+#> 
+#> Supplementary individuals:
+#>     dist PC1_coord PC1_cos2 PC2_coord PC2_cos2
+#> 1  2.382    -2.349    0.972     0.376    0.025
+#> 2  2.293    -2.157    0.885    -0.733    0.102
+#> 3  2.484    -2.446    0.969    -0.433    0.030
+#> 10 2.343    -2.264    0.934    -0.538    0.053
+#> 12 2.417    -2.410    0.995     0.025    0.000
+#> 14 2.918    -2.716    0.866    -1.052    0.130
+#> 30 2.389    -2.347    0.965    -0.428    0.032
+#> 38 2.662    -2.616    0.966     0.467    0.031
+#> 40 2.266    -2.252    0.988     0.176    0.006
+#> 51 1.553     1.061    0.467     0.898    0.335
+#> (23 more)
+```
+
 ### Extract
+
+**dimesion** provides several methods to extract the results:
+
+-   `get_data()` returns the original data.
+-   `get_contributions()` returns the contributions to the definition of
+    the principal dimensions.
+-   `get_coordinates()` returns the principal coordinates.
+-   `get_correlations()` returns the correlations between variables and
+    dimensions.
+-   `get_cos2()` returns the cos<sup>2</sup> values (i.e. the quality of
+    the representation of the points on the factor map).
+-   `get_eigenvalues()` returns the eigenvalues, the percentages of
+    variance and the cumulative percentages of variance.
+
+``` r
+## Eigenvalues
+get_eigenvalues(X)
+#>     eigenvalues  variance cumulative
+#> PC1   2.9228862 73.461363   73.46136
+#> PC2   0.8982303 22.575364   96.03673
+#> PC3   0.1576910  3.963273  100.00000
+```
 
 ### Visualize
 
@@ -109,11 +174,11 @@ plot_eigenvalues(X) +
   ggplot2::theme_bw() # Change theme
 
 ## Plot percentages of variance
-plot_variance(X, variance = TRUE, cumulative = TRUE) +
+plot_variance(X, cumulative = TRUE) +
   ggplot2::geom_text(nudge_y = 3) + # Add labels
   ggplot2::theme_bw() # Change theme
 
-## Plot variables contributions
+## Plot variables contributions to the definition of the first component
 plot_contributions(X, margin = 2, axes = 1) +
   ggplot2::theme_bw() + # Change theme
   ggplot2::theme( # Edit theme

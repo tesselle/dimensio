@@ -15,9 +15,9 @@ Authors@R:
 Maintainer: Nicolas Frerebeau
     <nicolas.frerebeau@u-bordeaux-montaigne.fr>
 Description: Simple Principal Components Analysis (PCA) and
-    Correspondence Analysis (CA). This package provides classes and methods to
-    compute, extract, summarize and visualize results of multivariate data
-    analysis.
+    Correspondence Analysis (CA)based on the Singular Value Decomposition (SVD). 
+    This package provides S4 classes and methods to compute, extract, summarize 
+    and visualize results of multivariate data analysis.
 License: GPL (>= 3)
 URL: http://dimensio.tesselle.org,
     https://github.com/tesselle/dimensio

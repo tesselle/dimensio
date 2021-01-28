@@ -164,6 +164,7 @@ setMethod(
     cos_ind <- coord_ind^2 / dist_ind
     cos_var <- coord_var^2 / dist_var
 
+    names(sv) <- paste0("PC", dim_keep)
     .PCA(
       data = object,
       dimension = as.integer(ndim),
@@ -204,9 +205,12 @@ setMethod(
   signature = signature(object = "PCA"),
   definition = function(object, newdata, margin = 1) {
     # Coerce to matrix
-    newdata <- if (missing(newdata)) object@data else as.matrix(newdata)
-
-    # TODO: keep only matching rows/columns
+    if (missing(newdata)) {
+      data <- object@data
+      data <- data[!object@rows@supplement, !object@columns@supplement]
+    } else {
+      data <- as.matrix(newdata)
+    }
 
     # Get standard coordinates
     var_mean <- object@center

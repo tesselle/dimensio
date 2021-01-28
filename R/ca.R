@@ -147,6 +147,7 @@ setMethod(
     cos_row <- coord_row^2 / dist_row
     cos_col <- coord_col^2 / dist_col
 
+    names(sv) <- paste0("CA", dim_keep)
     .CA(
       data = object,
       dimension = as.integer(ndim),
@@ -185,7 +186,12 @@ setMethod(
   signature = signature(object = "CA"),
   definition = function(object, newdata, margin = 1) {
     # Coerce to matrix
-    data <- if (missing(newdata)) object@data else as.matrix(newdata)
+    if (missing(newdata)) {
+      data <- object@data
+      data <- data[!object@rows@supplement, !object@columns@supplement]
+    } else {
+      data <- as.matrix(newdata)
+    }
 
     # TODO: keep only matching rows/columns
 
