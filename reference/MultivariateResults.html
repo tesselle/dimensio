@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summary of Multivariate Data Analysis — MultivariateSummary • dimensio</title>
+<title>Multivariate Data Analysis Results — MultivariateResults • dimensio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Summary of Multivariate Data Analysis — MultivariateSummary" />
-<meta property="og:description" content="A virtual S4 class to store the summary of a multivariate data analysis." />
+<meta property="og:title" content="Multivariate Data Analysis Results — MultivariateResults" />
+<meta property="og:description" content="An S4 class to store the results of a multivariate data analysis." />
 <meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@nfrerebeau" />
@@ -122,13 +122,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summary of Multivariate Data Analysis</h1>
+    <h1>Multivariate Data Analysis Results</h1>
     <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a></small>
-    <div class="hidden name"><code>MultivariateSummary.Rd</code></div>
+    <div class="hidden name"><code>MultivariateResults.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A virtual S4 class to store the summary of a multivariate data analysis.</p>
+    <p>An S4 class to store the results of a multivariate data analysis.</p>
     </div>
 
 
@@ -138,16 +138,31 @@
     
 
 <dl>
-<dt><code>data</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>.</p></dd>
+<dt><code>names</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> vector specifying the row names.</p></dd>
 
-<dt><code>eigenvalues</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>.</p></dd>
+<dt><code>coordinates</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>
+giving the principal coordinates.</p></dd>
 
-<dt><code>results</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>.</p></dd>
+<dt><code>standard</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>
+giving the standard coordinates.</p></dd>
+
+<dt><code>contributions</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>
+giving the contributions to the definition of the dimensions.</p></dd>
+
+<dt><code>cosine</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>
+giving the \(cos^2\) values.</p></dd>
+
+<dt><code>distances</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the distances to
+centroid.</p></dd>
+
+<dt><code>weights</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the masses/weights.</p></dd>
 
 <dt><code>supplement</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> vector specifying the supplementary
 points.</p></dd>
 
-<dt><code>margin</code></dt><dd><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code>.</p></dd>
+<dt><code>order</code></dt><dd><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> vector giving the original indices
+of the data (computation moves all supplementary points at the end of the
+results).</p></dd>
 
 </dl>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -155,7 +170,7 @@ points.</p></dd>
     <div class='dont-index'><p>Other class: 
 <code><a href='CA-class.html'>CA-class</a></code>,
 <code><a href='MultivariateAnalysis.html'>MultivariateAnalysis</a></code>,
-<code><a href='MultivariateResults.html'>MultivariateResults</a></code>,
+<code><a href='MultivariateSummary.html'>MultivariateSummary</a></code>,
 <code><a href='PCA-class.html'>PCA-class</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 

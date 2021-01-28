@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dimensio</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -219,7 +219,7 @@ places to be used.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>get_*()</code> returns a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector or matrix or a
+    <p><code>get_*()</code> returns a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector or a
 <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p>
 <p><code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> returns of a <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code> of class
 <code><a href='https://rdrr.io/r/stats/loadings.html'>loadings</a></code>.</p>
@@ -238,10 +238,11 @@ between variables and dimensions (<code>PCA</code>).</p>
 <p><code>get_eigenvalues()</code> returns a <code>data.frame</code> with the following
 columns: <code>eigenvalues</code>, <code>variance</code> (percentage of variance) and
 <code>cumulative</code> (cumulative percentage of variance).</p>
-<p><code>get_variance</code> returns a <code>numeric</code> vector giving the percentage
+<p><code>get_variance()</code> returns a <code>numeric</code> vector giving the percentage
 of explained variance of each dimension.</p>
-<p><code>loadings</code> returns variable loadings (i.e. the coefficients of the
-linear combination of the original variables).</p>
+<p><code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> returns variable loadings (i.e. the coefficients of the
+linear combination of the original variables). <code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> is only
+implemented for consistency with <span class="pkg"><a href='https://rdrr.io/r/stats/loadings.html'>stats</a></span>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other mutator: 

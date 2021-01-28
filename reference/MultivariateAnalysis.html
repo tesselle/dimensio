@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summary of Multivariate Data Analysis — MultivariateSummary • dimensio</title>
+<title>Output of Multivariate Data Analysis — MultivariateAnalysis • dimensio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Summary of Multivariate Data Analysis — MultivariateSummary" />
-<meta property="og:description" content="A virtual S4 class to store the summary of a multivariate data analysis." />
+<meta property="og:title" content="Output of Multivariate Data Analysis — MultivariateAnalysis" />
+<meta property="og:description" content="A virtual S4 class to store the output of a multivariate data analysis." />
 <meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@nfrerebeau" />
@@ -122,13 +122,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summary of Multivariate Data Analysis</h1>
+    <h1>Output of Multivariate Data Analysis</h1>
     <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a></small>
-    <div class="hidden name"><code>MultivariateSummary.Rd</code></div>
+    <div class="hidden name"><code>MultivariateAnalysis.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A virtual S4 class to store the summary of a multivariate data analysis.</p>
+    <p>A virtual S4 class to store the output of a multivariate data analysis.</p>
     </div>
 
 
@@ -140,22 +140,35 @@
 <dl>
 <dt><code>data</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>.</p></dd>
 
-<dt><code>eigenvalues</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>.</p></dd>
+<dt><code>dimension</code></dt><dd><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> giving the dimension of the
+solution.</p></dd>
 
-<dt><code>results</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code>.</p></dd>
+<dt><code>singular_values</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the singular
+values.</p></dd>
 
-<dt><code>supplement</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> vector specifying the supplementary
-points.</p></dd>
+<dt><code>rows</code></dt><dd><p>A <a href='MultivariateResults.html'>MultivariateResults</a> object.</p></dd>
 
-<dt><code>margin</code></dt><dd><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code>.</p></dd>
+<dt><code>columns</code></dt><dd><p>A <a href='MultivariateResults.html'>MultivariateResults</a> object.</p></dd>
 
 </dl>
+    <h2 class="hasAnchor" id="subset"><a class="anchor" href="#subset"></a>Subset</h2>
+
+    
+
+<p>In the code snippets below, <code>x</code> is a <code>MultivariateAnalysis</code>
+object.</p><dl>
+<dt><code>x[[i]]</code></dt><dd><p>Extracts information from a slot selected by
+subscript <code>i</code>. <code>i</code> is a length-one <code><a href='https://rdrr.io/r/base/character.html'>character</a></code>
+vector.</p></dd>
+
+</dl>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other class: 
 <code><a href='CA-class.html'>CA-class</a></code>,
-<code><a href='MultivariateAnalysis.html'>MultivariateAnalysis</a></code>,
 <code><a href='MultivariateResults.html'>MultivariateResults</a></code>,
+<code><a href='MultivariateSummary.html'>MultivariateSummary</a></code>,
 <code><a href='PCA-class.html'>PCA-class</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
