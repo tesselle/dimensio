@@ -237,8 +237,14 @@
   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span> <span class="co"># Edit theme</span>
     <span class="co"># Rotate x axis labels</span>
     axis.text.x <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span>, vjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-  <span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-eig-1.png"><img src="reference/figures/README-plot-eig-2.png"><img src="reference/figures/README-plot-eig-3.png"></p>
+  <span class="op">)</span>
+
+<span class="co">## Plot cos2</span>
+<span class="fu"><a href="reference/plot_contributions.html">plot_cos2</a></span><span class="op">(</span><span class="va">X</span>, margin <span class="op">=</span> <span class="fl">2</span>, axes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_label_repel</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># Add repelling labels</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># Change theme</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> <span class="co"># Edit theme</span></code></pre></div>
+<p><img src="reference/figures/README-plot-eig-1.png"><img src="reference/figures/README-plot-eig-2.png"><img src="reference/figures/README-plot-eig-3.png"><img src="reference/figures/README-plot-eig-4.png"></p>
 </div>
 </div>
 <div id="contributing" class="section level2">

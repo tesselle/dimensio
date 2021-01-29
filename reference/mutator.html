@@ -156,16 +156,19 @@
 <span class='fu'>get_contributions</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MultivariateAnalysis</span>
-<span class='fu'>get_coordinates</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, sup <span class='op'>=</span> <span class='cn'>TRUE</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
+<span class='fu'>get_coordinates</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
+
+<span class='co'># S4 method for PCA</span>
+<span class='fu'>get_correlations</span><span class='op'>(</span><span class='va'>x</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MultivariateAnalysis</span>
-<span class='fu'>get_cos2</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, sup <span class='op'>=</span> <span class='cn'>TRUE</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
+<span class='fu'>get_cos2</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MultivariateAnalysis</span>
 <span class='fu'>get_data</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MultivariateAnalysis</span>
-<span class='fu'>get_distances</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, sup <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>get_distances</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MultivariateAnalysis</span>
 <span class='fu'>get_eigenvalues</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
@@ -175,9 +178,6 @@
 
 <span class='co'># S4 method for MultivariateAnalysis</span>
 <span class='fu'>get_variance</span><span class='op'>(</span><span class='va'>x</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-
-<span class='co'># S4 method for PCA</span>
-<span class='fu'>get_correlations</span><span class='op'>(</span><span class='va'>x</span>, sup <span class='op'>=</span> <span class='cn'>TRUE</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
 
 <span class='co'># S4 method for PCA</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/loadings.html'>loadings</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
@@ -199,11 +199,6 @@
       <td><p>A length-one <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the subscript
 which the data will be returned: <code>1</code> indicates individuals/rows (the
 default), <code>2</code> indicates variables/columns.</p></td>
-    </tr>
-    <tr>
-      <th>sup</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/logical.html'>logical</a></code> scalar: should supplementary points be
-returned?</p></td>
     </tr>
     <tr>
       <th>sup_name</th>
@@ -228,13 +223,16 @@ places to be used.</p></td>
     <p><code>get_data()</code> returns a <code>data.frame</code> of original data.</p>
 <p><code>get_contributions()</code> returns a <code>data.frame</code> of contributions to
 the definition of the principal dimensions.</p>
-<p><code>get_coordinates()</code> returns a <code>data.frame</code> of coordinates. If
-<code>sup</code> is <code>TRUE</code>, an extra column (named after <code>sup_name</code>) is
-added specifying whether an observation is a supplementary point or not.</p>
+<p><code>get_coordinates()</code> returns a <code>data.frame</code> of coordinates.
+An extra column (named after <code>sup_name</code>) is added specifying whether
+an observation is a supplementary point or not.</p>
 <p><code>get_correlations()</code> returns a <code>data.frame</code> of correlations
-between variables and dimensions (<code>PCA</code>).</p>
+between variables and dimensions (<code>PCA</code>). An extra column (named after
+<code>sup_name</code>) is added specifying whether an observation is a supplementary point or not.</p>
 <p><code>get_cos2()</code> returns a <code>data.frame</code> of \(cos^2\) values
-(i.e. quality of the representation of the points on the factor map).</p>
+(i.e. quality of the representation of the points on the factor map).
+An extra column (named after <code>sup_name</code>) is added specifying whether
+an observation is a supplementary point or not.</p>
 <p><code>get_eigenvalues()</code> returns a <code>data.frame</code> with the following
 columns: <code>eigenvalues</code>, <code>variance</code> (percentage of variance) and
 <code>cumulative</code> (cumulative percentage of variance).</p>
