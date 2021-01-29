@@ -13,6 +13,8 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4478530.svg)](https://doi.org/10.5281/zenodo.4478530)
 <!-- badges: end -->
 
 Simple Principal Components Analysis (PCA) and Correspondence Analysis
@@ -141,13 +143,13 @@ as few elements as possible: this makes it easy to customize diagrams
 
 ``` r
 ## Plot active individuals by group
-plot_individuals(X, group = iris$Species, active = TRUE, sup = FALSE) +
+plot_rows(X, group = iris$Species, active = TRUE, sup = FALSE) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_contrast() # Custom color scale
 
 ## Plot all individuals by cos2
-plot_individuals(X, highlight = "cos2", active = TRUE, sup = TRUE) +
+plot_rows(X, highlight = "cos2", active = TRUE, sup = TRUE) +
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_iridescent() # Custom color scale
 ```
@@ -156,13 +158,13 @@ plot_individuals(X, highlight = "cos2", active = TRUE, sup = TRUE) +
 
 ``` r
 ## Plot variables factor map
-plot_variables(X) +
+plot_columns(X) +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() + # Change theme
   ggplot2::theme(legend.position = "bottom") # Edit theme
 
 ## Highlight contributions
-plot_variables(X, highlight = "contrib") +
+plot_columns(X, highlight = "contrib") +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() + # Change theme
   ggplot2::theme(legend.position = "bottom") + # Edit theme

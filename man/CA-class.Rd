@@ -4,6 +4,8 @@
 \name{CA-class}
 \alias{CA-class}
 \alias{.CA}
+\alias{BootstrapCA-class}
+\alias{.BootstrapCA}
 \title{CA Results}
 \description{
 An S4 class to store the results of a simple correspondence analysis.

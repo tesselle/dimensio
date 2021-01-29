@@ -495,7 +495,7 @@
 <circle cx='554.85' cy='339.31' r='1.95pt' style='stroke-width: 0.71; stroke: none; fill: #000000;' clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)' />
 <rect x='546.21' y='347.95' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)' />
 <polygon points='554.85,353.55 557.48,358.11 552.22,358.11 ' style='stroke-width: 0.71; stroke: none; fill: #000000;' clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)' />
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='568.97' y='342.34' style='font-size: 8.80px; font-family: Liberation Sans;' textLength='45.44px' lengthAdjust='spacingAndGlyphs'>ind. (active)</text></g>
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='568.97' y='359.62' style='font-size: 8.80px; font-family: Liberation Sans;' textLength='45.92px' lengthAdjust='spacingAndGlyphs'>ind. (suppl.)</text></g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='568.97' y='342.34' style='font-size: 8.80px; font-family: Liberation Sans;' textLength='45.44px' lengthAdjust='spacingAndGlyphs'>row (active)</text></g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='568.97' y='359.62' style='font-size: 8.80px; font-family: Liberation Sans;' textLength='45.92px' lengthAdjust='spacingAndGlyphs'>row (suppl.)</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='135.33' y='14.56' style='font-size: 13.20px; font-family: Liberation Sans;' textLength='62.30px' lengthAdjust='spacingAndGlyphs'>PCA_cos2</text></g>
 </svg>

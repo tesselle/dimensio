@@ -72,8 +72,10 @@ format_header <- function(object, width = getOption("width")) {
   analysis <- switch (
     class(object),
     CA = "Correspondence Analysis (CA)",
+    BootstrapCA = "Correspondence Analysis (CA)",
     SummaryCA = "Correspondence Analysis (CA)",
     PCA = "Principal Components Analysis (PCA)",
+    BootstrapPCA = "Principal Components Analysis (PCA)",
     SummaryPCA = "Principal Components Analysis (PCA)"
   )
 

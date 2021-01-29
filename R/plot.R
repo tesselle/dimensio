@@ -28,6 +28,52 @@ setMethod(
   }
 )
 
+#' @export
+#' @rdname plot_coordinates
+#' @aliases plot_rows,CA-method
+setMethod(
+  f = "plot_rows",
+  signature = signature(object = "CA"),
+  definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
+                        highlight = NULL, group = NULL) {
+    ## ggplot2
+    gg <- plot_points(
+      object,
+      margin = 1,
+      axes = axes,
+      active = active,
+      sup = sup,
+      highlight = highlight,
+      group = group,
+      several.ok = FALSE
+    )
+    return(gg)
+  }
+)
+
+#' @export
+#' @rdname plot_coordinates
+#' @aliases plot_columns,PCA-method
+setMethod(
+  f = "plot_columns",
+  signature = signature(object = "CA"),
+  definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
+                        highlight = NULL, group = NULL) {
+    ## ggplot2
+    gg <- plot_points(
+      object,
+      margin = 2,
+      axes = axes,
+      active = active,
+      sup = sup,
+      highlight = highlight,
+      group = group,
+      several.ok = FALSE
+    )
+    return(gg)
+  }
+)
+
 # Principal Components Analysis ================================================
 ## Coordinates -----------------------------------------------------------------
 #' @export
@@ -42,11 +88,11 @@ setMethod(
     gg <- switch (
       margin[[1L]],
       ## Plot individuals factor map
-      `1` = plot_individuals(x, axes = axes, active = active, sup = sup,
-                             highlight = highlight, group = group),
+      `1` = plot_rows(x, axes = axes, active = active, sup = sup,
+                      highlight = highlight, group = group),
       ## Plot variables factor map
-      `2` = plot_variables(x, axes = axes, active = active, sup = sup,
-                           highlight = highlight, group = group)
+      `2` = plot_columns(x, axes = axes, active = active, sup = sup,
+                         highlight = highlight, group = group)
     )
     return(gg)
   }
@@ -54,9 +100,9 @@ setMethod(
 
 #' @export
 #' @rdname plot_coordinates
-#' @aliases plot_individuals,PCA-method
+#' @aliases plot_rows,PCA-method
 setMethod(
-  f = "plot_individuals",
+  f = "plot_rows",
   signature = signature(object = "PCA"),
   definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
                         highlight = NULL, group = NULL) {
@@ -77,9 +123,9 @@ setMethod(
 
 #' @export
 #' @rdname plot_coordinates
-#' @aliases plot_variables,PCA-method
+#' @aliases plot_columns,PCA-method
 setMethod(
-  f = "plot_variables",
+  f = "plot_columns",
   signature = signature(object = "PCA"),
   definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
                         highlight = NULL, group = NULL) {
@@ -238,7 +284,7 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
     if (is.numeric(group)) {
       aes_group <- ggplot2::aes(color = .data$group, size = .data$group)
     } else {
-      aes_group <- ggplot2::aes(color = .data$group)
+      aes_group <- ggplot2::aes(color = .data$group, group = .data$group)
     }
   }
   if (!is.null(highlight)) {
@@ -335,11 +381,7 @@ print_variance <- function(object, axis) {
 prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
                           highlight = NULL, group = NULL, several.ok = FALSE) {
   ## Validation
-  choices <- switch(
-    class(object),
-    CA = c("rows", "columns"),
-    PCA = c("ind.", "var.")
-  )
+  choices <- c("row", "column")
 
   ## Get data
   row_data <- col_data <- data.frame()

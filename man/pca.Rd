@@ -90,11 +90,17 @@ get_correlations(X)
 ## Get eigenvalues
 get_eigenvalues(X)
 }
+\references{
+Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
+multidimensionnelle: visualisation et inférence en fouille de données}.
+Paris: Dunod, 2006.
+}
 \seealso{
 \link[=mutator]{get_*()}, \link[=predict]{predict()},
 \link[=svd]{svd()}
 
 Other multivariate analysis: 
+\code{\link{bootstrap}()},
 \code{\link{ca}()},
 \code{\link{predict}()}
 }

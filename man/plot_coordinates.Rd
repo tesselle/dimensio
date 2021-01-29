@@ -3,23 +3,43 @@
 \docType{methods}
 \name{plot_coordinates}
 \alias{plot_coordinates}
-\alias{plot_individuals}
-\alias{plot_individuals-method}
-\alias{plot_variables}
-\alias{plot_variables-method}
+\alias{plot_rows}
+\alias{plot_rows-method}
+\alias{plot_columns}
+\alias{plot_columns-method}
 \alias{plot,CA,missing-method}
+\alias{plot_rows,CA-method}
+\alias{plot_columns,CA-method}
+\alias{plot_columns,PCA-method}
 \alias{plot,PCA,missing-method}
-\alias{plot_individuals,PCA-method}
-\alias{plot_variables,PCA-method}
+\alias{plot_rows,PCA-method}
 \title{Visualize Factor Map}
 \usage{
-plot_individuals(object, ...)
+plot_rows(object, ...)
 
-plot_variables(object, ...)
+plot_columns(object, ...)
 
 \S4method{plot}{CA,missing}(
   x,
   margin = c(1, 2),
+  axes = c(1, 2),
+  active = TRUE,
+  sup = TRUE,
+  highlight = NULL,
+  group = NULL
+)
+
+\S4method{plot_rows}{CA}(
+  object,
+  axes = c(1, 2),
+  active = TRUE,
+  sup = TRUE,
+  highlight = NULL,
+  group = NULL
+)
+
+\S4method{plot_columns}{CA}(
+  object,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
@@ -37,7 +57,7 @@ plot_variables(object, ...)
   group = NULL
 )
 
-\S4method{plot_individuals}{PCA}(
+\S4method{plot_rows}{PCA}(
   object,
   axes = c(1, 2),
   active = TRUE,
@@ -46,7 +66,7 @@ plot_variables(object, ...)
   group = NULL
 )
 
-\S4method{plot_variables}{PCA}(
+\S4method{plot_columns}{PCA}(
   object,
   axes = c(1, 2),
   active = TRUE,

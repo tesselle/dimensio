@@ -1,4 +1,4 @@
-test_that("Correspondence Analysis", {
+test_that("CA - matrix", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
 
   row_zeros <- col_zeros <- cts
@@ -34,6 +34,13 @@ test_that("Correspondence Analysis", {
   # Eigenvalues
   eig <- get_eigenvalues(res)
   expect_equal(dim(eig), c(4L, 3L))
+})
+test_that("CA - data.frame", {
+  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 20)
+  df <- as.data.frame(cts)
+  df$test <- character(5)
+
+  expect_message(ca(df, sup_col = 1:5), "qualitative variable was removed")
 })
 test_that("Predict new coordinates", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)

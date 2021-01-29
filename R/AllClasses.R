@@ -134,6 +134,13 @@
   contains = "MultivariateAnalysis"
 )
 
+#' @rdname CA-class
+#' @aliases BootstrapCA-class
+.BootstrapCA <- setClass(
+  Class = "BootstrapCA",
+  contains = "CA"
+)
+
 # PCA ==========================================================================
 #' PCA Results
 #'

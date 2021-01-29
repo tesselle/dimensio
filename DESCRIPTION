@@ -32,6 +32,7 @@ Imports:
 Suggests: 
     codex,
     FactoMineR,
+    ggrepel,
     khroma,
     testthat (>= 3.0.0),
     vdiffr
@@ -45,6 +46,7 @@ RoxygenNote: 7.1.1
 Collate: 
     'AllClasses.R'
     'AllGenerics.R'
+    'bootstrap.R'
     'ca.R'
     'dimensio-package.R'
     'helpers.R'

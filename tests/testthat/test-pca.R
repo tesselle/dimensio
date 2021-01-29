@@ -1,4 +1,4 @@
-test_that("Principal Components Analysis", {
+test_that("PCA - matrix", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
 
   row_zeros <- cts
@@ -32,6 +32,13 @@ test_that("Principal Components Analysis", {
   # Eigenvalues
   eig <- get_eigenvalues(res)
   expect_equal(dim(eig), c(4L, 3L))
+})
+test_that("PCA - data.frame", {
+  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 20)
+  df <- as.data.frame(cts)
+  df$test <- character(5)
+
+  expect_message(pca(df, sup_var = 1:5), "qualitative variable was removed")
 })
 test_that("Predict new coordinates", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)

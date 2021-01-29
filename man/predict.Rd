@@ -44,6 +44,7 @@ predict(X, Z, margin = 2)
 }
 \seealso{
 Other multivariate analysis: 
+\code{\link{bootstrap}()},
 \code{\link{ca}()},
 \code{\link{pca}()}
 }

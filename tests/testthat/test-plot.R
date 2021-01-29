@@ -54,10 +54,6 @@ test_that("PCA - Plot coordinates", {
   data("zuni", package = "codex")
   res <- pca(zuni, sup_ind = 50:75, sup_var = 1:3)
 
-  gg_all <- plot(res, margin = c(1, 2), axes = c(1, 2),
-                 active = TRUE, sup = TRUE, highlight = NULL, group = NULL)
-  vdiffr::expect_doppelganger("PCA_ind-var", gg_all)
-
   for (i in c(TRUE, FALSE)) {
     gg_ind <- plot(res, margin = 1, axes = c(1, 2),
                    active = TRUE, sup = i, highlight = NULL, group = NULL)

@@ -217,6 +217,10 @@ NULL
 #' @example inst/examples/ex-ca.R
 #' @seealso \link[=mutator]{get_*()}, \link[=predict]{predict()},
 #'  \link[=svd]{svd()}
+#' @references
+#'  Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
+#'  multidimensionnelle: visualisation et inférence en fouille de données}.
+#'  Paris: Dunod, 2006.
 #' @author N. Frerebeau
 #' @docType methods
 #' @family multivariate analysis
@@ -260,6 +264,10 @@ setGeneric(
 #' @example inst/examples/ex-pca.R
 #' @seealso \link[=mutator]{get_*()}, \link[=predict]{predict()},
 #'  \link[=svd]{svd()}
+#' @references
+#'  Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
+#'  multidimensionnelle: visualisation et inférence en fouille de données}.
+#'  Paris: Dunod, 2006.
 #' @author N. Frerebeau
 #' @docType methods
 #' @family multivariate analysis
@@ -294,6 +302,36 @@ setGeneric(
 #' @name predict
 #' @rdname predict
 NULL
+
+# Bootstrap ====================================================================
+#' Partial Bootstrap Analysis
+#'
+#' Checks analysis with partial bootstrap resampling.
+#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
+#' @param n A non-negative \code{\link{integer}} giving the number of bootstrap
+#'  replications.
+#' @return
+#'  A \linkS4class{CA} or \linkS4class{PCA} object.
+#' @param ... Currently not used.
+#' @example inst/examples/ex-bootstrap.R
+#' @author N. Frerebeau
+#' @references
+#'  Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
+#'  multidimensionnelle: visualisation et inférence en fouille de données}.
+#'  Paris: Dunod, 2006.
+#' @docType methods
+#' @family multivariate analysis
+#' @name bootstrap
+#' @rdname bootstrap
+NULL
+
+#' @rdname bootstrap
+#' @aliases bootstrap-method
+setGeneric(
+  name = "bootstrap",
+  def = function(object, ...) standardGeneric("bootstrap"),
+  valueClass = "MultivariateAnalysis"
+)
 
 # Plot =========================================================================
 ## Coordinates -----------------------------------------------------------------
@@ -348,17 +386,17 @@ if (!isGeneric("plot"))
   setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
 
 #' @rdname plot_coordinates
-#' @aliases plot_individuals-method
+#' @aliases plot_rows-method
 setGeneric(
-  name = "plot_individuals",
-  def = function(object, ...) standardGeneric("plot_individuals")
+  name = "plot_rows",
+  def = function(object, ...) standardGeneric("plot_rows")
 )
 
 #' @rdname plot_coordinates
-#' @aliases plot_variables-method
+#' @aliases plot_columns-method
 setGeneric(
-  name = "plot_variables",
-  def = function(object, ...) standardGeneric("plot_variables")
+  name = "plot_columns",
+  def = function(object, ...) standardGeneric("plot_columns")
 )
 
 ## Eigenvalues -----------------------------------------------------------------

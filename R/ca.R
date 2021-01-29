@@ -14,10 +14,10 @@ setMethod(
     quali <- !vapply(object, FUN = is.numeric, FUN.VALUE = logical(1))
     if (any(quali)) {
       old <- object
-      object <- object[, -c(which(quali), sup_var), drop = FALSE]
-      if (!is.null(sup_var)) {
-        object <- cbind(object, old[, sup_var, drop = FALSE])
-        sup_var <- utils::tail(seq_along(object), length(sup_var))
+      object <- object[, -c(which(quali), sup_col), drop = FALSE]
+      if (!is.null(sup_col)) {
+        object <- cbind(object, old[, sup_col, drop = FALSE])
+        sup_col <- utils::tail(seq_along(object), length(sup_col))
       }
       # Generate message
       tot <- sum(quali)
