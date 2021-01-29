@@ -26,13 +26,13 @@
 \alias{dim,MultivariateAnalysis-method}
 \alias{get_contributions,MultivariateAnalysis-method}
 \alias{get_coordinates,MultivariateAnalysis-method}
+\alias{get_correlations,PCA-method}
 \alias{get_cos2,MultivariateAnalysis-method}
 \alias{get_data,MultivariateAnalysis-method}
 \alias{get_distances,MultivariateAnalysis-method}
 \alias{get_eigenvalues,MultivariateAnalysis-method}
 \alias{get_inertia,MultivariateAnalysis-method}
 \alias{get_variance,MultivariateAnalysis-method}
-\alias{get_correlations,PCA-method}
 \alias{loadings,PCA-method}
 \title{Get Results}
 \usage{
@@ -58,21 +58,21 @@ get_variance(x, ...)
 
 \S4method{get_contributions}{MultivariateAnalysis}(x, margin = 1)
 
-\S4method{get_coordinates}{MultivariateAnalysis}(x, margin = 1, sup = TRUE, sup_name = ".sup")
+\S4method{get_coordinates}{MultivariateAnalysis}(x, margin = 1, sup_name = ".sup")
 
-\S4method{get_cos2}{MultivariateAnalysis}(x, margin = 1, sup = TRUE, sup_name = ".sup")
+\S4method{get_correlations}{PCA}(x, sup_name = ".sup")
+
+\S4method{get_cos2}{MultivariateAnalysis}(x, margin = 1, sup_name = ".sup")
 
 \S4method{get_data}{MultivariateAnalysis}(x)
 
-\S4method{get_distances}{MultivariateAnalysis}(x, margin = 1, sup = TRUE)
+\S4method{get_distances}{MultivariateAnalysis}(x, margin = 1)
 
 \S4method{get_eigenvalues}{MultivariateAnalysis}(x)
 
 \S4method{get_inertia}{MultivariateAnalysis}(x, margin = 1)
 
 \S4method{get_variance}{MultivariateAnalysis}(x, digits = 2)
-
-\S4method{get_correlations}{PCA}(x, sup = TRUE, sup_name = ".sup")
 
 \S4method{loadings}{PCA}(x)
 }
@@ -85,9 +85,6 @@ get_variance(x, ...)
 \item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
 which the data will be returned: \code{1} indicates individuals/rows (the
 default), \code{2} indicates variables/columns.}
-
-\item{sup}{A \code{\link{logical}} scalar: should supplementary points be
-returned?}
 
 \item{sup_name}{A \code{\link{character}} string specifying the name of the
 column to create for supplementary points attribution (see below).}
@@ -111,15 +108,18 @@ Getters to retrieve parts of an object.
 \code{get_contributions()} returns a \code{data.frame} of contributions to
 the definition of the principal dimensions.
 
-\code{get_coordinates()} returns a \code{data.frame} of coordinates. If
-\code{sup} is \code{TRUE}, an extra column (named after \code{sup_name}) is
-added specifying whether an observation is a supplementary point or not.
+\code{get_coordinates()} returns a \code{data.frame} of coordinates.
+An extra column (named after \code{sup_name}) is added specifying whether
+an observation is a supplementary point or not.
 
 \code{get_correlations()} returns a \code{data.frame} of correlations
-between variables and dimensions (\code{PCA}).
+between variables and dimensions (\code{PCA}). An extra column (named after
+\code{sup_name}) is added specifying whether an observation is a supplementary point or not.
 
 \code{get_cos2()} returns a \code{data.frame} of \eqn{cos^2}{cos2} values
 (i.e. quality of the representation of the points on the factor map).
+An extra column (named after \code{sup_name}) is added specifying whether
+an observation is a supplementary point or not.
 
 \code{get_eigenvalues()} returns a \code{data.frame} with the following
 columns: \code{eigenvalues}, \code{variance} (percentage of variance) and

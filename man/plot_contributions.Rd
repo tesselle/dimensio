@@ -27,13 +27,10 @@ plot_cos2(object, ...)
 
 \S4method{plot_cos2}{MultivariateAnalysis}(
   object,
-  margin = 1,
-  axes = 1,
-  sort = TRUE,
-  decreasing = TRUE,
-  limit = 10,
+  margin = 2,
+  axes = c(1, 2),
   active = TRUE,
-  sup = FALSE,
+  sup = TRUE,
   fill = "grey30",
   border = "grey10"
 )

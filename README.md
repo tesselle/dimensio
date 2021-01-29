@@ -190,9 +190,15 @@ plot_contributions(X, margin = 2, axes = 1) +
     # Rotate x axis labels
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, vjust = 1)
   )
+
+## Plot cos2
+plot_cos2(X, margin = 2, axes = c(1, 2)) +
+  ggrepel::geom_label_repel() + # Add repelling labels
+  ggplot2::theme_bw() + # Change theme
+  ggplot2::theme(legend.position = "bottom") # Edit theme
 ```
 
-![](man/figures/README-plot-eig-1.png)![](man/figures/README-plot-eig-2.png)![](man/figures/README-plot-eig-3.png)
+![](man/figures/README-plot-eig-1.png)![](man/figures/README-plot-eig-2.png)![](man/figures/README-plot-eig-3.png)![](man/figures/README-plot-eig-4.png)
 
 ## Contributing
 

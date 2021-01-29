@@ -16,13 +16,12 @@ setMethod(
 
     ## Results
     inert <- get_inertia(object, margin = margin) * 1000
-    coord <- get_coordinates(object, margin = margin, sup = TRUE)
+    coord <- get_coordinates(object, margin = margin)
     contrib <- get_contributions(object, margin = margin)
-    cos2 <- get_cos2(object, margin = margin, sup = TRUE)
+    cos2 <- get_cos2(object, margin = margin)
 
     values <- build_summary(inertia = inert, coord = coord, contrib = contrib,
-                            cos2 = cos2, rank = rank, active = active,
-                            sup = sup, prefix = "CA")
+                            cos2 = cos2, rank = rank, prefix = "CA")
 
     ## Remove data
     is_sup <- coord$.sup
@@ -59,13 +58,12 @@ setMethod(
 
     ## Results
     inert <- get_distances(object, margin = margin)
-    coord <- get_coordinates(object, margin = margin, sup = TRUE)
+    coord <- get_coordinates(object, margin = margin)
     contrib <- get_contributions(object, margin = margin)
-    cos2 <- get_cos2(object, margin = margin, sup = TRUE)
+    cos2 <- get_cos2(object, margin = margin)
 
     values <- build_summary(inertia = inert, coord = coord, contrib = contrib,
-                            cos2 = cos2, rank = rank, active = active,
-                            sup = sup, prefix = "PC")
+                            cos2 = cos2, rank = rank, prefix = "PC")
 
     ## Remove data
     is_sup <- coord$.sup
@@ -89,8 +87,7 @@ setMethod(
 )
 
 build_summary <- function(inertia, coord, contrib, cos2,
-                          rank = 3, active = TRUE, sup = TRUE,
-                          prefix = "PC") {
+                          rank = 3, prefix = "PC") {
   ## Fix lengths
   n <- nrow(coord)
   m <- nrow(contrib)

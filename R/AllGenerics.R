@@ -15,8 +15,6 @@ setGeneric("loadings")
 #' @param margin A length-one \code{\link{numeric}} vector giving the subscript
 #'  which the data will be returned: \code{1} indicates individuals/rows (the
 #'  default), \code{2} indicates variables/columns.
-#' @param sup A \code{\link{logical}} scalar: should supplementary points be
-#'  returned?
 #' @param sup_name A \code{\link{character}} string specifying the name of the
 #'  column to create for supplementary points attribution (see below).
 #' @param digits An \code{\link{integer}} indicating the number of decimal
@@ -28,15 +26,18 @@ setGeneric("loadings")
 #'  \code{get_contributions()} returns a \code{data.frame} of contributions to
 #'  the definition of the principal dimensions.
 #'
-#'  \code{get_coordinates()} returns a \code{data.frame} of coordinates. If
-#'  \code{sup} is \code{TRUE}, an extra column (named after \code{sup_name}) is
-#'  added specifying whether an observation is a supplementary point or not.
+#'  \code{get_coordinates()} returns a \code{data.frame} of coordinates.
+#'  An extra column (named after \code{sup_name}) is added specifying whether
+#'  an observation is a supplementary point or not.
 #'
 #'  \code{get_correlations()} returns a \code{data.frame} of correlations
-#'  between variables and dimensions (\code{PCA}).
+#'  between variables and dimensions (\code{PCA}). An extra column (named after
+#'  \code{sup_name}) is added specifying whether an observation is a supplementary point or not.
 #'
 #'  \code{get_cos2()} returns a \code{data.frame} of \eqn{cos^2}{cos2} values
 #'  (i.e. quality of the representation of the points on the factor map).
+#'  An extra column (named after \code{sup_name}) is added specifying whether
+#'  an observation is a supplementary point or not.
 #'
 #'  \code{get_eigenvalues()} returns a \code{data.frame} with the following
 #'  columns: \code{eigenvalues}, \code{variance} (percentage of variance) and
@@ -153,23 +154,19 @@ setGeneric(
 #'   standard deviations (\code{PCA}).}
 #'  }
 #'
-#'  If \code{i} is "\code{rows}" (\code{CA}) or "\code{individuals}"
-#'  (\code{PCA}), returns a list with the following elements:
+#'  If \code{i} is "\code{rows}", returns a list with the following elements:
 #'  \describe{
 #'   \item{\code{coord}}{A \code{\link{numeric}} matrix of rows/individuals
 #'   coordinates.}
 #'   \item{\code{cos2}}{A \code{\link{numeric}} matrix of rows/individuals
 #'   squared cosine.}
-#'   \item{\code{masses}}{A \code{\link{numeric}} vector giving the rows masses
-#'   (\code{CA}).}
-#'   \item{\code{weights}}{A \code{\link{numeric}} vector giving the individuals
-#'   weights (\code{PCA}).}
+#'   \item{\code{masses}}{A \code{\link{numeric}} vector giving the rows masses/
+#'   individual weights.}
 #'   \item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
 #'   point is a supplementary observation or not.}
 #'  }
 #'
-#'  If \code{i} is "\code{columns}" (\code{CA}) or "\code{variables}"
-#'  (\code{PCA}), returns a list with the following elements:
+#'  If \code{i} is "\code{columns}", returns a list with the following elements:
 #'  \describe{
 #'   \item{\code{coord}}{A \code{\link{numeric}} matrix of columns/variables
 #'   coordinates.}
@@ -178,9 +175,7 @@ setGeneric(
 #'   \item{\code{cos2}}{A \code{\link{numeric}} matrix of columns/variables
 #'   squared cosine.}
 #'   \item{\code{masses}}{A \code{\link{numeric}} vector giving the columns
-#'   masses (\code{CA}).}
-#'   \item{\code{weights}}{A \code{\link{numeric}} vector giving the variables
-#'   weights (\code{PCA}).}
+#'   masses/variable weights.}
 #'   \item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
 #'   point is a supplementary observation or not.}
 #'  }

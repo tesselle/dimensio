@@ -38,10 +38,9 @@ joint <- function(object, what, ...) {
   fun(object, ...)
 }
 
-joint_coordinates <- function(object, margin = 1, axes = c(1, 2),
-                              sup = TRUE, ...) {
+joint_coordinates <- function(object, margin = 1, axes = c(1, 2), ...) {
   axes <- axes[c(1, 2)]
-  coord <- get_coordinates(object, margin = margin, sup = sup)
+  coord <- get_coordinates(object, margin = margin)
   rowSums(coord[, axes]^2)
 }
 
@@ -57,8 +56,8 @@ joint_contributions <- function(object, margin = 1, axes = c(1, 2), ...) {
   rowSums(contrib[, axes] * eig)
 }
 
-joint_cos2 <- function(object, margin = 1, axes = c(1, 2), sup = TRUE, ...) {
+joint_cos2 <- function(object, margin = 1, axes = c(1, 2), ...) {
   axes <- axes[c(1, 2)]
-  cos2 <- get_cos2(object, margin = margin, sup = sup)
+  cos2 <- get_cos2(object, margin = margin)
   rowSums(cos2[, axes])
 }

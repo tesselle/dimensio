@@ -12,9 +12,9 @@ test_that("PCA - matrix", {
   expect_output(show(res), "Principal Components Analysis")
 
   # Points coordinates
-  coord_row <- get_coordinates(res, margin = 1, sup = TRUE)
+  coord_row <- get_coordinates(res, margin = 1)
   expect_equal(dim(coord_row), c(20L, 5L))
-  coord_col <- get_coordinates(res, margin = 2, sup = TRUE)
+  coord_col <- get_coordinates(res, margin = 2)
   expect_equal(dim(coord_col), c(5L, 5L))
 
   # Distances
@@ -52,8 +52,8 @@ test_that("Predict new coordinates", {
 
   res_sup <- pca(cts, sup_ind = is_sup_rows, sup_var = is_sup_cols,
                  center = FALSE, scale = FALSE)
-  sup_rows <- get_coordinates(res_sup, margin = 1, sup = TRUE)
-  sup_cols <- get_coordinates(res_sup, margin = 2, sup = TRUE)
+  sup_rows <- get_coordinates(res_sup, margin = 1)
+  sup_cols <- get_coordinates(res_sup, margin = 2)
 
   expect_equal(new_rows, sup_rows[sup_rows$.sup, 1:5], ignore_attr = TRUE)
   expect_equal(new_cols, sup_cols[sup_cols$.sup, 1:5], ignore_attr = TRUE)
@@ -74,8 +74,8 @@ test_that("Compare with {FactoMineR}", {
                    sup_var = is_sup_cols)
 
   # Get coordinates
-  coord_row <- get_coordinates(res_arkhe, margin = 1, sup = TRUE)
-  coord_col <- get_coordinates(res_arkhe, margin = 2, sup = TRUE)
+  coord_row <- get_coordinates(res_arkhe, margin = 1)
+  coord_col <- get_coordinates(res_arkhe, margin = 2)
 
   # Row principal coordinates
   expect_equal(
@@ -114,15 +114,16 @@ test_that("Compare with {FactoMineR}", {
     ignore_attr = TRUE
   )
   # Column correlations
+  cor_col <- get_correlations(res_arkhe)
   expect_equal(
     object = abs(as.data.frame(res_facto$var$cor)),
-    expected = abs(get_correlations(res_arkhe, sup = FALSE)),
+    expected = abs(cor_col[!cor_col$.sup, -ncol(cor_col)]),
     ignore_attr = TRUE
   )
 
   # Get cos2
-  cos2_row <- get_cos2(res_arkhe, margin = 1, sup = TRUE)
-  cos2_col <- get_cos2(res_arkhe, margin = 2, sup = TRUE)
+  cos2_row <- get_cos2(res_arkhe, margin = 1)
+  cos2_col <- get_cos2(res_arkhe, margin = 2)
 
   # Row cos2
   expect_equal(

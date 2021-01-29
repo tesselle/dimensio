@@ -12,7 +12,7 @@ as.list.MultivariateResults <- function(x, ...) {
     contributions = x@contributions,
     cos2 = x@cosine,
     # distances = x@distances,
-    # weights = x@weights,
+    masses = x@weights,
     supplement = x@supplement
   )
 }
@@ -54,7 +54,6 @@ setMethod(
       sd = x@scale
     )
     data[[3]][["cor"]] <- sqrt(x@columns@cosine)
-    names(data) <- c("data", "individuals", "variables", "eigenvalues")
     methods::callGeneric(x = data, i = i)
   }
 )

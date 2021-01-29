@@ -244,28 +244,6 @@ setMethod(
 
 #' @export
 #' @rdname mutator
-#' @aliases get_correlations,PCA-method
-setMethod(
-  f = "get_correlations",
-  signature = signature(x = "PCA"),
-  definition = function(x, sup = TRUE, sup_name = ".sup") {
-    corr <- sqrt(x@columns@cosine)
-    suppl <- x@columns@supplement
-
-    corr <- as.data.frame(corr)
-
-    if (sup) {
-      corr[[sup_name]] <- suppl
-    } else {
-      corr <- corr[!suppl, ]
-    }
-
-    return(corr)
-  }
-)
-
-#' @export
-#' @rdname mutator
 #' @aliases loadings,PCA-method
 setMethod(
   f = "loadings",

@@ -34,23 +34,19 @@ means (\code{PCA}).}
 standard deviations (\code{PCA}).}
 }
 
-If \code{i} is "\code{rows}" (\code{CA}) or "\code{individuals}"
-(\code{PCA}), returns a list with the following elements:
+If \code{i} is "\code{rows}", returns a list with the following elements:
 \describe{
 \item{\code{coord}}{A \code{\link{numeric}} matrix of rows/individuals
 coordinates.}
 \item{\code{cos2}}{A \code{\link{numeric}} matrix of rows/individuals
 squared cosine.}
-\item{\code{masses}}{A \code{\link{numeric}} vector giving the rows masses
-(\code{CA}).}
-\item{\code{weights}}{A \code{\link{numeric}} vector giving the individuals
-weights (\code{PCA}).}
+\item{\code{masses}}{A \code{\link{numeric}} vector giving the rows masses/
+individual weights.}
 \item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
 point is a supplementary observation or not.}
 }
 
-If \code{i} is "\code{columns}" (\code{CA}) or "\code{variables}"
-(\code{PCA}), returns a list with the following elements:
+If \code{i} is "\code{columns}", returns a list with the following elements:
 \describe{
 \item{\code{coord}}{A \code{\link{numeric}} matrix of columns/variables
 coordinates.}
@@ -59,9 +55,7 @@ variables and the dimensions (\code{PCA}).}
 \item{\code{cos2}}{A \code{\link{numeric}} matrix of columns/variables
 squared cosine.}
 \item{\code{masses}}{A \code{\link{numeric}} vector giving the columns
-masses (\code{CA}).}
-\item{\code{weights}}{A \code{\link{numeric}} vector giving the variables
-weights (\code{PCA}).}
+masses/variable weights.}
 \item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
 point is a supplementary observation or not.}
 }

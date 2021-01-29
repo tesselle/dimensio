@@ -17,7 +17,7 @@ get_order <- function(x, margin = 1) {
   if (margin == 1) o <- x@rows@order
   if (margin == 2) o <- x@columns@order
 
-  return(o)
+  o
 }
 
 # Contributions ================================================================
@@ -43,8 +43,7 @@ setMethod(
 setMethod(
   f = "get_coordinates",
   signature = signature(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, sup = TRUE, sup_name = ".sup") {
-
+  definition = function(x, margin = 1, sup_name = ".sup") {
     margin <- margin[[1L]]
     if (margin == 1) {
       coords <- x@rows@coordinates
@@ -56,14 +55,27 @@ setMethod(
     }
 
     coords <- as.data.frame(coords)
+    coords[[sup_name]] <- suppl
 
-    if (sup) {
-      coords[[sup_name]] <- suppl
-    } else {
-      coords <- coords[!suppl, ]
-    }
+    coords
+  }
+)
 
-    return(coords)
+# Correlations =================================================================
+#' @export
+#' @rdname mutator
+#' @aliases get_correlations,PCA-method
+setMethod(
+  f = "get_correlations",
+  signature = signature(x = "PCA"),
+  definition = function(x, sup_name = ".sup") {
+    corr <- sqrt(x@columns@cosine)
+    suppl <- x@columns@supplement
+
+    corr <- as.data.frame(corr)
+    corr[[sup_name]] <- suppl
+
+    corr
   }
 )
 
@@ -74,7 +86,7 @@ setMethod(
 setMethod(
   f = "get_cos2",
   signature = signature(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, sup = TRUE, sup_name = ".sup") {
+  definition = function(x, margin = 1, sup_name = ".sup") {
 
     margin <- margin[[1L]]
     if (margin == 1) {
@@ -87,14 +99,9 @@ setMethod(
     }
 
     cos2 <- as.data.frame(cos2)
+    cos2[[sup_name]] <- suppl
 
-    if (sup) {
-      cos2[[sup_name]] <- suppl
-    } else {
-      cos2 <- cos2[!suppl, ]
-    }
-
-    return(cos2)
+    cos2
   }
 )
 
@@ -117,7 +124,7 @@ setMethod(
 setMethod(
   f = "get_distances",
   signature = signature(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, sup = TRUE) {
+  definition = function(x, margin = 1) {
 
     margin <- margin[[1L]]
     if (margin == 1) {
@@ -129,10 +136,6 @@ setMethod(
       d2 <- x@columns@distances
       names(d2) <- x@columns@names
       suppl <- x@columns@supplement
-    }
-
-    if (!sup) {
-      d2 <- d2[!suppl, ]
     }
 
     d2

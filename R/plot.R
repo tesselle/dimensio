@@ -155,9 +155,9 @@ setMethod(
                         sort = TRUE, decreasing = TRUE, limit = 10,
                         fill = "grey30", border = "grey10") {
     ## Prepare data
-    contrib <- get_contributions(object, margin = margin)
     data <- prepare_contrib(
-      contrib,
+      object,
+      margin = margin,
       axes = axes,
       sort = sort,
       decreasing = decreasing,
@@ -182,27 +182,25 @@ setMethod(
 setMethod(
   f = "plot_cos2",
   signature = signature(object = "MultivariateAnalysis"),
-  definition = function(object, margin = 1, axes = 1,
-                        sort = TRUE, decreasing = TRUE, limit = 10,
-                        active = TRUE, sup = FALSE,
-                        fill = "grey30", border = "grey10") {
+  definition = function(object, margin = 2, axes = c(1, 2), active = TRUE,
+                        sup = TRUE, fill = "grey30", border = "grey10") {
     ## Prepare data
-    cos2 <- get_cos2(object, margin = margin, sup = sup)
-    if (sup) cos2 <- cos2[cos2$.sup, , drop = FALSE]
-    data <- prepare_contrib(
-      cos2,
-      axes = axes,
-      sort = sort,
-      decreasing = decreasing,
-      limit = limit
-    )
+    data <- prepare_cos2(object, margin = margin, axes = axes,
+                         active = active, sup = sup)
 
     ## ggplot2
+    ## ggplot2
     gg <- ggplot2::ggplot(data = data) +
-      ggplot2::aes(x = .data$x, y = .data$y) +
-      ggplot2::geom_col(fill = fill, colour = border) +
-      ggplot2::scale_x_discrete(name = "") +
-      ggplot2::scale_y_continuous(name = expression("Cos"^2))
+      ggplot2::aes(
+        x = .data$x,
+        y = .data$y,
+        label = .data$label,
+        color = .data$value
+      ) +
+      ggplot2::geom_point() +
+      ggplot2::scale_x_continuous(name = print_variance(object, axes[[1]])) +
+      ggplot2::scale_y_continuous(name = print_variance(object, axes[[2]])) +
+      ggplot2::coord_fixed()
 
     return(gg)
   }
@@ -386,14 +384,14 @@ prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
   ## Get data
   row_data <- col_data <- data.frame()
   if (any(margin == 1)) {
-    row_coord <- get_coordinates(object, margin = 1, sup = TRUE)
+    row_coord <- get_coordinates(object, margin = 1)
     row_i <- seq_len(nrow(row_coord))
     if (active & !sup) row_i <- !row_coord$.sup
     if (!active & sup) row_i <- row_coord$.sup
     row_data <- row_coord[row_i, ]
   }
   if (any(margin == 2)) {
-    col_coord <- get_coordinates(object, margin = 2, sup = TRUE)
+    col_coord <- get_coordinates(object, margin = 2)
     col_i <- seq_len(nrow(col_coord))
     if (active & !sup) col_i <- !col_coord$.sup
     if (!active & sup) col_i <- col_coord$.sup
@@ -425,8 +423,7 @@ prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
   ## Highlight
   if (!is.null(highlight)) {
     highlight_i <- if (is_var) col_i else row_i # Subset
-    highlight_k <- joint(object, what = highlight, margin = margin,
-                         axes = axes, sup = TRUE)
+    highlight_k <- joint(object, what = highlight, margin = margin, axes = axes)
     highlight_k <- highlight_k[highlight_i]
     data[[highlight]] <- highlight_k
   }
@@ -435,11 +432,15 @@ prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
 }
 
 # Must return a data.frame
-prepare_contrib <- function(object, axes, sort, decreasing = TRUE, limit = 10) {
+prepare_contrib <- function(object, margin, axes, sort,
+                            decreasing = TRUE, limit = 10) {
+  ## Get data
+  contrib <- get_contributions(object, margin = margin)
+
   ## Prepare data
-  values <- object[[axes[[1]]]]
+  values <- contrib[[axes[[1]]]]
   data <- data.frame(
-    x = rownames(object),
+    x = rownames(contrib),
     y = values,
     label = round(values, digits = 1)
   )
@@ -458,5 +459,28 @@ prepare_contrib <- function(object, axes, sort, decreasing = TRUE, limit = 10) {
   ## Prevent reordering by ggplot2
   data$x <- factor(data$x, levels = unique(data$x))
 
-  return(data)
+  data
+}
+
+# Must return a data.frame
+prepare_cos2 <- function(object, margin, axes, active = TRUE, sup = TRUE) {
+  ## Get data
+  cos2 <- get_cos2(object, margin = margin)
+
+  ## Prepare data
+  data <- data.frame(
+    x = cos2[[axes[[1]]]],
+    y = cos2[[axes[[2]]]],
+    label = rownames(cos2),
+    sup = cos2$.sup
+  )
+
+  type <- ifelse(all(margin == 1), "row", "column")
+  obs <- ifelse(data$sup, "suppl.", "active")
+  data$value <- sprintf("%s (%s)", type, obs)
+
+  if (!active) data <- data[data$sup, ]
+  if (!sup) data <- data[!data$sup, ]
+
+  data
 }

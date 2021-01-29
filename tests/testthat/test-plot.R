@@ -41,7 +41,7 @@ test_that("CA - Plot contributions", {
   data("zuni", package = "codex")
   res <- ca(zuni)
 
-  gg_contrib <- plot_contributions(res)
+  gg_contrib <- plot_contributions(res, margin = 2)
   vdiffr::expect_doppelganger("CA_contrib", gg_contrib)
 
   gg_cos2 <- plot_cos2(res, margin = 2)

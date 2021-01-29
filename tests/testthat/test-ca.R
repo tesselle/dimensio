@@ -14,9 +14,9 @@ test_that("CA - matrix", {
   expect_output(show(res), "Correspondence Analysis")
 
   # Points coordinates
-  coord_row <- get_coordinates(res, margin = 1, sup = TRUE)
+  coord_row <- get_coordinates(res, margin = 1)
   expect_equal(dim(coord_row), c(20L, 5L))
-  coord_col <- get_coordinates(res, margin = 2, sup = TRUE)
+  coord_col <- get_coordinates(res, margin = 2)
   expect_equal(dim(coord_col), c(5L, 5L))
 
   # Distances
@@ -53,8 +53,8 @@ test_that("Predict new coordinates", {
   new_cols <- predict(res, cts[-is_sup_rows, is_sup_cols], margin = 2)
 
   res_sup <- ca(cts, sup_row = is_sup_rows, sup_col = is_sup_cols)
-  sup_rows <- get_coordinates(res_sup, margin = 1, sup = TRUE)
-  sup_cols <- get_coordinates(res_sup, margin = 2, sup = TRUE)
+  sup_rows <- get_coordinates(res_sup, margin = 1)
+  sup_cols <- get_coordinates(res_sup, margin = 2)
 
   expect_equal(new_rows, sup_rows[sup_rows$.sup, 1:5], ignore_attr = TRUE)
   expect_equal(new_cols, sup_cols[sup_cols$.sup, 1:5], ignore_attr = TRUE)
@@ -69,12 +69,13 @@ test_that("Compare with {FactoMineR}", {
   is_sup_rows <- sort(sample(1:10, 3, FALSE))
   is_sup_cols <- sort(sample(1:10, 4, FALSE))
 
-  res_facto <- FactoMineR::CA(df, row.sup = is_sup_rows, col.sup = is_sup_cols, graph = FALSE)
+  res_facto <- FactoMineR::CA(df, row.sup = is_sup_rows, col.sup = is_sup_cols,
+                              graph = FALSE)
   res_arkhe <- ca(df, sup_row = is_sup_rows, sup_col = is_sup_cols)
 
   # Get coordinates
-  coord_row <- get_coordinates(res_arkhe, margin = 1, sup = TRUE)
-  coord_col <- get_coordinates(res_arkhe, margin = 2, sup = TRUE)
+  coord_row <- get_coordinates(res_arkhe, margin = 1)
+  coord_col <- get_coordinates(res_arkhe, margin = 2)
 
   # Row principal coordinates
   expect_equal(
@@ -126,8 +127,8 @@ test_that("Compare with {FactoMineR}", {
   )
 
   # Get cos2
-  cos2_row <- get_cos2(res_arkhe, margin = 1, sup = TRUE)
-  cos2_col <- get_cos2(res_arkhe, margin = 2, sup = TRUE)
+  cos2_row <- get_cos2(res_arkhe, margin = 1)
+  cos2_col <- get_cos2(res_arkhe, margin = 2)
 
   # Row cos2
   expect_equal(
