@@ -12,6 +12,24 @@ setMethod(
   definition = function(x) x@dimension
 )
 
+#' @export
+#' @rdname mutator
+#' @aliases rownames,MultivariateAnalysis-method
+setMethod(
+  f = "rownames",
+  signature = signature(x = "MultivariateAnalysis"),
+  definition = function(x) x@rows@names
+)
+
+#' @export
+#' @rdname mutator
+#' @aliases colnames,MultivariateAnalysis-method
+setMethod(
+  f = "colnames",
+  signature = signature(x = "MultivariateAnalysis"),
+  definition = function(x) x@columns@names
+)
+
 get_order <- function(x, margin = 1) {
   margin <- margin[[1L]]
   if (margin == 1) o <- x@rows@order

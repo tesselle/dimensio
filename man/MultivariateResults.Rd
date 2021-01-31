@@ -37,6 +37,9 @@ points.}
 \item{\code{order}}{An \code{\link{integer}} vector giving the original indices
 of the data (computation moves all supplementary points at the end of the
 results).}
+
+\item{\code{group}}{A \code{\link{character}} vector specifying the class for each
+observation.}
 }}
 
 \seealso{

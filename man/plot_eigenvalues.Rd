@@ -3,18 +3,12 @@
 \docType{methods}
 \name{plot_eigenvalues}
 \alias{plot_eigenvalues}
-\alias{plot_eigenvalues-method}
 \alias{plot_variance}
 \alias{plot_variance-method}
-\alias{plot_eigenvalues,MultivariateAnalysis-method}
 \alias{plot_variance,MultivariateAnalysis-method}
 \title{Visualize Eigenvalues}
 \usage{
-plot_eigenvalues(object, ...)
-
 plot_variance(object, ...)
-
-\S4method{plot_eigenvalues}{MultivariateAnalysis}(object, fill = "grey30", border = "grey10")
 
 \S4method{plot_variance}{MultivariateAnalysis}(
   object,
@@ -30,15 +24,14 @@ plot_variance(object, ...)
 
 \item{...}{Currently not used.}
 
+\item{variance}{A \code{\link{logical}} scalar: should the percentages of
+variance be plotted instead of the eigenvalues?}
+
+\item{cumulative}{A \code{\link{logical}} scalar: should the cumulative
+percentages of variance be plotted?}
+
 \item{fill, border}{A \code{\link{character}} string specifying the bars
 infilling and border colors.}
-
-\item{variance}{A \code{\link{logical}} scalar: should percentages of
-variance be plotted instead of eigenvalues?}
-
-\item{cumulative}{A \code{\link{logical}} scalar: should cumulative
-percentages of variance be plotted ? Only used if \code{variance} is
-\code{TRUE}.}
 
 \item{color}{A \code{\link{character}} string specifying the line color.}
 }

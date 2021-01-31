@@ -3,6 +3,8 @@
 NULL
 
 # S4 dispatch to base S3 generic ===============================================
+setGeneric("rownames")
+setGeneric("colnames")
 setGeneric("loadings")
 
 # Extract ======================================================================
@@ -399,11 +401,10 @@ setGeneric(
 #'
 #' Plot eigenvalues or variances histogram.
 #' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
-#' @param variance A \code{\link{logical}} scalar: should percentages of
-#'  variance be plotted instead of eigenvalues?
-#' @param cumulative A \code{\link{logical}} scalar: should cumulative
-#'  percentages of variance be plotted ? Only used if \code{variance} is
-#'  \code{TRUE}.
+#' @param variance A \code{\link{logical}} scalar: should the percentages of
+#'  variance be plotted instead of the eigenvalues?
+#' @param cumulative A \code{\link{logical}} scalar: should the cumulative
+#'  percentages of variance be plotted?
 #' @param fill,border A \code{\link{character}} string specifying the bars
 #'  infilling and border colors.
 #' @param color A \code{\link{character}} string specifying the line color.
@@ -418,13 +419,6 @@ setGeneric(
 NULL
 
 #' @rdname plot_eigenvalues
-#' @aliases plot_eigenvalues-method
-setGeneric(
-  name = "plot_eigenvalues",
-  def = function(object, ...) standardGeneric("plot_eigenvalues")
-)
-
-#' @rdname plot_eigenvalues
 #' @aliases plot_variance-method
 setGeneric(
   name = "plot_variance",
@@ -434,24 +428,22 @@ setGeneric(
 ## Contributions ---------------------------------------------------------------
 #' Visualize Contributions and cos2
 #'
-#' Plots eigenvalues and variances.
+#' Plots contributions histogram and \eqn{cos^2}{cos2} scatterplot.
 #' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
 #' @param margin A length-one \code{\link{numeric}} vector giving the subscript
 #'  which the data will be returned: \code{1} indicates individuals/rows (the
 #'  default), \code{2} indicates variables/columns.
 #' @param axes A length-one \code{\link{numeric}} vector giving the dimensions
 #'  to be plotted.
+#' @param active A \code{\link{logical}} scalar: should the active
+#'  observations be plotted?
 #' @param sup A \code{\link{logical}} scalar: should the supplementary
-#'  observations be plotted instead of active observations?
+#'  observations be plotted?
 #' @param sort A \code{\link{logical}} scalar: should the data be sorted?
 #' @param decreasing A \code{\link{logical}} scalar: should the sort order be
 #'  decreasing? Only used if \code{sort} is \code{TRUE}.
 #' @param limit An \code{\link{integer}} specifying the number of top elements
 #'  to be displayed.
-#' @param active A \code{\link{logical}} scalar: should the active
-#'  observations be plotted?
-#' @param sup A \code{\link{logical}} scalar: should the supplementary
-#'  observations be plotted?
 #' @param fill,border A \code{\link{character}} string specifying the bars
 #'  infilling and border colors.
 #' @param ... Currently not used.

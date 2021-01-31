@@ -31,8 +31,9 @@ plot_cos2(object, ...)
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  fill = "grey30",
-  border = "grey10"
+  sort = TRUE,
+  decreasing = TRUE,
+  limit = 10
 )
 }
 \arguments{
@@ -65,7 +66,7 @@ observations be plotted?}
 observations be plotted?}
 }
 \description{
-Plots eigenvalues and variances.
+Plots contributions histogram and \eqn{cos^2}{cos2} scatterplot.
 }
 \examples{
 ## Load data
@@ -86,7 +87,7 @@ plot_variance(X)
 
 Other plot: 
 \code{\link{plot_coordinates}},
-\code{\link{plot_eigenvalues}()}
+\code{\link{plot_eigenvalues}}
 }
 \author{
 N. Frerebeau

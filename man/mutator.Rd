@@ -24,6 +24,8 @@
 \alias{get_variance}
 \alias{get_variance-method}
 \alias{dim,MultivariateAnalysis-method}
+\alias{rownames,MultivariateAnalysis-method}
+\alias{colnames,MultivariateAnalysis-method}
 \alias{get_contributions,MultivariateAnalysis-method}
 \alias{get_coordinates,MultivariateAnalysis-method}
 \alias{get_correlations,PCA-method}
@@ -55,6 +57,10 @@ get_inertia(x, ...)
 get_variance(x, ...)
 
 \S4method{dim}{MultivariateAnalysis}(x)
+
+\S4method{rownames}{MultivariateAnalysis}(x)
+
+\S4method{colnames}{MultivariateAnalysis}(x)
 
 \S4method{get_contributions}{MultivariateAnalysis}(x, margin = 1)
 

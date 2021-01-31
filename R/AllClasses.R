@@ -22,6 +22,8 @@
 #' @slot order An \code{\link{integer}} vector giving the original indices
 #'  of the data (computation moves all supplementary points at the end of the
 #'  results).
+#' @slot group A \code{\link{character}} vector specifying the class for each
+#'  observation.
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
@@ -38,7 +40,8 @@
     distances = "numeric",
     weights = "numeric",
     supplement = "logical",
-    order = "integer"
+    order = "integer",
+    group = "character"
   )
 )
 

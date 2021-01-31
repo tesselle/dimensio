@@ -12,6 +12,8 @@ test_that("CA - matrix", {
 
   res <- ca(cts, rank = 10)
   expect_output(show(res), "Correspondence Analysis")
+  expect_equal(rownames(res), as.character(seq_len(20)))
+  expect_equal(colnames(res), as.character(seq_len(5)))
 
   # Points coordinates
   coord_row <- get_coordinates(res, margin = 1)

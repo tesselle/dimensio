@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4478530.svg)](https://doi.org/10.5281/zenodo.4478530)
 <!-- badges: end -->
 
-Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis.
+Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis. It also includes methods for partial bootstrap validation.
 
 There are many very good packages for multivariate data analysis (such as [**FactoMineR**](http://factominer.free.fr/), [**ade4**](https://pbil.univ-lyon1.fr/ade4/) or [**ca**](https://cran.r-project.org/package=ca), all extended by [**FactoExtra**](https://rpkgs.datanovia.com/factoextra)). **dimensio** is designed to be as simple as possible, providing all the necessary tools to explore the results of the analysis.
 
@@ -96,14 +96,15 @@ get_eigenvalues(X)
 
 ```{r plot-ind, fig.width=5, fig.height=3.5, fig.show='hold'}
 ## Plot active individuals by group
-plot_rows(X, group = iris$Species, active = TRUE, sup = FALSE) +
+plot_rows(X, group = iris$Species, active = TRUE, sup = TRUE) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_contrast() # Custom color scale
 
 ## Plot all individuals by cos2
-plot_rows(X, highlight = "cos2", active = TRUE, sup = TRUE) +
+plot_rows(X, highlight = "cos2", active = TRUE, sup = FALSE) +
   ggplot2::theme_bw() + # Change theme
+  ggplot2::scale_size_continuous(range = c(1, 3)) + # Custom size scale
   khroma::scale_color_iridescent() # Custom color scale
 ```
 
@@ -118,17 +119,20 @@ plot_columns(X) +
 plot_columns(X, highlight = "contrib") +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() + # Change theme
-  ggplot2::theme(legend.position = "bottom") + # Edit theme
+  ggplot2::theme( # Edit theme
+    legend.position = "bottom",
+    legend.box = "vertical"
+  ) +
   khroma::scale_color_YlOrBr(range = c(0.5, 1)) # Custom color scale
 ```
 
 ```{r plot-eig, fig.width=3.5, fig.height=3.5, fig.show='hold'}
 ## Plot eigenvalues
-plot_eigenvalues(X) +
+plot_variance(X, variance = FALSE, cumulative = FALSE) +
   ggplot2::theme_bw() # Change theme
 
 ## Plot percentages of variance
-plot_variance(X, cumulative = TRUE) +
+plot_variance(X, variance = TRUE, cumulative = TRUE) +
   ggplot2::geom_text(nudge_y = 3) + # Add labels
   ggplot2::theme_bw() # Change theme
 

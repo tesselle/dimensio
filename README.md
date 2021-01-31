@@ -20,7 +20,8 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 Simple Principal Components Analysis (PCA) and Correspondence Analysis
 (CA) based on the Singular Value Decomposition (SVD). This package
 provides S4 classes and methods to compute, extract, summarize and
-visualize results of multivariate data analysis.
+visualize results of multivariate data analysis. It also includes
+methods for partial bootstrap validation.
 
 There are many very good packages for multivariate data analysis (such
 as [**FactoMineR**](http://factominer.free.fr/),
@@ -143,14 +144,15 @@ as few elements as possible: this makes it easy to customize diagrams
 
 ``` r
 ## Plot active individuals by group
-plot_rows(X, group = iris$Species, active = TRUE, sup = FALSE) +
+plot_rows(X, group = iris$Species, active = TRUE, sup = TRUE) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_contrast() # Custom color scale
 
 ## Plot all individuals by cos2
-plot_rows(X, highlight = "cos2", active = TRUE, sup = TRUE) +
+plot_rows(X, highlight = "cos2", active = TRUE, sup = FALSE) +
   ggplot2::theme_bw() + # Change theme
+  ggplot2::scale_size_continuous(range = c(1, 3)) + # Custom size scale
   khroma::scale_color_iridescent() # Custom color scale
 ```
 
@@ -167,7 +169,10 @@ plot_columns(X) +
 plot_columns(X, highlight = "contrib") +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() + # Change theme
-  ggplot2::theme(legend.position = "bottom") + # Edit theme
+  ggplot2::theme( # Edit theme
+    legend.position = "bottom",
+    legend.box = "vertical"
+  ) +
   khroma::scale_color_YlOrBr(range = c(0.5, 1)) # Custom color scale
 ```
 
@@ -175,11 +180,11 @@ plot_columns(X, highlight = "contrib") +
 
 ``` r
 ## Plot eigenvalues
-plot_eigenvalues(X) +
+plot_variance(X, variance = FALSE, cumulative = FALSE) +
   ggplot2::theme_bw() # Change theme
 
 ## Plot percentages of variance
-plot_variance(X, cumulative = TRUE) +
+plot_variance(X, variance = TRUE, cumulative = TRUE) +
   ggplot2::geom_text(nudge_y = 3) + # Add labels
   ggplot2::theme_bw() # Change theme
 
