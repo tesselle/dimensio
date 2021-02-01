@@ -14,7 +14,7 @@ An S4 class to store the results of a multivariate data analysis.
 \describe{
 \item{\code{names}}{A \code{\link{character}} vector specifying the row names.}
 
-\item{\code{coordinates}}{A \code{\link{numeric}} \code{\link{matrix}}
+\item{\code{principal}}{A \code{\link{numeric}} \code{\link{matrix}}
 giving the principal coordinates.}
 
 \item{\code{standard}}{A \code{\link{numeric}} \code{\link{matrix}}
@@ -38,7 +38,7 @@ points.}
 of the data (computation moves all supplementary points at the end of the
 results).}
 
-\item{\code{group}}{A \code{\link{character}} vector specifying the class for each
+\item{\code{groups}}{A \code{\link{character}} vector specifying the class for each
 observation.}
 }}
 

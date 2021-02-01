@@ -49,10 +49,10 @@ plot(X) +
 Y <- bootstrap(X, n = 30)
 
 ## Plot with ellipses
-plot_rows(Y, group = rep(rownames(color), 31)) +
+plot_rows(Y) +
   ggplot2::stat_ellipse()
 
-plot_columns(Y, group = rep(colnames(color), 31)) +
+plot_columns(Y) +
   ggplot2::stat_ellipse()
 }
 \references{

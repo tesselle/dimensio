@@ -7,7 +7,7 @@ NULL
 as.list.MultivariateResults <- function(x, ...) {
   list(
     # names = x@names,
-    coordinates = x@coordinates,
+    coordinates = x@principal,
     # standard = x@standard,
     contributions = x@contributions,
     cos2 = x@cosine,

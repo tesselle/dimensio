@@ -6,7 +6,7 @@
 #'
 #' An S4 class to store the results of a multivariate data analysis.
 #' @slot names A \code{\link{character}} vector specifying the row names.
-#' @slot coordinates A \code{\link{numeric}} \code{\link{matrix}}
+#' @slot principal A \code{\link{numeric}} \code{\link{matrix}}
 #'  giving the principal coordinates.
 #' @slot standard A \code{\link{numeric}} \code{\link{matrix}}
 #'  giving the standard coordinates.
@@ -22,7 +22,7 @@
 #' @slot order An \code{\link{integer}} vector giving the original indices
 #'  of the data (computation moves all supplementary points at the end of the
 #'  results).
-#' @slot group A \code{\link{character}} vector specifying the class for each
+#' @slot groups A \code{\link{character}} vector specifying the class for each
 #'  observation.
 #' @author N. Frerebeau
 #' @family class
@@ -33,7 +33,7 @@
   Class = "MultivariateResults",
   slots = c(
     names = "character",
-    coordinates = "matrix",
+    principal = "matrix",
     standard = "matrix",
     contributions = "matrix",
     cosine = "matrix",
@@ -41,7 +41,7 @@
     weights = "numeric",
     supplement = "logical",
     order = "integer",
-    group = "character"
+    groups = "character"
   )
 )
 
@@ -171,25 +171,25 @@
 setMethod(
   f = "initialize",
   signature = "MultivariateResults",
-  definition = function(.Object, names, coordinates, standard, contributions,
+  definition = function(.Object, names, principal, standard, contributions,
                         distances, cosine, weights, supplement, ...,
                         prefix = "PC") {
 
     ## /!\ Reorder active/supplementary points /!\
     ## Computation moves all supplementary points at the end of the results
-    new_i <- seq_len(nrow(coordinates))
+    new_i <- seq_len(nrow(principal))
     if (any(supplement)) {
       new_i <- c(new_i[!supplement], new_i[supplement])
       names <- names[new_i]
     }
 
     ## Prepare names
-    col_names <- paste0(prefix, seq_len(ncol(coordinates)))
+    col_names <- paste0(prefix, seq_len(ncol(principal)))
     dim_names0 <- list(names[!supplement], col_names)
     dim_names1 <- list(names, col_names)
 
     ## Set names
-    dimnames(coordinates) <- dimnames(cosine) <- dim_names1
+    dimnames(principal) <- dimnames(cosine) <- dim_names1
     dimnames(standard) <- dimnames(contributions) <- dim_names0
     names(distances) <- names
     names(weights) <- names[!supplement]
@@ -197,7 +197,7 @@ setMethod(
     .Object <- methods::callNextMethod(
       .Object,
       names = names,
-      coordinates = coordinates,
+      principal = principal,
       standard = standard,
       contributions = contributions,
       cosine = cosine,

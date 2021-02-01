@@ -119,9 +119,8 @@ setMethod(
     }
 
     ## Scaled variables?
-    scaled <- !all(object[["data"]][["sd"]] == 1)
     gg_circle <- NULL
-    if (scaled) {
+    if (is_scaled(object)) {
       circle <- data.frame(
         x = 1 * cos(seq(0, 2 * pi, length = 200)),
         y = 1 * sin(seq(0, 2 * pi, length = 200))
@@ -282,12 +281,12 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
                         sup = sup, highlight = highlight, group = group)
 
   ## Highlight or groups, if any
-  aes_group <- ggplot2::aes(color = .data$type)
+  aes_group <- ggplot2::aes(color = .data$group)
   if (!is.null(group)) {
     if (is.numeric(group)) {
       aes_group <- ggplot2::aes(color = .data$group, size = .data$group)
     } else {
-      aes_group <- ggplot2::aes(color = .data$group, group = .data$group)
+      aes_group <- ggplot2::aes(color = .data$group)
     }
   }
   if (!is.null(highlight)) {
@@ -301,6 +300,7 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
       x = .data$x,
       y = .data$y,
       label = .data$label,
+      group = .data$group,
       shape = .data$type
     ) +
     aes_group +
@@ -339,17 +339,21 @@ prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
 
   data$x <- data[[axes[[1]]]]
   data$y <- data[[axes[[2]]]]
-  data$group <- sprintf("%s (%s)", type, obs)
-  data$type <- sprintf("%s (%s)", type, obs)
+  data$type <- obs
   data$label <- rownames(data)
 
   ## Variables factor map?
   is_var <- all(margin == 2)
 
   ## Group
-  if (!is.null(group)) {
-    group_k <- get_order(object, margin = ifelse(is_var, 2, 1))
+  grp <- unlist(get_groups(object, margin = margin))
+  if (length(grp) > 0) {
+    data$group <- grp
+  } else if (!is.null(group)) {
+    group_k <- unlist(get_order(object, margin = margin))
     data$group <- group[group_k]
+  } else {
+    data$group <- type
   }
 
   ## Highlight

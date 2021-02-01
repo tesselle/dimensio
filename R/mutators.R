@@ -2,6 +2,29 @@
 #' @include AllClasses.R
 NULL
 
+# Non exported =================================================================
+has_groups <- function(x, margin = 1) {
+  margin <- margin[[1L]]
+  if (margin == 1) grp <- length(x@rows@groups) > 0
+  if (margin == 2) grp <- length(x@columns@groups) > 0
+  grp
+}
+get_groups <- function(x, margin = 1) {
+  grp1 <- grp2 <- NULL
+  if (any(margin == 1)) grp1 <- x@rows@groups
+  if (any(margin == 2)) grp2 <- x@columns@groups
+  list(rows = grp1, columns = grp2)
+}
+get_order <- function(x, margin = 1) {
+  ord1 <- ord2 <- NULL
+  if (margin == 1) ord1 <- x@rows@order
+  if (margin == 2) ord2 <- x@columns@order
+  list(rows = ord1, columns = ord2)
+}
+is_scaled <- function(x) {
+  !all(x@scale == 1)
+}
+
 # Dimensions ===================================================================
 #' @export
 #' @rdname mutator
@@ -30,14 +53,6 @@ setMethod(
   definition = function(x) x@columns@names
 )
 
-get_order <- function(x, margin = 1) {
-  margin <- margin[[1L]]
-  if (margin == 1) o <- x@rows@order
-  if (margin == 2) o <- x@columns@order
-
-  o
-}
-
 # Contributions ================================================================
 #' @export
 #' @rdname mutator
@@ -64,11 +79,11 @@ setMethod(
   definition = function(x, margin = 1, sup_name = ".sup") {
     margin <- margin[[1L]]
     if (margin == 1) {
-      coords <- x@rows@coordinates
+      coords <- x@rows@principal
       suppl <- x@rows@supplement
     }
     if (margin == 2) {
-      coords <- x@columns@coordinates
+      coords <- x@columns@principal
       suppl <- x@columns@supplement
     }
 

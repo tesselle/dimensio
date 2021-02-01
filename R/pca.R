@@ -171,7 +171,7 @@ setMethod(
       singular_values = sv,
       rows = .MultivariateResults(
         names = names_ind,
-        coordinates = coord_ind,
+        principal = coord_ind,
         standard = U,
         contributions = contrib_ind,
         distances = sqrt(dist_ind),
@@ -182,7 +182,7 @@ setMethod(
       ),
       columns = .MultivariateResults(
         names = names_var,
-        coordinates = coord_var,
+        principal = coord_var,
         standard = V,
         contributions = contrib_var,
         distances = sqrt(dist_var),
