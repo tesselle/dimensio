@@ -196,10 +196,10 @@ Paris: Dunod, 2006.</p>
 <span class='va'>Y</span> <span class='op'>&lt;-</span> <span class='fu'>bootstrap</span><span class='op'>(</span><span class='va'>X</span>, n <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
 
 <span class='co'>## Plot with ellipses</span>
-<span class='fu'><a href='plot_coordinates.html'>plot_rows</a></span><span class='op'>(</span><span class='va'>Y</span>, group <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>color</span><span class='op'>)</span>, <span class='fl'>31</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+<span class='fu'><a href='plot_coordinates.html'>plot_rows</a></span><span class='op'>(</span><span class='va'>Y</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/stat_ellipse.html'>stat_ellipse</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='img'><img src='bootstrap-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='plot_coordinates.html'>plot_columns</a></span><span class='op'>(</span><span class='va'>Y</span>, group <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>color</span><span class='op'>)</span>, <span class='fl'>31</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+<span class='fu'><a href='plot_coordinates.html'>plot_columns</a></span><span class='op'>(</span><span class='va'>Y</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/stat_ellipse.html'>stat_ellipse</a></span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='img'><img src='bootstrap-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
