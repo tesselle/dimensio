@@ -18,7 +18,7 @@
 \code{\link{matrix}} for which to compute principal coordinates.}
 
 \item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
-which the data will be returned: \code{1} indicates individuals/rows (the
+which the data will be predicted: \code{1} indicates individuals/rows (the
 default), \code{2} indicates variables/columns.}
 }
 \value{

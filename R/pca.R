@@ -9,16 +9,16 @@ setMethod(
   f = "pca",
   signature = signature(object = "data.frame"),
   definition = function(object, center = TRUE, scale = TRUE, rank = NULL,
-                        sup_ind = NULL, sup_var = NULL,
-                        weight_ind = NULL, weight_var = NULL) {
+                        sup_row = NULL, sup_col = NULL,
+                        weight_row = NULL, weight_col = NULL) {
     # Remove non-numeric variables, if any
     quali <- !vapply(object, FUN = is.numeric, FUN.VALUE = logical(1))
     if (any(quali)) {
       old <- object
-      object <- object[, -c(which(quali), sup_var), drop = FALSE]
-      if (!is.null(sup_var)) {
-        object <- cbind(object, old[, sup_var, drop = FALSE])
-        sup_var <- utils::tail(seq_along(object), length(sup_var))
+      object <- object[, -c(which(quali), sup_col), drop = FALSE]
+      if (!is.null(sup_col)) {
+        object <- cbind(object, old[, sup_col, drop = FALSE])
+        sup_col <- utils::tail(seq_along(object), length(sup_col))
       }
       # Generate message
       tot <- sum(quali)
@@ -30,8 +30,8 @@ setMethod(
 
     object <- as.matrix(object)
     methods::callGeneric(object = object, center = center, scale = scale,
-                         rank = rank, sup_ind = sup_ind, sup_var = sup_var,
-                         weight_ind = weight_ind, weight_var = weight_var)
+                         rank = rank, sup_row = sup_row, sup_col = sup_col,
+                         weight_row = weight_row, weight_col = weight_col)
   }
 )
 
@@ -42,22 +42,22 @@ setMethod(
   f = "pca",
   signature = signature(object = "matrix"),
   definition = function(object, center = TRUE, scale = TRUE, rank = NULL,
-                        sup_ind = NULL, sup_var = NULL,
-                        weight_ind = NULL, weight_var = NULL) {
+                        sup_row = NULL, sup_col = NULL,
+                        weight_row = NULL, weight_col = NULL) {
     # Check missing values
     if (anyNA(object))
       stop("Missing values detected.", call. = FALSE)
 
     # Fix dimension names
-    names_ind <- rownames(object)
-    names_var <- colnames(object)
-    if (is.null(names_ind)) names_ind <- as.character(seq_len(nrow(object)))
-    if (is.null(names_var)) names_var <- as.character(seq_len(ncol(object)))
+    names_row <- rownames(object)
+    names_col <- colnames(object)
+    if (is.null(names_row)) names_row <- as.character(seq_len(nrow(object)))
+    if (is.null(names_col)) names_col <- as.character(seq_len(ncol(object)))
 
     # Subset
-    is_ind_sup <- is_supplementary(sup_ind, nrow(object))
-    is_var_sup <- is_supplementary(sup_var, ncol(object))
-    N <- object[!is_ind_sup, !is_var_sup, drop = FALSE]
+    is_row_sup <- is_supplementary(sup_row, nrow(object))
+    is_col_sup <- is_supplementary(sup_col, ncol(object))
+    N <- object[!is_row_sup, !is_col_sup, drop = FALSE]
 
     # Dimension of the solution
     ndim <- min(rank, dim(N) - 1)
@@ -66,26 +66,26 @@ setMethod(
     j <- ncol(N)
 
     # Weights
-    w_ind <- if (is.null(weight_ind)) rep(1, nrow(N)) else weight_ind
-    w_var <- if (is.null(weight_var)) rep(1, ncol(N)) else weight_var
-    w_ind <- w_ind / sum(w_ind)
-    W_ind <- sqrt(w_ind)
-    W_var <- sqrt(w_var)
+    w_row <- if (is.null(weight_row)) rep(1, nrow(N)) else weight_row
+    w_col <- if (is.null(weight_col)) rep(1, ncol(N)) else weight_col
+    w_row <- w_row / sum(w_row)
+    W_row <- sqrt(w_row)
+    W_col <- sqrt(w_col)
 
     # Build matrix
     # matrix * vector is faster (!) than:
     # matrix %*% t(vector)
     # t(t(matrix) * vector)
-    s_ind <- sqrt(w_ind)
-    s_var <- sqrt(w_var)
-    W_ind1 <- matrix(s_ind, nrow = i, ncol = j, byrow = FALSE)
-    W_var1 <- matrix(s_var, nrow = i, ncol = j, byrow = TRUE)
-    W_ind2 <- matrix(s_ind, nrow = i, ncol = ndim, byrow = FALSE)
-    W_var2 <- matrix(s_var, nrow = j, ncol = ndim, byrow = FALSE)
+    s_row <- sqrt(w_row)
+    s_col <- sqrt(w_col)
+    W_row1 <- matrix(s_row, nrow = i, ncol = j, byrow = FALSE)
+    W_col1 <- matrix(s_col, nrow = i, ncol = j, byrow = TRUE)
+    W_row2 <- matrix(s_row, nrow = i, ncol = ndim, byrow = FALSE)
+    W_col2 <- matrix(s_col, nrow = j, ncol = ndim, byrow = FALSE)
 
     # Center data
     if (center) {
-      var_mean <- weighted_mean(N, w_ind)
+      var_mean <- weighted_mean(N, w_row)
     } else {
       var_mean <- rep(0, j)
     }
@@ -94,7 +94,7 @@ setMethod(
 
     # Scale data
     if (scale) {
-      var_sd <- weighted_sd(P, w_ind)
+      var_sd <- weighted_sd(P, w_row)
     } else {
       var_sd <- rep(1, j)
     }
@@ -102,94 +102,92 @@ setMethod(
     M <- P / std
 
     # Matrix of standardized residuals
-    S <- M * W_var1 * W_ind1
+    S <- M * W_col1 * W_row1
 
     # Singular Value Decomposition
     D <- svd(S)
     sv <- D$d[dim_keep] # Singular values
 
     # Standard coordinates
-    U <- D$u[, dim_keep, drop = FALSE] / W_ind2
-    V <- D$v[, dim_keep, drop = FALSE] / W_var2
+    U <- D$u[, dim_keep, drop = FALSE] / W_row2
+    V <- D$v[, dim_keep, drop = FALSE] / W_col2
 
     sv_U <- matrix(sv, nrow = i, ncol = ndim, byrow = TRUE)
     sv_V <- matrix(sv, nrow = j, ncol = ndim, byrow = TRUE)
 
     # Principal coordinates
-    coord_ind <- U * sv_U
-    coord_var <- V * sv_V
+    coord_row <- U * sv_U
+    coord_col <- V * sv_V
 
     # Contributions
-    contrib_ind <- ((coord_ind * W_ind2) / sv_U)^2 * 100
-    contrib_var <- ((coord_var * W_var2) / sv_V)^2 * 100
+    contrib_row <- ((coord_row * W_row2) / sv_U)^2 * 100
+    contrib_col <- ((coord_col * W_col2) / sv_V)^2 * 100
 
     # Squared distance to centroide
-    dist_ind <- rowSums((M * W_var1)^2)
-    dist_var <- colSums((M * W_ind1)^2)
+    dist_row <- rowSums((M * W_col1)^2)
+    dist_col <- colSums((M * W_row1)^2)
 
     # Supplementary points
-    if (any(is_ind_sup)) {
-      extra_ind <- object[is_ind_sup, !is_var_sup, drop = FALSE]
-      ind_sup <- (t(extra_ind) - var_mean) * w_var / var_sd
+    if (any(is_row_sup)) {
+      extra_row <- object[is_row_sup, !is_col_sup, drop = FALSE]
+      ind_sup <- (t(extra_row) - var_mean) * w_col / var_sd
 
       # Coordinates
-      coord_ind_sup <- crossprod(ind_sup, V)
-      coord_ind <- rbind(coord_ind, coord_ind_sup)
+      coord_row_sup <- crossprod(ind_sup, V)
+      coord_row <- rbind(coord_row, coord_row_sup)
 
       # Distances
-      dist_ind_sup <- colSums(ind_sup^2 * w_var)
-      dist_ind <- c(dist_ind, dist_ind_sup)
+      dist_row_sup <- colSums(ind_sup^2 * w_col)
+      dist_row <- c(dist_row, dist_row_sup)
     }
-    if (any(is_var_sup)) {
-      extra_var <- object[!is_ind_sup, is_var_sup, drop = FALSE]
+    if (any(is_col_sup)) {
+      extra_col <- object[!is_row_sup, is_col_sup, drop = FALSE]
       # Center and scale
       if (center) {
-        extra_var <- t(t(extra_var) - weighted_mean(extra_var, w_ind))
+        extra_col <- t(t(extra_col) - weighted_mean(extra_col, w_row))
       }
       if (scale) {
-        extra_var <- t(t(extra_var) / weighted_sd(extra_var, w_ind))
+        extra_col <- t(t(extra_col) / weighted_sd(extra_col, w_row))
       }
-      var_sup <- extra_var * w_ind
+      var_sup <- extra_col * w_row
 
       # Coordinates
-      coord_var_sup <- crossprod(var_sup, U)
-      coord_var <- rbind(coord_var, coord_var_sup)
+      coord_col_sup <- crossprod(var_sup, U)
+      coord_col <- rbind(coord_col, coord_col_sup)
 
       # Distances
-      dist_var_sup <- colSums(extra_var^2 * w_ind)
-      dist_var <- c(dist_var, dist_var_sup)
+      dist_col_sup <- colSums(extra_col^2 * w_row)
+      dist_col <- c(dist_col, dist_col_sup)
     }
 
     # Squared cosine
-    cos_ind <- coord_ind^2 / dist_ind
-    cos_var <- coord_var^2 / dist_var
+    cos_row <- coord_row^2 / dist_row
+    cos_col <- coord_col^2 / dist_col
 
-    names(sv) <- paste0("PC", dim_keep)
+    names(sv) <- paste0("F", dim_keep)
     .PCA(
       data = object,
       dimension = as.integer(ndim),
       singular_values = sv,
-      rows = .MultivariateResults(
-        names = names_ind,
-        principal = coord_ind,
+      rows = build_results(
+        names = names_row,
+        principal = coord_row,
         standard = U,
-        contributions = contrib_ind,
-        distances = sqrt(dist_ind),
-        cosine = cos_ind,
-        weights = w_ind,
-        supplement = is_ind_sup,
-        prefix = "PC"
+        contributions = contrib_row,
+        distances = sqrt(dist_row),
+        cosine = cos_row,
+        weights = w_row,
+        supplement = is_row_sup
       ),
-      columns = .MultivariateResults(
-        names = names_var,
-        principal = coord_var,
+      columns = build_results(
+        names = names_col,
+        principal = coord_col,
         standard = V,
-        contributions = contrib_var,
-        distances = sqrt(dist_var),
-        cosine = cos_var,
-        weights = w_var,
-        supplement = is_var_sup,
-        prefix = "PC"
+        contributions = contrib_col,
+        distances = sqrt(dist_col),
+        cosine = cos_col,
+        weights = w_col,
+        supplement = is_col_sup
       ),
       center = var_mean,
       scale = var_sd
@@ -237,7 +235,7 @@ setMethod(
     # Compute principal coordinates
     coords <- crossprod(newdata, std)
     coords <- as.data.frame(coords)
-    colnames(coords) <- paste0("PC", seq_along(coords))
+    colnames(coords) <- paste0("F", seq_along(coords))
     return(coords)
   }
 )

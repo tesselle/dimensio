@@ -5,8 +5,8 @@ test_that("PCA - matrix", {
   row_zeros[1, ] <- NA
   expect_error(pca(row_zeros), "Missing values detected.")
 
-  expect_error(pca(cts, sup_ind = "row1"), "must be a numeric vector")
-  expect_error(pca(cts, sup_var = "col1"), "must be a numeric vector")
+  expect_error(pca(cts, sup_row = "row1"), "must be a numeric vector")
+  expect_error(pca(cts, sup_col = "col1"), "must be a numeric vector")
 
   res <- pca(cts, center = TRUE, scale = TRUE, rank = 10)
   expect_output(show(res), "Principal Components Analysis")
@@ -40,31 +40,26 @@ test_that("PCA - data.frame", {
   df <- as.data.frame(cts)
   df$test <- character(5)
 
-  expect_message(pca(df, sup_var = 1:5), "qualitative variable was removed")
+  expect_message(pca(df, sup_col = 1:5), "qualitative variable was removed")
 })
 test_that("Predict new coordinates", {
-  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)
+  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
 
-  is_sup_rows <- sort(sample(1:10, 3, FALSE))
-  is_sup_cols <- sort(sample(1:10, 4, FALSE))
+  res <- pca(cts, center = FALSE, scale = FALSE)
+  new_rows <- predict(res, cts, margin = 1)
+  new_cols <- predict(res, cts, margin = 2)
 
-  res <- pca(cts[-is_sup_rows, -is_sup_cols], center = FALSE, scale = FALSE)
-  new_rows <- predict(res, cts[is_sup_rows, -is_sup_cols], margin = 1)
-  new_cols <- predict(res, cts[-is_sup_rows, is_sup_cols], margin = 2)
+  sup_rows <- get_coordinates(res, margin = 1)
+  sup_cols <- get_coordinates(res, margin = 2)
 
-  res_sup <- pca(cts, sup_ind = is_sup_rows, sup_var = is_sup_cols,
-                 center = FALSE, scale = FALSE)
-  sup_rows <- get_coordinates(res_sup, margin = 1)
-  sup_cols <- get_coordinates(res_sup, margin = 2)
-
-  expect_equal(new_rows, sup_rows[sup_rows$.sup, 1:5], ignore_attr = TRUE)
-  expect_equal(new_cols, sup_cols[sup_cols$.sup, 1:5], ignore_attr = TRUE)
+  expect_equal(new_rows, sup_rows[, 1:4], ignore_attr = TRUE)
+  expect_equal(new_cols, sup_cols[, 1:4], ignore_attr = TRUE)
 })
 test_that("Compare with {FactoMineR}", {
   skip_on_cran()
   skip_if_not_installed("FactoMineR")
 
-  mtx <- matrix(data = sample(1:100, 100, TRUE), ncol = 10)
+  mtx <- matrix(data = sample(1:100, 1000, TRUE), ncol = 10)
   df <- as.data.frame(mtx)
 
   is_sup_rows <- sort(sample(1:10, 3, FALSE))
@@ -72,8 +67,8 @@ test_that("Compare with {FactoMineR}", {
 
   res_facto <- FactoMineR::PCA(df, scale.unit = TRUE, ind.sup = is_sup_rows,
                                quanti.sup = is_sup_cols, graph = FALSE)
-  res_arkhe <- pca(df, scale = TRUE, sup_ind = is_sup_rows,
-                   sup_var = is_sup_cols)
+  res_arkhe <- pca(df, scale = TRUE, sup_row = is_sup_rows,
+                   sup_col = is_sup_cols)
 
   # Get coordinates
   coord_row <- get_coordinates(res_arkhe, margin = 1)

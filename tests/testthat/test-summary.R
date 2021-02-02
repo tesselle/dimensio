@@ -16,7 +16,7 @@ test_that("Correspondence Analysis", {
 })
 test_that("Principal Components Analysis", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
-  res <- pca(cts, sup_ind = 10:15)
+  res <- pca(cts, sup_row = 10:15)
 
   s0 <- summary(res)
   expect_s4_class(s0, "MultivariateSummary")

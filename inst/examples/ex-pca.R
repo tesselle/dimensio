@@ -3,7 +3,7 @@ library(codex)
 data("compiegne")
 
 ## Compute principal components analysis
-X <- pca(compiegne, scale = TRUE, sup_var = 7:10)
+X <- pca(compiegne, scale = TRUE, sup_col = 7:10)
 
 ## Get row coordinates
 get_coordinates(X, margin = 1)

@@ -15,10 +15,10 @@ pca(object, ...)
   center = TRUE,
   scale = TRUE,
   rank = NULL,
-  sup_ind = NULL,
-  sup_var = NULL,
-  weight_ind = NULL,
-  weight_var = NULL
+  sup_row = NULL,
+  sup_col = NULL,
+  weight_row = NULL,
+  weight_col = NULL
 )
 
 \S4method{pca}{matrix}(
@@ -26,10 +26,10 @@ pca(object, ...)
   center = TRUE,
   scale = TRUE,
   rank = NULL,
-  sup_ind = NULL,
-  sup_var = NULL,
-  weight_ind = NULL,
-  weight_var = NULL
+  sup_row = NULL,
+  sup_col = NULL,
+  weight_row = NULL,
+  weight_col = NULL
 )
 }
 \arguments{
@@ -48,17 +48,18 @@ to unit variance?}
 components to be kept in the results. If \code{NULL} (the default),
 \eqn{p - 1} components will be returned.}
 
-\item{sup_ind}{A \code{\link{numeric}} or \code{\link{logical}} vector
-specifying the indices of the supplementary individuals.}
+\item{sup_row}{A \code{\link{numeric}} or \code{\link{logical}} vector
+specifying the indices of the supplementary rows (individuals).}
 
-\item{sup_var}{A \code{\link{numeric}} or \code{\link{logical}} vector
-specifying the indices of the supplementary variables.}
+\item{sup_col}{A \code{\link{numeric}} or \code{\link{logical}} vector
+specifying the indices of the supplementary columns (variables).}
 
-\item{weight_ind}{A \code{\link{numeric}} vector specifying the active
-individual weights. If \code{NULL} (the default), no weights are used.}
+\item{weight_row}{A \code{\link{numeric}} vector specifying the active
+row (individual) weights. If \code{NULL} (the default), no weights are used.}
 
-\item{weight_var}{A \code{\link{numeric}} vector specifying the active
-individual weights. If \code{NULL} (the default), no weights are used.}
+\item{weight_col}{A \code{\link{numeric}} vector specifying the active
+column (variable) weights. If \code{NULL} (the default), no weights are
+used.}
 }
 \value{
 A \linkS4class{PCA} object.
@@ -73,7 +74,7 @@ library(codex)
 data("compiegne")
 
 ## Compute principal components analysis
-X <- pca(compiegne, scale = TRUE, sup_var = 7:10)
+X <- pca(compiegne, scale = TRUE, sup_col = 7:10)
 
 ## Get row coordinates
 get_coordinates(X, margin = 1)

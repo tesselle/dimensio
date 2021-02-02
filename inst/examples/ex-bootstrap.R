@@ -1,6 +1,6 @@
 library(ggrepel)
 
-## Partial bootstrap
+## Partial bootstrap on CA
 ## Data from Lebart et al. 2006, p. 170-172
 color <- data.frame(
   brun = c(68, 15, 5, 20),
@@ -23,6 +23,21 @@ Y <- bootstrap(X, n = 30)
 ## Plot with ellipses
 plot_rows(Y) +
   ggplot2::stat_ellipse()
+plot_columns(Y) +
+  ggplot2::stat_ellipse()
 
+## Partial bootstrap on PCA
+## Compute principal components analysis
+data(iris)
+X <- pca(iris)
+
+## Plot results
+plot_columns(X) +
+  ggrepel::geom_label_repel()
+
+## Bootstrap (30 replicates)
+Y <- bootstrap(X, n = 30)
+
+## Plot with ellipses
 plot_columns(Y) +
   ggplot2::stat_ellipse()

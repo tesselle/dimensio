@@ -56,7 +56,7 @@ test_that("PCA - Plot coordinates", {
 
   data("iris")
   sup_ind <- seq(from = 1, to = 150, by = 5)
-  res <- pca(iris[, -5], sup_ind = sup_ind, sup_var = 4)
+  res <- pca(iris[, -5], sup_row = sup_ind, sup_col = 4)
 
   for (i in c(TRUE, FALSE)) {
     for (j in c(TRUE, FALSE)) {

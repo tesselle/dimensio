@@ -167,46 +167,45 @@
   contains = "MultivariateAnalysis"
 )
 
-# Initialize ===================================================================
-setMethod(
-  f = "initialize",
-  signature = "MultivariateResults",
-  definition = function(.Object, names, principal, standard, contributions,
-                        distances, cosine, weights, supplement, ...,
-                        prefix = "PC") {
-
-    ## /!\ Reorder active/supplementary points /!\
-    ## Computation moves all supplementary points at the end of the results
-    new_i <- seq_len(nrow(principal))
-    if (any(supplement)) {
-      new_i <- c(new_i[!supplement], new_i[supplement])
-      names <- names[new_i]
-    }
-
-    ## Prepare names
-    col_names <- paste0(prefix, seq_len(ncol(principal)))
-    dim_names0 <- list(names[!supplement], col_names)
-    dim_names1 <- list(names, col_names)
-
-    ## Set names
-    dimnames(principal) <- dimnames(cosine) <- dim_names1
-    dimnames(standard) <- dimnames(contributions) <- dim_names0
-    names(distances) <- names
-    names(weights) <- names[!supplement]
-
-    .Object <- methods::callNextMethod(
-      .Object,
-      names = names,
-      principal = principal,
-      standard = standard,
-      contributions = contributions,
-      cosine = cosine,
-      distances = distances,
-      weights = weights,
-      supplement = sort(supplement),
-      order = new_i
-    )
-    validObject(.Object)
-    .Object
-  }
+#' @rdname PCA-class
+#' @aliases BootstrapPCA-class
+.BootstrapPCA <- setClass(
+  Class = "BootstrapPCA",
+  contains = "PCA"
 )
+
+# Initialize ===================================================================
+build_results <- function(names, principal, standard, contributions,
+                          distances, cosine, weights, supplement) {
+  ## /!\ Reorder active/supplementary points /!\
+  ## Computation moves all supplementary points at the end of the results
+  new_i <- seq_len(nrow(principal))
+  if (any(supplement)) {
+    new_i <- c(new_i[!supplement], new_i[supplement])
+    names <- names[new_i]
+  }
+
+  ## Prepare names
+  # names <- rep(names, length.out = length(supplement))
+  col_names <- paste0("F", seq_len(ncol(principal)))
+  dim_names0 <- list(names[!supplement], col_names)
+  dim_names1 <- list(names, col_names)
+
+  ## Set names
+  dimnames(principal) <- dimnames(cosine) <- dim_names1
+  dimnames(standard) <- dimnames(contributions) <- dim_names0
+  names(distances) <- names
+  names(weights) <- names[!supplement]
+
+  .MultivariateResults(
+    names = names,
+    principal = principal,
+    standard = standard,
+    contributions = contributions,
+    cosine = cosine,
+    distances = distances,
+    weights = weights,
+    supplement = sort(supplement),
+    order = new_i
+  )
+}

@@ -19,8 +19,9 @@ Simple Principal Components Analysis (PCA) and
 \tabular{ll}{
 \strong{Package:} \tab dimensio \cr
 \strong{Type:} \tab Package \cr
-\strong{Version:} \tab 0.1.0 \cr
+\strong{Version:} \tab 0.2.0 \cr
 \strong{License:} \tab GPL-3 \cr
+\strong{DOI:} \tab \href{https://doi.org/10.5281/zenodo.4478530}{10.5281/zenodo.4478530}
 }
 }
 \seealso{

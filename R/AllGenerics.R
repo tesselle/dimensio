@@ -247,14 +247,15 @@ setGeneric(
 #' @param rank An \code{\link{integer}} value specifying the maximal number of
 #'  components to be kept in the results. If \code{NULL} (the default),
 #'  \eqn{p - 1} components will be returned.
-#' @param sup_ind A \code{\link{numeric}} or \code{\link{logical}} vector
-#'  specifying the indices of the supplementary individuals.
-#' @param sup_var A \code{\link{numeric}} or \code{\link{logical}} vector
-#'  specifying the indices of the supplementary variables.
-#' @param weight_ind A \code{\link{numeric}} vector specifying the active
-#'  individual weights. If \code{NULL} (the default), no weights are used.
-#' @param weight_var A \code{\link{numeric}} vector specifying the active
-#'  individual weights. If \code{NULL} (the default), no weights are used.
+#' @param sup_row A \code{\link{numeric}} or \code{\link{logical}} vector
+#'  specifying the indices of the supplementary rows (individuals).
+#' @param sup_col A \code{\link{numeric}} or \code{\link{logical}} vector
+#'  specifying the indices of the supplementary columns (variables).
+#' @param weight_row A \code{\link{numeric}} vector specifying the active
+#'  row (individual) weights. If \code{NULL} (the default), no weights are used.
+#' @param weight_col A \code{\link{numeric}} vector specifying the active
+#'  column (variable) weights. If \code{NULL} (the default), no weights are
+#'  used.
 #' @param ... Currently not used.
 #' @return
 #'  A \linkS4class{PCA} object.
@@ -288,7 +289,7 @@ setGeneric(
 #' @param newdata An object of supplementary points coercible to a
 #'  \code{\link{matrix}} for which to compute principal coordinates.
 #' @param margin A length-one \code{\link{numeric}} vector giving the subscript
-#'  which the data will be returned: \code{1} indicates individuals/rows (the
+#'  which the data will be predicted: \code{1} indicates individuals/rows (the
 #'  default), \code{2} indicates variables/columns.
 #' @return
 #'  A \code{\link{data.frame}} of coordinates.
@@ -326,8 +327,8 @@ NULL
 #' @aliases bootstrap-method
 setGeneric(
   name = "bootstrap",
-  def = function(object, ...) standardGeneric("bootstrap"),
-  valueClass = "MultivariateAnalysis"
+  def = function(object, ...) standardGeneric("bootstrap")
+  # valueClass = "MultivariateAnalysis"
 )
 
 # Plot =========================================================================

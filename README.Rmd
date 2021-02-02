@@ -58,13 +58,12 @@ library(khroma)
 ```
 
 ```{r pca}
-## Select 25 random supplementary individuals
-set.seed(12345)
-sup <- sample(nrow(iris), size = 25, replace = TRUE)
+## Load data
+data(iris)
 
 ## Compute PCA
 ## (non numeric variables are automatically removed)
-X <- pca(iris, scale = TRUE, sup_ind = sup)
+X <- pca(iris, center = TRUE, scale = TRUE)
 ```
 
 ### Summarize
@@ -96,13 +95,13 @@ get_eigenvalues(X)
 
 ```{r plot-ind, fig.width=5, fig.height=3.5, fig.show='hold'}
 ## Plot active individuals by group
-plot_rows(X, group = iris$Species, active = TRUE, sup = TRUE) +
+plot_rows(X, group = iris$Species) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_contrast() # Custom color scale
 
 ## Plot all individuals by cos2
-plot_rows(X, highlight = "cos2", active = TRUE, sup = FALSE) +
+plot_rows(X, highlight = "cos2") +
   ggplot2::theme_bw() + # Change theme
   ggplot2::scale_size_continuous(range = c(1, 3)) + # Custom size scale
   khroma::scale_color_iridescent() # Custom color scale
@@ -149,6 +148,18 @@ plot_cos2(X, margin = 2, axes = c(1, 2)) +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() + # Change theme
   ggplot2::theme(legend.position = "bottom") # Edit theme
+```
+
+### Validation
+
+```{r plot-valid, fig.width=5, fig.height=3.5, fig.show='hold'}
+## Partial bootstrap
+Y <- bootstrap(X, n = 30)
+
+## Plot with ellipses
+plot_columns(Y) +
+  ggplot2::stat_ellipse() + # Add ellipses
+  ggplot2::theme_bw() # Change theme
 ```
 
 ## Contributing

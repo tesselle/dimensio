@@ -12,6 +12,7 @@
 \alias{plot_columns,CA-method}
 \alias{plot_columns,PCA-method}
 \alias{plot,PCA,missing-method}
+\alias{plot_columns,BootstrapPCA-method}
 \title{Visualize Factor Map}
 \usage{
 plot_rows(object, ...)
@@ -57,6 +58,15 @@ plot_columns(object, ...)
 )
 
 \S4method{plot_columns}{PCA}(
+  object,
+  axes = c(1, 2),
+  active = TRUE,
+  sup = TRUE,
+  highlight = NULL,
+  group = NULL
+)
+
+\S4method{plot_columns}{BootstrapPCA}(
   object,
   axes = c(1, 2),
   active = TRUE,

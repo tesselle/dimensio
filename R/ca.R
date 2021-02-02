@@ -147,12 +147,12 @@ setMethod(
     cos_row <- coord_row^2 / dist_row
     cos_col <- coord_col^2 / dist_col
 
-    names(sv) <- paste0("CA", dim_keep)
+    names(sv) <- paste0("F", dim_keep)
     .CA(
       data = object,
       dimension = as.integer(ndim),
       singular_values = sv,
-      rows = .MultivariateResults(
+      rows = build_results(
         names = names_row,
         principal = coord_row,
         standard = U,
@@ -160,10 +160,9 @@ setMethod(
         distances = dist_row,
         cosine = cos_row,
         weights = w_row,
-        supplement = is_row_sup,
-        prefix = "CA"
+        supplement = is_row_sup
       ),
-      columns = .MultivariateResults(
+      columns = build_results(
         names = names_col,
         principal = coord_col,
         standard = V,
@@ -171,8 +170,7 @@ setMethod(
         distances = dist_col,
         cosine = cos_col,
         weights = w_col,
-        supplement = is_col_sup,
-        prefix = "CA"
+        supplement = is_col_sup
       )
     )
   }
@@ -208,7 +206,7 @@ setMethod(
     # Compute principal coordinates
     coords <- crossprod(t(data), std)
     coords <- as.data.frame(coords)
-    colnames(coords) <- paste0("CA", seq_along(coords))
+    colnames(coords) <- paste0("F", seq_along(coords))
     return(coords)
   }
 )

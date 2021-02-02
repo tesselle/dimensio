@@ -45,27 +45,23 @@ test_that("CA - data.frame", {
   expect_message(ca(df, sup_col = 1:5), "qualitative variable was removed")
 })
 test_that("Predict new coordinates", {
-  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)
+  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
 
-  is_sup_rows <- sort(sample(1:10, 3, FALSE))
-  is_sup_cols <- sort(sample(1:10, 4, FALSE))
+  res <- ca(cts)
+  new_rows <- predict(res, cts, margin = 1)
+  new_cols <- predict(res, cts, margin = 2)
 
-  res <- ca(cts[-is_sup_rows, -is_sup_cols])
-  new_rows <- predict(res, cts[is_sup_rows, -is_sup_cols], margin = 1)
-  new_cols <- predict(res, cts[-is_sup_rows, is_sup_cols], margin = 2)
+  sup_rows <- get_coordinates(res, margin = 1)
+  sup_cols <- get_coordinates(res, margin = 2)
 
-  res_sup <- ca(cts, sup_row = is_sup_rows, sup_col = is_sup_cols)
-  sup_rows <- get_coordinates(res_sup, margin = 1)
-  sup_cols <- get_coordinates(res_sup, margin = 2)
-
-  expect_equal(new_rows, sup_rows[sup_rows$.sup, 1:5], ignore_attr = TRUE)
-  expect_equal(new_cols, sup_cols[sup_cols$.sup, 1:5], ignore_attr = TRUE)
+  expect_equal(new_rows, sup_rows[, 1:4], ignore_attr = TRUE)
+  expect_equal(new_cols, sup_cols[, 1:4], ignore_attr = TRUE)
 })
 test_that("Compare with {FactoMineR}", {
   skip_on_cran()
   skip_if_not_installed("FactoMineR")
 
-  mtx <- matrix(data = sample(1:10, 100, TRUE), ncol = 10)
+  mtx <- matrix(data = sample(1:10, 1000, TRUE), ncol = 10)
   df <- as.data.frame(mtx)
 
   is_sup_rows <- sort(sample(1:10, 3, FALSE))

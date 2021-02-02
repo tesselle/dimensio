@@ -158,6 +158,27 @@ setMethod(
   }
 )
 
+#' @export
+#' @rdname plot_coordinates
+#' @aliases plot_columns,BootstrapPCA-method
+setMethod(
+  f = "plot_columns",
+  signature = signature(object = "BootstrapPCA"),
+  definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
+                        highlight = NULL, group = NULL) {
+    ## ggplot2
+    plot_points(
+      object,
+      margin = 2,
+      axes = axes,
+      active = active,
+      sup = sup,
+      highlight = highlight,
+      group = group
+    )
+  }
+)
+
 # Contributions ================================================================
 #' @export
 #' @rdname plot_contributions
@@ -178,7 +199,8 @@ setMethod(
       limit = limit
     )
 
-    y_name <- sprintf("Contributions %s (%%)", paste0(axes, collapse = "-"))
+    y_name <- sprintf("Contributions to %s (%%)",
+                      paste0("F", axes, collapse = "-"))
 
     ## ggplot2
     ggplot2::ggplot(data = data) +
@@ -348,7 +370,7 @@ prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
   ## Group
   grp <- unlist(get_groups(object, margin = margin))
   if (length(grp) > 0) {
-    data$group <- grp
+    data$group <- factor(grp, levels = unique(grp))
   } else if (!is.null(group)) {
     group_k <- unlist(get_order(object, margin = margin))
     data$group <- group[group_k]

@@ -59,13 +59,12 @@ library(khroma)
 ```
 
 ``` r
-## Select 25 random supplementary individuals
-set.seed(12345)
-sup <- sample(nrow(iris), size = 25, replace = TRUE)
+## Load data
+data(iris)
 
 ## Compute PCA
 ## (non numeric variables are automatically removed)
-X <- pca(iris, scale = TRUE, sup_ind = sup)
+X <- pca(iris, center = TRUE, scale = TRUE)
 #> 1 qualitative variable was removed: Species.
 ```
 
@@ -77,38 +76,24 @@ summary(X, margin = 1, rank = 2)
 #> --- Principal Components Analysis (PCA) -----------------------------------------
 #> 
 #> Eigenvalues:
-#>     eigenvalues variance cumulative
-#> PC1       2.923   73.461     73.461
-#> PC2       0.898   22.575     96.037
-#> PC3       0.158    3.963    100.000
+#>    eigenvalues variance cumulative
+#> F1       2.918   73.342     73.342
+#> F2       0.914   22.970     96.312
+#> F3       0.147    3.688    100.000
 #> 
 #> Active individuals:
 #>     dist PC1_coord PC1_contrib PC1_cos2 PC2_coord PC2_contrib PC2_cos2
-#> 4  2.478    -2.380       1.526    0.922    -0.682       0.408    0.076
-#> 5  2.532    -2.477       1.652    0.956     0.526       0.243    0.043
-#> 6  2.552    -2.162       1.259    0.717     1.356       1.612    0.282
-#> 7  2.553    -2.529       1.723    0.981    -0.071       0.004    0.001
-#> 8  2.321    -2.316       1.445    0.995     0.125       0.014    0.003
-#> 9  2.693    -2.413       1.568    0.803    -1.188       1.238    0.195
-#> 11 2.452    -2.252       1.366    0.843     0.933       0.762    0.145
-#> 13 2.442    -2.297       1.421    0.885    -0.792       0.550    0.105
-#> 15 2.915    -2.287       1.409    0.615     1.735       2.639    0.354
-#> 16 3.445    -2.356       1.495    0.468     2.512       5.532    0.532
-#> (127 more)
-#> 
-#> Supplementary individuals:
-#>     dist PC1_coord PC1_cos2 PC2_coord PC2_cos2
-#> 1  2.382    -2.349    0.972     0.376    0.025
-#> 2  2.293    -2.157    0.885    -0.733    0.102
-#> 3  2.484    -2.446    0.969    -0.433    0.030
-#> 10 2.343    -2.264    0.934    -0.538    0.053
-#> 12 2.417    -2.410    0.995     0.025    0.000
-#> 14 2.918    -2.716    0.866    -1.052    0.130
-#> 30 2.389    -2.347    0.965    -0.428    0.032
-#> 38 2.662    -2.616    0.966     0.467    0.031
-#> 40 2.266    -2.252    0.988     0.176    0.006
-#> 51 1.553     1.061    0.467     0.898    0.335
-#> (23 more)
+#> 1  2.319    -2.265       1.172    0.954    -0.480       0.168    0.043
+#> 2  2.202    -2.081       0.989    0.893     0.674       0.331    0.094
+#> 3  2.389    -2.364       1.277    0.979     0.342       0.085    0.020
+#> 4  2.378    -2.299       1.208    0.935     0.597       0.260    0.063
+#> 5  2.476    -2.390       1.305    0.932    -0.647       0.305    0.068
+#> 6  2.555    -2.076       0.984    0.660    -1.489       1.617    0.340
+#> 7  2.468    -2.444       1.364    0.981    -0.048       0.002    0.000
+#> 8  2.246    -2.233       1.139    0.988    -0.223       0.036    0.010
+#> 9  2.592    -2.335       1.245    0.812     1.115       0.907    0.185
+#> 10 2.249    -2.184       1.090    0.943     0.469       0.160    0.043
+#> (150 more)
 ```
 
 ### Extract
@@ -129,10 +114,10 @@ summary(X, margin = 1, rank = 2)
 ``` r
 ## Eigenvalues
 get_eigenvalues(X)
-#>     eigenvalues  variance cumulative
-#> PC1   2.9228862 73.461363   73.46136
-#> PC2   0.8982303 22.575364   96.03673
-#> PC3   0.1576910  3.963273  100.00000
+#>    eigenvalues  variance cumulative
+#> F1   2.9184978 73.342264   73.34226
+#> F2   0.9140305 22.969715   96.31198
+#> F3   0.1467569  3.688021  100.00000
 ```
 
 ### Visualize
@@ -144,13 +129,13 @@ as few elements as possible: this makes it easy to customize diagrams
 
 ``` r
 ## Plot active individuals by group
-plot_rows(X, group = iris$Species, active = TRUE, sup = TRUE) +
+plot_rows(X, group = iris$Species) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_contrast() # Custom color scale
 
 ## Plot all individuals by cos2
-plot_rows(X, highlight = "cos2", active = TRUE, sup = FALSE) +
+plot_rows(X, highlight = "cos2") +
   ggplot2::theme_bw() + # Change theme
   ggplot2::scale_size_continuous(range = c(1, 3)) + # Custom size scale
   khroma::scale_color_iridescent() # Custom color scale
@@ -204,6 +189,20 @@ plot_cos2(X, margin = 2, axes = c(1, 2)) +
 ```
 
 ![](man/figures/README-plot-eig-1.png)![](man/figures/README-plot-eig-2.png)![](man/figures/README-plot-eig-3.png)![](man/figures/README-plot-eig-4.png)
+
+### Validation
+
+``` r
+## Partial bootstrap
+Y <- bootstrap(X, n = 30)
+
+## Plot with ellipses
+plot_columns(Y) +
+  ggplot2::stat_ellipse() + # Add ellipses
+  ggplot2::theme_bw() # Change theme
+```
+
+![](man/figures/README-plot-valid-1.png)<!-- -->
 
 ## Contributing
 

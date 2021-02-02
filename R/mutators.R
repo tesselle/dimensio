@@ -21,6 +21,9 @@ get_order <- function(x, margin = 1) {
   if (margin == 2) ord2 <- x@columns@order
   list(rows = ord1, columns = ord2)
 }
+is_centered <- function(x) {
+  !all(x@center == 0)
+}
 is_scaled <- function(x) {
   !all(x@scale == 1)
 }
