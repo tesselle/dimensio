@@ -10,6 +10,12 @@
     ],
     "contributors": [
         {
+            "orcid": "0000-0002-1061-4642",
+            "affiliation": "CNRS",
+            "type": "Other",
+            "name": "Fourvel, Jean-Baptiste"
+        },
+        {
             "orcid": "0000-0001-7503-8685",
             "affiliation": "Universit\u00e9 Bordeaux Montaigne",
             "type": "Other",

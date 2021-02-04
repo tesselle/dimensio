@@ -309,7 +309,7 @@ NULL
 #' @param n A non-negative \code{\link{integer}} giving the number of bootstrap
 #'  replications.
 #' @return
-#'  A \linkS4class{CA} or \linkS4class{PCA} object.
+#'  A \linkS4class{BootstrapCA} or \linkS4class{BootstrapPCA} object.
 #' @param ... Currently not used.
 #' @example inst/examples/ex-bootstrap.R
 #' @author N. Frerebeau

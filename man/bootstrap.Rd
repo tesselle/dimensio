@@ -23,7 +23,7 @@ bootstrap(object, ...)
 replications.}
 }
 \value{
-A \linkS4class{CA} or \linkS4class{PCA} object.
+A \linkS4class{BootstrapCA} or \linkS4class{BootstrapPCA} object.
 }
 \description{
 Checks analysis with partial bootstrap resampling.

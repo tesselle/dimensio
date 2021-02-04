@@ -5,13 +5,13 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "dimensio",
-  "description": "Simple Principal Components Analysis (PCA) and\n    Correspondence Analysis (CA) based on the Singular Value Decomposition\n    (SVD). This package provides S4 classes and methods to compute,\n    extract, summarize and visualize results of multivariate data\n    analysis.",
+  "description": "Simple Principal Components Analysis (PCA) and\n    Correspondence Analysis (CA) based on the Singular Value Decomposition\n    (SVD). This package provides S4 classes and methods to compute,\n    extract, summarize and visualize results of multivariate data\n    analysis. It also includes methods for partial bootstrap validation.",
   "name": "dimensio: Multivariate Data Analysis",
   "codeRepository": "https://github.com/tesselle/dimensio",
-  "relatedLink": "http://dimensio.tesselle.org",
+  "relatedLink": ["http://dimensio.tesselle.org", "https://dimensio.tesselle.org"],
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -28,6 +28,13 @@
     }
   ],
   "contributor": [
+    {
+      "@type": "Person",
+      "givenName": "Jean-Baptiste",
+      "familyName": "Fourvel",
+      "email": "fourvel@mmsh.univ-aix.fr",
+      "@id": "https://orcid.org/0000-0002-1061-4642"
+    },
     {
       "@type": "Person",
       "givenName": "Brice",
@@ -155,7 +162,7 @@
   ],
   "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
   "readme": "https://github.com/tesselle/dimensio/blob/master/README.md",
-  "fileSize": "1099.129KB",
+  "fileSize": "1348.007KB",
   "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#stable"],
   "keywords": [
     "r-package",
@@ -175,7 +182,8 @@
         }
       ],
       "name": "dimensio: Multivariate Data Analysis",
-      "description": "R package version 0.1.0"
+      "url": "https://doi.org/10.5281/zenodo.4478530",
+      "description": "R package version 0.2.0"
     }
   ]
 }

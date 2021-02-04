@@ -13,7 +13,7 @@ Simple Principal Components Analysis (PCA) and
     Correspondence Analysis (CA) based on the Singular Value Decomposition
     (SVD). This package provides S4 classes and methods to compute,
     extract, summarize and visualize results of multivariate data
-    analysis.
+    analysis. It also includes methods for partial bootstrap validation.
 }
 \details{
 \tabular{ll}{
@@ -27,7 +27,7 @@ Simple Principal Components Analysis (PCA) and
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://dimensio.tesselle.org}
+  \item \url{https://dimensio.tesselle.org}
   \item \url{https://github.com/tesselle/dimensio}
   \item Report bugs at \url{https://github.com/tesselle/dimensio/issues}
 }
@@ -37,6 +37,7 @@ Useful links:
 \strong{Full list of authors and contributors} (alphabetic order)
 
 \tabular{ll}{
+Jean-Baptiste Fourvel \tab \emph{CNRS, France} \cr
 Nicolas Frerebeau \tab \emph{Université Bordeaux Montaigne, France} \cr
 Brice Lebrun \tab \emph{Université Bordeaux Montaigne, France} \cr
 }
