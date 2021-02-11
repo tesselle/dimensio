@@ -224,24 +224,26 @@ setMethod(
   signature = signature(object = "MultivariateAnalysis"),
   definition = function(object, margin = 2, axes = c(1, 2), active = TRUE,
                         sup = TRUE, sort = TRUE, decreasing = TRUE,
-                        limit = 10) {
+                        limit = 10, fill = "grey30", border = "grey10") {
     ## Prepare data
     data <- prepare_cos2(object, margin = margin, axes = axes,
                          active = active, sup = sup, sort = sort,
                          decreasing = decreasing, limit = limit)
 
     ## ggplot2
+    xx <- sprintf("along %s", paste0("F", axes, collapse = "-"))
+    y_name <- bquote(paste(plain(cos)^2~.(xx)))
+
+    ## ggplot2
     ggplot2::ggplot(data = data) +
       ggplot2::aes(
         x = .data$x,
         y = .data$y,
-        label = .data$label,
-        color = .data$group
+        label = .data$label
       ) +
-      ggplot2::geom_point() +
-      ggplot2::scale_x_continuous(name = print_variance(object, axes[[1]])) +
-      ggplot2::scale_y_continuous(name = print_variance(object, axes[[2]])) +
-      ggplot2::coord_fixed()
+      ggplot2::geom_col(fill = fill, colour = border) +
+      ggplot2::scale_x_discrete(name = "") +
+      ggplot2::scale_y_continuous(name = y_name)
   }
 )
 
@@ -407,7 +409,7 @@ prepare_contrib <- function(object, margin, axes, sort = TRUE,
   data <- data.frame(
     x = rownames(contrib),
     y = values,
-    label = round(values, digits = 1)
+    label = round(values, digits = 2)
   )
 
   ## Sort data
@@ -432,27 +434,26 @@ prepare_cos2 <- function(object, margin, axes, active = TRUE, sup = TRUE,
                          sort = TRUE, decreasing = TRUE, limit = 10) {
   ## Get data
   cos2 <- get_cos2(object, margin = margin)
+  if (length(axes) > 1) {
+    values <- joint_cos2(object, margin = margin, axes = axes)
+  } else {
+    values <- cos2[[axes[[1]]]]
+  }
 
   ## Prepare data
   data <- data.frame(
-    x = cos2[[axes[[1]]]],
-    y = cos2[[axes[[2]]]],
-    z = rowSums(cos2[, axes]),
-    label = rownames(cos2),
-    sup = cos2$.sup
+    x = rownames(cos2),
+    y = values,
+    label = round(values, digits = 2)
   )
 
-  type <- ifelse(all(margin == 1), "row", "column")
-  obs <- ifelse(data$sup, "suppl.", "active")
-  data$group <- sprintf("%s (%s)", type, obs)
-
   ## Subset
-  if (!active & sup) data <- data[data$sup, ]
-  if (active & !sup) data <- data[!data$sup, ]
+  if (!active & sup) data <- data[cos2$.sup, ]
+  if (active & !sup) data <- data[!cos2$.sup, ]
 
   ## Sort data
   if (sort) {
-    data <- data[order(data$z, decreasing = decreasing), ]
+    data <- data[order(data$y, decreasing = decreasing), ]
   }
 
   ## Subset
@@ -460,6 +461,9 @@ prepare_cos2 <- function(object, margin, axes, active = TRUE, sup = TRUE,
     limit <- min(nrow(data), limit)
     data <- data[seq_len(limit), , drop = FALSE]
   }
+
+  ## Prevent reordering by ggplot2
+  data$x <- factor(data$x, levels = unique(data$x))
 
   data
 }

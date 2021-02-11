@@ -11,8 +11,6 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4478530.svg)](https://doi.org/10.5281/zenodo.4478530)
 <!-- badges: end -->
@@ -147,17 +145,12 @@ plot_rows(X, highlight = "cos2") +
 ## Plot variables factor map
 plot_columns(X) +
   ggrepel::geom_label_repel() + # Add repelling labels
-  ggplot2::theme_bw() + # Change theme
-  ggplot2::theme(legend.position = "bottom") # Edit theme
+  ggplot2::theme_bw() # Change theme
 
 ## Highlight contributions
 plot_columns(X, highlight = "contrib") +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() + # Change theme
-  ggplot2::theme( # Edit theme
-    legend.position = "bottom",
-    legend.box = "vertical"
-  ) +
   khroma::scale_color_YlOrBr(range = c(0.5, 1)) # Custom color scale
 ```
 
@@ -175,6 +168,7 @@ plot_variance(X, variance = TRUE, cumulative = TRUE) +
 
 ## Plot variables contributions to the definition of the first component
 plot_contributions(X, margin = 2, axes = 1) +
+  ggplot2::geom_text(nudge_y = 2) + # Add labels
   ggplot2::theme_bw() + # Change theme
   ggplot2::theme( # Edit theme
     # Rotate x axis labels
@@ -183,9 +177,12 @@ plot_contributions(X, margin = 2, axes = 1) +
 
 ## Plot cos2
 plot_cos2(X, margin = 2, axes = c(1, 2)) +
-  ggrepel::geom_label_repel() + # Add repelling labels
+  ggplot2::geom_text(nudge_y = 0.05) + # Add labels
   ggplot2::theme_bw() + # Change theme
-  ggplot2::theme(legend.position = "bottom") # Edit theme
+  ggplot2::theme( # Edit theme
+    # Rotate x axis labels
+    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, vjust = 1)
+  )
 ```
 
 ![](man/figures/README-plot-eig-1.png)![](man/figures/README-plot-eig-2.png)![](man/figures/README-plot-eig-3.png)![](man/figures/README-plot-eig-4.png)

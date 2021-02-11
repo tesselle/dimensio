@@ -2,7 +2,6 @@
 #' @include AllClasses.R AllGenerics.R
 NULL
 
-
 #' @export
 #' @rdname ca
 #' @aliases ca,data.frame-method

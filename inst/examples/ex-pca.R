@@ -1,6 +1,5 @@
 ## Load data
-library(codex)
-data("compiegne")
+data("compiegne", package = "codex")
 
 ## Compute principal components analysis
 X <- pca(compiegne, scale = TRUE, sup_col = 7:10)

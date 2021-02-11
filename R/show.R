@@ -4,13 +4,55 @@ NULL
 
 setMethod(
   f = "show",
-  signature = "MultivariateAnalysis",
+  signature = "CA",
   definition = function(object) {
-    header <- format_header(object)
-    cat(header, sep = "\n")
+    row_sup <- object@rows@supplement
+    col_sup <- object@columns@supplement
+
+    sup_txt <- " (+ %d supplementary)"
+    row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
+    col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
+
+    cat(
+      format_header("Correspondence Analysis (CA)"),
+      sprintf("* Row variable: %d categories%s.", sum(!row_sup), row_txt),
+      sprintf("* Column variable: %d categories%s.", sum(!col_sup), col_txt),
+      "",
+      sprintf("* %d components.", dim(object)),
+      sep = "\n"
+    )
     invisible(object)
   }
 )
+setMethod(
+  f = "show",
+  signature = "PCA",
+  definition = function(object) {
+    row_sup <- object@rows@supplement
+    col_sup <- object@columns@supplement
+
+    sup_txt <- " (+ %d supplementary)"
+    row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
+    col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
+
+    var_center <- sprintf("* Variables were%s shifted to be zero centered.",
+                          ifelse(is_centered(object), "", " NOT"))
+    var_scale <- sprintf("* Variables were%s scaled to unit variance.",
+                         ifelse(is_scaled(object), "", " NOT"))
+    cat(
+      format_header("Principal Components Analysis (PCA)"),
+      sprintf("* %d individuals%s.", sum(!row_sup), row_txt),
+      sprintf("* %d variables%s.", sum(!col_sup), col_txt),
+      "",
+      sprintf("* %d components.", dim(object)),
+      var_center,
+      var_scale,
+      sep = "\n"
+    )
+    invisible(object)
+  }
+)
+
 setMethod(
   f = "show",
   signature = "MultivariateSummary",
@@ -19,11 +61,14 @@ setMethod(
     n_dig <- getOption("dimensio.digits")
     n_max <- getOption("dimensio.max.print")
 
-    analysis <- switch (
-      class(object),
-      SummaryCA = c("rows", "columns"),
-      SummaryPCA = c("individuals", "variables")
-    )
+    if (methods::is(object, "SummaryCA")) {
+      analysis <- c("rows", "columns")
+      title <- "Correspondence Analysis (CA)"
+    }
+    if (methods::is(object, "SummaryPCA")) {
+      analysis <- c("individuals", "variables")
+      title <- "Principal Components Analysis (PCA)"
+    }
 
     ## Get data
     eig <- round(object@eigenvalues, digits = n_dig)
@@ -62,24 +107,14 @@ setMethod(
     }
 
     ## Print
-    header <- format_header(object)
+    header <- format_header(title)
     cat(header, eigen, sum_act, extra_act, sum_sup, extra_sup, sep = "\n")
     invisible(object)
   }
 )
 
-format_header <- function(object, width = getOption("width")) {
-  analysis <- switch (
-    class(object),
-    CA = "Correspondence Analysis (CA)",
-    BootstrapCA = "Correspondence Analysis (CA)",
-    SummaryCA = "Correspondence Analysis (CA)",
-    PCA = "Principal Components Analysis (PCA)",
-    BootstrapPCA = "Principal Components Analysis (PCA)",
-    SummaryPCA = "Principal Components Analysis (PCA)"
-  )
-
-  n_dashes <- width - nchar(analysis) - 4
+format_header <- function(title, width = getOption("width")) {
+  n_dashes <- width - nchar(title) - 4
   dashes <- paste0(rep("-", n_dashes), collapse = "")
-  sprintf("--- %s %s", analysis, dashes)
+  sprintf("--- %s %s", title, dashes)
 }

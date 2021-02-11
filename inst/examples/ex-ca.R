@@ -1,6 +1,5 @@
 ## Load data
-library(codex)
-data("zuni")
+data("zuni", package = "codex")
 
 ## The chi square of independence between the two variables
 stats::chisq.test(zuni)

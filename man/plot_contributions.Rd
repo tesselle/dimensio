@@ -33,7 +33,9 @@ plot_cos2(object, ...)
   sup = TRUE,
   sort = TRUE,
   decreasing = TRUE,
-  limit = 10
+  limit = 10,
+  fill = "grey30",
+  border = "grey10"
 )
 }
 \arguments{
