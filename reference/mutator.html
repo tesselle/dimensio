@@ -133,6 +133,8 @@
 
     <pre class="usage"><span class='fu'>get_coordinates</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
+<span class='fu'>get_replications</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
 <span class='fu'>get_contributions</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='fu'>get_correlations</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
@@ -159,10 +161,16 @@
 <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MultivariateAnalysis</span>
+<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateAnalysis</span>
 <span class='fu'>get_contributions</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MultivariateAnalysis</span>
 <span class='fu'>get_coordinates</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
+
+<span class='co'># S4 method for MultivariateBootstrap</span>
+<span class='fu'>get_replications</span><span class='op'>(</span><span class='va'>x</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'># S4 method for PCA</span>
 <span class='fu'>get_correlations</span><span class='op'>(</span><span class='va'>x</span>, sup_name <span class='op'>=</span> <span class='st'>".sup"</span><span class='op'>)</span>
@@ -232,6 +240,8 @@ the definition of the principal dimensions.</p>
 <p><code>get_coordinates()</code> returns a <code>data.frame</code> of coordinates.
 An extra column (named after <code>sup_name</code>) is added specifying whether
 an observation is a supplementary point or not.</p>
+<p><code>get_replications()</code> returns an <code>array</code> of replicated coordinates
+(see <code><a href='bootstrap.html'>bootstrap()</a></code>).</p>
 <p><code>get_correlations()</code> returns a <code>data.frame</code> of correlations
 between variables and dimensions (<code>PCA</code>). An extra column (named after
 <code>sup_name</code>) is added specifying whether an observation is a supplementary point or not.</p>

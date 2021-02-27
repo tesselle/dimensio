@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PCA Results — PCA-class • dimensio</title>
+<title>Output of Bootstrap Replications — MultivariateBootstrap • dimensio</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="PCA Results — PCA-class" />
-<meta property="og:description" content="An S4 class to store the results of a principal components analysis." />
+<meta property="og:title" content="Output of Bootstrap Replications — MultivariateBootstrap" />
+<meta property="og:description" content="A virtual S4 class to store the output of a bootstrap analysis." />
 <meta property="og:image" content="http://dimensio.tesselle.org/logo.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@nfrerebeau" />
@@ -122,13 +122,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>PCA Results</h1>
+    <h1>Output of Bootstrap Replications</h1>
     <small class="dont-index">Source: <a href='https://github.com/tesselle/dimensio/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a></small>
-    <div class="hidden name"><code>PCA-class.Rd</code></div>
+    <div class="hidden name"><code>MultivariateBootstrap.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An S4 class to store the results of a principal components analysis.</p>
+    <p>A virtual S4 class to store the output of a bootstrap analysis.</p>
     </div>
 
 
@@ -138,11 +138,8 @@
     
 
 <dl>
-<dt><code>center</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the column mean of the
-initial dataset (active individuals only).</p></dd>
-
-<dt><code>scale</code></dt><dd><p>A <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the column
-standard deviations of the initial dataset (active individuals only).</p></dd>
+<dt><code>replications</code></dt><dd><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> giving the number of bootstrap
+replications.</p></dd>
 
 </dl>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -150,81 +147,13 @@ standard deviations of the initial dataset (active individuals only).</p></dd>
     <div class='dont-index'><p>Other class: 
 <code><a href='CA-class.html'>CA-class</a></code>,
 <code><a href='MultivariateAnalysis.html'>MultivariateAnalysis</a></code>,
-<code><a href='MultivariateBootstrap.html'>MultivariateBootstrap</a></code>,
 <code><a href='MultivariateResults.html'>MultivariateResults</a></code>,
-<code><a href='MultivariateSummary.html'>MultivariateSummary</a></code></p></div>
+<code><a href='MultivariateSummary.html'>MultivariateSummary</a></code>,
+<code><a href='PCA-class.html'>PCA-class</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>N. Frerebeau</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Load data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"compiegne"</span>, package <span class='op'>=</span> <span class='st'>"folio"</span><span class='op'>)</span>
-
-<span class='co'>## Compute principal components analysis</span>
-<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='pca.html'>pca</a></span><span class='op'>(</span><span class='va'>compiegne</span>, scale <span class='op'>=</span> <span class='cn'>TRUE</span>, sup_col <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
-
-<span class='co'>## Get row coordinates</span>
-<span class='fu'><a href='mutator.html'>get_coordinates</a></span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;          F1         F2         F3         F4  .sup
-#&gt; 5 -4.028910  0.8641397 -0.8323490 -0.5311213 FALSE
-#&gt; 4 -1.200000 -1.3998925  2.0665385  0.5545804 FALSE
-#&gt; 3  1.281060 -3.0459165 -1.4606637  0.3039523 FALSE
-#&gt; 2  2.524114  0.5491907  0.6135577 -1.2700893 FALSE
-#&gt; 1  1.423737  3.0324786 -0.3870835  0.9426779 FALSE</div><div class='input'>
-<span class='co'>## Get column coordinates</span>
-<span class='fu'><a href='mutator.html'>get_coordinates</a></span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;             F1         F2           F3           F4  .sup
-#&gt; A -0.757352643 -0.6450544  0.002336832  0.101569114 FALSE
-#&gt; B  0.731814163 -0.5399164 -0.397242180  0.123032258 FALSE
-#&gt; C -0.654603931  0.2027554  0.699509268  0.202659109 FALSE
-#&gt; D  0.822280000  0.5033252  0.120820243 -0.236477847 FALSE
-#&gt; E  0.766689218 -0.5390548  0.337863168 -0.086348632 FALSE
-#&gt; F  0.866067134  0.4640471 -0.079538530  0.168111998 FALSE
-#&gt; K -0.003259205 -0.9040812  0.275262947  0.326889788 FALSE
-#&gt; L  0.447986933 -0.8295169 -0.333466553  0.003079837 FALSE
-#&gt; M  0.884262154  0.3352261  0.309946481 -0.098168669 FALSE
-#&gt; N -0.902522062  0.1616100 -0.047496227 -0.396333502 FALSE
-#&gt; O  0.110236742  0.9024775  0.072642687  0.410006379 FALSE
-#&gt; P  0.425781193 -0.5743904  0.672218354 -0.192115939 FALSE
-#&gt; G  0.887407063  0.4351508  0.067691802 -0.136272946  TRUE
-#&gt; H  0.575300330  0.7523059 -0.070885782  0.313114383  TRUE
-#&gt; I  0.718162798  0.5002278  0.134453678 -0.464689714  TRUE
-#&gt; J  0.756161121  0.6513134 -0.058568231  0.024103134  TRUE</div><div class='input'>
-<span class='co'>## Get row contributions</span>
-<span class='fu'><a href='mutator.html'>get_contributions</a></span><span class='op'>(</span><span class='va'>X</span>, margin <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;          F1        F2        F3        F4
-#&gt; 5 58.575577  3.476175  9.088098  8.860150
-#&gt; 4  5.196417  9.122694 56.020766  9.660123
-#&gt; 3  5.922161 43.188663 27.987396  2.901780
-#&gt; 2 22.991073  1.404042  4.938247 50.666637
-#&gt; 1  7.314773 42.808425  1.965492 27.911310</div><div class='input'>
-<span class='co'>## Get correlations between variables and dimensions</span>
-<span class='fu'><a href='mutator.html'>get_correlations</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            F1        F2          F3          F4  .sup
-#&gt; A 0.757352643 0.6450544 0.002336832 0.101569114 FALSE
-#&gt; B 0.731814163 0.5399164 0.397242180 0.123032258 FALSE
-#&gt; C 0.654603931 0.2027554 0.699509268 0.202659109 FALSE
-#&gt; D 0.822280000 0.5033252 0.120820243 0.236477847 FALSE
-#&gt; E 0.766689218 0.5390548 0.337863168 0.086348632 FALSE
-#&gt; F 0.866067134 0.4640471 0.079538530 0.168111998 FALSE
-#&gt; K 0.003259205 0.9040812 0.275262947 0.326889788 FALSE
-#&gt; L 0.447986933 0.8295169 0.333466553 0.003079837 FALSE
-#&gt; M 0.884262154 0.3352261 0.309946481 0.098168669 FALSE
-#&gt; N 0.902522062 0.1616100 0.047496227 0.396333502 FALSE
-#&gt; O 0.110236742 0.9024775 0.072642687 0.410006379 FALSE
-#&gt; P 0.425781193 0.5743904 0.672218354 0.192115939 FALSE
-#&gt; G 0.887407063 0.4351508 0.067691802 0.136272946  TRUE
-#&gt; H 0.575300330 0.7523059 0.070885782 0.313114383  TRUE
-#&gt; I 0.718162798 0.5002278 0.134453678 0.464689714  TRUE
-#&gt; J 0.756161121 0.6513134 0.058568231 0.024103134  TRUE</div><div class='input'>
-<span class='co'>## Get eigenvalues</span>
-<span class='fu'><a href='mutator.html'>get_eigenvalues</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    eigenvalues  variance cumulative
-#&gt; F1    5.542281 46.185672   46.18567
-#&gt; F2    4.296316 35.802634   81.98831
-#&gt; F3    1.524642 12.705352   94.69366
-#&gt; F4    0.636761  5.306341  100.00000</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
