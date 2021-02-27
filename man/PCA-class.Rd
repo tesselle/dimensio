@@ -22,7 +22,7 @@ standard deviations of the initial dataset (active individuals only).}
 
 \examples{
 ## Load data
-data("compiegne", package = "codex")
+data("compiegne", package = "folio")
 
 ## Compute principal components analysis
 X <- pca(compiegne, scale = TRUE, sup_col = 7:10)

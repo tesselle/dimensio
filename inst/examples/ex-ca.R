@@ -1,5 +1,5 @@
 ## Load data
-data("zuni", package = "codex")
+data("zuni", package = "folio")
 
 ## The chi square of independence between the two variables
 stats::chisq.test(zuni)

@@ -1,6 +1,5 @@
 ## Load data
-library(codex)
-data("zuni")
+data("zuni", package = "folio")
 
 ## Compute correspondence analysis
 X <- ca(zuni)

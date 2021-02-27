@@ -72,8 +72,7 @@ Plots contributions histogram and \eqn{cos^2}{cos2} scatterplot.
 }
 \examples{
 ## Load data
-library(codex)
-data("zuni")
+data("zuni", package = "folio")
 
 ## Compute correspondence analysis
 X <- ca(zuni)

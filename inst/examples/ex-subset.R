@@ -1,6 +1,5 @@
 ## Load data
-library(codex)
-data("mississippi")
+data("mississippi", package = "folio")
 
 ## Compute principal components analysis
 X <- pca(mississippi, scale = TRUE, sup_row = 8:10, sup_col = 7:10)

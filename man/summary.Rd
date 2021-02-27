@@ -32,8 +32,7 @@ Provides a summary of the results of a multivariate data analysis.
 }
 \examples{
 ## Load data
-library(codex)
-data("zuni")
+data("zuni", package = "folio")
 
 ## Compute correspondence analysis
 X <- ca(zuni, rank = 5, sup_row = 1:50)
