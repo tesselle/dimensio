@@ -46,6 +46,7 @@ get_eigenvalues(X)
 Other class: 
 \code{\link{CA-class}},
 \code{\link{MultivariateAnalysis}},
+\code{\link{MultivariateBootstrap}},
 \code{\link{MultivariateResults}},
 \code{\link{MultivariateSummary}}
 }

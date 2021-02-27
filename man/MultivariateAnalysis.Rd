@@ -39,6 +39,7 @@ vector.}
 \seealso{
 Other class: 
 \code{\link{CA-class}},
+\code{\link{MultivariateBootstrap}},
 \code{\link{MultivariateResults}},
 \code{\link{MultivariateSummary}},
 \code{\link{PCA-class}}

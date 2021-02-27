@@ -46,6 +46,7 @@ observation.}
 Other class: 
 \code{\link{CA-class}},
 \code{\link{MultivariateAnalysis}},
+\code{\link{MultivariateBootstrap}},
 \code{\link{MultivariateSummary}},
 \code{\link{PCA-class}}
 }

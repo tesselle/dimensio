@@ -5,6 +5,7 @@ NULL
 # S4 dispatch to base S3 generic ===============================================
 setGeneric("rownames")
 setGeneric("colnames")
+setGeneric("dimnames")
 setGeneric("loadings")
 
 # Extract ======================================================================
@@ -31,6 +32,9 @@ setGeneric("loadings")
 #'  \code{get_coordinates()} returns a \code{data.frame} of coordinates.
 #'  An extra column (named after \code{sup_name}) is added specifying whether
 #'  an observation is a supplementary point or not.
+#'
+#'  \code{get_replications()} returns an \code{array} of replicated coordinates
+#'  (see \code{\link[=bootstrap]{bootstrap()}}).
 #'
 #'  \code{get_correlations()} returns a \code{data.frame} of correlations
 #'  between variables and dimensions (\code{PCA}). An extra column (named after
@@ -72,6 +76,14 @@ setGeneric(
   name = "get_coordinates",
   def = function(x, ...) standardGeneric("get_coordinates"),
   valueClass = "data.frame"
+)
+
+#' @rdname mutator
+#' @aliases get_replications-method
+setGeneric(
+  name = "get_replications",
+  def = function(x, ...) standardGeneric("get_replications"),
+  valueClass = "array"
 )
 
 #' @rdname mutator

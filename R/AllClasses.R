@@ -81,6 +81,25 @@
   contains = "VIRTUAL"
 )
 
+## Bootstrap -------------------------------------------------------------------
+#' Output of Bootstrap Replications
+#'
+#' A virtual S4 class to store the output of a bootstrap analysis.
+#' @slot replications An \code{\link{integer}} giving the number of bootstrap
+#' replications.
+#' @author N. Frerebeau
+#' @family class
+#' @docType class
+#' @name MultivariateBootstrap
+#' @aliases MultivariateBootstrap-class
+.MultivariateBootstrap <- setClass(
+  Class = "MultivariateBootstrap",
+  slots = c(
+    replications = "integer"
+  ),
+  contains = "VIRTUAL"
+)
+
 ## Summary ---------------------------------------------------------------------
 #' Summary of Multivariate Data Analysis
 #'
@@ -141,7 +160,7 @@
 #' @aliases BootstrapCA-class
 .BootstrapCA <- setClass(
   Class = "BootstrapCA",
-  contains = "CA"
+  contains = c("MultivariateBootstrap", "CA")
 )
 
 # PCA ==========================================================================
@@ -171,7 +190,7 @@
 #' @aliases BootstrapPCA-class
 .BootstrapPCA <- setClass(
   Class = "BootstrapPCA",
-  contains = "PCA"
+  contains = c("MultivariateBootstrap", "PCA")
 )
 
 # Initialize ===================================================================

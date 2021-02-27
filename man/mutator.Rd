@@ -7,6 +7,8 @@
 \alias{set}
 \alias{get_coordinates}
 \alias{get_coordinates-method}
+\alias{get_replications}
+\alias{get_replications-method}
 \alias{get_contributions}
 \alias{get_contributions-method}
 \alias{get_correlations}
@@ -26,8 +28,10 @@
 \alias{dim,MultivariateAnalysis-method}
 \alias{rownames,MultivariateAnalysis-method}
 \alias{colnames,MultivariateAnalysis-method}
+\alias{dimnames,MultivariateAnalysis-method}
 \alias{get_contributions,MultivariateAnalysis-method}
 \alias{get_coordinates,MultivariateAnalysis-method}
+\alias{get_replications,MultivariateBootstrap-method}
 \alias{get_correlations,PCA-method}
 \alias{get_cos2,MultivariateAnalysis-method}
 \alias{get_data,MultivariateAnalysis-method}
@@ -39,6 +43,8 @@
 \title{Get Results}
 \usage{
 get_coordinates(x, ...)
+
+get_replications(x, ...)
 
 get_contributions(x, ...)
 
@@ -62,9 +68,13 @@ get_variance(x, ...)
 
 \S4method{colnames}{MultivariateAnalysis}(x)
 
+\S4method{dimnames}{MultivariateAnalysis}(x)
+
 \S4method{get_contributions}{MultivariateAnalysis}(x, margin = 1)
 
 \S4method{get_coordinates}{MultivariateAnalysis}(x, margin = 1, sup_name = ".sup")
+
+\S4method{get_replications}{MultivariateBootstrap}(x, margin = 1)
 
 \S4method{get_correlations}{PCA}(x, sup_name = ".sup")
 
@@ -117,6 +127,9 @@ the definition of the principal dimensions.
 \code{get_coordinates()} returns a \code{data.frame} of coordinates.
 An extra column (named after \code{sup_name}) is added specifying whether
 an observation is a supplementary point or not.
+
+\code{get_replications()} returns an \code{array} of replicated coordinates
+(see \code{\link[=bootstrap]{bootstrap()}}).
 
 \code{get_correlations()} returns a \code{data.frame} of correlations
 between variables and dimensions (\code{PCA}). An extra column (named after

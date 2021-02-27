@@ -10,6 +10,7 @@ setMethod(
   signature = signature(object = "CA"),
   definition = function(object, n = 30) {
     ## Data replication
+    n <- as.integer(n)
     data <- object@data
     data <- data[!object@rows@supplement, !object@columns@supplement]
     repl <- stats::rmultinom(n = n, size = sum(data), prob = data)
@@ -46,7 +47,8 @@ setMethod(
     .BootstrapCA(
       object,
       rows = res_row@rows,
-      columns = res_col@columns
+      columns = res_col@columns,
+      replications = n
     )
   }
 )
@@ -59,6 +61,7 @@ setMethod(
   signature = signature(object = "PCA"),
   definition = function(object, n = 30) {
     ## Get data
+    n <- as.integer(n)
     data <- object@data
     data <- data[!object@rows@supplement, !object@columns@supplement]
     U <- object@rows@standard
@@ -109,6 +112,10 @@ setMethod(
       supplement = c(object@columns@supplement, !logical(j * n)),
       groups = names_col
     )
-    .BootstrapPCA(object, columns = new_col)
+    .BootstrapPCA(
+      object,
+      columns = new_col,
+      replications = n
+    )
   }
 )

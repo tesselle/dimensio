@@ -56,6 +56,15 @@ setMethod(
   definition = function(x) x@columns@names
 )
 
+#' @export
+#' @rdname mutator
+#' @aliases dimnames,MultivariateAnalysis-method
+setMethod(
+  f = "dimnames",
+  signature = signature(x = "MultivariateAnalysis"),
+  definition = function(x) list(x@rows@names, x@columns@names)
+)
+
 # Contributions ================================================================
 #' @export
 #' @rdname mutator
@@ -94,6 +103,29 @@ setMethod(
     coords[[sup_name]] <- suppl
 
     coords
+  }
+)
+
+#' @export
+#' @rdname mutator
+#' @aliases get_replications,MultivariateBootstrap-method
+setMethod(
+  f = "get_replications",
+  signature = signature(x = "MultivariateBootstrap"),
+  definition = function(x, margin = 1) {
+    coords <- get_coordinates(x = x, margin = margin)
+
+    k <- x@replications
+    i <- nrow(coords) / (k + 1)
+    j <- ncol(coords) - 1
+
+    ## Drop the original data and the last column
+    repl_coords <- coords[-seq_len(i), seq_len(j)]
+    repl <- split(x = repl_coords, f = rep(seq_len(k), each = i))
+    repl <- array(data = unlist(repl), dim = c(i, j, k))
+    rownames(repl) <- rownames(coords)[seq_len(i)]
+    colnames(repl) <- colnames(repl_coords)
+    repl
   }
 )
 

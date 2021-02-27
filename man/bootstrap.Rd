@@ -51,9 +51,16 @@ plot(X) +
 ## Bootstrap (30 replicates)
 Y <- bootstrap(X, n = 30)
 
+\donttest{
+## Get replicated coordinates
+get_replications(Y, margin = 1)
+get_replications(Y, margin = 2)
+}
+
 ## Plot with ellipses
 plot_rows(Y) +
   ggplot2::stat_ellipse()
+
 plot_columns(Y) +
   ggplot2::stat_ellipse()
 

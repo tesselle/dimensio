@@ -41,6 +41,7 @@ get_eigenvalues(X)
 \seealso{
 Other class: 
 \code{\link{MultivariateAnalysis}},
+\code{\link{MultivariateBootstrap}},
 \code{\link{MultivariateResults}},
 \code{\link{MultivariateSummary}},
 \code{\link{PCA-class}}
