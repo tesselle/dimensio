@@ -129,6 +129,17 @@ setMethod(
   }
 )
 
+#' @export
+#' @rdname mutator
+#' @aliases get_replications,BootstrapPCA-method
+setMethod(
+  f = "get_replications",
+  signature = signature(x = "BootstrapPCA"),
+  definition = function(x) {
+    methods::callNextMethod(x = x, margin = 2)
+  }
+)
+
 # Correlations =================================================================
 #' @export
 #' @rdname mutator

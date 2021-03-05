@@ -32,6 +32,7 @@
 \alias{get_contributions,MultivariateAnalysis-method}
 \alias{get_coordinates,MultivariateAnalysis-method}
 \alias{get_replications,MultivariateBootstrap-method}
+\alias{get_replications,BootstrapPCA-method}
 \alias{get_correlations,PCA-method}
 \alias{get_cos2,MultivariateAnalysis-method}
 \alias{get_data,MultivariateAnalysis-method}
@@ -75,6 +76,8 @@ get_variance(x, ...)
 \S4method{get_coordinates}{MultivariateAnalysis}(x, margin = 1, sup_name = ".sup")
 
 \S4method{get_replications}{MultivariateBootstrap}(x, margin = 1)
+
+\S4method{get_replications}{BootstrapPCA}(x)
 
 \S4method{get_correlations}{PCA}(x, sup_name = ".sup")
 

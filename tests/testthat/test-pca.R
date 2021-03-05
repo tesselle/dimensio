@@ -12,6 +12,10 @@ test_that("PCA - matrix", {
   expect_output(show(res), "Principal Components Analysis")
   expect_equal(rownames(res), as.character(seq_len(20)))
   expect_equal(colnames(res), as.character(seq_len(5)))
+  expect_equal(dimnames(res), list(as.character(seq_len(20)),
+                                   as.character(seq_len(5))))
+
+  expect_equal(get_data(res), as.data.frame(cts))
 
   # Points coordinates
   coord_row <- get_coordinates(res, margin = 1)
