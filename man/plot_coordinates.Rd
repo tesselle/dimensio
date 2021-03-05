@@ -10,8 +10,8 @@
 \alias{plot_rows,MultivariateAnalysis-method}
 \alias{plot,CA,missing-method}
 \alias{plot_columns,CA-method}
-\alias{plot_columns,PCA-method}
 \alias{plot,PCA,missing-method}
+\alias{plot_columns,PCA-method}
 \alias{plot_columns,BootstrapPCA-method}
 \title{Visualize Factor Map}
 \usage{

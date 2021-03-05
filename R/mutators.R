@@ -93,13 +93,15 @@ setMethod(
     if (margin == 1) {
       coords <- x@rows@principal
       suppl <- x@rows@supplement
+      id <- x@rows@names
     }
     if (margin == 2) {
       coords <- x@columns@principal
       suppl <- x@columns@supplement
+      id <- x@columns@names
     }
 
-    coords <- as.data.frame(coords)
+    coords <- as.data.frame(coords, row.names = id)
     coords[[sup_name]] <- suppl
 
     coords

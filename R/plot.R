@@ -50,7 +50,7 @@ setMethod(
 
 #' @export
 #' @rdname plot_coordinates
-#' @aliases plot_columns,PCA-method
+#' @aliases plot_columns,CA-method
 setMethod(
   f = "plot_columns",
   signature = signature(object = "CA"),
