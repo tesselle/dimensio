@@ -3,6 +3,7 @@ development:
   mode: auto
 
 template:
+  package: preferably
   opengraph:
     twitter:
       creator: "@nfrerebeau"
@@ -15,6 +16,9 @@ reference:
 - title: Visualization
   contents:
   - has_concept("plot")
+- title: Summary
+  contents:
+  - has_concept("summary")
 - title: Classes
   contents:
   - has_concept("class")
