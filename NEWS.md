@@ -1,8 +1,12 @@
-# dimension 0.2.0
+# dimensio 0.2.0
 
+## New classes and methods
 * Add `bootstrap()` for partial bootstrap analysis.
+* Add `BootstrapCA` and `BootstrapPCA`: S4 classes to store partial bootstrap analysis.
+
+## Bugfixes & changes
+* Rename `plot_individuals()` and `plot_variables()` to `plot_rows()` and `plot_columns()`.
 * Remove `plot_eigenvalues()`.
-* Rename `plot_individuals()` and `plot_columns()` to `plot_rows()` and `plot_columns()`.
 
 # dimensio 0.1.0
 
