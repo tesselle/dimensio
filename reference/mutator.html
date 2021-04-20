@@ -6,6 +6,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Inform modern browsers that this page supports both dark and light color schemes,
+  and the page author prefers light. -->
+<meta name="color-scheme" content="dark light">
+<script>
+  // If `prefers-color-scheme` is not supported, fall back to light mode.
+  // i.e. In this case, inject the `light` CSS before the others, with
+  // no media filter so that it will be downloaded with highest priority.
+  if (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") {
+    document.documentElement.style.display = "none";
+    document.head.insertAdjacentHTML(
+      "beforeend",
+      "<link id=\"css\" rel=\"stylesheet\" href=\"https://bootswatch.com/3/flatly/bootstrap.css\" onload=\"document.documentElement.style.display = ''\">"
+    );
+  }
+</script>
+
 <title>Get Results — mutator • dimensio</title>
 
 <!-- favicons -->
@@ -20,9 +36,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- Flatly Theme - Light  -->
+<link id="css-light" rel="stylesheet" href="https://bootswatch.com/3/flatly/bootstrap.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
+
+<!-- Darkly Theme - Dark -->
+<link id="css-dark" rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.css" media="(prefers-color-scheme: dark)">
+
+<!-- preferably CSS -->
+<link rel="stylesheet" href="../preferably.css">
+<link id="css-code-light" rel="stylesheet" href="../code-color-scheme-light.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
+<link id="css-code-dark" rel="stylesheet" href="../code-color-scheme-dark.css" media="(prefers-color-scheme: dark)">
+
+  <script src="../darkswitch.js"></script>
 
 <!-- bootstrap-toc -->
 <link rel="stylesheet" href="../bootstrap-toc.css">
@@ -59,6 +86,9 @@
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
+
+
+
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -103,12 +133,23 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        
+        <li>
+          <a href="#" id="css-toggle-btn">
+            <span class="fas fa-adjust fa-lg"></span>
+          </a>
+        </li>
+        
         <li>
   <a href="https://github.com/tesselle/dimensio/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
+        
+        
+
+
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -204,8 +245,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An object from which to get element(s) (a <a href='CA-class.html'>CA</a> or
-<a href='PCA-class.html'>PCA</a> object).</p></td>
+      <td><p>An object from which to get element(s) (a <code><a href='CA-class.html'>CA</a></code> or
+<code><a href='PCA-class.html'>PCA</a></code> object).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -213,53 +254,51 @@
     </tr>
     <tr>
       <th>margin</th>
-      <td><p>A length-one <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the subscript
-which the data will be returned: <code>1</code> indicates individuals/rows (the
-default), <code>2</code> indicates variables/columns.</p></td>
+      <td><p>A length-one <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector giving the subscript which the
+data will be returned: <code>1</code> indicates individuals/rows (the default), <code>2</code>
+indicates variables/columns.</p></td>
     </tr>
     <tr>
       <th>sup_name</th>
-      <td><p>A <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> string specifying the name of the
-column to create for supplementary points attribution (see below).</p></td>
+      <td><p>A <code><a href='https://rdrr.io/r/base/character.html'>character</a></code> string specifying the name of the column to
+create for supplementary points attribution (see below).</p></td>
     </tr>
     <tr>
       <th>digits</th>
-      <td><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> indicating the number of decimal
-places to be used.</p></td>
+      <td><p>An <code><a href='https://rdrr.io/r/base/integer.html'>integer</a></code> indicating the number of decimal places to be
+used.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>get_*()</code> returns a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector or a
-<code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p>
-<p><code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> returns of a <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code> of class
-<code><a href='https://rdrr.io/r/stats/loadings.html'>loadings</a></code>.</p>
+    <p><code>get_*()</code> returns a <code><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></code> vector or a <code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></code>.</p>
+<p><code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> returns of a <code><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></code> of class <a href='https://rdrr.io/r/stats/loadings.html'>stats::loadings</a>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>get_data()</code> returns a <code>data.frame</code> of original data.</p>
-<p><code>get_contributions()</code> returns a <code>data.frame</code> of contributions to
-the definition of the principal dimensions.</p>
-<p><code>get_coordinates()</code> returns a <code>data.frame</code> of coordinates.
-An extra column (named after <code>sup_name</code>) is added specifying whether
-an observation is a supplementary point or not.</p>
+<p><code>get_contributions()</code> returns a <code>data.frame</code> of contributions to the
+definition of the principal dimensions.</p>
+<p><code>get_coordinates()</code> returns a <code>data.frame</code> of coordinates. An extra column
+(named after <code>sup_name</code>) is added specifying whether an observation is a
+supplementary point or not.</p>
 <p><code>get_replications()</code> returns an <code>array</code> of replicated coordinates
 (see <code><a href='bootstrap.html'>bootstrap()</a></code>).</p>
-<p><code>get_correlations()</code> returns a <code>data.frame</code> of correlations
-between variables and dimensions (<code>PCA</code>). An extra column (named after
-<code>sup_name</code>) is added specifying whether an observation is a supplementary point or not.</p>
-<p><code>get_cos2()</code> returns a <code>data.frame</code> of \(cos^2\) values
-(i.e. quality of the representation of the points on the factor map).
-An extra column (named after <code>sup_name</code>) is added specifying whether
-an observation is a supplementary point or not.</p>
-<p><code>get_eigenvalues()</code> returns a <code>data.frame</code> with the following
-columns: <code>eigenvalues</code>, <code>variance</code> (percentage of variance) and
-<code>cumulative</code> (cumulative percentage of variance).</p>
-<p><code>get_variance()</code> returns a <code>numeric</code> vector giving the percentage
-of explained variance of each dimension.</p>
-<p><code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> returns variable loadings (i.e. the coefficients of the
-linear combination of the original variables). <code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> is only
-implemented for consistency with <span class="pkg"><a href='https://rdrr.io/r/stats/loadings.html'>stats</a></span>.</p>
+<p><code>get_correlations()</code> returns a <code>data.frame</code> of correlations between
+variables and dimensions (<code>PCA</code>). An extra column (named after <code>sup_name</code>)
+is added specifying whether an observation is a supplementary point or not.</p>
+<p><code>get_cos2()</code> returns a <code>data.frame</code> of \(cos^2\) values (i.e.
+quality of the representation of the points on the factor map). An extra
+column (named after <code>sup_name</code>) is added specifying whether an observation
+is a supplementary point or not.</p>
+<p><code>get_eigenvalues()</code> returns a <code>data.frame</code> with the following columns:
+<code>eigenvalues</code>, <code>variance</code> (percentage of variance) and <code>cumulative</code>
+(cumulative percentage of variance).</p>
+<p><code>get_variance()</code> returns a <code>numeric</code> vector giving the percentage of
+explained variance of each dimension.</p>
+<p><code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> returns variable loadings (i.e. the coefficients of the linear
+combination of the original variables). <code><a href='https://rdrr.io/r/stats/loadings.html'>loadings()</a></code> is only implemented for
+consistency with <span class="pkg">[stats][stats::loadings]</span>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other mutator: 
@@ -283,7 +322,7 @@ implemented for consistency with <span class="pkg"><a href='https://rdrr.io/r/st
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Made with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1, using <a href="https://preferably.amirmasoudabdol.name/?source=footer">preferably</a> template.</p>
 </div>
 
       </footer>
