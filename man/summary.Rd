@@ -12,20 +12,20 @@
 \S4method{summary}{PCA}(object, margin = 1, active = TRUE, sup = TRUE, rank = 3)
 }
 \arguments{
-\item{object}{A \linkS4class{CA} or \linkS4class{PCA} object.}
+\item{object}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
-which the data will be summarized: \code{1} indicates individuals/rows (the
-default), \code{2} indicates variables/columns.}
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
+data will be summarized: \code{1} indicates individuals/rows (the default), \code{2}
+indicates variables/columns.}
 
-\item{active}{A \code{\link{logical}} scalar: should the active
-observations be summarized?}
+\item{active}{A \code{\link{logical}} scalar: should the active observations be
+summarized?}
 
-\item{sup}{A \code{\link{logical}} scalar: should the supplementary
-observations be summarized?}
+\item{sup}{A \code{\link{logical}} scalar: should the supplementary observations be
+summarized?}
 
-\item{rank}{An \code{\link{integer}} value specifying the maximal number of
-components to be kept in the results.}
+\item{rank}{An \code{\link{integer}} value specifying the maximal number of components
+to be kept in the results.}
 }
 \description{
 Provides a summary of the results of a multivariate data analysis.

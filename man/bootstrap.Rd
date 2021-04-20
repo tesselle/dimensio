@@ -15,7 +15,7 @@ bootstrap(object, ...)
 \S4method{bootstrap}{PCA}(object, n = 30)
 }
 \arguments{
-\item{object}{A \linkS4class{CA} or \linkS4class{PCA} object.}
+\item{object}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Currently not used.}
 
@@ -23,7 +23,7 @@ bootstrap(object, ...)
 replications.}
 }
 \value{
-A \linkS4class{BootstrapCA} or \linkS4class{BootstrapPCA} object.
+A \code{\linkS4class{BootstrapCA}} or \code{\linkS4class{BootstrapPCA}} object.
 }
 \description{
 Checks analysis with partial bootstrap resampling.
@@ -81,6 +81,9 @@ plot_columns(Y) +
   ggplot2::stat_ellipse()
 }
 \references{
+Greenacre, Michael J. \emph{Theory and Applications of Correspondence
+Analysis}. London: Academic Press, 1984.
+
 Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
 multidimensionnelle: visualisation et inférence en fouille de données}.
 Paris: Dunod, 2006.

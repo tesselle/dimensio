@@ -5,24 +5,18 @@
 #' Multivariate Data Analysis Results
 #'
 #' An S4 class to store the results of a multivariate data analysis.
-#' @slot names A \code{\link{character}} vector specifying the row names.
-#' @slot principal A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the principal coordinates.
-#' @slot standard A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the standard coordinates.
-#' @slot contributions A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the contributions to the definition of the dimensions.
-#' @slot cosine A \code{\link{numeric}} \code{\link{matrix}}
-#'  giving the \eqn{cos^2}{cos2} values.
-#' @slot distances A \code{\link{numeric}} vector giving the distances to
-#'  centroid.
-#' @slot weights A \code{\link{numeric}} vector giving the masses/weights.
-#' @slot supplement A \code{\link{logical}} vector specifying the supplementary
-#'  points.
-#' @slot order An \code{\link{integer}} vector giving the original indices
-#'  of the data (computation moves all supplementary points at the end of the
-#'  results).
-#' @slot groups A \code{\link{character}} vector specifying the class for each
+#' @slot names A [`character`] vector specifying the row names.
+#' @slot principal A [`numeric`] [`matrix`] giving the principal coordinates.
+#' @slot standard A [`numeric`] [`matrix`] giving the standard coordinates.
+#' @slot contributions A [`numeric`] [`matrix`] giving the contributions to the
+#'  definition of the dimensions.
+#' @slot cosine A [`numeric`] [`matrix`] giving the \eqn{cos^2}{cos2} values.
+#' @slot distances A [`numeric`] vector giving the distances to centroid.
+#' @slot weights A [`numeric`] vector giving the masses/weights.
+#' @slot supplement A [`logical`] vector specifying the supplementary points.
+#' @slot order An [`integer`] vector giving the original indices of the data
+#'  (computation moves all supplementary points at the end of the results).
+#' @slot groups A [`character`] vector specifying the class for each
 #'  observation.
 #' @author N. Frerebeau
 #' @family class
@@ -49,20 +43,16 @@
 #' Output of Multivariate Data Analysis
 #'
 #' A virtual S4 class to store the output of a multivariate data analysis.
-#' @slot data A \code{\link{numeric}} \code{\link{matrix}}.
-#' @slot dimension An \code{\link{integer}} giving the dimension of the
-#'  solution.
-#' @slot singular_values A \code{\link{numeric}} vector giving the singular
-#'  values.
-#' @slot rows A \linkS4class{MultivariateResults} object.
-#' @slot columns A \linkS4class{MultivariateResults} object.
+#' @slot data A [`numeric`] [`matrix`].
+#' @slot dimension An [`integer`] giving the dimension of the solution.
+#' @slot singular_values A [`numeric`] vector giving the singular values.
+#' @slot rows A [`MultivariateResults-class`] object.
+#' @slot columns A [`MultivariateResults-class`] object.
 #' @section Subset:
-#'  In the code snippets below, \code{x} is a \code{MultivariateAnalysis}
-#'  object.
+#'  In the code snippets below, `x` is a `MultivariateAnalysis` object.
 #'  \describe{
-#'   \item{\code{x[[i]]}}{Extracts information from a slot selected by
-#'   subscript \code{i}. \code{i} is a length-one \code{\link{character}}
-#'   vector.}
+#'   \item{`x[[i]]`}{Extracts information from a slot selected by subscript `i`.
+#'   `i` is a length-one [`character`] vector.}
 #'  }
 #' @author N. Frerebeau
 #' @family class
@@ -85,8 +75,8 @@
 #' Output of Bootstrap Replications
 #'
 #' A virtual S4 class to store the output of a bootstrap analysis.
-#' @slot replications An \code{\link{integer}} giving the number of bootstrap
-#' replications.
+#' @slot replications An [`integer`] giving the number of bootstrap
+#'  replications.
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
@@ -104,12 +94,11 @@
 #' Summary of Multivariate Data Analysis
 #'
 #' A virtual S4 class to store the summary of a multivariate data analysis.
-#' @slot data A \code{\link{numeric}} \code{\link{matrix}}.
-#' @slot eigenvalues A \code{\link{numeric}} \code{\link{matrix}}.
-#' @slot results A \code{\link{numeric}} \code{\link{matrix}}.
-#' @slot supplement A \code{\link{logical}} vector specifying the supplementary
-#'  points.
-#' @slot margin An \code{\link{integer}}.
+#' @slot data A [`numeric`] [`matrix`].
+#' @slot eigenvalues A [`numeric`] [`matrix`].
+#' @slot results A [`numeric`] [`matrix`].
+#' @slot supplement A [`logical`] vector specifying the supplementary points.
+#' @slot margin An [`integer`].
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
@@ -167,10 +156,10 @@
 #' PCA Results
 #'
 #' An S4 class to store the results of a principal components analysis.
-#' @slot center A \code{\link{numeric}} vector giving the column mean of the
+#' @slot center A [`numeric`] vector giving the column mean of the initial
+#'  dataset (active individuals only).
+#' @slot scale A [`numeric`] vector giving the column standard deviations of the
 #'  initial dataset (active individuals only).
-#' @slot scale A \code{\link{numeric}} vector giving the column
-#'  standard deviations of the initial dataset (active individuals only).
 #' @example inst/examples/ex-pca.R
 #' @author N. Frerebeau
 #' @family class

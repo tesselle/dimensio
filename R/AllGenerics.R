@@ -13,54 +13,52 @@ setGeneric("loadings")
 #' Get Results
 #'
 #' Getters to retrieve parts of an object.
-#' @param x An object from which to get element(s) (a \linkS4class{CA} or
-#'  \linkS4class{PCA} object).
-#' @param margin A length-one \code{\link{numeric}} vector giving the subscript
-#'  which the data will be returned: \code{1} indicates individuals/rows (the
-#'  default), \code{2} indicates variables/columns.
-#' @param sup_name A \code{\link{character}} string specifying the name of the
-#'  column to create for supplementary points attribution (see below).
-#' @param digits An \code{\link{integer}} indicating the number of decimal
-#'  places to be used.
+#' @param x An object from which to get element(s) (a [`CA-class`] or
+#'  [`PCA-class`] object).
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be returned: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns.
+#' @param sup_name A [`character`] string specifying the name of the column to
+#'  create for supplementary points attribution (see below).
+#' @param digits An [`integer`] indicating the number of decimal places to be
+#'  used.
 #' @param ... Currently not used.
 #' @details
-#'  \code{get_data()} returns a \code{data.frame} of original data.
+#'  `get_data()` returns a `data.frame` of original data.
 #'
-#'  \code{get_contributions()} returns a \code{data.frame} of contributions to
-#'  the definition of the principal dimensions.
+#'  `get_contributions()` returns a `data.frame` of contributions to the
+#'  definition of the principal dimensions.
 #'
-#'  \code{get_coordinates()} returns a \code{data.frame} of coordinates.
-#'  An extra column (named after \code{sup_name}) is added specifying whether
-#'  an observation is a supplementary point or not.
+#'  `get_coordinates()` returns a `data.frame` of coordinates. An extra column
+#'  (named after `sup_name`) is added specifying whether an observation is a
+#'  supplementary point or not.
 #'
-#'  \code{get_replications()} returns an \code{array} of replicated coordinates
-#'  (see \code{\link[=bootstrap]{bootstrap()}}).
+#'  `get_replications()` returns an `array` of replicated coordinates
+#'  (see [bootstrap()]).
 #'
-#'  \code{get_correlations()} returns a \code{data.frame} of correlations
-#'  between variables and dimensions (\code{PCA}). An extra column (named after
-#'  \code{sup_name}) is added specifying whether an observation is a supplementary point or not.
+#'  `get_correlations()` returns a `data.frame` of correlations between
+#'  variables and dimensions (`PCA`). An extra column (named after `sup_name`)
+#'  is added specifying whether an observation is a supplementary point or not.
 #'
-#'  \code{get_cos2()} returns a \code{data.frame} of \eqn{cos^2}{cos2} values
-#'  (i.e. quality of the representation of the points on the factor map).
-#'  An extra column (named after \code{sup_name}) is added specifying whether
-#'  an observation is a supplementary point or not.
+#'  `get_cos2()` returns a `data.frame` of \eqn{cos^2}{cos2} values (i.e.
+#'  quality of the representation of the points on the factor map). An extra
+#'  column (named after `sup_name`) is added specifying whether an observation
+#'  is a supplementary point or not.
 #'
-#'  \code{get_eigenvalues()} returns a \code{data.frame} with the following
-#'  columns: \code{eigenvalues}, \code{variance} (percentage of variance) and
-#'  \code{cumulative} (cumulative percentage of variance).
+#'  `get_eigenvalues()` returns a `data.frame` with the following columns:
+#'  `eigenvalues`, `variance` (percentage of variance) and `cumulative`
+#'  (cumulative percentage of variance).
 #'
-#'  \code{get_variance()} returns a \code{numeric} vector giving the percentage
-#'  of explained variance of each dimension.
+#'  `get_variance()` returns a `numeric` vector giving the percentage of
+#'  explained variance of each dimension.
 #'
-#'  \code{loadings()} returns variable loadings (i.e. the coefficients of the
-#'  linear combination of the original variables). \code{loadings()} is only
-#'  implemented for consistency with \pkg{\link[stats:loadings]{stats}}.
+#'  `loadings()` returns variable loadings (i.e. the coefficients of the linear
+#'  combination of the original variables). `loadings()` is only implemented for
+#'  consistency with \pkg{[stats][stats::loadings]}.
 #' @return
-#'  \code{get_*()} returns a \code{\link{numeric}} vector or a
-#'  \code{\link{data.frame}}.
+#'  `get_*()` returns a [`numeric`] vector or a [`data.frame`].
 #'
-#'  \code{loadings()} returns of a \code{\link{matrix}} of class
-#'  \code{\link[stats]{loadings}}.
+#'  `loadings()` returns of a [`matrix`] of class [stats::loadings].
 # @example inst/examples/ex-extract.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -156,48 +154,42 @@ setGeneric(
 #' Operators acting on objects to extract parts.
 #' @param x An object from which to extract element(s) or in which to replace
 #'  element(s).
-#' @param i A \code{\link{character}} string specifying elements to extract.
+#' @param i A [`character`] string specifying elements to extract.
 #'  Any unambiguous substring can be given (see details).
 #' @details
-#'  If \code{i} is "\code{data}", returns a list with the following elements:
+#'  If `i` is "`data`", returns a list with the following elements:
 #'  \describe{
-#'   \item{\code{data}}{A \code{\link{numeric}} matrix of raw data.}
-#'   \item{\code{mean}}{A \code{\link{numeric}} vector giving the variables
-#'   means (\code{PCA}).}
-#'   \item{\code{sd}}{A \code{\link{numeric}} vector giving the variables
-#'   standard deviations (\code{PCA}).}
+#'   \item{`data`}{A [`numeric`] matrix of raw data.}
+#'   \item{`mean`}{A [`numeric`] vector giving the variables means (`PCA`).}
+#'   \item{`sd`}{A [`numeric`] vector giving the variables standard deviations
+#'   (`PCA`).}
 #'  }
 #'
-#'  If \code{i} is "\code{rows}", returns a list with the following elements:
+#'  If `i` is "`rows`", returns a list with the following elements:
 #'  \describe{
-#'   \item{\code{coord}}{A \code{\link{numeric}} matrix of rows/individuals
-#'   coordinates.}
-#'   \item{\code{cos2}}{A \code{\link{numeric}} matrix of rows/individuals
-#'   squared cosine.}
-#'   \item{\code{masses}}{A \code{\link{numeric}} vector giving the rows masses/
-#'   individual weights.}
-#'   \item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
-#'   point is a supplementary observation or not.}
+#'   \item{`coord`}{A [`numeric`] matrix of rows/individuals coordinates.}
+#'   \item{`cos2`}{A [`numeric`] matrix of rows/individuals squared cosine.}
+#'   \item{`masses`}{A [`numeric`] vector giving the rows masses/individual
+#'   weights.}
+#'   \item{`sup`}{A [`logical`] vector specifying whether a point is a
+#'   supplementary observation or not.}
 #'  }
 #'
-#'  If \code{i} is "\code{columns}", returns a list with the following elements:
+#'  If `i` is "`columns`", returns a list with the following elements:
 #'  \describe{
-#'   \item{\code{coord}}{A \code{\link{numeric}} matrix of columns/variables
-#'   coordinates.}
-#'   \item{\code{cor}}{A \code{\link{numeric}} matrix of correlation between
-#'   variables and the dimensions (\code{PCA}).}
-#'   \item{\code{cos2}}{A \code{\link{numeric}} matrix of columns/variables
-#'   squared cosine.}
-#'   \item{\code{masses}}{A \code{\link{numeric}} vector giving the columns
-#'   masses/variable weights.}
-#'   \item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
-#'   point is a supplementary observation or not.}
+#'   \item{`coord`}{A [`numeric`] matrix of columns/variables coordinates.}
+#'   \item{\code{cor}}{A [`numeric`] matrix of correlation between variables and
+#'   the dimensions (`PCA`).}
+#'   \item{`cos2`}{A [`numeric`] matrix of columns/variables squared cosine.}
+#'   \item{`masses`}{A [`numeric`] vector giving the columns masses/variable
+#'   weights.}
+#'   \item{`sup`}{A [`logical`] vector specifying whether a point is a
+#'   supplementary observation or not.}
 #'  }
 #'
-#'  If \code{i} is "\code{eigenvalues}", returns a \code{\link{numeric}} vector
-#'  of eigenvalues.
+#'  If `i` is "`eigenvalues`", returns a [`numeric`] vector of eigenvalues.
 #' @return
-#'  A \code{\link{list}}.
+#'  A [`list`].
 #' @example inst/examples/ex-subset.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -211,24 +203,26 @@ NULL
 #'
 #' Computes a simple correspondence analysis based on the singular value
 #' decomposition.
-#' @param object A \eqn{m \times p}{m x p} numeric \code{\link{matrix}} or a
-#'  \code{\link{data.frame}}.
-#' @param rank An \code{\link{integer}} value specifying the maximal number of
-#'  components to be kept in the results. If \code{NULL} (the default),
+#' @param object A \eqn{m \times p}{m x p} numeric [`matrix`] or a
+#'  [`data.frame`].
+#' @param rank An [`integer`] value specifying the maximal number of
+#'  components to be kept in the results. If `NULL` (the default),
 #'  \eqn{min(m, p) - 1} components will be returned.
-#' @param sup_row A \code{\link{numeric}} or \code{\link{logical}} vector
-#'  specifying the indices of the supplementary rows.
-#' @param sup_col A \code{\link{numeric}} or \code{\link{logical}} vector
-#'  specifying the indices of the supplementary columns.
+#' @param sup_row A [`numeric`] or [`logical`] vector specifying the indices of
+#'  the supplementary rows.
+#' @param sup_col A [`numeric`] or [`logical`] vector specifying the indices of
+#'  the supplementary columns.
 #' @param ... Currently not used.
 #' @return
-#'  A \linkS4class{CA} object.
+#'  A [`CA-class`] object.
 #' @example inst/examples/ex-ca.R
-#' @seealso \link[=mutator]{get_*()}, \link[=predict]{predict()},
-#'  \link[=svd]{svd()}
+#' @seealso [`get_*()`][mutator], [stats::predict()], [svd()]
 #' @references
-#'  Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
-#'  multidimensionnelle: visualisation et inférence en fouille de données}.
+#'  Greenacre, Michael J. *Theory and Applications of Correspondence
+#'  Analysis*. London: Academic Press, 1984.
+#'
+#'  Lebart, L., Piron, M. and Morineau, A. *Statistique exploratoire
+#'  multidimensionnelle: visualisation et inférence en fouille de données*.
 #'  Paris: Dunod, 2006.
 #' @author N. Frerebeau
 #' @docType methods
@@ -250,33 +244,31 @@ setGeneric(
 #'
 #' Computes a principal components analysis based on the singular value
 #' decomposition.
-#' @param object A \eqn{m \times p}{m x p} numeric \code{\link{matrix}} or a
-#'  \code{\link{data.frame}}.
-#' @param center A \code{\link{logical}} scalar: should the variables be shifted
-#'  to be zero centered?
-#' @param scale A \code{\link{logical}} scalar: should the variables be scaled
-#'  to unit variance?
-#' @param rank An \code{\link{integer}} value specifying the maximal number of
-#'  components to be kept in the results. If \code{NULL} (the default),
-#'  \eqn{p - 1} components will be returned.
-#' @param sup_row A \code{\link{numeric}} or \code{\link{logical}} vector
-#'  specifying the indices of the supplementary rows (individuals).
-#' @param sup_col A \code{\link{numeric}} or \code{\link{logical}} vector
-#'  specifying the indices of the supplementary columns (variables).
-#' @param weight_row A \code{\link{numeric}} vector specifying the active
-#'  row (individual) weights. If \code{NULL} (the default), no weights are used.
-#' @param weight_col A \code{\link{numeric}} vector specifying the active
-#'  column (variable) weights. If \code{NULL} (the default), no weights are
-#'  used.
+#' @param object A \eqn{m \times p}{m x p} numeric [`matrix`] or a
+#'  [`data.frame`].
+#' @param center A [`logical`] scalar: should the variables be shifted to be
+#'  zero centered?
+#' @param scale A [`logical`] scalar: should the variables be scaled to unit
+#'  variance?
+#' @param rank An [`integer`] value specifying the maximal number of components
+#'  to be kept in the results. If `NULL` (the default), \eqn{p - 1} components
+#'  will be returned.
+#' @param sup_row A [`numeric`] or [`logical`] vector specifying the indices of
+#'  the supplementary rows (individuals).
+#' @param sup_col A [`numeric`] or [`logical`] vector specifying the indices of
+#'  the supplementary columns (variables).
+#' @param weight_row A [`numeric`] vector specifying the active row (individual)
+#'  weights. If `NULL` (the default), no weights are used.
+#' @param weight_col A [`numeric`] vector specifying the active column
+#'  (variable) weights. If `NULL` (the default), no weights are used.
 #' @param ... Currently not used.
 #' @return
-#'  A \linkS4class{PCA} object.
+#'  A [`PCA-class`] object.
 #' @example inst/examples/ex-pca.R
-#' @seealso \link[=mutator]{get_*()}, \link[=predict]{predict()},
-#'  \link[=svd]{svd()}
+#' @seealso [`get_*()`][mutator], [stats::predict()], [svd()]
 #' @references
-#'  Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
-#'  multidimensionnelle: visualisation et inférence en fouille de données}.
+#'  Lebart, L., Piron, M. and Morineau, A. *Statistique exploratoire
+#'  multidimensionnelle: visualisation et inférence en fouille de données*.
 #'  Paris: Dunod, 2006.
 #' @author N. Frerebeau
 #' @docType methods
@@ -297,14 +289,14 @@ setGeneric(
 #' Predict New Coordinates
 #'
 #' Predict the projection of new individuals/rows or variables/columns.
-#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
+#' @param object A [`CA-class`] or [`PCA-class`] object.
 #' @param newdata An object of supplementary points coercible to a
-#'  \code{\link{matrix}} for which to compute principal coordinates.
-#' @param margin A length-one \code{\link{numeric}} vector giving the subscript
-#'  which the data will be predicted: \code{1} indicates individuals/rows (the
-#'  default), \code{2} indicates variables/columns.
+#'  [`matrix`] for which to compute principal coordinates.
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be predicted: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns.
 #' @return
-#'  A \code{\link{data.frame}} of coordinates.
+#'  A [`data.frame`] of coordinates.
 #' @example inst/examples/ex-predict.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -317,17 +309,20 @@ NULL
 #' Partial Bootstrap Analysis
 #'
 #' Checks analysis with partial bootstrap resampling.
-#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
-#' @param n A non-negative \code{\link{integer}} giving the number of bootstrap
+#' @param object A [`CA-class`] or [`PCA-class`] object.
+#' @param n A non-negative [`integer`] giving the number of bootstrap
 #'  replications.
 #' @return
-#'  A \linkS4class{BootstrapCA} or \linkS4class{BootstrapPCA} object.
+#'  A [`BootstrapCA-class`] or [`BootstrapPCA-class`] object.
 #' @param ... Currently not used.
 #' @example inst/examples/ex-bootstrap.R
 #' @author N. Frerebeau
 #' @references
-#'  Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
-#'  multidimensionnelle: visualisation et inférence en fouille de données}.
+#'  Greenacre, Michael J. *Theory and Applications of Correspondence
+#'  Analysis*. London: Academic Press, 1984.
+#'
+#'  Lebart, L., Piron, M. and Morineau, A. *Statistique exploratoire
+#'  multidimensionnelle: visualisation et inférence en fouille de données*.
 #'  Paris: Dunod, 2006.
 #' @docType methods
 #' @family multivariate analysis
@@ -348,42 +343,40 @@ setGeneric(
 #' Visualize Factor Map
 #'
 #' Plots factor map.
-#' @param object,x A \linkS4class{CA} or \linkS4class{PCA} object.
-#' @param margin A length-one \code{\link{numeric}} vector giving the subscript
-#'  which the data will be returned: \code{1} indicates individuals/rows (the
-#'  default), \code{2} indicates variables/columns, \code{c(1, 2)} indicates
-#'  rows and columns (\code{CA}).
-#' @param axes A length-two \code{\link{numeric}} vector giving the dimensions
-#'  to be plotted.
-#' @param active A \code{\link{logical}} scalar: should the active
-#'  observations be plotted?
-#' @param sup A \code{\link{logical}} scalar: should the supplementary
-#'  observations be plotted?
-# @param select NULL
-#' @param highlight A \code{\link{character}} string giving XXX.
-#'  It must be one of "\code{coordinates}", "\code{contributions}" or
-#'  "\code{cos2}". Any unambiguous substring can be given.
-#'  If \code{NULL} (the default), no highlighting is applied.
-#' @param group A vector of categories specifying the categorical
-#'  variable from which to color the individuals (only used if \code{highlight}
-#'  is \code{NULL}; see below).
+#' @param object,x A [`CA-class`] or [`PCA-class`] object.
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be returned: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns, `c(1, 2)` indicates rows and columns (`CA`).
+#' @param axes A length-two [`numeric`] vector giving the dimensions to be
+#'  plotted.
+#' @param active A [`logical`] scalar: should the active observations be
+#'  plotted?
+#' @param sup A [`logical`] scalar: should the supplementary observations be
+#'  plotted?
+#' @param highlight A [`character`] string giving XXX.
+#'  It must be one of "`coordinates`", "`contributions`" or "`cos2`".
+#'  Any unambiguous substring can be given.
+#'  If `NULL` (the default), no highlighting is applied.
+#' @param group A vector of categories specifying the categorical variable from
+#'  which to color the individuals (only used if `highlight` is `NULL`; see
+#'  below).
 #' @param ... Currently not used.
 #' @section Aesthetic:
 #'  Point shapes and line types are set whether an observation is a
 #'  row/individual or a column/variable and is active or supplementary.
 #'
-#'  Colors are set according to \code{highlight} and \code{group}:
+#'  Colors are set according to `highlight` and `group`:
 #'  \itemize{
-#'   \item{If \code{highlight} is not \code{NULL}, the color gradient will vary
-#'   according to the value of the selected parameter.}
-#'   \item{If \code{group} is a \code{numeric} vector, the color gradient and
-#'   size will vary by the value of \code{group}.}
-#'   \item{If \code{group} is not a \code{numeric} vector, the colors will be
-#'   mapped to the levels of \code{group}.}
-#'   \item{If both are \code{NULL} (the default), then the same rule as for
-#'   shapes is used.}
+#'   \item{If `highlight` is not `NULL`, the color gradient will vary according
+#'   to the value of the selected parameter.}
+#'   \item{If `group` is a `numeric` vector, the color gradient and size will
+#'   vary by the value of `group`.}
+#'   \item{If `group` is not a `numeric` vector, the colors will be mapped to
+#'   the levels of `group`.}
+#'   \item{If both are `NULL` (the default), then the same rule as for shapes is
+#'   used.}
 #'  }
-#' @seealso \link[ggplot2:ggplot]{ggplot()}
+#' @seealso [ggplot2::ggplot()]
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -413,16 +406,16 @@ setGeneric(
 #' Visualize Eigenvalues
 #'
 #' Plot eigenvalues or variances histogram.
-#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
-#' @param variance A \code{\link{logical}} scalar: should the percentages of
-#'  variance be plotted instead of the eigenvalues?
-#' @param cumulative A \code{\link{logical}} scalar: should the cumulative
-#'  percentages of variance be plotted?
-#' @param fill,border A \code{\link{character}} string specifying the bars
-#'  infilling and border colors.
-#' @param color A \code{\link{character}} string specifying the line color.
+#' @param object A [`CA-class`] or [`PCA-class`] object.
+#' @param variance A [`logical`] scalar: should the percentages of variance be
+#'  plotted instead of the eigenvalues?
+#' @param cumulative A [`logical`] scalar: should the cumulative percentages of
+#'  variance be plotted?
+#' @param fill,border A [`character`] string specifying the bars infilling and
+#'  border colors.
+#' @param color A [`character`] string specifying the line color.
 #' @param ... Currently not used.
-#' @seealso \link[ggplot2:ggplot]{ggplot()}
+#' @seealso [ggplot2::ggplot()]
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -442,25 +435,25 @@ setGeneric(
 #' Visualize Contributions and cos2
 #'
 #' Plots contributions histogram and \eqn{cos^2}{cos2} scatterplot.
-#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
-#' @param margin A length-one \code{\link{numeric}} vector giving the subscript
-#'  which the data will be returned: \code{1} indicates individuals/rows (the
-#'  default), \code{2} indicates variables/columns.
-#' @param axes A length-one \code{\link{numeric}} vector giving the dimensions
-#'  to be plotted.
-#' @param active A \code{\link{logical}} scalar: should the active
-#'  observations be plotted?
-#' @param sup A \code{\link{logical}} scalar: should the supplementary
-#'  observations be plotted?
-#' @param sort A \code{\link{logical}} scalar: should the data be sorted?
-#' @param decreasing A \code{\link{logical}} scalar: should the sort order be
-#'  decreasing? Only used if \code{sort} is \code{TRUE}.
-#' @param limit An \code{\link{integer}} specifying the number of top elements
-#'  to be displayed.
-#' @param fill,border A \code{\link{character}} string specifying the bars
-#'  infilling and border colors.
+#' @param object A [`CA-class`] or [`PCA-class`] object.
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be returned: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns.
+#' @param axes A length-one [`numeric`] vector giving the dimensions to be
+#'  plotted.
+#' @param active A [`logical`] scalar: should the active observations be
+#'  plotted?
+#' @param sup A [`logical`] scalar: should the supplementary observations be
+#'  plotted?
+#' @param sort A [`logical`] scalar: should the data be sorted?
+#' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
+#'  Only used if `sort` is `TRUE`.
+#' @param limit An [`integer`] specifying the number of top elements to be
+#'  displayed.
+#' @param fill,border A [`character`] string specifying the bars infilling and
+#'  border colors.
 #' @param ... Currently not used.
-#' @seealso \link[ggplot2:ggplot]{ggplot()}
+#' @seealso [ggplot2::ggplot()]
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -487,16 +480,16 @@ setGeneric(
 #' Object Summaries
 #'
 #' Provides a summary of the results of a multivariate data analysis.
-#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
-#' @param margin A length-one \code{\link{numeric}} vector giving the subscript
-#'  which the data will be summarized: \code{1} indicates individuals/rows (the
-#'  default), \code{2} indicates variables/columns.
-#' @param rank An \code{\link{integer}} value specifying the maximal number of
-#'  components to be kept in the results.
-#' @param active A \code{\link{logical}} scalar: should the active
-#'  observations be summarized?
-#' @param sup A \code{\link{logical}} scalar: should the supplementary
-#'  observations be summarized?
+#' @param object A [`CA-class`] or [`PCA-class`] object.
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be summarized: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns.
+#' @param rank An [`integer`] value specifying the maximal number of components
+#'  to be kept in the results.
+#' @param active A [`logical`] scalar: should the active observations be
+#'  summarized?
+#' @param sup A [`logical`] scalar: should the supplementary observations be
+#'  summarized?
 #' @example inst/examples/ex-summary.R
 #' @author N. Frerebeau
 #' @docType methods

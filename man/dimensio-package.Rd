@@ -13,7 +13,9 @@ Simple Principal Components Analysis (PCA) and
     Correspondence Analysis (CA) based on the Singular Value Decomposition
     (SVD). This package provides S4 classes and methods to compute,
     extract, summarize and visualize results of multivariate data
-    analysis. It also includes methods for partial bootstrap validation.
+    analysis. It also includes methods for partial bootstrap validation
+    described in Greenacre (1984) <isbn: 978-0-12-299050-2> and Lebart et al. 
+    (2006) <isbn: 978-2-10-049616-7>.
 }
 \details{
 \tabular{ll}{
@@ -22,6 +24,7 @@ Simple Principal Components Analysis (PCA) and
 \strong{Version:} \tab 0.2.0 \cr
 \strong{License:} \tab GPL-3 \cr
 }
+
 \doi{10.5281/zenodo.4478530}
 }
 \seealso{

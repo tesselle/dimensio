@@ -38,31 +38,30 @@ pca(object, ...)
 
 \item{...}{Currently not used.}
 
-\item{center}{A \code{\link{logical}} scalar: should the variables be shifted
-to be zero centered?}
+\item{center}{A \code{\link{logical}} scalar: should the variables be shifted to be
+zero centered?}
 
-\item{scale}{A \code{\link{logical}} scalar: should the variables be scaled
-to unit variance?}
+\item{scale}{A \code{\link{logical}} scalar: should the variables be scaled to unit
+variance?}
 
-\item{rank}{An \code{\link{integer}} value specifying the maximal number of
-components to be kept in the results. If \code{NULL} (the default),
-\eqn{p - 1} components will be returned.}
+\item{rank}{An \code{\link{integer}} value specifying the maximal number of components
+to be kept in the results. If \code{NULL} (the default), \eqn{p - 1} components
+will be returned.}
 
-\item{sup_row}{A \code{\link{numeric}} or \code{\link{logical}} vector
-specifying the indices of the supplementary rows (individuals).}
+\item{sup_row}{A \code{\link{numeric}} or \code{\link{logical}} vector specifying the indices of
+the supplementary rows (individuals).}
 
-\item{sup_col}{A \code{\link{numeric}} or \code{\link{logical}} vector
-specifying the indices of the supplementary columns (variables).}
+\item{sup_col}{A \code{\link{numeric}} or \code{\link{logical}} vector specifying the indices of
+the supplementary columns (variables).}
 
-\item{weight_row}{A \code{\link{numeric}} vector specifying the active
-row (individual) weights. If \code{NULL} (the default), no weights are used.}
+\item{weight_row}{A \code{\link{numeric}} vector specifying the active row (individual)
+weights. If \code{NULL} (the default), no weights are used.}
 
-\item{weight_col}{A \code{\link{numeric}} vector specifying the active
-column (variable) weights. If \code{NULL} (the default), no weights are
-used.}
+\item{weight_col}{A \code{\link{numeric}} vector specifying the active column
+(variable) weights. If \code{NULL} (the default), no weights are used.}
 }
 \value{
-A \linkS4class{PCA} object.
+A \code{\linkS4class{PCA}} object.
 }
 \description{
 Computes a principal components analysis based on the singular value
@@ -96,8 +95,7 @@ multidimensionnelle: visualisation et inférence en fouille de données}.
 Paris: Dunod, 2006.
 }
 \seealso{
-\link[=mutator]{get_*()}, \link[=predict]{predict()},
-\link[=svd]{svd()}
+\code{\link[=mutator]{get_*()}}, \code{\link[stats:predict]{stats::predict()}}, \code{\link[=svd]{svd()}}
 
 Other multivariate analysis: 
 \code{\link{bootstrap}()},

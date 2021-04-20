@@ -1,21 +1,23 @@
 #' @details
 #' \tabular{ll}{
-#'  \strong{Package:} \tab dimensio \cr
-#'  \strong{Type:} \tab Package \cr
-#'  \strong{Version:} \tab 0.2.0 \cr
-#'  \strong{License:} \tab GPL-3 \cr
+#'  **Package:** \tab dimensio \cr
+#'  **Type:** \tab Package \cr
+#'  **Version:** \tab 0.2.0 \cr
+#'  **License:** \tab GPL-3 \cr
 #' }
+#'
 #' \doi{10.5281/zenodo.4478530}
+#'
 #' @author
-#' \strong{Full list of authors and contributors} (alphabetic order)
+#' **Full list of authors and contributors** (alphabetic order)
 #'
 #' \tabular{ll}{
-#'  Jean-Baptiste Fourvel \tab \emph{CNRS, France} \cr
-#'  Nicolas Frerebeau \tab \emph{Université Bordeaux Montaigne, France} \cr
-#'  Brice Lebrun \tab \emph{Université Bordeaux Montaigne, France} \cr
+#'  Jean-Baptiste Fourvel \tab *CNRS, France* \cr
+#'  Nicolas Frerebeau \tab *Université Bordeaux Montaigne, France* \cr
+#'  Brice Lebrun \tab *Université Bordeaux Montaigne, France* \cr
 #' }
 #'
-#' \strong{Package maintainer}
+#' **Package maintainer**
 #'
 #' Nicolas Frerebeau\cr
 #' \email{nicolas.frerebeau@@u-bordeaux-montaigne.fr}

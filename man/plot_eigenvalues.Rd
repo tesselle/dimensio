@@ -20,18 +20,18 @@ plot_variance(object, ...)
 )
 }
 \arguments{
-\item{object}{A \linkS4class{CA} or \linkS4class{PCA} object.}
+\item{object}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Currently not used.}
 
-\item{variance}{A \code{\link{logical}} scalar: should the percentages of
-variance be plotted instead of the eigenvalues?}
+\item{variance}{A \code{\link{logical}} scalar: should the percentages of variance be
+plotted instead of the eigenvalues?}
 
-\item{cumulative}{A \code{\link{logical}} scalar: should the cumulative
-percentages of variance be plotted?}
+\item{cumulative}{A \code{\link{logical}} scalar: should the cumulative percentages of
+variance be plotted?}
 
-\item{fill, border}{A \code{\link{character}} string specifying the bars
-infilling and border colors.}
+\item{fill, border}{A \code{\link{character}} string specifying the bars infilling and
+border colors.}
 
 \item{color}{A \code{\link{character}} string specifying the line color.}
 }
@@ -52,7 +52,7 @@ plot(X)
 plot_variance(X)
 }
 \seealso{
-\link[ggplot2:ggplot]{ggplot()}
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}
 
 Other plot: 
 \code{\link{plot_contributions}()},

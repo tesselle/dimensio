@@ -76,32 +76,31 @@ plot_columns(object, ...)
 )
 }
 \arguments{
-\item{object, x}{A \linkS4class{CA} or \linkS4class{PCA} object.}
+\item{object, x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Currently not used.}
 
-\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
-to be plotted.}
+\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
+plotted.}
 
-\item{active}{A \code{\link{logical}} scalar: should the active
-observations be plotted?}
+\item{active}{A \code{\link{logical}} scalar: should the active observations be
+plotted?}
 
-\item{sup}{A \code{\link{logical}} scalar: should the supplementary
-observations be plotted?}
+\item{sup}{A \code{\link{logical}} scalar: should the supplementary observations be
+plotted?}
 
 \item{highlight}{A \code{\link{character}} string giving XXX.
-It must be one of "\code{coordinates}", "\code{contributions}" or
-"\code{cos2}". Any unambiguous substring can be given.
+It must be one of "\code{coordinates}", "\code{contributions}" or "\code{cos2}".
+Any unambiguous substring can be given.
 If \code{NULL} (the default), no highlighting is applied.}
 
-\item{group}{A vector of categories specifying the categorical
-variable from which to color the individuals (only used if \code{highlight}
-is \code{NULL}; see below).}
+\item{group}{A vector of categories specifying the categorical variable from
+which to color the individuals (only used if \code{highlight} is \code{NULL}; see
+below).}
 
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
-which the data will be returned: \code{1} indicates individuals/rows (the
-default), \code{2} indicates variables/columns, \code{c(1, 2)} indicates
-rows and columns (\code{CA}).}
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
+data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
+indicates variables/columns, \code{c(1, 2)} indicates rows and columns (\code{CA}).}
 }
 \description{
 Plots factor map.
@@ -113,14 +112,14 @@ row/individual or a column/variable and is active or supplementary.
 
 Colors are set according to \code{highlight} and \code{group}:
 \itemize{
-\item{If \code{highlight} is not \code{NULL}, the color gradient will vary
-according to the value of the selected parameter.}
-\item{If \code{group} is a \code{numeric} vector, the color gradient and
-size will vary by the value of \code{group}.}
-\item{If \code{group} is not a \code{numeric} vector, the colors will be
-mapped to the levels of \code{group}.}
-\item{If both are \code{NULL} (the default), then the same rule as for
-shapes is used.}
+\item{If \code{highlight} is not \code{NULL}, the color gradient will vary according
+to the value of the selected parameter.}
+\item{If \code{group} is a \code{numeric} vector, the color gradient and size will
+vary by the value of \code{group}.}
+\item{If \code{group} is not a \code{numeric} vector, the colors will be mapped to
+the levels of \code{group}.}
+\item{If both are \code{NULL} (the default), then the same rule as for shapes is
+used.}
 }
 }
 
@@ -138,7 +137,7 @@ plot(X)
 plot_variance(X)
 }
 \seealso{
-\link[ggplot2:ggplot]{ggplot()}
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}
 
 Other plot: 
 \code{\link{plot_contributions}()},

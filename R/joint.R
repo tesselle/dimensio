@@ -4,14 +4,14 @@ NULL
 
 #' Joint
 #'
-#' @param object A \linkS4class{CA} or \linkS4class{PCA} object.
-#' @param what A \code{\link{character}} string.
-#' @param margin A length-one \code{\link{numeric}} vector giving the subscript
-#'  which the data will be returned: \code{1} indicates individuals/rows (the
-#'  default), \code{2} indicates variables/columns.
-#' @param axes A length-two \code{\link{numeric}} vector giving the dimensions
+#' @param object A [`CA-class`] or [`PCA-class`] object.
+#' @param what A [`character`] string.
+#' @param margin A length-one [`numeric`] vector giving the subscript
+#'  which the data will be returned: `1` indicates individuals/rows (the
+#'  default), `2` indicates variables/columns.
+#' @param axes A length-two [`numeric`] vector giving the dimensions
 #'  to be for which to compute results.
-#' @param sup A \code{\link{logical}} scalar: should supplementary points be
+#' @param sup A [`logical`] scalar: should supplementary points be
 #'  returned?
 #' @param ... Extra parameters to be passed to internal methods.
 #' @seealso \link[=mutator]{get_*()}

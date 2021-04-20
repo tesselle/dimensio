@@ -96,27 +96,25 @@ get_variance(x, ...)
 \S4method{loadings}{PCA}(x)
 }
 \arguments{
-\item{x}{An object from which to get element(s) (a \linkS4class{CA} or
-\linkS4class{PCA} object).}
+\item{x}{An object from which to get element(s) (a \code{\linkS4class{CA}} or
+\code{\linkS4class{PCA}} object).}
 
 \item{...}{Currently not used.}
 
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
-which the data will be returned: \code{1} indicates individuals/rows (the
-default), \code{2} indicates variables/columns.}
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
+data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
+indicates variables/columns.}
 
-\item{sup_name}{A \code{\link{character}} string specifying the name of the
-column to create for supplementary points attribution (see below).}
+\item{sup_name}{A \code{\link{character}} string specifying the name of the column to
+create for supplementary points attribution (see below).}
 
-\item{digits}{An \code{\link{integer}} indicating the number of decimal
-places to be used.}
+\item{digits}{An \code{\link{integer}} indicating the number of decimal places to be
+used.}
 }
 \value{
-\code{get_*()} returns a \code{\link{numeric}} vector or a
-\code{\link{data.frame}}.
+\verb{get_*()} returns a \code{\link{numeric}} vector or a \code{\link{data.frame}}.
 
-\code{loadings()} returns of a \code{\link{matrix}} of class
-\code{\link[stats]{loadings}}.
+\code{loadings()} returns of a \code{\link{matrix}} of class \link[stats:loadings]{stats::loadings}.
 }
 \description{
 Getters to retrieve parts of an object.
@@ -124,35 +122,35 @@ Getters to retrieve parts of an object.
 \details{
 \code{get_data()} returns a \code{data.frame} of original data.
 
-\code{get_contributions()} returns a \code{data.frame} of contributions to
-the definition of the principal dimensions.
+\code{get_contributions()} returns a \code{data.frame} of contributions to the
+definition of the principal dimensions.
 
-\code{get_coordinates()} returns a \code{data.frame} of coordinates.
-An extra column (named after \code{sup_name}) is added specifying whether
-an observation is a supplementary point or not.
+\code{get_coordinates()} returns a \code{data.frame} of coordinates. An extra column
+(named after \code{sup_name}) is added specifying whether an observation is a
+supplementary point or not.
 
 \code{get_replications()} returns an \code{array} of replicated coordinates
 (see \code{\link[=bootstrap]{bootstrap()}}).
 
-\code{get_correlations()} returns a \code{data.frame} of correlations
-between variables and dimensions (\code{PCA}). An extra column (named after
-\code{sup_name}) is added specifying whether an observation is a supplementary point or not.
+\code{get_correlations()} returns a \code{data.frame} of correlations between
+variables and dimensions (\code{PCA}). An extra column (named after \code{sup_name})
+is added specifying whether an observation is a supplementary point or not.
 
-\code{get_cos2()} returns a \code{data.frame} of \eqn{cos^2}{cos2} values
-(i.e. quality of the representation of the points on the factor map).
-An extra column (named after \code{sup_name}) is added specifying whether
-an observation is a supplementary point or not.
+\code{get_cos2()} returns a \code{data.frame} of \eqn{cos^2}{cos2} values (i.e.
+quality of the representation of the points on the factor map). An extra
+column (named after \code{sup_name}) is added specifying whether an observation
+is a supplementary point or not.
 
-\code{get_eigenvalues()} returns a \code{data.frame} with the following
-columns: \code{eigenvalues}, \code{variance} (percentage of variance) and
-\code{cumulative} (cumulative percentage of variance).
+\code{get_eigenvalues()} returns a \code{data.frame} with the following columns:
+\code{eigenvalues}, \code{variance} (percentage of variance) and \code{cumulative}
+(cumulative percentage of variance).
 
-\code{get_variance()} returns a \code{numeric} vector giving the percentage
-of explained variance of each dimension.
+\code{get_variance()} returns a \code{numeric} vector giving the percentage of
+explained variance of each dimension.
 
-\code{loadings()} returns variable loadings (i.e. the coefficients of the
-linear combination of the original variables). \code{loadings()} is only
-implemented for consistency with \pkg{\link[stats:loadings]{stats}}.
+\code{loadings()} returns variable loadings (i.e. the coefficients of the linear
+combination of the original variables). \code{loadings()} is only implemented for
+consistency with \pkg{[stats][stats::loadings]}.
 }
 \seealso{
 Other mutator: 

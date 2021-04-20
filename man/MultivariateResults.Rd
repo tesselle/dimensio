@@ -14,29 +14,23 @@ An S4 class to store the results of a multivariate data analysis.
 \describe{
 \item{\code{names}}{A \code{\link{character}} vector specifying the row names.}
 
-\item{\code{principal}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the principal coordinates.}
+\item{\code{principal}}{A \code{\link{numeric}} \code{\link{matrix}} giving the principal coordinates.}
 
-\item{\code{standard}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the standard coordinates.}
+\item{\code{standard}}{A \code{\link{numeric}} \code{\link{matrix}} giving the standard coordinates.}
 
-\item{\code{contributions}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the contributions to the definition of the dimensions.}
+\item{\code{contributions}}{A \code{\link{numeric}} \code{\link{matrix}} giving the contributions to the
+definition of the dimensions.}
 
-\item{\code{cosine}}{A \code{\link{numeric}} \code{\link{matrix}}
-giving the \eqn{cos^2}{cos2} values.}
+\item{\code{cosine}}{A \code{\link{numeric}} \code{\link{matrix}} giving the \eqn{cos^2}{cos2} values.}
 
-\item{\code{distances}}{A \code{\link{numeric}} vector giving the distances to
-centroid.}
+\item{\code{distances}}{A \code{\link{numeric}} vector giving the distances to centroid.}
 
 \item{\code{weights}}{A \code{\link{numeric}} vector giving the masses/weights.}
 
-\item{\code{supplement}}{A \code{\link{logical}} vector specifying the supplementary
-points.}
+\item{\code{supplement}}{A \code{\link{logical}} vector specifying the supplementary points.}
 
-\item{\code{order}}{An \code{\link{integer}} vector giving the original indices
-of the data (computation moves all supplementary points at the end of the
-results).}
+\item{\code{order}}{An \code{\link{integer}} vector giving the original indices of the data
+(computation moves all supplementary points at the end of the results).}
 
 \item{\code{groups}}{A \code{\link{character}} vector specifying the class for each
 observation.}

@@ -14,25 +14,21 @@ A virtual S4 class to store the output of a multivariate data analysis.
 \describe{
 \item{\code{data}}{A \code{\link{numeric}} \code{\link{matrix}}.}
 
-\item{\code{dimension}}{An \code{\link{integer}} giving the dimension of the
-solution.}
+\item{\code{dimension}}{An \code{\link{integer}} giving the dimension of the solution.}
 
-\item{\code{singular_values}}{A \code{\link{numeric}} vector giving the singular
-values.}
+\item{\code{singular_values}}{A \code{\link{numeric}} vector giving the singular values.}
 
-\item{\code{rows}}{A \linkS4class{MultivariateResults} object.}
+\item{\code{rows}}{A \code{\linkS4class{MultivariateResults}} object.}
 
-\item{\code{columns}}{A \linkS4class{MultivariateResults} object.}
+\item{\code{columns}}{A \code{\linkS4class{MultivariateResults}} object.}
 }}
 
 \section{Subset}{
 
-In the code snippets below, \code{x} is a \code{MultivariateAnalysis}
-object.
+In the code snippets below, \code{x} is a \code{MultivariateAnalysis} object.
 \describe{
-\item{\code{x[[i]]}}{Extracts information from a slot selected by
-subscript \code{i}. \code{i} is a length-one \code{\link{character}}
-vector.}
+\item{\code{x[[i]]}}{Extracts information from a slot selected by subscript \code{i}.
+\code{i} is a length-one \code{\link{character}} vector.}
 }
 }
 

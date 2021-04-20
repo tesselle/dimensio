@@ -24,14 +24,14 @@ ca(object, ...)
 components to be kept in the results. If \code{NULL} (the default),
 \eqn{min(m, p) - 1} components will be returned.}
 
-\item{sup_row}{A \code{\link{numeric}} or \code{\link{logical}} vector
-specifying the indices of the supplementary rows.}
+\item{sup_row}{A \code{\link{numeric}} or \code{\link{logical}} vector specifying the indices of
+the supplementary rows.}
 
-\item{sup_col}{A \code{\link{numeric}} or \code{\link{logical}} vector
-specifying the indices of the supplementary columns.}
+\item{sup_col}{A \code{\link{numeric}} or \code{\link{logical}} vector specifying the indices of
+the supplementary columns.}
 }
 \value{
-A \linkS4class{CA} object.
+A \code{\linkS4class{CA}} object.
 }
 \description{
 Computes a simple correspondence analysis based on the singular value
@@ -66,13 +66,15 @@ get_contributions(X, margin = 1)
 get_eigenvalues(X)
 }
 \references{
+Greenacre, Michael J. \emph{Theory and Applications of Correspondence
+Analysis}. London: Academic Press, 1984.
+
 Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
 multidimensionnelle: visualisation et inférence en fouille de données}.
 Paris: Dunod, 2006.
 }
 \seealso{
-\link[=mutator]{get_*()}, \link[=predict]{predict()},
-\link[=svd]{svd()}
+\code{\link[=mutator]{get_*()}}, \code{\link[stats:predict]{stats::predict()}}, \code{\link[=svd]{svd()}}
 
 Other multivariate analysis: 
 \code{\link{bootstrap}()},

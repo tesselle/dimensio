@@ -22,8 +22,7 @@ A virtual S4 class to store the summary of a multivariate data analysis.
 
 \item{\code{results}}{A \code{\link{numeric}} \code{\link{matrix}}.}
 
-\item{\code{supplement}}{A \code{\link{logical}} vector specifying the supplementary
-points.}
+\item{\code{supplement}}{A \code{\link{logical}} vector specifying the supplementary points.}
 
 \item{\code{margin}}{An \code{\link{integer}}.}
 }}

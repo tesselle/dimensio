@@ -13,11 +13,11 @@ An S4 class to store the results of a principal components analysis.
 \section{Slots}{
 
 \describe{
-\item{\code{center}}{A \code{\link{numeric}} vector giving the column mean of the
-initial dataset (active individuals only).}
+\item{\code{center}}{A \code{\link{numeric}} vector giving the column mean of the initial
+dataset (active individuals only).}
 
-\item{\code{scale}}{A \code{\link{numeric}} vector giving the column
-standard deviations of the initial dataset (active individuals only).}
+\item{\code{scale}}{A \code{\link{numeric}} vector giving the column standard deviations of the
+initial dataset (active individuals only).}
 }}
 
 \examples{

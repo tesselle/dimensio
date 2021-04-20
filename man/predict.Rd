@@ -12,14 +12,14 @@
 \S4method{predict}{PCA}(object, newdata, margin = 1)
 }
 \arguments{
-\item{object}{A \linkS4class{CA} or \linkS4class{PCA} object.}
+\item{object}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
 \item{newdata}{An object of supplementary points coercible to a
 \code{\link{matrix}} for which to compute principal coordinates.}
 
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
-which the data will be predicted: \code{1} indicates individuals/rows (the
-default), \code{2} indicates variables/columns.}
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
+data will be predicted: \code{1} indicates individuals/rows (the default), \code{2}
+indicates variables/columns.}
 }
 \value{
 A \code{\link{data.frame}} of coordinates.

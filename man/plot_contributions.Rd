@@ -39,33 +39,33 @@ plot_cos2(object, ...)
 )
 }
 \arguments{
-\item{object}{A \linkS4class{CA} or \linkS4class{PCA} object.}
+\item{object}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Currently not used.}
 
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
-which the data will be returned: \code{1} indicates individuals/rows (the
-default), \code{2} indicates variables/columns.}
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
+data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
+indicates variables/columns.}
 
-\item{axes}{A length-one \code{\link{numeric}} vector giving the dimensions
-to be plotted.}
+\item{axes}{A length-one \code{\link{numeric}} vector giving the dimensions to be
+plotted.}
 
 \item{sort}{A \code{\link{logical}} scalar: should the data be sorted?}
 
-\item{decreasing}{A \code{\link{logical}} scalar: should the sort order be
-decreasing? Only used if \code{sort} is \code{TRUE}.}
+\item{decreasing}{A \code{\link{logical}} scalar: should the sort order be decreasing?
+Only used if \code{sort} is \code{TRUE}.}
 
-\item{limit}{An \code{\link{integer}} specifying the number of top elements
-to be displayed.}
+\item{limit}{An \code{\link{integer}} specifying the number of top elements to be
+displayed.}
 
-\item{fill, border}{A \code{\link{character}} string specifying the bars
-infilling and border colors.}
+\item{fill, border}{A \code{\link{character}} string specifying the bars infilling and
+border colors.}
 
-\item{active}{A \code{\link{logical}} scalar: should the active
-observations be plotted?}
+\item{active}{A \code{\link{logical}} scalar: should the active observations be
+plotted?}
 
-\item{sup}{A \code{\link{logical}} scalar: should the supplementary
-observations be plotted?}
+\item{sup}{A \code{\link{logical}} scalar: should the supplementary observations be
+plotted?}
 }
 \description{
 Plots contributions histogram and \eqn{cos^2}{cos2} scatterplot.
@@ -84,7 +84,7 @@ plot(X)
 plot_variance(X)
 }
 \seealso{
-\link[ggplot2:ggplot]{ggplot()}
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}
 
 Other plot: 
 \code{\link{plot_coordinates}},

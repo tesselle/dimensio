@@ -28,40 +28,34 @@ Operators acting on objects to extract parts.
 If \code{i} is "\code{data}", returns a list with the following elements:
 \describe{
 \item{\code{data}}{A \code{\link{numeric}} matrix of raw data.}
-\item{\code{mean}}{A \code{\link{numeric}} vector giving the variables
-means (\code{PCA}).}
-\item{\code{sd}}{A \code{\link{numeric}} vector giving the variables
-standard deviations (\code{PCA}).}
+\item{\code{mean}}{A \code{\link{numeric}} vector giving the variables means (\code{PCA}).}
+\item{\code{sd}}{A \code{\link{numeric}} vector giving the variables standard deviations
+(\code{PCA}).}
 }
 
 If \code{i} is "\code{rows}", returns a list with the following elements:
 \describe{
-\item{\code{coord}}{A \code{\link{numeric}} matrix of rows/individuals
-coordinates.}
-\item{\code{cos2}}{A \code{\link{numeric}} matrix of rows/individuals
-squared cosine.}
-\item{\code{masses}}{A \code{\link{numeric}} vector giving the rows masses/
-individual weights.}
-\item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
-point is a supplementary observation or not.}
+\item{\code{coord}}{A \code{\link{numeric}} matrix of rows/individuals coordinates.}
+\item{\code{cos2}}{A \code{\link{numeric}} matrix of rows/individuals squared cosine.}
+\item{\code{masses}}{A \code{\link{numeric}} vector giving the rows masses/individual
+weights.}
+\item{\code{sup}}{A \code{\link{logical}} vector specifying whether a point is a
+supplementary observation or not.}
 }
 
 If \code{i} is "\code{columns}", returns a list with the following elements:
 \describe{
-\item{\code{coord}}{A \code{\link{numeric}} matrix of columns/variables
-coordinates.}
-\item{\code{cor}}{A \code{\link{numeric}} matrix of correlation between
-variables and the dimensions (\code{PCA}).}
-\item{\code{cos2}}{A \code{\link{numeric}} matrix of columns/variables
-squared cosine.}
-\item{\code{masses}}{A \code{\link{numeric}} vector giving the columns
-masses/variable weights.}
-\item{\code{sup}}{A \code{\link{logical}} vector specifying whether a
-point is a supplementary observation or not.}
+\item{\code{coord}}{A \code{\link{numeric}} matrix of columns/variables coordinates.}
+\item{\code{cor}}{A \code{\link{numeric}} matrix of correlation between variables and
+the dimensions (\code{PCA}).}
+\item{\code{cos2}}{A \code{\link{numeric}} matrix of columns/variables squared cosine.}
+\item{\code{masses}}{A \code{\link{numeric}} vector giving the columns masses/variable
+weights.}
+\item{\code{sup}}{A \code{\link{logical}} vector specifying whether a point is a
+supplementary observation or not.}
 }
 
-If \code{i} is "\code{eigenvalues}", returns a \code{\link{numeric}} vector
-of eigenvalues.
+If \code{i} is "\code{eigenvalues}", returns a \code{\link{numeric}} vector of eigenvalues.
 }
 \examples{
 ## Load data
