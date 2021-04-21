@@ -5,10 +5,13 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "dimensio",
-  "description": "Simple Principal Components Analysis (PCA) and\n    Correspondence Analysis (CA) based on the Singular Value Decomposition\n    (SVD). This package provides S4 classes and methods to compute,\n    extract, summarize and visualize results of multivariate data\n    analysis. It also includes methods for partial bootstrap validation.",
+  "description": "Simple Principal Components Analysis (PCA) and\n    Correspondence Analysis (CA) based on the Singular Value Decomposition\n    (SVD). This package provides S4 classes and methods to compute,\n    extract, summarize and visualize results of multivariate data\n    analysis. It also includes methods for partial bootstrap validation\n    described in Greenacre (1984) <isbn: 978-0-12-299050-2> and Lebart et al. \n    (2006) <isbn: 978-2-10-049616-7>.",
   "name": "dimensio: Multivariate Data Analysis",
   "codeRepository": "https://github.com/tesselle/dimensio",
-  "relatedLink": ["http://dimensio.tesselle.org", "https://dimensio.tesselle.org"],
+  "relatedLink": [
+    "http://dimensio.tesselle.org",
+    "https://dimensio.tesselle.org"
+  ],
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
   "version": "0.2.0",
@@ -57,9 +60,15 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "codex",
-      "name": "codex",
-      "sameAs": "https://github.com/tesselle/codex"
+      "identifier": "folio",
+      "name": "folio",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=folio"
     },
     {
       "@type": "SoftwareApplication",
@@ -162,8 +171,8 @@
   ],
   "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
   "readme": "https://github.com/tesselle/dimensio/blob/master/README.md",
-  "fileSize": "1348.007KB",
-  "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#stable"],
+  "fileSize": "1430.046KB",
+  "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": [
     "r-package",
     "multivariate-analysis",

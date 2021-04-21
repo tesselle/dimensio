@@ -25,7 +25,7 @@ There are many very good packages for multivariate data analysis (such
 as [**FactoMineR**](http://factominer.free.fr/),
 [**ade4**](https://pbil.univ-lyon1.fr/ade4/) or
 [**ca**](https://cran.r-project.org/package=ca), all extended by
-[**FactoExtra**](https://rpkgs.datanovia.com/factoextra)). **dimensio**
+[**FactoExtra**](https://rpkgs.datanovia.com/factoextra/)). **dimensio**
 is designed to be as simple as possible, providing all the necessary
 tools to explore the results of the analysis.
 
