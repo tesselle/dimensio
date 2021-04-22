@@ -21,7 +21,7 @@ Simple Principal Components Analysis (PCA) and
 \tabular{ll}{
 \strong{Package:} \tab dimensio \cr
 \strong{Type:} \tab Package \cr
-\strong{Version:} \tab 0.2.0 \cr
+\strong{Version:} \tab 0.2.0.9000 \cr
 \strong{License:} \tab GPL-3 \cr
 }
 
