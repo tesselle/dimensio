@@ -8,6 +8,13 @@
 [![R-CMD-check](https://github.com/tesselle/dimensio/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/dimensio/actions)
 [![codecov](https://codecov.io/gh/tesselle/dimensio/branch/master/graph/badge.svg)](https://codecov.io/gh/tesselle/dimensio)
 
+[![CRAN
+Version](http://www.r-pkg.org/badges/version/dimensio)](https://cran.r-project.org/package=dimensio)
+[![CRAN
+checks](https://cranchecks.info/badges/worst/dimensio)](https://cran.r-project.org/web/checks/check_results_dimensio.html)
+[![CRAN
+Downloads](http://cranlogs.r-pkg.org/badges/dimensio)](https://cran.r-project.org/package=dimensio)
+
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
