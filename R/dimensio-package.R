@@ -2,11 +2,10 @@
 #' \tabular{ll}{
 #'  **Package:** \tab dimensio \cr
 #'  **Type:** \tab Package \cr
-#'  **Version:** \tab 0.2.0.9000 \cr
+#'  **Version:** \tab 0.2.1 \cr
 #'  **License:** \tab GPL-3 \cr
+#'  **Zenodo:** \tab \doi{10.5281/zenodo.4478530} \cr
 #' }
-#'
-#' \doi{10.5281/zenodo.4478530}
 #'
 #' @author
 #' **Full list of authors and contributors** (alphabetic order)
