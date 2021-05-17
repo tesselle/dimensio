@@ -84,42 +84,76 @@ test_that("Compare with {FactoMineR}", {
     expected = abs(coord_row[!coord_row$.sup, -ncol(coord_row)]),
     ignore_attr = TRUE
   )
+  expect_equal(
+    rownames(res_facto$ind$coord),
+    rownames(coord_row[!coord_row$.sup, -ncol(coord_row)])
+  )
+
   # Supplementary row coordinates
   expect_equal(
     object = abs(as.data.frame(res_facto$ind.sup$coord)),
     expected = abs(coord_row[coord_row$.sup, -ncol(coord_row)]),
     ignore_attr = TRUE
   )
+  expect_equal(
+    rownames(res_facto$ind.sup$coord),
+    rownames(coord_row[coord_row$.sup, -ncol(coord_row)])
+  )
+
   # Column principal coordinates
   expect_equal(
     object = abs(as.data.frame(res_facto$var$coord)),
     expected = abs(coord_col[!coord_col$.sup, -ncol(coord_col)]),
     ignore_attr = TRUE
   )
+  expect_equal(
+    rownames(res_facto$var$coord),
+    rownames(coord_col[!coord_col$.sup, -ncol(coord_col)])
+  )
+
   # Supplementary column coordinates
   expect_equal(
     object = abs(as.data.frame(res_facto$quanti.sup$coord)),
     expected = abs(coord_col[coord_col$.sup, -ncol(coord_col)]),
     ignore_attr = TRUE
   )
+  expect_equal(
+    rownames(res_facto$quanti.sup$coord),
+    rownames(coord_col[coord_col$.sup, -ncol(coord_col)])
+  )
+
   # Row contributions
   expect_equal(
     object = as.data.frame(res_facto$ind$contrib),
     expected = get_contributions(res_arkhe, margin = 1),
     ignore_attr = TRUE
   )
+  expect_equal(
+    rownames(res_facto$ind$contrib),
+    rownames(get_contributions(res_arkhe, margin = 1))
+  )
+
   # Column contributions
   expect_equal(
     object = as.data.frame(res_facto$var$contrib),
     expected = get_contributions(res_arkhe, margin = 2),
     ignore_attr = TRUE
   )
+  expect_equal(
+    rownames(res_facto$var$contrib),
+    rownames(get_contributions(res_arkhe, margin = 2))
+  )
+
   # Column correlations
   cor_col <- get_correlations(res_arkhe)
   expect_equal(
     object = abs(as.data.frame(res_facto$var$cor)),
     expected = abs(cor_col[!cor_col$.sup, -ncol(cor_col)]),
     ignore_attr = TRUE
+  )
+  expect_equal(
+    rownames(res_facto$var$cor),
+    rownames(cor_col[!cor_col$.sup, -ncol(cor_col)])
   )
 
   # Get cos2
@@ -132,22 +166,41 @@ test_that("Compare with {FactoMineR}", {
     expected = cos2_row[!cos2_row$.sup, -ncol(cos2_row)],
     ignore_attr = TRUE
   )
+  expect_equal(
+    rownames(res_facto$ind$cos2),
+    rownames(cos2_row[!cos2_row$.sup, -ncol(cos2_row)])
+  )
+
   # Supplementary row cos2
   expect_equal(
     object = as.data.frame(res_facto$ind.sup$cos2),
     expected = cos2_row[cos2_row$.sup, -ncol(cos2_row)],
     ignore_attr = TRUE
   )
+  expect_equal(
+    rownames(res_facto$ind.sup$cos2),
+    rownames(cos2_row[cos2_row$.sup, -ncol(cos2_row)])
+  )
+
   # Column cos2
   expect_equal(
     object = as.data.frame(res_facto$var$cos2),
     expected = cos2_col[!cos2_col$.sup, -ncol(cos2_col)],
     ignore_attr = TRUE
   )
+  expect_equal(
+    rownames(res_facto$var$cos2),
+    rownames(cos2_col[!cos2_col$.sup, -ncol(cos2_col)])
+  )
+
   # Supplementary column cos2
   expect_equal(
     object = as.data.frame(res_facto$quanti.sup$cos2),
     expected = cos2_col[cos2_col$.sup, -ncol(cos2_col)],
     ignore_attr = TRUE
+  )
+  expect_equal(
+    rownames(res_facto$quanti.sup$cos2),
+    rownames(cos2_col[cos2_col$.sup, -ncol(cos2_col)])
   )
 })

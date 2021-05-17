@@ -188,7 +188,9 @@ build_results <- function(names, principal, standard, contributions,
   ## /!\ Reorder active/supplementary points /!\
   ## Computation moves all supplementary points at the end of the results
   new_i <- seq_len(nrow(principal))
+  sup_i <- new_i * -1
   if (any(supplement)) {
+    sup_i <- utils::tail(new_i, n = sum(supplement))
     new_i <- c(new_i[!supplement], new_i[supplement])
     names <- names[new_i]
   }
@@ -196,7 +198,7 @@ build_results <- function(names, principal, standard, contributions,
   ## Prepare names
   # names <- rep(names, length.out = length(supplement))
   col_names <- paste0("F", seq_len(ncol(principal)))
-  dim_names0 <- list(names[!supplement], col_names)
+  dim_names0 <- list(names[-sup_i], col_names)
   dim_names1 <- list(names, col_names)
 
   ## Set names
