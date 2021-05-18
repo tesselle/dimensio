@@ -1,4 +1,8 @@
+# dimensio 0.2.1.9000
+
 # dimensio 0.2.1
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4769401.svg)](https://doi.org/10.5281/zenodo.4769401)
 
 ## Bugfixes & changes
 * Fix row names in `build_results()`. When initializing a `MultivariateResults` object with supplementary observations, the row names of the `standard` and `contributions` matrices were incorrect (computation moves all supplementary points at the end of the results).
