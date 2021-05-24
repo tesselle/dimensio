@@ -9,9 +9,8 @@
   "name": "dimensio: Multivariate Data Analysis",
   "codeRepository": "https://github.com/tesselle/dimensio",
   "relatedLink": [
-    "http://dimensio.tesselle.org",
-    "https://dimensio.tesselle.org",
-    "https://CRAN.R-project.org/package=dimensio"
+    "https://CRAN.R-project.org/package=dimensio",
+    "https://packages.tesselle.org/dimensio"
   ],
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
@@ -21,7 +20,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
+  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
   "author": [
     {
       "@type": "Person",
@@ -184,7 +183,7 @@
   ],
   "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
   "readme": "https://github.com/tesselle/dimensio/blob/master/README.md",
-  "fileSize": "101139.179KB",
+  "fileSize": "1293.53KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": [
     "r-package",
