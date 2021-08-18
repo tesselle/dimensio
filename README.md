@@ -8,6 +8,7 @@
 [![R-CMD-check](https://github.com/tesselle/dimensio/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/dimensio/actions)
 [![codecov](https://codecov.io/gh/tesselle/dimensio/branch/master/graph/badge.svg)](https://codecov.io/gh/tesselle/dimensio)
 
+[![r-universe](https://tesselle.r-universe.dev/badges/dimensio)](https://tesselle.r-universe.dev)
 [![CRAN
 Version](http://www.r-pkg.org/badges/version/dimensio)](https://cran.r-project.org/package=dimensio)
 [![CRAN
@@ -137,7 +138,7 @@ as few elements as possible: this makes it easy to customize diagrams
 plot_rows(X, group = iris$Species) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
-  khroma::scale_color_contrast() # Custom color scale
+  khroma::scale_colour_highcontrast() # Custom color scale
 
 ## Plot all individuals by cos2
 plot_rows(X, highlight = "cos2") +
