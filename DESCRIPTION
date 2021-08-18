@@ -43,7 +43,7 @@ Suggests:
     ggrepel,
     khroma,
     testthat (>= 3.0.0),
-    vdiffr
+    vdiffr (>= 1.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
