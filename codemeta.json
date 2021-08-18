@@ -10,7 +10,7 @@
   "codeRepository": "https://github.com/tesselle/dimensio",
   "relatedLink": [
     "https://CRAN.R-project.org/package=dimensio",
-    "https://packages.tesselle.org/dimensio"
+    "https://packages.tesselle.org/dimensio/"
   ],
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
@@ -183,7 +183,7 @@
   ],
   "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
   "readme": "https://github.com/tesselle/dimensio/blob/master/README.md",
-  "fileSize": "1293.53KB",
+  "fileSize": "1293.541KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": [
     "r-package",

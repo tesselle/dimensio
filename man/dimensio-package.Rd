@@ -29,7 +29,7 @@ Simple Principal Components Analysis (PCA) and
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://packages.tesselle.org/dimensio}
+  \item \url{https://packages.tesselle.org/dimensio/}
   \item \url{https://github.com/tesselle/dimensio}
   \item Report bugs at \url{https://github.com/tesselle/dimensio/issues}
 }

@@ -16,5 +16,5 @@ citEntry(
         "R package version 0.2.1",
         "Université Bordeaux Montaigne, Pessac, France.",
         "DOI 10.5281/zenodo.4478530.",
-        "URL https://dimensio.tesselle.org.")
+        "URL https://packages.tesselle.org/dimensio.")
 )
