@@ -20,7 +20,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
+  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
   "author": [
     {
       "@type": "Person",
@@ -184,7 +184,7 @@
   ],
   "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
   "readme": "https://github.com/tesselle/dimensio/blob/master/README.md",
-  "fileSize": "1072.59KB",
+  "fileSize": "1085.043KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": [
     "r-package",

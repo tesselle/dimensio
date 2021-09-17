@@ -2,6 +2,106 @@
 #' @include AllClasses.R AllGenerics.R
 NULL
 
+# numeric/integer ==============================================================
+#' @export
+#' @describeIn bootstrap Samples randomly from the elements of `object` with
+#'  replacement.
+#' @aliases bootstrap,numeric-method
+setMethod(
+  f = "bootstrap",
+  signature = c(object = "numeric"),
+  definition = function(object, do, n, ...) {
+    spl <- sample(object, size = length(object) * n, replace = TRUE)
+    replicates <- t(matrix(spl, nrow = n))
+    values <- apply(X = replicates, MARGIN = 2, FUN = do, ...)
+    .BootstrapVector(values)
+  }
+)
+
+#' @export
+#' @describeIn bootstrap Samples observations from a multinomial distribution.
+#' @aliases bootstrap,integer-method
+setMethod(
+  f = "bootstrap",
+  signature = c(object = "integer"),
+  definition = function(object, do, n, ...) {
+    size <- sum(object)
+    replicates <- stats::rmultinom(n, size = size, prob = object / size)
+    values <- apply(X = replicates, MARGIN = 2, FUN = do, ...)
+    .BootstrapVector(values)
+  }
+)
+
+#' @export
+#' @rdname bootstrap
+#' @aliases summary,BootstrapVector-method
+setMethod(
+  f = "summary",
+  signature = c(object = "BootstrapVector"),
+  definition = function(object, level = 0.95, type = c("student", "normal"),
+                        probs = c(0.25, 0.75), na.rm = FALSE, ...) {
+    ## Confidence interval for the mean
+    CI <- conf <- NULL
+    if (!is.null(level)) {
+      CI <- confidence_mean(object, level = level, type = type)
+      conf <- c("lower", "upper")
+    }
+
+    ## Quantiles
+    QU <- quant <- NULL
+    if (!is.null(probs)) {
+      QU <- stats::quantile(object, probs = probs, na.rm = na.rm, names = FALSE)
+      quant <- sprintf("Q%02d", round(probs * 100, 0))
+    }
+
+    results <- c(
+      min(object, na.rm = na.rm),
+      mean(object, na.rm = na.rm),
+      max(object, na.rm = na.rm),
+      CI,
+      QU
+    )
+    names(results) <- c("min", "mean", "max", conf, quant)
+    results
+  }
+)
+
+#' Confidence Interval for a Mean
+#'
+#' Computes the margin of errors of a confidence interval at a desired level of
+#'  significance.
+#' @param x A [`numeric`] vector.
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#'  Must be a single number between \eqn{0} and \eqn{1}.
+#' @param type A [`character`] string giving the type of confidence
+#'  interval to be returned. It must be one "`student`" (default) or
+#'  "`normal`". Any unambiguous substring can be given.
+#' @return A length-two [`numeric`] vector giving the margins of errors.
+#' @author N. Frerebeau
+#' @keywords internal
+#' @noRd
+confidence_mean <- function(x, level = 0.95, type = c("student", "normal")) {
+  ## Validation
+  type <- match.arg(type, several.ok = FALSE)
+
+  n <- length(x)
+  z <- zscore(alpha = 1 - level, n = n, type = type)
+  stardard_error <- stats::sd(x) / sqrt(n)
+
+  margin <- z * stardard_error
+  mean(x) + margin * c(-1, 1)
+}
+
+zscore <- function(alpha, n, type = c("student", "normal")) {
+  switch(
+    type,
+    normal = stats::qnorm(1 - alpha / 2), # Large sample size
+    student = stats::qt(1 - alpha / 2, n - 1), # Small sample size
+    stop(sprintf("There is no such type: %s", type), call. = FALSE)
+  )
+}
+
+# MultivariateAnalysis =========================================================
 #' @export
 #' @rdname bootstrap
 #' @aliases bootstrap,CA-method

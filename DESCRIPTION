@@ -55,6 +55,7 @@ Collate:
     'ca.R'
     'dimensio-package.R'
     'helpers.R'
+    'jackknife.R'
     'joint.R'
     'mutators.R'
     'pca.R'

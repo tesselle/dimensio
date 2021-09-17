@@ -1,5 +1,18 @@
 # CLASSES DEFINITION
 
+# Vector =======================================================================
+.BootstrapVector <- setClass(
+  Class = "BootstrapVector",
+  contains = "numeric"
+)
+.JackknifeVector <- setClass(
+  Class = "JackknifeVector",
+  slots = c(
+    hat = "numeric"
+  ),
+  contains = "numeric"
+)
+
 # MultivariateAnalysis =========================================================
 ## Results ---------------------------------------------------------------------
 #' Multivariate Data Analysis Results

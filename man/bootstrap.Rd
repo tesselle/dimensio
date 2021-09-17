@@ -4,32 +4,101 @@
 \name{bootstrap}
 \alias{bootstrap}
 \alias{bootstrap-method}
+\alias{bootstrap,numeric-method}
+\alias{bootstrap,integer-method}
+\alias{summary,BootstrapVector-method}
 \alias{bootstrap,CA-method}
 \alias{bootstrap,PCA-method}
 \title{Partial Bootstrap Analysis}
 \usage{
 bootstrap(object, ...)
 
+\S4method{bootstrap}{numeric}(object, do, n, ...)
+
+\S4method{bootstrap}{integer}(object, do, n, ...)
+
+\S4method{summary}{BootstrapVector}(
+  object,
+  level = 0.95,
+  type = c("student", "normal"),
+  probs = c(0.25, 0.75),
+  na.rm = FALSE,
+  ...
+)
+
 \S4method{bootstrap}{CA}(object, n = 30)
 
 \S4method{bootstrap}{PCA}(object, n = 30)
 }
 \arguments{
-\item{object}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+\item{object}{A \code{\link{numeric}} or an \code{\link{integer}} vector or
+a \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object (see below).}
 
 \item{...}{Currently not used.}
 
+\item{do}{A \code{\link{function}} that takes \code{object} as an argument
+and returns a single numeric value.}
+
 \item{n}{A non-negative \code{\link{integer}} giving the number of bootstrap
 replications.}
+
+\item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.
+Must be a single number between \eqn{0} and \eqn{1}. If \code{NULL}, no
+confidence interval are computed.}
+
+\item{type}{A \code{\link{character}} string giving the type of confidence
+interval to be returned. It must be one "\code{student}" (default) or
+"\code{normal}". Any unambiguous substring can be given. Only used if \code{level}
+is not \code{NULL}.``}
+
+\item{probs}{A \code{\link{numeric}} vector of probabilities with values in
+\eqn{[0,1]} (see \code{\link[stats:quantile]{stats::quantile()}}). If \code{NULL}, quantiles are not
+computed.}
+
+\item{na.rm}{A \code{\link{logical}} scalar: should missing values be removed
+from \code{object} before the sample statistics are computed?}
 }
 \value{
-A \code{\linkS4class{BootstrapCA}} or \code{\linkS4class{BootstrapPCA}} object.
+If \code{object} is a \code{\link{numeric}} or an \code{\link{integer}} vector, \code{bootstrap()}
+returns a \code{BootstrapVector} object (i.e. a \code{numeric} vector of the \code{n}
+bootstrap values of \code{do}).
+
+If \code{object} is a \code{\linkS4class{CA}} or a \code{\linkS4class{PCA}} object, \code{bootstrap()}
+returns a \code{\linkS4class{BootstrapCA}} or a \code{\linkS4class{BootstrapPCA}} object.
+
+\code{summary()} returns a \code{numeric} vector with the following elements:
+\describe{
+\item{\code{min}}{Minimum value.}
+\item{\code{mean}}{Mean value.}
+\item{\code{max}}{Maximum value.}
+\item{\code{lower}}{Lower bound of the confidence interval.}
+\item{\code{upper}}{Upper bound of the confidence interval.}
+\item{\verb{Q*}}{Sample quantile to \code{*} probability.}
+}
 }
 \description{
 Checks analysis with partial bootstrap resampling.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{numeric}: Samples randomly from the elements of \code{object} with
+replacement.
+
+\item \code{integer}: Samples observations from a multinomial distribution.
+}}
+
 \examples{
 library(ggrepel)
+
+## Random samples from x with replacement
+x <- rnorm(20) # numeric
+boot <- bootstrap(x, do = mean, n = 100) # Sample mean
+summary(boot)
+
+## Sample observations from a multinomial distribution
+x <- sample(1:100, 100, TRUE) # integer
+boot <- bootstrap(x, do = median, n = 100)
+summary(boot)
 
 ## Partial bootstrap on CA
 ## Data from Lebart et al. 2006, p. 170-172
@@ -89,12 +158,10 @@ multidimensionnelle: visualisation et inférence en fouille de données}.
 Paris: Dunod, 2006.
 }
 \seealso{
-Other multivariate analysis: 
-\code{\link{ca}()},
-\code{\link{pca}()},
-\code{\link{predict}()}
+Other resampling methods: 
+\code{\link{jackknife}()}
 }
 \author{
 N. Frerebeau
 }
-\concept{multivariate analysis}
+\concept{resampling methods}

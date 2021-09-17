@@ -98,7 +98,6 @@ Paris: Dunod, 2006.
 \code{\link[=mutator]{get_*()}}, \code{\link[stats:predict]{stats::predict()}}, \code{\link[=svd]{svd()}}
 
 Other multivariate analysis: 
-\code{\link{bootstrap}()},
 \code{\link{ca}()},
 \code{\link{predict}()}
 }

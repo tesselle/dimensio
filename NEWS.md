@@ -1,5 +1,11 @@
 # dimensio 0.2.1.9000
 
+## New classes and methods
+* Add resampling methods: `bootstrap()` and `jackknife()`.
+
+## Internals
+* Add `BootstrapVector` and `JackknifeVector` classes to store bootstrap and jackknife resampling values (inherit from base `numeric`).
+
 # dimensio 0.2.1
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4769401.svg)](https://doi.org/10.5281/zenodo.4769401)
