@@ -7,13 +7,13 @@ citEntry(
   year         = "2021",
   organization = "Université Bordeaux Montaigne",
   address      = "Pessac, France",
-  note         = "R package version 0.2.1",
+  note         = "R package version 0.2.2",
   url          = "https://doi.org/10.5281/zenodo.4478530",
 
   textVersion  =
   paste("Frerebeau, Nicolas (2021).",
         "dimensio: Multivariate Data Analysis.",
-        "R package version 0.2.1",
+        "R package version 0.2.2",
         "Université Bordeaux Montaigne, Pessac, France.",
         "DOI 10.5281/zenodo.4478530.",
         "URL https://packages.tesselle.org/dimensio.")

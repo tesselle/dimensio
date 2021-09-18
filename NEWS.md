@@ -1,4 +1,4 @@
-# dimensio 0.2.1.9000
+# dimensio 0.2.2
 
 ## New classes and methods
 * Add `bootstrap()` and `jackknife()` methods for `numeric` and `integer` vectors.
