@@ -1,4 +1,8 @@
+# dimensio 0.2.2.9000
+
 # dimensio 0.2.2
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5515458.svg)](https://doi.org/10.5281/zenodo.5515458)
 
 ## New classes and methods
 * Add `bootstrap()` and `jackknife()` methods for `numeric` and `integer` vectors.

@@ -1,6 +1,6 @@
 Package: dimensio
 Title: Multivariate Data Analysis
-Version: 0.2.2
+Version: 0.2.2.9000
 Authors@R: 
     c(person(given = "Nicolas",
              family = "Frerebeau",
