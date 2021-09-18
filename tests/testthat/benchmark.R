@@ -27,7 +27,7 @@
 #   dimensio_ca = dimensio::ca(mtx, rank = 5, sup_row = 8:10, sup_col = 7:10),
 #   ca_ca = ca::ca(mtx, nd = 5, suprow = 8:10, supcol = 7:10),
 #   facto_ca = FactoMineR::CA(dtf, ncp = 5, row.sup = 8:10, col.sup = 7:10, graph = FALSE),
-#   times = 1000
+#   times = 2000
 # )
 # mbm
 #
@@ -43,7 +43,7 @@
 # mbm <- microbenchmark::microbenchmark(
 #   dimensio_pca = dimensio::pca(dtf, rank = 5, sup_row = 8:10, sup_col = 7:10),
 #   facto_pca = FactoMineR::PCA(dtf, ncp = 5, ind.sup = 8:10, quanti.sup = 7:10, graph = FALSE),
-#   times = 1000
+#   times = 2000
 # )
 # mbm
 #

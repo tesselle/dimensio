@@ -63,4 +63,5 @@ Collate:
     'show.R'
     'subset.R'
     'summary.R'
+    'svd.R'
     'zzz.R'

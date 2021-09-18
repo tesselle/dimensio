@@ -1,7 +1,10 @@
 # dimensio 0.2.1.9000
 
 ## New classes and methods
-* Add resampling methods: `bootstrap()` and `jackknife()`.
+* Add `bootstrap()` and `jackknife()` methods for `numeric` and `integer` vectors.
+
+## Bugfixes & changes
+* Fix sign of singular vectors for consistency with **FactoMineR**.
 
 ## Internals
 * Add `BootstrapVector` and `JackknifeVector` classes to store bootstrap and jackknife resampling values (inherit from base `numeric`).

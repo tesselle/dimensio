@@ -56,7 +56,6 @@ setMethod(
 
     ## Dimension of the solution
     ndim <- min(rank, dim(N) - 1)
-    dim_keep <- seq_len(ndim)
     i <- nrow(N)
     j <- ncol(N)
 
@@ -94,12 +93,12 @@ setMethod(
     S <- M / W_row1 / W_col1
 
     ## Singular Value Decomposition
-    D <- svd(S)
-    sv <- D$d[dim_keep] # Singular values
+    D <- svd2(S, ndim)
+    sv <- D$d # Singular values
 
     ## Standard coordinates
-    U <- D$u[, dim_keep, drop = FALSE] / W_row2
-    V <- D$v[, dim_keep, drop = FALSE] / W_col2
+    U <- D$u / W_row2
+    V <- D$v / W_col2
 
     sv_U <- matrix(sv, nrow = i, ncol = ndim, byrow = TRUE)
     sv_V <- matrix(sv, nrow = j, ncol = ndim, byrow = TRUE)
@@ -146,7 +145,6 @@ setMethod(
     cos_row <- coord_row^2 / dist_row
     cos_col <- coord_col^2 / dist_col
 
-    names(sv) <- paste0("F", dim_keep)
     .CA(
       data = object,
       dimension = as.integer(ndim),

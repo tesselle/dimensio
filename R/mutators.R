@@ -150,7 +150,7 @@ setMethod(
   f = "get_correlations",
   signature = signature(x = "PCA"),
   definition = function(x, sup_name = ".sup") {
-    corr <- sqrt(x@columns@cosine)
+    corr <- x@columns@principal / x@columns@distances
     suppl <- x@columns@supplement
 
     corr <- as.data.frame(corr)
