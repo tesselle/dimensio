@@ -24,6 +24,8 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4478530.svg)](https://doi.org/10.5281/zenodo.4478530)
 <!-- badges: end -->
 
+## Overview
+
 Simple Principal Components Analysis (PCA) and Correspondence Analysis
 (CA) based on the Singular Value Decomposition (SVD). This package
 provides S4 classes and methods to compute, extract, summarize and
