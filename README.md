@@ -6,8 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/tesselle/dimensio/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/dimensio/actions)
-[![codecov](https://codecov.io/gh/tesselle/dimensio/branch/master/graph/badge.svg)](https://codecov.io/gh/tesselle/dimensio)
-[![CodeFactor](https://www.codefactor.io/repository/github/tesselle/dimensio/badge/master)](https://www.codefactor.io/repository/github/tesselle/dimensio/overview/master)
+[![codecov](https://codecov.io/gh/tesselle/dimensio/branch/main/graph/badge.svg)](https://codecov.io/gh/tesselle/dimensio)
+[![CodeFactor](https://www.codefactor.io/repository/github/tesselle/dimensio/badge/main)](https://www.codefactor.io/repository/github/tesselle/dimensio/overview/main)
 
 [![r-universe](https://tesselle.r-universe.dev/badges/dimensio)](https://tesselle.r-universe.dev)
 [![CRAN

@@ -183,8 +183,8 @@
     }
   ],
   "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
-  "readme": "https://github.com/tesselle/dimensio/blob/master/README.md",
-  "fileSize": "1084.835KB",
+  "readme": "https://github.com/tesselle/dimensio/blob/main/README.md",
+  "fileSize": "1085.674KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": [
     "r-package",
