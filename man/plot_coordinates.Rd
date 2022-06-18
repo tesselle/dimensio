@@ -7,30 +7,42 @@
 \alias{plot_rows-method}
 \alias{plot_columns}
 \alias{plot_columns-method}
-\alias{plot_rows,MultivariateAnalysis-method}
 \alias{plot,CA,missing-method}
-\alias{plot_columns,CA-method}
 \alias{plot,PCA,missing-method}
-\alias{plot_columns,PCA-method}
+\alias{plot_rows,MultivariateAnalysis-method}
+\alias{plot_columns,CA-method}
 \alias{plot_columns,BootstrapPCA-method}
+\alias{plot_columns,PCA-method}
 \title{Visualize Factor Map}
 \usage{
 plot_rows(object, ...)
 
 plot_columns(object, ...)
 
-\S4method{plot_rows}{MultivariateAnalysis}(
-  object,
+\S4method{plot}{CA,missing}(
+  x,
+  margin = c(1, 2),
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
   highlight = NULL,
-  group = NULL
+  group = NULL,
+  ...
 )
 
-\S4method{plot}{CA,missing}(
+\S4method{plot}{PCA,missing}(
   x,
-  margin = c(1, 2),
+  margin = 1,
+  axes = c(1, 2),
+  active = TRUE,
+  sup = TRUE,
+  highlight = NULL,
+  group = NULL,
+  ...
+)
+
+\S4method{plot_rows}{MultivariateAnalysis}(
+  object,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
@@ -47,9 +59,8 @@ plot_columns(object, ...)
   group = NULL
 )
 
-\S4method{plot}{PCA,missing}(
-  x,
-  margin = 1,
+\S4method{plot_columns}{BootstrapPCA}(
+  object,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
@@ -65,20 +76,15 @@ plot_columns(object, ...)
   highlight = NULL,
   group = NULL
 )
-
-\S4method{plot_columns}{BootstrapPCA}(
-  object,
-  axes = c(1, 2),
-  active = TRUE,
-  sup = TRUE,
-  highlight = NULL,
-  group = NULL
-)
 }
 \arguments{
 \item{object, x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Currently not used.}
+
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
+data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
+indicates variables/columns, \code{c(1, 2)} indicates rows and columns (\code{CA}).}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -97,10 +103,6 @@ If \code{NULL} (the default), no highlighting is applied.}
 \item{group}{A vector of categories specifying the categorical variable from
 which to color the individuals (only used if \code{highlight} is \code{NULL}; see
 below).}
-
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
-data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
-indicates variables/columns, \code{c(1, 2)} indicates rows and columns (\code{CA}).}
 }
 \description{
 Plots factor map.

@@ -3,6 +3,54 @@
 NULL
 
 # Coordinates ==================================================================
+## CA --------------------------------------------------------------------------
+#' @export
+#' @method plot CA
+plot.CA <- function(x, margin = c(1, 2), axes = c(1, 2),
+                    active = TRUE, sup = TRUE,
+                    highlight = NULL, group = NULL, ...) {
+  ## ggplot2
+  gg <- plot_points(
+    x,
+    margin = margin,
+    axes = axes,
+    active = active,
+    sup = sup,
+    highlight = highlight,
+    group = group
+  )
+  return(gg)
+}
+
+#' @export
+#' @rdname plot_coordinates
+#' @aliases plot,CA,missing-method
+setMethod("plot", c(x = "CA", y = "missing"), plot.CA)
+
+## PCA -------------------------------------------------------------------------
+#' @export
+#' @method plot PCA
+plot.PCA <- function(x, margin = 1, axes = c(1, 2),
+                     active = TRUE, sup = TRUE,
+                     highlight = NULL, group = NULL, ...) {
+  gg <- switch (
+    margin[[1L]],
+    ## Plot individuals factor map
+    `1` = plot_rows(x, axes = axes, active = active, sup = sup,
+                    highlight = highlight, group = group),
+    ## Plot variables factor map
+    `2` = plot_columns(x, axes = axes, active = active, sup = sup,
+                       highlight = highlight, group = group)
+  )
+  return(gg)
+}
+
+#' @export
+#' @rdname plot_coordinates
+#' @aliases plot,PCA,missing-method
+setMethod("plot", c(x = "PCA", y = "missing"), plot.PCA)
+
+## Rows ------------------------------------------------------------------------
 #' @export
 #' @rdname plot_coordinates
 #' @aliases plot_rows,MultivariateAnalysis-method
@@ -24,30 +72,7 @@ setMethod(
   }
 )
 
-## Correspondence Analysis -----------------------------------------------------
-#' @export
-#' @rdname plot_coordinates
-#' @aliases plot,CA,missing-method
-setMethod(
-  f = "plot",
-  signature = signature(x = "CA", y = "missing"),
-  definition = function(x, margin = c(1, 2), axes = c(1, 2),
-                        active = TRUE, sup = TRUE,
-                        highlight = NULL, group = NULL) {
-    ## ggplot2
-    gg <- plot_points(
-      x,
-      margin = margin,
-      axes = axes,
-      active = active,
-      sup = sup,
-      highlight = highlight,
-      group = group
-    )
-    return(gg)
-  }
-)
-
+## Columns ---------------------------------------------------------------------
 #' @export
 #' @rdname plot_coordinates
 #' @aliases plot_columns,CA-method
@@ -69,26 +94,24 @@ setMethod(
   }
 )
 
-## Principal Components Analysis -----------------------------------------------
 #' @export
 #' @rdname plot_coordinates
-#' @aliases plot,PCA,missing-method
+#' @aliases plot_columns,BootstrapPCA-method
 setMethod(
-  f = "plot",
-  signature = signature(x = "PCA", y = "missing"),
-  definition = function(x, margin = 1, axes = c(1, 2),
-                        active = TRUE, sup = TRUE,
+  f = "plot_columns",
+  signature = signature(object = "BootstrapPCA"),
+  definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
                         highlight = NULL, group = NULL) {
-    gg <- switch (
-      margin[[1L]],
-      ## Plot individuals factor map
-      `1` = plot_rows(x, axes = axes, active = active, sup = sup,
-                      highlight = highlight, group = group),
-      ## Plot variables factor map
-      `2` = plot_columns(x, axes = axes, active = active, sup = sup,
-                         highlight = highlight, group = group)
+    ## ggplot2
+    plot_points(
+      object,
+      margin = 2,
+      axes = axes,
+      active = active,
+      sup = sup,
+      highlight = highlight,
+      group = group
     )
-    return(gg)
   }
 )
 
@@ -155,27 +178,6 @@ setMethod(
       ggplot2::scale_x_continuous(name = print_variance(object, axes[[1]])) +
       ggplot2::scale_y_continuous(name = print_variance(object, axes[[2]])) +
       ggplot2::coord_fixed()
-  }
-)
-
-#' @export
-#' @rdname plot_coordinates
-#' @aliases plot_columns,BootstrapPCA-method
-setMethod(
-  f = "plot_columns",
-  signature = signature(object = "BootstrapPCA"),
-  definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        highlight = NULL, group = NULL) {
-    ## ggplot2
-    plot_points(
-      object,
-      margin = 2,
-      axes = axes,
-      active = active,
-      sup = sup,
-      highlight = highlight,
-      group = group
-    )
   }
 )
 

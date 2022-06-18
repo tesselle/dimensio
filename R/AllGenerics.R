@@ -3,7 +3,6 @@
 NULL
 
 # S4 dispatch to base S3 generic ===============================================
-setGeneric("plot")
 setGeneric("rownames")
 setGeneric("colnames")
 setGeneric("dimnames")
