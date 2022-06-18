@@ -30,7 +30,7 @@ is_scaled <- function(x) {
 
 # Dimensions ===================================================================
 #' @export
-#' @rdname mutator
+#' @rdname mutators
 #' @aliases dim,MultivariateAnalysis-method
 setMethod(
   f = "dim",
@@ -39,7 +39,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname mutator
+#' @rdname mutators
 #' @aliases rownames,MultivariateAnalysis-method
 setMethod(
   f = "rownames",
@@ -48,7 +48,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname mutator
+#' @rdname mutators
 #' @aliases colnames,MultivariateAnalysis-method
 setMethod(
   f = "colnames",
@@ -57,7 +57,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname mutator
+#' @rdname mutators
 #' @aliases dimnames,MultivariateAnalysis-method
 setMethod(
   f = "dimnames",
@@ -67,7 +67,7 @@ setMethod(
 
 # Contributions ================================================================
 #' @export
-#' @rdname mutator
+#' @rdname get_contributions
 #' @aliases get_contributions,MultivariateAnalysis-method
 setMethod(
   f = "get_contributions",
@@ -83,7 +83,7 @@ setMethod(
 
 # Coordinates ==================================================================
 #' @export
-#' @rdname mutator
+#' @rdname get_coordinates
 #' @aliases get_coordinates,MultivariateAnalysis-method
 setMethod(
   f = "get_coordinates",
@@ -109,7 +109,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname mutator
+#' @rdname get_coordinates
 #' @aliases get_replications,MultivariateBootstrap-method
 setMethod(
   f = "get_replications",
@@ -132,7 +132,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname mutator
+#' @rdname get_coordinates
 #' @aliases get_replications,BootstrapPCA-method
 setMethod(
   f = "get_replications",
@@ -144,7 +144,7 @@ setMethod(
 
 # Correlations =================================================================
 #' @export
-#' @rdname mutator
+#' @rdname get_contributions
 #' @aliases get_correlations,PCA-method
 setMethod(
   f = "get_correlations",
@@ -162,7 +162,7 @@ setMethod(
 
 # Cos2 =========================================================================
 #' @export
-#' @rdname mutator
+#' @rdname get_contributions
 #' @aliases get_cos2,MultivariateAnalysis-method
 setMethod(
   f = "get_cos2",
@@ -188,7 +188,7 @@ setMethod(
 
 # Data =========================================================================
 #' @export
-#' @rdname mutator
+#' @rdname get_data
 #' @aliases get_data,MultivariateAnalysis-method
 setMethod(
   f = "get_data",
@@ -200,7 +200,7 @@ setMethod(
 
 # Distances ====================================================================
 #' @export
-#' @rdname mutator
+#' @rdname get_distances
 #' @aliases get_distances,MultivariateAnalysis-method
 setMethod(
   f = "get_distances",
@@ -225,7 +225,7 @@ setMethod(
 
 # Eigenvalues ==================================================================
 #' @export
-#' @rdname mutator
+#' @rdname get_eigenvalues
 #' @aliases get_eigenvalues,MultivariateAnalysis-method
 setMethod(
   f = "get_eigenvalues",
@@ -245,7 +245,7 @@ setMethod(
 
 # Inertia ======================================================================
 #' @export
-#' @rdname mutator
+#' @rdname get_eigenvalues
 #' @aliases get_inertia,MultivariateAnalysis-method
 setMethod(
   f = "get_inertia",
@@ -272,7 +272,7 @@ setMethod(
 
 # Variance =====================================================================
 #' @export
-#' @rdname mutator
+#' @rdname get_eigenvalues
 #' @aliases get_variance,MultivariateAnalysis-method
 setMethod(
   f = "get_variance",

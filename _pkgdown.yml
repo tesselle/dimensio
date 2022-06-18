@@ -24,6 +24,6 @@ reference:
   - has_concept("class")
 - title: Getters and Setters
   contents:
-  - has_concept("mutator")
+  - has_concept("mutators")
 - title: Datasets
   - has_concept("datasets")

@@ -68,10 +68,15 @@ X <- pca(iris, scale = TRUE, sup_row = 8:10, sup_col = 1)
 X[["rows"]]
 }
 \seealso{
-Other mutator: 
-\code{\link{mutator}}
+Other mutators: 
+\code{\link{get_contributions}()},
+\code{\link{get_coordinates}()},
+\code{\link{get_data}()},
+\code{\link{get_distances}()},
+\code{\link{get_eigenvalues}()},
+\code{\link{mutators}}
 }
 \author{
 N. Frerebeau
 }
-\concept{mutator}
+\concept{mutators}

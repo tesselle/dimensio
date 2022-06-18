@@ -74,7 +74,7 @@ multidimensionnelle: visualisation et inférence en fouille de données}.
 Paris: Dunod, 2006.
 }
 \seealso{
-\code{\link[=mutator]{get_*()}}, \code{\link[stats:predict]{stats::predict()}}, \code{\link[=svd]{svd()}}
+\code{\link[=svd]{svd()}}
 
 Other multivariate analysis: 
 \code{\link{pca}()},
