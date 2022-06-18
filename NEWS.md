@@ -1,5 +1,8 @@
 # dimensio 0.2.2.9000
 
+## Breaking changes
+* Remove `bootstrap()` and `jackknife()` methods for `numeric` and `integer` vectors.
+
 # dimensio 0.2.2
 ## New classes and methods
 * Add `bootstrap()` and `jackknife()` methods for `numeric` and `integer` vectors.

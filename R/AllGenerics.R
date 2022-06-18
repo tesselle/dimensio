@@ -3,6 +3,7 @@
 NULL
 
 # S4 dispatch to base S3 generic ===============================================
+setGeneric("plot")
 setGeneric("rownames")
 setGeneric("colnames")
 setGeneric("dimnames")
@@ -309,42 +310,11 @@ NULL
 #' Partial Bootstrap Analysis
 #'
 #' Checks analysis with partial bootstrap resampling.
-#' @param object A [`numeric`] or an [`integer`] vector or
-#'  a [`CA-class`] or [`PCA-class`] object (see below).
-#' @param do A [`function`] that takes `object` as an argument
-#'  and returns a single numeric value.
+#' @param object A [`CA-class`] or [`PCA-class`] object.
 #' @param n A non-negative [`integer`] giving the number of bootstrap
 #'  replications.
-#' @param level A length-one [`numeric`] vector giving the confidence level.
-#'  Must be a single number between \eqn{0} and \eqn{1}. If `NULL`, no
-#'  confidence interval are computed.
-#' @param type A [`character`] string giving the type of confidence
-#'  interval to be returned. It must be one "`student`" (default) or
-#'  "`normal`". Any unambiguous substring can be given. Only used if `level`
-#'  is not `NULL`.``
-#' @param probs A [`numeric`] vector of probabilities with values in
-#'  \eqn{[0,1]} (see [stats::quantile()]). If `NULL`, quantiles are not
-#'  computed.
-#' @param na.rm A [`logical`] scalar: should missing values be removed
-#'  from `object` before the sample statistics are computed?
-#' @param ... Extra arguments passed to `do`.
-#' @return
-#'  If `object` is a [`numeric`] or an [`integer`] vector, `bootstrap()`
-#'  returns a `BootstrapVector` object (i.e. a `numeric` vector of the `n`
-#'  bootstrap values of `do`).
-#'
-#'  If `object` is a [`CA-class`] or a [`PCA-class`] object, `bootstrap()`
-#'  returns a [`BootstrapCA-class`] or a [`BootstrapPCA-class`] object.
-#'
-#'  `summary()` returns a `numeric` vector with the following elements:
-#'  \describe{
-#'   \item{`min`}{Minimum value.}
-#'   \item{`mean`}{Mean value.}
-#'   \item{`max`}{Maximum value.}
-#'   \item{`lower`}{Lower bound of the confidence interval.}
-#'   \item{`upper`}{Upper bound of the confidence interval.}
-#'   \item{`Q*`}{Sample quantile to `*` probability.}
-#'  }
+#' @return#'
+#'  Returns a [`BootstrapCA-class`] or a [`BootstrapPCA-class`] object.
 #' @param ... Currently not used.
 #' @example inst/examples/ex-bootstrap.R
 #' @references
@@ -366,38 +336,6 @@ NULL
 setGeneric(
   name = "bootstrap",
   def = function(object, ...) standardGeneric("bootstrap")
-)
-
-# Jackknife ====================================================================
-#' Jackknife Estimation
-#'
-#' @param object A [`numeric`] vector.
-#' @param do A [`function`] that takes `object` as an argument and returns a
-#'  single numeric value.
-#' @param ... Extra arguments passed to `do`.
-#' @return
-#'  `jackknife()` returns a `JackknifeVector` object (i.e. a `numeric`
-#'  vector of the `n` leave-one-out values of `do`).
-#'
-#'  `summary()` returns a named `numeric` vector with the following elements:
-#'  \describe{
-#'   \item{`mean`}{The jackknife estimate of mean of `do`.}
-#'   \item{`bias`}{The jackknife estimate of bias of `do`.}
-#'   \item{`error`}{he jackknife estimate of standard error of `do`.}
-#'  }
-#' @example inst/examples/ex-jackknife.R
-#' @author N. Frerebeau
-#' @docType methods
-#' @family resampling methods
-#' @name jackknife
-#' @rdname jackknife
-NULL
-
-#' @rdname jackknife
-#' @aliases jackknife-method
-setGeneric(
-  name = "jackknife",
-  def = function(object, ...) standardGeneric("jackknife")
 )
 
 # Plot =========================================================================
@@ -446,9 +384,6 @@ setGeneric(
 #' @name plot_coordinates
 #' @rdname plot_coordinates
 NULL
-
-if (!isGeneric("plot"))
-  setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
 
 #' @rdname plot_coordinates
 #' @aliases plot_rows-method
