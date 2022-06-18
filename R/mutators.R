@@ -30,40 +30,48 @@ is_scaled <- function(x) {
 
 # Dimensions ===================================================================
 #' @export
+#' @method dim MultivariateAnalysis
+dim.MultivariateAnalysis <- function(x) {
+  x@dimension
+}
+
+#' @export
 #' @rdname mutators
 #' @aliases dim,MultivariateAnalysis-method
-setMethod(
-  f = "dim",
-  signature = signature(x = "MultivariateAnalysis"),
-  definition = function(x) x@dimension
-)
+setMethod("dim", "MultivariateAnalysis", dim.MultivariateAnalysis)
+
+#' @export
+#' @method rownames MultivariateAnalysis
+rownames.MultivariateAnalysis <- function(x) {
+  x@rows@names
+}
 
 #' @export
 #' @rdname mutators
 #' @aliases rownames,MultivariateAnalysis-method
-setMethod(
-  f = "rownames",
-  signature = signature(x = "MultivariateAnalysis"),
-  definition = function(x) x@rows@names
-)
+setMethod("rownames", "MultivariateAnalysis", rownames.MultivariateAnalysis)
+
+#' @export
+#' @method colnames MultivariateAnalysis
+colnames.MultivariateAnalysis <- function(x) {
+  x@columns@names
+}
 
 #' @export
 #' @rdname mutators
 #' @aliases colnames,MultivariateAnalysis-method
-setMethod(
-  f = "colnames",
-  signature = signature(x = "MultivariateAnalysis"),
-  definition = function(x) x@columns@names
-)
+setMethod("colnames", "MultivariateAnalysis", colnames.MultivariateAnalysis)
+
+#' @export
+#' @method dimnames MultivariateAnalysis
+dimnames.MultivariateAnalysis <- function(x) {
+  list(x@rows@names, x@columns@names)
+}
 
 #' @export
 #' @rdname mutators
 #' @aliases dimnames,MultivariateAnalysis-method
-setMethod(
-  f = "dimnames",
-  signature = signature(x = "MultivariateAnalysis"),
-  definition = function(x) list(x@rows@names, x@columns@names)
-)
+setMethod("dimnames", "MultivariateAnalysis", dimnames.MultivariateAnalysis)
 
 # Contributions ================================================================
 #' @export
