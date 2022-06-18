@@ -11,29 +11,29 @@
 An S4 class to store the results of a simple correspondence analysis.
 }
 \examples{
-## Load data
-data("zuni", package = "folio")
+## Data from Lebart et al. 2006, p. 170-172
+data("colours")
 
 ## The chi square of independence between the two variables
-stats::chisq.test(zuni)
+stats::chisq.test(colours)
 
 ## Compute correspondence analysis
-X <- ca(zuni)
+X <- ca(colours)
 
 ## Get row coordinates
-get_coordinates(X, margin = 1)
+head(get_coordinates(X, margin = 1))
 
 ## Get column coordinates
-get_coordinates(X, margin = 2)
+head(get_coordinates(X, margin = 2))
 
 ## Get row distances to centroid
-get_distances(X, margin = 1)
+head(get_distances(X, margin = 1))
 
 ## Get row inertias
-get_inertia(X, margin = 1)
+head(get_inertia(X, margin = 1))
 
 ## Get row contributions
-get_contributions(X, margin = 1)
+head(get_contributions(X, margin = 1))
 
 ## Get eigenvalues
 get_eigenvalues(X)

@@ -59,19 +59,13 @@ If \code{i} is "\code{eigenvalues}", returns a \code{\link{numeric}} vector of e
 }
 \examples{
 ## Load data
-data("mississippi", package = "folio")
+data("iris")
 
 ## Compute principal components analysis
-X <- pca(mississippi, scale = TRUE, sup_row = 8:10, sup_col = 7:10)
+X <- pca(iris, scale = TRUE, sup_row = 8:10, sup_col = 1)
 
 ## Get results for the individuals
-X[["individuals"]]
-
-## Compute correspondence analysis
-Y <- ca(mississippi, sup_row = 8:10, sup_col = 7:10)
-
-## Get results for the rows
-Y[["rows"]]
+X[["rows"]]
 }
 \seealso{
 Other mutator: 

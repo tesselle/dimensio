@@ -56,6 +56,7 @@ Collate:
     'AllGenerics.R'
     'bootstrap.R'
     'ca.R'
+    'data.R'
     'dimensio-package.R'
     'helpers.R'
     'joint.R'
@@ -67,3 +68,4 @@ Collate:
     'summary.R'
     'svd.R'
     'zzz.R'
+LazyData: true

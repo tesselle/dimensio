@@ -31,11 +31,11 @@ to be kept in the results.}
 Provides a summary of the results of a multivariate data analysis.
 }
 \examples{
-## Load data
-data("zuni", package = "folio")
+## Data from Lebart et al. 2006, p. 170-172
+data("colours")
 
 ## Compute correspondence analysis
-X <- ca(zuni, rank = 5, sup_row = 1:50)
+X <- ca(colours)
 
 ## Rows summary
 summary(X, margin = 1)

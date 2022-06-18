@@ -1,17 +1,11 @@
 library(ggrepel)
 
-## Partial bootstrap on CA
+## Bootstrap on CA
 ## Data from Lebart et al. 2006, p. 170-172
-color <- data.frame(
-  brun = c(68, 15, 5, 20),
-  chatain = c(119, 54, 29, 84),
-  roux = c(26, 14, 14, 17),
-  blond = c(7, 10, 16, 94),
-  row.names = c("marron", "noisette", "vert", "bleu")
-)
+data("colours")
 
 ## Compute correspondence analysis
-X <- ca(color)
+X <- ca(colours)
 
 ## Plot results
 plot(X) +
@@ -33,7 +27,7 @@ plot_rows(Y) +
 plot_columns(Y) +
   ggplot2::stat_ellipse()
 
-## Partial bootstrap on PCA
+## Bootstrap on PCA
 ## Compute principal components analysis
 data(iris)
 X <- pca(iris)
