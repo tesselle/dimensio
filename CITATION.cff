@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.1.0
+# CITATION file created with {cffr} R package, v0.2.2
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -8,12 +8,12 @@ message: 'To cite package "dimensio" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'dimensio: Multivariate Data Analysis'
-version: 0.2.2.9000
-abstract: 'Simple Principal Components Analysis (PCA) and Correspondence Analysis
-  (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes
+version: 0.3.0
+abstract: Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA)
+  based on the Singular Value Decomposition (SVD). This package provides S4 classes
   and methods to compute, extract, summarize and visualize results of multivariate
   data analysis. It also includes methods for partial bootstrap validation described
-  in Greenacre (1984) <isbn: 978-0-12-299050-2> and Lebart et al. (2006) <isbn: 978-2-10-049616-7>.'
+  in Greenacre (1984) <isbn:978-0-12-299050-2> and Lebart et al. (2006) <isbn:978-2-10-049616-7>.
 authors:
 - family-names: Frerebeau
   given-names: Nicolas
@@ -29,13 +29,12 @@ preferred-citation:
     email: nicolas.frerebeau@u-bordeaux-montaigne.fr
     orcid: https://orcid.org/0000-0001-5759-4944
     affiliation: Université Bordeaux Montaigne
-  version: 0.2.2.9000
-  abstract: 'Simple Principal Components Analysis (PCA) and Correspondence Analysis
+  version: 0.3.0
+  abstract: Simple Principal Components Analysis (PCA) and Correspondence Analysis
     (CA) based on the Singular Value Decomposition (SVD). This package provides S4
     classes and methods to compute, extract, summarize and visualize results of multivariate
     data analysis. It also includes methods for partial bootstrap validation described
-    in Greenacre (1984) <isbn: 978-0-12-299050-2> and Lebart et al. (2006) <isbn:
-    978-2-10-049616-7>.'
+    in Greenacre (1984) <isbn:978-0-12-299050-2> and Lebart et al. (2006) <isbn:978-2-10-049616-7>.
   repository: https://CRAN.R-project.org/package=dimensio
   repository-code: https://github.com/tesselle/dimensio
   url: https://packages.tesselle.org/dimensio/
@@ -45,8 +44,12 @@ preferred-citation:
     email: nicolas.frerebeau@u-bordeaux-montaigne.fr
     orcid: https://orcid.org/0000-0001-5759-4944
     affiliation: Université Bordeaux Montaigne
+  keywords:
+  - data-analysis
+  - multivariate-analysis
+  - r-package
   license: GPL-3.0-or-later
-  year: '2021'
+  year: '2022'
 repository: https://CRAN.R-project.org/package=dimensio
 repository-code: https://github.com/tesselle/dimensio
 url: https://packages.tesselle.org/dimensio/
@@ -60,6 +63,173 @@ keywords:
 - data analysis
 - multivariate analysis
 - r package
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+  version: '>= 3.3'
+- type: software
+  title: ggplot2
+  abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Chang
+    given-names: Winston
+    orcid: https://orcid.org/0000-0002-1576-2126
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@rstudio.com
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Takahashi
+    given-names: Kohske
+  - family-names: Wilke
+    given-names: Claus
+    orcid: https://orcid.org/0000-0002-7470-9261
+  - family-names: Woo
+    given-names: Kara
+    orcid: https://orcid.org/0000-0002-5125-4188
+  - family-names: Yutani
+    given-names: Hiroaki
+    orcid: https://orcid.org/0000-0002-3385-7233
+  - family-names: Dunnington
+    given-names: Dewey
+    orcid: https://orcid.org/0000-0002-9415-4582
+  year: '2022'
+  url: https://CRAN.R-project.org/package=ggplot2
+- type: software
+  title: grDevices
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: methods
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: rlang
+  abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
+  notes: Imports
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@rstudio.com
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=rlang
+- type: software
+  title: covr
+  abstract: 'covr: Test Coverage for Packages'
+  notes: Suggests
+  authors:
+  - family-names: Hester
+    given-names: Jim
+    email: james.f.hester@gmail.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=covr
+- type: software
+  title: FactoMineR
+  abstract: 'FactoMineR: Multivariate Exploratory Data Analysis and Data Mining'
+  notes: Suggests
+  authors:
+  - family-names: Husson
+    given-names: Francois
+  - family-names: Josse
+    given-names: Julie
+  - family-names: Le
+    given-names: Sebastien
+  - family-names: Mazet
+    given-names: Jeremy
+  year: '2022'
+  url: https://CRAN.R-project.org/package=FactoMineR
+- type: software
+  title: ggrepel
+  abstract: 'ggrepel: Automatically Position Non-Overlapping Text Labels with ''ggplot2'''
+  notes: Suggests
+  authors:
+  - family-names: Slowikowski
+    given-names: Kamil
+    email: kslowikowski@gmail.com
+    orcid: https://orcid.org/0000-0002-2843-6370
+  year: '2022'
+  url: https://CRAN.R-project.org/package=ggrepel
+- type: software
+  title: khroma
+  abstract: 'khroma: Colour Schemes for Scientific Data Visualization'
+  notes: Suggests
+  authors:
+  - family-names: Frerebeau
+    given-names: Nicolas
+    email: nicolas.frerebeau@u-bordeaux-montaigne.fr
+    orcid: https://orcid.org/0000-0001-5759-4944
+    affiliation: Université Bordeaux Montaigne
+  year: '2022'
+  url: https://CRAN.R-project.org/package=khroma
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=testthat
+  version: '>= 3.0.0'
+- type: software
+  title: vdiffr
+  abstract: 'vdiffr: Visual Regression Testing and Graphical Diffing'
+  notes: Suggests
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@rstudio.com
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@rstudio.com
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Luciani
+    given-names: T Jake
+    email: jake@apache.org
+  - family-names: Decorde
+    given-names: Matthieu
+    email: matthieu.decorde@ens-lyon.fr
+  - family-names: Lise
+    given-names: Vaudor
+    email: lise.vaudor@ens-lyon.fr
+  year: '2022'
+  url: https://CRAN.R-project.org/package=vdiffr
+  version: '>= 1.0.0'
 identifiers:
 - description: The concept DOI.
   type: doi

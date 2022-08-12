@@ -55,10 +55,12 @@ the supplementary rows (individuals).}
 the supplementary columns (variables).}
 
 \item{weight_row}{A \code{\link{numeric}} vector specifying the active row (individual)
-weights. If \code{NULL} (the default), no weights are used.}
+weights. If \code{NULL} (the default), uniform weights are used. Row weights are
+internally normalized to sum 1}
 
 \item{weight_col}{A \code{\link{numeric}} vector specifying the active column
-(variable) weights. If \code{NULL} (the default), no weights are used.}
+(variable) weights. If \code{NULL} (the default), uniform weights (1) are
+used.}
 }
 \value{
 A \code{\linkS4class{PCA}} object.

@@ -1,26 +1,26 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "dimensio",
-  "description": "Simple Principal Components Analysis (PCA) and\n    Correspondence Analysis (CA) based on the Singular Value Decomposition\n    (SVD). This package provides S4 classes and methods to compute,\n    extract, summarize and visualize results of multivariate data\n    analysis. It also includes methods for partial bootstrap validation\n    described in Greenacre (1984) <isbn: 978-0-12-299050-2> and Lebart et al. \n    (2006) <isbn: 978-2-10-049616-7>.",
+  "description": "Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis. It also includes methods for partial bootstrap validation described in Greenacre (1984) <isbn:978-0-12-299050-2> and Lebart et al. (2006) <isbn:978-2-10-049616-7>.",
   "name": "dimensio: Multivariate Data Analysis",
+  "relatedLink": ["https://packages.tesselle.org/dimensio/", "https://CRAN.R-project.org/package=dimensio"],
   "codeRepository": "https://github.com/tesselle/dimensio",
-  "relatedLink": [
-    "https://CRAN.R-project.org/package=dimensio",
-    "https://packages.tesselle.org/dimensio/"
-  ],
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.2.2.9000",
+  "version": "0.3.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
+  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
   "author": [
     {
       "@type": "Person",
@@ -46,8 +46,6 @@
       "@id": "https://orcid.org/0000-0001-7503-8685"
     }
   ],
-  "copyrightHolder": {},
-  "funder": {},
   "maintainer": [
     {
       "@type": "Person",
@@ -69,18 +67,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=covr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "folio",
-      "name": "folio",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=folio"
     },
     {
       "@type": "SoftwareApplication",
@@ -145,14 +131,14 @@
       "sameAs": "https://CRAN.R-project.org/package=vdiffr"
     }
   ],
-  "softwareRequirements": [
-    {
+  "softwareRequirements": {
+    "1": {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 3.3"
     },
-    {
+    "2": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -164,12 +150,17 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    {
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "grDevices",
+      "name": "grDevices"
+    },
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
-    {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
@@ -180,18 +171,10 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=rlang"
-    }
-  ],
-  "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
-  "readme": "https://github.com/tesselle/dimensio/blob/main/README.md",
-  "fileSize": "1085.674KB",
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "keywords": [
-    "r-package",
-    "multivariate-analysis",
-    "data-analysis"
-  ],
-  "contIntegration": "https://codecov.io/gh/tesselle/dimensio",
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "1143.921KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -206,15 +189,14 @@
       "name": "dimensio: Multivariate Data Analysis",
       "identifier": "10.5281/zenodo.4478530",
       "url": "https://packages.tesselle.org/dimensio",
-      "description": "R package version 0.2.2",
+      "description": "R package version 0.3.0",
       "@id": "https://doi.org/10.5281/zenodo.4478530",
       "sameAs": "https://doi.org/10.5281/zenodo.4478530"
     }
   ],
-  "provider": {
-    "@id": "https://cran.r-project.org",
-    "@type": "Organization",
-    "name": "Comprehensive R Archive Network (CRAN)",
-    "url": "https://cran.r-project.org"
-  }
+  "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
+  "readme": "https://github.com/tesselle/dimensio/blob/main/README.md",
+  "contIntegration": ["https://github.com/tesselle/dimensio/actions", "https://codecov.io/gh/tesselle/dimensio"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "keywords": ["r-package", "multivariate-analysis", "data-analysis"]
 }

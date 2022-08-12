@@ -141,9 +141,11 @@ setGeneric(
 #' @param sup_col A [`numeric`] or [`logical`] vector specifying the indices of
 #'  the supplementary columns (variables).
 #' @param weight_row A [`numeric`] vector specifying the active row (individual)
-#'  weights. If `NULL` (the default), no weights are used.
+#'  weights. If `NULL` (the default), uniform weights are used. Row weights are
+#'  internally normalized to sum 1
 #' @param weight_col A [`numeric`] vector specifying the active column
-#'  (variable) weights. If `NULL` (the default), no weights are used.
+#'  (variable) weights. If `NULL` (the default), uniform weights (1) are
+#'  used.
 #' @param ... Currently not used.
 #' @return
 #'  A [`PCA-class`] object.

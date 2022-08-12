@@ -15,7 +15,7 @@ Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA) base
 \tabular{ll}{
 \strong{Package:} \tab dimensio \cr
 \strong{Type:} \tab Package \cr
-\strong{Version:} \tab 0.2.2 \cr
+\strong{Version:} \tab 0.3.0 \cr
 \strong{License:} \tab GPL-3 \cr
 \strong{Zenodo:} \tab \doi{10.5281/zenodo.4478530} \cr
 }
@@ -43,7 +43,7 @@ Brice Lebrun \tab \emph{Université Bordeaux Montaigne, France} \cr
 Nicolas Frerebeau\cr
 \email{nicolas.frerebeau@u-bordeaux-montaigne.fr}
 
-IRAMAT-CRP2A (UMR 5060)\cr
+Archéosciences Bordeaux (UMR 6034)\cr
 Maison de l'Archéologie\cr
 Université Bordeaux Montaigne\cr
 F-33607 Pessac cedex\cr

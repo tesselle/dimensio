@@ -1,4 +1,20 @@
-# dimensio 0.2.2.9000
+# dimensio 0.3.0
+## New classes and methods
+* Add `biplot()` to produce PCA and CA biplots.
+* Add `plot_individuals()` and `plot_variables()` methods for `PCA` class.
+* Add `tidy()` to get coordinates with extra informations.
+* Add `wrap_hull()` to compute convex hull around coordinates.
+* Add a **ggplot2** layer: `stat_hull()` (thanks to [**ggplot2** documentation](https://ggplot2.tidyverse.org/articles/extending-ggplot2.html))
+
+## Enhancements
+* `plot_rows` and `plot_columns()`
+* `get_coordinates()` gained a new argument allowing to select principal or standard coordinates.
+
+## Breaking changes
+* Remove `plot()` methods for both `PCA` and `CA` classes.
+
+## Bugfixes & changes
+* `plot()`, `plot_rows()` and `plot_columns()`.
 
 ## Breaking changes
 * Remove `bootstrap()` and `jackknife()` methods for `numeric` and `integer` vectors.

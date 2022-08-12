@@ -6,16 +6,24 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/tesselle/dimensio/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/dimensio/actions)
-[![codecov](https://codecov.io/gh/tesselle/dimensio/branch/main/graph/badge.svg)](https://codecov.io/gh/tesselle/dimensio)
+[![codecov](https://codecov.io/gh/tesselle/dimensio/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tesselle/dimensio)
 [![CodeFactor](https://www.codefactor.io/repository/github/tesselle/dimensio/badge/main)](https://www.codefactor.io/repository/github/tesselle/dimensio/overview/main)
 
-[![r-universe](https://tesselle.r-universe.dev/badges/dimensio)](https://tesselle.r-universe.dev)
-[![CRAN
-Version](http://www.r-pkg.org/badges/version/dimensio)](https://cran.r-project.org/package=dimensio)
-[![CRAN
-checks](https://cranchecks.info/badges/worst/dimensio)](https://cran.r-project.org/web/checks/check_results_dimensio.html)
-[![CRAN
-Downloads](http://cranlogs.r-pkg.org/badges/dimensio)](https://cran.r-project.org/package=dimensio)
+<a href="https://tesselle.r-universe.dev" class="pkgdown-devel"><img
+src="https://tesselle.r-universe.dev/badges/dimensio"
+alt="r-universe" /></a>
+<a href="https://cran.r-project.org/package=dimensio"
+class="pkgdown-release"><img
+src="http://www.r-pkg.org/badges/version/dimensio"
+alt="CRAN Version" /></a> <a
+href="https://cran.r-project.org/web/checks/check_results_dimensio.html"
+class="pkgdown-release"><img
+src="https://cranchecks.info/badges/worst/dimensio"
+alt="CRAN checks" /></a>
+<a href="https://cran.r-project.org/package=dimensio"
+class="pkgdown-release"><img
+src="http://cranlogs.r-pkg.org/badges/dimensio"
+alt="CRAN Downloads" /></a>
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
