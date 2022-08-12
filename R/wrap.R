@@ -40,19 +40,6 @@ setMethod(
 
 #' @export
 #' @rdname envelopes
-#' @aliases wrap_hull,MultivariateBootstrap-method
-setMethod(
-  f = "wrap_hull",
-  signature = c(x = "MultivariateBootstrap"),
-  definition = function(x, margin = 1, axes = c(1, 2)) {
-    ## Get groups
-    group  <- get_groups(x, margin = margin)
-    methods::callNextMethod(x = x, margin = margin, axes = axes, group = group)
-  }
-)
-
-#' @export
-#' @rdname envelopes
 #' @aliases wrap_hull,BootstrapPCA-method
 setMethod(
   f = "wrap_hull",

@@ -260,6 +260,45 @@
       roux_30    -0.15811662  0.100166413  0.146214511  TRUE
       blond_30    0.86063868 -0.129392534 -0.143128541  TRUE
 
+---
+
+    Code
+      wrap_hull(Y)
+    Output
+                                     F1           F2    group
+      bleu.bleu_16           0.62053121 -0.128378914     bleu
+      bleu.bleu_4            0.61537666 -0.176161962     bleu
+      bleu.bleu_13           0.48390494 -0.212780427     bleu
+      bleu.bleu_7            0.42793387 -0.135179620     bleu
+      bleu.bleu_9            0.41848218 -0.104142776     bleu
+      bleu.bleu_6            0.39156022  0.012222558     bleu
+      bleu.bleu_5            0.51956560  0.022490861     bleu
+      bleu.bleu_12           0.58084102  0.016662954     bleu
+      bleu.bleu_27           0.61532176 -0.040801861     bleu
+      bleu.bleu_16.1         0.62053121 -0.128378914     bleu
+      marron.marron_3       -0.43382863 -0.107258485   marron
+      marron.marron_1       -0.48031898 -0.225131171   marron
+      marron.marron_29      -0.56492813 -0.244595559   marron
+      marron.marron_30      -0.52004482 -0.001919262   marron
+      marron.marron_11      -0.43999904  0.082379747   marron
+      marron.marron_3.1     -0.43382863 -0.107258485   marron
+      noisette.noisette_4   -0.06640576  0.057033028 noisette
+      noisette.noisette_9   -0.21908802  0.049335902 noisette
+      noisette.noisette_29  -0.32440608  0.082505275 noisette
+      noisette.noisette_24  -0.35525341  0.126011528 noisette
+      noisette.noisette_17  -0.33473423  0.268150159 noisette
+      noisette.noisette_12  -0.29563991  0.329450551 noisette
+      noisette.noisette_20  -0.19557675  0.404102041 noisette
+      noisette.noisette_27  -0.04758878  0.225933450 noisette
+      noisette.noisette_4.1 -0.06640576  0.057033028 noisette
+      vert.vert_4            0.35239200  0.078528201     vert
+      vert.vert_30          -0.03056635  0.325560097     vert
+      vert.vert_12          -0.03990386  0.386965326     vert
+      vert.vert_15           0.02535926  0.586144780     vert
+      vert.vert_20           0.31311782  0.625903316     vert
+      vert.vert_3            0.36073565  0.411075820     vert
+      vert.vert_4.1          0.35239200  0.078528201     vert
+
 # PCA
 
     Code
@@ -390,4 +429,45 @@
       Sepal.Width_30  -0.4441060  0.926998489  0.050218240  TRUE
       Petal.Length_30  1.0167673  0.056736903  0.005696093  TRUE
       Petal.Width_30   0.9907075  0.084092943  0.191711484  TRUE
+
+---
+
+    Code
+      wrap_hull(Y)
+    Output
+                                             F1           F2        group
+      Petal.Length.Petal.Length_24    1.0308141 -0.044760068 Petal.Length
+      Petal.Length.Petal.Length_27    1.0263701 -0.108414593 Petal.Length
+      Petal.Length.Petal.Length_21    0.9924055 -0.132669034 Petal.Length
+      Petal.Length.Petal.Length_13    0.9639158 -0.067760746 Petal.Length
+      Petal.Length.Petal.Length_7     0.9096806  0.061833614 Petal.Length
+      Petal.Length.Petal.Length_22    0.9831139  0.176692127 Petal.Length
+      Petal.Length.Petal.Length_28    1.0029201  0.196418315 Petal.Length
+      Petal.Length.Petal.Length_3     1.0303249  0.159925097 Petal.Length
+      Petal.Length.Petal.Length_1     1.0367453  0.083137018 Petal.Length
+      Petal.Length.Petal.Length_24.1  1.0308141 -0.044760068 Petal.Length
+      Petal.Width.Petal.Width_20      1.0036524  0.001754434  Petal.Width
+      Petal.Width.Petal.Width_19      1.0013334 -0.019737999  Petal.Width
+      Petal.Width.Petal.Width_27      0.9949017 -0.063454632  Petal.Width
+      Petal.Width.Petal.Width_21      0.9582261 -0.085342887  Petal.Width
+      Petal.Width.Petal.Width_7       0.8843994  0.079208099  Petal.Width
+      Petal.Width.Petal.Width_22      0.9539062  0.243480402  Petal.Width
+      Petal.Width.Petal.Width_28      0.9690717  0.237617739  Petal.Width
+      Petal.Width.Petal.Width_3       1.0034397  0.179607543  Petal.Width
+      Petal.Width.Petal.Width_1       1.0101946  0.112530224  Petal.Width
+      Petal.Width.Petal.Width_20.1    1.0036524  0.001754434  Petal.Width
+      Sepal.Length.Sepal.Length_24    0.9420010  0.234169841 Sepal.Length
+      Sepal.Length.Sepal.Length_6     0.9145569  0.225169555 Sepal.Length
+      Sepal.Length.Sepal.Length_21    0.8746895  0.236032969 Sepal.Length
+      Sepal.Length.Sepal.Length_7     0.7937235  0.432025583 Sepal.Length
+      Sepal.Length.Sepal.Length_10    0.8555331  0.485864613 Sepal.Length
+      Sepal.Length.Sepal.Length_3     0.9325291  0.497842643 Sepal.Length
+      Sepal.Length.Sepal.Length_24.1  0.9420010  0.234169841 Sepal.Length
+      Sepal.Width.Sepal.Width_28     -0.3767251  0.727028529  Sepal.Width
+      Sepal.Width.Sepal.Width_8      -0.5107634  0.727397007  Sepal.Width
+      Sepal.Width.Sepal.Width_27     -0.5818265  0.838648503  Sepal.Width
+      Sepal.Width.Sepal.Width_21     -0.5623635  0.900822501  Sepal.Width
+      Sepal.Width.Sepal.Width_3      -0.3784769  0.960273225  Sepal.Width
+      Sepal.Width.Sepal.Width_10     -0.3380557  0.902719607  Sepal.Width
+      Sepal.Width.Sepal.Width_28.1   -0.3767251  0.727028529  Sepal.Width
 

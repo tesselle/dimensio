@@ -349,7 +349,7 @@ setMethod(
     }
     if (!is.null(linetype)) {
       linetype <- match.arg(linetype, choices = choices[c(2, 6)])
-      aes_shape <- ggplot2::aes(linetype = .data[[linetype]])
+      aes_linetype <- ggplot2::aes(linetype = .data[[linetype]])
     }
     if (!is.null(size)) {
       size <- match.arg(size, choices = choices[c(3, 4, 5)])

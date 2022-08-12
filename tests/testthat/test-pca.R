@@ -1,43 +1,41 @@
-test_that("PCA - matrix", {
-  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
+test_that("PCA", {
+  data("countries")
 
-  row_zeros <- cts
+  row_zeros <- countries
   row_zeros[1, ] <- NA
   expect_error(pca(row_zeros), "Missing values detected.")
 
-  expect_error(pca(cts, sup_row = "row1"), "must be a numeric vector")
-  expect_error(pca(cts, sup_col = "col1"), "must be a numeric vector")
+  expect_error(pca(countries, sup_row = "row1"), "must be a numeric vector")
+  expect_error(pca(countries, sup_col = "col1"), "must be a numeric vector")
 
-  res <- pca(cts, center = TRUE, scale = TRUE, rank = 10)
+  res <- pca(countries, center = TRUE, scale = FALSE, rank = 5)
   expect_output(show(res), "Principal Components Analysis")
-  expect_equal(rownames(res), as.character(seq_len(20)))
-  expect_equal(colnames(res), as.character(seq_len(5)))
-  expect_equal(dimnames(res), list(as.character(seq_len(20)),
-                                   as.character(seq_len(5))))
+  expect_equal(rownames(res), rownames(countries))
+  expect_equal(colnames(res), colnames(countries))
+  expect_equal(dimnames(res), dimnames(countries))
 
-  expect_equal(get_data(res), as.data.frame(cts))
+  expect_equal(get_data(res), countries)
 
   # Points coordinates
-  coord_row <- get_coordinates(res, margin = 1)
-  expect_equal(dim(coord_row), c(20L, 5L))
-  coord_col <- get_coordinates(res, margin = 2)
-  expect_equal(dim(coord_col), c(5L, 5L))
+  expect_snapshot(get_coordinates(res, margin = 1, principal = TRUE))
+  expect_snapshot(get_coordinates(res, margin = 2, principal = TRUE))
+  expect_snapshot(get_coordinates(res, margin = 1, principal = FALSE))
+  expect_snapshot(get_coordinates(res, margin = 2, principal = FALSE))
+
+  # Tidy coordinates
+  expect_snapshot(tidy(res, margin = 1))
+  expect_snapshot(tidy(res, margin = 2))
 
   # Distances
-  dist_row <- get_distances(res, margin = 1)
-  expect_length(dist_row, 20)
-  dist_col <- get_distances(res, margin = 2)
-  expect_length(dist_col, 5)
+  expect_snapshot(get_distances(res, margin = 1))
+  expect_snapshot(get_distances(res, margin = 2))
 
   # Inertias
-  inertia_row <- get_inertia(res, margin = 1)
-  expect_length(inertia_row, 20)
-  inertia_col <- get_inertia(res, margin = 2)
-  expect_length(inertia_col, 5)
+  expect_snapshot(get_inertia(res, margin = 1))
+  expect_snapshot(get_inertia(res, margin = 2))
 
   # Eigenvalues
-  eig <- get_eigenvalues(res)
-  expect_equal(dim(eig), c(4L, 3L))
+  expect_snapshot(get_eigenvalues(res))
 })
 test_that("PCA - data.frame", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 20)

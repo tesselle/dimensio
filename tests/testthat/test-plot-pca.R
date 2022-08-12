@@ -19,6 +19,32 @@ test_that("PCA - Plot coordinates", {
     }
   }
 })
+test_that("PCA - Plot aesthetics", {
+  skip_if_not_installed("vdiffr")
+
+  data("iris")
+  res <- pca(iris)
+
+  # Individuals
+  gg_cos2 <- plot_individuals(res, colour = "cos2", alpha = "cos2")
+  vdiffr::expect_doppelganger("PCA_ind_highlight_cos2", gg_cos2)
+
+  gg_contrib <- plot_individuals(res, size = "contrib")
+  vdiffr::expect_doppelganger("PCA_var_highlight_contrib", gg_contrib)
+
+  gg_group <- plot_individuals(res, colour = "group", shape = "group",
+                               group = iris$Species)
+  vdiffr::expect_doppelganger("PCA_ind_group", gg_group)
+
+  # Variables
+  group_num <- c(1, 2, 3, 4)
+  gg_group_num <- plot_variables(res, colour = "group", group = group_num)
+  vdiffr::expect_doppelganger("PCA_var_group_num", gg_group_num)
+
+  group_cat <- c("Sepal", "Sepal", "Petal", "Petal")
+  gg_group_cat <- plot_variables(res, linetype = "group", group = group_cat)
+  vdiffr::expect_doppelganger("PCA_var_group_cat", gg_group_cat)
+})
 test_that("PCA - Plot eigenvalues", {
   skip_if_not_installed("vdiffr")
 

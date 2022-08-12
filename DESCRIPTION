@@ -42,7 +42,6 @@ Imports:
     rlang
 Suggests: 
     covr,
-    folio,
     FactoMineR,
     ggrepel,
     khroma,

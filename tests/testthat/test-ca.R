@@ -1,45 +1,43 @@
-test_that("CA - matrix", {
-  cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
+test_that("CA", {
+  data("benthos")
 
-  row_zeros <- col_zeros <- cts
+  row_zeros <- col_zeros <- benthos
   row_zeros[1, ] <- 0
   expect_error(ca(row_zeros), "Empty rows detected.")
   col_zeros[, 1] <- 0
   expect_error(ca(col_zeros), "Empty columns detected.")
 
-  expect_error(ca(cts, sup_row = "row1"), "must be a numeric vector")
-  expect_error(ca(cts, sup_col = "col1"), "must be a numeric vector")
+  expect_error(ca(benthos, sup_row = "row1"), "must be a numeric vector")
+  expect_error(ca(benthos, sup_col = "col1"), "must be a numeric vector")
 
-  res <- ca(cts, rank = 10)
+  res <- ca(benthos, rank = 10)
   expect_output(show(res), "Correspondence Analysis")
-  expect_equal(rownames(res), as.character(seq_len(20)))
-  expect_equal(colnames(res), as.character(seq_len(5)))
-  expect_equal(dimnames(res), list(as.character(seq_len(20)),
-                                   as.character(seq_len(5))))
+  expect_equal(rownames(res), rownames(benthos))
+  expect_equal(colnames(res), colnames(benthos))
+  expect_equal(dimnames(res), dimnames(benthos))
 
-  expect_equal(get_data(res), as.data.frame(cts))
+  expect_equal(get_data(res), benthos)
 
   # Points coordinates
-  coord_row <- get_coordinates(res, margin = 1)
-  expect_equal(dim(coord_row), c(20L, 5L))
-  coord_col <- get_coordinates(res, margin = 2)
-  expect_equal(dim(coord_col), c(5L, 5L))
+  expect_snapshot(get_coordinates(res, margin = 1, principal = TRUE))
+  expect_snapshot(get_coordinates(res, margin = 2, principal = TRUE))
+  expect_snapshot(get_coordinates(res, margin = 1, principal = FALSE))
+  expect_snapshot(get_coordinates(res, margin = 2, principal = FALSE))
+
+  # Tidy coordinates
+  expect_snapshot(tidy(res, margin = 1))
+  expect_snapshot(tidy(res, margin = 2))
 
   # Distances
-  dist_row <- get_distances(res, margin = 1)
-  expect_length(dist_row, 20)
-  dist_col <- get_distances(res, margin = 2)
-  expect_length(dist_col, 5)
+  expect_snapshot(get_distances(res, margin = 1))
+  expect_snapshot(get_distances(res, margin = 2))
 
   # Inertias
-  inertia_row <- get_inertia(res, margin = 1)
-  expect_length(inertia_row, 20)
-  inertia_col <- get_inertia(res, margin = 2)
-  expect_length(inertia_col, 5)
+  expect_snapshot(get_inertia(res, margin = 1))
+  expect_snapshot(get_inertia(res, margin = 2))
 
   # Eigenvalues
-  eig <- get_eigenvalues(res)
-  expect_equal(dim(eig), c(4L, 3L))
+  expect_snapshot(get_eigenvalues(res))
 })
 test_that("CA - data.frame", {
   cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 20)

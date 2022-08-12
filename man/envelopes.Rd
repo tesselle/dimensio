@@ -7,7 +7,6 @@
 \alias{wrap_hull-method}
 \alias{stat_hull}
 \alias{wrap_hull,MultivariateAnalysis-method}
-\alias{wrap_hull,MultivariateBootstrap-method}
 \alias{wrap_hull,BootstrapPCA-method}
 \title{Wrap Observations}
 \usage{
@@ -25,8 +24,6 @@ stat_hull(
 )
 
 \S4method{wrap_hull}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL)
-
-\S4method{wrap_hull}{MultivariateBootstrap}(x, margin = 1, axes = c(1, 2))
 
 \S4method{wrap_hull}{BootstrapPCA}(x, axes = c(1, 2))
 }
