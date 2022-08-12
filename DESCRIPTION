@@ -27,8 +27,8 @@ Description: Simple Principal Components Analysis (PCA) and
     (SVD). This package provides S4 classes and methods to compute,
     extract, summarize and visualize results of multivariate data
     analysis. It also includes methods for partial bootstrap validation
-    described in Greenacre (1984) <isbn: 978-0-12-299050-2> and Lebart et al. 
-    (2006) <isbn: 978-2-10-049616-7>.
+    described in Greenacre (1984) <isbn:978-0-12-299050-2> and Lebart et al. 
+    (2006) <isbn:978-2-10-049616-7>.
 License: GPL (>= 3)
 URL: https://packages.tesselle.org/dimensio/,
     https://github.com/tesselle/dimensio
@@ -37,6 +37,7 @@ Depends:
     R (>= 3.3)
 Imports: 
     ggplot2,
+    grDevices,
     methods,
     rlang
 Suggests: 
@@ -50,7 +51,7 @@ Suggests:
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Collate: 
     'AllClasses.R'
     'AllGenerics.R'
@@ -58,8 +59,8 @@ Collate:
     'ca.R'
     'data.R'
     'dimensio-package.R'
+    'ggplot2.R'
     'helpers.R'
-    'joint.R'
     'mutators.R'
     'pca.R'
     'plot.R'
@@ -67,5 +68,7 @@ Collate:
     'subset.R'
     'summary.R'
     'svd.R'
+    'tidy.R'
+    'wrap.R'
     'zzz.R'
 LazyData: true

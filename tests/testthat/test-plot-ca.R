@@ -1,22 +1,15 @@
 test_that("CA - Plot coordinates", {
-  skip_if_not_installed("folio")
   skip_if_not_installed("vdiffr")
 
-  data("zuni", package = "folio")
-  res <- ca(zuni, sup_row = 50:75, sup_col = 15:18)
-
-  gg_all <- plot(res, margin = c(1, 2), axes = c(1, 2),
-                 active = TRUE, sup = TRUE, highlight = NULL, group = NULL)
-  vdiffr::expect_doppelganger("CA_coord-ALL", gg_all)
+  data("benthos")
+  res <- ca(benthos, sup_row = 1:5, sup_col = 1)
 
   for (i in c(TRUE, FALSE)) {
     for (j in c(TRUE, FALSE)) {
-      gg_ind <- plot_rows(res, axes = c(1, 2), active = i, sup = j,
-                          highlight = NULL, group = NULL)
+      gg_ind <- plot_rows(res, axes = c(1, 2), active = i, sup = j)
       vdiffr::expect_doppelganger(sprintf("CA_ind_%d-%d", i, j), gg_ind)
 
-      gg_var <- plot_columns(res, axes = c(1, 2), active = i, sup = j,
-                             highlight = NULL, group = NULL)
+      gg_var <- plot_columns(res, axes = c(1, 2), active = i, sup = j)
       vdiffr::expect_doppelganger(sprintf("CA_var_%d-%d", i, j), gg_var)
     }
   }
@@ -25,8 +18,8 @@ test_that("CA - Plot eigenvalues", {
   skip_if_not_installed("folio")
   skip_if_not_installed("vdiffr")
 
-  data("zuni", package = "folio")
-  res <- ca(zuni)
+  data("benthos")
+  res <- ca(benthos)
 
   for (i in c(TRUE, FALSE)) {
     for (j in c(TRUE, FALSE)) {
@@ -36,11 +29,10 @@ test_that("CA - Plot eigenvalues", {
   }
 })
 test_that("CA - Plot contributions", {
-  skip_if_not_installed("folio")
   skip_if_not_installed("vdiffr")
 
-  data("zuni", package = "folio")
-  res <- ca(zuni)
+  data("benthos")
+  res <- ca(benthos)
 
   gg_contrib_1 <- plot_contributions(res, margin = 1, axes = c(1, 2))
   vdiffr::expect_doppelganger("CA_ind_contrib", gg_contrib_1)

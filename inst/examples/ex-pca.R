@@ -2,7 +2,7 @@
 data("iris")
 
 ## Compute principal components analysis
-X <- pca(iris, scale = TRUE)
+X <- pca(iris, scale = TRUE, sup_row = sample(150, 10), sup_col = 2)
 
 ## Get row coordinates
 head(get_coordinates(X, margin = 1))

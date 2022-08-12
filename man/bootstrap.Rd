@@ -30,18 +30,12 @@ Returns a \code{\linkS4class{BootstrapCA}} or a \code{\linkS4class{BootstrapPCA}
 Checks analysis with partial bootstrap resampling.
 }
 \examples{
-library(ggrepel)
-
 ## Bootstrap on CA
 ## Data from Lebart et al. 2006, p. 170-172
 data("colours")
 
 ## Compute correspondence analysis
 X <- ca(colours)
-
-## Plot results
-plot(X) +
-  ggrepel::geom_label_repel()
 
 ## Bootstrap (30 replicates)
 Y <- bootstrap(X, n = 30)
@@ -53,26 +47,23 @@ get_replications(Y, margin = 2)
 }
 
 ## Plot with ellipses
-plot_rows(Y) +
+plot_rows(Y, colour = "group") +
   ggplot2::stat_ellipse()
 
-plot_columns(Y) +
-  ggplot2::stat_ellipse()
+## Plot with convex hulls
+plot_columns(Y, colour = "group", fill = "group") +
+  stat_hull(geom = "polygon", alpha = 0.5)
 
 ## Bootstrap on PCA
 ## Compute principal components analysis
-data(iris)
+data("iris")
 X <- pca(iris)
-
-## Plot results
-plot_columns(X) +
-  ggrepel::geom_label_repel()
 
 ## Bootstrap (30 replicates)
 Y <- bootstrap(X, n = 30)
 
 ## Plot with ellipses
-plot_columns(Y) +
+plot_columns(Y, colour = "group") +
   ggplot2::stat_ellipse()
 }
 \references{

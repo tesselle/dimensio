@@ -3,45 +3,21 @@ test_that("PCA - Plot coordinates", {
 
   data("iris")
   sup_ind <- seq(from = 1, to = 150, by = 5)
-  res <- pca(iris[, -5], sup_row = sup_ind, sup_col = 4)
+  res <- pca(iris, sup_row = sup_ind, sup_col = 4)
 
   for (i in c(TRUE, FALSE)) {
     for (j in c(TRUE, FALSE)) {
-      gg_ind <- plot(res, margin = 1, axes = c(1, 2),
-                     active = i, sup = j, highlight = NULL, group = NULL)
+      gg_ind <- plot_individuals(res, axes = c(1, 2), active = i, sup = j)
       vdiffr::expect_doppelganger(sprintf("PCA_ind_%d-%d", i, j), gg_ind)
     }
   }
 
   for (i in c(TRUE, FALSE)) {
     for (j in c(TRUE, FALSE)) {
-      gg_var <- plot(res, margin = 2, axes = c(1, 2),
-                     active = i, sup = j, highlight = NULL, group = NULL)
+      gg_var <- plot_variables(res, axes = c(1, 2), active = i, sup = j)
       vdiffr::expect_doppelganger(sprintf("PCA_var_%d-%d", i, j), gg_var)
     }
   }
-
-  gg_cos2 <- plot(res, margin = 1, axes = c(1, 2), active = TRUE, sup = TRUE,
-                  highlight = "cos2", group = NULL)
-  vdiffr::expect_doppelganger("PCA_ind_highlight_cos2", gg_cos2)
-
-  gg_contrib <- plot(res, margin = 2, axes = c(1, 2), active = TRUE, sup = TRUE,
-                     highlight = "contrib", group = NULL)
-  vdiffr::expect_doppelganger("PCA_var_highlight_contrib", gg_contrib)
-
-  gg_group <- plot(res, margin = 1, axes = c(1, 2), active = TRUE,
-                   sup = TRUE, highlight = NULL, group = iris$Species)
-  vdiffr::expect_doppelganger("PCA_ind_group", gg_group)
-
-  group_num <- seq_len(ncol(iris))
-  gg_group_num <- plot(res, margin = 2, axes = c(1, 2), active = TRUE,
-                       sup = TRUE, highlight = NULL, group = group_num)
-  vdiffr::expect_doppelganger("PCA_var_group_num", gg_group_num)
-
-  group_cat <- rep(c("A", "B", "C"), length.out = ncol(iris))
-  gg_group_cat <- plot(res, margin = 2, axes = c(1, 2), active = TRUE,
-                       sup = TRUE, highlight = NULL, group = group_cat)
-  vdiffr::expect_doppelganger("PCA_var_group_cat", gg_group_cat)
 })
 test_that("PCA - Plot eigenvalues", {
   skip_if_not_installed("vdiffr")

@@ -66,8 +66,11 @@ head(get_contributions(X, margin = 1))
 get_eigenvalues(X)
 }
 \references{
-Greenacre, Michael J. \emph{Theory and Applications of Correspondence
-Analysis}. London: Academic Press, 1984.
+Greenacre, M. J. \emph{Theory and Applications of Correspondence Analysis}.
+London: Academic Press, 1984.
+
+Greenacre, M. J. \emph{Correspondence Analysis in Practice}. Seconde edition.
+Interdisciplinary Statistics Series. Boca Raton: Chapman & Hall/CRC, 2007.
 
 Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
 multidimensionnelle: visualisation et inférence en fouille de données}.

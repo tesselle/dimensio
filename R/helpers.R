@@ -39,3 +39,17 @@ is_supplementary <- function(index, n) {
     stop(msg, call. = FALSE)
   }
 }
+
+has_length <- function(x, n = NULL) {
+  if (is.null(n)) length(x) > 0 else length(x) == n
+}
+assert_length <- function(x, expected, empty = FALSE) {
+  arg <- deparse(substitute(x))
+  if (!(empty & length(x) == 0) && !has_length(x, n = expected)) {
+    msg <- sprintf("%s must be of length %d; not %s.", sQuote(arg),
+                   expected, length(x))
+    stop(msg, call. = FALSE)
+  }
+  invisible(x)
+}
+

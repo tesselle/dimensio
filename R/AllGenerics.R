@@ -7,6 +7,7 @@ setGeneric("rownames")
 setGeneric("colnames")
 setGeneric("dimnames")
 setGeneric("loadings")
+setGeneric("biplot")
 
 # Extract ======================================================================
 ## Get -------------------------------------------------------------------------
@@ -97,8 +98,11 @@ NULL
 #' @example inst/examples/ex-ca.R
 #' @seealso [svd()]
 #' @references
-#'  Greenacre, Michael J. *Theory and Applications of Correspondence
-#'  Analysis*. London: Academic Press, 1984.
+#'  Greenacre, M. J. *Theory and Applications of Correspondence Analysis*.
+#'  London: Academic Press, 1984.
+#'
+#'  Greenacre, M. J. *Correspondence Analysis in Practice*. Seconde edition.
+#'  Interdisciplinary Statistics Series. Boca Raton: Chapman & Hall/CRC, 2007.
 #'
 #'  Lebart, L., Piron, M. and Morineau, A. *Statistique exploratoire
 #'  multidimensionnelle: visualisation et inférence en fouille de données*.
@@ -248,6 +252,8 @@ setGeneric(
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
+#' @param principal A [`logical`] scalar: should principal coordinates be
+#'  returned? If `FALSE`, standard coordinates are returned.
 #' @param sup_name A [`character`] string specifying the name of the column to
 #'  create for supplementary points attribution (see below).
 #' @param ... Currently not used.
@@ -256,6 +262,7 @@ setGeneric(
 #'    column (named after `sup_name`) is added specifying whether an observation
 #'    is a supplementary point or not.
 #'  * `get_replications()` returns an [`array`] of coordinates.
+#' @example inst/examples/ex-coordinates.R
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
@@ -279,47 +286,154 @@ setGeneric(
   valueClass = "array"
 )
 
-#' Visualize Factor Map
+#' Wrap Observations
 #'
-#' Plots factor map.
-#' @param object,x A [`CA-class`] or [`PCA-class`] object.
+#' @description
+#'  * `wrap_hull()` computes convex hull of a set of observations.
+#' @param x An object from which to wrap observations (a [`CA-class`] or
+#'  [`PCA-class`] object).
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
-#'  indicates variables/columns, `c(1, 2)` indicates rows and columns (`CA`).
+#'  indicates variables/columns.
+#' @param axes A length-two [`numeric`] vector giving the dimensions
+#'  to be for which to compute results.
+#' @param group A vector specifying the group an observation belongs to.
+#' @param ... Currently not used.
+#' @inheritParams ggplot2::layer
+#' @param na.rm A [`logical`] scalar: should missing values be silently removed?
+#'  If `FALSE` (the ), missing values are removed with a warning.
+#' @return
+#'  * `stat_hull()` return a [ggplot2::layer()].
+#'  * `wrap_hull()` return a [`data.frame`] of
+#'    envelope principal coordinates. An extra column named `group` is added
+#'    specifying the group an observation belongs to.
+#' @example inst/examples/ex-wrap.R
+#' @references
+#'  <https://ggplot2.tidyverse.org/articles/extending-ggplot2.html>
+#' @author N. Frerebeau
+#' @docType methods
+#' @family plot methods
+#' @name envelopes
+#' @rdname envelopes
+NULL
+
+#' @rdname envelopes
+#' @aliases wrap_hull-method
+setGeneric(
+  name = "wrap_hull",
+  def = function(x, ...) standardGeneric("wrap_hull"),
+  valueClass = "data.frame"
+)
+
+#' Tidy Coordinates
+#'
+#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param margin A length-one [`numeric`] vector giving the subscript
+#'  which the data will be returned: `1` indicates individuals/rows (the
+#'  default), `2` indicates variables/columns.
+#' @param axes A length-two [`numeric`] vector giving the dimensions
+#'  to be for which to compute results.
+#' @param principal A [`logical`] scalar: should principal coordinates be
+#'  returned? If `FALSE`, standard coordinates are returned.
+#' @param ... Currently not used.
+#' @return
+#'  Returns a [`data.frame`] of the row/column coordinates along `axes` and the
+#'  following columns:
+#'  \describe{
+#'   \item{`labels`}{Row names of the original data.}
+#'   \item{`supplementary`}{Whether an observation is active or supplementary.}
+#'   \item{`mass`}{Weight/mass of each observation.}
+#'   \item{`sum`}{Sum of squared coordinates along `axes`.}
+#'   \item{`contribution`}{Joint contributions to the definition of `axes`.}
+#'   \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
+#'  }
+#' @example inst/examples/ex-coordinates.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family tidy methods
+#' @name tidy
+#' @rdname tidy
+NULL
+
+#' @rdname tidy
+#' @aliases tidy-method
+setGeneric(
+  name = "tidy",
+  def = function(x, ...) standardGeneric("tidy"),
+  valueClass = "data.frame"
+)
+
+#' Biplot
+#'
+#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param axes A length-two [`numeric`] vector giving the dimensions to be
+#'  plotted.
+#' @param type A [`character`] string specifying the biplot to be plotted
+#'  (see below). It must be one of "`row`", "`column`", "`contribution`" (CA),
+#'  "`form`" or "`covariance`" (PCA).
+#' @param active A [`logical`] scalar: should the active observations be
+#'  plotted?
+#' @param sup A [`logical`] scalar: should the supplementary observations be
+#'  plotted?
+#' @section PCA Biplots:
+#'  \describe{
+#'   \item{`form`}{Form biplot (row-metric-preserving).}
+#'   \item{`covariance`}{Covariance biplot (column-metric-preserving).}
+#'  }
+#' @section CA Biplots:
+#'  \describe{
+#'   \item{`row`}{Row principal biplot.}
+#'   \item{`column`}{Column principal biplot.}
+#'   \item{`contribution`}{Contribution biplot}.
+#'  }
+#' @return
+#'  A [ggplot2::ggplot] object.
+#' @example inst/examples/ex-biplot.R
+#' @references
+#'  Greenacre, M. J. *Biplots in Practice*. Bilbao: Fundación BBVA, 2010.
+#' @author N. Frerebeau
+#' @docType methods
+#' @family plot methods
+#' @name biplot
+#' @rdname biplot
+NULL
+
+#' Visualize Factor Map
+#'
+#' Plots principal coordinates.
+#' @param object A [`CA-class`] or [`PCA-class`] object.
 #' @param axes A length-two [`numeric`] vector giving the dimensions to be
 #'  plotted.
 #' @param active A [`logical`] scalar: should the active observations be
 #'  plotted?
 #' @param sup A [`logical`] scalar: should the supplementary observations be
 #'  plotted?
-#' @param highlight A [`character`] string giving XXX.
-#'  It must be one of "`coordinates`", "`contributions`" or "`cos2`".
+#' @param alpha,colour,fill,linetype,shape,size A [`character`] string
+#'  specifying the information to be highlighted (will be mapped to the
+#'  corresponding aesthetic).
+#'  It must be one of "`labels`", "`observation`", "`mass`", "`sum`",
+#'  "`contribution`", "`cos2`" or "`group`" (see details).
 #'  Any unambiguous substring can be given.
 #'  If `NULL` (the default), no highlighting is applied.
 #' @param group A vector of categories specifying the categorical variable from
-#'  which to color the individuals (only used if `highlight` is `NULL`; see
-#'  below).
+#'  which to highlight the individuals (only used if at least one of `colour`,
+#'  `fill`, `linetype` or `shape` is set to `group`; see details).
 #' @param ... Currently not used.
-#' @section Aesthetic:
-#'  Point shapes and line types are set whether an observation is a
-#'  row/individual or a column/variable and is active or supplementary.
-#'
-#'  Colors are set according to `highlight` and `group`:
-#'  \itemize{
-#'   \item{If `highlight` is not `NULL`, the color gradient will vary according
-#'   to the value of the selected parameter.}
-#'   \item{If `group` is a `numeric` vector, the color gradient and size will
-#'   vary by the value of `group`.}
-#'   \item{If `group` is not a `numeric` vector, the colors will be mapped to
-#'   the levels of `group`.}
-#'   \item{If both are `NULL` (the default), then the same rule as for shapes is
-#'   used.}
+#' @details
+#'  \describe{
+#'   \item{`labels`}{Row names of the original data.}
+#'   \item{`observation`}{Whether an observation is active or supplementary.}
+#'   \item{`mass`}{Weight/mass of each observation.}
+#'   \item{`sum`}{Sum of squared coordinates along `axes`.}
+#'   \item{`contribution`}{Joint contributions to the definition of `axes`.}
+#'   \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
 #'  }
-#' @seealso [ggplot2::ggplot()]
+#' @return
+#'  A [ggplot2::ggplot] object.
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family plot
+#' @family plot methods
 #' @name plot_coordinates
 #' @rdname plot_coordinates
 NULL
@@ -336,6 +450,20 @@ setGeneric(
 setGeneric(
   name = "plot_columns",
   def = function(object, ...) standardGeneric("plot_columns")
+)
+
+#' @rdname plot_coordinates
+#' @aliases plot_individuals-method
+setGeneric(
+  name = "plot_individuals",
+  def = function(object, ...) standardGeneric("plot_individuals")
+)
+
+#' @rdname plot_coordinates
+#' @aliases plot_variables-method
+setGeneric(
+  name = "plot_variables",
+  def = function(object, ...) standardGeneric("plot_variables")
 )
 
 ## Eigenvalues -----------------------------------------------------------------
@@ -397,13 +525,14 @@ setGeneric(
 #'  variance be plotted?
 #' @param fill,border A [`character`] string specifying the bars infilling and
 #'  border colors.
-#' @param color A [`character`] string specifying the line color.
+#' @param colour A [`character`] string specifying the line color.
 #' @param ... Currently not used.
-#' @seealso [ggplot2::ggplot()]
+#' @return
+#'  A [ggplot2::ggplot] object.
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family plot
+#' @family plot methods
 #' @name plot_eigenvalues
 #' @rdname plot_eigenvalues
 NULL
@@ -489,11 +618,12 @@ setGeneric(
 #' @param fill,border A [`character`] string specifying the bars infilling and
 #'  border colors.
 #' @param ... Currently not used.
-#' @seealso [ggplot2::ggplot()]
+#' @return
+#'  A [ggplot2::ggplot] object.
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family plot
+#' @family plot methods
 #' @name plot_contributions
 #' @rdname plot_contributions
 NULL
@@ -522,7 +652,8 @@ setGeneric(
 #'  indicates variables/columns.
 #' @param ... Currently not used.
 #' @return
-#'  * `get_distances()` returns a [`numeric`] vector.
+#'  * `get_distances()` returns a [`numeric`] vector of squared distance to
+#'  the centroide.
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators

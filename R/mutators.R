@@ -3,6 +3,12 @@
 NULL
 
 # Non exported =================================================================
+get_masses <- function(x, margin = 1) {
+  margin <- margin[[1L]]
+  if (margin == 1) mass <- x@rows@weights
+  if (margin == 2) mass <- x@columns@weights
+  mass
+}
 has_groups <- function(x, margin = 1) {
   margin <- margin[[1L]]
   if (margin == 1) grp <- length(x@rows@groups) > 0
@@ -10,16 +16,16 @@ has_groups <- function(x, margin = 1) {
   grp
 }
 get_groups <- function(x, margin = 1) {
-  grp1 <- grp2 <- NULL
-  if (any(margin == 1)) grp1 <- x@rows@groups
-  if (any(margin == 2)) grp2 <- x@columns@groups
-  list(rows = grp1, columns = grp2)
+  margin <- margin[[1L]]
+  if (margin == 1) grp <- x@rows@groups
+  if (margin == 2) grp <- x@columns@groups
+  grp
 }
 get_order <- function(x, margin = 1) {
-  ord1 <- ord2 <- NULL
-  if (margin == 1) ord1 <- x@rows@order
-  if (margin == 2) ord2 <- x@columns@order
-  list(rows = ord1, columns = ord2)
+  margin <- margin[[1L]]
+  if (margin == 1) ord <- x@rows@order
+  if (margin == 2) ord <- x@columns@order
+  ord
 }
 is_centered <- function(x) {
   !all(x@center == 0)
@@ -96,21 +102,21 @@ setMethod(
 setMethod(
   f = "get_coordinates",
   signature = signature(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, sup_name = ".sup") {
+  definition = function(x, margin = 1, principal = TRUE, sup_name = ".sup") {
     margin <- margin[[1L]]
     if (margin == 1) {
-      coords <- x@rows@principal
+      coords <- if (principal) x@rows@principal else x@rows@standard
       suppl <- x@rows@supplement
       id <- x@rows@names
     }
     if (margin == 2) {
-      coords <- x@columns@principal
+      coords <- if (principal) x@columns@principal else x@columns@standard
       suppl <- x@columns@supplement
       id <- x@columns@names
     }
 
     coords <- as.data.frame(coords, row.names = id)
-    coords[[sup_name]] <- suppl
+    coords[[sup_name]] <- if (principal) suppl else suppl[!suppl]
 
     coords
   }

@@ -3,52 +3,203 @@
 NULL
 
 # Coordinates ==================================================================
-## CA --------------------------------------------------------------------------
-#' @export
-#' @method plot CA
-plot.CA <- function(x, margin = c(1, 2), axes = c(1, 2),
-                    active = TRUE, sup = TRUE,
-                    highlight = NULL, group = NULL, ...) {
+plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
+                        alpha = NULL, colour = NULL, fill = NULL, shape = NULL,
+                        size = NULL, group = NULL) {
+  ## Prepare data
+  data <- lapply(
+    X = margin,
+    FUN = function(x, object, axes, active, sup, group) {
+      prepare_coord(object, margin = x, axes = axes, active = active,
+                    sup = sup, group = group)
+    },
+    object = object, axes = axes, active = active, sup = sup, group = group
+  )
+  data <- do.call(rbind, data)
+
+  ## Aesthetics
+  aes_points <- ggplot2::aes(
+    x = .data$x,
+    y = .data$y,
+    label = .data$labels
+  )
+  aes_alpha <- aes_colour <- aes_fill <- aes_shape <- aes_size <- NULL
+  choices <- c("labels", "observation", "mass", "sum", "contribution",
+               "cos2", "group", "data")
+  if (!is.null(alpha)) {
+    alpha <- match.arg(alpha, choices = choices[c(4, 5, 6)])
+    aes_alpha <- ggplot2::aes(alpha = .data[[alpha]])
+  }
+  if (!is.null(colour)) {
+    colour <- match.arg(colour, choices = choices)
+    aes_colour <- ggplot2::aes(colour = .data[[colour]])
+  }
+  if (!is.null(fill)) {
+    fill <- match.arg(fill, choices = choices)
+    aes_fill <- ggplot2::aes(fill = .data[[fill]])
+  }
+  if (!is.null(shape)) {
+    shape <- match.arg(shape, choices = choices[c(2, 7)])
+    aes_shape <- ggplot2::aes(shape = .data[[shape]])
+  }
+  if (!is.null(size)) {
+    size <- match.arg(size, choices = choices[c(3, 4, 5, 6)])
+    aes_size <- ggplot2::aes(size = .data[[size]])
+  }
+
+  aes_group <- ggplot2::aes(group = .data$group)
+
   ## ggplot2
-  gg <- plot_points(
-    x,
-    margin = margin,
-    axes = axes,
-    active = active,
-    sup = sup,
-    highlight = highlight,
-    group = group
-  )
-  return(gg)
+  ggplot2::ggplot(data = data) +
+    aes_points +
+    aes_alpha +
+    aes_colour +
+    aes_fill +
+    aes_shape +
+    aes_size +
+    aes_group +
+    ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
+    ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
+    ggplot2::geom_point() +
+    ggplot2::scale_x_continuous(name = print_variance(object, axes[[1]])) +
+    ggplot2::scale_y_continuous(name = print_variance(object, axes[[2]])) +
+    ggplot2::coord_fixed()
 }
 
+## Biplots ---------------------------------------------------------------------
 #' @export
-#' @rdname plot_coordinates
-#' @aliases plot,CA,missing-method
-setMethod("plot", c(x = "CA", y = "missing"), plot.CA)
+#' @rdname biplot
+#' @aliases biplot,CA-method
+setMethod(
+  f = "biplot",
+  signature = signature(x = "CA"),
+  definition = function(x, axes = c(1, 2),
+                        type = c("row", "column", "contributions"),
+                        active = TRUE, sup = TRUE) {
+    ## Validation
+    type <- match.arg(type, several.ok = FALSE)
 
-## PCA -------------------------------------------------------------------------
-#' @export
-#' @method plot PCA
-plot.PCA <- function(x, margin = 1, axes = c(1, 2),
-                     active = TRUE, sup = TRUE,
-                     highlight = NULL, group = NULL, ...) {
-  gg <- switch (
-    margin[[1L]],
-    ## Plot individuals factor map
-    `1` = plot_rows(x, axes = axes, active = active, sup = sup,
-                    highlight = highlight, group = group),
-    ## Plot variables factor map
-    `2` = plot_columns(x, axes = axes, active = active, sup = sup,
-                       highlight = highlight, group = group)
-  )
-  return(gg)
-}
+    ## Type of biplot
+    if (type == "row") {
+      princ_row <- TRUE
+      princ_col <- FALSE
+    }
+    if (type == "column") {
+      princ_row <- FALSE
+      princ_col <- TRUE
+    }
+    if (type == "contributions") {
+      princ_row <- FALSE
+      princ_col <- TRUE
+    }
+
+    ## Get data
+    coord_row <-  prepare_coord(x, margin = 1, axes = axes,
+                                active = active, sup = sup,
+                                principal = princ_row,
+                                weight = type == "contributions")
+    coord_col <-  prepare_coord(x, margin = 2, axes = axes,
+                                active = active, sup = sup,
+                                principal = princ_col,
+                                weight = FALSE)
+    coord <- rbind(coord_row, coord_col)
+
+    ## Aesthetics
+    aes_points <- ggplot2::aes(
+      x = .data$x,
+      y = .data$y,
+      colour = .data$data,
+      label = .data$labels
+    )
+    if (length(unique(coord$observation)) > 1) {
+      aes_shape <- ggplot2::aes(shape = .data$observation)
+    } else {
+      aes_shape <- ggplot2::aes(shape = .data$data)
+    }
+    if (type == "contributions") {
+      aes_size <- ggplot2::aes(size = .data$mass)
+    } else {
+      aes_size <- NULL
+    }
+
+    ## ggplot2
+    ggplot2::ggplot(data = coord) +
+      aes_points +
+      aes_shape +
+      aes_size +
+      ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
+      ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
+      ggplot2::geom_point() +
+      ggplot2::scale_x_continuous(name = print_variance(x, axes[[1]])) +
+      ggplot2::scale_y_continuous(name = print_variance(x, axes[[2]])) +
+      ggplot2::coord_fixed()
+  }
+)
 
 #' @export
-#' @rdname plot_coordinates
-#' @aliases plot,PCA,missing-method
-setMethod("plot", c(x = "PCA", y = "missing"), plot.PCA)
+#' @rdname biplot
+#' @aliases biplot,PCA-method
+setMethod(
+  f = "biplot",
+  signature = signature(x = "PCA"),
+  definition = function(x, axes = c(1, 2), type = c("form", "covariance"),
+                        active = TRUE, sup = TRUE) {
+    ## Validation
+    type <- match.arg(type, several.ok = FALSE)
+
+    ## Type of biplot
+    if (type == "form") {
+      princ_row <- TRUE
+      princ_col <- FALSE
+    }
+    if (type == "covariance") {
+      princ_row <- FALSE
+      princ_col <- TRUE
+    }
+
+    ## Get data
+    coord_row <-  prepare_coord(x, margin = 1, axes = axes,
+                                active = active, sup = sup,
+                                principal = princ_row,
+                                weight = FALSE)
+    coord_col <-  prepare_coord(x, margin = 2, axes = axes,
+                                active = active, sup = sup,
+                                principal = princ_col,
+                                weight = FALSE)
+    coord_row$z <- 0 # Set the origin of arrows
+    coord_col$z <- 0 # Set the origin of arrows
+
+    ## Aesthetics
+    aes_points <- ggplot2::aes(
+      x = .data$x,
+      y = .data$y,
+      colour = .data$data,
+      label = .data$labels
+    )
+    aes_segments <- ggplot2::aes(
+      xend = .data$z,
+      yend = .data$z
+    )
+
+    ## ggplot2
+    ggplot2::ggplot(data = rbind(coord_row, coord_col)) +
+      aes_points +
+      ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
+      ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
+      ggplot2::geom_point(
+        data = coord_row
+      ) +
+      ggplot2::geom_segment(
+        data = coord_col,
+        mapping = aes_segments,
+        arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm"), ends = "first"),
+        size = 0.5
+      ) +
+      ggplot2::scale_x_continuous(name = print_variance(x, axes[[1]])) +
+      ggplot2::scale_y_continuous(name = print_variance(x, axes[[2]])) +
+      ggplot2::coord_fixed()
+  }
+)
 
 ## Rows ------------------------------------------------------------------------
 #' @export
@@ -58,7 +209,8 @@ setMethod(
   f = "plot_rows",
   signature = signature(object = "MultivariateAnalysis"),
   definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        highlight = NULL, group = NULL) {
+                        alpha = NULL, colour = NULL, fill = NULL, shape = NULL,
+                        size = NULL, group = NULL) {
     ## ggplot2
     plot_points(
       object,
@@ -66,7 +218,11 @@ setMethod(
       axes = axes,
       active = active,
       sup = sup,
-      highlight = highlight,
+      alpha = alpha,
+      colour = colour,
+      fill = fill,
+      shape = shape,
+      size = size,
       group = group
     )
   }
@@ -75,12 +231,13 @@ setMethod(
 ## Columns ---------------------------------------------------------------------
 #' @export
 #' @rdname plot_coordinates
-#' @aliases plot_columns,CA-method
+#' @aliases plot_columns,MultivariateAnalysis-method
 setMethod(
   f = "plot_columns",
-  signature = signature(object = "CA"),
+  signature = signature(object = "MultivariateAnalysis"),
   definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        highlight = NULL, group = NULL) {
+                        alpha = NULL, colour = NULL, fill = NULL, shape = NULL,
+                        size = NULL, group = NULL) {
     ## ggplot2
     plot_points(
       object,
@@ -88,7 +245,11 @@ setMethod(
       axes = axes,
       active = active,
       sup = sup,
-      highlight = highlight,
+      alpha = alpha,
+      colour = colour,
+      fill = fill,
+      shape = shape,
+      size = size,
       group = group
     )
   }
@@ -101,7 +262,8 @@ setMethod(
   f = "plot_columns",
   signature = signature(object = "BootstrapPCA"),
   definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        highlight = NULL, group = NULL) {
+                        alpha = NULL, colour = NULL, fill = NULL, shape = NULL,
+                        size = NULL, group = NULL) {
     ## ggplot2
     plot_points(
       object,
@@ -109,37 +271,46 @@ setMethod(
       axes = axes,
       active = active,
       sup = sup,
-      highlight = highlight,
+      alpha = alpha,
+      colour = colour,
+      fill = fill,
+      shape = shape,
+      size = size,
       group = group
     )
   }
 )
 
+## Individuals -----------------------------------------------------------------
 #' @export
 #' @rdname plot_coordinates
-#' @aliases plot_columns,PCA-method
+#' @aliases plot_individuals,PCA-method
 setMethod(
-  f = "plot_columns",
+  f = "plot_individuals",
   signature = signature(object = "PCA"),
   definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        highlight = NULL, group = NULL) {
+                        alpha = NULL, colour = NULL, fill = NULL, shape = NULL,
+                        size = NULL, group = NULL) {
+    plot_rows(object, axes = axes, active = active, sup = sup,
+              alpha = alpha, colour = colour, fill = fill, shape = shape,
+              size = size, group = group)
+  }
+)
+
+## Arrows ----------------------------------------------------------------------
+#' @export
+#' @rdname plot_coordinates
+#' @aliases plot_variables,PCA-method
+setMethod(
+  f = "plot_variables",
+  signature = signature(object = "PCA"),
+  definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
+                        alpha = NULL, colour = NULL, linetype = NULL,
+                        size = NULL, group = NULL) {
     ## Prepare data
     data <- prepare_coord(object, margin = 2, axes = axes, active = active,
-                          sup = sup, highlight = highlight, group = group)
+                          sup = sup, group = group)
     data$z <- 0 # Set the origin of arrows
-
-    ## Highlight or groups, if any
-    aes_group <- ggplot2::aes(color = .data$type)
-    if (!is.null(group)) {
-      if (is.numeric(group)) {
-        aes_group <- ggplot2::aes(color = .data$group, size = .data$group)
-      } else {
-        aes_group <- ggplot2::aes(color = .data$group)
-      }
-    }
-    if (!is.null(highlight)) {
-      aes_group <- ggplot2::aes(color = .data[[highlight]])
-    }
 
     ## Scaled variables?
     gg_circle <- NULL
@@ -157,16 +328,43 @@ setMethod(
       )
     }
 
+    ## Aesthetics
+    aes_segments <- ggplot2::aes(
+      x = .data$x,
+      y = .data$y,
+      xend = .data$z,
+      yend = .data$z,
+      label = .data$labels
+    )
+    aes_alpha <- aes_colour <- aes_linetype <- aes_size <- NULL
+    choices <- c("labels", "observation", "coordinates", "contribution",
+                 "cos2", "group", "data")
+    if (!is.null(alpha)) {
+      alpha <- match.arg(alpha, choices = choices[c(3, 4, 5)])
+      aes_alpha <- ggplot2::aes(alpha = .data[[alpha]])
+    }
+    if (!is.null(colour)) {
+      colour <- match.arg(colour, choices = choices)
+      aes_colour <- ggplot2::aes(colour = .data[[colour]])
+    }
+    if (!is.null(linetype)) {
+      linetype <- match.arg(linetype, choices = choices[c(2, 6)])
+      aes_shape <- ggplot2::aes(linetype = .data[[linetype]])
+    }
+    if (!is.null(size)) {
+      size <- match.arg(size, choices = choices[c(3, 4, 5)])
+      aes_size <- ggplot2::aes(size = .data[[size]])
+    }
+
+    aes_group <- ggplot2::aes(group = .data$group)
+
     ## ggplot2
     ggplot2::ggplot(data = data) +
-      ggplot2::aes(
-        x = .data$x,
-        y = .data$y,
-        xend = .data$z,
-        yend = .data$z,
-        label = .data$label,
-        linetype = .data$type
-      ) +
+      aes_segments +
+      aes_alpha +
+      aes_colour +
+      aes_linetype +
+      aes_size +
       aes_group +
       ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
       ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
@@ -257,7 +455,7 @@ setMethod(
   f = "plot_variance",
   signature = signature(object = "MultivariateAnalysis"),
   definition = function(object, variance = TRUE, cumulative = TRUE,
-                        fill = "grey30", border = "grey10", color = "red") {
+                        fill = "grey30", border = "grey10", colour = "red") {
     ## Prepare data
     data <- get_eigenvalues(object)
     data$x <- seq_len(nrow(data))
@@ -280,8 +478,8 @@ setMethod(
       k <- max(data$y) / max(data$z)
       aes_var <- ggplot2::aes(y = .data$z * k)
       gg_var <- list(
-        ggplot2::geom_line(mapping = aes_var, colour = color),
-        ggplot2::geom_point(mapping = aes_var, colour = color)
+        ggplot2::geom_line(mapping = aes_var, colour = colour),
+        ggplot2::geom_point(mapping = aes_var, colour = colour)
       )
       gg_scale <- ggplot2::sec_axis(
         trans = ~ . / k,
@@ -300,102 +498,41 @@ setMethod(
 )
 
 # Helpers ======================================================================
-plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
-                        highlight = NULL, group = NULL) {
-  ## Prepare data
-  data <- prepare_coord(object, margin = margin, axes = axes, active = active,
-                        sup = sup, highlight = highlight, group = group)
-
-  ## Highlight or groups, if any
-  aes_group <- ggplot2::aes(color = .data$group)
-  if (!is.null(group)) {
-    if (is.numeric(group)) {
-      aes_group <- ggplot2::aes(color = .data$group, size = .data$group)
-    } else {
-      aes_group <- ggplot2::aes(color = .data$group)
-    }
-  }
-  if (!is.null(highlight)) {
-    aes_group <- ggplot2::aes(color = .data[[highlight]],
-                              size = .data[[highlight]])
-  }
-
-  ## ggplot2
-  ggplot2::ggplot(data = data) +
-    ggplot2::aes(
-      x = .data$x,
-      y = .data$y,
-      label = .data$label,
-      group = .data$group,
-      shape = .data$type
-    ) +
-    aes_group +
-    ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
-    ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
-    ggplot2::geom_point() +
-    ggplot2::scale_x_continuous(name = print_variance(object, axes[[1]])) +
-    ggplot2::scale_y_continuous(name = print_variance(object, axes[[2]])) +
-    ggplot2::coord_fixed()
-}
-
 print_variance <- function(object, axis) {
   v <- get_variance(object, digits = 1) # Get percentage of variance
   sprintf("%s (%g%%)", names(v)[[axis]], v[[axis]])
 }
 
-# Must returns a data.frame
-prepare_coord <- function(object, margin, axes, active = TRUE, sup = TRUE,
-                          highlight = NULL, group = NULL) {
-  ## Validation
-  choices <- c("row", "column")
-
-  ## Get data
-  row_data <- col_data <- data.frame()
-  if (any(margin == 1)) {
-    row_data <- get_coordinates(object, margin = 1)
-  }
-  if (any(margin == 2)) {
-    col_data <- get_coordinates(object, margin = 2)
-  }
-
+# Must return a data.frame
+prepare_coord <- function(object, margin, axes = c(1, 2), active = TRUE,
+                          sup = TRUE, principal = TRUE, weight = FALSE,
+                          group = NULL) {
   ## Prepare data
-  data <- rbind(row_data, col_data)
-  type <- rep(choices, times = c(nrow(row_data), nrow(col_data)))
-  obs <- ifelse(data$.sup, "suppl.", "active")
+  data <- tidy(object, margin = margin, axes = axes, principal = principal)
+  data$x <- if (weight) data[[1]] * sqrt(data$mass) else data[[1]]
+  data$y <- if (weight) data[[2]] * sqrt(data$mass) else data[[2]]
 
-  data$x <- data[[axes[[1]]]]
-  data$y <- data[[axes[[2]]]]
-  data$type <- obs
-  data$label <- rownames(data)
-
-  ## Variables factor map?
-  is_var <- all(margin == 2)
-
-  ## Group
-  grp <- unlist(get_groups(object, margin = margin))
-  if (length(grp) > 0) {
-    data$group <- factor(grp, levels = unique(grp))
-  } else if (!is.null(group)) {
-    group_k <- unlist(get_order(object, margin = margin))
-    data$group <- group[group_k]
+  k <- get_order(object, margin = margin)
+  if (!is.null(group)) {
+    assert_length(group, nrow(data))
+    group <- group[k]
+  } else if (has_groups(object, margin = margin)) {
+    group <- get_groups(object, margin = margin)
   } else {
-    data$group <- type
+    group <- rep(NA_character_, length(k))
   }
+  data$group <- group
 
-  ## Highlight
-  if (!is.null(highlight)) {
-    high_k <- joint(object, what = highlight, margin = margin, axes = axes)
-    length(high_k) <- nrow(data)
-    data[[highlight]] <- high_k
-  }
+  type <- ifelse(margin == 1, "row", "column")
+  data$data <- rep(type, length(k))
 
   ## Subset
-  if (active & !sup) data <- data[!data$.sup, ]
-  if (!active & sup) data <- data[data$.sup, ]
+  if (active & !sup) data <- data[!data$supplementary, ]
+  if (!active & sup) data <- data[data$supplementary, ]
+  data$observation <- ifelse(data$supplementary, "suppl.", "active")
 
   data
 }
-
 # Must return a data.frame
 prepare_contrib <- function(object, margin, axes, sort = TRUE,
                             decreasing = TRUE, limit = 10) {

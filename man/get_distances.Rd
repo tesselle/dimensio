@@ -23,7 +23,8 @@ indicates variables/columns.}
 }
 \value{
 \itemize{
-\item \code{get_distances()} returns a \code{\link{numeric}} vector.
+\item \code{get_distances()} returns a \code{\link{numeric}} vector of squared distance to
+the centroide.
 }
 }
 \description{

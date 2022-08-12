@@ -15,7 +15,7 @@ get_coordinates(x, ...)
 
 get_replications(x, ...)
 
-\S4method{get_coordinates}{MultivariateAnalysis}(x, margin = 1, sup_name = ".sup")
+\S4method{get_coordinates}{MultivariateAnalysis}(x, margin = 1, principal = TRUE, sup_name = ".sup")
 
 \S4method{get_replications}{MultivariateBootstrap}(x, margin = 1)
 
@@ -31,6 +31,9 @@ get_replications(x, ...)
 data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
 indicates variables/columns.}
 
+\item{principal}{A \code{\link{logical}} scalar: should principal coordinates be
+returned? If \code{FALSE}, standard coordinates are returned.}
+
 \item{sup_name}{A \code{\link{character}} string specifying the name of the column to
 create for supplementary points attribution (see below).}
 }
@@ -44,6 +47,23 @@ is a supplementary point or not.
 }
 \description{
 Get Coordinates
+}
+\examples{
+## Load data
+data("iris")
+
+## Compute principal components analysis
+X <- pca(iris, scale = TRUE, sup_row = 5:10)
+
+## Get row principal coordinates
+head(get_coordinates(X, margin = 1, principal = TRUE))
+
+## Get row standard coordinates
+head(get_coordinates(X, margin = 1, principal = FALSE))
+
+## Tidy principal coordinates
+head(tidy(X, margin = 1, axes = c(1, 2)))
+head(tidy(X, margin = 2, axes = c(1, 2)))
 }
 \seealso{
 Other mutators: 

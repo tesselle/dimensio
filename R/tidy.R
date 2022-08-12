@@ -1,6 +1,40 @@
-# JOINT
+# TIDY DATA
 #' @include AllClasses.R
 NULL
+
+# Coordinates ==================================================================
+#' @export
+#' @rdname tidy
+#' @aliases tidy,MultivariateAnalysis-method
+setMethod(
+  f = "tidy",
+  signature = c(x = "MultivariateAnalysis"),
+  definition = function(x, margin = 1, axes = c(1, 2), principal = TRUE, ...) {
+    ## Validation
+    assert_length(margin, 1)
+    assert_length(axes, 2)
+
+    ## Get data
+    coords <- get_coordinates(x, margin = margin, principal = principal)
+    weight <- data.frame(
+      mass = get_masses(x, margin = margin)
+    )
+    contrib <- data.frame(
+      contribution = joint_contributions(x, margin = margin, axes = axes)
+    )
+
+    data.frame(
+      coords[, axes, drop = FALSE],
+      labels = rownames(coords),
+      supplementary = coords$.sup,
+      mass = weight[match(rownames(coords), rownames(weight)), ],
+      sum = joint_coordinates(x, margin = margin, axes = axes),
+      contribution = contrib[match(rownames(coords), rownames(contrib)), ],
+      cos2 = joint_cos2(x, margin = margin, axes = axes),
+      row.names = NULL
+    )
+  }
+)
 
 #' Joint
 #'

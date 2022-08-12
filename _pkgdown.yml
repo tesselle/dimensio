@@ -15,15 +15,18 @@ reference:
   - has_concept("resampling methods")
 - title: Visualization
   contents:
-  - has_concept("plot")
+  - has_concept("plot methods")
 - title: Summary
   contents:
   - has_concept("summary")
+  contents:
+  - has_concept("mutators")
+- title: Tidy Methods
+  contents:
+  - has_concept("tidy methods")
 - title: Classes
   contents:
   - has_concept("class")
 - title: Getters and Setters
-  contents:
-  - has_concept("mutators")
 - title: Datasets
   - has_concept("datasets")

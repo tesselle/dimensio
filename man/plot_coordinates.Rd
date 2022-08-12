@@ -7,55 +7,48 @@
 \alias{plot_rows-method}
 \alias{plot_columns}
 \alias{plot_columns-method}
-\alias{plot,CA,missing-method}
-\alias{plot,PCA,missing-method}
+\alias{plot_individuals}
+\alias{plot_individuals-method}
+\alias{plot_variables}
+\alias{plot_variables-method}
 \alias{plot_rows,MultivariateAnalysis-method}
-\alias{plot_columns,CA-method}
+\alias{plot_columns,MultivariateAnalysis-method}
 \alias{plot_columns,BootstrapPCA-method}
-\alias{plot_columns,PCA-method}
+\alias{plot_individuals,PCA-method}
+\alias{plot_variables,PCA-method}
 \title{Visualize Factor Map}
 \usage{
 plot_rows(object, ...)
 
 plot_columns(object, ...)
 
-\S4method{plot}{CA,missing}(
-  x,
-  margin = c(1, 2),
-  axes = c(1, 2),
-  active = TRUE,
-  sup = TRUE,
-  highlight = NULL,
-  group = NULL,
-  ...
-)
+plot_individuals(object, ...)
 
-\S4method{plot}{PCA,missing}(
-  x,
-  margin = 1,
-  axes = c(1, 2),
-  active = TRUE,
-  sup = TRUE,
-  highlight = NULL,
-  group = NULL,
-  ...
-)
+plot_variables(object, ...)
 
 \S4method{plot_rows}{MultivariateAnalysis}(
   object,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  highlight = NULL,
+  alpha = NULL,
+  colour = NULL,
+  fill = NULL,
+  shape = NULL,
+  size = NULL,
   group = NULL
 )
 
-\S4method{plot_columns}{CA}(
+\S4method{plot_columns}{MultivariateAnalysis}(
   object,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  highlight = NULL,
+  alpha = NULL,
+  colour = NULL,
+  fill = NULL,
+  shape = NULL,
+  size = NULL,
   group = NULL
 )
 
@@ -64,27 +57,43 @@ plot_columns(object, ...)
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  highlight = NULL,
+  alpha = NULL,
+  colour = NULL,
+  fill = NULL,
+  shape = NULL,
+  size = NULL,
   group = NULL
 )
 
-\S4method{plot_columns}{PCA}(
+\S4method{plot_individuals}{PCA}(
   object,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  highlight = NULL,
+  alpha = NULL,
+  colour = NULL,
+  fill = NULL,
+  shape = NULL,
+  size = NULL,
+  group = NULL
+)
+
+\S4method{plot_variables}{PCA}(
+  object,
+  axes = c(1, 2),
+  active = TRUE,
+  sup = TRUE,
+  alpha = NULL,
+  colour = NULL,
+  linetype = NULL,
+  size = NULL,
   group = NULL
 )
 }
 \arguments{
-\item{object, x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+\item{object}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Currently not used.}
-
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
-data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
-indicates variables/columns, \code{c(1, 2)} indicates rows and columns (\code{CA}).}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -95,58 +104,63 @@ plotted?}
 \item{sup}{A \code{\link{logical}} scalar: should the supplementary observations be
 plotted?}
 
-\item{highlight}{A \code{\link{character}} string giving XXX.
-It must be one of "\code{coordinates}", "\code{contributions}" or "\code{cos2}".
+\item{alpha, colour, fill, linetype, shape, size}{A \code{\link{character}} string
+specifying the information to be highlighted (will be mapped to the
+corresponding aesthetic).
+It must be one of "\code{labels}", "\code{observation}", "\code{mass}", "\code{sum}",
+"\code{contribution}", "\code{cos2}" or "\code{group}" (see details).
 Any unambiguous substring can be given.
 If \code{NULL} (the default), no highlighting is applied.}
 
 \item{group}{A vector of categories specifying the categorical variable from
-which to color the individuals (only used if \code{highlight} is \code{NULL}; see
-below).}
+which to highlight the individuals (only used if at least one of \code{colour},
+\code{fill}, \code{linetype} or \code{shape} is set to \code{group}; see details).}
+}
+\value{
+A \link[ggplot2:ggplot]{ggplot2::ggplot} object.
 }
 \description{
-Plots factor map.
+Plots principal coordinates.
 }
-\section{Aesthetic}{
-
-Point shapes and line types are set whether an observation is a
-row/individual or a column/variable and is active or supplementary.
-
-Colors are set according to \code{highlight} and \code{group}:
-\itemize{
-\item{If \code{highlight} is not \code{NULL}, the color gradient will vary according
-to the value of the selected parameter.}
-\item{If \code{group} is a \code{numeric} vector, the color gradient and size will
-vary by the value of \code{group}.}
-\item{If \code{group} is not a \code{numeric} vector, the colors will be mapped to
-the levels of \code{group}.}
-\item{If both are \code{NULL} (the default), then the same rule as for shapes is
-used.}
+\details{
+\describe{
+\item{\code{labels}}{Row names of the original data.}
+\item{\code{observation}}{Whether an observation is active or supplementary.}
+\item{\code{mass}}{Weight/mass of each observation.}
+\item{\code{sum}}{Sum of squared coordinates along \code{axes}.}
+\item{\code{contribution}}{Joint contributions to the definition of \code{axes}.}
+\item{\code{cos2}}{Joint \eqn{cos^2}{cos2} along \code{axes}.}
 }
 }
-
 \examples{
-## Data from Lebart et al. 2006, p. 170-172
-data("colours")
+## Load data
+data("iris")
 
-## Compute correspondence analysis
-X <- ca(colours)
+## Compute principal components analysis
+Y <- pca(iris, scale = TRUE)
 
 ## Plot results
-plot(X) +
-  ggrepel::geom_label_repel()
+plot_individuals(Y, colour = "group", shape = "group", group = iris$Species) +
+  khroma::scale_colour_highcontrast()
 
-## Screeplot
-plot_variance(X)
+plot_individuals(Y, colour = "group", size = "cos2", group = iris$Sepal.Width) +
+  khroma::scale_color_YlOrBr()
+
+plot_individuals(Y, colour = "contribution", size = "contribution") +
+  khroma::scale_color_iridescent(range = c(0.5, 1))
+
+plot_variables(Y, colour = "contribution") +
+  ggrepel::geom_label_repel() +
+  khroma::scale_color_YlOrBr(range = c(0.5, 1))
 }
 \seealso{
-\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}
-
-Other plot: 
+Other plot methods: 
+\code{\link{biplot}()},
+\code{\link{envelopes}},
 \code{\link{plot_contributions}()},
 \code{\link{plot_eigenvalues}}
 }
 \author{
 N. Frerebeau
 }
-\concept{plot}
+\concept{plot methods}

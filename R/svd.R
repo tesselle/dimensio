@@ -17,6 +17,8 @@ NULL
 #'   \item{`v`}{A matrix whose columns contain the right singular vectors of
 #'   `x`. Dimension `c(p, rank)`.}
 #'  }
+#' @note
+#'  In both PCA and PCA-cor whitening there is a sign-ambiguity in the eigenvector matrices. In order to resolve the sign-ambiguity we use eigenvector matrices with a positive diagonal. This has the effect to make cross-correlations and cross-correlations positive diagonal for PCA
 #' @keywords internal
 #' @noRd
 svd2 <- function(x, rank = Inf) {

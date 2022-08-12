@@ -16,7 +16,7 @@ plot_variance(object, ...)
   cumulative = TRUE,
   fill = "grey30",
   border = "grey10",
-  color = "red"
+  colour = "red"
 )
 }
 \arguments{
@@ -33,33 +33,43 @@ variance be plotted?}
 \item{fill, border}{A \code{\link{character}} string specifying the bars infilling and
 border colors.}
 
-\item{color}{A \code{\link{character}} string specifying the line color.}
+\item{colour}{A \code{\link{character}} string specifying the line color.}
+}
+\value{
+A \link[ggplot2:ggplot]{ggplot2::ggplot} object.
 }
 \description{
 Plot eigenvalues or variances histogram.
 }
 \examples{
-## Data from Lebart et al. 2006, p. 170-172
-data("colours")
+## Load data
+data("iris")
 
-## Compute correspondence analysis
-X <- ca(colours)
+## Compute principal components analysis
+Y <- pca(iris, scale = TRUE)
 
 ## Plot results
-plot(X) +
-  ggrepel::geom_label_repel()
+plot_individuals(Y, colour = "group", shape = "group", group = iris$Species) +
+  khroma::scale_colour_highcontrast()
 
-## Screeplot
-plot_variance(X)
+plot_individuals(Y, colour = "group", size = "cos2", group = iris$Sepal.Width) +
+  khroma::scale_color_YlOrBr()
+
+plot_individuals(Y, colour = "contribution", size = "contribution") +
+  khroma::scale_color_iridescent(range = c(0.5, 1))
+
+plot_variables(Y, colour = "contribution") +
+  ggrepel::geom_label_repel() +
+  khroma::scale_color_YlOrBr(range = c(0.5, 1))
 }
 \seealso{
-\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}
-
-Other plot: 
+Other plot methods: 
+\code{\link{biplot}()},
+\code{\link{envelopes}},
 \code{\link{plot_contributions}()},
 \code{\link{plot_coordinates}}
 }
 \author{
 N. Frerebeau
 }
-\concept{plot}
+\concept{plot methods}
