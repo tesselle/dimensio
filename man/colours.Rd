@@ -19,5 +19,10 @@ colours
 \description{
 Contingency table of eye and hair colours of different individuals.
 }
+\seealso{
+Other datasets: 
+\code{\link{benthos}},
+\code{\link{countries}}
+}
 \concept{datasets}
 \keyword{datasets}
