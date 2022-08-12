@@ -19,6 +19,7 @@ reference:
 - title: Summary
   contents:
   - has_concept("summary")
+- title: Getters and Setters
   contents:
   - has_concept("mutators")
 - title: Tidy Methods
@@ -27,6 +28,6 @@ reference:
 - title: Classes
   contents:
   - has_concept("class")
-- title: Getters and Setters
 - title: Datasets
+  contents:
   - has_concept("datasets")
