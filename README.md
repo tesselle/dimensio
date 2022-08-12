@@ -138,34 +138,34 @@ as few elements as possible: this makes it easy to customize diagrams
 
 ``` r
 ## Plot active individuals by group
-plot_rows(X, group = iris$Species) +
+plot_individuals(X, colour = "group", group = iris$Species) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
   khroma::scale_colour_highcontrast() # Custom color scale
 
 ## Plot all individuals by cos2
-plot_rows(X, highlight = "cos2") +
+plot_individuals(X, colour = "cos2", size = "cos2") +
   ggplot2::theme_bw() + # Change theme
   ggplot2::scale_size_continuous(range = c(1, 3)) + # Custom size scale
   khroma::scale_color_iridescent() # Custom color scale
 ```
 
-![](man/figures/README-plot-ind-1.png)![](man/figures/README-plot-ind-2.png)
+<img src="man/figures/README-plot-ind-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-plot-ind-2.png" style="display: block; margin: auto;" />
 
 ``` r
 ## Plot variables factor map
-plot_columns(X) +
+plot_variables(X) +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() # Change theme
 
 ## Highlight contributions
-plot_columns(X, highlight = "contrib") +
+plot_variables(X, colour = "contrib") +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_YlOrBr(range = c(0.5, 1)) # Custom color scale
 ```
 
-![](man/figures/README-plot-var-1.png)![](man/figures/README-plot-var-2.png)
+<img src="man/figures/README-plot-var-1.png" style="display: block; margin: auto;" /><img src="man/figures/README-plot-var-2.png" style="display: block; margin: auto;" />
 
 ``` r
 ## Plot eigenvalues
@@ -205,12 +205,12 @@ plot_cos2(X, margin = 2, axes = c(1, 2)) +
 Y <- bootstrap(X, n = 30)
 
 ## Plot with ellipses
-plot_columns(Y) +
+plot_columns(Y, colour = "group") +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() # Change theme
 ```
 
-![](man/figures/README-plot-valid-1.png)<!-- -->
+<img src="man/figures/README-plot-valid-1.png" style="display: block; margin: auto;" />
 
 ## Contributing
 

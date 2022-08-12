@@ -100,28 +100,28 @@ get_eigenvalues(X)
 
 **dimensio** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting informations. Visualization methods produce graphics with as few elements as possible: this makes it easy to customize diagrams (e.g. using extra layers, themes and scales).
 
-```{r plot-ind, fig.width=5, fig.height=3.5, fig.show='hold'}
+```{r plot-ind, fig.width=5, fig.height=3.5, fig.show='hold', fig.align='center'}
 ## Plot active individuals by group
-plot_rows(X, group = iris$Species) +
+plot_individuals(X, colour = "group", group = iris$Species) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
   khroma::scale_colour_highcontrast() # Custom color scale
 
 ## Plot all individuals by cos2
-plot_rows(X, highlight = "cos2") +
+plot_individuals(X, colour = "cos2", size = "cos2") +
   ggplot2::theme_bw() + # Change theme
   ggplot2::scale_size_continuous(range = c(1, 3)) + # Custom size scale
   khroma::scale_color_iridescent() # Custom color scale
 ```
 
-```{r plot-var, fig.width=5, fig.height=3.5, fig.show='hold'}
+```{r plot-var, fig.width=5, fig.height=3.5, fig.show='hold', fig.align='center'}
 ## Plot variables factor map
-plot_columns(X) +
+plot_variables(X) +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() # Change theme
 
 ## Highlight contributions
-plot_columns(X, highlight = "contrib") +
+plot_variables(X, colour = "contrib") +
   ggrepel::geom_label_repel() + # Add repelling labels
   ggplot2::theme_bw() + # Change theme
   khroma::scale_color_YlOrBr(range = c(0.5, 1)) # Custom color scale
@@ -158,12 +158,12 @@ plot_cos2(X, margin = 2, axes = c(1, 2)) +
 
 ### Validation
 
-```{r plot-valid, fig.width=7, fig.height=5, fig.show='hold'}
+```{r plot-valid, fig.width=7, fig.height=5, fig.align='center'}
 ## Partial bootstrap
 Y <- bootstrap(X, n = 30)
 
 ## Plot with ellipses
-plot_columns(Y) +
+plot_columns(Y, colour = "group") +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() # Change theme
 ```
