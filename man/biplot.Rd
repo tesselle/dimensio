@@ -10,9 +10,10 @@
 \S4method{biplot}{CA}(
   x,
   axes = c(1, 2),
-  type = c("row", "column", "contributions"),
+  type = c("rows", "columns", "contributions"),
   active = TRUE,
-  sup = TRUE
+  sup = TRUE,
+  label = c("rows", "columns")
 )
 
 \S4method{biplot}{PCA}(
@@ -20,7 +21,8 @@
   axes = c(1, 2),
   type = c("form", "covariance"),
   active = TRUE,
-  sup = TRUE
+  sup = TRUE,
+  label = c("individuals", "variables")
 )
 }
 \arguments{
@@ -30,14 +32,19 @@
 plotted.}
 
 \item{type}{A \code{\link{character}} string specifying the biplot to be plotted
-(see below). It must be one of "\code{row}", "\code{column}", "\code{contribution}" (CA),
-"\code{form}" or "\code{covariance}" (PCA).}
+(see below). It must be one of "\code{rows}", "\code{columns}", "\code{contribution}" (CA),
+"\code{form}" or "\code{covariance}" (PCA). Any unambiguous substring can be given.}
 
 \item{active}{A \code{\link{logical}} scalar: should the active observations be
 plotted?}
 
 \item{sup}{A \code{\link{logical}} scalar: should the supplementary observations be
 plotted?}
+
+\item{label}{A \code{\link{character}} vector specifying whether
+"\code{rows}"/"\code{individuals}" and/or "\code{columns}"/"\code{variables}" names must be
+mapped (e.g. for use with \code{\link[ggrepel:geom_text_repel]{ggrepel::geom_label_repel()}}).
+Any unambiguous substring can be given.}
 }
 \value{
 A \link[ggplot2:ggplot]{ggplot2::ggplot} object.
@@ -56,8 +63,8 @@ Biplot
 \section{CA Biplots}{
 
 \describe{
-\item{\code{row}}{Row principal biplot.}
-\item{\code{column}}{Column principal biplot.}
+\item{\code{rows}}{Row principal biplot.}
+\item{\code{columns}}{Column principal biplot.}
 \item{\code{contribution}}{Contribution biplot}.
 }
 }

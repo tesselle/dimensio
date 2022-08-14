@@ -9,6 +9,12 @@ get_masses <- function(x, margin = 1) {
   if (margin == 2) mass <- x@columns@weights
   mass
 }
+has_supplementary <- function(x, margin = 1) {
+  margin <- margin[[1L]]
+  if (margin == 1) supp <- any(x@rows@supplement)
+  if (margin == 2) supp <- any(x@columns@supplement)
+  supp
+}
 has_groups <- function(x, margin = 1) {
   margin <- margin[[1L]]
   if (margin == 1) grp <- length(x@rows@groups) > 0

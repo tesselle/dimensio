@@ -2,7 +2,7 @@
 ## New classes and methods
 * Add `biplot()` to produce PCA and CA biplots.
 * Add `plot_individuals()` and `plot_variables()` methods for `PCA` class.
-* Add `tidy()` to get coordinates with extra informations.
+* Add `tidy()` and `augment()` to get coordinates with extra informations.
 * Add `wrap_hull()` to compute convex hull around coordinates.
 * Add a **ggplot2** layer: `stat_hull()` (thanks to [**ggplot2** documentation](https://ggplot2.tidyverse.org/articles/extending-ggplot2.html))
 

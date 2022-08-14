@@ -62,8 +62,11 @@ head(get_coordinates(X, margin = 1, principal = TRUE))
 head(get_coordinates(X, margin = 1, principal = FALSE))
 
 ## Tidy principal coordinates
-head(tidy(X, margin = 1, axes = c(1, 2)))
-head(tidy(X, margin = 2, axes = c(1, 2)))
+head(tidy(X, margin = 1))
+head(tidy(X, margin = 2))
+
+head(augment(X, margin = 1, axes = c(1, 2)))
+head(augment(X, margin = 2, axes = c(1, 2)))
 }
 \seealso{
 Other mutators: 

@@ -4,12 +4,19 @@
 \name{tidy}
 \alias{tidy}
 \alias{tidy-method}
+\alias{augment}
+\alias{augment-method}
 \alias{tidy,MultivariateAnalysis-method}
+\alias{augment,MultivariateAnalysis-method}
 \title{Tidy Coordinates}
 \usage{
 tidy(x, ...)
 
-\S4method{tidy}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), principal = TRUE, ...)
+augment(x, ...)
+
+\S4method{tidy}{MultivariateAnalysis}(x, margin = 1, principal = TRUE, ...)
+
+\S4method{augment}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), principal = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
@@ -20,22 +27,35 @@ tidy(x, ...)
 which the data will be returned: \code{1} indicates individuals/rows (the
 default), \code{2} indicates variables/columns.}
 
-\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
-to be for which to compute results.}
-
 \item{principal}{A \code{\link{logical}} scalar: should principal coordinates be
 returned? If \code{FALSE}, standard coordinates are returned.}
+
+\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
+to be for which to compute results.}
 }
 \value{
-Returns a \code{\link{data.frame}} of the row/column coordinates along \code{axes} and the
-following columns:
+\itemize{
+\item \code{tidy()} returns a long \code{\link{data.frame}} with the following columns:
 \describe{
-\item{\code{labels}}{Row names of the original data.}
-\item{\code{supplementary}}{Whether an observation is active or supplementary.}
+\item{\code{label}}{Row/column names of the original data.}
+\item{\code{component}}{Component.}
+\item{\code{supplementary}}{Whether an observation is active or
+supplementary.}
+\item{\code{coordinate}}{Coordinates.}
+\item{\code{contribution}}{Contributions to the definition of the components.}
+\item{\code{cos2}}{\eqn{cos^2}{cos2}.}
+}
+\item \code{augment()} returns a wide \code{\link{data.frame}} of the row/column coordinates
+along \code{axes} and the following columns:
+\describe{
+\item{\code{label}}{Row/column names of the original data.}
+\item{\code{supplementary}}{Whether an observation is active or
+supplementary.}
 \item{\code{mass}}{Weight/mass of each observation.}
 \item{\code{sum}}{Sum of squared coordinates along \code{axes}.}
 \item{\code{contribution}}{Joint contributions to the definition of \code{axes}.}
 \item{\code{cos2}}{Joint \eqn{cos^2}{cos2} along \code{axes}.}
+}
 }
 }
 \description{
@@ -55,8 +75,11 @@ head(get_coordinates(X, margin = 1, principal = TRUE))
 head(get_coordinates(X, margin = 1, principal = FALSE))
 
 ## Tidy principal coordinates
-head(tidy(X, margin = 1, axes = c(1, 2)))
-head(tidy(X, margin = 2, axes = c(1, 2)))
+head(tidy(X, margin = 1))
+head(tidy(X, margin = 2))
+
+head(augment(X, margin = 1, axes = c(1, 2)))
+head(augment(X, margin = 2, axes = c(1, 2)))
 }
 \author{
 N. Frerebeau

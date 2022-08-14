@@ -339,16 +339,27 @@ setGeneric(
 #'  returned? If `FALSE`, standard coordinates are returned.
 #' @param ... Currently not used.
 #' @return
-#'  Returns a [`data.frame`] of the row/column coordinates along `axes` and the
-#'  following columns:
-#'  \describe{
-#'   \item{`labels`}{Row names of the original data.}
-#'   \item{`supplementary`}{Whether an observation is active or supplementary.}
-#'   \item{`mass`}{Weight/mass of each observation.}
-#'   \item{`sum`}{Sum of squared coordinates along `axes`.}
-#'   \item{`contribution`}{Joint contributions to the definition of `axes`.}
-#'   \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
-#'  }
+#'  * `tidy()` returns a long [`data.frame`] with the following columns:
+#'    \describe{
+#'     \item{`label`}{Row/column names of the original data.}
+#'     \item{`component`}{Component.}
+#'     \item{`supplementary`}{Whether an observation is active or
+#'     supplementary.}
+#'     \item{`coordinate`}{Coordinates.}
+#'     \item{`contribution`}{Contributions to the definition of the components.}
+#'     \item{`cos2`}{\eqn{cos^2}{cos2}.}
+#'    }
+#'  * `augment()` returns a wide [`data.frame`] of the row/column coordinates
+#'    along `axes` and the following columns:
+#'    \describe{
+#'     \item{`label`}{Row/column names of the original data.}
+#'     \item{`supplementary`}{Whether an observation is active or
+#'     supplementary.}
+#'     \item{`mass`}{Weight/mass of each observation.}
+#'     \item{`sum`}{Sum of squared coordinates along `axes`.}
+#'     \item{`contribution`}{Joint contributions to the definition of `axes`.}
+#'     \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
+#'    }
 #' @example inst/examples/ex-coordinates.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -365,18 +376,30 @@ setGeneric(
   valueClass = "data.frame"
 )
 
+#' @rdname tidy
+#' @aliases augment-method
+setGeneric(
+  name = "augment",
+  def = function(x, ...) standardGeneric("augment"),
+  valueClass = "data.frame"
+)
+
 #' Biplot
 #'
 #' @param x A [`CA-class`] or [`PCA-class`] object.
 #' @param axes A length-two [`numeric`] vector giving the dimensions to be
 #'  plotted.
 #' @param type A [`character`] string specifying the biplot to be plotted
-#'  (see below). It must be one of "`row`", "`column`", "`contribution`" (CA),
-#'  "`form`" or "`covariance`" (PCA).
+#'  (see below). It must be one of "`rows`", "`columns`", "`contribution`" (CA),
+#'  "`form`" or "`covariance`" (PCA). Any unambiguous substring can be given.
 #' @param active A [`logical`] scalar: should the active observations be
 #'  plotted?
 #' @param sup A [`logical`] scalar: should the supplementary observations be
 #'  plotted?
+#' @param label A [`character`] vector specifying whether
+#'  "`rows`"/"`individuals`" and/or "`columns`"/"`variables`" names must be
+#'  mapped (e.g. for use with [ggrepel::geom_label_repel()]).
+#'  Any unambiguous substring can be given.
 #' @section PCA Biplots:
 #'  \describe{
 #'   \item{`form`}{Form biplot (row-metric-preserving).}
@@ -384,8 +407,8 @@ setGeneric(
 #'  }
 #' @section CA Biplots:
 #'  \describe{
-#'   \item{`row`}{Row principal biplot.}
-#'   \item{`column`}{Column principal biplot.}
+#'   \item{`rows`}{Row principal biplot.}
+#'   \item{`columns`}{Column principal biplot.}
 #'   \item{`contribution`}{Contribution biplot}.
 #'  }
 #' @return
@@ -413,9 +436,8 @@ NULL
 #' @param alpha,colour,fill,linetype,shape,size A [`character`] string
 #'  specifying the information to be highlighted (will be mapped to the
 #'  corresponding aesthetic).
-#'  It must be one of "`labels`", "`observation`", "`mass`", "`sum`",
-#'  "`contribution`", "`cos2`" or "`group`" (see details).
-#'  Any unambiguous substring can be given.
+#'  It must be one of "`observation`", "`mass`", "`sum`", "`contribution`",
+#'  "`cos2`" or "`group`" (see details). Any unambiguous substring can be given.
 #'  If `NULL` (the default), no highlighting is applied.
 #' @param group A vector of categories specifying the categorical variable from
 #'  which to highlight the individuals (only used if at least one of `colour`,
@@ -423,7 +445,6 @@ NULL
 #' @param ... Currently not used.
 #' @details
 #'  \describe{
-#'   \item{`labels`}{Row names of the original data.}
 #'   \item{`observation`}{Whether an observation is active or supplementary.}
 #'   \item{`mass`}{Weight/mass of each observation.}
 #'   \item{`sum`}{Sum of squared coordinates along `axes`.}

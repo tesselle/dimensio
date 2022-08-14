@@ -69,7 +69,116 @@
     Code
       tidy(res, margin = 1)
     Output
-                  F1          F2       labels supplementary       mass       sum
+                label component supplementary  coordinate contribution         cos2
+      1        Brazil        F1         FALSE -3.44797107  5.538247158 8.292023e-01
+      2        Brazil        F2         FALSE  0.90619483  0.632431152 5.727650e-02
+      3        Brazil        F3         FALSE -0.24993533  0.456302123 4.357011e-03
+      4        Brazil        F4         FALSE -0.24686767  0.832566107 4.250713e-03
+      5        Brazil        F5         FALSE -0.67882293 10.083352392 3.214003e-02
+      6       Croatia        F1         FALSE  1.79079771  1.493957244 4.826141e-01
+      7       Croatia        F2         FALSE  0.84162266  0.545512790 1.065962e-01
+      8       Croatia        F3         FALSE -0.01449191  0.001534081 3.160517e-05
+      9       Croatia        F4         FALSE  1.59105122 34.582676894 3.809564e-01
+      10      Croatia        F5         FALSE  0.18114485  0.718032180 4.938089e-03
+      11       France        F1         FALSE  6.69562651 20.884666655 7.946831e-01
+      12       France        F2         FALSE  2.00627835  3.099934127 7.134999e-02
+      13       France        F3         FALSE  2.73192386 54.517302165 1.322966e-01
+      14       France        F4         FALSE  0.27991249  1.070372241 1.388852e-03
+      15       France        F5         FALSE -0.03056456  0.020442230 1.655953e-05
+      16      Germany        F1         FALSE  8.30948913 32.165755442 9.317348e-01
+      17      Germany        F2         FALSE -0.54464651  0.228454409 4.002885e-03
+      18      Germany        F3         FALSE -1.98635298 28.821064927 5.324226e-02
+      19      Germany        F4         FALSE  0.38186098  1.992052864 1.967679e-03
+      20      Germany        F5         FALSE -0.81443212 14.514488173 8.950627e-03
+      21        Italy        F1         FALSE -0.07961026  0.002952455 2.752023e-04
+      22        Italy        F2         FALSE  4.76842490 17.511364425 9.873333e-01
+      23        Italy        F3         FALSE -0.09224234  0.062152384 3.694660e-04
+      24        Italy        F4         FALSE -0.30125031  1.239781899 3.940659e-03
+      25        Italy        F5         FALSE  0.32660369  2.334178725 4.631867e-03
+      26       Mexico        F1         FALSE -2.71576869  3.435822031 3.599314e-01
+      27       Mexico        F2         FALSE -3.38057248  8.801376441 5.577181e-01
+      28       Mexico        F3         FALSE -0.08580922  0.053785488 3.593372e-04
+      29       Mexico        F4         FALSE  0.67284661  6.184753916 2.209359e-02
+      30       Mexico        F5         FALSE  1.10781957 26.855299640 5.989248e-02
+      31      Morocco        F1         FALSE -5.19232134 12.559380906 9.779511e-01
+      32      Morocco        F2         FALSE  0.08628152  0.005733313 2.700409e-04
+      33      Morocco        F3         FALSE  0.40450590  1.195217356 5.935314e-03
+      34      Morocco        F4         FALSE -0.27456580  1.029871792 2.734556e-03
+      35      Morocco        F5         FALSE -0.50284328  5.532956156 9.171900e-03
+      36      Nigeria        F1         FALSE -2.59114505  3.127724971 2.174533e-01
+      37      Nigeria        F2         FALSE -4.86429718 18.222597905 7.663424e-01
+      38      Nigeria        F3         FALSE -0.15845101  0.183394872 8.131537e-04
+      39      Nigeria        F4         FALSE  0.63156703  5.449155200 1.291878e-02
+      40      Nigeria        F5         FALSE  0.23942241  1.254358106 1.856574e-03
+      41         Peru        F1         FALSE -0.91300892  0.388324820 4.107170e-01
+      42         Peru        F2         FALSE -0.62414874  0.300017289 1.919415e-01
+      43         Peru        F3         FALSE  0.47308016  1.634807600 1.102712e-01
+      44         Peru        F4         FALSE -0.46757393  2.986694897 1.077192e-01
+      45         Peru        F5         FALSE  0.01795598  0.007055217 1.588587e-04
+      46       Russia        F1         FALSE  4.54170301  9.609096837 4.802279e-01
+      47       Russia        F2         FALSE -4.35945144 14.636383537 4.424596e-01
+      48       Russia        F3         FALSE  0.01557778  0.001772590 5.649643e-06
+      49       Russia        F4         FALSE -1.75999931 42.317039675 7.211654e-02
+      50       Russia        F5         FALSE  0.45394180  4.509125057 4.797448e-03
+      51 South Africa        F1         FALSE -1.34736404  0.845697437 1.657487e-01
+      52 South Africa        F2         FALSE -2.86252274  6.310561198 7.481319e-01
+      53 South Africa        F3         FALSE -0.06323260  0.029206483 3.650584e-04
+      54 South Africa        F4         FALSE  0.02627636  0.009432364 6.303918e-05
+      55 South Africa        F5         FALSE -0.56804213  7.060785707 2.946059e-02
+      56        Spain        F1         FALSE -0.45133324  0.094894216 5.582226e-03
+      57        Spain        F2         FALSE  5.79620280 25.873622490 9.206613e-01
+      58        Spain        F3         FALSE -1.29683897 12.284833583 4.608768e-02
+      59        Spain        F4         FALSE -0.38192774  1.992749446 3.997378e-03
+      60        Spain        F5         FALSE  0.90948477 18.100175926 2.266750e-02
+      61       Turkey        F1         FALSE -4.59909375  9.853479829 7.915481e-01
+      62       Turkey        F2         FALSE  2.23063403  3.832010923 1.862042e-01
+      63       Turkey        F3         FALSE  0.32226666  0.758626348 3.886543e-03
+      64       Turkey        F4         FALSE -0.15132993  0.312852707 8.570031e-04
+      65       Turkey        F5         FALSE -0.64166805  9.009750490 1.540826e-02
+
+---
+
+    Code
+      tidy(res, margin = 2)
+    Output
+                  label component supplementary  coordinate contribution         cos2
+      1         climate        F1         FALSE -1.30036717 10.240483257 3.740463e-01
+      2         climate        F2         FALSE  1.63510483 26.767304989 5.914044e-01
+      3         climate        F3         FALSE -0.19217801  3.507097979 8.169599e-03
+      4         climate        F4         FALSE  0.05400430  0.517953034 6.451342e-04
+      5         climate        F5         FALSE  0.06174522  1.084530983 8.433348e-04
+      6            food        F1         FALSE -1.22451514  9.080646704 2.748426e-01
+      7            food        F2         FALSE  1.87558258 35.219714148 6.448047e-01
+      8            food        F3         FALSE  0.63262861 38.004775827 7.335901e-02
+      9            food        F4         FALSE  0.05440148  0.525599708 5.424719e-04
+      10           food        F5         FALSE  0.06377067  1.156850553 7.454144e-04
+      11    hospitality        F1         FALSE  2.22861603 30.078692861 8.761767e-01
+      12    hospitality        F2         FALSE -0.43460427  1.891043111 3.332032e-02
+      13    hospitality        F3         FALSE  0.67806660 43.660150475 8.110841e-02
+      14    hospitality        F4         FALSE  0.03711303  0.244616936 2.429820e-04
+      15    hospitality        F5         FALSE  0.10551217  3.166943833 1.963931e-03
+      16 infrastructure        F1         FALSE  2.01846775 24.673575431 7.069218e-01
+      17 infrastructure        F2         FALSE  1.17848934 13.904800556 2.409789e-01
+      18 infrastructure        F3         FALSE -0.36590599 12.713922393 2.323094e-02
+      19 infrastructure        F4         FALSE -0.07743027  1.064768537 1.040278e-03
+      20 infrastructure        F5         FALSE  0.38935786 43.125404217 2.630423e-02
+      21         living        F1         FALSE  1.34319012 10.926056451 5.064834e-01
+      22         living        F2         FALSE  1.18449983 14.046995753 3.938766e-01
+      23         living        F3         FALSE -0.01007192  0.009633082 2.847836e-05
+      24         living        F4         FALSE -0.49266988 43.106786998 6.814002e-02
+      25         living        F5         FALSE -0.33469213 31.865906795 3.144714e-02
+      26       security        F1         FALSE  1.57383534 15.000545296 6.708427e-01
+      27       security        F2         FALSE  0.90335419  8.170141443 2.210132e-01
+      28       security        F3         FALSE -0.14886616  2.104420245 6.001973e-03
+      29       security        F4         FALSE  0.55416851 54.540274788 8.317366e-02
+      30       security        F5         FALSE -0.26249100 19.600363619 1.866083e-02
+
+---
+
+    Code
+      augment(res, margin = 1)
+    Output
+                  F1          F2        label supplementary       mass       sum
       1  -0.07961026  4.76842490        Italy         FALSE 0.07692308 22.744214
       2  -0.45133324  5.79620280        Spain         FALSE 0.07692308 33.799669
       3   1.79079771  0.84162266      Croatia         FALSE 0.07692308  3.915285
@@ -101,9 +210,9 @@
 ---
 
     Code
-      tidy(res, margin = 2)
+      augment(res, margin = 2)
     Output
-               F1         F2         labels supplementary mass      sum contribution
+               F1         F2          label supplementary mass      sum contribution
       1  1.343190  1.1844998         living         FALSE    1 3.207200     320.7200
       2 -1.300367  1.6351048        climate         FALSE    1 4.364523     436.4523
       3 -1.224515  1.8755826           food         FALSE    1 5.017247     501.7247

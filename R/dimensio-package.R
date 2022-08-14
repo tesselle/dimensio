@@ -40,6 +40,7 @@
 #' .hasSlot initialize is new setClass setClassUnion
 #' setGeneric setMethod slot slot<- slotNames validObject .valueClassTest
 #' @importFrom rlang .data
+#' @importFrom utils stack
 NULL
 
 # Notes:

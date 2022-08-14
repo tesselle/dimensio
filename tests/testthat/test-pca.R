@@ -25,6 +25,8 @@ test_that("PCA", {
   # Tidy coordinates
   expect_snapshot(tidy(res, margin = 1))
   expect_snapshot(tidy(res, margin = 2))
+  expect_snapshot(augment(res, margin = 1))
+  expect_snapshot(augment(res, margin = 2))
 
   # Distances
   expect_snapshot(get_distances(res, margin = 1))

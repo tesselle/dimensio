@@ -21,13 +21,13 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
   aes_points <- ggplot2::aes(
     x = .data$x,
     y = .data$y,
-    label = .data$labels
+    label = .data$label
   )
   aes_alpha <- aes_colour <- aes_fill <- aes_shape <- aes_size <- NULL
-  choices <- c("labels", "observation", "mass", "sum", "contribution",
+  choices <- c("observation", "mass", "sum", "contribution",
                "cos2", "group", "data")
   if (!is.null(alpha)) {
-    alpha <- match.arg(alpha, choices = choices[c(4, 5, 6)])
+    alpha <- match.arg(alpha, choices = choices[c(3, 4, 5)])
     aes_alpha <- ggplot2::aes(alpha = .data[[alpha]])
   }
   if (!is.null(colour)) {
@@ -39,11 +39,11 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
     aes_fill <- ggplot2::aes(fill = .data[[fill]])
   }
   if (!is.null(shape)) {
-    shape <- match.arg(shape, choices = choices[c(2, 7)])
+    shape <- match.arg(shape, choices = choices[c(1, 6)])
     aes_shape <- ggplot2::aes(shape = .data[[shape]])
   }
   if (!is.null(size)) {
-    size <- match.arg(size, choices = choices[c(3, 4, 5, 6)])
+    size <- match.arg(size, choices = choices[c(2, 3, 4, 5, 6)])
     aes_size <- ggplot2::aes(size = .data[[size]])
   }
 
@@ -74,17 +74,19 @@ setMethod(
   f = "biplot",
   signature = signature(x = "CA"),
   definition = function(x, axes = c(1, 2),
-                        type = c("row", "column", "contributions"),
-                        active = TRUE, sup = TRUE) {
+                        type = c("rows", "columns", "contributions"),
+                        active = TRUE, sup = TRUE,
+                        label = c("rows", "columns")) {
     ## Validation
     type <- match.arg(type, several.ok = FALSE)
+    label <- match.arg(label, several.ok = TRUE)
 
     ## Type of biplot
-    if (type == "row") {
+    if (type == "rows") {
       princ_row <- TRUE
       princ_col <- FALSE
     }
-    if (type == "column") {
+    if (type == "columns") {
       princ_row <- FALSE
       princ_col <- TRUE
     }
@@ -104,12 +106,20 @@ setMethod(
                                 weight = FALSE)
     coord <- rbind(coord_row, coord_col)
 
+    ## Labels
+    if ("rows" %notin% label) {
+      coord$label[coord$data == "row"] <- NA
+    }
+    if ("columns" %notin% label) {
+      coord$label[coord$data == "column"] <- NA
+    }
+
     ## Aesthetics
     aes_points <- ggplot2::aes(
       x = .data$x,
       y = .data$y,
       colour = .data$data,
-      label = .data$labels
+      label = .data$label
     )
     if (length(unique(coord$observation)) > 1) {
       aes_shape <- ggplot2::aes(shape = .data$observation)
@@ -143,9 +153,11 @@ setMethod(
   f = "biplot",
   signature = signature(x = "PCA"),
   definition = function(x, axes = c(1, 2), type = c("form", "covariance"),
-                        active = TRUE, sup = TRUE) {
+                        active = TRUE, sup = TRUE,
+                        label = c("individuals", "variables")) {
     ## Validation
     type <- match.arg(type, several.ok = FALSE)
+    label <- match.arg(label, several.ok = TRUE)
 
     ## Type of biplot
     if (type == "form") {
@@ -166,15 +178,23 @@ setMethod(
                                 active = active, sup = sup,
                                 principal = princ_col,
                                 weight = FALSE)
-    coord_row$z <- 0 # Set the origin of arrows
+    coord <- rbind(coord_row, coord_col)
     coord_col$z <- 0 # Set the origin of arrows
+
+    ## Labels
+    if ("individuals" %notin% label) {
+      coord$label[coord$data == "row"] <- NA
+    }
+    if ("variables" %notin% label) {
+      coord$label[coord$data == "column"] <- NA
+    }
 
     ## Aesthetics
     aes_points <- ggplot2::aes(
       x = .data$x,
       y = .data$y,
       colour = .data$data,
-      label = .data$labels
+      label = .data$label
     )
     aes_segments <- ggplot2::aes(
       xend = .data$z,
@@ -182,7 +202,7 @@ setMethod(
     )
 
     ## ggplot2
-    ggplot2::ggplot(data = rbind(coord_row, coord_col)) +
+    ggplot2::ggplot(data = coord) +
       aes_points +
       ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
       ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
@@ -334,13 +354,13 @@ setMethod(
       y = .data$y,
       xend = .data$z,
       yend = .data$z,
-      label = .data$labels
+      label = .data$label
     )
     aes_alpha <- aes_colour <- aes_linetype <- aes_size <- NULL
-    choices <- c("labels", "observation", "coordinates", "contribution",
+    choices <- c("observation", "coordinates", "contribution",
                  "cos2", "group", "data")
     if (!is.null(alpha)) {
-      alpha <- match.arg(alpha, choices = choices[c(3, 4, 5)])
+      alpha <- match.arg(alpha, choices = choices[c(2, 3, 4)])
       aes_alpha <- ggplot2::aes(alpha = .data[[alpha]])
     }
     if (!is.null(colour)) {
@@ -348,11 +368,11 @@ setMethod(
       aes_colour <- ggplot2::aes(colour = .data[[colour]])
     }
     if (!is.null(linetype)) {
-      linetype <- match.arg(linetype, choices = choices[c(2, 6)])
+      linetype <- match.arg(linetype, choices = choices[c(1, 5)])
       aes_linetype <- ggplot2::aes(linetype = .data[[linetype]])
     }
     if (!is.null(size)) {
-      size <- match.arg(size, choices = choices[c(3, 4, 5)])
+      size <- match.arg(size, choices = choices[c(2, 3, 4)])
       aes_size <- ggplot2::aes(size = .data[[size]])
     }
 
@@ -508,7 +528,7 @@ prepare_coord <- function(object, margin, axes = c(1, 2), active = TRUE,
                           sup = TRUE, principal = TRUE, weight = FALSE,
                           group = NULL) {
   ## Prepare data
-  data <- tidy(object, margin = margin, axes = axes, principal = principal)
+  data <- augment(object, margin = margin, axes = axes, principal = principal)
   data$x <- if (weight) data[[1]] * sqrt(data$mass) else data[[1]]
   data$y <- if (weight) data[[2]] * sqrt(data$mass) else data[[2]]
 

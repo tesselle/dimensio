@@ -107,9 +107,8 @@ plotted?}
 \item{alpha, colour, fill, linetype, shape, size}{A \code{\link{character}} string
 specifying the information to be highlighted (will be mapped to the
 corresponding aesthetic).
-It must be one of "\code{labels}", "\code{observation}", "\code{mass}", "\code{sum}",
-"\code{contribution}", "\code{cos2}" or "\code{group}" (see details).
-Any unambiguous substring can be given.
+It must be one of "\code{observation}", "\code{mass}", "\code{sum}", "\code{contribution}",
+"\code{cos2}" or "\code{group}" (see details). Any unambiguous substring can be given.
 If \code{NULL} (the default), no highlighting is applied.}
 
 \item{group}{A vector of categories specifying the categorical variable from
@@ -124,7 +123,6 @@ Plots principal coordinates.
 }
 \details{
 \describe{
-\item{\code{labels}}{Row names of the original data.}
 \item{\code{observation}}{Whether an observation is active or supplementary.}
 \item{\code{mass}}{Weight/mass of each observation.}
 \item{\code{sum}}{Sum of squared coordinates along \code{axes}.}

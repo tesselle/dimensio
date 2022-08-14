@@ -40,6 +40,8 @@ is_supplementary <- function(index, n) {
   }
 }
 
+`%notin%` <- Negate(`%in%`)
+
 has_length <- function(x, n = NULL) {
   if (is.null(n)) length(x) > 0 else length(x) == n
 }
