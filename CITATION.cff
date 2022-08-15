@@ -8,7 +8,7 @@ message: 'To cite package "dimensio" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'dimensio: Multivariate Data Analysis'
-version: 0.3.0
+version: 0.3.0.9000
 abstract: Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA)
   based on the Singular Value Decomposition (SVD). This package provides S4 classes
   and methods to compute, extract, summarize and visualize results of multivariate
@@ -29,7 +29,7 @@ preferred-citation:
     email: nicolas.frerebeau@u-bordeaux-montaigne.fr
     orcid: https://orcid.org/0000-0001-5759-4944
     affiliation: Université Bordeaux Montaigne
-  version: 0.3.0
+  version: 0.3.0.9000
   abstract: Simple Principal Components Analysis (PCA) and Correspondence Analysis
     (CA) based on the Singular Value Decomposition (SVD). This package provides S4
     classes and methods to compute, extract, summarize and visualize results of multivariate
@@ -246,3 +246,6 @@ identifiers:
 - description: The versioned DOI for version 0.2.2.
   type: doi
   value: 10.5281/zenodo.5515458
+- description: The versioned DOI for version 0.3.0.
+  type: doi
+  value: 10.5281/zenodo.6993004

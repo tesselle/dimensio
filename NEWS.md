@@ -1,3 +1,5 @@
+# dimensio 0.3.0.9000
+
 # dimensio 0.3.0
 ## New classes and methods
 * Add `biplot()` to produce PCA and CA biplots.
