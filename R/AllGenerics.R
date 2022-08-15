@@ -436,7 +436,7 @@ setGeneric(
 #' @references
 #'  Aitchison, J. and Greenacre, M. (2002). Biplots of Compositional Data.
 #'  *Journal of the Royal Statistical Society: Series C (Applied Statistics)*,
-#'  51:4: 375‑92. \doi{10.1111/1467-9876.00275}.
+#'  51(4): 375-92. \doi{10.1111/1467-9876.00275}.
 #'
 #'  Greenacre, M. J. *Biplots in Practice*. Bilbao: Fundación BBVA, 2010.
 #' @author N. Frerebeau

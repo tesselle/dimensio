@@ -105,7 +105,7 @@ X <- pca(iris, center = TRUE, scale = TRUE)
 
 ### Visualize
 
-The package also to quickly visualize the results:
+The package allows to quickly visualize the results:
 
 -   `plot_rows()`/`plot_individuals()` displays row/individual principal
     coordinates.

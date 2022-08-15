@@ -88,7 +88,7 @@ X <- pca(iris, center = TRUE, scale = TRUE)
 
 ### Visualize
 
-The package also to quickly visualize the results:
+The package allows to quickly visualize the results:
 
 * `plot_rows()`/`plot_individuals()` displays row/individual principal coordinates.
 * `plot_columns()`/`plot_variables()` displays columns/variable principal coordinates. `plot_variables()` depicts the variables by rays emanating from the origin (both their lengths and directions are important to the interpretation).
