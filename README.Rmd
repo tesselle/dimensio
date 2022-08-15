@@ -36,7 +36,7 @@ knitr::opts_chunk$set(
 
 Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis. It also includes methods for partial bootstrap validation.
 
-There are many very good packages for multivariate data analysis (such as [**FactoMineR**](http://factominer.free.fr/), [**ade4**](https://pbil.univ-lyon1.fr/ade4/) or [**ca**](https://cran.r-project.org/package=ca), all extended by [**FactoExtra**](https://rpkgs.datanovia.com/factoextra/)). **dimensio** is designed to be as simple as possible, providing all the necessary tools to explore the results of the analysis.
+There are many very good packages for multivariate data analysis (such as [**FactoMineR**](http://factominer.free.fr/), [**ade4**](https://pbil.univ-lyon1.fr/ade4/), [**vegan**](https://rpubs.com/brouwern/veganpca) or [**ca**](https://cran.r-project.org/package=ca), all extended by [**FactoExtra**](https://rpkgs.datanovia.com/factoextra/)). **dimensio** is designed to be as simple as possible, providing all the necessary tools to explore the results of the analysis.
 
 ## Installation
 
@@ -64,6 +64,8 @@ library(ggrepel)
 library(khroma)
 ```
 
+### Compute
+
 ```{r pca}
 ## Load data
 data(iris)
@@ -73,48 +75,53 @@ data(iris)
 X <- pca(iris, center = TRUE, scale = TRUE)
 ```
 
-### Summarize
-
-```{r summary}
-## Summarize results for the individuals (first two components)
-summary(X, margin = 1, rank = 2)
-```
-
 ### Extract
 
-**dimesion** provides several methods to extract the results: 
+**dimensio** provides several methods to extract the results: 
 
 * `get_data()` returns the original data.
 * `get_contributions()` returns the contributions to the definition of the principal dimensions.
-* `get_coordinates()` returns the principal coordinates.
+* `get_coordinates()` returns the principal or standard coordinates.
 * `get_correlations()` returns the correlations between variables and dimensions.
 * `get_cos2()` returns the cos^2^ values (i.e. the quality of the representation of the points on the factor map).
 * `get_eigenvalues()` returns the eigenvalues, the percentages of variance and the cumulative percentages of variance.
 
-```{r extract}
-## Eigenvalues
-get_eigenvalues(X)
-```
-
 ### Visualize
 
-**dimensio** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting informations. Visualization methods produce graphics with as few elements as possible: this makes it easy to customize diagrams (e.g. using extra layers, themes and scales).
+The package also to quickly visualize the results:
 
-```{r plot-ind, fig.width=5, fig.height=3.5, fig.show='hold', fig.align='center'}
-## Plot active individuals by group
+* `plot_rows()`/`plot_individuals()` displays row/individual principal coordinates.
+* `plot_columns()`/`plot_variables()` displays columns/variable principal coordinates. `plot_variables()` depicts the variables by rays emanating from the origin (both their lengths and directions are important to the interpretation).
+* `plot_contributions()` displays (joint) contributions. 
+* `plot_cos2()` displays (joint) cos^2^.
+* `plot_variance()` produces a scree plot.
+
+**dimensio** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting informations. Visualization methods produce graphics with as few elements as possible: this makes it easy to customize diagrams (e.g. using extra layers, themes and scales). The `plot_*()` functions allow to highlight additional information by varying different graphical elements (color, transparency, shape and size of symbols...).
+
+```{r biplot, fig.align='center', warning=FALSE}
+## Form biplot
+biplot(X, type = "form", label = "variables") +
+  ggrepel::geom_label_repel() + # Add repelling labels
+  ggplot2::theme_bw() + # Change theme
+  ggplot2::theme(legend.position = "none") +
+  khroma::scale_colour_highcontrast() # Custom color scale
+```
+
+```{r plot-ind, fig.width=5, fig.height=3.5, out.width='50%', fig.show='hold'}
+## Highlight species
 plot_individuals(X, colour = "group", group = iris$Species) +
   ggplot2::stat_ellipse() + # Add ellipses
   ggplot2::theme_bw() + # Change theme
   khroma::scale_colour_highcontrast() # Custom color scale
 
-## Plot all individuals by cos2
-plot_individuals(X, colour = "cos2", size = "cos2") +
+## Highlight petal length
+plot_individuals(X, colour = "group", size = "group", group = iris$Petal.Length) +
   ggplot2::theme_bw() + # Change theme
   ggplot2::scale_size_continuous(range = c(1, 3)) + # Custom size scale
   khroma::scale_color_iridescent() # Custom color scale
 ```
 
-```{r plot-var, fig.width=5, fig.height=3.5, fig.show='hold', fig.align='center'}
+```{r plot-var, fig.width=5, fig.height=3.5, out.width='50%', fig.show='hold'}
 ## Plot variables factor map
 plot_variables(X) +
   ggrepel::geom_label_repel() + # Add repelling labels
@@ -127,12 +134,8 @@ plot_variables(X, colour = "contrib") +
   khroma::scale_color_YlOrBr(range = c(0.5, 1)) # Custom color scale
 ```
 
-```{r plot-eig, fig.width=3.5, fig.height=3.5, fig.show='hold'}
-## Plot eigenvalues
-plot_variance(X, variance = FALSE, cumulative = FALSE) +
-  ggplot2::theme_bw() # Change theme
-
-## Plot percentages of variance
+```{r plot-eig, fig.width=5, fig.height=5, out.width='50%', fig.show='hold'}
+## Scree plot
 plot_variance(X, variance = TRUE, cumulative = TRUE) +
   ggplot2::geom_text(nudge_y = 3) + # Add labels
   ggplot2::theme_bw() # Change theme
@@ -145,27 +148,6 @@ plot_contributions(X, margin = 2, axes = 1) +
     # Rotate x axis labels
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, vjust = 1)
   )
-
-## Plot cos2
-plot_cos2(X, margin = 2, axes = c(1, 2)) +
-  ggplot2::geom_text(nudge_y = 0.05) + # Add labels
-  ggplot2::theme_bw() + # Change theme
-  ggplot2::theme( # Edit theme
-    # Rotate x axis labels
-    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, vjust = 1)
-  )
-```
-
-### Validation
-
-```{r plot-valid, fig.width=7, fig.height=5, fig.align='center'}
-## Partial bootstrap
-Y <- bootstrap(X, n = 30)
-
-## Plot with ellipses
-plot_columns(Y, colour = "group") +
-  ggplot2::stat_ellipse() + # Add ellipses
-  ggplot2::theme_bw() # Change theme
 ```
 
 ## Contributing
