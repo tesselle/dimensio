@@ -15,4 +15,3 @@ test_that("PCA Biplot", {
   gg_biplot_col <- biplot(X, type = "covariance")
   vdiffr::expect_doppelganger("PCA_biplot_column", gg_biplot_col)
 })
-

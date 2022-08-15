@@ -98,12 +98,16 @@ setMethod(
     ## Get data
     coord_row <-  prepare_coord(x, margin = 1, axes = axes,
                                 active = active, sup = sup,
-                                principal = princ_row,
-                                weight = type == "contributions")
+                                principal = princ_row)
     coord_col <-  prepare_coord(x, margin = 2, axes = axes,
                                 active = active, sup = sup,
-                                principal = princ_col,
-                                weight = FALSE)
+                                principal = princ_col)
+
+    if (type == "contributions") {
+      coord_row$x <- coord_row$x * sqrt(coord_row$mass)
+      coord_row$y <- coord_row$y * sqrt(coord_row$mass)
+    }
+
     coord <- rbind(coord_row, coord_col)
 
     ## Labels
@@ -172,12 +176,11 @@ setMethod(
     ## Get data
     coord_row <-  prepare_coord(x, margin = 1, axes = axes,
                                 active = active, sup = sup,
-                                principal = princ_row,
-                                weight = FALSE)
+                                principal = princ_row)
     coord_col <-  prepare_coord(x, margin = 2, axes = axes,
                                 active = active, sup = sup,
-                                principal = princ_col,
-                                weight = FALSE)
+                                principal = princ_col)
+
     coord <- rbind(coord_row, coord_col)
     coord_col$z <- 0 # Set the origin of arrows
 
@@ -525,12 +528,11 @@ print_variance <- function(object, axis) {
 
 # Must return a data.frame
 prepare_coord <- function(object, margin, axes = c(1, 2), active = TRUE,
-                          sup = TRUE, principal = TRUE, weight = FALSE,
-                          group = NULL) {
+                          sup = TRUE, principal = TRUE, group = NULL) {
   ## Prepare data
   data <- augment(object, margin = margin, axes = axes, principal = principal)
-  data$x <- if (weight) data[[1]] * sqrt(data$mass) else data[[1]]
-  data$y <- if (weight) data[[2]] * sqrt(data$mass) else data[[2]]
+  data$x <- data[[1]]
+  data$y <- data[[2]]
 
   k <- get_order(object, margin = margin)
   if (!is.null(group)) {

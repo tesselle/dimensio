@@ -52,11 +52,31 @@ A \link[ggplot2:ggplot]{ggplot2::ggplot} object.
 \description{
 Biplot
 }
+\details{
+A biplot is the simultaneous representation of rows and columns of a
+rectangular dataset. It is the generalization of a scatterplot to the case
+of mutlivariate data: it allows to visualize as much information as possible
+in a single graph (Greenacre 2010).
+
+Biplots have the drawbacks of their advantages: they can quickly become
+difficult to read as they display a lot of information at once. It may then
+be preferable to visualize the results for individuals and variables
+separately.
+}
 \section{PCA Biplots}{
 
 \describe{
-\item{\code{form}}{Form biplot (row-metric-preserving).}
-\item{\code{covariance}}{Covariance biplot (column-metric-preserving).}
+\item{\code{form}}{Form biplot (row-metric-preserving). The form biplot favors
+the representation of the individuals: the distance between the individuals
+approximates the Euclidean distance between rows. In the form biplot the
+length of a vector approximates the quality of the representation of the
+variable.}
+\item{\code{covariance}}{Covariance biplot (column-metric-preserving). The
+covariance biplot favors the representation of the variables: the length of
+a vector approximates the standard deviation of the variable and the cosine
+of the angle formed by two vectors approximates the correlation between the
+two variables. In the covariance biplot the distance between the
+individuals approximates the Mahalanobis distance between rows.}
 }
 }
 
@@ -106,6 +126,10 @@ biplot(X, type = "contrib") +
   ggrepel::geom_label_repel()
 }
 \references{
+Aitchison, J. and Greenacre, M. (2002). Biplots of Compositional Data.
+\emph{Journal of the Royal Statistical Society: Series C (Applied Statistics)},
+51:4: 375‑92. \doi{10.1111/1467-9876.00275}.
+
 Greenacre, M. J. \emph{Biplots in Practice}. Bilbao: Fundación BBVA, 2010.
 }
 \seealso{
