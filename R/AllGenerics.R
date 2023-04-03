@@ -11,21 +11,37 @@ setGeneric("biplot")
 
 # Extract ======================================================================
 ## Get -------------------------------------------------------------------------
-#' Get Results
+#' Extract Loadings
 #'
-#' Getters to retrieve parts of an object.
-#' @param x An object from which to get element(s) (a [`CA-class`] or
-#'  [`PCA-class`] object).
+#' Extract loadingsin principal components analysis.
+#' @param x A [`PCA-class`] object.
 #' @return
-#'  `loadings()` returns variable loadings (i.e. the coefficients of the linear
-#'  combination of the original variables). `loadings()` is only implemented for
-#'  consistency with \pkg{[stats][stats::loadings]}.
-# @example inst/examples/ex-extract.R
+#'  Returns variable loadings (i.e. the coefficients of the linear combination
+#'  of the original variables).
+#' @note
+#'  `loadings()` is only implemented for consistency with
+#'  \pkg{[stats][stats::loadings]}.
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
-#' @name mutators
-#' @rdname mutators
+#' @name loadings
+#' @rdname loadings
+NULL
+
+## Dimnames --------------------------------------------------------------------
+#' Dimnames of an Object
+#'
+#' Retrieve or set the dimnames of an object.
+#' @param x An object from which to retrieve the row or column names
+#'  (a [`CA-class`] or [`PCA-class`] object).
+#' @param do.NULL A [`logical`] scalar. If `FALSE` and names are `NULL`, names
+#'  are created.
+#' @param prefix A [`character`] string specifying the prefix for created names.
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @name dimnames
+#' @rdname dimnames
 NULL
 
 ## Subset ----------------------------------------------------------------------

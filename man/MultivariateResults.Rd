@@ -48,3 +48,4 @@ Other class:
 N. Frerebeau
 }
 \concept{class}
+\keyword{internal}

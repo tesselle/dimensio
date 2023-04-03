@@ -57,11 +57,12 @@ Get Contributions
 }
 \seealso{
 Other mutators: 
+\code{\link{dimnames}()},
 \code{\link{get_coordinates}()},
 \code{\link{get_data}()},
 \code{\link{get_distances}()},
 \code{\link{get_eigenvalues}()},
-\code{\link{mutators}},
+\code{\link{loadings}()},
 \code{\link{subset}()}
 }
 \author{

@@ -23,6 +23,7 @@
 #' @docType class
 #' @name MultivariateResults
 #' @aliases MultivariateResults-class
+#' @keywords internal
 .MultivariateResults <- setClass(
   Class = "MultivariateResults",
   slots = c(
@@ -59,6 +60,7 @@
 #' @docType class
 #' @name MultivariateAnalysis
 #' @aliases MultivariateAnalysis-class
+#' @keywords internal
 .MultivariateAnalysis <- setClass(
   Class = "MultivariateAnalysis",
   slots = c(
@@ -82,6 +84,7 @@
 #' @docType class
 #' @name MultivariateBootstrap
 #' @aliases MultivariateBootstrap-class
+#' @keywords internal
 .MultivariateBootstrap <- setClass(
   Class = "MultivariateBootstrap",
   slots = c(
@@ -104,6 +107,7 @@
 #' @docType class
 #' @name MultivariateSummary
 #' @aliases MultivariateSummary-class
+#' @keywords internal
 .MultivariateSummary <- setClass(
   Class = "MultivariateSummary",
   slots = c(
@@ -140,6 +144,7 @@
 #' @docType class
 #' @exportClass CA
 #' @aliases CA-class
+#' @keywords internal
 .CA <- setClass(
   Class = "CA",
   contains = "MultivariateAnalysis"
@@ -166,6 +171,7 @@
 #' @docType class
 #' @exportClass PCA
 #' @aliases PCA-class
+#' @keywords internal
 .PCA <- setClass(
   Class = "PCA",
   slots = c(

@@ -240,7 +240,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname mutators
+#' @rdname loadings
 #' @aliases loadings,PCA-method
 setMethod(
   f = "loadings",

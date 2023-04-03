@@ -53,11 +53,12 @@ Get Eigenvalues
 }
 \seealso{
 Other mutators: 
+\code{\link{dimnames}()},
 \code{\link{get_contributions}()},
 \code{\link{get_coordinates}()},
 \code{\link{get_data}()},
 \code{\link{get_distances}()},
-\code{\link{mutators}},
+\code{\link{loadings}()},
 \code{\link{subset}()}
 }
 \author{

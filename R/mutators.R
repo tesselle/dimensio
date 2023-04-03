@@ -48,29 +48,49 @@ dim.MultivariateAnalysis <- function(x) {
 }
 
 #' @export
-#' @rdname mutators
+#' @rdname dimnames
 #' @aliases dim,MultivariateAnalysis-method
 setMethod("dim", "MultivariateAnalysis", dim.MultivariateAnalysis)
 
 #' @export
 #' @method rownames MultivariateAnalysis
-rownames.MultivariateAnalysis <- function(x) {
-  x@rows@names
+rownames.MultivariateAnalysis <- function(x, do.NULL = TRUE, prefix = "row") {
+  dn <- dimnames(x)
+  if (!is.null(dn[[1L]]))
+    dn[[1L]]
+  else {
+    nr <- NROW(x@rows@principal)
+    if (do.NULL)
+      NULL
+    else if (nr > 0L)
+      paste0(prefix, seq_len(nr))
+    else character()
+  }
 }
 
 #' @export
-#' @rdname mutators
+#' @rdname dimnames
 #' @aliases rownames,MultivariateAnalysis-method
 setMethod("rownames", "MultivariateAnalysis", rownames.MultivariateAnalysis)
 
 #' @export
 #' @method colnames MultivariateAnalysis
-colnames.MultivariateAnalysis <- function(x) {
-  x@columns@names
+colnames.MultivariateAnalysis <- function(x, do.NULL = TRUE, prefix = "col") {
+  dn <- dimnames(x)
+  if (!is.null(dn[[2L]]))
+    dn[[2L]]
+  else {
+    nc <- NROW(x@columns@principal)
+    if (do.NULL)
+      NULL
+    else if (nc > 0L)
+      paste0(prefix, seq_len(nc))
+    else character()
+  }
 }
 
 #' @export
-#' @rdname mutators
+#' @rdname dimnames
 #' @aliases colnames,MultivariateAnalysis-method
 setMethod("colnames", "MultivariateAnalysis", colnames.MultivariateAnalysis)
 
@@ -81,7 +101,7 @@ dimnames.MultivariateAnalysis <- function(x) {
 }
 
 #' @export
-#' @rdname mutators
+#' @rdname dimnames
 #' @aliases dimnames,MultivariateAnalysis-method
 setMethod("dimnames", "MultivariateAnalysis", dimnames.MultivariateAnalysis)
 
