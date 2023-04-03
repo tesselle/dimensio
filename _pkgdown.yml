@@ -25,9 +25,6 @@ reference:
 - title: Tidy Methods
   contents:
   - has_concept("tidy methods")
-- title: Classes
-  contents:
-  - has_concept("class")
 - title: Datasets
   contents:
   - has_concept("datasets")

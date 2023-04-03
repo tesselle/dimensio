@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.2
+# CITATION file created with {cffr} R package, v0.4.1
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -8,7 +8,8 @@ message: 'To cite package "dimensio" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'dimensio: Multivariate Data Analysis'
-version: 0.3.0.9000
+version: 0.3.1
+doi: 10.5281/zenodo.4478530
 abstract: Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA)
   based on the Singular Value Decomposition (SVD). This package provides S4 classes
   and methods to compute, extract, summarize and visualize results of multivariate
@@ -29,27 +30,14 @@ preferred-citation:
     email: nicolas.frerebeau@u-bordeaux-montaigne.fr
     orcid: https://orcid.org/0000-0001-5759-4944
     affiliation: Université Bordeaux Montaigne
-  version: 0.3.0.9000
-  abstract: Simple Principal Components Analysis (PCA) and Correspondence Analysis
-    (CA) based on the Singular Value Decomposition (SVD). This package provides S4
-    classes and methods to compute, extract, summarize and visualize results of multivariate
-    data analysis. It also includes methods for partial bootstrap validation described
-    in Greenacre (1984) <isbn:978-0-12-299050-2> and Lebart et al. (2006) <isbn:978-2-10-049616-7>.
-  repository: https://CRAN.R-project.org/package=dimensio
-  repository-code: https://github.com/tesselle/dimensio
+  year: '2021'
+  location:
+    name: Pessac, France
+  notes: R package version 0.3.1
   url: https://packages.tesselle.org/dimensio/
-  contact:
-  - family-names: Frerebeau
-    given-names: Nicolas
-    email: nicolas.frerebeau@u-bordeaux-montaigne.fr
-    orcid: https://orcid.org/0000-0001-5759-4944
-    affiliation: Université Bordeaux Montaigne
-  keywords:
-  - data-analysis
-  - multivariate-analysis
-  - r-package
-  license: GPL-3.0-or-later
-  year: '2022'
+  doi: 10.5281/zenodo.4478530
+  institution:
+    name: Université Bordeaux Montaigne
 repository: https://CRAN.R-project.org/package=dimensio
 repository-code: https://github.com/tesselle/dimensio
 url: https://packages.tesselle.org/dimensio/
@@ -67,12 +55,12 @@ references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
+  url: https://www.R-project.org/
   authors:
   - name: R Core Team
   location:
     name: Vienna, Austria
-  year: '2022'
-  url: https://www.R-project.org/
+  year: '2023'
   institution:
     name: R Foundation for Statistical Computing
   version: '>= 3.3'
@@ -80,6 +68,8 @@ references:
   title: ggplot2
   abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
   notes: Imports
+  url: https://ggplot2.tidyverse.org
+  repository: https://CRAN.R-project.org/package=ggplot2
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -108,8 +98,7 @@ references:
   - family-names: Dunnington
     given-names: Dewey
     orcid: https://orcid.org/0000-0002-9415-4582
-  year: '2022'
-  url: https://CRAN.R-project.org/package=ggplot2
+  year: '2023'
 - type: software
   title: grDevices
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -118,8 +107,7 @@ references:
   - name: R Core Team
   location:
     name: Vienna, Austria
-  year: '2022'
-  url: https://www.R-project.org/
+  year: '2023'
   institution:
     name: R Foundation for Statistical Computing
 - type: software
@@ -130,14 +118,15 @@ references:
   - name: R Core Team
   location:
     name: Vienna, Austria
-  year: '2022'
-  url: https://www.R-project.org/
+  year: '2023'
   institution:
     name: R Foundation for Statistical Computing
 - type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
   notes: Imports
+  url: https://rlang.r-lib.org
+  repository: https://CRAN.R-project.org/package=rlang
   authors:
   - family-names: Henry
     given-names: Lionel
@@ -145,22 +134,24 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=rlang
+  year: '2023'
 - type: software
   title: covr
   abstract: 'covr: Test Coverage for Packages'
   notes: Suggests
+  url: https://covr.r-lib.org
+  repository: https://CRAN.R-project.org/package=covr
   authors:
   - family-names: Hester
     given-names: Jim
     email: james.f.hester@gmail.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=covr
+  year: '2023'
 - type: software
   title: FactoMineR
   abstract: 'FactoMineR: Multivariate Exploratory Data Analysis and Data Mining'
   notes: Suggests
+  url: http://factominer.free.fr
+  repository: https://CRAN.R-project.org/package=FactoMineR
   authors:
   - family-names: Husson
     given-names: Francois
@@ -170,46 +161,50 @@ references:
     given-names: Sebastien
   - family-names: Mazet
     given-names: Jeremy
-  year: '2022'
-  url: https://CRAN.R-project.org/package=FactoMineR
+  year: '2023'
 - type: software
   title: ggrepel
   abstract: 'ggrepel: Automatically Position Non-Overlapping Text Labels with ''ggplot2'''
   notes: Suggests
+  url: https://github.com/slowkow/ggrepel
+  repository: https://CRAN.R-project.org/package=ggrepel
   authors:
   - family-names: Slowikowski
     given-names: Kamil
     email: kslowikowski@gmail.com
     orcid: https://orcid.org/0000-0002-2843-6370
-  year: '2022'
-  url: https://CRAN.R-project.org/package=ggrepel
+  year: '2023'
 - type: software
   title: khroma
   abstract: 'khroma: Colour Schemes for Scientific Data Visualization'
   notes: Suggests
+  url: https://packages.tesselle.org/khroma/
+  repository: https://CRAN.R-project.org/package=khroma
   authors:
   - family-names: Frerebeau
     given-names: Nicolas
     email: nicolas.frerebeau@u-bordeaux-montaigne.fr
     orcid: https://orcid.org/0000-0001-5759-4944
     affiliation: Université Bordeaux Montaigne
-  year: '2022'
-  url: https://CRAN.R-project.org/package=khroma
+  year: '2023'
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
   notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
   authors:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=testthat
+  year: '2023'
   version: '>= 3.0.0'
 - type: software
   title: vdiffr
   abstract: 'vdiffr: Visual Regression Testing and Graphical Diffing'
   notes: Suggests
+  url: https://vdiffr.r-lib.org/
+  repository: https://CRAN.R-project.org/package=vdiffr
   authors:
   - family-names: Henry
     given-names: Lionel
@@ -227,8 +222,7 @@ references:
   - family-names: Lise
     given-names: Vaudor
     email: lise.vaudor@ens-lyon.fr
-  year: '2022'
-  url: https://CRAN.R-project.org/package=vdiffr
+  year: '2023'
   version: '>= 1.0.0'
 identifiers:
 - description: The concept DOI.

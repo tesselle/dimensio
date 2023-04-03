@@ -1,6 +1,6 @@
 Package: dimensio
 Title: Multivariate Data Analysis
-Version: 0.3.0.9000
+Version: 0.3.1
 Authors@R: 
     c(person(given = "Nicolas",
              family = "Frerebeau",
@@ -11,7 +11,7 @@ Authors@R:
       person(given = "Jean-Baptiste",
              family = "Fourvel",
              role = "ctb",
-             email = "fourvel@mmsh.univ-aix.fr",
+             email = "jean-baptiste.fourvel@univ-amu.fr",
              comment = c(ORCID = "0000-0002-1061-4642", 
                          affiliation = "CNRS")),
       person(given = "Brice",

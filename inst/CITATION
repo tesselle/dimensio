@@ -4,17 +4,17 @@ citEntry(
   entry        = "Manual",
   title        = "dimensio: Multivariate Data Analysis",
   author       = c(person("Nicolas", "Frerebeau", role = "aut")),
-  year         = "2021",
+  year         = "2023",
   organization = "Université Bordeaux Montaigne",
   address      = "Pessac, France",
-  note         = "R package version 0.3.0",
+  note         = "R package version 0.3.1",
   url          = "https://packages.tesselle.org/dimensio/",
   doi          = "10.5281/zenodo.4478530",
 
   textVersion  =
-  paste("Frerebeau, Nicolas (2021).",
+  paste("Frerebeau, Nicolas (2023).",
         "dimensio: Multivariate Data Analysis.",
-        "R package version 0.3.0",
+        "R package version 0.3.1",
         "Université Bordeaux Montaigne, Pessac, France.",
         "DOI 10.5281/zenodo.4478530.",
         "URL https://packages.tesselle.org/dimensio/.")

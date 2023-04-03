@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/tesselle/dimensio",
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "runtimePlatform": "R version 4.2.2 Patched (2022-11-10 r83330)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -35,7 +35,7 @@
       "@type": "Person",
       "givenName": "Jean-Baptiste",
       "familyName": "Fourvel",
-      "email": "fourvel@mmsh.univ-aix.fr",
+      "email": "jean-baptiste.fourvel@univ-amu.fr",
       "@id": "https://orcid.org/0000-0002-1061-4642"
     },
     {
@@ -174,11 +174,11 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1143.921KB",
+  "fileSize": "1149.764KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
-      "datePublished": "2021",
+      "datePublished": "2023",
       "author": [
         {
           "@type": "Person",
@@ -188,8 +188,8 @@
       ],
       "name": "dimensio: Multivariate Data Analysis",
       "identifier": "10.5281/zenodo.4478530",
-      "url": "https://packages.tesselle.org/dimensio",
-      "description": "R package version 0.3.0",
+      "url": "https://packages.tesselle.org/dimensio/",
+      "description": "R package version 0.3.1",
       "@id": "https://doi.org/10.5281/zenodo.4478530",
       "sameAs": "https://doi.org/10.5281/zenodo.4478530"
     }
