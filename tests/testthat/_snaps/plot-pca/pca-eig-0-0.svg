@@ -27,9 +27,9 @@
 </defs>
 <g clip-path='url(#cpMjcuOTB8NzE0LjUyfDIyLjc4fDU0NS4xMQ==)'>
 <rect x='27.90' y='22.78' width='686.62' height='522.33' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='59.11' y='46.53' width='193.72' height='474.84' style='stroke-width: 1.07; stroke: #1A1A1A; stroke-linecap: square; stroke-linejoin: miter; fill: #4D4D4D;' />
-<rect x='274.35' y='372.66' width='193.72' height='148.71' style='stroke-width: 1.07; stroke: #1A1A1A; stroke-linecap: square; stroke-linejoin: miter; fill: #4D4D4D;' />
-<rect x='489.59' y='497.49' width='193.72' height='23.88' style='stroke-width: 1.07; stroke: #1A1A1A; stroke-linecap: square; stroke-linejoin: miter; fill: #4D4D4D;' />
+<rect x='59.11' y='46.53' width='193.72' height='474.84' style='stroke-width: 1.07; stroke: #1A1A1A; stroke-linecap: butt; stroke-linejoin: miter; fill: #4D4D4D;' />
+<rect x='274.35' y='372.66' width='193.72' height='148.71' style='stroke-width: 1.07; stroke: #1A1A1A; stroke-linecap: butt; stroke-linejoin: miter; fill: #4D4D4D;' />
+<rect x='489.59' y='497.49' width='193.72' height='23.88' style='stroke-width: 1.07; stroke: #1A1A1A; stroke-linecap: butt; stroke-linejoin: miter; fill: #4D4D4D;' />
 <rect x='27.90' y='22.78' width='686.62' height='522.33' style='stroke-width: 1.07; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>

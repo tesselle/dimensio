@@ -58,8 +58,8 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
     aes_shape +
     aes_size +
     aes_group +
-    ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
-    ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
+    ggplot2::geom_vline(xintercept = 0, linewidth = 0.5, linetype = "dashed") +
+    ggplot2::geom_hline(yintercept = 0, linewidth = 0.5, linetype = "dashed") +
     ggplot2::geom_point() +
     ggplot2::scale_x_continuous(name = print_variance(object, axes[[1]])) +
     ggplot2::scale_y_continuous(name = print_variance(object, axes[[2]])) +
@@ -141,8 +141,8 @@ setMethod(
       aes_points +
       aes_shape +
       aes_size +
-      ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
-      ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
+      ggplot2::geom_vline(xintercept = 0, linewidth = 0.5, linetype = "dashed") +
+      ggplot2::geom_hline(yintercept = 0, linewidth = 0.5, linetype = "dashed") +
       ggplot2::geom_point() +
       ggplot2::scale_x_continuous(name = print_variance(x, axes[[1]])) +
       ggplot2::scale_y_continuous(name = print_variance(x, axes[[2]])) +
@@ -207,8 +207,8 @@ setMethod(
     ## ggplot2
     ggplot2::ggplot(data = coord) +
       aes_points +
-      ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
-      ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
+      ggplot2::geom_vline(xintercept = 0, linewidth = 0.5, linetype = "dashed") +
+      ggplot2::geom_hline(yintercept = 0, linewidth = 0.5, linetype = "dashed") +
       ggplot2::geom_point(
         data = coord_row
       ) +
@@ -216,7 +216,7 @@ setMethod(
         data = coord_col,
         mapping = aes_segments,
         arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm"), ends = "first"),
-        size = 0.5
+        linewidth = 0.5
       ) +
       ggplot2::scale_x_continuous(name = print_variance(x, axes[[1]])) +
       ggplot2::scale_y_continuous(name = print_variance(x, axes[[2]])) +
@@ -346,7 +346,7 @@ setMethod(
         mapping = ggplot2::aes(x = .data$x, y = .data$y),
         data = circle,
         colour = "grey30",
-        size = 0.5,
+        linewidth = 0.5,
         inherit.aes = FALSE
       )
     }
@@ -389,12 +389,12 @@ setMethod(
       aes_linetype +
       aes_size +
       aes_group +
-      ggplot2::geom_vline(xintercept = 0, size = 0.5, linetype = "dashed") +
-      ggplot2::geom_hline(yintercept = 0, size = 0.5, linetype = "dashed") +
+      ggplot2::geom_vline(xintercept = 0, linewidth = 0.5, linetype = "dashed") +
+      ggplot2::geom_hline(yintercept = 0, linewidth = 0.5, linetype = "dashed") +
       gg_circle +
       ggplot2::geom_segment(
         arrow = ggplot2::arrow(length = ggplot2::unit(0.2, "cm"), ends = "first"),
-        size = 0.5
+        linewidth = 0.5
       ) +
       ggplot2::scale_x_continuous(name = print_variance(object, axes[[1]])) +
       ggplot2::scale_y_continuous(name = print_variance(object, axes[[2]])) +
