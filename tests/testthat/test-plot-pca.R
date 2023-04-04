@@ -26,7 +26,7 @@ test_that("PCA - Plot aesthetics", {
   res <- pca(iris)
 
   # Individuals
-  gg_cos2 <- plot_individuals(res, colour = "cos2", alpha = "cos2")
+  gg_cos2 <- plot_individuals(res, colour = "cos2")
   vdiffr::expect_doppelganger("PCA_ind_highlight_cos2", gg_cos2)
 
   gg_contrib <- plot_individuals(res, size = "contrib")
