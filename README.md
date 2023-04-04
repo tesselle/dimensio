@@ -19,7 +19,7 @@ src="http://www.r-pkg.org/badges/version/dimensio"
 alt="CRAN Version" /></a> <a
 href="https://cran.r-project.org/web/checks/check_results_dimensio.html"
 class="pkgdown-release"><img
-src="https://cranchecks.info/badges/worst/dimensio"
+src="https://badges.cranchecks.info/worst/dimensio.svg"
 alt="CRAN checks" /></a>
 <a href="https://cran.r-project.org/package=dimensio"
 class="pkgdown-release"><img
@@ -49,6 +49,30 @@ as [**FactoMineR**](http://factominer.free.fr/),
 [**FactoExtra**](https://rpkgs.datanovia.com/factoextra/)). **dimensio**
 is designed to be as simple as possible, providing all the necessary
 tools to explore the results of the analysis.
+
+
+    To cite dimensio in publications use:
+
+      Frerebeau N (2023). _dimensio: Multivariate Data Analysis_.
+      Université Bordeaux Montaigne, Pessac, France.
+      doi:10.5281/zenodo.4478530 <https://doi.org/10.5281/zenodo.4478530>,
+      R package version 0.3.1, <https://packages.tesselle.org/dimensio/>.
+
+    Une entrée BibTeX pour les utilisateurs LaTeX est
+
+      @Manual{,
+        author = {Nicolas Frerebeau},
+        title = {{dimensio: Multivariate Data Analysis}},
+        year = {2023},
+        organization = {Université Bordeaux Montaigne},
+        address = {Pessac, France},
+        note = {R package version 0.3.1},
+        doi = {10.5281/zenodo.4478530},
+        url = {https://packages.tesselle.org/dimensio/},
+      }
+
+    This package is a part of the tesselle project
+    <https://www.tesselle.org>.
 
 ## Installation
 

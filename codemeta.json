@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.2 Patched (2022-11-10 r83330)",
+  "runtimePlatform": "R version 4.2.3 (2023-03-15)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -174,7 +174,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1149.764KB",
+  "fileSize": "1149.508KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -186,7 +186,7 @@
           "familyName": "Frerebeau"
         }
       ],
-      "name": "dimensio: Multivariate Data Analysis",
+      "name": "{dimensio: Multivariate Data Analysis}",
       "identifier": "10.5281/zenodo.4478530",
       "url": "https://packages.tesselle.org/dimensio/",
       "description": "R package version 0.3.1",
@@ -196,7 +196,7 @@
   ],
   "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
   "readme": "https://github.com/tesselle/dimensio/blob/main/README.md",
-  "contIntegration": ["https://github.com/tesselle/dimensio/actions", "https://codecov.io/gh/tesselle/dimensio"],
+  "contIntegration": ["https://github.com/tesselle/dimensio/actions", "https://app.codecov.io/gh/tesselle/dimensio"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": ["r-package", "multivariate-analysis", "data-analysis"]
 }

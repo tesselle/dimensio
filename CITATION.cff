@@ -30,12 +30,12 @@ preferred-citation:
     email: nicolas.frerebeau@u-bordeaux-montaigne.fr
     orcid: https://orcid.org/0000-0001-5759-4944
     affiliation: Université Bordeaux Montaigne
-  year: '2021'
+  year: '2023'
   location:
     name: Pessac, France
   notes: R package version 0.3.1
-  url: https://packages.tesselle.org/dimensio/
   doi: 10.5281/zenodo.4478530
+  url: https://packages.tesselle.org/dimensio/
   institution:
     name: Université Bordeaux Montaigne
 repository: https://CRAN.R-project.org/package=dimensio
@@ -73,7 +73,7 @@ references:
   authors:
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
     orcid: https://orcid.org/0000-0003-4757-117X
   - family-names: Chang
     given-names: Winston
@@ -82,7 +82,7 @@ references:
     given-names: Lionel
   - family-names: Pedersen
     given-names: Thomas Lin
-    email: thomas.pedersen@rstudio.com
+    email: thomas.pedersen@posit.co
     orcid: https://orcid.org/0000-0002-5147-4711
   - family-names: Takahashi
     given-names: Kohske
@@ -130,10 +130,10 @@ references:
   authors:
   - family-names: Henry
     given-names: Lionel
-    email: lionel@rstudio.com
+    email: lionel@posit.co
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   year: '2023'
 - type: software
   title: covr
