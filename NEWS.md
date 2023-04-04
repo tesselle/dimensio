@@ -1,3 +1,5 @@
+# dimensio 0.3.1.9000
+
 # dimensio 0.3.1
 ## Bugfixes & changes
 * Fix `rownames()` and `colnames()` for S3 generic/method consistency.
