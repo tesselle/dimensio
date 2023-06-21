@@ -66,7 +66,6 @@ viz_variables(x, ...)
   colour = NULL,
   shape = NULL,
   size = NULL,
-  group = NULL,
   ...
 )
 
@@ -103,13 +102,19 @@ plotted?}
 \item{sup}{A \code{\link{logical}} scalar: should the supplementary observations be
 plotted?}
 
-\item{alpha, colour, fill, linetype, shape, size}{A vector specifying the
+\item{labels}{A \code{\link{logical}} scalar: should labels be drawn?}
+
+\item{alpha, colour, linetype, shape, size}{A vector specifying the
 information to be highlighted (will be mapped to the corresponding
 aesthetic; see examples and vignettes).
 If a single \code{character} string is passed, it must be one of "\code{observation}",
 "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}" (see details).
 Any unambiguous substring can be given.
 If \code{NULL} (the default), no highlighting is applied.}
+
+\item{main}{A \code{\link{character}} string giving a main title for the plot.}
+
+\item{sub}{A \code{\link{character}} string giving a subtitle for the plot.}
 }
 \value{
 \verb{viz_*()} is called for its side-effects: it results in a graphic

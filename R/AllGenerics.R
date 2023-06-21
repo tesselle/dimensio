@@ -440,13 +440,16 @@ NULL
 #'  plotted?
 #' @param sup A [`logical`] scalar: should the supplementary observations be
 #'  plotted?
-#' @param alpha,colour,fill,linetype,shape,size A vector specifying the
+#' @param labels A [`logical`] scalar: should labels be drawn?
+#' @param alpha,colour,linetype,shape,size A vector specifying the
 #'  information to be highlighted (will be mapped to the corresponding
 #'  aesthetic; see examples and vignettes).
 #'  If a single `character` string is passed, it must be one of "`observation`",
 #'  "`mass`", "`sum`", "`contribution`" or "`cos2`" (see details).
 #'  Any unambiguous substring can be given.
 #'  If `NULL` (the default), no highlighting is applied.
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ... Currently not used.
 #' @details
 #'  \describe{
@@ -542,8 +545,8 @@ setGeneric(
 #' Scree Plot
 #'
 #' Plot eigenvalues (scree plot) or variances histogram.
-#' @param object A [`CA-class`] or [`PCA-class`] object.
-#' @param variance A [`logical`] scalar: should the eigenvalues be plotted
+#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param eigenvalues A [`logical`] scalar: should the eigenvalues be plotted
 #'  instead of variance/inertia?
 #' @param cumulative A [`logical`] scalar: should the cumulative percentages of
 #'  variance be plotted?

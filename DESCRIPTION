@@ -1,55 +1,44 @@
 Package: dimensio
 Title: Multivariate Data Analysis
 Version: 0.3.1.9000
-Authors@R: 
-    c(person(given = "Nicolas",
-             family = "Frerebeau",
-             role = c("aut", "cre"),
-             email = "nicolas.frerebeau@u-bordeaux-montaigne.fr",
-             comment = c(ORCID = "0000-0001-5759-4944", 
-                         affiliation = "Université Bordeaux Montaigne")),
-      person(given = "Jean-Baptiste",
-             family = "Fourvel",
-             role = "ctb",
-             email = "jean-baptiste.fourvel@univ-amu.fr",
-             comment = c(ORCID = "0000-0002-1061-4642", 
-                         affiliation = "CNRS")),
-      person(given = "Brice",
-             family = "Lebrun",
-             role = "ctb",
-             email = "brice.lebrun@u-bordeaux-montaigne.fr",
-             comment = c(ORCID = "0000-0001-7503-8685", 
-                         affiliation = "Université Bordeaux Montaigne")))
-Maintainer: Nicolas Frerebeau
-    <nicolas.frerebeau@u-bordeaux-montaigne.fr>
-Description: Simple Principal Components Analysis (PCA) and
-    Correspondence Analysis (CA) based on the Singular Value Decomposition
-    (SVD). This package provides S4 classes and methods to compute,
-    extract, summarize and visualize results of multivariate data
-    analysis. It also includes methods for partial bootstrap validation
-    described in Greenacre (1984) <isbn:978-0-12-299050-2> and Lebart et al. 
-    (2006) <isbn:978-2-10-049616-7>.
+Authors@R: c(
+    person("Nicolas", "Frerebeau", , "nicolas.frerebeau@u-bordeaux-montaigne.fr", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-5759-4944", affiliation = "Université Bordeaux Montaigne")),
+    person("Jean-Baptiste", "Fourvel", , "jean-baptiste.fourvel@univ-amu.fr", role = "ctb",
+           comment = c(ORCID = "0000-0002-1061-4642", affiliation = "CNRS")),
+    person("Brice", "Lebrun", , "brice.lebrun@u-bordeaux-montaigne.fr", role = "ctb",
+           comment = c(ORCID = "0000-0001-7503-8685", affiliation = "Université Bordeaux Montaigne"))
+  )
+Maintainer: Nicolas Frerebeau <nicolas.frerebeau@u-bordeaux-montaigne.fr>
+Description: Simple Principal Components Analysis (PCA) and Correspondence
+    Analysis (CA) based on the Singular Value Decomposition (SVD). This
+    package provides S4 classes and methods to compute, extract, summarize
+    and visualize results of multivariate data analysis. It also includes
+    methods for partial bootstrap validation described in Greenacre (1984)
+    <isbn:978-0-12-299050-2> and Lebart et al. (2006) <isbn:978-2-10-049616-7>.
 License: GPL (>= 3)
 URL: https://packages.tesselle.org/dimensio/,
     https://github.com/tesselle/dimensio
 BugReports: https://github.com/tesselle/dimensio/issues
 Depends: 
-    R (>= 3.3)
+    R (>= 3.5)
 Imports: 
     ggplot2,
+    graphics,
     grDevices,
     methods,
     rlang,
     wordcloud
 Suggests: 
-    covr,
-    FactoMineR,
     ggrepel,
     khroma,
-    testthat (>= 3.0.0),
-    vdiffr (>= 1.0.0)
+    rsvg,
+    svglite,
+    tinysnapshot,
+    tinytest
 Config/testthat/edition: 3
 Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Collate: 
@@ -73,4 +62,3 @@ Collate:
     'tidy.R'
     'wrap.R'
     'zzz.R'
-LazyData: true

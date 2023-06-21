@@ -22,6 +22,11 @@
 )
 }
 \arguments{
+\item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+
+\item{eigenvalues}{A \code{\link{logical}} scalar: should the eigenvalues be plotted
+instead of variance/inertia?}
+
 \item{cumulative}{A \code{\link{logical}} scalar: should the cumulative percentages of
 variance be plotted?}
 
@@ -41,11 +46,6 @@ border colors.}
 \item{lwd.cumulative}{A specification for the line width.}
 
 \item{...}{Extra parameters to be passed to \code{\link[graphics:barplot]{graphics::barplot()}}.}
-
-\item{object}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
-
-\item{variance}{A \code{\link{logical}} scalar: should the eigenvalues be plotted
-instead of variance/inertia?}
 }
 \value{
 \code{screeplot()} is called for its side-effects: it results in a graphic

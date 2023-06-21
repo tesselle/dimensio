@@ -1,0 +1,73 @@
+if (at_home()) {
+  using("tinysnapshot")
+  options(tinysnapshot_device = "svglite")
+  options(tinysnapshot_height = 7) # inches
+  options(tinysnapshot_width = 7)
+  options(tinysnapshot_tol = 200) # pixels
+  options(tinysnapshot_os = "Linux")
+
+  data("iris")
+
+  # PCA - Plot coordinates =====================================================
+  sup_ind <- seq(from = 1, to = 150, by = 5)
+  res <- pca(iris, sup_row = sup_ind, sup_col = 4)
+
+  for (i in c(TRUE, FALSE)) {
+    for (j in c(TRUE, FALSE)) {
+      plot_ind <- function() viz_individuals(res, axes = c(1, 2), active = i, sup = j,
+                                             colour = "observation", shape = "observation")
+      expect_snapshot_plot(plot_ind, sprintf("PCA_ind_%d-%d", i, j))
+    }
+  }
+
+  for (i in c(TRUE, FALSE)) {
+    for (j in c(TRUE, FALSE)) {
+      plot_var <- function() viz_variables(res, axes = c(1, 2),
+                                           active = i, sup = j,
+                                           labels = FALSE,
+                                           colour = "observation",
+                                           linetype = "observation")
+      expect_snapshot_plot(plot_var, sprintf("PCA_var_%d-%d", i, j))
+    }
+  }
+
+  # PCA - Plot aesthetics ======================================================
+  res <- pca(iris)
+
+  # Individuals
+  plot_ind_cos2 <- function() viz_individuals(res, colour = "cos2")
+  expect_snapshot_plot(plot_ind_cos2, "PCA_ind_highlight_cos2")
+
+  plot_ind_contrib <- function() viz_individuals(res, size = "contrib")
+  expect_snapshot_plot(plot_ind_contrib, "PCA_var_highlight_contrib")
+
+  plot_ind_group <- function() viz_individuals(res, colour = iris$Species, shape = iris$Species)
+  expect_snapshot_plot(plot_ind_group, "PCA_ind_group")
+
+  # Variables
+  group_num <- c(1, 2, 3, 4)
+  plot_var_group_num <- function() viz_variables(res, labels = FALSE, colour = group_num)
+  expect_snapshot_plot(plot_var_group_num, "PCA_var_group_num")
+
+  group_cat <- c("Sepal", "Sepal", "Petal", "Petal")
+  plot_var_group_cat <- function() viz_variables(res, labels = FALSE, linetype = group_cat)
+  expect_snapshot_plot(plot_var_group_cat, "PCA_var_group_cat")
+
+  # PCA - Plot eigenvalues =====================================================
+  for (i in c(TRUE, FALSE)) {
+    for (j in c(TRUE, FALSE)) {
+      plot_var <- function() screeplot(res, eigenvalues = i, cumulative = j)
+      expect_snapshot_plot(plot_var, sprintf("PCA_eig_%d-%d", i, j))
+    }
+  }
+
+  # PCA - Plot contributions ===================================================
+  plot_contrib_1 <- function() viz_contributions(res, margin = 1, axes = c(1, 2))
+  expect_snapshot_plot(plot_contrib_1, "PCA_ind_contrib")
+
+  plot_contrib_2 <- function() viz_contributions(res, margin = 2, axes = 1)
+  expect_snapshot_plot(plot_contrib_2, "PCA_var_contrib")
+
+  plot_cos2 <- function() viz_cos2(res, margin = 2)
+  expect_snapshot_plot(plot_cos2, "PCA_var_cos2")
+}

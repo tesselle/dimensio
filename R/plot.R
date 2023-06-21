@@ -16,7 +16,6 @@ setMethod(
     .points(x, margin = 1, axes = axes, active = active, sup = sup,
             labels = labels, alpha = alpha, colour = colour,
             shape = shape, size = size, ...)
-
     invisible(x)
   }
 )
@@ -46,7 +45,7 @@ setMethod(
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, alpha = NULL, colour = NULL,
                         shape = NULL, size = NULL, ...) {
-    viz_rows(x, axes = axes, active = active, sup = sup, labels = labels,
+    viz_rows(x, axes = axes, active = active, sup = sup,
              labels = labels, alpha = alpha, colour = colour,
              shape = shape, size = size, ...)
 
@@ -63,10 +62,10 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, alpha = NULL, colour = NULL,
-                        shape = NULL, size = NULL, group = NULL, ...) {
+                        shape = NULL, size = NULL, ...) {
     .points(x, margin = 2, axes = axes, active = active, sup = sup,
             labels = labels, alpha = alpha, colour = colour,
-            shape = shape, size = size, group = group, ...)
+            shape = shape, size = size, ...)
 
     invisible(x)
   }
@@ -136,7 +135,7 @@ setMethod(
     )
 
     ## Labels
-    if (labels) {
+    if (labels && nrow(coord) > 1) {
       lay <- wordcloud::wordlayout(x = coord$x, y = coord$y,
                                    words = coord$label,
                                    xlim = xlim, ylim = ylim)
