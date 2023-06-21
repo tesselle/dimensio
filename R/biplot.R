@@ -77,10 +77,10 @@ setMethod(
   signature = c(x = "PCA"),
   definition = function(x, axes = c(1, 2), type = c("form", "covariance"),
                         active = TRUE, sup = TRUE,
-                        labels = c("individuals", "variables"),
+                        labels = "variables",
                         col.rows = "#004488", col.columns = "#BB5566",
                         pch.rows = 16, pch.columns = 17,
-                        lty = "solid", lwd = 1,
+                        lty = "solid", lwd = 2,
                         main = NULL, sub = NULL, ...) {
     ## Validation
     type <- match.arg(type, several.ok = FALSE)
@@ -107,7 +107,7 @@ setMethod(
       graphics::arrows(
         x0 = 0, y0 = 0,
         x1 = coord_col$x, y1 = coord_col$y,
-        length = 0.15, angle = 30,
+        length = 0.10, angle = 30,
         col = col.columns, lty = lty, lwd = lwd
       )
     }
@@ -168,28 +168,12 @@ setMethod(
   if (!is.null(labels)) {
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {
-      lay_row <- wordcloud::wordlayout(
-        x = coord_row$x,
-        y = coord_row$y,
-        words = coord_row$label,
-        xlim = xlim,
-        ylim = ylim,
-        ...
-      )
-      graphics::text(x = lay_row[, "x"], y = lay_row[, "y"],
-                     labels = coord_row$label, col = col.rows)
+      .labels(x = coord_row$x, y = coord_row$y, labels = coord_row$label,
+              xlim = xlim, ylim = ylim, col = col.rows, ...)
     }
     if (any(labels == "columns") | any(labels == "variables")) {
-      lay_col <- wordcloud::wordlayout(
-        x = coord_col$x,
-        y = coord_col$y,
-        words = coord_col$label,
-        xlim = xlim,
-        ylim = ylim,
-        ...
-      )
-      graphics::text(x = lay_col[, "x"], y = lay_col[, "y"],
-                     labels = coord_col$label, col = col.columns)
+      .labels(x = coord_col$x, y = coord_col$y, labels = coord_col$label,
+              xlim = xlim, ylim = ylim, col = col.columns, ...)
     }
   }
 

@@ -28,18 +28,18 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpNTkuMDR8NDczLjc2fDU5LjA0fDQzMC41Ng==)'>
-<line x1='222.07' y1='258.05' x2='278.48' y2='194.10' style='stroke-width: 0.75; stroke: #BB5566;' />
-<polyline points='276.34,204.68 278.48,194.10 268.24,197.54 ' style='stroke-width: 0.75; stroke: #BB5566;' />
-<line x1='222.07' y1='258.05' x2='167.47' y2='169.77' style='stroke-width: 0.75; stroke: #BB5566;' />
-<polyline points='176.98,174.88 167.47,169.77 167.79,180.56 ' style='stroke-width: 0.75; stroke: #BB5566;' />
-<line x1='222.07' y1='258.05' x2='170.65' y2='156.78' style='stroke-width: 0.75; stroke: #BB5566;' />
-<polyline points='179.70,162.68 170.65,156.78 170.07,167.57 ' style='stroke-width: 0.75; stroke: #BB5566;' />
-<line x1='222.07' y1='258.05' x2='288.16' y2='209.28' style='stroke-width: 0.75; stroke: #BB5566;' />
-<polyline points='283.85,219.17 288.16,209.28 277.43,210.49 ' style='stroke-width: 0.75; stroke: #BB5566;' />
-<line x1='222.07' y1='258.05' x2='315.66' y2='281.52' style='stroke-width: 0.75; stroke: #BB5566;' />
-<polyline points='305.28,284.48 315.66,281.52 307.90,274.01 ' style='stroke-width: 0.75; stroke: #BB5566;' />
-<line x1='222.07' y1='258.05' x2='306.84' y2='194.42' style='stroke-width: 0.75; stroke: #BB5566;' />
-<polyline points='302.60,204.35 306.84,194.42 296.11,195.72 ' style='stroke-width: 0.75; stroke: #BB5566;' />
+<line x1='222.07' y1='258.05' x2='278.48' y2='194.10' style='stroke-width: 1.50; stroke: #BB5566;' />
+<polyline points='277.05,201.15 278.48,194.10 271.65,196.39 ' style='stroke-width: 1.50; stroke: #BB5566;' />
+<line x1='222.07' y1='258.05' x2='167.47' y2='169.77' style='stroke-width: 1.50; stroke: #BB5566;' />
+<polyline points='173.81,173.18 167.47,169.77 167.68,176.96 ' style='stroke-width: 1.50; stroke: #BB5566;' />
+<line x1='222.07' y1='258.05' x2='170.65' y2='156.78' style='stroke-width: 1.50; stroke: #BB5566;' />
+<polyline points='176.68,160.71 170.65,156.78 170.26,163.97 ' style='stroke-width: 1.50; stroke: #BB5566;' />
+<line x1='222.07' y1='258.05' x2='288.16' y2='209.28' style='stroke-width: 1.50; stroke: #BB5566;' />
+<polyline points='285.28,215.88 288.16,209.28 281.01,210.08 ' style='stroke-width: 1.50; stroke: #BB5566;' />
+<line x1='222.07' y1='258.05' x2='315.66' y2='281.52' style='stroke-width: 1.50; stroke: #BB5566;' />
+<polyline points='308.74,283.49 315.66,281.52 310.49,276.51 ' style='stroke-width: 1.50; stroke: #BB5566;' />
+<line x1='222.07' y1='258.05' x2='306.84' y2='194.42' style='stroke-width: 1.50; stroke: #BB5566;' />
+<polyline points='304.01,201.04 306.84,194.42 299.69,195.28 ' style='stroke-width: 1.50; stroke: #BB5566;' />
 <line x1='59.04' y1='258.05' x2='473.76' y2='258.05' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
 <line x1='222.07' y1='430.56' x2='222.07' y2='59.04' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
 <circle cx='219.81' cy='122.43' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #004488;' />
