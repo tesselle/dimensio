@@ -63,9 +63,6 @@ remotes::install_github("tesselle/dimensio")
 ```{r packages-load}
 ## Load packages
 library(dimensio)
-
-library(ggplot2)
-library(ggrepel)
 library(khroma)
 ```
 
@@ -95,64 +92,64 @@ X <- pca(iris, center = TRUE, scale = TRUE)
 
 The package allows to quickly visualize the results:
 
-* `plot_rows()`/`plot_individuals()` displays row/individual principal coordinates.
-* `plot_columns()`/`plot_variables()` displays columns/variable principal coordinates. `plot_variables()` depicts the variables by rays emanating from the origin (both their lengths and directions are important to the interpretation).
-* `plot_contributions()` displays (joint) contributions. 
-* `plot_cos2()` displays (joint) cos^2^.
-* `plot_variance()` produces a scree plot.
+* `viz_rows()`/`viz_individuals()` displays row/individual principal coordinates.
+* `viz_columns()`/`viz_variables()` displays columns/variable principal coordinates. `viz_variables()` depicts the variables by rays emanating from the origin (both their lengths and directions are important to the interpretation).
+* `viz_contributions()` displays (joint) contributions. 
+* `viz_cos2()` displays (joint) cos^2^.
+* `screeplot()` produces a scree plot.
+* `biplot()` produces a biplot.
 
-**dimensio** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting informations. Visualization methods produce graphics with as few elements as possible: this makes it easy to customize diagrams (e.g. using extra layers, themes and scales). The `plot_*()` functions allow to highlight additional information by varying different graphical elements (color, transparency, shape and size of symbols...).
+The `viz_*()` functions allow to highlight additional information by varying different graphical elements (color, transparency, shape and size of symbols...).
 
-```{r biplot, fig.align='center', warning=FALSE}
+```{r biplot, fig.width=7, fig.height=7, fig.align='center'}
 ## Form biplot
-biplot(X, type = "form", label = "variables") +
-  ggrepel::geom_label_repel() + # Add repelling labels
-  ggplot2::theme_bw() + # Change theme
-  ggplot2::theme(legend.position = "none") +
-  khroma::scale_colour_highcontrast() # Custom color scale
+biplot(X, type = "form")
 ```
 
-```{r plot-ind, fig.width=5, fig.height=3.5, out.width='50%', fig.show='hold'}
+```{r plot-ind, fig.width=7, fig.height=7, out.width='50%', fig.show='hold'}
 ## Highlight species
-plot_individuals(X, colour = "group", group = iris$Species) +
-  ggplot2::stat_ellipse() + # Add ellipses
-  ggplot2::theme_bw() + # Change theme
-  khroma::scale_colour_highcontrast() # Custom color scale
+viz_individuals(
+  x = X, 
+  colour = iris$Species, 
+  col = colour("high contrast")(3), 
+  pch = 16
+)
+## Add ellipses
+viz_tolerance(
+  x = X, 
+  group = iris$Species, 
+  level = 0.95,
+  border = colour("high contrast")(3)
+)
 
 ## Highlight petal length
-plot_individuals(X, colour = "group", size = "group", group = iris$Petal.Length) +
-  ggplot2::theme_bw() + # Change theme
-  ggplot2::scale_size_continuous(range = c(1, 3)) + # Custom size scale
-  khroma::scale_color_iridescent() # Custom color scale
+viz_individuals(
+  x = X,
+  colour = iris$Petal.Length, 
+  size = iris$Petal.Length,
+  col = colour("iridescent")(255), 
+  pch = 16
+)
 ```
 
-```{r plot-var, fig.width=5, fig.height=3.5, out.width='50%', fig.show='hold'}
+```{r plot-var, fig.width=7, fig.height=7, out.width='50%', fig.show='hold'}
 ## Plot variables factor map
-plot_variables(X) +
-  ggrepel::geom_label_repel() + # Add repelling labels
-  ggplot2::theme_bw() # Change theme
+viz_variables(X)
 
 ## Highlight contributions
-plot_variables(X, colour = "contrib") +
-  ggrepel::geom_label_repel() + # Add repelling labels
-  ggplot2::theme_bw() + # Change theme
-  khroma::scale_color_YlOrBr(range = c(0.5, 1)) # Custom color scale
+viz_variables(
+  x = X,
+  colour = "cos2", 
+  col = colour("YlOrBr")(255)
+)
 ```
 
-```{r plot-eig, fig.width=5, fig.height=5, out.width='50%', fig.show='hold'}
+```{r plot-eig, fig.width=7, fig.height=7, out.width='50%', fig.show='hold'}
 ## Scree plot
-plot_variance(X, variance = TRUE, cumulative = TRUE) +
-  ggplot2::geom_text(nudge_y = 3) + # Add labels
-  ggplot2::theme_bw() # Change theme
+screeplot(X, eigenvalues = FALSE, cumulative = TRUE)
 
 ## Plot variables contributions to the definition of the first component
-plot_contributions(X, margin = 2, axes = 1) +
-  ggplot2::geom_text(nudge_y = 2) + # Add labels
-  ggplot2::theme_bw() + # Change theme
-  ggplot2::theme( # Edit theme
-    # Rotate x axis labels
-    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, vjust = 1)
-  )
+viz_contributions(X, margin = 2, axes = 1)
 ```
 
 ## Contributing

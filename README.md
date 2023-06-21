@@ -50,13 +50,13 @@ as [**FactoMineR**](http://factominer.free.fr/),
 is designed to be as simple as possible, providing all the necessary
 tools to explore the results of the analysis.
 
-
     To cite dimensio in publications use:
 
       Frerebeau N (2023). _dimensio: Multivariate Data Analysis_.
       Université Bordeaux Montaigne, Pessac, France.
       doi:10.5281/zenodo.4478530 <https://doi.org/10.5281/zenodo.4478530>,
-      R package version 0.3.1, <https://packages.tesselle.org/dimensio/>.
+      R package version 0.3.1.9000,
+      <https://packages.tesselle.org/dimensio/>.
 
     Une entrée BibTeX pour les utilisateurs LaTeX est
 
@@ -66,7 +66,7 @@ tools to explore the results of the analysis.
         year = {2023},
         organization = {Université Bordeaux Montaigne},
         address = {Pessac, France},
-        note = {R package version 0.3.1},
+        note = {R package version 0.3.1.9000},
         doi = {10.5281/zenodo.4478530},
         url = {https://packages.tesselle.org/dimensio/},
       }
@@ -95,9 +95,6 @@ remotes::install_github("tesselle/dimensio")
 ``` r
 ## Load packages
 library(dimensio)
-
-library(ggplot2)
-library(ggrepel)
 library(khroma)
 ```
 
@@ -132,84 +129,76 @@ X <- pca(iris, center = TRUE, scale = TRUE)
 
 The package allows to quickly visualize the results:
 
-- `plot_rows()`/`plot_individuals()` displays row/individual principal
+- `viz_rows()`/`viz_individuals()` displays row/individual principal
   coordinates.
-- `plot_columns()`/`plot_variables()` displays columns/variable
-  principal coordinates. `plot_variables()` depicts the variables by
-  rays emanating from the origin (both their lengths and directions are
-  important to the interpretation).
-- `plot_contributions()` displays (joint) contributions.
-- `plot_cos2()` displays (joint) cos<sup>2</sup>.
-- `plot_variance()` produces a scree plot.
+- `viz_columns()`/`viz_variables()` displays columns/variable principal
+  coordinates. `viz_variables()` depicts the variables by rays emanating
+  from the origin (both their lengths and directions are important to
+  the interpretation).
+- `viz_contributions()` displays (joint) contributions.
+- `viz_cos2()` displays (joint) cos<sup>2</sup>.
+- `screeplot()` produces a scree plot.
+- `biplot()` produces a biplot.
 
-**dimensio** uses [**ggplot2**](https://github.com/tidyverse/ggplot2)
-for plotting informations. Visualization methods produce graphics with
-as few elements as possible: this makes it easy to customize diagrams
-(e.g. using extra layers, themes and scales). The `plot_*()` functions
-allow to highlight additional information by varying different graphical
-elements (color, transparency, shape and size of symbols…).
+The `viz_*()` functions allow to highlight additional information by
+varying different graphical elements (color, transparency, shape and
+size of symbols…).
 
 ``` r
 ## Form biplot
-biplot(X, type = "form", label = "variables") +
-  ggrepel::geom_label_repel() + # Add repelling labels
-  ggplot2::theme_bw() + # Change theme
-  ggplot2::theme(legend.position = "none") +
-  khroma::scale_colour_highcontrast() # Custom color scale
+biplot(X, type = "form")
 ```
 
 <img src="man/figures/README-biplot-1.png" style="display: block; margin: auto;" />
 
 ``` r
 ## Highlight species
-plot_individuals(X, colour = "group", group = iris$Species) +
-  ggplot2::stat_ellipse() + # Add ellipses
-  ggplot2::theme_bw() + # Change theme
-  khroma::scale_colour_highcontrast() # Custom color scale
-#> Warning: The following aesthetics were dropped during statistical transformation: label
-#> ℹ This can happen when ggplot fails to infer the correct grouping structure in
-#>   the data.
-#> ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
-#>   variable into a factor?
+viz_individuals(
+  x = X, 
+  colour = iris$Species, 
+  col = colour("high contrast")(3), 
+  pch = 16
+)
+## Add ellipses
+viz_tolerance(
+  x = X, 
+  group = iris$Species, 
+  level = 0.95,
+  border = colour("high contrast")(3)
+)
 
 ## Highlight petal length
-plot_individuals(X, colour = "group", size = "group", group = iris$Petal.Length) +
-  ggplot2::theme_bw() + # Change theme
-  ggplot2::scale_size_continuous(range = c(1, 3)) + # Custom size scale
-  khroma::scale_color_iridescent() # Custom color scale
+viz_individuals(
+  x = X,
+  colour = iris$Petal.Length, 
+  size = iris$Petal.Length,
+  col = colour("iridescent")(255), 
+  pch = 16
+)
 ```
 
 <img src="man/figures/README-plot-ind-1.png" width="50%" /><img src="man/figures/README-plot-ind-2.png" width="50%" />
 
 ``` r
 ## Plot variables factor map
-plot_variables(X) +
-  ggrepel::geom_label_repel() + # Add repelling labels
-  ggplot2::theme_bw() # Change theme
+viz_variables(X)
 
 ## Highlight contributions
-plot_variables(X, colour = "contrib") +
-  ggrepel::geom_label_repel() + # Add repelling labels
-  ggplot2::theme_bw() + # Change theme
-  khroma::scale_color_YlOrBr(range = c(0.5, 1)) # Custom color scale
+viz_variables(
+  x = X,
+  colour = "cos2", 
+  col = colour("YlOrBr")(255)
+)
 ```
 
 <img src="man/figures/README-plot-var-1.png" width="50%" /><img src="man/figures/README-plot-var-2.png" width="50%" />
 
 ``` r
 ## Scree plot
-plot_variance(X, variance = TRUE, cumulative = TRUE) +
-  ggplot2::geom_text(nudge_y = 3) + # Add labels
-  ggplot2::theme_bw() # Change theme
+screeplot(X, eigenvalues = FALSE, cumulative = TRUE)
 
 ## Plot variables contributions to the definition of the first component
-plot_contributions(X, margin = 2, axes = 1) +
-  ggplot2::geom_text(nudge_y = 2) + # Add labels
-  ggplot2::theme_bw() + # Change theme
-  ggplot2::theme( # Edit theme
-    # Rotate x axis labels
-    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, vjust = 1)
-  )
+viz_contributions(X, margin = 2, axes = 1)
 ```
 
 <img src="man/figures/README-plot-eig-1.png" width="50%" /><img src="man/figures/README-plot-eig-2.png" width="50%" />
