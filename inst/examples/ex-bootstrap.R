@@ -15,12 +15,15 @@ get_replications(Y, margin = 2)
 }
 
 ## Plot with ellipses
-plot_rows(Y, colour = "group") +
-  ggplot2::stat_ellipse()
+viz_rows(Y)
+viz_tolerance(Y, margin = 1, level = c(0.68, 0.95))
+
+viz_columns(Y)
+viz_tolerance(Y, margin = 2, level = c(0.68, 0.95))
 
 ## Plot with convex hulls
-plot_columns(Y, colour = "group", fill = "group") +
-  stat_hull(geom = "polygon", alpha = 0.5)
+viz_columns(Y)
+viz_hull(Y, margin = 2)
 
 ## Bootstrap on PCA
 ## Compute principal components analysis
@@ -31,5 +34,5 @@ X <- pca(iris)
 Y <- bootstrap(X, n = 30)
 
 ## Plot with ellipses
-plot_columns(Y, colour = "group") +
-  ggplot2::stat_ellipse()
+viz_variables(Y)
+viz_tolerance(Y, margin = 2, level = c(0.68, 0.95))

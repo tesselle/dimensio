@@ -10,9 +10,6 @@ head(get_coordinates(X, margin = 1))
 ## Get column coordinates
 head(get_coordinates(X, margin = 2))
 
-## Get row contributions
-head(get_contributions(X, margin = 1))
-
 ## Get correlations between variables and dimensions
 head(get_correlations(X))
 

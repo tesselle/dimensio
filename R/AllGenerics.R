@@ -304,45 +304,6 @@ setGeneric(
   valueClass = "array"
 )
 
-#' Wrap Observations
-#'
-#' @description
-#'  * `wrap_hull()` computes convex hull of a set of observations.
-#' @param x An object from which to wrap observations (a [`CA-class`] or
-#'  [`PCA-class`] object).
-#' @param margin A length-one [`numeric`] vector giving the subscript which the
-#'  data will be returned: `1` indicates individuals/rows (the default), `2`
-#'  indicates variables/columns.
-#' @param axes A length-two [`numeric`] vector giving the dimensions
-#'  to be for which to compute results.
-#' @param group A vector specifying the group an observation belongs to.
-#' @param ... Currently not used.
-#' @inheritParams ggplot2::layer
-#' @param na.rm A [`logical`] scalar: should missing values be silently removed?
-#'  If `FALSE` (the ), missing values are removed with a warning.
-#' @return
-#'  * `stat_hull()` return a [ggplot2::layer()].
-#'  * `wrap_hull()` return a [`data.frame`] of
-#'    envelope principal coordinates. An extra column named `group` is added
-#'    specifying the group an observation belongs to.
-#' @example inst/examples/ex-wrap.R
-#' @references
-#'  <https://ggplot2.tidyverse.org/articles/extending-ggplot2.html>
-#' @author N. Frerebeau
-#' @docType methods
-#' @family plot methods
-#' @name envelopes
-#' @rdname envelopes
-NULL
-
-#' @rdname envelopes
-#' @aliases wrap_hull-method
-setGeneric(
-  name = "wrap_hull",
-  def = function(x, ...) standardGeneric("wrap_hull"),
-  valueClass = "data.frame"
-)
-
 #' Tidy Coordinates
 #'
 #' @param x A [`CA-class`] or [`PCA-class`] object.
@@ -355,7 +316,7 @@ setGeneric(
 #'  returned? If `FALSE`, standard coordinates are returned.
 #' @param ... Currently not used.
 #' @return
-#'  * `tidy()` returns a long [`data.frame`] with the following columns:
+#'  `tidy()` returns a long [`data.frame`] with the following columns:
 #'    \describe{
 #'     \item{`label`}{Row/column names of the original data.}
 #'     \item{`component`}{Component.}
@@ -365,7 +326,8 @@ setGeneric(
 #'     \item{`contribution`}{Contributions to the definition of the components.}
 #'     \item{`cos2`}{\eqn{cos^2}{cos2}.}
 #'    }
-#'  * `augment()` returns a wide [`data.frame`] of the row/column coordinates
+#'
+#'  `augment()` returns a wide [`data.frame`] of the row/column coordinates
 #'    along `axes` and the following columns:
 #'    \describe{
 #'     \item{`label`}{Row/column names of the original data.}
@@ -412,10 +374,15 @@ setGeneric(
 #'  plotted?
 #' @param sup A [`logical`] scalar: should the supplementary observations be
 #'  plotted?
-#' @param label A [`character`] vector specifying whether
+#' @param labels A [`character`] vector specifying whether
 #'  "`rows`"/"`individuals`" and/or "`columns`"/"`variables`" names must be
-#'  mapped (e.g. for use with [ggrepel::geom_label_repel()]).
-#'  Any unambiguous substring can be given.
+#'  drawn. Any unambiguous substring can be given.
+#' @param col.rows,col.columns A color specification.
+#' @param pch.rows,pch.columns A symbol specification.
+#' @param lty,lwd A specification for the line type and width.
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param ... Further parameters to be passed to [wordcloud::wordlayout()].
 #' @details
 #'  A biplot is the simultaneous representation of rows and columns of a
 #'  rectangular dataset. It is the generalization of a scatterplot to the case
@@ -447,7 +414,8 @@ setGeneric(
 #'   \item{`contribution`}{Contribution biplot}.
 #'  }
 #' @return
-#'  A [ggplot2::ggplot] object.
+#'  `biplot()` is called for its side-effects: it results in a graphic being
+#'  displayed. Invisibly returns `x`.
 #' @example inst/examples/ex-biplot.R
 #' @references
 #'  Aitchison, J. and Greenacre, M. (2002). Biplots of Compositional Data.
@@ -465,22 +433,20 @@ NULL
 #' Visualize Factor Map
 #'
 #' Plots principal coordinates.
-#' @param object A [`CA-class`] or [`PCA-class`] object.
+#' @param x A [`CA-class`] or [`PCA-class`] object.
 #' @param axes A length-two [`numeric`] vector giving the dimensions to be
 #'  plotted.
 #' @param active A [`logical`] scalar: should the active observations be
 #'  plotted?
 #' @param sup A [`logical`] scalar: should the supplementary observations be
 #'  plotted?
-#' @param alpha,colour,fill,linetype,shape,size A [`character`] string
-#'  specifying the information to be highlighted (will be mapped to the
-#'  corresponding aesthetic).
-#'  It must be one of "`observation`", "`mass`", "`sum`", "`contribution`",
-#'  "`cos2`" or "`group`" (see details). Any unambiguous substring can be given.
+#' @param alpha,colour,fill,linetype,shape,size A vector specifying the
+#'  information to be highlighted (will be mapped to the corresponding
+#'  aesthetic; see examples and vignettes).
+#'  If a single `character` string is passed, it must be one of "`observation`",
+#'  "`mass`", "`sum`", "`contribution`" or "`cos2`" (see details).
+#'  Any unambiguous substring can be given.
 #'  If `NULL` (the default), no highlighting is applied.
-#' @param group A vector of categories specifying the categorical variable from
-#'  which to highlight the individuals (only used if at least one of `colour`,
-#'  `fill`, `linetype` or `shape` is set to `group`; see details).
 #' @param ... Currently not used.
 #' @details
 #'  \describe{
@@ -491,41 +457,42 @@ NULL
 #'   \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
 #'  }
 #' @return
-#'  A [ggplot2::ggplot] object.
+#'  `viz_*()` is called for its side-effects: it results in a graphic
+#'  being displayed. Invisibly returns `x`.
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
 #' @family plot methods
-#' @name plot_coordinates
-#' @rdname plot_coordinates
+#' @name viz_coordinates
+#' @rdname viz_coordinates
 NULL
 
-#' @rdname plot_coordinates
-#' @aliases plot_rows-method
+#' @rdname viz_coordinates
+#' @aliases viz_rows-method
 setGeneric(
-  name = "plot_rows",
-  def = function(object, ...) standardGeneric("plot_rows")
+  name = "viz_rows",
+  def = function(x, ...) standardGeneric("viz_rows")
 )
 
-#' @rdname plot_coordinates
-#' @aliases plot_columns-method
+#' @rdname viz_coordinates
+#' @aliases viz_columns-method
 setGeneric(
-  name = "plot_columns",
-  def = function(object, ...) standardGeneric("plot_columns")
+  name = "viz_columns",
+  def = function(x, ...) standardGeneric("viz_columns")
 )
 
-#' @rdname plot_coordinates
-#' @aliases plot_individuals-method
+#' @rdname viz_coordinates
+#' @aliases viz_individuals-method
 setGeneric(
-  name = "plot_individuals",
-  def = function(object, ...) standardGeneric("plot_individuals")
+  name = "viz_individuals",
+  def = function(x, ...) standardGeneric("viz_individuals")
 )
 
-#' @rdname plot_coordinates
-#' @aliases plot_variables-method
+#' @rdname viz_coordinates
+#' @aliases viz_variables-method
 setGeneric(
-  name = "plot_variables",
-  def = function(object, ...) standardGeneric("plot_variables")
+  name = "viz_variables",
+  def = function(x, ...) standardGeneric("viz_variables")
 )
 
 ## Eigenvalues -----------------------------------------------------------------
@@ -549,11 +516,6 @@ setGeneric(
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
-#' @name get_eigenvalues
-#' @rdname get_eigenvalues
-NULL
-
-#' @rdname get_eigenvalues
 #' @aliases get_eigenvalues-method
 setGeneric(
   name = "get_eigenvalues",
@@ -577,34 +539,35 @@ setGeneric(
   valueClass = "numeric"
 )
 
-#' Visualize Eigenvalues
+#' Scree Plot
 #'
-#' Plot eigenvalues or variances histogram.
+#' Plot eigenvalues (scree plot) or variances histogram.
 #' @param object A [`CA-class`] or [`PCA-class`] object.
-#' @param variance A [`logical`] scalar: should the percentages of variance be
-#'  plotted instead of the eigenvalues?
+#' @param variance A [`logical`] scalar: should the eigenvalues be plotted
+#'  instead of variance/inertia?
 #' @param cumulative A [`logical`] scalar: should the cumulative percentages of
 #'  variance be plotted?
-#' @param fill,border A [`character`] string specifying the bars infilling and
+#' @param labels A [`logical`] scalar: should text labels be drawn on top of
+#'  bars?
+#' @param limit An [`integer`] specifying the number of top elements to be
+#'  displayed.
+#' @param col,border A [`character`] string specifying the bars infilling and
 #'  border colors.
-#' @param colour A [`character`] string specifying the line color.
-#' @param ... Currently not used.
+#' @param col.cumulative A specification for the line color.
+#' @param lty.cumulative A specification for the line type.
+#' @param lwd.cumulative A specification for the line width.
+#' @param ... Extra parameters to be passed to [graphics::barplot()].
 #' @return
-#'  A [ggplot2::ggplot] object.
-#' @example inst/examples/ex-plot.R
+#'  `screeplot()` is called for its side-effects: it results in a graphic
+#'  being displayed. Invisibly returns `x`.
+#' @example inst/examples/ex-screeplot.R
 #' @author N. Frerebeau
 #' @docType methods
 #' @family plot methods
-#' @name plot_eigenvalues
-#' @rdname plot_eigenvalues
+#' @aliases screeplot-method
+#' @name screeplot
+#' @rdname screeplot
 NULL
-
-#' @rdname plot_eigenvalues
-#' @aliases plot_variance-method
-setGeneric(
-  name = "plot_variance",
-  def = function(object, ...) standardGeneric("plot_variance")
-)
 
 ## Contributions ---------------------------------------------------------------
 #' Get Contributions
@@ -631,11 +594,6 @@ setGeneric(
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
-#' @name get_contributions
-#' @rdname get_contributions
-NULL
-
-#' @rdname get_contributions
 #' @aliases get_contributions-method
 setGeneric(
   name = "get_contributions",
@@ -662,7 +620,7 @@ setGeneric(
 #' Visualize Contributions and cos2
 #'
 #' Plots contributions histogram and \eqn{cos^2}{cos2} scatterplot.
-#' @param object A [`CA-class`] or [`PCA-class`] object.
+#' @param x A [`CA-class`] or [`PCA-class`] object.
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
@@ -677,31 +635,29 @@ setGeneric(
 #'  Only used if `sort` is `TRUE`.
 #' @param limit An [`integer`] specifying the number of top elements to be
 #'  displayed.
-#' @param fill,border A [`character`] string specifying the bars infilling and
+#' @param horiz A [`logical`] scalar: should the bars be drawn horizontally
+#'  with the first at the bottom?
+#' @param col,border A [`character`] string specifying the bars infilling and
 #'  border colors.
-#' @param ... Currently not used.
+#' @param ... Extra parameters to be passed to [graphics::barplot()].
 #' @return
-#'  A [ggplot2::ggplot] object.
-#' @example inst/examples/ex-plot.R
+#'  `viz_contributions()` and `viz_cos2()` are called for their side-effects:
+#'  they result in a graphic being displayed. Invisibly return `x`.
+#' @example inst/examples/ex-contributions.R
 #' @author N. Frerebeau
 #' @docType methods
 #' @family plot methods
-#' @name plot_contributions
-#' @rdname plot_contributions
-NULL
-
-#' @rdname plot_contributions
-#' @aliases plot_contributions-method
+#' @aliases viz_contributions-method
 setGeneric(
-  name = "plot_contributions",
-  def = function(object, ...) standardGeneric("plot_contributions")
+  name = "viz_contributions",
+  def = function(x, ...) standardGeneric("viz_contributions")
 )
 
-#' @rdname plot_contributions
-#' @aliases plot_cos2-method
+#' @rdname viz_contributions
+#' @aliases viz_cos2-method
 setGeneric(
-  name = "plot_cos2",
-  def = function(object, ...) standardGeneric("plot_cos2")
+  name = "viz_cos2",
+  def = function(x, ...) standardGeneric("viz_cos2")
 )
 
 ## Distances -------------------------------------------------------------------
@@ -719,16 +675,107 @@ setGeneric(
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
-#' @name get_distances
-#' @rdname get_distances
-NULL
-
-#' @rdname get_distances
 #' @aliases get_distances-method
 setGeneric(
   name = "get_distances",
   def = function(x, ...) standardGeneric("get_distances"),
   valueClass = "numeric"
+)
+
+# Envelopes ====================================================================
+#' Wrap Observations
+#'
+#' @description
+#'  * `wrap_hull()` computes convex hull of a set of observations.
+#'  * `wrap_confidence()` computes a confidence ellipse.
+#'  * `wrap_tolerance()` computes a tolerance ellipse.
+#' @param x An object from which to wrap observations (a [`CA-class`] or
+#'  [`PCA-class`] object).
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be returned: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns.
+#' @param axes A length-two [`numeric`] vector giving the dimensions
+#'  to be for which to compute results.
+#' @param group A vector specifying the group an observation belongs to.
+#' @param level A [`numeric`] vector specifying the confidence/tolerance level.
+#' @param ... Currently not used.
+#' @return
+#'  `wrap_*()` returns a [`data.frame`] of envelope `x` and `y` coordinates.
+#'
+#'  An extra column named `group` is added specifying the group an observation
+#'  belongs to.
+#' @example inst/examples/ex-wrap.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family plot methods
+#' @name wrap
+#' @rdname wrap
+NULL
+
+#' @rdname wrap
+#' @aliases wrap_hull-method
+setGeneric(
+  name = "wrap_hull",
+  def = function(x, ...) standardGeneric("wrap_hull")
+)
+
+#' @rdname wrap
+#' @aliases wrap_confidence-method
+setGeneric(
+  name = "wrap_confidence",
+  def = function(x, ...) standardGeneric("wrap_confidence")
+)
+
+#' @rdname wrap
+#' @aliases wrap_tolerance-method
+setGeneric(
+  name = "wrap_tolerance",
+  def = function(x, ...) standardGeneric("wrap_tolerance")
+)
+
+#' Plot Envelopes
+#'
+#' @param x An object from which to wrap observations (a [`CA-class`] or
+#'  [`PCA-class`] object).
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be returned: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns.
+#' @param axes A length-two [`numeric`] vector giving the dimensions
+#'  to be for which to compute results.
+#' @param group A vector specifying the group an observation belongs to.
+#' @param level A [`numeric`] vector specifying the confidence/tolerance level.
+#' @param ... Further [graphical parameters][graphics::par] to be passed to
+#'  [graphics::polygon()].
+#' @return
+#'  `viz_*()`is called for its side-effects: it results in a graphic being
+#'  displayed. Invisibly returns `x`.
+#' @example inst/examples/ex-wrap.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family plot methods
+#' @name viz_wrap
+#' @rdname viz_wrap
+NULL
+
+#' @rdname viz_wrap
+#' @aliases viz_hull-method
+setGeneric(
+  name = "viz_hull",
+  def = function(x, ...) standardGeneric("viz_hull")
+)
+
+#' @rdname viz_wrap
+#' @aliases viz_confidence-method
+setGeneric(
+  name = "viz_confidence",
+  def = function(x, ...) standardGeneric("viz_confidence")
+)
+
+#' @rdname viz_wrap
+#' @aliases viz_tolerance-method
+setGeneric(
+  name = "viz_tolerance",
+  def = function(x, ...) standardGeneric("viz_tolerance")
 )
 
 # Summarize ====================================================================

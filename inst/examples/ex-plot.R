@@ -2,18 +2,16 @@
 data("iris")
 
 ## Compute principal components analysis
-Y <- pca(iris, scale = TRUE)
+X <- pca(iris, scale = TRUE)
 
-## Plot results
-plot_individuals(Y, colour = "group", shape = "group", group = iris$Species) +
-  khroma::scale_colour_highcontrast()
+## Plot individuals
+viz_individuals(X, colour = iris$Species, shape = iris$Species)
 
-plot_individuals(Y, colour = "group", size = "cos2", group = iris$Sepal.Width) +
-  khroma::scale_color_YlOrBr()
+viz_individuals(X, colour = iris$Sepal.Width, size = "cos2")
 
-plot_individuals(Y, colour = "contribution", size = "contribution") +
-  khroma::scale_color_iridescent(range = c(0.5, 1))
+viz_individuals(X, colour = "contribution", size = "contribution", pch = 16)
 
-plot_variables(Y, colour = "contribution") +
-  ggrepel::geom_label_repel() +
-  khroma::scale_color_YlOrBr(range = c(0.5, 1))
+## Plot variables
+viz_variables(X)
+
+viz_variables(X, colour = "contribution")

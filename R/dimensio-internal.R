@@ -1,6 +1,8 @@
 # HELPERS
-NULL
 
+`%||%` <- function(x, y) {
+  if (!is.null(x)) x else y
+}
 
 #' Weighted Column Means and Standard Deviations
 #'
@@ -14,6 +16,33 @@ weighted_mean <- function(x, w) {
 }
 weighted_sd <- function(x, w) {
   sqrt(as.vector(crossprod(w, x^2)))
+}
+
+#' Draw a Circle
+#'
+#' @param x,y A length-one [`numeric`] vector giving the coordinates of the
+#'  center of the circle.
+#' @param radius A length-one [`numeric`] vector giving the radius of the
+#'  circle.
+#' @param n A length-on [`integer`] vector specifying the number of vertices to
+#'  draw the circle.
+#' @param ... Further parameters to be passed to [graphics::polygon()].
+#' @examples
+#' \dontrun{
+#' plot(NA, xlim = c(-1, 1), ylim = c(-1, 1),
+#'      axes = FALSE, ann = FALSE, asp = 1)
+#' plot_circle(0, 0, 0.5)
+#' }
+#' @keywords internal
+#' @author N. Frerebeau
+#' @noRd
+plot_circle <- function(x, y, radius, n = 100, ...) {
+  angle.inc <- 2 * pi / n
+  angles <- seq(0, 2 * pi - angle.inc, by = angle.inc)
+
+  xv <- cos(angles) * radius + x
+  yv <- sin(angles) * radius + y
+  graphics::polygon(xv, yv, ...)
 }
 
 #' @param index A [`numeric`] vector.

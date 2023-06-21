@@ -34,8 +34,7 @@ returned? If \code{FALSE}, standard coordinates are returned.}
 to be for which to compute results.}
 }
 \value{
-\itemize{
-\item \code{tidy()} returns a long \code{\link{data.frame}} with the following columns:
+\code{tidy()} returns a long \code{\link{data.frame}} with the following columns:
 \describe{
 \item{\code{label}}{Row/column names of the original data.}
 \item{\code{component}}{Component.}
@@ -45,7 +44,8 @@ supplementary.}
 \item{\code{contribution}}{Contributions to the definition of the components.}
 \item{\code{cos2}}{\eqn{cos^2}{cos2}.}
 }
-\item \code{augment()} returns a wide \code{\link{data.frame}} of the row/column coordinates
+
+\code{augment()} returns a wide \code{\link{data.frame}} of the row/column coordinates
 along \code{axes} and the following columns:
 \describe{
 \item{\code{label}}{Row/column names of the original data.}
@@ -55,7 +55,6 @@ supplementary.}
 \item{\code{sum}}{Sum of squared coordinates along \code{axes}.}
 \item{\code{contribution}}{Joint contributions to the definition of \code{axes}.}
 \item{\code{cos2}}{Joint \eqn{cos^2}{cos2} along \code{axes}.}
-}
 }
 }
 \description{

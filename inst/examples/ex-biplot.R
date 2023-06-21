@@ -8,12 +8,10 @@ col_w <- rep(1 / ncol(countries), ncol(countries)) # 1/6
 Y <- pca(countries, scale = FALSE, weight_row = row_w, weight_col = col_w)
 
 ## Row-metric-preserving biplot (form biplot)
-biplot(Y, type = "form") +
-  ggrepel::geom_label_repel()
+biplot(Y, type = "form")
 
 ## Column-metric-preserving biplot (covariance biplot)
-biplot(Y, type = "covariance") +
-  ggrepel::geom_label_repel()
+biplot(Y, type = "covariance")
 
 ## Replicate examples from Greenacre 2007, p. 79-88
 data("benthos")
@@ -22,13 +20,10 @@ data("benthos")
 X <- ca(benthos)
 
 ## Row principal CA biplot
-biplot(X, type = "row") +
-  ggrepel::geom_label_repel()
+biplot(X, type = "row", labels = "columns")
 
 ## Column principal CA biplot
-biplot(X, type = "column") +
-  ggrepel::geom_label_repel()
+biplot(X, type = "column", labels = "columns")
 
 ## Contribution CA biplot
-biplot(X, type = "contrib") +
-  ggrepel::geom_label_repel()
+biplot(X, type = "contrib", labels = NULL)

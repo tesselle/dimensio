@@ -39,7 +39,8 @@ Imports:
     ggplot2,
     grDevices,
     methods,
-    rlang
+    rlang,
+    wordcloud
 Suggests: 
     covr,
     FactoMineR,
@@ -54,15 +55,17 @@ RoxygenNote: 7.2.3
 Collate: 
     'AllClasses.R'
     'AllGenerics.R'
+    'biplot.R'
     'bootstrap.R'
     'ca.R'
     'data.R'
+    'dimensio-deprecated.R'
+    'dimensio-internal.R'
     'dimensio-package.R'
-    'ggplot2.R'
-    'helpers.R'
     'mutators.R'
     'pca.R'
     'plot.R'
+    'screeplot.R'
     'show.R'
     'subset.R'
     'summary.R'

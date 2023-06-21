@@ -272,14 +272,13 @@ setMethod(
   signature = signature(x = "MultivariateAnalysis"),
   definition = function(x) {
     eig <- x@singular_values^2 # Eigenvalues
-    pvar <- eig / sum(eig) * 100 # Percentage of variance
-    cvar <- cumsum(pvar) # Cumulative percentage of variance
+    pvar <- eig / sum(eig) * 100 # Percentage
+    cvar <- cumsum(pvar) # Cumulative percentage
 
-    data.frame(
-      eigenvalues = eig,
-      variance = pvar,
-      cumulative = cvar
-    )
+    z <- data.frame(eig, pvar, cvar)
+    expl <- if (methods::is(x, "CA")) "inertia" else "variance"
+    colnames(z) <- c("eigenvalues", expl, "cumulative")
+    z
   }
 )
 
