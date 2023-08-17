@@ -139,8 +139,6 @@ setMethod(
     ## Labels
     if (labels && nrow(coord) > 1) {
       usr <- graphics::par("usr")
-      print(c(xlim, ylim))
-      print(usr)
       .labels(x = coord$x, y = coord$y, labels = coord$label,
               xlim = usr[c(1, 2)], ylim = usr[c(3, 4)], col = param$col)
     }

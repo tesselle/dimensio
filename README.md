@@ -183,8 +183,6 @@ viz_individuals(
 ``` r
 ## Plot variables factor map
 viz_variables(X)
-#> [1] -1  1 -1  1
-#> [1] -1.205581  1.205581 -1.080000  1.080000
 
 ## Scree plot
 screeplot(X, eigenvalues = FALSE, cumulative = TRUE)

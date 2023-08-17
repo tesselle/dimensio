@@ -97,7 +97,7 @@ viz_variables(x, ...)
 \arguments{
 \item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
-\item{...}{Currently not used.}
+\item{...}{Further \link[graphics:par]{graphical parameters} (see below).}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -130,12 +130,25 @@ being displayed. Invisibly returns \code{x}.
 Plots principal coordinates.
 }
 \details{
+Available statistics:
 \describe{
 \item{\code{observation}}{Whether an observation is active or supplementary.}
 \item{\code{mass}}{Weight/mass of each observation.}
 \item{\code{sum}}{Sum of squared coordinates along \code{axes}.}
 \item{\code{contribution}}{Joint contributions to the definition of \code{axes}.}
 \item{\code{cos2}}{Joint \eqn{cos^2}{cos2} along \code{axes}.}
+}
+
+Commonly used \link[graphics:par]{graphical parameters} are:
+\describe{
+\item{\code{col}}{The colors for lines and points. Multiple colors can be
+specified so that each point can be given its own color.}
+\item{\code{pch}}{A vector of plotting characters or symbols.}
+\item{\code{cex}}{A \code{numeric} vector giving the amount by which plotting
+characters and symbols should be scaled relative to the
+default.}
+\item{\code{lty}}{A vector of line types.}
+\item{\code{lwd}}{A vector of line widths.}
 }
 }
 \examples{

@@ -1,5 +1,5 @@
 # dimensio 0.4.0
-** Use graphics instead of ggplot2.**
+**Use graphics instead of ggplot2.**
 
 ## New classes and methods
 * Add `screeplot()` to produce a scree plot.

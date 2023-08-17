@@ -567,14 +567,27 @@ NULL
 #'  If `NULL` (the default), no highlighting is applied.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ... Currently not used.
+#' @param ... Further [graphical parameters][graphics::par] (see below).
 #' @details
+#'  Available statistics:
 #'  \describe{
 #'   \item{`observation`}{Whether an observation is active or supplementary.}
 #'   \item{`mass`}{Weight/mass of each observation.}
 #'   \item{`sum`}{Sum of squared coordinates along `axes`.}
 #'   \item{`contribution`}{Joint contributions to the definition of `axes`.}
 #'   \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
+#'  }
+#'
+#'  Commonly used [graphical parameters][graphics::par] are:
+#'  \describe{
+#'   \item{`col`}{The colors for lines and points. Multiple colors can be
+#'                specified so that each point can be given its own color.}
+#'   \item{`pch`}{A vector of plotting characters or symbols.}
+#'   \item{`cex`}{A `numeric` vector giving the amount by which plotting
+#'                characters and symbols should be scaled relative to the
+#'                default.}
+#'   \item{`lty`}{A vector of line types.}
+#'   \item{`lwd`}{A vector of line widths.}
 #'  }
 #' @return
 #'  `viz_*()` is called for its side-effects: it results in a graphic
