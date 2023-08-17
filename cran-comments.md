@@ -1,5 +1,5 @@
 ## Test environments
-* Local R installation: R 4.2.3
+* Local R installation: R 4.3.1
 * Ubuntu (on GitHub Actions): R devel, release, oldrel
 * Windows (on GitHub Actions and win-builder): R devel, release, oldrel
 * MacOS (on GitHub Actions): R release
@@ -8,9 +8,7 @@
 
 0 errors | 0 warnings | 0 note
 
-* CRAN package check warning ("S3 generic/method consistency") has been fixed.
-
-## Reverse dependencies
+## revdepcheck results
 
 We checked 2 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 

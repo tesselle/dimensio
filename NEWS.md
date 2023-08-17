@@ -1,4 +1,12 @@
-# dimensio 0.3.1.9000
+# dimensio 0.4.0
+** Use graphics instead of ggplot2.**
+
+## New classes and methods
+* Add `screeplot()` to produce a scree plot.
+* Add `viz_*()` methods to replace `plot_*()` methods.
+
+## Bugfixes & changes
+* Deprecate `plot_*()` methods. The internal use of **ggplot2** is badly interoperable or composable. This will reduces hard dependencies.
 
 # dimensio 0.3.1
 ## Bugfixes & changes
