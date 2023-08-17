@@ -12,10 +12,11 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, alpha = NULL, colour = NULL,
-                        shape = NULL, size = NULL, ...) {
+                        shape = NULL, size = NULL,
+                        main = NULL, sub = NULL, ...) {
     .points(x, margin = 1, axes = axes, active = active, sup = sup,
             labels = labels, alpha = alpha, colour = colour,
-            shape = shape, size = size, ...)
+            shape = shape, size = size, main = main, sub = sub, ...)
     invisible(x)
   }
 )
@@ -44,11 +45,11 @@ setMethod(
   signature = c(x = "PCA"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, alpha = NULL, colour = NULL,
-                        shape = NULL, size = NULL, ...) {
+                        shape = NULL, size = NULL,
+                        main = NULL, sub = NULL, ...) {
     viz_rows(x, axes = axes, active = active, sup = sup,
              labels = labels, alpha = alpha, colour = colour,
-             shape = shape, size = size, ...)
-
+             shape = shape, size = size, main = main, sub = sub, ...)
     invisible(x)
   }
 )
@@ -62,10 +63,11 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, alpha = NULL, colour = NULL,
-                        shape = NULL, size = NULL, ...) {
+                        shape = NULL, size = NULL,
+                        main = NULL, sub = NULL, ...) {
     .points(x, margin = 2, axes = axes, active = active, sup = sup,
             labels = labels, alpha = alpha, colour = colour,
-            shape = shape, size = size, ...)
+            shape = shape, size = size, main = main, sub = sub, ...)
 
     invisible(x)
   }
@@ -136,8 +138,11 @@ setMethod(
 
     ## Labels
     if (labels && nrow(coord) > 1) {
+      usr <- graphics::par("usr")
+      print(c(xlim, ylim))
+      print(usr)
       .labels(x = coord$x, y = coord$y, labels = coord$label,
-              xlim = xlim, ylim = ylim, col = param$col)
+              xlim = usr[c(1, 2)], ylim = usr[c(3, 4)], col = param$col)
     }
 
     ## Evaluate post-plot and pre-axis expressions
@@ -178,7 +183,6 @@ setMethod(
     .points(x, margin = 2, axes = axes, active = TRUE, sup = TRUE,
             labels = FALSE, alpha = NULL, colour = group,
             shape = group, size = NULL, ...)
-
     invisible(x)
   }
 )
@@ -446,8 +450,9 @@ prepare_cos2 <- function(object, margin, axes, active = TRUE, sup = TRUE,
 
   ## Labels
   if (labels) {
+    usr <- graphics::par("usr")
     .labels(x = coord$x, y = coord$y, labels = coord$label,
-            xlim = xlim, ylim = ylim, col = param$col, ...)
+            xlim = usr[c(1, 2)], ylim = usr[c(3, 4)], col = param$col, ...)
   }
 
   ## Evaluate post-plot and pre-axis expressions
@@ -534,9 +539,14 @@ shadowtext <- function(x, y, labels,
   xt <- xt + max(wt)
   yt <- yt + max(ht)
 
+  x_out <- (xt - wt) < min(xlim) | (xt + wt) > max(xlim)
+  xt[x_out] <- lay[x_out, "x"]
+  y_out <- (yt - ht) < min(ylim) | (yt + ht) > max(ylim)
+  yt[y_out] <- lay[y_out, "y"]
+
   ## Plot lines
   if (isTRUE(segment)) {
-    for (i in 1:length(x)) {
+    for (i in seq_along(x)) {
       if (x[i] != xt[i] || y[i] != yt[i]) {
         graphics::lines(
           x = c(x[i], xt[i] - 0.5 * wt[i]),

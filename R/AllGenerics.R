@@ -362,6 +362,122 @@ setGeneric(
   valueClass = "data.frame"
 )
 
+## Eigenvalues -----------------------------------------------------------------
+#' Get Eigenvalues
+#'
+#' @param x An object from which to get element(s) (a [`CA-class`] or
+#'  [`PCA-class`] object).
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be returned: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns.
+#' @param digits An [`integer`] indicating the number of decimal places to be
+#'  used.
+#' @param ... Currently not used.
+#' @return
+#'  * `get_eigenvalues()` returns a [`data.frame`] with the following columns:
+#'    `eigenvalues`, `variance` (percentage of variance) and `cumulative`
+#'    (cumulative percentage of variance).
+#'  * `get_variance()` returns a [`numeric`] vector giving the percentage of
+#'    explained variance of each dimension.
+#'  * `get_inertia()` returns a [`numeric`] vector.
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @aliases get_eigenvalues-method
+setGeneric(
+  name = "get_eigenvalues",
+  def = function(x) standardGeneric("get_eigenvalues"),
+  valueClass = "data.frame"
+)
+
+#' @rdname get_eigenvalues
+#' @aliases get_inertia-method
+setGeneric(
+  name = "get_inertia",
+  def = function(x, ...) standardGeneric("get_inertia"),
+  valueClass = "numeric"
+)
+
+#' @rdname get_eigenvalues
+#' @aliases get_variance-method
+setGeneric(
+  name = "get_variance",
+  def = function(x, ...) standardGeneric("get_variance"),
+  valueClass = "numeric"
+)
+
+## Contributions ---------------------------------------------------------------
+#' Get Contributions
+#'
+#' @param x An object from which to get element(s) (a [`CA-class`] or
+#'  [`PCA-class`] object).
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be returned: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns.
+#' @param sup_name A [`character`] string specifying the name of the column to
+#'  create for supplementary points attribution (see below).
+#' @param ... Currently not used.
+#' @return
+#'  * `get_contributions()` returns a [`data.frame`] of contributions to the
+#'    definition of the principal dimensions.
+#'  * `get_correlations()` returns a [`data.frame`] of correlations between
+#'    variables and dimensions (`PCA`). An extra column (named after `sup_name`)
+#'    is added specifying whether an observation is a supplementary point or
+#'    not.
+#'  * `get_cos2()` returns a [`data.frame`] of \eqn{cos^2}{cos2} values (i.e.
+#'    quality of the representation of the points on the factor map). An extra
+#'    column (named after `sup_name`) is added specifying whether an observation
+#'    is a supplementary point or not.
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @aliases get_contributions-method
+setGeneric(
+  name = "get_contributions",
+  def = function(x, ...) standardGeneric("get_contributions"),
+  valueClass = "data.frame"
+)
+
+#' @rdname get_contributions
+#' @aliases get_correlations-method
+setGeneric(
+  name = "get_correlations",
+  def = function(x, ...) standardGeneric("get_correlations"),
+  valueClass = "data.frame"
+)
+
+#' @rdname get_contributions
+#' @aliases get_cos2-method
+setGeneric(
+  name = "get_cos2",
+  def = function(x, ...) standardGeneric("get_cos2"),
+  valueClass = "data.frame"
+)
+
+## Distances -------------------------------------------------------------------
+#' Get Distances
+#'
+#' @param x An object from which to get element(s) (a [`CA-class`] or
+#'  [`PCA-class`] object).
+#' @param margin A length-one [`numeric`] vector giving the subscript which the
+#'  data will be returned: `1` indicates individuals/rows (the default), `2`
+#'  indicates variables/columns.
+#' @param ... Currently not used.
+#' @return
+#'  * `get_distances()` returns a [`numeric`] vector of squared distance to
+#'  the centroide.
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @aliases get_distances-method
+setGeneric(
+  name = "get_distances",
+  def = function(x, ...) standardGeneric("get_distances"),
+  valueClass = "numeric"
+)
+
+# Plot =========================================================================
+## Biplot ----------------------------------------------------------------------
 #' Biplot
 #'
 #' @param x A [`CA-class`] or [`PCA-class`] object.
@@ -430,6 +546,7 @@ setGeneric(
 #' @rdname biplot
 NULL
 
+## Coordinates -----------------------------------------------------------------
 #' Visualize Factor Map
 #'
 #' Plots principal coordinates.
@@ -499,49 +616,6 @@ setGeneric(
 )
 
 ## Eigenvalues -----------------------------------------------------------------
-#' Get Eigenvalues
-#'
-#' @param x An object from which to get element(s) (a [`CA-class`] or
-#'  [`PCA-class`] object).
-#' @param margin A length-one [`numeric`] vector giving the subscript which the
-#'  data will be returned: `1` indicates individuals/rows (the default), `2`
-#'  indicates variables/columns.
-#' @param digits An [`integer`] indicating the number of decimal places to be
-#'  used.
-#' @param ... Currently not used.
-#' @return
-#'  * `get_eigenvalues()` returns a [`data.frame`] with the following columns:
-#'    `eigenvalues`, `variance` (percentage of variance) and `cumulative`
-#'    (cumulative percentage of variance).
-#'  * `get_variance()` returns a [`numeric`] vector giving the percentage of
-#'    explained variance of each dimension.
-#'  * `get_inertia()` returns a [`numeric`] vector.
-#' @author N. Frerebeau
-#' @docType methods
-#' @family mutators
-#' @aliases get_eigenvalues-method
-setGeneric(
-  name = "get_eigenvalues",
-  def = function(x) standardGeneric("get_eigenvalues"),
-  valueClass = "data.frame"
-)
-
-#' @rdname get_eigenvalues
-#' @aliases get_inertia-method
-setGeneric(
-  name = "get_inertia",
-  def = function(x, ...) standardGeneric("get_inertia"),
-  valueClass = "numeric"
-)
-
-#' @rdname get_eigenvalues
-#' @aliases get_variance-method
-setGeneric(
-  name = "get_variance",
-  def = function(x, ...) standardGeneric("get_variance"),
-  valueClass = "numeric"
-)
-
 #' Scree Plot
 #'
 #' Plot eigenvalues (scree plot) or variances histogram.
@@ -573,53 +647,6 @@ setGeneric(
 NULL
 
 ## Contributions ---------------------------------------------------------------
-#' Get Contributions
-#'
-#' @param x An object from which to get element(s) (a [`CA-class`] or
-#'  [`PCA-class`] object).
-#' @param margin A length-one [`numeric`] vector giving the subscript which the
-#'  data will be returned: `1` indicates individuals/rows (the default), `2`
-#'  indicates variables/columns.
-#' @param sup_name A [`character`] string specifying the name of the column to
-#'  create for supplementary points attribution (see below).
-#' @param ... Currently not used.
-#' @return
-#'  * `get_contributions()` returns a [`data.frame`] of contributions to the
-#'    definition of the principal dimensions.
-#'  * `get_correlations()` returns a [`data.frame`] of correlations between
-#'    variables and dimensions (`PCA`). An extra column (named after `sup_name`)
-#'    is added specifying whether an observation is a supplementary point or
-#'    not.
-#'  * `get_cos2()` returns a [`data.frame`] of \eqn{cos^2}{cos2} values (i.e.
-#'    quality of the representation of the points on the factor map). An extra
-#'    column (named after `sup_name`) is added specifying whether an observation
-#'    is a supplementary point or not.
-#' @author N. Frerebeau
-#' @docType methods
-#' @family mutators
-#' @aliases get_contributions-method
-setGeneric(
-  name = "get_contributions",
-  def = function(x, ...) standardGeneric("get_contributions"),
-  valueClass = "data.frame"
-)
-
-#' @rdname get_contributions
-#' @aliases get_correlations-method
-setGeneric(
-  name = "get_correlations",
-  def = function(x, ...) standardGeneric("get_correlations"),
-  valueClass = "data.frame"
-)
-
-#' @rdname get_contributions
-#' @aliases get_cos2-method
-setGeneric(
-  name = "get_cos2",
-  def = function(x, ...) standardGeneric("get_cos2"),
-  valueClass = "data.frame"
-)
-
 #' Visualize Contributions and cos2
 #'
 #' Plots contributions histogram and \eqn{cos^2}{cos2} scatterplot.
@@ -661,28 +688,6 @@ setGeneric(
 setGeneric(
   name = "viz_cos2",
   def = function(x, ...) standardGeneric("viz_cos2")
-)
-
-## Distances -------------------------------------------------------------------
-#' Get Distances
-#'
-#' @param x An object from which to get element(s) (a [`CA-class`] or
-#'  [`PCA-class`] object).
-#' @param margin A length-one [`numeric`] vector giving the subscript which the
-#'  data will be returned: `1` indicates individuals/rows (the default), `2`
-#'  indicates variables/columns.
-#' @param ... Currently not used.
-#' @return
-#'  * `get_distances()` returns a [`numeric`] vector of squared distance to
-#'  the centroide.
-#' @author N. Frerebeau
-#' @docType methods
-#' @family mutators
-#' @aliases get_distances-method
-setGeneric(
-  name = "get_distances",
-  def = function(x, ...) standardGeneric("get_distances"),
-  valueClass = "numeric"
 )
 
 # Envelopes ====================================================================

@@ -38,6 +38,8 @@ viz_variables(x, ...)
   colour = NULL,
   shape = NULL,
   size = NULL,
+  main = NULL,
+  sub = NULL,
   ...
 )
 
@@ -53,6 +55,8 @@ viz_variables(x, ...)
   colour = NULL,
   shape = NULL,
   size = NULL,
+  main = NULL,
+  sub = NULL,
   ...
 )
 
@@ -66,6 +70,8 @@ viz_variables(x, ...)
   colour = NULL,
   shape = NULL,
   size = NULL,
+  main = NULL,
+  sub = NULL,
   ...
 )
 

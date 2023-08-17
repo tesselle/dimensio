@@ -165,6 +165,9 @@ setMethod(
   }
 
   ## Labels
+  usr <- graphics::par("usr")
+  xlim <- usr[c(1, 2)]
+  ylim <- usr[c(3, 4)]
   if (!is.null(labels)) {
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {

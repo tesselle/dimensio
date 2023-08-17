@@ -19,3 +19,4 @@ with_seed <- function(seed, code) {
   }
   eval.parent(code)
 }
+
