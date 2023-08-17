@@ -1,0 +1,182 @@
+---
+title: "Principal Components Analysis"
+output: 
+  rmarkdown::html_vignette:
+    number_sections: yes
+    fig_caption: yes
+    toc: true
+bibliography: bibliography.bib
+vignette: >
+  %\VignetteIndexEntry{Principal Components Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 5, 
+  fig.height = 5,
+  out.width = NULL
+)
+```
+
+```{r setup}
+library(dimensio)
+```
+
+# Do PCA
+
+```{r pca}
+## Load data
+data(iris)
+head(iris)
+
+## Compute PCA
+## (non numeric variables are automatically removed)
+X <- pca(iris, center = TRUE, scale = TRUE)
+```
+
+# Explore the results
+
+**dimensio** provides several methods to extract (`get_*()`) the results: 
+
+* `get_data()` returns the original data.
+* `get_contributions()` returns the contributions to the definition of the principal dimensions.
+* `get_coordinates()` returns the principal or standard coordinates.
+* `get_correlations()` returns the correlations between variables and dimensions.
+* `get_cos2()` returns the cos^2^ values (i.e. the quality of the representation of the points on the factor map).
+* `get_eigenvalues()` returns the eigenvalues, the percentages of variance and the cumulative percentages of variance.
+
+The package also allows to quickly visualize (`viz_*()`) the results:
+
+* `biplot()` produces a biplot.
+* `screeplot()` produces a scree plot.
+* `viz_rows()`/`viz_individuals()` displays row/individual principal coordinates.
+* `viz_columns()`/`viz_variables()` displays columns/variable principal coordinates.
+* `viz_contributions()` displays (joint) contributions. 
+* `viz_cos2()` displays (joint) cos^2^.
+
+```{r eigenvalues}
+## Get eigenvalues
+get_eigenvalues(X)
+
+## Scree plot
+screeplot(X, cumulative = TRUE)
+```
+
+```{r contributions}
+## Plot variable contributions to the definition of the first two axes
+viz_contributions(X, margin = 2, axes = c(1, 2))
+```
+
+# PCA biplot
+
+A biplot is the simultaneous representation of rows and columns of a rectangular dataset. It is the generalization of a scatterplot to the case of mutlivariate data: it allows to visualize as much information as possible in a single graph [@greenacre2010].
+
+**dimensio** allows to display two types of biplots: a *form biplot* (*row-metric-preserving* biplot) or a *covariance biplot* (*column-metric-preserving* biplot). See @greenacre2010 for more details about biplots.
+
+The form biplot favors the representation of the individuals: the distance between the individuals approximates the Euclidean distance between rows. In the form biplot the length of a vector approximates the quality of the representation of the variable.
+
+```{r biplot-rows}
+biplot(X, type = "form", label = "variables")
+```
+
+The covariance biplot favors the representation of the variables: the length of a vector approximates the standard deviation of the variable and the cosine of the angle formed by two vectors approximates the correlation between the two variables [@greenacre2010]. In the covariance biplot the distance between the individuals approximates the Mahalanobis distance between rows.
+
+```{r biplot-columns}
+biplot(X, type = "covariance", label = "variables")
+```
+
+Biplots have the drawbacks of their advantages: they can quickly become difficult to read as they display a lot of information at once. It may then be preferable to visualize the results for individuals and variables separately.
+
+# Plot PCA loadings
+
+`viz_variables()` depicts the variables by rays emanating from the origin (both their lengths and directions are important to the interpretation).
+
+```{r plot-var}
+## Plot variables factor map
+viz_variables(X)
+```
+
+`viz_variables()` allows to highlight additional information by varying different graphical elements (color, transparency, shape and size of symbols...).
+
+```{r plot-var-cos2}
+## Highlight cos2
+viz_variables(X, colour = "cos2", col = khroma::colour("YlOrBr")(12))
+```
+
+# Plot PCA scores
+
+`viz_individuals()` allows to display individuals and to highlight additional information.
+
+```{r plot-ind-species}
+## Plot individuals and colour by species
+viz_individuals(
+  x = X,
+  colour = iris$Species,
+  shape = iris$Species, 
+  col = khroma::colour("bright")(3), # Custom color scale
+  pch = c(15, 16, 17) # Custom symbols
+)
+```
+
+```{r plot-wrap, fig.show='hold', out.width='50%'}
+## Add ellipses
+viz_individuals(x = X)
+viz_tolerance(x = X, group = iris$Species, level = 0.95,
+              border = khroma::colour("high contrast")(3))
+
+## Add convex hull
+viz_individuals(x = X)
+viz_hull(x = X, group = iris$Species, level = 0.95,
+         border = khroma::colour("high contrast")(3))
+```
+
+```{r plot-ind-petal}
+## Highlight petal length
+viz_individuals(
+  x = X, 
+  colour = iris$Petal.Length,
+  col = khroma::colour("YlOrBr")(12), # Custom color scale
+  pch = 16
+)
+```
+
+```{r plot-ind-contrib}
+## Highlight contributions
+viz_individuals(
+  x = X, 
+  colour = "contrib", 
+  size = "contrib",
+  col = khroma::colour("iridescent")(12), # Custom color scale
+  pch = 16
+)
+```
+
+# Custom plot
+
+If you need more flexibility, the `get_*()` family and the `tidy()` and `augment()` functions allow you to extract the results as data frames and thus build custom graphs with base **graphics** or **ggplot2**.
+
+```{r tidy}
+iris_tidy <- tidy(X, margin = 2)
+head(iris_tidy)
+
+iris_augment <- augment(X, margin = 1)
+head(iris_augment)
+```
+
+```{r ggplot2, eval=FALSE}
+## Custom plot with ggplot2
+ggplot2::ggplot(data = iris_augment) +
+  ggplot2::aes(x = F1, y = F2, colour = contribution) +
+  ggplot2::geom_vline(xintercept = 0, linewidth = 0.5, linetype = "dashed") +
+  ggplot2::geom_hline(yintercept = 0, linewidth = 0.5, linetype = "dashed") +
+  ggplot2::geom_point() +
+  ggplot2::coord_fixed() + # /!\
+  ggplot2::theme_bw() +
+  khroma::scale_color_iridescent()
+```
+
+# References

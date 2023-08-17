@@ -35,11 +35,11 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 
 ## Overview
 
-Simple Principal Components Analysis (PCA) and Correspondence Analysis
-(CA) based on the Singular Value Decomposition (SVD). This package
-provides S4 classes and methods to compute, extract, summarize and
-visualize results of multivariate data analysis. It also includes
-methods for partial bootstrap validation.
+Simple Principal Components Analysis (PCA; see `vignette("pca")`) and
+Correspondence Analysis (CA) based on the Singular Value Decomposition
+(SVD). This package provides S4 classes and methods to compute, extract,
+summarize and visualize results of multivariate data analysis. It also
+includes methods for partial bootstrap validation.
 
 There are many very good packages for multivariate data analysis (such
 as [**FactoMineR**](http://factominer.free.fr/),
@@ -93,9 +93,11 @@ remotes::install_github("tesselle/dimensio")
 ## Usage
 
 ``` r
+## Install extra packages (if needed)
+# install.packages("khroma")
+
 ## Load packages
 library(dimensio)
-library(khroma)
 ```
 
 ### Compute
@@ -129,6 +131,8 @@ X <- pca(iris, center = TRUE, scale = TRUE)
 
 The package allows to quickly visualize the results:
 
+- `biplot()` produces a biplot.
+- `screeplot()` produces a scree plot.
 - `viz_rows()`/`viz_individuals()` displays row/individual principal
   coordinates.
 - `viz_columns()`/`viz_variables()` displays columns/variable principal
@@ -137,8 +141,6 @@ The package allows to quickly visualize the results:
   the interpretation).
 - `viz_contributions()` displays (joint) contributions.
 - `viz_cos2()` displays (joint) cos<sup>2</sup>.
-- `screeplot()` produces a scree plot.
-- `biplot()` produces a biplot.
 
 The `viz_*()` functions allow to highlight additional information by
 varying different graphical elements (color, transparency, shape and
@@ -156,7 +158,7 @@ biplot(X, type = "form")
 viz_individuals(
   x = X, 
   colour = iris$Species, 
-  col = colour("high contrast")(3), 
+  col = khroma::colour("high contrast")(3), 
   pch = 16
 )
 ## Add ellipses
@@ -164,7 +166,7 @@ viz_tolerance(
   x = X, 
   group = iris$Species, 
   level = 0.95,
-  border = colour("high contrast")(3)
+  border = khroma::colour("high contrast")(3)
 )
 
 ## Highlight petal length
@@ -172,7 +174,7 @@ viz_individuals(
   x = X,
   colour = iris$Petal.Length, 
   size = iris$Petal.Length,
-  col = colour("iridescent")(255), 
+  col = khroma::colour("iridescent")(255), 
   pch = 16
 )
 ```
@@ -182,26 +184,14 @@ viz_individuals(
 ``` r
 ## Plot variables factor map
 viz_variables(X)
+#> [1] -1  1 -1  1
+#> [1] -1.205581  1.205581 -1.080000  1.080000
 
-## Highlight contributions
-viz_variables(
-  x = X,
-  colour = "cos2", 
-  col = colour("YlOrBr")(255)
-)
+## Scree plot
+screeplot(X, eigenvalues = FALSE, cumulative = TRUE)
 ```
 
 <img src="man/figures/README-plot-var-1.png" width="50%" /><img src="man/figures/README-plot-var-2.png" width="50%" />
-
-``` r
-## Scree plot
-screeplot(X, eigenvalues = FALSE, cumulative = TRUE)
-
-## Plot variables contributions to the definition of the first component
-viz_contributions(X, margin = 2, axes = 1)
-```
-
-<img src="man/figures/README-plot-eig-1.png" width="50%" /><img src="man/figures/README-plot-eig-2.png" width="50%" />
 
 ## Contributing
 
