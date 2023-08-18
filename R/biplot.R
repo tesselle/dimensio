@@ -52,7 +52,7 @@ setMethod(
       cex.columns <- cex.columns + (coord_col$mass / max(coord_col$mass))
     }
 
-    .biplot(
+    viz_biplot(
       coord_row, coord_col, rows = TRUE, columns = TRUE, labels = labels,
       col.rows = col.rows, col.columns = col.columns,
       pch.rows = pch.rows, pch.columns = pch.columns,
@@ -112,7 +112,7 @@ setMethod(
       )
     }
 
-    .biplot(
+    viz_biplot(
       coord_row, coord_col, rows = TRUE, columns = FALSE, labels = labels,
       col.rows = col.rows, col.columns = col.columns,
       pch.rows = pch.rows, pch.columns = pch.columns,
@@ -128,16 +128,16 @@ setMethod(
   }
 )
 
-.biplot <- function(coord_row, coord_col, rows = TRUE, columns = TRUE,
-                    labels = c("rows", "columns", "individuals", "variables"),
-                    col.rows = "#004488", col.columns = "#BB5566",
-                    pch.rows = 16, pch.columns = 17,
-                    cex.rows = graphics::par("cex"),
-                    cex.columns = graphics::par("cex"),
-                    xlab = NULL, ylab = NULL, main = NULL, sub = NULL,
-                    axes = TRUE, frame.plot = axes,
-                    ann = graphics::par("ann"),
-                    panel.first = NULL, panel.last = NULL, ...) {
+viz_biplot <- function(coord_row, coord_col, rows = TRUE, columns = TRUE,
+                       labels = c("rows", "columns", "individuals", "variables"),
+                       col.rows = "#004488", col.columns = "#BB5566",
+                       pch.rows = 16, pch.columns = 17,
+                       cex.rows = graphics::par("cex"),
+                       cex.columns = graphics::par("cex"),
+                       xlab = NULL, ylab = NULL, main = NULL, sub = NULL,
+                       axes = TRUE, frame.plot = axes,
+                       ann = graphics::par("ann"),
+                       panel.first = NULL, panel.last = NULL, ...) {
 
   ## Open new window
   grDevices::dev.hold()
@@ -171,12 +171,12 @@ setMethod(
   if (!is.null(labels)) {
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {
-      .labels(x = coord_row$x, y = coord_row$y, labels = coord_row$label,
-              xlim = xlim, ylim = ylim, col = col.rows, ...)
+      viz_labels(x = coord_row$x, y = coord_row$y, labels = coord_row$label,
+                 xlim = xlim, ylim = ylim, col = col.rows, ...)
     }
     if (any(labels == "columns") | any(labels == "variables")) {
-      .labels(x = coord_col$x, y = coord_col$y, labels = coord_col$label,
-              xlim = xlim, ylim = ylim, col = col.columns, ...)
+      viz_labels(x = coord_col$x, y = coord_col$y, labels = coord_col$label,
+                 xlim = xlim, ylim = ylim, col = col.columns, ...)
     }
   }
 

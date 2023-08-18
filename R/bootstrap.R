@@ -1,8 +1,8 @@
 # BOOTSTRAP
-#' @include AllClasses.R AllGenerics.R
+#' @include AllGenerics.R
 NULL
 
-# MultivariateAnalysis =========================================================
+# CA ===========================================================================
 #' @export
 #' @rdname bootstrap
 #' @aliases bootstrap,CA-method
@@ -54,6 +54,7 @@ setMethod(
   }
 )
 
+# PCA ==========================================================================
 #' @export
 #' @rdname bootstrap
 #' @aliases bootstrap,PCA-method

@@ -547,9 +547,71 @@ setGeneric(
 NULL
 
 ## Coordinates -----------------------------------------------------------------
-#' Visualize Factor Map
+#' Visualize Individuals Factor Map
 #'
-#' Plots principal coordinates.
+#' Plots row/individual principal coordinates.
+#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param axes A length-two [`numeric`] vector giving the dimensions to be
+#'  plotted.
+#' @param active A [`logical`] scalar: should the active observations be
+#'  plotted?
+#' @param sup A [`logical`] scalar: should the supplementary observations be
+#'  plotted?
+#' @param labels A [`logical`] scalar: should labels be drawn?
+#' @param alpha,colour,shape,size A vector specifying the
+#'  information to be highlighted (will be mapped to the corresponding
+#'  aesthetic; see examples and vignettes).
+#'  If a single `character` string is passed, it must be one of "`observation`",
+#'  "`mass`", "`sum`", "`contribution`" or "`cos2`" (see details).
+#'  Any unambiguous substring can be given.
+#'  If `NULL` (the default), no highlighting is applied.
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param ... Further [graphical parameters][graphics::par] (see below).
+#' @details
+#'  Available statistics:
+#'  \describe{
+#'   \item{`observation`}{Whether an observation is active or supplementary.}
+#'   \item{`mass`}{Weight/mass of each observation.}
+#'   \item{`sum`}{Sum of squared coordinates along `axes`.}
+#'   \item{`contribution`}{Joint contributions to the definition of `axes`.}
+#'   \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
+#'  }
+#'
+#'  Commonly used [graphical parameters][graphics::par] are:
+#'  \describe{
+#'   \item{`col`}{The colors for lines and points. Multiple colors can be
+#'                specified so that each point can be given its own color.}
+#'   \item{`pch`}{A vector of plotting characters or symbols.}
+#'   \item{`cex`}{A `numeric` vector giving the amount by which plotting
+#'                characters and symbols should be scaled relative to the
+#'                default.}
+#'   \item{`lty`}{A vector of line types.}
+#'   \item{`lwd`}{A vector of line widths.}
+#'  }
+#' @return
+#'  `viz_*()` is called for its side-effects: it results in a graphic
+#'  being displayed. Invisibly returns `x`.
+#' @example inst/examples/ex-plot.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family plot methods
+#' @aliases viz_individuals-method
+setGeneric(
+  name = "viz_individuals",
+  def = function(x, ...) standardGeneric("viz_individuals")
+)
+
+#' @rdname viz_individuals
+#' @aliases viz_rows-method
+setGeneric(
+  name = "viz_rows",
+  def = function(x, ...) standardGeneric("viz_rows")
+)
+
+#' Visualize Variables Factor Map
+#'
+#' Plots column/variable principal coordinates.
 #' @param x A [`CA-class`] or [`PCA-class`] object.
 #' @param axes A length-two [`numeric`] vector giving the dimensions to be
 #'  plotted.
@@ -596,36 +658,17 @@ NULL
 #' @author N. Frerebeau
 #' @docType methods
 #' @family plot methods
-#' @name viz_coordinates
-#' @rdname viz_coordinates
-NULL
-
-#' @rdname viz_coordinates
-#' @aliases viz_rows-method
-setGeneric(
-  name = "viz_rows",
-  def = function(x, ...) standardGeneric("viz_rows")
-)
-
-#' @rdname viz_coordinates
-#' @aliases viz_columns-method
-setGeneric(
-  name = "viz_columns",
-  def = function(x, ...) standardGeneric("viz_columns")
-)
-
-#' @rdname viz_coordinates
-#' @aliases viz_individuals-method
-setGeneric(
-  name = "viz_individuals",
-  def = function(x, ...) standardGeneric("viz_individuals")
-)
-
-#' @rdname viz_coordinates
 #' @aliases viz_variables-method
 setGeneric(
   name = "viz_variables",
   def = function(x, ...) standardGeneric("viz_variables")
+)
+
+#' @rdname viz_variables
+#' @aliases viz_columns-method
+setGeneric(
+  name = "viz_columns",
+  def = function(x, ...) standardGeneric("viz_columns")
 )
 
 ## Eigenvalues -----------------------------------------------------------------

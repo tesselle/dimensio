@@ -1,5 +1,5 @@
 # CORRESPONDENCE ANALYSIS
-#' @include AllClasses.R AllGenerics.R
+#' @include AllGenerics.R
 NULL
 
 #' @export
@@ -170,40 +170,5 @@ setMethod(
         supplement = is_col_sup
       )
     )
-  }
-)
-
-#' @export
-#' @rdname predict
-#' @aliases predict,CA-method
-setMethod(
-  f = "predict",
-  signature = signature(object = "CA"),
-  definition = function(object, newdata, margin = 1) {
-    # Coerce to matrix
-    if (missing(newdata)) {
-      data <- object@data
-      data <- data[!object@rows@supplement, !object@columns@supplement]
-    } else {
-      data <- as.matrix(newdata)
-    }
-
-    # TODO: keep only matching rows/columns
-
-    # Get standard coordinates
-    if (margin == 1) {
-      data <- data / rowSums(data)
-      std <- object@columns@standard
-    }
-    if (margin == 2) {
-      data <- t(data) / colSums(data)
-      std <- object@rows@standard
-    }
-
-    # Compute principal coordinates
-    coords <- crossprod(t(data), std)
-    coords <- as.data.frame(coords)
-    colnames(coords) <- paste0("F", seq_along(coords))
-    return(coords)
   }
 )

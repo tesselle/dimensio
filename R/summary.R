@@ -1,8 +1,8 @@
 # SUMMARY
-#' @include AllClasses.R
+#' @include AllGenerics.R
 NULL
 
-# Correspondence Analysis ======================================================
+# CA ===========================================================================
 #' @export
 #' @rdname summary
 #' @aliases summary,CA-method
@@ -44,7 +44,7 @@ setMethod(
   }
 )
 
-# Principal Components Analysis ================================================
+# PCA ==========================================================================
 #' @export
 #' @rdname summary
 #' @aliases summary,PCA-method

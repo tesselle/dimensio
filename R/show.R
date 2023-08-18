@@ -1,5 +1,5 @@
-# SHOW METHODS
-#' @include AllClasses.R
+# SHOW
+#' @include AllGenerics.R
 NULL
 
 setMethod(

@@ -1,5 +1,5 @@
 # SVD
-#' @include AllClasses.R AllGenerics.R
+#' @include AllGenerics.R
 NULL
 
 #' Singular Value Decomposition of a Matrix
