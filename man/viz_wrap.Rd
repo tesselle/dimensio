@@ -10,8 +10,11 @@
 \alias{viz_tolerance}
 \alias{viz_tolerance-method}
 \alias{viz_tolerance,MultivariateAnalysis-method}
+\alias{viz_tolerance,BootstrapCA-method}
 \alias{viz_confidence,MultivariateAnalysis-method}
+\alias{viz_confidence,BootstrapCA-method}
 \alias{viz_hull,MultivariateAnalysis-method}
+\alias{viz_hull,BootstrapCA-method}
 \title{Plot Envelopes}
 \usage{
 viz_hull(x, ...)
@@ -22,9 +25,15 @@ viz_tolerance(x, ...)
 
 \S4method{viz_tolerance}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95, ...)
 
+\S4method{viz_tolerance}{BootstrapCA}(x, margin = 1, axes = c(1, 2), level = 0.95, ...)
+
 \S4method{viz_confidence}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95, ...)
 
+\S4method{viz_confidence}{BootstrapCA}(x, margin = 1, axes = c(1, 2), level = 0.95, ...)
+
 \S4method{viz_hull}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL, ...)
+
+\S4method{viz_hull}{BootstrapCA}(x, margin = 1, axes = c(1, 2), ...)
 }
 \arguments{
 \item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}} or
@@ -70,7 +79,7 @@ conf <- wrap_confidence(X, margin = 1, group = iris$Species, level = 0.95)
 
 ## Plot with convex hulls
 col <- c(blue = "#004488", yellow = "#DDAA33", red = "#BB5566")
-viz_rows(X, map_color = iris$Species, scale_color = col)
+viz_rows(X, map_color = iris$Species, col = col)
 viz_hull(X, group = iris$Species, border = col)
 }
 \seealso{

@@ -72,6 +72,10 @@ setMethod(
     lapply(
       X = data,
       FUN = function(x, level) {
+        ## Drop NAs
+        x <- stats::na.omit(x)
+        if (nrow(x) < 3) return(NULL)
+
         df <- ncol(x) - 1
         radius <- sqrt(stats::qchisq(p = level, df = df))
         wrap_ellipse(x[, 1], x[, 2], radius = radius)

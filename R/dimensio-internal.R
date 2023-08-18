@@ -6,6 +6,18 @@
 
 `%notin%` <- Negate(`%in%`)
 
+recycle <- function(x, n, verbose = getOption("dimensio.verbose")) {
+  if (length(x) == n) return(x)
+
+  if (verbose) {
+    arg <- deparse(substitute(x))
+    msg <- sprintf("Note that %s was recycled to length %d.", sQuote(arg), n)
+    message(msg)
+  }
+  x <- rep_len(x, length.out = n)
+  x
+}
+
 #' Weighted Column Means and Standard Deviations
 #'
 #' @param x A [`numeric`] matrix.

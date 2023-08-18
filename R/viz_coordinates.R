@@ -10,19 +10,12 @@ setMethod(
   f = "viz_rows",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE,
-                        map_alpha = NULL, map_color = NULL,
+                        labels = FALSE, map_color = NULL,
                         map_shape = NULL, map_size = NULL,
-                        scale_color = NULL, scale_shape = NULL,
-                        scale_size = NULL,
                         main = NULL, sub = NULL, ...) {
-    viz_points(x, margin = 1, axes = axes,
-               active = active, sup = sup, labels = labels,
-               map_alpha = map_alpha, map_color = map_color,
+    viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
+               labels = labels, map_color = map_color,
                map_shape = map_shape, map_size = map_size,
-               scale_color = scale_color,
-               scale_shape = scale_shape,
-               scale_size = scale_size,
                main = main, sub = sub, ...)
     invisible(x)
   }
@@ -34,13 +27,11 @@ setMethod(
 setMethod(
   f = "viz_rows",
   signature = c(x = "BootstrapCA"),
-  definition = function(x, axes = c(1, 2), scale_color = NULL,
-                        scale_shape = NULL, ...) {
+  definition = function(x, axes = c(1, 2), ...) {
     group <- get_groups(x, margin = 1)
     viz_points(x, margin = 1, axes = axes,
                active = TRUE, sup = TRUE, labels = FALSE,
-               map_color = group, scale_color = scale_color,
-               map_shape = group, scale_shape = scale_shape, ...)
+               map_color = group, map_shape = group, ...)
     invisible(x)
   }
 )
@@ -53,15 +44,12 @@ setMethod(
   f = "viz_individuals",
   signature = c(x = "PCA"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, map_alpha = NULL, map_color = NULL,
+                        labels = FALSE, map_color = NULL,
                         map_shape = NULL, map_size = NULL,
-                        scale_color = NULL, scale_shape = NULL,
-                        scale_size = NULL, main = NULL, sub = NULL, ...) {
+                        main = NULL, sub = NULL, ...) {
     viz_rows(x, axes = axes, active = active, sup = sup, labels = labels,
-             map_alpha = map_alpha, map_color = map_color,
-             map_shape = map_shape, map_size = map_size,
-             scale_color = scale_color, scale_shape = scale_shape,
-             scale_size = scale_size, main = main, sub = sub, ...)
+             map_color = map_color, map_shape = map_shape, map_size = map_size,
+             main = main, sub = sub, ...)
     invisible(x)
   }
 )
@@ -75,17 +63,12 @@ setMethod(
   f = "viz_columns",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, map_alpha = NULL, map_color = NULL,
+                        labels = FALSE, map_color = NULL,
                         map_shape = NULL, map_size = NULL,
-                        scale_color = NULL, scale_shape = NULL,
-                        scale_size = NULL, main = NULL, sub = NULL, ...) {
-    viz_points(x, margin = 2, axes = axes,
-               active = active, sup = sup, labels = labels,
-               map_alpha = map_alpha, map_color = map_color,
+                        main = NULL, sub = NULL, ...) {
+    viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
+               labels = labels, map_color = map_color,
                map_shape = map_shape, map_size = map_size,
-               scale_color = scale_color,
-               scale_shape = scale_shape,
-               scale_size = scale_size,
                main = main, sub = sub, ...)
     invisible(x)
   }
@@ -97,12 +80,10 @@ setMethod(
 setMethod(
   f = "viz_columns",
   signature = c(x = "BootstrapCA"),
-  definition = function(x, axes = c(1, 2), scale_color = NULL,
-                        scale_shape = NULL, ...) {
+  definition = function(x, axes = c(1, 2), ...) {
     group <- get_groups(x, margin = 2)
     viz_points(x, margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, map_color = group, scale_color = scale_color,
-               map_shape = group, scale_shape = scale_shape, ...)
+               labels = FALSE, map_color = group, map_shape = group, ...)
     invisible(x)
   }
 )
@@ -115,19 +96,17 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "PCA"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = TRUE, map_alpha = NULL, map_color = NULL,
-                        map_linetype = NULL, map_size = NULL,
-                        scale_color = NULL, scale_linetype = NULL,
-                        scale_size = NULL, main = NULL, sub = NULL, ...) {
+                        labels = TRUE, map_color = NULL,
+                        map_linetype = NULL, map_linewidth = NULL,
+                        main = NULL, sub = NULL, ...) {
     ## Prepare data
     coord <- prepare_coord(x, margin = 2, axes = axes, active = active,
                            sup = sup)
 
     ## Graphical parameters
-    param <- prepare_param(coord, map_alpha = map_alpha,
-                           map_color = map_color, scale_color = scale_color,
-                           map_linetype = map_linetype, scale_linetype = scale_linetype,
-                           map_size = map_size, scale_size = scale_size)
+    param <- prepare_param(coord, map_color = map_color,
+                           map_linetype = map_linetype,
+                           map_linewidth = map_linewidth, ...)
 
     ## Open new window
     grDevices::dev.hold()
@@ -159,9 +138,8 @@ setMethod(
 
     ## Labels
     if (labels && nrow(coord) > 1) {
-      usr <- graphics::par("usr")
       viz_labels(x = coord$x, y = coord$y, labels = coord$label,
-                 xlim = usr[c(1, 2)], ylim = usr[c(3, 4)], col = param$col)
+                 col = param$col, cex = param$cex)
     }
 
     ## Evaluate post-plot and pre-axis expressions
@@ -197,31 +175,25 @@ setMethod(
 setMethod(
   f = "viz_variables",
   signature = c(x = "BootstrapPCA"),
-  definition = function(x, axes = c(1, 2), scale_color = NULL,
-                        scale_shape = NULL, ...) {
+  definition = function(x, axes = c(1, 2), ...) {
     group <- get_groups(x, margin = 2)
     viz_points(x, margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, map_color = group, scale_color = scale_color,
-               map_shape = group, scale_shape = scale_shape, ...)
+               labels = FALSE, map_color = group, map_shape = group, ...)
     invisible(x)
   }
 )
 
 # Helpers ======================================================================
 viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALSE,
-                       map_alpha = NULL, map_color = NULL, scale_color = NULL,
-                       map_shape = NULL, scale_shape = NULL,
-                       map_size = NULL, scale_size = NULL,
+                       map_color = NULL, map_shape = NULL, map_size = NULL,
                        main = NULL, sub = NULL, ...) {
   ## Prepare data
   coord <- prepare_coord(x, margin = margin, axes = axes, active = active,
                          sup = sup)
 
   ## Graphical parameters
-  param <- prepare_param(coord, map_alpha = map_alpha,
-                         map_color = map_color, scale_color = scale_color,
-                         map_shape = map_shape, scale_shape = scale_shape,
-                         map_size = map_size, scale_size = scale_size)
+  param <- prepare_param(coord, map_color = map_color, map_shape = map_shape,
+                         map_size = map_size, alpha = FALSE, ...)
 
   ## Open new window
   grDevices::dev.hold()
@@ -229,8 +201,8 @@ viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALS
   graphics::plot.new()
 
   ## Set plotting coordinates
-  xlim <- range(coord$x)
-  ylim <- range(coord$y)
+  xlim <- range(coord$x, na.rm = TRUE)
+  ylim <- range(coord$y, na.rm = TRUE)
   graphics::plot.window(xlim = xlim, ylim = ylim, asp = 1)
 
   ## Evaluate pre-plot expressions
@@ -244,9 +216,8 @@ viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALS
 
   ## Labels
   if (labels) {
-    usr <- graphics::par("usr")
     viz_labels(x = coord$x, y = coord$y, labels = coord$label,
-               xlim = usr[c(1, 2)], ylim = usr[c(3, 4)], col = param$col, ...)
+               col = param$col, cex = param$cex)
   }
 
   ## Evaluate post-plot and pre-axis expressions
@@ -339,94 +310,98 @@ prepare_coord <- function(object, margin, axes = c(1, 2), active = TRUE,
   data
 }
 
-prepare_param <- function(x, map_alpha = NULL,
-                          map_color = NULL, scale_color = NULL,
-                          map_size = NULL, scale_size = NULL,
-                          map_linetype = NULL, scale_linetype = NULL,
-                          map_shape = NULL, scale_shape = NULL) {
+prepare_param <- function(x, map_color = NULL, map_shape = NULL,
+                          map_size = NULL, map_linetype = NULL,
+                          map_linewidth = NULL, alpha = FALSE, ...) {
   n <- nrow(x)
-
-  ## Graphical parameters
-  col <- scale_color
-  pch <- scale_shape
-  lty <- scale_linetype
-  cex <- scale_size %||% graphics::par("cex")
-  lwd <- scale_size %||% graphics::par("lwd")
-
   choices <- c("observation", "mass", "sum", "contribution", "cos2")
 
-  if (!is.null(map_color)) {
-    if (length(map_color) == 1) {
-      map_color <- match.arg(map_color, choices = choices)
-      map_color <- x[[map_color]]
-    }
-
-    if (is.double(map_color)) {
-      ## Continuous scale
-      if (is.null(col))
-        col <- grDevices::hcl.colors(12, "YlOrRd", rev = TRUE)
-      map_color <- map_color / max(map_color)
-      col <- grDevices::colorRamp(col)(map_color)
-      col <- grDevices::rgb(col[, 1], col[, 2], col[, 3], maxColorValue = 255)
-    } else {
-      ## Discrete scale
-      n_col <- length(unique(map_color))
-      if (is.null(col)) col <- grDevices::hcl.colors(n_col, "viridis")
-      if (length(col) < n_col) assert_length(col, n_col)
-      col <- col[as.factor(map_color)]
-    }
-  } else {
-    col <- rep(col %||% graphics::par("col"), n)
+  ## Colors
+  if (length(map_color) == 1) {
+    map_color <- match.arg(map_color, choices = choices)
+    map_color <- x[[map_color]]
   }
+  col <- scale_color(x = map_color, n = n, col = list(...)$col, alpha = alpha)
 
-  if (!is.null(map_alpha)) {
-    if (length(map_alpha) == 1) {
-      map_alpha <- match.arg(map_alpha, choices = choices[c(2, 3, 4, 5)])
-      map_alpha <- x[[map_alpha]]
-    }
-
-    alpha <- as.numeric(map_alpha)
-    alpha <- alpha / max(alpha)
-    col <- grDevices::adjustcolor(col, alpha.f = alpha)
+  ## Symbol
+  if (length(map_shape) == 1) {
+    map_shape <- match.arg(map_shape, choices = choices[1])
+    map_shape <- x[[map_shape]]
   }
+  pch <- scale_symbole(x = map_shape, n = n, symb = list(...)$pch,
+                       default = graphics::par("pch"))
 
-  if (!is.null(map_linetype)) {
-    if (length(map_linetype) == 1) {
-      map_linetype <- match.arg(map_linetype, choices = choices[1])
-      map_linetype <- x[[map_linetype]]
-    }
-
-    n_lty <- length(unique(map_linetype))
-    if (is.null(lty)) lty <- seq_along(unique(map_linetype))
-    lty <- lty[as.factor(map_linetype)]
-  } else {
-    lty <- rep(lty %||% graphics::par("lty"), n)
+  ## Size
+  if (length(map_size) == 1) {
+    map_size <- match.arg(map_size, choices = choices[c(2, 3, 4, 5)])
+    map_size <- x[[map_size]]
   }
+  cex <- scale_size(x = map_size, n, size = list(...)$cex,
+                    default = graphics::par("cex"))
 
-  if (!is.null(map_shape)) {
-    if (length(map_shape) == 1) {
-      map_shape <- match.arg(map_shape, choices = choices[1])
-      map_shape <- x[[map_shape]]
-    }
-
-    if (is.null(pch)) pch <- seq_along(unique(map_shape))
-    pch <- pch[as.factor(map_shape)]
-  } else {
-    pch <- rep(pch %||% graphics::par("pch"), n)
+  ## Line type
+  if (length(map_linetype) == 1) {
+    map_linetype <- match.arg(map_linetype, choices = choices[1])
+    map_linetype <- x[[map_linetype]]
   }
+  lty <- scale_symbole(x = map_linetype, n = n, symb = list(...)$lty,
+                       default = graphics::par("lty"))
 
-  if (!is.null(map_size)) {
-    if (length(map_size) == 1) {
-      map_size <- match.arg(map_size, choices = choices[c(2, 3, 4, 5)])
-      map_size <- x[[map_size]]
-    }
-
-    cex <- cex + map_size / max(map_size)
-    lwd <- lwd + map_size / max(map_size)
-  } else {
-    cex <- rep(cex, n)
-    lwd <- rep(lwd, n)
+  ## Line width
+  if (length(map_linewidth) == 1) {
+    map_linewidth <- match.arg(map_linewidth, choices = choices[c(2, 3, 4, 5)])
+    map_linewidth <- x[[map_linewidth]]
   }
+  lwd <- scale_size(x = map_linewidth, n = n, size = list(...)$lwd,
+                    default = graphics::par("lwd"))
 
   data.frame(col = col, pch = pch, cex = cex, lty = lty, lwd = lwd)
+}
+
+scale_range <- function(x, to = c(0, 1), from = range(x, na.rm = TRUE)) {
+  (x - from[1]) / diff(from) * diff(to) + to[1]
+}
+scale_color <- function(x, n, col = NULL, alpha = FALSE) {
+  if (is.null(x)) {
+    col <- rep_len(col %||% graphics::par("col"), n)
+    return(col)
+  }
+
+  if (is.double(x)) {
+    ## Continuous scale
+    if (is.null(col))
+      col <- grDevices::hcl.colors(12, "YlOrRd", rev = TRUE)
+    x <- scale_range(x) # Rescale to [0,1]
+    col <- grDevices::colorRamp(col)(x)
+    col <- grDevices::rgb(col[, 1], col[, 2], col[, 3], maxColorValue = 255)
+  } else {
+    ## Discrete scale
+    n_col <- length(unique(x))
+    if (is.null(col))
+      col <- grDevices::hcl.colors(n_col, "viridis")
+    col <- recycle(col, n_col)
+    col <- col[as.factor(x)]
+  }
+
+  ## Alpha transparency
+  if (alpha) col <- grDevices::adjustcolor(col, alpha.f = alpha)
+
+  col
+}
+scale_symbole <- function(x, n, symb = NULL, default = 1) {
+  symb <- symb %||% default
+  if (is.null(x)) return(rep_len(symb, n))
+
+  n_symb <- length(unique(x))
+  if (is.null(n_symb)) symb <- seq_len(n_symb)
+  symb <- recycle(symb, n_symb)
+  symb <- symb[as.factor(x)]
+  symb
+}
+scale_size <- function(x, n, size = NULL, default = 1) {
+  size <- size %||% default
+  if (is.null(x)) return(rep_len(size, n))
+
+  size <- size + x / max(x)
+  size
 }

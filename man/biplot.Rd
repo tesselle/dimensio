@@ -13,9 +13,11 @@
   type = c("rows", "columns", "contributions"),
   active = TRUE,
   sup = TRUE,
-  labels = c("rows", "columns"),
+  labels = "columns",
   col.rows = "#004488",
   col.columns = "#BB5566",
+  cex.rows = graphics::par("cex"),
+  cex.columns = graphics::par("cex"),
   pch.rows = 16,
   pch.columns = 17,
   main = NULL,
@@ -62,6 +64,9 @@ plotted?}
 drawn. Any unambiguous substring can be given.}
 
 \item{col.rows, col.columns}{A color specification.}
+
+\item{cex.rows, cex.columns}{A numerical vector giving the amount by which
+plotting characters and symbols should be scaled relative to the default.}
 
 \item{pch.rows, pch.columns}{A symbol specification.}
 

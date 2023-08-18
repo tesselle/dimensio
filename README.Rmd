@@ -113,8 +113,8 @@ biplot(X, type = "form")
 viz_individuals(
   x = X, 
   map_color = iris$Species, 
-  scale_color = khroma::color("high contrast")(3), 
-  scale_shape = 16
+  col = khroma::color("high contrast")(3), 
+  pch = 16
 )
 ## Add ellipses
 viz_tolerance(
@@ -129,8 +129,8 @@ viz_individuals(
   x = X,
   map_color = iris$Petal.Length, 
   map_size = iris$Petal.Length,
-  scale_color = khroma::color("iridescent")(255), 
-  scale_shape = 16
+  col = khroma::color("iridescent")(255), 
+  pch = 16
 )
 ```
 

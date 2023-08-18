@@ -12,8 +12,10 @@ setMethod(
   definition = function(x, axes = c(1, 2),
                         type = c("rows", "columns", "contributions"),
                         active = TRUE, sup = TRUE,
-                        labels = c("rows", "columns"),
+                        labels = "columns",
                         col.rows = "#004488", col.columns = "#BB5566",
+                        cex.rows = graphics::par("cex"),
+                        cex.columns = graphics::par("cex"),
                         pch.rows = 16, pch.columns = 17,
                         main = NULL, sub = NULL, ...) {
     ## Validation
@@ -42,8 +44,6 @@ setMethod(
                                 principal = princ_col)
 
     ## Graphical parameters
-    cex.rows <- cex.columns <- graphics::par("cex")
-
     if (type == "contributions") {
       coord_row$x <- coord_row$x * sqrt(coord_row$mass)
       coord_row$y <- coord_row$y * sqrt(coord_row$mass)

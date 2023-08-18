@@ -22,19 +22,15 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
-  map_alpha = NULL,
   map_color = NULL,
   map_shape = NULL,
   map_size = NULL,
-  scale_color = NULL,
-  scale_shape = NULL,
-  scale_size = NULL,
   main = NULL,
   sub = NULL,
   ...
 )
 
-\S4method{viz_columns}{BootstrapCA}(x, axes = c(1, 2), scale_color = NULL, scale_shape = NULL, ...)
+\S4method{viz_columns}{BootstrapCA}(x, axes = c(1, 2), ...)
 
 \S4method{viz_variables}{PCA}(
   x,
@@ -42,24 +38,20 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = TRUE,
-  map_alpha = NULL,
   map_color = NULL,
   map_linetype = NULL,
-  map_size = NULL,
-  scale_color = NULL,
-  scale_linetype = NULL,
-  scale_size = NULL,
+  map_linewidth = NULL,
   main = NULL,
   sub = NULL,
   ...
 )
 
-\S4method{viz_variables}{BootstrapPCA}(x, axes = c(1, 2), scale_color = NULL, scale_shape = NULL, ...)
+\S4method{viz_variables}{BootstrapPCA}(x, axes = c(1, 2), ...)
 }
 \arguments{
 \item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
 
-\item{...}{Currently not used.}
+\item{...}{Further \link[graphics:par]{graphical parameters} (see details).}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -72,28 +64,17 @@ plotted?}
 
 \item{labels}{A \code{\link{logical}} scalar: should labels be drawn?}
 
-\item{map_alpha, map_color, map_linetype, map_shape, map_size}{A vector
-specifying the information to be highlighted.
-It will be mapped to the corresponding aesthetic, according to the
-corresponding \code{scale} argument (see examples and vignettes).
+\item{map_color, map_shape, map_size, map_linetype, map_linewidth}{A vector
+specifying the information to be highlighted. It will be mapped to the
+corresponding aesthetic (see examples and vignettes).
 If a single \code{character} string is passed, it must be one of "\code{observation}",
 "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}" (see details).
 Any unambiguous substring can be given.
 If \code{NULL} (the default), no highlighting is applied.}
 
-\item{scale_color}{The colors for points. Multiple colors can be
-specified so that each point can be given its own color.}
-
-\item{scale_shape}{A vector of plotting characters or symbols.}
-
-\item{scale_size}{A \code{numeric} vector giving the amount by which plotting
-characters and symbols should be scaled relative to the default.}
-
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
 \item{sub}{A \code{\link{character}} string giving a subtitle for the plot.}
-
-\item{scale_linetype}{A vector of line type specification.}
 }
 \value{
 \verb{viz_*()} is called for its side-effects: it results in a graphic
@@ -111,6 +92,18 @@ Available statistics:
 \item{\code{contribution}}{Joint contributions to the definition of \code{axes}.}
 \item{\code{cos2}}{Joint \eqn{cos^2}{cos2} along \code{axes}.}
 }
+
+Commonly used \link[graphics:par]{graphical parameters} are:
+\describe{
+\item{\code{col}}{The colors for lines and points. Multiple colors can be
+specified so that each point can be given its own color.}
+\item{\code{pch}}{A vector of plotting characters or symbols.}
+\item{\code{cex}}{A numerical vector giving the amount by which plotting
+characters and symbols should be scaled relative to the
+default.}
+\item{\code{lty}}{A vector of line types.}
+\item{\code{lwd}}{A vector of line widths.}
+}
 }
 \examples{
 ## Load data
@@ -124,8 +117,7 @@ viz_individuals(X, map_color = iris$Species, map_shape = iris$Species)
 
 viz_individuals(X, map_color = iris$Sepal.Width, map_size = "cos2")
 
-viz_individuals(X, map_color = "contribution", map_size = "contribution",
-                scale_shape = 16)
+viz_individuals(X, map_color = "contrib", map_size = "contrib", pch = 16)
 
 ## Plot variables
 viz_variables(X)

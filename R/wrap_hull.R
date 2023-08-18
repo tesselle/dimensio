@@ -29,6 +29,10 @@ setMethod(
     lapply(
       X = data,
       FUN = function(x) {
+        ## Drop NAs
+        x <- stats::na.omit(x)
+        if (nrow(x) == 0) return(NULL)
+
         i <- grDevices::chull(x[, c(1, 2)])
         x[c(i, i[1]), , drop = FALSE]
       }

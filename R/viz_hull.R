@@ -30,3 +30,16 @@ setMethod(
     invisible(x)
   }
 )
+
+#' @export
+#' @rdname viz_wrap
+#' @aliases viz_hull,BootstrapCA-method
+setMethod(
+  f = "viz_hull",
+  signature = c(x = "BootstrapCA"),
+  definition = function(x, margin = 1, axes = c(1, 2), ...) {
+    group <- get_groups(x, margin = margin)
+    methods::callNextMethod(x, margin = margin, axes = axes, group = group, ...)
+    invisible(x)
+  }
+)

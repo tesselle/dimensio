@@ -16,6 +16,20 @@ setMethod(
 
 #' @export
 #' @rdname viz_wrap
+#' @aliases viz_tolerance,BootstrapCA-method
+setMethod(
+  f = "viz_tolerance",
+  signature = c(x = "BootstrapCA"),
+  definition = function(x, margin = 1, axes = c(1, 2), level = 0.95, ...) {
+    group <- get_groups(x, margin = margin)
+    methods::callNextMethod(x, margin = margin, axes = axes, group = group,
+                            level = level, ...)
+    invisible(x)
+  }
+)
+
+#' @export
+#' @rdname viz_wrap
 #' @aliases viz_confidence,MultivariateAnalysis-method
 setMethod(
   f = "viz_confidence",
@@ -23,6 +37,20 @@ setMethod(
   definition = function(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95, ...) {
     .viz_ellipse(x, type = "confidence", level = level,
                  margin = margin, axes = axes, group = group, ...)
+  }
+)
+
+#' @export
+#' @rdname viz_wrap
+#' @aliases viz_confidence,BootstrapCA-method
+setMethod(
+  f = "viz_confidence",
+  signature = c(x = "BootstrapCA"),
+  definition = function(x, margin = 1, axes = c(1, 2), level = 0.95, ...) {
+    group <- get_groups(x, margin = margin)
+    methods::callNextMethod(x, margin = margin, axes = axes, group = group,
+                            level = level, ...)
+    invisible(x)
   }
 )
 
