@@ -74,8 +74,9 @@ conf <- wrap_confidence(X, margin = 1, group = iris$Species,
 conf <- wrap_confidence(X, margin = 1, group = iris$Species, level = 0.95)
 
 ## Plot with convex hulls
-viz_rows(X, colour = iris$Species, col = khroma::color("high contrast")(3))
-viz_hull(X, group = iris$Species, border = khroma::color("high contrast")(3))
+col <- c(blue = "#004488", yellow = "#DDAA33", red = "#BB5566")
+viz_rows(X, map_color = iris$Species, scale_color = col)
+viz_hull(X, group = iris$Species, border = col)
 }
 \seealso{
 Other plot methods: 

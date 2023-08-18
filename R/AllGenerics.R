@@ -558,16 +558,22 @@ NULL
 #' @param sup A [`logical`] scalar: should the supplementary observations be
 #'  plotted?
 #' @param labels A [`logical`] scalar: should labels be drawn?
-#' @param alpha,colour,shape,size A vector specifying the
-#'  information to be highlighted (will be mapped to the corresponding
-#'  aesthetic; see examples and vignettes).
+#' @param map_alpha,map_color,map_shape,map_size A vector specifying the
+#'  information to be highlighted.
+#'  It will be mapped to the corresponding aesthetic, according to the
+#'  corresponding `scale` argument (see examples and vignettes).
 #'  If a single `character` string is passed, it must be one of "`observation`",
 #'  "`mass`", "`sum`", "`contribution`" or "`cos2`" (see details).
 #'  Any unambiguous substring can be given.
 #'  If `NULL` (the default), no highlighting is applied.
+#' @param scale_color The colors for points. Multiple colors can be
+#'  specified so that each point can be given its own color.
+#' @param scale_shape A vector of plotting characters or symbols.
+#' @param scale_size A `numeric` vector giving the amount by which plotting
+#'  characters and symbols should be scaled relative to the default.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ... Further [graphical parameters][graphics::par] (see below).
+#' @param ... Currently not used.
 #' @details
 #'  Available statistics:
 #'  \describe{
@@ -576,18 +582,6 @@ NULL
 #'   \item{`sum`}{Sum of squared coordinates along `axes`.}
 #'   \item{`contribution`}{Joint contributions to the definition of `axes`.}
 #'   \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
-#'  }
-#'
-#'  Commonly used [graphical parameters][graphics::par] are:
-#'  \describe{
-#'   \item{`col`}{The colors for lines and points. Multiple colors can be
-#'                specified so that each point can be given its own color.}
-#'   \item{`pch`}{A vector of plotting characters or symbols.}
-#'   \item{`cex`}{A `numeric` vector giving the amount by which plotting
-#'                characters and symbols should be scaled relative to the
-#'                default.}
-#'   \item{`lty`}{A vector of line types.}
-#'   \item{`lwd`}{A vector of line widths.}
 #'  }
 #' @return
 #'  `viz_*()` is called for its side-effects: it results in a graphic
@@ -620,16 +614,23 @@ setGeneric(
 #' @param sup A [`logical`] scalar: should the supplementary observations be
 #'  plotted?
 #' @param labels A [`logical`] scalar: should labels be drawn?
-#' @param alpha,colour,linetype,shape,size A vector specifying the
-#'  information to be highlighted (will be mapped to the corresponding
-#'  aesthetic; see examples and vignettes).
+#' @param map_alpha,map_color,map_linetype,map_shape,map_size A vector
+#'  specifying the information to be highlighted.
+#'  It will be mapped to the corresponding aesthetic, according to the
+#'  corresponding `scale` argument (see examples and vignettes).
 #'  If a single `character` string is passed, it must be one of "`observation`",
 #'  "`mass`", "`sum`", "`contribution`" or "`cos2`" (see details).
 #'  Any unambiguous substring can be given.
 #'  If `NULL` (the default), no highlighting is applied.
+#' @param scale_color The colors for points. Multiple colors can be
+#'  specified so that each point can be given its own color.
+#' @param scale_linetype A vector of line type specification.
+#' @param scale_shape A vector of plotting characters or symbols.
+#' @param scale_size A `numeric` vector giving the amount by which plotting
+#'  characters and symbols should be scaled relative to the default.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ... Further [graphical parameters][graphics::par] (see below).
+#' @param ... Currently not used.
 #' @details
 #'  Available statistics:
 #'  \describe{
@@ -638,18 +639,6 @@ setGeneric(
 #'   \item{`sum`}{Sum of squared coordinates along `axes`.}
 #'   \item{`contribution`}{Joint contributions to the definition of `axes`.}
 #'   \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
-#'  }
-#'
-#'  Commonly used [graphical parameters][graphics::par] are:
-#'  \describe{
-#'   \item{`col`}{The colors for lines and points. Multiple colors can be
-#'                specified so that each point can be given its own color.}
-#'   \item{`pch`}{A vector of plotting characters or symbols.}
-#'   \item{`cex`}{A `numeric` vector giving the amount by which plotting
-#'                characters and symbols should be scaled relative to the
-#'                default.}
-#'   \item{`lty`}{A vector of line types.}
-#'   \item{`lwd`}{A vector of line widths.}
 #'  }
 #' @return
 #'  `viz_*()` is called for its side-effects: it results in a graphic

@@ -15,7 +15,8 @@ if (at_home()) {
   for (i in c(TRUE, FALSE)) {
     for (j in c(TRUE, FALSE)) {
       plot_ind <- function() viz_individuals(res, axes = c(1, 2), active = i, sup = j,
-                                             colour = "observation", shape = "observation")
+                                             map_color = "observation",
+                                             map_shape = "observation")
       expect_snapshot_plot(plot_ind, sprintf("PCA_ind_%d-%d", i, j))
     }
   }
@@ -25,8 +26,8 @@ if (at_home()) {
       plot_var <- function() viz_variables(res, axes = c(1, 2),
                                            active = i, sup = j,
                                            labels = FALSE,
-                                           colour = "observation",
-                                           linetype = "observation")
+                                           map_color = "observation",
+                                           map_linetype = "observation")
       expect_snapshot_plot(plot_var, sprintf("PCA_var_%d-%d", i, j))
     }
   }
@@ -35,22 +36,25 @@ if (at_home()) {
   res <- pca(iris)
 
   # Individuals
-  plot_ind_cos2 <- function() viz_individuals(res, colour = "cos2")
+  plot_ind_cos2 <- function() viz_individuals(res, map_color = "cos2")
   expect_snapshot_plot(plot_ind_cos2, "PCA_ind_highlight_cos2")
 
-  plot_ind_contrib <- function() viz_individuals(res, size = "contrib")
+  plot_ind_contrib <- function() viz_individuals(res, map_size = "contrib")
   expect_snapshot_plot(plot_ind_contrib, "PCA_var_highlight_contrib")
 
-  plot_ind_group <- function() viz_individuals(res, colour = iris$Species, shape = iris$Species)
+  plot_ind_group <- function() viz_individuals(res, map_color = iris$Species,
+                                               map_shape = iris$Species)
   expect_snapshot_plot(plot_ind_group, "PCA_ind_group")
 
   # Variables
   group_num <- c(1, 2, 3, 4)
-  plot_var_group_num <- function() viz_variables(res, labels = FALSE, colour = group_num)
+  plot_var_group_num <- function() viz_variables(res, labels = FALSE,
+                                                 map_color = group_num)
   expect_snapshot_plot(plot_var_group_num, "PCA_var_group_num")
 
   group_cat <- c("Sepal", "Sepal", "Petal", "Petal")
-  plot_var_group_cat <- function() viz_variables(res, labels = FALSE, linetype = group_cat)
+  plot_var_group_cat <- function() viz_variables(res, labels = FALSE,
+                                                 map_linetype = group_cat)
   expect_snapshot_plot(plot_var_group_cat, "PCA_var_group_cat")
 
   # PCA - Plot eigenvalues =====================================================

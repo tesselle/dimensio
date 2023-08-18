@@ -112,25 +112,25 @@ biplot(X, type = "form")
 ## Highlight species
 viz_individuals(
   x = X, 
-  colour = iris$Species, 
-  col = khroma::colour("high contrast")(3), 
-  pch = 16
+  map_color = iris$Species, 
+  scale_color = khroma::color("high contrast")(3), 
+  scale_shape = 16
 )
 ## Add ellipses
 viz_tolerance(
   x = X, 
   group = iris$Species, 
   level = 0.95,
-  border = khroma::colour("high contrast")(3)
+  border = khroma::color("high contrast")(3)
 )
 
 ## Highlight petal length
 viz_individuals(
   x = X,
-  colour = iris$Petal.Length, 
-  size = iris$Petal.Length,
-  col = khroma::colour("iridescent")(255), 
-  pch = 16
+  map_color = iris$Petal.Length, 
+  map_size = iris$Petal.Length,
+  scale_color = khroma::color("iridescent")(255), 
+  scale_shape = 16
 )
 ```
 
