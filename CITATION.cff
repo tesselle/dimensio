@@ -147,28 +147,6 @@ references:
     email: hadley@posit.co
   year: '2023'
 - type: software
-  title: wordcloud
-  abstract: 'wordcloud: Word Clouds'
-  notes: Imports
-  url: http://blog.fellstat.com/?cat=11
-  repository: https://CRAN.R-project.org/package=wordcloud
-  authors:
-  - family-names: Fellows
-    given-names: Ian
-  year: '2023'
-- type: software
-  title: ggrepel
-  abstract: 'ggrepel: Automatically Position Non-Overlapping Text Labels with ''ggplot2'''
-  notes: Suggests
-  url: https://github.com/slowkow/ggrepel
-  repository: https://CRAN.R-project.org/package=ggrepel
-  authors:
-  - family-names: Slowikowski
-    given-names: Kamil
-    email: kslowikowski@gmail.com
-    orcid: https://orcid.org/0000-0002-2843-6370
-  year: '2023'
-- type: software
   title: khroma
   abstract: 'khroma: Colour Schemes for Scientific Data Visualization'
   notes: Suggests

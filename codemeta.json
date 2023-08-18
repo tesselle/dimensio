@@ -58,18 +58,6 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "ggrepel",
-      "name": "ggrepel",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggrepel"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
       "provider": {
@@ -199,21 +187,9 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rlang"
     },
-    "7": {
-      "@type": "SoftwareApplication",
-      "identifier": "wordcloud",
-      "name": "wordcloud",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=wordcloud"
-    },
     "SystemRequirements": null
   },
-  "fileSize": "988.334KB",
+  "fileSize": "1000.615KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

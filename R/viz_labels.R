@@ -2,29 +2,17 @@
 #' @include AllGenerics.R
 NULL
 
-viz_labels <- function(x, y, labels, xlim = c(-Inf, Inf), ylim = c(-Inf, Inf),
-                       box = FALSE, segment = TRUE,
+viz_labels <- function(x, y, labels = seq_along(x),
+                       xlim = c(-Inf, Inf), ylim = c(-Inf, Inf),
+                       box = FALSE, segment = FALSE,
                        cex = graphics::par("cex"), col = graphics::par("fg"),
                        bg = graphics::par("bg"), ...) {
   ## Compute label positions
-  lay <- wordcloud::wordlayout(x = x, y = y, words = labels,
-                               xlim = xlim, ylim = ylim, cex = cex, ...)
-  xt <- lay[, "x"]
-  yt <- lay[, "y"]
-  wt <- lay[, "width"]
-  ht <- lay[, "ht"]
-
-  mar_x <- graphics::strwidth ("m", cex = cex, ...) * 0.3
-  mar_y <- graphics::strheight("x", cex = cex, ...) * 0.3
-
-  ## Shift label positions
-  xt <- xt + max(wt)
-  yt <- yt + max(ht)
-
-  x_out <- (xt - wt) < min(xlim) | (xt + wt) > max(xlim)
-  xt[x_out] <- lay[x_out, "x"]
-  y_out <- (yt - ht) < min(ylim) | (yt + ht) > max(ylim)
-  yt[y_out] <- lay[y_out, "y"]
+  coord <- get_labels(x = x, y = y, labels = labels, cex = cex)
+  xt <- coord$x
+  yt <- coord$y
+  wt <- coord$width
+  ht <- coord$height
 
   ## Plot lines
   if (isTRUE(segment)) {
@@ -41,6 +29,9 @@ viz_labels <- function(x, y, labels, xlim = c(-Inf, Inf), ylim = c(-Inf, Inf),
 
   ## Plot boxes
   if (isTRUE(box)) {
+    mar_x <- graphics::strwidth ("m", cex = cex, ...) * 0.3
+    mar_y <- graphics::strheight("x", cex = cex, ...) * 0.3
+
     .mapply(
       FUN = function(x, y, w, h, col, border) {
         roundrect(
@@ -62,6 +53,63 @@ viz_labels <- function(x, y, labels, xlim = c(-Inf, Inf), ylim = c(-Inf, Inf),
 
   ## Plot labels
   graphics::text(x = xt, y = yt, labels = labels, col = col, cex = cex)
+}
+
+# Adapted from vegan::ordipointlabel() by Jari Oksanen
+get_labels <- function(x, y, labels, cex = 1) {
+  xy <- cbind.data.frame(x, y)
+
+  em <- graphics::strwidth("m", cex = min(cex))
+  ex <- graphics::strheight("x", cex = min(cex))
+  ltr <- em * ex
+
+  width <- graphics::strwidth(labels, cex = cex) + em
+  height <- graphics::strheight(labels, cex = cex) + ex
+  box <- cbind.data.frame(width, height)
+
+  makeoff <- function(pos, lab) {
+    cbind(
+      c(0, 1, 0, -1, 0.9, 0.9, -0.9, -0.9)[pos] * lab[, 1] / 2,
+      c(1, 0, -1, 0, 0.8, -0.8, -0.8, 0.8)[pos] * lab[, 2] / 2
+    )
+  }
+  overlap <- function(xy1, off1, xy2, off2) {
+    pmax(0, pmin(xy1[, 1] + off1[, 1]/2, xy2[, 1] + off2[, 1]/2) -
+           pmax(xy1[, 1] - off1[, 1]/2, xy2[, 1] - off2[, 1]/2)) *
+      pmax(0, pmin(xy1[, 2] + off1[, 2]/2, xy2[, 2] + off2[, 2]/2) -
+             pmax(xy1[, 2] - off1[, 2]/2, xy2[, 2] - off2[, 2]/2))
+  }
+
+  n <- nrow(xy)
+  j <- as.vector(stats::as.dist(row(matrix(0, n, n))))
+  k <- as.vector(stats::as.dist(col(matrix(0, n, n))))
+
+  maylap <- overlap(xy[j, ], 2 * box[j, ], xy[k, ], 2 * box[k, ]) > 0
+  j <- j[maylap]
+  k <- k[maylap]
+  jk <- sort(unique(c(j, k)))
+
+  nit <- min(48 * length(jk), 10000)
+  pos <- rep(1, n)
+
+  ## Simulated annealing
+  fn <- function(pos) {
+    off <- makeoff(pos, box)
+    val <- sum(overlap(xy[j, ] + off[j, ], box[j, ], xy[k, ] + off[k, ], box[k, ]))
+    val <- val / ltr + sum(pos > 1) * 0.1 + sum(pos > 4) * 0.1
+  }
+  gr <- function(pos) {
+    take <- sample(jk, 1)
+    pos[take] <- sample((1:8)[-pos[take]], 1)
+    pos
+  }
+  sol <- stats::optim(par = pos, fn = fn, gr = gr, method = "SANN",
+                      control = list(maxit = nit))
+
+  coord <- xy + makeoff(sol$par, box)
+  coord$width <- width
+  coord$height <- height
+  coord
 }
 
 # Helpers ======================================================================

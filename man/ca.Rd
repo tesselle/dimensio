@@ -47,6 +47,12 @@ stats::chisq.test(colours)
 ## Compute correspondence analysis
 X <- ca(colours)
 
+## Plot rows
+viz_rows(X, labels = TRUE)
+
+## Plot columns
+viz_columns(X, labels = TRUE)
+
 ## Get row coordinates
 head(get_coordinates(X, margin = 1))
 
