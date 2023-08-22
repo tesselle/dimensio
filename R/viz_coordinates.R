@@ -108,6 +108,11 @@ setMethod(
                            map_linetype = map_linetype,
                            map_linewidth = map_linewidth, ...)
 
+    ## Save and restore graphical parameters
+    ## pty: square plotting region, independent of device size
+    old_par <- graphics::par(pty = "s", no.readonly = TRUE)
+    on.exit(graphics::par(old_par), add = TRUE)
+
     ## Open new window
     grDevices::dev.hold()
     on.exit(grDevices::dev.flush(), add = TRUE)
@@ -194,6 +199,11 @@ viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALS
   ## Graphical parameters
   param <- prepare_param(coord, map_color = map_color, map_shape = map_shape,
                          map_size = map_size, alpha = FALSE, ...)
+
+  ## Save and restore graphical parameters
+  ## pty: square plotting region, independent of device size
+  old_par <- graphics::par(pty = "s", no.readonly = TRUE)
+  on.exit(graphics::par(old_par), add = TRUE)
 
   ## Open new window
   grDevices::dev.hold()
@@ -389,11 +399,13 @@ scale_color <- function(x, n, col = NULL, alpha = FALSE) {
   col
 }
 scale_symbole <- function(x, n, symb = NULL, default = 1) {
-  symb <- symb %||% default
-  if (is.null(x)) return(rep_len(symb, n))
+  if (is.null(x)) {
+    symb <- rep_len(symb %||% default, n)
+    return(symb)
+  }
 
   n_symb <- length(unique(x))
-  if (is.null(n_symb)) symb <- seq_len(n_symb)
+  if (is.null(symb)) symb <- seq_len(n_symb)
   symb <- recycle(symb, n_symb)
   symb <- symb[as.factor(x)]
   symb

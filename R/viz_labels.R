@@ -52,7 +52,8 @@ viz_labels <- function(x, y, labels = seq_along(x),
   }
 
   ## Plot labels
-  graphics::text(x = xt, y = yt, labels = labels, col = col, cex = cex)
+  graphics::text(x = xt, y = yt, labels = labels, col = col, cex = cex,
+                 xpd = TRUE)
 }
 
 # Adapted from vegan::ordipointlabel() by Jari Oksanen

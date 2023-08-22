@@ -16,8 +16,8 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 5, 
-  fig.height = 5,
+  fig.width = 7, 
+  fig.height = 7,
   out.width = NULL
 )
 ```
@@ -58,15 +58,13 @@ The package also allows to quickly visualize (`viz_*()`) the results:
 * `viz_contributions()` displays (joint) contributions. 
 * `viz_cos2()` displays (joint) cos^2^.
 
-```{r eigenvalues}
+```{r eigenvalues, fig.show='hold', out.width='50%'}
 ## Get eigenvalues
 get_eigenvalues(X)
 
 ## Scree plot
 screeplot(X, cumulative = TRUE)
-```
 
-```{r contributions}
 ## Plot variable contributions to the definition of the first two axes
 viz_contributions(X, margin = 2, axes = c(1, 2))
 ```
