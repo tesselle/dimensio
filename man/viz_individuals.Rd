@@ -21,11 +21,11 @@ viz_rows(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
-  map_color = NULL,
-  map_shape = NULL,
-  map_size = NULL,
+  highlight = NULL,
   main = NULL,
   sub = NULL,
+  panel.first = NULL,
+  panel.last = NULL,
   ...
 )
 
@@ -37,11 +37,11 @@ viz_rows(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
-  map_color = NULL,
-  map_shape = NULL,
-  map_size = NULL,
+  highlight = NULL,
   main = NULL,
   sub = NULL,
+  panel.first = NULL,
+  panel.last = NULL,
   ...
 )
 }
@@ -61,17 +61,24 @@ plotted?}
 
 \item{labels}{A \code{\link{logical}} scalar: should labels be drawn?}
 
-\item{map_color, map_shape, map_size}{A vector specifying the
-information to be highlighted. It will be mapped to the corresponding
-aesthetic (see examples and vignettes).
+\item{highlight}{A vector specifying the information to be highlighted.
+If \code{NULL} (the default), no highlighting is applied.
+It will only be mapped if at least one \link[graphics:par]{graphical parameters}
+is explicitly specified (see examples).
 If a single \code{character} string is passed, it must be one of "\code{observation}",
-"\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}" (see details).
-Any unambiguous substring can be given.
-If \code{NULL} (the default), no highlighting is applied.}
+"\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}" (see \code{\link[=augment]{augment()}}).
+Any unambiguous substring can be given.}
 
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
 \item{sub}{A \code{\link{character}} string giving a subtitle for the plot.}
+
+\item{panel.first}{An an \code{expression} to be evaluated after the plot axes are
+set up but before any plotting takes place. This can be useful for drawing
+background grids.}
+
+\item{panel.last}{An \code{expression} to be evaluated after plotting has taken
+place but before the axes, title and box are added.}
 }
 \value{
 \verb{viz_*()} is called for its side-effects: it results in a graphic
@@ -81,24 +88,22 @@ being displayed. Invisibly returns \code{x}.
 Plots row/individual principal coordinates.
 }
 \details{
-Available statistics:
-\describe{
-\item{\code{observation}}{Whether an observation is active or supplementary.}
-\item{\code{mass}}{Weight/mass of each observation.}
-\item{\code{sum}}{Sum of squared coordinates along \code{axes}.}
-\item{\code{contribution}}{Joint contributions to the definition of \code{axes}.}
-\item{\code{cos2}}{Joint \eqn{cos^2}{cos2} along \code{axes}.}
-}
-
 Commonly used \link[graphics:par]{graphical parameters} are:
 \describe{
-\item{\code{col}}{The colors for lines and points. Multiple colors can be
-specified so that each point can be given its own color.}
-\item{\code{pch}}{A vector of plotting characters or symbols.}
+\item{\code{pch}}{A vector of plotting characters or symbols. This can either be
+a single character or an integer code for one of a set of
+graphics symbols.}
 \item{\code{cex}}{A numerical vector giving the amount by which plotting
 characters and symbols should be scaled relative to the
 default.}
+\item{\code{col}}{The colors for lines and points. Multiple colors can be
+specified so that each point can be given its own color.}
+\item{\code{bg}}{The background color for the open plot symbols given by
+\code{pch = 21:25}.}
 }
+}
+\note{
+Be careful: graphical parameters are silently recycled.
 }
 \examples{
 ## Load data
@@ -108,16 +113,35 @@ data("iris")
 X <- pca(iris, scale = TRUE)
 
 ## Plot individuals
-viz_individuals(X, map_color = iris$Species, map_shape = iris$Species)
-
-viz_individuals(X, map_color = iris$Sepal.Width, map_size = "cos2")
-
-viz_individuals(X, map_color = "contrib", map_size = "contrib", pch = 16)
+viz_individuals(X, panel.last = graphics::grid())
 
 ## Plot variables
-viz_variables(X)
+viz_variables(X, panel.last = graphics::grid())
 
-viz_variables(X, map_color = "contribution")
+## Graphical parameters
+## Continuous values
+viz_individuals(X, highlight = iris$Petal.Length, pch = 16)
+viz_individuals(X, highlight = iris$Petal.Length, pch = 16,
+                col = grDevices::hcl.colors(12, "RdPu"))
+viz_individuals(X, highlight = iris$Petal.Length, pch = 16,
+                col = grDevices::hcl.colors(12, "RdPu"),
+                cex = c(1, 2))
+
+viz_variables(X, highlight = "contribution",
+              col = grDevices::hcl.colors(12, "BluGrn", rev = TRUE),
+              lwd = c(1, 5))
+
+## Discrete values
+viz_individuals(X, highlight = iris$Species, pch = 21:23)
+viz_individuals(X, highlight = iris$Species, pch = 21:23,
+                bg = c("#004488", "#DDAA33", "#BB5566"),
+                col = "black")
+
+viz_variables(X, highlight = c("Petal", "Petal", "Sepal", "Sepal"),
+              col = c("#EE7733", "#0077BB"),
+              lty = c(1, 3))
+
+
 }
 \seealso{
 Other plot methods: 

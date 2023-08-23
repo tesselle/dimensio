@@ -5,13 +5,32 @@ data("iris")
 X <- pca(iris, scale = TRUE)
 
 ## Plot individuals
-viz_individuals(X, map_color = iris$Species, map_shape = iris$Species)
-
-viz_individuals(X, map_color = iris$Sepal.Width, map_size = "cos2")
-
-viz_individuals(X, map_color = "contrib", map_size = "contrib", pch = 16)
+viz_individuals(X, panel.last = graphics::grid())
 
 ## Plot variables
-viz_variables(X)
+viz_variables(X, panel.last = graphics::grid())
 
-viz_variables(X, map_color = "contribution")
+## Graphical parameters
+## Continuous values
+viz_individuals(X, highlight = iris$Petal.Length, pch = 16)
+viz_individuals(X, highlight = iris$Petal.Length, pch = 16,
+                col = grDevices::hcl.colors(12, "RdPu"))
+viz_individuals(X, highlight = iris$Petal.Length, pch = 16,
+                col = grDevices::hcl.colors(12, "RdPu"),
+                cex = c(1, 2))
+
+viz_variables(X, highlight = "contribution",
+              col = grDevices::hcl.colors(12, "BluGrn", rev = TRUE),
+              lwd = c(1, 5))
+
+## Discrete values
+viz_individuals(X, highlight = iris$Species, pch = 21:23)
+viz_individuals(X, highlight = iris$Species, pch = 21:23,
+                bg = c("#004488", "#DDAA33", "#BB5566"),
+                col = "black")
+
+viz_variables(X, highlight = c("Petal", "Petal", "Sepal", "Sepal"),
+              col = c("#EE7733", "#0077BB"),
+              lty = c(1, 3))
+
+

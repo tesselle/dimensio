@@ -170,18 +170,15 @@ viz_biplot <- function(coord_row, coord_col, rows = TRUE, columns = TRUE,
   }
 
   ## Labels
-  usr <- graphics::par("usr")
-  xlim <- usr[c(1, 2)]
-  ylim <- usr[c(3, 4)]
   if (!is.null(labels)) {
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {
       viz_labels(x = coord_row$x, y = coord_row$y, labels = coord_row$label,
-                 xlim = xlim, ylim = ylim, col = col.rows, ...)
+                 col = col.rows, ...)
     }
     if (any(labels == "columns") | any(labels == "variables")) {
       viz_labels(x = coord_col$x, y = coord_col$y, labels = coord_col$label,
-                 xlim = xlim, ylim = ylim, col = col.columns, ...)
+                 col = col.columns, ...)
     }
   }
 

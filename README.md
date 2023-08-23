@@ -156,7 +156,7 @@ biplot(X, type = "form")
 ## Highlight species
 viz_individuals(
   x = X, 
-  map_color = iris$Species, 
+  highlight = iris$Species, 
   col = khroma::color("high contrast")(3), 
   pch = 16
 )
@@ -171,9 +171,9 @@ viz_tolerance(
 ## Highlight petal length
 viz_individuals(
   x = X,
-  map_color = iris$Petal.Length, 
-  map_size = iris$Petal.Length,
+  highlight = iris$Petal.Length,
   col = khroma::color("iridescent")(255), 
+  cex = c(1, 2),
   pch = 16
 )
 ```

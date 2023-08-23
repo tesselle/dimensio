@@ -104,7 +104,7 @@ viz_variables(X)
 ## Highlight cos2
 viz_variables(
   x = X, 
-  map_color = "cos2", 
+  highlight = "cos2", 
   col = khroma::color("YlOrBr")(4, range = c(0.5, 1))
 )
 ```
@@ -117,8 +117,7 @@ viz_variables(
 ## Plot individuals and color by species
 viz_individuals(
   x = X,
-  map_color = iris$Species,
-  map_shape = iris$Species, 
+  highlight = iris$Species,
   col = khroma::color("bright")(3), # Custom color scale
   pch = c(15, 16, 17) # Custom symbols
 )
@@ -140,9 +139,9 @@ viz_hull(x = X, group = iris$Species, level = 0.95,
 ## Highlight petal length
 viz_individuals(
   x = X, 
-  map_color = iris$Petal.Length,
-  map_size = iris$Petal.Length,
+  highlight = iris$Petal.Length,
   col = khroma::color("YlOrBr")(12), # Custom color scale
+  cex = c(1, 2), # Custom size scale
   pch = 16
 )
 ```
@@ -151,9 +150,9 @@ viz_individuals(
 ## Highlight contributions
 viz_individuals(
   x = X, 
-  map_color = "contrib",
-  map_size = "contrib",
+  highlight = "contrib",
   col = khroma::color("iridescent")(12), # Custom color scale
+  cex = c(1, 2), # Custom size scale
   pch = 16
 )
 ```

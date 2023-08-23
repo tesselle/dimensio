@@ -10,13 +10,13 @@ setMethod(
   f = "viz_rows",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, map_color = NULL,
-                        map_shape = NULL, map_size = NULL,
-                        main = NULL, sub = NULL, ...) {
+                        labels = FALSE, highlight = NULL,
+                        main = NULL, sub = NULL,
+                        panel.first = NULL, panel.last = NULL, ...) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
-               labels = labels, map_color = map_color,
-               map_shape = map_shape, map_size = map_size,
-               main = main, sub = sub, ...)
+               labels = labels, highlight = highlight,
+               main = main, sub = sub,
+               panel.first = panel.first, panel.last = panel.last, ...)
     invisible(x)
   }
 )
@@ -29,9 +29,8 @@ setMethod(
   signature = c(x = "BootstrapCA"),
   definition = function(x, axes = c(1, 2), ...) {
     group <- get_groups(x, margin = 1)
-    viz_points(x, margin = 1, axes = axes,
-               active = TRUE, sup = TRUE, labels = FALSE,
-               map_color = group, map_shape = group, ...)
+    viz_points(x, margin = 1, axes = axes, active = TRUE, sup = TRUE,
+               labels = FALSE, highlight = group, ...)
     invisible(x)
   }
 )
@@ -44,12 +43,12 @@ setMethod(
   f = "viz_individuals",
   signature = c(x = "PCA"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, map_color = NULL,
-                        map_shape = NULL, map_size = NULL,
-                        main = NULL, sub = NULL, ...) {
+                        labels = FALSE, highlight = NULL,
+                        main = NULL, sub = NULL,
+                        panel.first = NULL, panel.last = NULL, ...) {
     viz_rows(x, axes = axes, active = active, sup = sup, labels = labels,
-             map_color = map_color, map_shape = map_shape, map_size = map_size,
-             main = main, sub = sub, ...)
+             highlight = highlight, main = main, sub = sub,
+             panel.first = panel.first, panel.last = panel.last, ...)
     invisible(x)
   }
 )
@@ -63,13 +62,13 @@ setMethod(
   f = "viz_columns",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, map_color = NULL,
-                        map_shape = NULL, map_size = NULL,
-                        main = NULL, sub = NULL, ...) {
+                        labels = FALSE, highlight = NULL,
+                        main = NULL, sub = NULL,
+                        panel.first = NULL, panel.last = NULL, ...) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
-               labels = labels, map_color = map_color,
-               map_shape = map_shape, map_size = map_size,
-               main = main, sub = sub, ...)
+               labels = labels, highlight = highlight,
+               main = main, sub = sub,
+               panel.first = panel.first, panel.last = panel.last, ...)
     invisible(x)
   }
 )
@@ -83,7 +82,7 @@ setMethod(
   definition = function(x, axes = c(1, 2), ...) {
     group <- get_groups(x, margin = 2)
     viz_points(x, margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, map_color = group, map_shape = group, ...)
+               labels = FALSE, highlight = group, ...)
     invisible(x)
   }
 )
@@ -96,17 +95,12 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "PCA"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = TRUE, map_color = NULL,
-                        map_linetype = NULL, map_linewidth = NULL,
-                        main = NULL, sub = NULL, ...) {
+                        labels = TRUE, highlight = NULL,
+                        main = NULL, sub = NULL,
+                        panel.first = NULL, panel.last = NULL, ...) {
     ## Prepare data
     coord <- prepare_coord(x, margin = 2, axes = axes, active = active,
-                           sup = sup)
-
-    ## Graphical parameters
-    param <- prepare_param(coord, map_color = map_color,
-                           map_linetype = map_linetype,
-                           map_linewidth = map_linewidth, ...)
+                           sup = sup, highlight = highlight, ...)
 
     ## Save and restore graphical parameters
     ## pty: square plotting region, independent of device size
@@ -126,7 +120,7 @@ setMethod(
     graphics::plot.window(xlim = xlim, ylim = ylim, asp = 1)
 
     ## Evaluate pre-plot expressions
-    # panel.first
+    panel.first
 
     ## Plot
     graphics::abline(h = 0, lty = "dashed", lwd = 1, col = graphics::par("fg"))
@@ -140,17 +134,19 @@ setMethod(
 
     graphics::arrows(
       x0 = 0, y0 = 0, x1 = coord$x, y1 = coord$y, length = 0.15, angle = 30,
-      col = param$col, lty = param$lty, lwd = param$lwd
+      col = coord$col,
+      lty = coord$lty,
+      lwd = coord$lwd
     )
 
     ## Labels
     if (labels && nrow(coord) > 1) {
       viz_labels(x = coord$x, y = coord$y, labels = coord$label,
-                 col = param$col, cex = param$cex)
+                 col = coord$col, cex = coord$cex)
     }
 
     ## Evaluate post-plot and pre-axis expressions
-    # panel.last
+    panel.last
 
     ## Construct axis (axes)
     if (TRUE) {
@@ -185,22 +181,20 @@ setMethod(
   definition = function(x, axes = c(1, 2), ...) {
     group <- get_groups(x, margin = 2)
     viz_points(x, margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, map_color = group, map_shape = group, ...)
+               labels = FALSE, highlight = group, ...)
     invisible(x)
   }
 )
 
 # Helpers ======================================================================
 viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALSE,
-                       map_color = NULL, map_shape = NULL, map_size = NULL,
-                       main = NULL, sub = NULL, ...) {
+                       highlight = NULL, main = NULL, sub = NULL,
+                       xlab = NULL, ylab = NULL, ann = graphics::par("ann"),
+                       frame.plot = TRUE,
+                       panel.first = NULL, panel.last = NULL, ...) {
   ## Prepare data
   coord <- prepare_coord(x, margin = margin, axes = axes, active = active,
-                         sup = sup)
-
-  ## Graphical parameters
-  param <- prepare_param(coord, map_color = map_color, map_shape = map_shape,
-                         map_size = map_size, alpha = FALSE, ...)
+                         sup = sup, highlight = highlight, ...)
 
   ## Save and restore graphical parameters
   ## pty: square plotting region, independent of device size
@@ -218,22 +212,28 @@ viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALS
   graphics::plot.window(xlim = xlim, ylim = ylim, asp = 1)
 
   ## Evaluate pre-plot expressions
-  # panel.first
+  panel.first
 
   ## Plot
   graphics::abline(h = 0, lty = "dashed", lwd = 1, col = graphics::par("fg"))
   graphics::abline(v = 0, lty = "dashed", lwd = 1, col = graphics::par("fg"))
-  graphics::points(x = coord$x, y = coord$y, col = param$col,
-                   pch = param$pch, cex = param$cex)
+  graphics::points(
+    x = coord$x,
+    y = coord$y,
+    col = coord$col,
+    bg = coord$bg,
+    pch = coord$pch,
+    cex = coord$cex
+  )
 
   ## Labels
   if (labels) {
     viz_labels(x = coord$x, y = coord$y, labels = coord$label,
-               col = param$col, cex = param$cex)
+               col = coord$col, cex = coord$cex)
   }
 
   ## Evaluate post-plot and pre-axis expressions
-  # panel.last
+  panel.last
 
   ## Construct axis (axes)
   if (TRUE) {
@@ -241,21 +241,21 @@ viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALS
     graphics::axis(side = 2, las = 1)
   }
 
-  ## Plot frame (frame.plot)
-  if (TRUE) {
+  ## Plot frame
+  if (frame.plot) {
     graphics::box()
   }
 
-  ## Add annotation (ann)
-  if (TRUE) {
+  ## Add annotation
+  if (ann) {
     graphics::title(
       main = main, sub = sub,
-      xlab = print_variance(x, axes[[1]]),
-      ylab = print_variance(x, axes[[2]])
+      xlab = xlab %||% print_variance(x, axes[[1]]),
+      ylab = ylab %||% print_variance(x, axes[[2]])
     )
   }
 
-  invisible(param)
+  invisible(coord)
 }
 
 print_variance <- function(object, axis) {
@@ -294,7 +294,8 @@ plot_circle <- function(x, y, radius, n = 100, ...) {
 #   * `label`, `supplementary`, `mass`, `sum`, `contribution`, `cos2`,
 #   * `x`, `y`, `group`, `data`, `observation`
 prepare_coord <- function(object, margin, axes = c(1, 2), active = TRUE,
-                          sup = TRUE, principal = TRUE, group = NULL) {
+                          sup = TRUE, principal = TRUE, group = NULL,
+                          highlight = NULL, ...) {
   ## Prepare data
   data <- augment(object, margin = margin, axes = axes, principal = principal)
   data$x <- data[[1]]
@@ -319,80 +320,66 @@ prepare_coord <- function(object, margin, axes = c(1, 2), active = TRUE,
   if (!active & sup) data <- data[data$supplementary, ]
   data$observation <- ifelse(data$supplementary, "suppl.", "active")
 
-  data
+  ## Graphical parameters
+  param <- prepare_param(data, highlight = highlight, ...)
+
+  cbind(data, param)
 }
 
-prepare_param <- function(x, map_color = NULL, map_shape = NULL,
-                          map_size = NULL, map_linetype = NULL,
-                          map_linewidth = NULL, alpha = FALSE, ...) {
+prepare_param <- function(x, highlight = NULL, alpha = FALSE, ...) {
+  ## Graphical parameters
+  col <- list(...)$col
+  bg <- list(...)$bg
+  pch <- list(...)$pch
+  cex <- list(...)$cex
+  lty <- list(...)$lty
+  lwd <- list(...)$lwd
+
   n <- nrow(x)
-  choices <- c("observation", "mass", "sum", "contribution", "cos2")
+  if (length(highlight) == 1) {
+    choices <- c("mass", "sum", "contribution", "cos2", "observation")
+    highlight <- match.arg(highlight, choices = choices, several.ok = FALSE)
+    highlight <- x[[highlight]]
+  }
+  if (length(highlight) > 1) assert_length(highlight, n)
 
   ## Colors
-  if (length(map_color) == 1) {
-    map_color <- match.arg(map_color, choices = choices)
-    map_color <- x[[map_color]]
-  }
-  col <- scale_color(x = map_color, n = n, col = list(...)$col, alpha = alpha)
+  col <- scale_color(x = highlight, col = col, alpha = alpha)
+  bg <- scale_color(x = highlight, col = bg, alpha = alpha)
 
   ## Symbol
-  if (length(map_shape) == 1) {
-    map_shape <- match.arg(map_shape, choices = choices[1])
-    map_shape <- x[[map_shape]]
-  }
-  pch <- scale_symbole(x = map_shape, n = n, symb = list(...)$pch,
-                       default = graphics::par("pch"))
+  pch <- scale_symbole(x = highlight, symb = pch)
 
   ## Size
-  if (length(map_size) == 1) {
-    map_size <- match.arg(map_size, choices = choices[c(2, 3, 4, 5)])
-    map_size <- x[[map_size]]
-  }
-  cex <- scale_size(x = map_size, n, size = list(...)$cex,
-                    default = graphics::par("cex"))
+  cex <- scale_size(x = highlight, size = cex)
 
   ## Line type
-  if (length(map_linetype) == 1) {
-    map_linetype <- match.arg(map_linetype, choices = choices[1])
-    map_linetype <- x[[map_linetype]]
-  }
-  lty <- scale_symbole(x = map_linetype, n = n, symb = list(...)$lty,
-                       default = graphics::par("lty"))
+  lty <- scale_symbole(x = highlight, symb = lty)
 
   ## Line width
-  if (length(map_linewidth) == 1) {
-    map_linewidth <- match.arg(map_linewidth, choices = choices[c(2, 3, 4, 5)])
-    map_linewidth <- x[[map_linewidth]]
-  }
-  lwd <- scale_size(x = map_linewidth, n = n, size = list(...)$lwd,
-                    default = graphics::par("lwd"))
+  lwd <- scale_size(x = highlight, size = lwd)
 
-  data.frame(col = col, pch = pch, cex = cex, lty = lty, lwd = lwd)
+  param <- data.frame(
+    col = col,
+    bg = bg,
+    pch = pch,
+    cex = cex,
+    lty = lty,
+    lwd = lwd
+  )
+  if (nrow(param) > n) param <- param[seq_len(n), , drop = FALSE]
+  param
 }
 
-#' Rescale Continuous Vector
-#'
-#' Rescales continuous vector to have specified minimum and maximum.
-#' @param x A continuous `vector` of values to manipulate.
-#' @param to A length-two [`numeric`] vector specifying the output range.
-#' @param from A length-two [`numeric`] vector specifying the input range.
-#' @return A [`numeric`] vector.
-#' @keywords internal
-#' @noRd
-scale_range <- function(x, to = c(0, 1), from = range(x, na.rm = TRUE, finite = TRUE)) {
-  (x - from[1]) / diff(from) * diff(to) + to[1]
-}
-
-scale_color <- function(x, n = length(x), col = NULL, alpha = FALSE) {
+scale_color <- function(x, col = NULL, alpha = FALSE) {
   if (is.null(x)) {
-    col <- rep_len(col %||% graphics::par("col"), n)
+    if (is.null(col)) col <- graphics::par("col")
     return(col)
   }
 
   if (is.double(x)) {
     ## Continuous scale
-    if (is.null(col))
-      col <- grDevices::hcl.colors(12, "YlOrRd", rev = TRUE)
+    if (is.null(col)) col <- grDevices::hcl.colors(12, "YlOrRd", rev = TRUE)
     x <- scale_range(x) # Rescale to [0,1]
     col <- grDevices::colorRamp(col)(x)
     col <- grDevices::rgb(col[, 1], col[, 2], col[, 3], maxColorValue = 255)
@@ -401,40 +388,33 @@ scale_color <- function(x, n = length(x), col = NULL, alpha = FALSE) {
   } else {
     ## Discrete scale
     n_col <- length(unique(x))
-    if (is.null(col))
-      col <- grDevices::hcl.colors(n_col, "viridis")
+    if (is.null(col)) col <- grDevices::hcl.colors(n_col, "viridis")
     col <- recycle(col, n_col)
     col <- col[as.factor(x)]
   }
 
   col
 }
-scale_symbole <- function(x, n = length(x), symb = NULL, default = 1) {
-  if (is.null(x)) {
-    symb <- rep_len(symb %||% default, n)
-    return(symb)
-  }
-
-  if (is.double(x)) { # Continuous scale
+scale_symbole <- function(x, symb = NULL, what = "pch") {
+  if (is.double(x) && length(symb) > 1) {
     warning("Continuous value supplied to discrete scale.", call. = FALSE)
   }
 
+  if (is.null(symb)) symb <- graphics::par(what)
+  if (is.null(x)) return(symb)
+
   n_symb <- length(unique(x))
-  if (is.null(symb)) symb <- seq_len(n_symb)
   symb <- recycle(symb, n_symb)
   symb <- symb[as.factor(x)]
   symb
 }
-scale_size <- function(x, n = length(x), size = NULL, default = 1) {
-  if (is.null(x)) {
-    size <- rep_len(size %||% default, n)
+scale_size <- function(x, size = NULL, what = "cex") {
+  if (is.null(size)) size <- graphics::par(what)
+  if (!is.double(x)) {
+    if (length(size) > 1)
+      warning("Discrete value supplied to continuous scale.", call. = FALSE)
     return(size)
   }
 
-  if (!is.double(x)) { # Discrete scale
-    warning("Discrete value supplied to continuous scale.", call. = FALSE)
-  }
-
-  if (is.null(size)) size <- default + x / max(x)
-  size
+  scale_range(x, to = range(size))
 }

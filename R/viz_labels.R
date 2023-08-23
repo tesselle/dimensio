@@ -3,7 +3,6 @@
 NULL
 
 viz_labels <- function(x, y, labels = seq_along(x),
-                       xlim = c(-Inf, Inf), ylim = c(-Inf, Inf),
                        box = FALSE, segment = FALSE,
                        cex = graphics::par("cex"), col = graphics::par("fg"),
                        bg = graphics::par("bg"), ...) {
