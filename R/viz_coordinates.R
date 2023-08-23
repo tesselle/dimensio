@@ -119,8 +119,10 @@ setMethod(
     graphics::plot.new()
 
     ## Set plotting coordinates
-    xlim <- if (is_scaled(x)) c(-1, 1) else range(coord$x)
-    ylim <- if (is_scaled(x)) c(-1, 1) else range(coord$y)
+    xlim <- range(coord$x, na.rm = TRUE, finite = TRUE)
+    if (is_scaled(x)) xlim <- c(-1, 1)
+    ylim <- range(coord$y, na.rm = TRUE, finite = TRUE)
+    if (is_scaled(x)) ylim <- c(-1, 1)
     graphics::plot.window(xlim = xlim, ylim = ylim, asp = 1)
 
     ## Evaluate pre-plot expressions
@@ -211,8 +213,8 @@ viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALS
   graphics::plot.new()
 
   ## Set plotting coordinates
-  xlim <- range(coord$x, na.rm = TRUE)
-  ylim <- range(coord$y, na.rm = TRUE)
+  xlim <- range(coord$x, na.rm = TRUE, finite = TRUE)
+  ylim <- range(coord$y, na.rm = TRUE, finite = TRUE)
   graphics::plot.window(xlim = xlim, ylim = ylim, asp = 1)
 
   ## Evaluate pre-plot expressions
@@ -368,10 +370,20 @@ prepare_param <- function(x, map_color = NULL, map_shape = NULL,
   data.frame(col = col, pch = pch, cex = cex, lty = lty, lwd = lwd)
 }
 
-scale_range <- function(x, to = c(0, 1), from = range(x, na.rm = TRUE)) {
+#' Rescale Continuous Vector
+#'
+#' Rescales continuous vector to have specified minimum and maximum.
+#' @param x A continuous `vector` of values to manipulate.
+#' @param to A length-two [`numeric`] vector specifying the output range.
+#' @param from A length-two [`numeric`] vector specifying the input range.
+#' @return A [`numeric`] vector.
+#' @keywords internal
+#' @noRd
+scale_range <- function(x, to = c(0, 1), from = range(x, na.rm = TRUE, finite = TRUE)) {
   (x - from[1]) / diff(from) * diff(to) + to[1]
 }
-scale_color <- function(x, n, col = NULL, alpha = FALSE) {
+
+scale_color <- function(x, n = length(x), col = NULL, alpha = FALSE) {
   if (is.null(x)) {
     col <- rep_len(col %||% graphics::par("col"), n)
     return(col)
@@ -384,6 +396,8 @@ scale_color <- function(x, n, col = NULL, alpha = FALSE) {
     x <- scale_range(x) # Rescale to [0,1]
     col <- grDevices::colorRamp(col)(x)
     col <- grDevices::rgb(col[, 1], col[, 2], col[, 3], maxColorValue = 255)
+    ## Alpha transparency
+    if (alpha) col <- grDevices::adjustcolor(col, alpha.f = alpha)
   } else {
     ## Discrete scale
     n_col <- length(unique(x))
@@ -393,15 +407,16 @@ scale_color <- function(x, n, col = NULL, alpha = FALSE) {
     col <- col[as.factor(x)]
   }
 
-  ## Alpha transparency
-  if (alpha) col <- grDevices::adjustcolor(col, alpha.f = alpha)
-
   col
 }
-scale_symbole <- function(x, n, symb = NULL, default = 1) {
+scale_symbole <- function(x, n = length(x), symb = NULL, default = 1) {
   if (is.null(x)) {
     symb <- rep_len(symb %||% default, n)
     return(symb)
+  }
+
+  if (is.double(x)) { # Continuous scale
+    warning("Continuous value supplied to discrete scale.", call. = FALSE)
   }
 
   n_symb <- length(unique(x))
@@ -410,10 +425,16 @@ scale_symbole <- function(x, n, symb = NULL, default = 1) {
   symb <- symb[as.factor(x)]
   symb
 }
-scale_size <- function(x, n, size = NULL, default = 1) {
-  size <- size %||% default
-  if (is.null(x)) return(rep_len(size, n))
+scale_size <- function(x, n = length(x), size = NULL, default = 1) {
+  if (is.null(x)) {
+    size <- rep_len(size %||% default, n)
+    return(size)
+  }
 
-  size <- size + x / max(x)
+  if (!is.double(x)) { # Discrete scale
+    warning("Discrete value supplied to continuous scale.", call. = FALSE)
+  }
+
+  if (is.null(size)) size <- default + x / max(x)
   size
 }

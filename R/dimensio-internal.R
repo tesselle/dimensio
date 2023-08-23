@@ -4,10 +4,8 @@
   if (!is.null(x)) x else y
 }
 
-`%notin%` <- Negate(`%in%`)
-
 recycle <- function(x, n, verbose = getOption("dimensio.verbose")) {
-  if (length(x) == n) return(x)
+  if (length(x) >= n) return(x[seq_len(n)])
 
   if (verbose) {
     arg <- deparse(substitute(x))

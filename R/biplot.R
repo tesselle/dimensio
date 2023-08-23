@@ -150,8 +150,8 @@ viz_biplot <- function(coord_row, coord_col, rows = TRUE, columns = TRUE,
   graphics::plot.new()
 
   ## Set plotting coordinates
-  xlim <- range(coord_row$x, coord_col$x)
-  ylim <- range(coord_row$y, coord_col$y)
+  xlim <- range(coord_row$x, coord_col$x, na.rm = TRUE, finite = TRUE)
+  ylim <- range(coord_row$y, coord_col$y, na.rm = TRUE, finite = TRUE)
   graphics::plot.window(xlim = xlim, ylim = ylim, asp = 1)
 
   ## Evaluate pre-plot expressions
