@@ -1,3 +1,5 @@
+# dimensio 0.4.0.9000
+
 # dimensio 0.4.0
 ## New classes and methods
 * Add `screeplot()` to produce a scree plot.
