@@ -11,11 +11,11 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
-                        main = NULL, sub = NULL,
+                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL, ...) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
                labels = labels, highlight = highlight,
-               main = main, sub = sub,
+               xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last, ...)
     invisible(x)
   }
@@ -44,10 +44,11 @@ setMethod(
   signature = c(x = "PCA"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
-                        main = NULL, sub = NULL,
+                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL, ...) {
     viz_rows(x, axes = axes, active = active, sup = sup, labels = labels,
-             highlight = highlight, main = main, sub = sub,
+             highlight = highlight, xlim = xlim, ylim = ylim,
+             main = main, sub = sub,
              panel.first = panel.first, panel.last = panel.last, ...)
     invisible(x)
   }
@@ -63,11 +64,11 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
-                        main = NULL, sub = NULL,
+                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL, ...) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
                labels = labels, highlight = highlight,
-               main = main, sub = sub,
+               xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last, ...)
     invisible(x)
   }
@@ -96,7 +97,7 @@ setMethod(
   signature = c(x = "PCA"),
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = TRUE, highlight = NULL,
-                        main = NULL, sub = NULL,
+                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL, ...) {
     ## Prepare data
     coord <- prepare_coord(x, margin = 2, axes = axes, active = active,
@@ -113,9 +114,9 @@ setMethod(
     graphics::plot.new()
 
     ## Set plotting coordinates
-    xlim <- range(coord$x, na.rm = TRUE, finite = TRUE)
+    xlim <- xlim %||% range(coord$x, na.rm = TRUE, finite = TRUE)
     if (is_scaled(x)) xlim <- c(-1, 1)
-    ylim <- range(coord$y, na.rm = TRUE, finite = TRUE)
+    ylim <- ylim %||% range(coord$y, na.rm = TRUE, finite = TRUE)
     if (is_scaled(x)) ylim <- c(-1, 1)
     graphics::plot.window(xlim = xlim, ylim = ylim, asp = 1)
 
@@ -188,9 +189,9 @@ setMethod(
 
 # Helpers ======================================================================
 viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALSE,
-                       highlight = NULL, main = NULL, sub = NULL,
-                       xlab = NULL, ylab = NULL, ann = graphics::par("ann"),
-                       frame.plot = TRUE,
+                       highlight = NULL, xlim = NULL, ylim = NULL,
+                       main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
+                       ann = graphics::par("ann"), frame.plot = TRUE,
                        panel.first = NULL, panel.last = NULL, ...) {
   ## Prepare data
   coord <- prepare_coord(x, margin = margin, axes = axes, active = active,
@@ -207,8 +208,8 @@ viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALS
   graphics::plot.new()
 
   ## Set plotting coordinates
-  xlim <- range(coord$x, na.rm = TRUE, finite = TRUE)
-  ylim <- range(coord$y, na.rm = TRUE, finite = TRUE)
+  xlim <- xlim %||% range(coord$x, na.rm = TRUE, finite = TRUE)
+  ylim <- ylim %||% range(coord$y, na.rm = TRUE, finite = TRUE)
   graphics::plot.window(xlim = xlim, ylim = ylim, asp = 1)
 
   ## Evaluate pre-plot expressions

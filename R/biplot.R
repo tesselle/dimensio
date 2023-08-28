@@ -17,6 +17,7 @@ setMethod(
                         cex.rows = graphics::par("cex"),
                         cex.columns = graphics::par("cex"),
                         pch.rows = 16, pch.columns = 17,
+                        xlim = NULL, ylim = NULL,
                         main = NULL, sub = NULL, ...) {
     ## Validation
     type <- match.arg(type, several.ok = FALSE)
@@ -58,9 +59,10 @@ setMethod(
       pch.rows = pch.rows, pch.columns = pch.columns,
       cex.rows = cex.rows,
       cex.columns = cex.columns,
+      xlim = xlim, ylim = ylim,
+      main = main, sub = sub,
       xlab = print_variance(x, axes[[1]]),
       ylab = print_variance(x, axes[[2]]),
-      main = main, sub = sub,
       ...
     )
 
@@ -81,6 +83,7 @@ setMethod(
                         col.rows = "#004488", col.columns = "#BB5566",
                         pch.rows = 16, pch.columns = 17,
                         lty = "solid", lwd = 2,
+                        xlim = NULL, ylim = NULL,
                         main = NULL, sub = NULL, ...) {
     ## Validation
     type <- match.arg(type, several.ok = FALSE)
@@ -116,9 +119,10 @@ setMethod(
       coord_row, coord_col, rows = TRUE, columns = FALSE, labels = labels,
       col.rows = col.rows, col.columns = col.columns,
       pch.rows = pch.rows, pch.columns = pch.columns,
+      xlim = xlim, ylim = ylim,
+      main = main, sub = sub,
       xlab = print_variance(x, axes[[1]]),
       ylab = print_variance(x, axes[[2]]),
-      main = main, sub = sub,
       panel.first = arrows_col(),
       panel.last = NULL,
       ...
@@ -134,7 +138,8 @@ viz_biplot <- function(coord_row, coord_col, rows = TRUE, columns = TRUE,
                        pch.rows = 16, pch.columns = 17,
                        cex.rows = graphics::par("cex"),
                        cex.columns = graphics::par("cex"),
-                       xlab = NULL, ylab = NULL, main = NULL, sub = NULL,
+                       xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
+                       xlab = NULL, ylab = NULL,
                        axes = TRUE, frame.plot = axes,
                        ann = graphics::par("ann"),
                        panel.first = NULL, panel.last = NULL, ...) {
@@ -150,8 +155,8 @@ viz_biplot <- function(coord_row, coord_col, rows = TRUE, columns = TRUE,
   graphics::plot.new()
 
   ## Set plotting coordinates
-  xlim <- range(coord_row$x, coord_col$x, na.rm = TRUE, finite = TRUE)
-  ylim <- range(coord_row$y, coord_col$y, na.rm = TRUE, finite = TRUE)
+  xlim <- xlim %||% range(coord_row$x, coord_col$x, na.rm = TRUE, finite = TRUE)
+  ylim <- ylim %||% range(coord_row$y, coord_col$y, na.rm = TRUE, finite = TRUE)
   graphics::plot.window(xlim = xlim, ylim = ylim, asp = 1)
 
   ## Evaluate pre-plot expressions

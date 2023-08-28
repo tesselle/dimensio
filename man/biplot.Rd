@@ -20,6 +20,8 @@
   cex.columns = graphics::par("cex"),
   pch.rows = 16,
   pch.columns = 17,
+  xlim = NULL,
+  ylim = NULL,
   main = NULL,
   sub = NULL,
   ...
@@ -38,6 +40,8 @@
   pch.columns = 17,
   lty = "solid",
   lwd = 2,
+  xlim = NULL,
+  ylim = NULL,
   main = NULL,
   sub = NULL,
   ...
@@ -69,6 +73,14 @@ drawn. Any unambiguous substring can be given.}
 plotting characters and symbols should be scaled relative to the default.}
 
 \item{pch.rows, pch.columns}{A symbol specification.}
+
+\item{xlim}{A length-two \code{\link{numeric}} vector giving the x limits of the plot.
+The default value, \code{NULL}, indicates that the range of the
+\link[=is.finite]{finite} values to be plotted should be used.}
+
+\item{ylim}{A length-two \code{\link{numeric}} vector giving the y limits of the plot.
+The default value, \code{NULL}, indicates that the range of the
+\link[=is.finite]{finite} values to be plotted should be used.}
 
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 

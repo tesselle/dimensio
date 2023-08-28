@@ -22,6 +22,8 @@ viz_rows(x, ...)
   sup = TRUE,
   labels = FALSE,
   highlight = NULL,
+  xlim = NULL,
+  ylim = NULL,
   main = NULL,
   sub = NULL,
   panel.first = NULL,
@@ -38,6 +40,8 @@ viz_rows(x, ...)
   sup = TRUE,
   labels = FALSE,
   highlight = NULL,
+  xlim = NULL,
+  ylim = NULL,
   main = NULL,
   sub = NULL,
   panel.first = NULL,
@@ -68,6 +72,14 @@ is explicitly specified (see examples).
 If a single \code{character} string is passed, it must be one of "\code{observation}",
 "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}" (see \code{\link[=augment]{augment()}}).
 Any unambiguous substring can be given.}
+
+\item{xlim}{A length-two \code{\link{numeric}} vector giving the x limits of the plot.
+The default value, \code{NULL}, indicates that the range of the
+\link[=is.finite]{finite} values to be plotted should be used.}
+
+\item{ylim}{A length-two \code{\link{numeric}} vector giving the y limits of the plot.
+The default value, \code{NULL}, indicates that the range of the
+\link[=is.finite]{finite} values to be plotted should be used.}
 
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 

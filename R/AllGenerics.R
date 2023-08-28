@@ -498,6 +498,12 @@ setGeneric(
 #' @param cex.rows,cex.columns A numerical vector giving the amount by which
 #'  plotting characters and symbols should be scaled relative to the default.
 #' @param lty,lwd A specification for the line type and width.
+#' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
+#'  The default value, `NULL`, indicates that the range of the
+#'  [finite][is.finite()] values to be plotted should be used.
+#' @param ylim A length-two [`numeric`] vector giving the y limits of the plot.
+#'  The default value, `NULL`, indicates that the range of the
+#'  [finite][is.finite()] values to be plotted should be used.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ... Further parameters to be passed to [wordcloud::wordlayout()].
@@ -567,6 +573,12 @@ NULL
 #'  If a single `character` string is passed, it must be one of "`observation`",
 #'  "`mass`", "`sum`", "`contribution`" or "`cos2`" (see [`augment()`]).
 #'  Any unambiguous substring can be given.
+#' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
+#'  The default value, `NULL`, indicates that the range of the
+#'  [finite][is.finite()] values to be plotted should be used.
+#' @param ylim A length-two [`numeric`] vector giving the y limits of the plot.
+#'  The default value, `NULL`, indicates that the range of the
+#'  [finite][is.finite()] values to be plotted should be used.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param panel.first An an `expression` to be evaluated after the plot axes are
