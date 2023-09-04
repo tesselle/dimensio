@@ -175,6 +175,23 @@ setMethod(
 
 #' @export
 #' @rdname viz_variables
+#' @aliases viz_variables,CA-method
+setMethod(
+  f = "viz_variables",
+  signature = c(x = "CA"),
+  definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
+                        labels = FALSE, highlight = NULL,
+                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
+                        panel.first = NULL, panel.last = NULL, ...) {
+    viz_columns(x, axes = axes, active = active, sup = sup,
+                labels = labels, highlight = highlight,
+                xlim = xlim, ylim = ylim, main = main, sub = sub,
+                panel.first = panel.first, panel.last = panel.last, ...)
+  }
+)
+
+#' @export
+#' @rdname viz_variables
 #' @aliases viz_variables,BootstrapPCA-method
 setMethod(
   f = "viz_variables",

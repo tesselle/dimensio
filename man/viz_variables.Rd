@@ -9,6 +9,7 @@
 \alias{viz_columns,MultivariateAnalysis-method}
 \alias{viz_columns,BootstrapCA-method}
 \alias{viz_variables,PCA-method}
+\alias{viz_variables,CA-method}
 \alias{viz_variables,BootstrapPCA-method}
 \title{Visualize Variables Factor Map}
 \usage{
@@ -40,6 +41,22 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = TRUE,
+  highlight = NULL,
+  xlim = NULL,
+  ylim = NULL,
+  main = NULL,
+  sub = NULL,
+  panel.first = NULL,
+  panel.last = NULL,
+  ...
+)
+
+\S4method{viz_variables}{CA}(
+  x,
+  axes = c(1, 2),
+  active = TRUE,
+  sup = TRUE,
+  labels = FALSE,
   highlight = NULL,
   xlim = NULL,
   ylim = NULL,
