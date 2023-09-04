@@ -7,7 +7,7 @@ NULL
 #' @aliases get_contributions,MultivariateAnalysis-method
 setMethod(
   f = "get_contributions",
-  signature = signature(x = "MultivariateAnalysis"),
+  signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1) {
     margin <- margin[[1L]]
     if (margin == 1) contrib <- x@rows@contributions

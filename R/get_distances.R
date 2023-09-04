@@ -7,7 +7,7 @@ NULL
 #' @aliases get_distances,MultivariateAnalysis-method
 setMethod(
   f = "get_distances",
-  signature = signature(x = "MultivariateAnalysis"),
+  signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1) {
 
     margin <- margin[[1L]]

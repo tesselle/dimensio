@@ -7,7 +7,7 @@ NULL
 #' @aliases get_eigenvalues,MultivariateAnalysis-method
 setMethod(
   f = "get_eigenvalues",
-  signature = signature(x = "MultivariateAnalysis"),
+  signature = c(x = "MultivariateAnalysis"),
   definition = function(x) {
     eig <- x@singular_values^2 # Eigenvalues
     pvar <- eig / sum(eig) * 100 # Percentage

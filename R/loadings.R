@@ -8,7 +8,7 @@ NULL
 #' @aliases loadings,PCA-method
 setMethod(
   f = "loadings",
-  signature = signature(x = "PCA"),
+  signature = c(x = "PCA"),
   definition = function(x) {
     loads <- x@columns@standard
     class(loads) <- "loadings"

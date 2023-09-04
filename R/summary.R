@@ -8,7 +8,7 @@ NULL
 #' @aliases summary,CA-method
 setMethod(
   f = "summary",
-  signature = signature(object = "CA"),
+  signature = c(object = "CA"),
   definition = function(object, margin = 1, active = TRUE, sup = TRUE,
                         rank = 3) {
     ## Eigenvalues
@@ -50,7 +50,7 @@ setMethod(
 #' @aliases summary,PCA-method
 setMethod(
   f = "summary",
-  signature = signature(object = "PCA"),
+  signature = c(object = "PCA"),
   definition = function(object, margin = 1, active = TRUE, sup = TRUE,
                         rank = 3) {
     ## Eigenvalues

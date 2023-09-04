@@ -7,7 +7,7 @@ NULL
 #' @aliases get_cos2,MultivariateAnalysis-method
 setMethod(
   f = "get_cos2",
-  signature = signature(x = "MultivariateAnalysis"),
+  signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1, sup_name = ".sup") {
 
     margin <- margin[[1L]]

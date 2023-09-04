@@ -8,7 +8,7 @@ NULL
 #' @aliases get_coordinates,MultivariateAnalysis-method
 setMethod(
   f = "get_coordinates",
-  signature = signature(x = "MultivariateAnalysis"),
+  signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1, principal = TRUE, sup_name = ".sup") {
     margin <- margin[[1L]]
     if (margin == 1) {
@@ -35,7 +35,7 @@ setMethod(
 #' @aliases get_replications,MultivariateBootstrap-method
 setMethod(
   f = "get_replications",
-  signature = signature(x = "MultivariateBootstrap"),
+  signature = c(x = "MultivariateBootstrap"),
   definition = function(x, margin = 1) {
     coords <- get_coordinates(x = x, margin = margin)
 
@@ -58,7 +58,7 @@ setMethod(
 #' @aliases get_replications,BootstrapPCA-method
 setMethod(
   f = "get_replications",
-  signature = signature(x = "BootstrapPCA"),
+  signature = c(x = "BootstrapPCA"),
   definition = function(x) {
     methods::callNextMethod(x = x, margin = 2)
   }

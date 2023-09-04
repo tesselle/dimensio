@@ -7,7 +7,7 @@ NULL
 #' @aliases ca,data.frame-method
 setMethod(
   f = "ca",
-  signature = signature(object = "data.frame"),
+  signature = c(object = "data.frame"),
   definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL) {
     # Remove non-numeric variables, if any
     quali <- !vapply(object, FUN = is.numeric, FUN.VALUE = logical(1))
@@ -37,7 +37,7 @@ setMethod(
 #' @aliases ca,matrix-method
 setMethod(
   f = "ca",
-  signature = signature(object = "matrix"),
+  signature = c(object = "matrix"),
   definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL) {
     ## Check missing values
     if (anyNA(object))

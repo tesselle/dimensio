@@ -126,11 +126,6 @@ NULL
 #' @author N. Frerebeau
 #' @docType methods
 #' @family multivariate analysis
-#' @name ca
-#' @rdname ca
-NULL
-
-#' @rdname ca
 #' @aliases ca-method
 setGeneric(
   name = "ca",
@@ -174,11 +169,6 @@ setGeneric(
 #' @author N. Frerebeau
 #' @docType methods
 #' @family multivariate analysis
-#' @name pca
-#' @rdname pca
-NULL
-
-#' @rdname pca
 #' @aliases pca-method
 setGeneric(
   name = "pca",
@@ -227,11 +217,6 @@ NULL
 #' @author N. Frerebeau
 #' @docType methods
 #' @family resampling methods
-#' @name bootstrap
-#' @rdname bootstrap
-NULL
-
-#' @rdname bootstrap
 #' @aliases bootstrap-method
 setGeneric(
   name = "bootstrap",
@@ -250,11 +235,6 @@ setGeneric(
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
-#' @name get_data
-#' @rdname get_data
-NULL
-
-#' @rdname get_data
 #' @aliases get_data-method
 setGeneric(
   name = "get_data",
@@ -284,11 +264,6 @@ setGeneric(
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
-#' @name get_coordinates
-#' @rdname get_coordinates
-NULL
-
-#' @rdname get_coordinates
 #' @aliases get_coordinates-method
 setGeneric(
   name = "get_coordinates",
@@ -342,11 +317,6 @@ setGeneric(
 #' @author N. Frerebeau
 #' @docType methods
 #' @family tidy methods
-#' @name tidy
-#' @rdname tidy
-NULL
-
-#' @rdname tidy
 #' @aliases tidy-method
 setGeneric(
   name = "tidy",
@@ -506,7 +476,7 @@ setGeneric(
 #'  [finite][is.finite()] values to be plotted should be used.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ... Further parameters to be passed to [wordcloud::wordlayout()].
+#' @param ... Currently not used.
 #' @details
 #'  A biplot is the simultaneous representation of rows and columns of a
 #'  rectangular dataset. It is the generalization of a scatterplot to the case

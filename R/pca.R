@@ -7,7 +7,7 @@ NULL
 #' @aliases pca,data.frame-method
 setMethod(
   f = "pca",
-  signature = signature(object = "data.frame"),
+  signature = c(object = "data.frame"),
   definition = function(object, center = TRUE, scale = TRUE, rank = NULL,
                         sup_row = NULL, sup_col = NULL,
                         weight_row = NULL, weight_col = NULL) {
@@ -40,7 +40,7 @@ setMethod(
 #' @aliases pca,matrix-method
 setMethod(
   f = "pca",
-  signature = signature(object = "matrix"),
+  signature = c(object = "matrix"),
   definition = function(object, center = TRUE, scale = TRUE, rank = NULL,
                         sup_row = NULL, sup_col = NULL,
                         weight_row = NULL, weight_col = NULL) {

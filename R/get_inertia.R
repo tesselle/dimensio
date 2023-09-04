@@ -7,7 +7,7 @@ NULL
 #' @aliases get_inertia,MultivariateAnalysis-method
 setMethod(
   f = "get_inertia",
-  signature = signature(x = "MultivariateAnalysis"),
+  signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1) {
     if (margin == 1) {
       masses <- x@rows@weights

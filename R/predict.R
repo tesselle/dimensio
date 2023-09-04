@@ -8,12 +8,12 @@ NULL
 #' @aliases predict,CA-method
 setMethod(
   f = "predict",
-  signature = signature(object = "CA"),
+  signature = c(object = "CA"),
   definition = function(object, newdata, margin = 1) {
     # Coerce to matrix
     if (missing(newdata)) {
       data <- object@data
-      data <- data[!object@rows@supplement, !object@columns@supplement]
+      data <- data[!object@rows@supplement, !object@columns@supplement, drop = FALSE]
     } else {
       data <- as.matrix(newdata)
     }
@@ -25,6 +25,7 @@ setMethod(
       data <- data / rowSums(data)
       std <- object@columns@standard
     }
+
     if (margin == 2) {
       data <- t(data) / colSums(data)
       std <- object@rows@standard
@@ -44,7 +45,7 @@ setMethod(
 #' @aliases predict,PCA-method
 setMethod(
   f = "predict",
-  signature = signature(object = "PCA"),
+  signature = c(object = "PCA"),
   definition = function(object, newdata, margin = 1) {
     # Coerce to matrix
     if (missing(newdata)) {

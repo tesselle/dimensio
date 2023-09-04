@@ -7,7 +7,7 @@ NULL
 #' @aliases get_correlations,PCA-method
 setMethod(
   f = "get_correlations",
-  signature = signature(x = "PCA"),
+  signature = c(x = "PCA"),
   definition = function(x, sup_name = ".sup") {
     corr <- x@columns@principal / x@columns@distances
     suppl <- x@columns@supplement

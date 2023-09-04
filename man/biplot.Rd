@@ -86,7 +86,7 @@ The default value, \code{NULL}, indicates that the range of the
 
 \item{sub}{A \code{\link{character}} string giving a subtitle for the plot.}
 
-\item{...}{Further parameters to be passed to \code{\link[wordcloud:wordlayout]{wordcloud::wordlayout()}}.}
+\item{...}{Currently not used.}
 
 \item{lty, lwd}{A specification for the line type and width.}
 }

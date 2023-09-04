@@ -8,7 +8,7 @@ NULL
 #' @aliases bootstrap,CA-method
 setMethod(
   f = "bootstrap",
-  signature = signature(object = "CA"),
+  signature = c(object = "CA"),
   definition = function(object, n = 30) {
     ## Data replication
     n <- as.integer(n)
@@ -60,7 +60,7 @@ setMethod(
 #' @aliases bootstrap,PCA-method
 setMethod(
   f = "bootstrap",
-  signature = signature(object = "PCA"),
+  signature = c(object = "PCA"),
   definition = function(object, n = 30) {
     ## Get data
     n <- as.integer(n)

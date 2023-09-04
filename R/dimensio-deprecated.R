@@ -129,7 +129,7 @@ setGeneric(
 #' @aliases plot_variables,PCA-method
 setMethod(
   f = "plot_variables",
-  signature = signature(object = "PCA"),
+  signature = c(object = "PCA"),
   definition = function(object, axes = c(1, 2), active = TRUE, sup = TRUE,
                         alpha = NULL, colour = NULL, linetype = NULL,
                         size = NULL, group = NULL) {
@@ -218,7 +218,7 @@ setGeneric(
 #' @aliases plot_variance,MultivariateAnalysis-method
 setMethod(
   f = "plot_variance",
-  signature = signature(object = "MultivariateAnalysis"),
+  signature = c(object = "MultivariateAnalysis"),
   definition = function(object, select = NULL, variance = TRUE, cumulative = TRUE,
                         fill = "grey30", border = "grey10", colour = "red") {
     .Deprecated(new = "screeplot()", old = "plot_variance()")
@@ -323,7 +323,7 @@ setGeneric(
 #' @aliases plot_cos2,MultivariateAnalysis-method
 setMethod(
   f = "plot_cos2",
-  signature = signature(object = "MultivariateAnalysis"),
+  signature = c(object = "MultivariateAnalysis"),
   definition = function(object, margin = 2, axes = c(1, 2), active = TRUE,
                         sup = TRUE, sort = TRUE, decreasing = TRUE,
                         limit = 10, fill = "grey30", border = "grey10") {

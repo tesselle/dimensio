@@ -8,7 +8,7 @@ NULL
 #' @aliases screeplot,MultivariateAnalysis-method
 setMethod(
   f = "screeplot",
-  signature = signature(x = "MultivariateAnalysis"),
+  signature = c(x = "MultivariateAnalysis"),
   definition = function(x, eigenvalues = FALSE, cumulative = FALSE,
                         labels = TRUE, limit = 10,
                         col = "grey90", border = "grey10",
