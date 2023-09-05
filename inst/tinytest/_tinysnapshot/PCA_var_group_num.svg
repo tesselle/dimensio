@@ -67,4 +67,15 @@
 <text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='65.86px' lengthAdjust='spacingAndGlyphs'>F1 (73.3%)</text>
 <text transform='translate(34.56,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='54.40px' lengthAdjust='spacingAndGlyphs'>F2 (23%)</text>
 </g>
+<g clip-path='url(#cpODAuNjR8NDUyLjE2fDU5LjA0fDQzMC41Ng==)'>
+<rect x='80.64' y='59.04' width='56.24' height='72.00' style='stroke-width: 0.75; fill: #FFFFFF;' />
+<line x1='91.44' y1='73.44' x2='113.04' y2='73.44' style='stroke-width: 0.75; stroke: #FFFFC8;' />
+<line x1='91.44' y1='87.84' x2='113.04' y2='87.84' style='stroke-width: 0.75; stroke: #F7C14E;' />
+<line x1='91.44' y1='102.24' x2='113.04' y2='102.24' style='stroke-width: 0.75; stroke: #E95500;' />
+<line x1='91.44' y1='116.64' x2='113.04' y2='116.64' style='stroke-width: 0.75; stroke: #7D0025;' />
+<text x='123.84' y='77.81' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='123.84' y='92.21' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='123.84' y='106.61' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='123.84' y='121.01' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>4</text>
+</g>
 </svg>

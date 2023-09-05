@@ -12,11 +12,13 @@ setMethod(
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
-                        panel.first = NULL, panel.last = NULL, ...) {
+                        panel.first = NULL, panel.last = NULL,
+                        legend = list(x = "topleft"), ...) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
                labels = labels, highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
-               panel.first = panel.first, panel.last = panel.last, ...)
+               panel.first = panel.first, panel.last = panel.last,
+               legend = legend, ...)
     invisible(x)
   }
 )
@@ -45,15 +47,15 @@ setMethod(
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
-                        panel.first = NULL, panel.last = NULL, ...) {
+                        panel.first = NULL, panel.last = NULL,
+                        legend = list(x = "topleft"), ...) {
     viz_rows(x, axes = axes, active = active, sup = sup, labels = labels,
              highlight = highlight, xlim = xlim, ylim = ylim,
-             main = main, sub = sub,
-             panel.first = panel.first, panel.last = panel.last, ...)
+             main = main, sub = sub, panel.first = panel.first,
+             panel.last = panel.last, legend = legend, ...)
     invisible(x)
   }
 )
-
 
 # Columns =====================================================================
 #' @export
@@ -65,11 +67,13 @@ setMethod(
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
-                        panel.first = NULL, panel.last = NULL, ...) {
+                        panel.first = NULL, panel.last = NULL,
+                        legend = list(x = "topleft"), ...) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
                labels = labels, highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
-               panel.first = panel.first, panel.last = panel.last, ...)
+               panel.first = panel.first, panel.last = panel.last,
+               legend = legend, ...)
     invisible(x)
   }
 )
@@ -98,7 +102,8 @@ setMethod(
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = TRUE, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
-                        panel.first = NULL, panel.last = NULL, ...) {
+                        panel.first = NULL, panel.last = NULL,
+                        legend = list(x = "topleft"), ...) {
     ## Prepare data
     coord <- prepare_coord(x, margin = 2, axes = axes, active = active,
                            sup = sup, highlight = highlight, ...)
@@ -169,6 +174,9 @@ setMethod(
       )
     }
 
+    ## Legend
+    prepare_legend(coord, legend, points = FALSE, lines = TRUE)
+
     invisible(x)
   }
 )
@@ -182,11 +190,13 @@ setMethod(
   definition = function(x, axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
-                        panel.first = NULL, panel.last = NULL, ...) {
+                        panel.first = NULL, panel.last = NULL,
+                        legend = list(x = "topleft"), ...) {
     viz_columns(x, axes = axes, active = active, sup = sup,
                 labels = labels, highlight = highlight,
                 xlim = xlim, ylim = ylim, main = main, sub = sub,
-                panel.first = panel.first, panel.last = panel.last, ...)
+                panel.first = panel.first, panel.last = panel.last,
+                legend = legend, ...)
   }
 )
 
@@ -208,8 +218,9 @@ setMethod(
 viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALSE,
                        highlight = NULL, xlim = NULL, ylim = NULL,
                        main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
-                       ann = graphics::par("ann"), frame.plot = TRUE,
-                       panel.first = NULL, panel.last = NULL, ...) {
+                       ann = graphics::par("ann"),frame.plot = TRUE,
+                       panel.first = NULL, panel.last = NULL,
+                       legend = list(x = "topleft"), ...) {
   ## Prepare data
   coord <- prepare_coord(x, margin = margin, axes = axes, active = active,
                          sup = sup, highlight = highlight, ...)
@@ -272,6 +283,9 @@ viz_points <- function(x, margin, axes, active = TRUE, sup = TRUE, labels = FALS
       ylab = ylab %||% print_variance(x, axes[[2]])
     )
   }
+
+  ## Legend
+  prepare_legend(coord, legend, points = TRUE, lines = FALSE)
 
   invisible(coord)
 }
@@ -386,7 +400,58 @@ prepare_param <- function(x, highlight = NULL, alpha = FALSE, ...) {
     lwd = lwd
   )
   if (nrow(param) > n) param <- param[seq_len(n), , drop = FALSE]
+  param$highlight <- highlight
+
   param
+}
+
+#' @param x A [`data.frame`] returned by [prepare_coord()].
+#' @param args A [`list`] of additional arguments to be passed to
+#'  [graphics::legend()]; names of the list are used as argument names.
+#'  If `NULL`, no legend is displayed.
+#' @param points A [`logical`] scalar. Legend for points?
+#' @param lines A [`logical`] scalar. Legend for lines?
+#' @keywords internal
+#' @noRd
+prepare_legend <- function(x, args, points = TRUE, lines = TRUE) {
+  h <- x$highlight
+
+  if (!is.null(h) && is.list(args) && length(args) > 0) {
+    if (is.double(h)) {
+      ## Continuous scale
+      im <- grDevices::as.raster(x$col)
+
+      pr <- pretty(h, n = ifelse(nrow(x) > 5, 5, nrow(x)))
+      pr <- pr[pr <= max(h) & pr >= min(h)]
+      i <- order(h, method = "radix")[!duplicated(h)]
+
+      col <- grDevices::colorRamp(x$col[i])(scale_range(pr, from = range(h)))
+      col <- grDevices::rgb(col, maxColorValue = 255)
+
+      leg <- list(legend = pr, col = col)
+      if (points) {
+        cex <- stats::approx(x = h[i], y = x$cex[i], xout = pr, ties = "ordered")$y
+        leg <- utils::modifyList(leg, list(pch = unique(x$pch), pt.cex = cex))
+      }
+      if (lines) {
+        lwd <- stats::approx(x = h[i], y = x$lwd[i], xout = pr, ties = "ordered")$y
+        leg <- utils::modifyList(leg, list(lty = unique(x$lty), lwd = lwd))
+      }
+    } else {
+      ## Discrete scale
+      leg <- list(legend = unique(h), col = unique(x$col))
+      if (points) {
+        leg <- utils::modifyList(leg, list(pt.bg = unique(x$bg),
+                                           pch = unique(x$pch)))
+      }
+      if (lines) {
+        leg <- utils::modifyList(leg, list(lty = unique(x$lty)))
+      }
+    }
+
+    leg <- utils::modifyList(leg, args)
+    do.call(graphics::legend, args = leg)
+  }
 }
 
 scale_color <- function(x, col = NULL, alpha = FALSE) {
@@ -400,7 +465,7 @@ scale_color <- function(x, col = NULL, alpha = FALSE) {
     if (is.null(col)) col <- grDevices::hcl.colors(12, "YlOrRd", rev = TRUE)
     x <- scale_range(x) # Rescale to [0,1]
     col <- grDevices::colorRamp(col)(x)
-    col <- grDevices::rgb(col[, 1], col[, 2], col[, 3], maxColorValue = 255)
+    col <- grDevices::rgb(col, maxColorValue = 255)
     ## Alpha transparency
     if (alpha) col <- grDevices::adjustcolor(col, alpha.f = alpha)
   } else {

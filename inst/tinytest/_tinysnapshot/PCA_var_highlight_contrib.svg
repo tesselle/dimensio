@@ -216,4 +216,15 @@
 <text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='65.86px' lengthAdjust='spacingAndGlyphs'>F1 (73.3%)</text>
 <text transform='translate(34.56,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='54.40px' lengthAdjust='spacingAndGlyphs'>F2 (23%)</text>
 </g>
+<g clip-path='url(#cpODAuNjR8NDUyLjE2fDU5LjA0fDQzMC41Ng==)'>
+<rect x='80.64' y='59.04' width='34.64' height='72.00' style='stroke-width: 0.75; fill: #FFFFFF;' />
+<circle cx='91.44' cy='73.44' r='3.35' style='stroke-width: 0.75; stroke: #FEF1B1;' />
+<circle cx='91.44' cy='87.84' r='4.00' style='stroke-width: 0.75; stroke: #F7CC6D;' />
+<circle cx='91.44' cy='102.24' r='4.65' style='stroke-width: 0.75; stroke: #F6AE20;' />
+<circle cx='91.44' cy='116.64' r='5.31' style='stroke-width: 0.75; stroke: #C72500;' />
+<text x='102.24' y='77.81' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='102.24' y='92.21' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='102.24' y='106.61' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>6</text>
+<text x='102.24' y='121.01' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>8</text>
+</g>
 </svg>

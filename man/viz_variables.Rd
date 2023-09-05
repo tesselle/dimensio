@@ -30,6 +30,7 @@ viz_columns(x, ...)
   sub = NULL,
   panel.first = NULL,
   panel.last = NULL,
+  legend = list(x = "topleft"),
   ...
 )
 
@@ -48,6 +49,7 @@ viz_columns(x, ...)
   sub = NULL,
   panel.first = NULL,
   panel.last = NULL,
+  legend = list(x = "topleft"),
   ...
 )
 
@@ -64,6 +66,7 @@ viz_columns(x, ...)
   sub = NULL,
   panel.first = NULL,
   panel.last = NULL,
+  legend = list(x = "topleft"),
   ...
 )
 
@@ -111,6 +114,10 @@ background grids.}
 
 \item{panel.last}{An \code{expression} to be evaluated after plotting has taken
 place but before the axes, title and box are added.}
+
+\item{legend}{A \code{\link{list}} of additional arguments to be passed to
+\code{\link[graphics:legend]{graphics::legend()}}; names of the list are used as argument names.
+If \code{NULL}, no legend is displayed.}
 }
 \value{
 \verb{viz_*()} is called for its side-effects: it results in a graphic

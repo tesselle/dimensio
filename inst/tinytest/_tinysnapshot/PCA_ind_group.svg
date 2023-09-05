@@ -266,4 +266,14 @@
 <text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='65.86px' lengthAdjust='spacingAndGlyphs'>F1 (73.3%)</text>
 <text transform='translate(34.56,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='54.40px' lengthAdjust='spacingAndGlyphs'>F2 (23%)</text>
 </g>
+<g clip-path='url(#cpODAuNjR8NDUyLjE2fDU5LjA0fDQzMC41Ng==)'>
+<rect x='80.64' y='59.04' width='85.57' height='57.60' style='stroke-width: 0.75; fill: #FFFFFF;' />
+<circle cx='91.44' cy='73.44' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
+<polygon points='91.44,83.64 95.08,89.94 87.80,89.94 ' style='stroke-width: 0.75; stroke: #009B95;' />
+<line x1='87.62' y1='102.24' x2='95.26' y2='102.24' style='stroke-width: 0.75; stroke: #FDE333;' />
+<line x1='91.44' y1='106.06' x2='91.44' y2='98.42' style='stroke-width: 0.75; stroke: #FDE333;' />
+<text x='102.24' y='77.81' style='font-size: 12.00px; font-family: "Arial";' textLength='39.31px' lengthAdjust='spacingAndGlyphs'>setosa</text>
+<text x='102.24' y='92.21' style='font-size: 12.00px; font-family: "Arial";' textLength='58.57px' lengthAdjust='spacingAndGlyphs'>versicolor</text>
+<text x='102.24' y='106.61' style='font-size: 12.00px; font-family: "Arial";' textLength='51.02px' lengthAdjust='spacingAndGlyphs'>virginica</text>
+</g>
 </svg>

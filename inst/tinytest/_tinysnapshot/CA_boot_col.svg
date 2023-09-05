@@ -177,6 +177,15 @@
 <text transform='translate(34.56,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='58.22px' lengthAdjust='spacingAndGlyphs'>F2 (9.5%)</text>
 </g>
 <g clip-path='url(#cpODAuNjR8NDUyLjE2fDU5LjA0fDQzMC41Ng==)'>
+<rect x='80.64' y='59.04' width='71.58' height='72.00' style='stroke-width: 0.75; fill: #FFFFFF;' />
+<circle cx='91.44' cy='73.44' r='2.70' style='stroke-width: 0.75; stroke: #007094;' />
+<circle cx='91.44' cy='87.84' r='2.70' style='stroke-width: 0.75; stroke: #00BE7D;' />
+<circle cx='91.44' cy='102.24' r='2.70' style='stroke-width: 0.75; stroke: #FDE333;' />
+<circle cx='91.44' cy='116.64' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
+<text x='102.24' y='77.81' style='font-size: 12.00px; font-family: "Arial";' textLength='27.77px' lengthAdjust='spacingAndGlyphs'>brun</text>
+<text x='102.24' y='92.21' style='font-size: 12.00px; font-family: "Arial";' textLength='44.58px' lengthAdjust='spacingAndGlyphs'>chatain</text>
+<text x='102.24' y='106.61' style='font-size: 12.00px; font-family: "Arial";' textLength='26.73px' lengthAdjust='spacingAndGlyphs'>roux</text>
+<text x='102.24' y='121.01' style='font-size: 12.00px; font-family: "Arial";' textLength='33.52px' lengthAdjust='spacingAndGlyphs'>blond</text>
 <polygon points='438.40,306.99 432.17,337.60 411.12,318.65 396.47,300.45 382.54,267.57 412.85,278.46 427.43,287.49 435.47,299.49 438.40,306.99 ' style='stroke-width: 0.75;' />
 <polygon points='164.55,356.29 94.40,366.18 103.73,314.58 149.15,305.58 164.97,317.89 170.39,328.76 164.55,356.29 ' style='stroke-width: 0.75;' />
 <polygon points='222.92,281.87 219.97,290.64 200.79,304.74 195.85,297.38 191.42,290.74 185.64,278.90 183.89,268.99 194.57,248.53 222.30,254.63 225.49,263.52 222.92,281.87 ' style='stroke-width: 0.75;' />

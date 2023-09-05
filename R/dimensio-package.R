@@ -40,7 +40,7 @@
 #' .hasSlot initialize is new setClass setClassUnion
 #' setGeneric setMethod slot slot<- slotNames validObject .valueClassTest
 #' @importFrom rlang .data
-#' @importFrom stats as.dist cov optim qchisq qf rmultinom
+#' @importFrom stats approx as.dist cov optim qchisq qf rmultinom
 #' @importFrom utils capture.output stack tail
 NULL
 
