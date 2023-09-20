@@ -8,7 +8,7 @@ NULL
 setMethod(
   f = "augment",
   signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, axes = c(1, 2), principal = TRUE, ...) {
+  definition = function(x, ..., margin = 1, axes = c(1, 2), principal = TRUE) {
     ## Validation
     assert_length(margin, 1)
     assert_length(axes, 2)
@@ -71,13 +71,13 @@ joint <- function(object, what, ...) {
   fun(object, ...)
 }
 
-joint_coordinates <- function(object, margin = 1, axes = c(1, 2), ...) {
+joint_coordinates <- function(object, ..., margin = 1, axes = c(1, 2)) {
   axes <- axes[c(1, 2)]
   coord <- get_coordinates(object, margin = margin)
   rowSums(coord[, axes]^2)
 }
 
-joint_contributions <- function(object, margin = 1, axes = c(1, 2), ...) {
+joint_contributions <- function(object, ..., margin = 1, axes = c(1, 2)) {
   axes <- axes[c(1, 2)]
   contrib <- get_contributions(object, margin = margin)
   eig <- matrix(
@@ -89,7 +89,7 @@ joint_contributions <- function(object, margin = 1, axes = c(1, 2), ...) {
   rowSums(contrib[, axes] * eig)
 }
 
-joint_cos2 <- function(object, margin = 1, axes = c(1, 2), ...) {
+joint_cos2 <- function(object, ..., margin = 1, axes = c(1, 2)) {
   axes <- axes[c(1, 2)]
   cos2 <- get_cos2(object, margin = margin)
   rowSums(cos2[, axes])

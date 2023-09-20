@@ -8,9 +8,9 @@ NULL
 setMethod(
   f = "viz_contributions",
   signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 2, axes = 1,
+  definition = function(x, ..., margin = 2, axes = 1,
                         sort = TRUE, decreasing = TRUE, limit = 10,
-                        horiz = FALSE, col = "grey90", border = "grey10", ...) {
+                        horiz = FALSE, col = "grey90", border = "grey10") {
     ## Prepare data
     data <- prepare_contrib(x, margin = margin, axes = axes, sort = sort,
                             decreasing = decreasing, limit = limit)

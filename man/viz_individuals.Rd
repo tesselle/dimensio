@@ -17,6 +17,7 @@ viz_rows(x, ...)
 
 \S4method{viz_rows}{MultivariateAnalysis}(
   x,
+  ...,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
@@ -28,14 +29,14 @@ viz_rows(x, ...)
   sub = NULL,
   panel.first = NULL,
   panel.last = NULL,
-  legend = list(x = "topleft"),
-  ...
+  legend = list(x = "topleft")
 )
 
-\S4method{viz_rows}{BootstrapCA}(x, axes = c(1, 2), ...)
+\S4method{viz_rows}{BootstrapCA}(x, ..., axes = c(1, 2))
 
 \S4method{viz_individuals}{PCA}(
   x,
+  ...,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
@@ -47,8 +48,7 @@ viz_rows(x, ...)
   sub = NULL,
   panel.first = NULL,
   panel.last = NULL,
-  legend = list(x = "topleft"),
-  ...
+  legend = list(x = "topleft")
 )
 }
 \arguments{

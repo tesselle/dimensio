@@ -8,9 +8,9 @@ NULL
 setMethod(
   f = "viz_tolerance",
   signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95, ...) {
-    .viz_ellipse(x, type = "tolerance", level = level,
-                 margin = margin, axes = axes, group = group, ...)
+  definition = function(x, ..., margin = 1, axes = c(1, 2), group = NULL, level = 0.95) {
+    .viz_ellipse(x, ..., type = "tolerance", level = level,
+                 margin = margin, axes = axes, group = group)
   }
 )
 
@@ -20,7 +20,7 @@ setMethod(
 setMethod(
   f = "viz_tolerance",
   signature = c(x = "BootstrapCA"),
-  definition = function(x, margin = 1, axes = c(1, 2), level = 0.95, ...) {
+  definition = function(x, ..., margin = 1, axes = c(1, 2), level = 0.95) {
     group <- get_groups(x, margin = margin)
     methods::callNextMethod(x, margin = margin, axes = axes, group = group,
                             level = level, ...)
@@ -34,9 +34,9 @@ setMethod(
 setMethod(
   f = "viz_confidence",
   signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95, ...) {
-    .viz_ellipse(x, type = "confidence", level = level,
-                 margin = margin, axes = axes, group = group, ...)
+  definition = function(x, ..., margin = 1, axes = c(1, 2), group = NULL, level = 0.95) {
+    .viz_ellipse(x, ..., type = "confidence", level = level,
+                 margin = margin, axes = axes, group = group)
   }
 )
 
@@ -46,7 +46,7 @@ setMethod(
 setMethod(
   f = "viz_confidence",
   signature = c(x = "BootstrapCA"),
-  definition = function(x, margin = 1, axes = c(1, 2), level = 0.95, ...) {
+  definition = function(x, ..., margin = 1, axes = c(1, 2), level = 0.95) {
     group <- get_groups(x, margin = margin)
     methods::callNextMethod(x, margin = margin, axes = axes, group = group,
                             level = level, ...)
@@ -54,8 +54,11 @@ setMethod(
   }
 )
 
-.viz_ellipse <- function(x, type = c("tolerance", "confidence"), level = 0.95,
-                         margin = 1, axes = c(1, 2), group = NULL, ...) {
+.viz_ellipse <- function(x, ..., type = c("tolerance", "confidence"),
+                         level = 0.95, margin = 1, axes = c(1, 2),
+                         group = NULL, border = graphics::par("col"),
+                         col = NA, lty = graphics::par("lty"),
+                         lwd = graphics::par("lwd")) {
   fun <- switch(
     type,
     tolerance = wrap_tolerance,
@@ -65,10 +68,6 @@ setMethod(
   n <- length(ell)
 
   ## Graphical parameters
-  border <- list(...)$border %||% graphics::par("col")
-  col <- list(...)$col %||% NA
-  lty <- list(...)$lty %||% graphics::par("lty")
-  lwd <- list(...)$lwd %||% graphics::par("lwd")
   if (length(border) != n) border <- rep(border, length.out = n)
   if (length(col) != n) col <- rep(col, length.out = n)
   if (length(lty) != n) lty <- rep(lty, length.out = n)

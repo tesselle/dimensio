@@ -9,7 +9,7 @@ NULL
 setMethod(
   f = "biplot",
   signature = c(x = "CA"),
-  definition = function(x, axes = c(1, 2),
+  definition = function(x, ..., axes = c(1, 2),
                         type = c("rows", "columns", "contributions"),
                         active = TRUE, sup = TRUE,
                         labels = "columns",
@@ -18,7 +18,7 @@ setMethod(
                         cex.columns = graphics::par("cex"),
                         pch.rows = 16, pch.columns = 17,
                         xlim = NULL, ylim = NULL,
-                        main = NULL, sub = NULL, ...) {
+                        main = NULL, sub = NULL) {
     ## Validation
     type <- match.arg(type, several.ok = FALSE)
 
@@ -54,7 +54,9 @@ setMethod(
     }
 
     viz_biplot(
-      coord_row, coord_col, rows = TRUE, columns = TRUE, labels = labels,
+      coord_row, coord_col,
+      ...,
+      rows = TRUE, columns = TRUE, labels = labels,
       col.rows = col.rows, col.columns = col.columns,
       pch.rows = pch.rows, pch.columns = pch.columns,
       cex.rows = cex.rows,
@@ -62,8 +64,7 @@ setMethod(
       xlim = xlim, ylim = ylim,
       main = main, sub = sub,
       xlab = print_variance(x, axes[[1]]),
-      ylab = print_variance(x, axes[[2]]),
-      ...
+      ylab = print_variance(x, axes[[2]])
     )
 
     invisible(x)
@@ -77,14 +78,14 @@ setMethod(
 setMethod(
   f = "biplot",
   signature = c(x = "PCA"),
-  definition = function(x, axes = c(1, 2), type = c("form", "covariance"),
+  definition = function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
                         active = TRUE, sup = TRUE,
                         labels = "variables",
                         col.rows = "#004488", col.columns = "#BB5566",
                         pch.rows = 16, pch.columns = 17,
                         lty = "solid", lwd = 2,
                         xlim = NULL, ylim = NULL,
-                        main = NULL, sub = NULL, ...) {
+                        main = NULL, sub = NULL) {
     ## Validation
     type <- match.arg(type, several.ok = FALSE)
 
@@ -116,7 +117,9 @@ setMethod(
     }
 
     viz_biplot(
-      coord_row, coord_col, rows = TRUE, columns = FALSE, labels = labels,
+      coord_row, coord_col,
+      ...,
+      rows = TRUE, columns = FALSE, labels = labels,
       col.rows = col.rows, col.columns = col.columns,
       pch.rows = pch.rows, pch.columns = pch.columns,
       xlim = xlim, ylim = ylim,
@@ -124,15 +127,14 @@ setMethod(
       xlab = print_variance(x, axes[[1]]),
       ylab = print_variance(x, axes[[2]]),
       panel.first = arrows_col(),
-      panel.last = NULL,
-      ...
+      panel.last = NULL
     )
 
     invisible(x)
   }
 )
 
-viz_biplot <- function(coord_row, coord_col, rows = TRUE, columns = TRUE,
+viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
                        labels = c("rows", "columns", "individuals", "variables"),
                        col.rows = "#004488", col.columns = "#BB5566",
                        pch.rows = 16, pch.columns = 17,
@@ -142,7 +144,7 @@ viz_biplot <- function(coord_row, coord_col, rows = TRUE, columns = TRUE,
                        xlab = NULL, ylab = NULL,
                        axes = TRUE, frame.plot = axes,
                        ann = graphics::par("ann"),
-                       panel.first = NULL, panel.last = NULL, ...) {
+                       panel.first = NULL, panel.last = NULL) {
 
   ## Save and restore graphical parameters
   ## pty: square plotting region, independent of device size

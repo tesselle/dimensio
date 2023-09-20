@@ -8,7 +8,7 @@ NULL
 setMethod(
   f = "tidy",
   signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, principal = TRUE, ...) {
+  definition = function(x, ..., margin = 1, principal = TRUE) {
     ## Validation
     assert_length(margin, 1)
 

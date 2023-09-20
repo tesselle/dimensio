@@ -9,6 +9,7 @@
 \usage{
 \S4method{biplot}{CA}(
   x,
+  ...,
   axes = c(1, 2),
   type = c("rows", "columns", "contributions"),
   active = TRUE,
@@ -23,12 +24,12 @@
   xlim = NULL,
   ylim = NULL,
   main = NULL,
-  sub = NULL,
-  ...
+  sub = NULL
 )
 
 \S4method{biplot}{PCA}(
   x,
+  ...,
   axes = c(1, 2),
   type = c("form", "covariance"),
   active = TRUE,
@@ -43,12 +44,13 @@
   xlim = NULL,
   ylim = NULL,
   main = NULL,
-  sub = NULL,
-  ...
+  sub = NULL
 )
 }
 \arguments{
 \item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+
+\item{...}{Currently not used.}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -85,8 +87,6 @@ The default value, \code{NULL}, indicates that the range of the
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
 \item{sub}{A \code{\link{character}} string giving a subtitle for the plot.}
-
-\item{...}{Currently not used.}
 
 \item{lty, lwd}{A specification for the line type and width.}
 }

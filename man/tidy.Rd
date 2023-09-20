@@ -14,9 +14,9 @@ tidy(x, ...)
 
 augment(x, ...)
 
-\S4method{augment}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), principal = TRUE, ...)
+\S4method{augment}{MultivariateAnalysis}(x, ..., margin = 1, axes = c(1, 2), principal = TRUE)
 
-\S4method{tidy}{MultivariateAnalysis}(x, margin = 1, principal = TRUE, ...)
+\S4method{tidy}{MultivariateAnalysis}(x, ..., margin = 1, principal = TRUE)
 }
 \arguments{
 \item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}

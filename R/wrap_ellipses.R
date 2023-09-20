@@ -111,14 +111,15 @@ wrap_ellipse <- function(x, y, radius = 1) {
 #'  the value of a t-statistic on its boundary.
 #' @param n A length-one [`numeric`] vector specifying the number of points used
 #'  in the ellipse.
+#' @param ... Currently not used.
 #' @note Adapted from [ellipse::ellipse()].
 #' @return
 #'  A [`list`] of \eqn{k} \eqn{n \times 2}{n x 2} `matrix`, suitable for
 #'  plotting.
 #' @keywords internal
 #' @noRd
-ellipse <- function(sigma, mu = c(0, 0), scale = c(1, 1), level = 0.95,
-                    radius = sqrt(stats::qchisq(level, 2)), n = 100, ...) {
+ellipse <- function(sigma, ..., mu = c(0, 0), scale = c(1, 1), level = 0.95,
+                    radius = sqrt(stats::qchisq(level, 2)), n = 100) {
   r <- sigma[1, 2]
 
   if (missing(scale)) {

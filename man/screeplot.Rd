@@ -9,6 +9,7 @@
 \usage{
 \S4method{screeplot}{MultivariateAnalysis}(
   x,
+  ...,
   eigenvalues = FALSE,
   cumulative = FALSE,
   labels = TRUE,
@@ -17,12 +18,13 @@
   border = "grey10",
   col.cumulative = "red",
   lty.cumulative = "solid",
-  lwd.cumulative = 2,
-  ...
+  lwd.cumulative = 2
 )
 }
 \arguments{
 \item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+
+\item{...}{Extra parameters to be passed to \code{\link[graphics:barplot]{graphics::barplot()}}.}
 
 \item{eigenvalues}{A \code{\link{logical}} scalar: should the eigenvalues be plotted
 instead of variance/inertia?}
@@ -44,8 +46,6 @@ border colors.}
 \item{lty.cumulative}{A specification for the line type.}
 
 \item{lwd.cumulative}{A specification for the line width.}
-
-\item{...}{Extra parameters to be passed to \code{\link[graphics:barplot]{graphics::barplot()}}.}
 }
 \value{
 \code{screeplot()} is called for its side-effects: it results in a graphic

@@ -8,10 +8,10 @@ NULL
 setMethod(
   f = "viz_cos2",
   signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 2, axes = c(1, 2), active = TRUE,
+  definition = function(x, ..., margin = 2, axes = c(1, 2), active = TRUE,
                         sup = TRUE, sort = TRUE, decreasing = TRUE,
                         limit = 10, horiz = FALSE,
-                        col = "grey90", border = "grey10", ...) {
+                        col = "grey90", border = "grey10") {
     ## Prepare data
     data <- prepare_cos2(x, margin = margin, axes = axes,
                          active = active, sup = sup, sort = sort,

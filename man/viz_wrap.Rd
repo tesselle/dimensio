@@ -23,17 +23,17 @@ viz_confidence(x, ...)
 
 viz_tolerance(x, ...)
 
-\S4method{viz_tolerance}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95, ...)
+\S4method{viz_tolerance}{MultivariateAnalysis}(x, ..., margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
 
-\S4method{viz_tolerance}{BootstrapCA}(x, margin = 1, axes = c(1, 2), level = 0.95, ...)
+\S4method{viz_tolerance}{BootstrapCA}(x, ..., margin = 1, axes = c(1, 2), level = 0.95)
 
-\S4method{viz_confidence}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95, ...)
+\S4method{viz_confidence}{MultivariateAnalysis}(x, ..., margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
 
-\S4method{viz_confidence}{BootstrapCA}(x, margin = 1, axes = c(1, 2), level = 0.95, ...)
+\S4method{viz_confidence}{BootstrapCA}(x, ..., margin = 1, axes = c(1, 2), level = 0.95)
 
-\S4method{viz_hull}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL, ...)
+\S4method{viz_hull}{MultivariateAnalysis}(x, ..., margin = 1, axes = c(1, 2), group = NULL)
 
-\S4method{viz_hull}{BootstrapCA}(x, margin = 1, axes = c(1, 2), ...)
+\S4method{viz_hull}{BootstrapCA}(x, ..., margin = 1, axes = c(1, 2))
 }
 \arguments{
 \item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}} or

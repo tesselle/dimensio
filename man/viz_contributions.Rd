@@ -17,6 +17,7 @@ viz_cos2(x, ...)
 
 \S4method{viz_contributions}{MultivariateAnalysis}(
   x,
+  ...,
   margin = 2,
   axes = 1,
   sort = TRUE,
@@ -24,12 +25,12 @@ viz_cos2(x, ...)
   limit = 10,
   horiz = FALSE,
   col = "grey90",
-  border = "grey10",
-  ...
+  border = "grey10"
 )
 
 \S4method{viz_cos2}{MultivariateAnalysis}(
   x,
+  ...,
   margin = 2,
   axes = c(1, 2),
   active = TRUE,
@@ -39,8 +40,7 @@ viz_cos2(x, ...)
   limit = 10,
   horiz = FALSE,
   col = "grey90",
-  border = "grey10",
-  ...
+  border = "grey10"
 )
 }
 \arguments{

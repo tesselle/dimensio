@@ -19,6 +19,7 @@ viz_columns(x, ...)
 
 \S4method{viz_columns}{MultivariateAnalysis}(
   x,
+  ...,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
@@ -30,14 +31,14 @@ viz_columns(x, ...)
   sub = NULL,
   panel.first = NULL,
   panel.last = NULL,
-  legend = list(x = "topleft"),
-  ...
+  legend = list(x = "topleft")
 )
 
-\S4method{viz_columns}{BootstrapCA}(x, axes = c(1, 2), ...)
+\S4method{viz_columns}{BootstrapCA}(x, ..., axes = c(1, 2))
 
 \S4method{viz_variables}{PCA}(
   x,
+  ...,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
@@ -49,12 +50,12 @@ viz_columns(x, ...)
   sub = NULL,
   panel.first = NULL,
   panel.last = NULL,
-  legend = list(x = "topleft"),
-  ...
+  legend = list(x = "topleft")
 )
 
 \S4method{viz_variables}{CA}(
   x,
+  ...,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
@@ -66,11 +67,10 @@ viz_columns(x, ...)
   sub = NULL,
   panel.first = NULL,
   panel.last = NULL,
-  legend = list(x = "topleft"),
-  ...
+  legend = list(x = "topleft")
 )
 
-\S4method{viz_variables}{BootstrapPCA}(x, axes = c(1, 2), ...)
+\S4method{viz_variables}{BootstrapPCA}(x, ..., axes = c(1, 2))
 }
 \arguments{
 \item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}

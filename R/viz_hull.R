@@ -8,7 +8,7 @@ NULL
 setMethod(
   f = "viz_hull",
   signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, axes = c(1, 2), group = NULL, ...) {
+  definition = function(x, ..., margin = 1, axes = c(1, 2), group = NULL) {
     hull <- wrap_hull(x, margin = margin, axes = axes, group = group)
     n <- length(hull)
 
@@ -37,7 +37,7 @@ setMethod(
 setMethod(
   f = "viz_hull",
   signature = c(x = "BootstrapCA"),
-  definition = function(x, margin = 1, axes = c(1, 2), ...) {
+  definition = function(x, ..., margin = 1, axes = c(1, 2)) {
     group <- get_groups(x, margin = margin)
     methods::callNextMethod(x, margin = margin, axes = axes, group = group, ...)
     invisible(x)
