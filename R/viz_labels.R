@@ -2,12 +2,14 @@
 #' @include AllGenerics.R
 NULL
 
-viz_labels <- function(x, y, labels = seq_along(x),
+viz_labels <- function(x, y, ..., labels = seq_along(x),
                        box = FALSE, segment = FALSE,
-                       cex = graphics::par("cex"), col = graphics::par("fg"),
-                       bg = graphics::par("bg"), ...) {
+                       cex = graphics::par("cex"),
+                       col = graphics::par("fg"),
+                       bg = graphics::par("bg"),
+                       font = graphics::par("font")) {
   ## Compute label positions
-  coord <- get_labels(x = x, y = y, labels = labels, cex = cex)
+  coord <- compute_labels(x = x, y = y, labels = labels, cex = cex)
   xt <- coord$x
   yt <- coord$y
   wt <- coord$width
@@ -28,43 +30,26 @@ viz_labels <- function(x, y, labels = seq_along(x),
 
   ## Plot boxes
   if (isTRUE(box)) {
-    mar_x <- graphics::strwidth ("m", cex = cex, ...) * 0.3
-    mar_y <- graphics::strheight("x", cex = cex, ...) * 0.3
-
-    .mapply(
-      FUN = function(x, y, w, h, col, border) {
-        roundrect(
-          xleft = x - w - mar_x,
-          ybottom = y - h - mar_y,
-          xright = x + w + mar_x,
-          ytop = y + h + mar_y,
-          col = col,
-          border = border
-        )
-      },
-      dots = list(x = xt, y = yt, w = wt * 0.5, h = ht * 0.5,
-                  col = bg, border = col),
-      MoreArgs = NULL
-    )
+    boxtext(x = xt, y = yt, width = wt, height = ht, labels = labels,
+            col = col, bg = bg, cex = cex, font = font)
   } else {
-    shadowtext(x = xt, y = yt, labels = labels, col = col, bg = bg, cex = cex)
+    shadowtext(x = xt, y = yt, labels = labels, col = col, bg = bg,
+               cex = cex, font = font)
   }
-
-  ## Plot labels
-  graphics::text(x = xt, y = yt, labels = labels, col = col, cex = cex,
-                 xpd = TRUE)
 }
 
+# Helpers ======================================================================
 # Adapted from vegan::ordipointlabel() by Jari Oksanen
-get_labels <- function(x, y, labels, cex = 1) {
+compute_labels <- function(x, y, labels, cex = graphics::par("cex"),
+                           font = graphics::par("font")) {
   xy <- cbind.data.frame(x, y)
 
   em <- graphics::strwidth("m", cex = min(cex))
   ex <- graphics::strheight("x", cex = min(cex))
   ltr <- em * ex
 
-  width <- graphics::strwidth(labels, cex = cex) + em
-  height <- graphics::strheight(labels, cex = cex) + ex
+  width <- graphics::strwidth(labels, cex = cex, font = font) + em
+  height <- graphics::strheight(labels, cex = cex, font = font) + ex
   box <- cbind.data.frame(width, height)
 
   makeoff <- function(pos, lab) {
@@ -112,9 +97,58 @@ get_labels <- function(x, y, labels, cex = 1) {
   coord
 }
 
-# Helpers ======================================================================
-roundrect <- function(xleft, ybottom, xright, ytop,
-                      rounding = 0.25, n = 200, ...) {
+boxtext <- function(x, y, width, height, labels, ..., r = 0.1,
+                    cex = graphics::par("cex"),
+                    col = graphics::par("fg"),
+                    bg = graphics::par("bg"),
+                    font = graphics::par("font"),
+                    xpd = TRUE) {
+
+  xo <- r * graphics::strwidth("M", cex = cex, font = font, ...)
+  yo <- r * graphics::strheight("X", cex = cex, font = font, ...)
+
+  .mapply(
+    FUN = function(x, y, w, h, col, border, xpd) {
+      roundrect(
+        xleft = x - w - xo,
+        ybottom = y - h - yo,
+        xright = x + w + xo,
+        ytop = y + h + yo,
+        col = col,
+        border = border,
+        xpd = xpd
+      )
+    },
+    dots = list(x = x, y = y, w = width * 0.5, h = height * 0.5,
+                col = bg, border = col),
+    MoreArgs = list(xpd = xpd)
+  )
+  graphics::text(x = x, y = y, labels = labels, col = col,
+                 cex = cex, font = font, xpd = xpd)
+}
+
+shadowtext <- function(x, y, labels, ...,
+                       theta = seq(0, 2 * pi, length.out = 50),
+                       r = 0.1,
+                       cex = graphics::par("cex"),
+                       col = graphics::par("fg"),
+                       bg = graphics::par("bg"),
+                       font = graphics::par("font"),
+                       xpd = TRUE) {
+
+  xo <- r * graphics::strwidth("M", cex = cex, font = font, ...)
+  yo <- r * graphics::strheight("X", cex = cex, font = font, ...)
+
+  for (i in theta) {
+    graphics::text(x + cos(i) * xo, y + sin(i) * yo, labels,
+                   col = bg, cex = cex, font = font, xpd = xpd)
+  }
+
+  graphics::text(x, y, labels, col = col, cex = cex, font = font, xpd = xpd)
+}
+
+roundrect <- function(xleft, ybottom, xright, ytop, ...,
+                      rounding = 0.25, n = 200) {
 
   XD <- YD <- min(c(xright - xleft, ytop - ybottom))
   xi <- rounding * XD
@@ -135,19 +169,4 @@ roundrect <- function(xleft, ybottom, xright, ytop,
           ybottom + yi + ely(3 * pi / 2, 2 * pi))
 
   graphics::polygon(x = xc, y = yc, ...)
-}
-
-shadowtext <- function(x, y, labels,
-                       cex = graphics::par("cex"),
-                       col = graphics::par("fg"), bg = graphics::par("bg"),
-                       theta= seq(0, 2 * pi, length.out = 50), r = 0.1, ... ) {
-
-  xo <- r * graphics::strwidth("A", cex = cex, ...)
-  yo <- r * graphics::strheight("A", cex = cex, ...)
-
-  for (i in theta) {
-    graphics::text(x + cos(i) * xo, y + sin(i) * yo, labels, col = bg, ...)
-  }
-
-  graphics::text(x, y, labels, col = col, ...)
 }
