@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/tesselle/dimensio",
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.4.1",
+  "version": "0.4.1.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -177,7 +177,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1016.053KB",
+  "fileSize": "1016.963KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -192,7 +192,7 @@
       "name": "{dimensio: Multivariate Data Analysis}",
       "identifier": "10.5281/zenodo.4478530",
       "url": "https://packages.tesselle.org/dimensio/",
-      "description": "R package version 0.4.1",
+      "description": "R package version 0.4.1.9000",
       "@id": "https://doi.org/10.5281/zenodo.4478530",
       "sameAs": "https://doi.org/10.5281/zenodo.4478530"
     }

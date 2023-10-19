@@ -8,7 +8,7 @@ message: 'To cite package "dimensio" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'dimensio: Multivariate Data Analysis'
-version: 0.4.1
+version: 0.4.1.9000
 doi: 10.5281/zenodo.4478530
 abstract: Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA)
   based on the Singular Value Decomposition (SVD). This package provides S4 classes
@@ -33,7 +33,7 @@ preferred-citation:
   year: '2023'
   location:
     name: Pessac, France
-  notes: R package version 0.4.1
+  notes: R package version 0.4.1.9000
   doi: 10.5281/zenodo.4478530
   url: https://packages.tesselle.org/dimensio/
   institution:
@@ -289,3 +289,6 @@ identifiers:
 - description: The versioned DOI for version 0.4.0.
   type: doi
   value: 10.5281/zenodo.8277200
+- description: The versioned DOI for version 0.4.1.
+  type: doi
+  value: 10.5281/zenodo.10022325
