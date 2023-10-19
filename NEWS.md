@@ -1,6 +1,7 @@
 # dimensio 0.4.0.9000
 ## Bugfixes & changes
 * Put `...` after required arguments.
+* Suggest **ggplot2** instead of import.
 
 ## Enhancements
 * `viz_individuals()`, `viz_row()`, `viz_variables()`, `viz_columns()` and `biplot()` gained new arguments allowing set the x and y limits of the plot.

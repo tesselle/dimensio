@@ -32,14 +32,10 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @importFrom ggplot2 aes arrow coord_fixed geom_col geom_hline geom_line
-#' geom_path geom_point geom_segment geom_vline ggplot ggproto layer
-#' scale_x_continuous scale_x_discrete scale_y_continuous sec_axis Stat waiver
 #' @importFrom grDevices adjustcolor chull colorRamp hcl.colors rgb
 #' @importFrom methods Arith as as<- callGeneric callNextMethod
 #' .hasSlot initialize is new setClass setClassUnion
 #' setGeneric setMethod slot slot<- slotNames validObject .valueClassTest
-#' @importFrom rlang .data
 #' @importFrom stats approx as.dist cov optim qchisq qf rmultinom
 #' @importFrom utils capture.output stack tail
 NULL

@@ -5,31 +5,43 @@
 #' @keywords internal
 NULL
 
+check_package <- function(x) {
+  if (!requireNamespace(x, quietly = TRUE)) {
+    msg <- "Package %s needed for this function to work. Please install it."
+    stop(sprintf(msg, x), call. = FALSE)
+  }
+  invisible(NULL)
+}
+
+# rlang ========================================================================
+utils::globalVariables(".data")
+
 # ggplot2 ======================================================================
 # https://cran.r-project.org/web/packages/ggplot2/vignettes/extending-ggplot2.html
-
-StatHull <- ggplot2::ggproto(
-  `_class` = "StatHull",
-  `_inherit` = ggplot2::Stat,
-  compute_group = function(data, scales) {
-    i <- chull(data$x, data$y)
-    data[c(i, i[1]), , drop = FALSE]
-  },
-  required_aes = c("x", "y")
-)
 
 #' @rdname dimensio-deprecated
 #' @export
 stat_hull <- function(mapping = NULL, data = NULL, geom = "polygon",
                       position = "identity", na.rm = FALSE, show.legend = NA,
                       inherit.aes = TRUE, ...) {
+  check_package("ggplot2")
+
+  StatHull <- ggplot2::ggproto(
+    `_class` = "StatHull",
+    `_inherit` = ggplot2::Stat,
+    compute_group = function(data, scales) {
+      i <- chull(data$x, data$y)
+      data[c(i, i[1]), , drop = FALSE]
+    },
+    required_aes = c("x", "y")
+  )
+
   ggplot2::layer(
     stat = StatHull, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
   )
 }
-
 
 # Plot =========================================================================
 ## Rows ------------------------------------------------------------------------
@@ -134,6 +146,8 @@ setMethod(
                         alpha = NULL, colour = NULL, linetype = NULL,
                         size = NULL, group = NULL) {
     .Deprecated(new = "viz_variables()", old = "plot_variables()")
+    check_package("ggplot2")
+
     ## Prepare data
     data <- prepare_coord(object, margin = 2, axes = axes, active = active,
                           sup = sup, group = group)
@@ -222,6 +236,7 @@ setMethod(
   definition = function(object, select = NULL, variance = TRUE, cumulative = TRUE,
                         fill = "grey30", border = "grey10", colour = "red") {
     .Deprecated(new = "screeplot()", old = "plot_variance()")
+    check_package("ggplot2")
 
     ## Prepare data
     data <- get_eigenvalues(object)
@@ -285,6 +300,8 @@ setMethod(
                         sort = TRUE, decreasing = TRUE, limit = 10,
                         fill = "grey30", border = "grey10") {
     .Deprecated(new = "viz_contributions()", old = "plot_contributions()")
+    check_package("ggplot2")
+
     ## Prepare data
     data <- prepare_contrib(
       object,
@@ -328,6 +345,7 @@ setMethod(
                         sup = TRUE, sort = TRUE, decreasing = TRUE,
                         limit = 10, fill = "grey30", border = "grey10") {
     .Deprecated(new = "viz_cos2()", old = "plot_cos2()")
+    check_package("ggplot2")
 
     ## Prepare data
     data <- prepare_cos2(object, margin = margin, axes = axes,
@@ -354,6 +372,8 @@ setMethod(
 plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
                         alpha = NULL, colour = NULL, fill = NULL, shape = NULL,
                         size = NULL, group = NULL) {
+  check_package("ggplot2")
+
   ## Prepare data
   data <- lapply(
     X = margin,

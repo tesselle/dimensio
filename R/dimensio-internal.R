@@ -56,4 +56,3 @@ assert_length <- function(x, expected, empty = FALSE) {
   }
   invisible(x)
 }
-
