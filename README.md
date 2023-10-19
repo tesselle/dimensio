@@ -10,7 +10,8 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/tesselle/dimensio/badge/main)](https://www.codefactor.io/repository/github/tesselle/dimensio/overview/main)
 [![Dependencies](https://tinyverse.netlify.com/badge/dimensio)](https://cran.r-project.org/package=dimensio)
 
-<a href="https://tesselle.r-universe.dev" class="pkgdown-devel"><img
+<a href="https://tesselle.r-universe.dev/dimensio"
+class="pkgdown-devel"><img
 src="https://tesselle.r-universe.dev/badges/dimensio"
 alt="r-universe" /></a>
 <a href="https://cran.r-project.org/package=dimensio"
@@ -55,8 +56,7 @@ tools to explore the results of the analysis.
       Frerebeau N (2023). _dimensio: Multivariate Data Analysis_.
       Université Bordeaux Montaigne, Pessac, France.
       doi:10.5281/zenodo.4478530 <https://doi.org/10.5281/zenodo.4478530>,
-      R package version 0.4.0,
-      <https://packages.tesselle.org/dimensio/>.
+      R package version 0.4.1, <https://packages.tesselle.org/dimensio/>.
 
     Une entrée BibTeX pour les utilisateurs LaTeX est
 
@@ -66,7 +66,7 @@ tools to explore the results of the analysis.
         year = {2023},
         organization = {Université Bordeaux Montaigne},
         address = {Pessac, France},
-        note = {R package version 0.4.0},
+        note = {R package version 0.4.1},
         doi = {10.5281/zenodo.4478530},
         url = {https://packages.tesselle.org/dimensio/},
       }

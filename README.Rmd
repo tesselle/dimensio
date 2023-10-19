@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 [![CodeFactor](https://www.codefactor.io/repository/github/tesselle/dimensio/badge/main)](https://www.codefactor.io/repository/github/tesselle/dimensio/overview/main)
 [![Dependencies](https://tinyverse.netlify.com/badge/dimensio)](https://cran.r-project.org/package=dimensio)
 
-[![r-universe](https://tesselle.r-universe.dev/badges/dimensio)](https://tesselle.r-universe.dev){.pkgdown-devel}
+[![r-universe](https://tesselle.r-universe.dev/badges/dimensio)](https://tesselle.r-universe.dev/dimensio){.pkgdown-devel}
 [![CRAN Version](http://www.r-pkg.org/badges/version/dimensio)](https://cran.r-project.org/package=dimensio){.pkgdown-release}
 [![CRAN checks](https://badges.cranchecks.info/worst/dimensio.svg)](https://cran.r-project.org/web/checks/check_results_dimensio.html){.pkgdown-release}
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/dimensio)](https://cran.r-project.org/package=dimensio){.pkgdown-release}

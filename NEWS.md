@@ -1,4 +1,4 @@
-# dimensio 0.4.0.9000
+# dimensio 0.4.1
 ## Bugfixes & changes
 * Put `...` after required arguments.
 * Suggest **ggplot2** instead of import.
