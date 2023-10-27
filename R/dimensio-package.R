@@ -32,6 +32,7 @@
 #' @keywords internal
 "_PACKAGE"
 
+#' @import arkhe
 #' @importFrom grDevices adjustcolor chull colorRamp hcl.colors rgb
 #' @importFrom methods Arith as as<- callGeneric callNextMethod
 #' .hasSlot initialize is new setClass setClassUnion

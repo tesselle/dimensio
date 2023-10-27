@@ -16,7 +16,7 @@ setMethod(
     ## Add groups, if any
     k <- get_order(x, margin = margin)
     if (!is.null(group)) {
-      assert_length(group, nrow(data))
+      arkhe::assert_length(group, nrow(data))
       group <- group[k]
     } else if (has_groups(x, margin = margin)) {
       group <- get_groups(x, margin = margin)

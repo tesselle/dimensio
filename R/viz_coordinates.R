@@ -134,8 +134,8 @@ setMethod(
 
     ## Scaled variables?
     if (is_scaled(x)) {
-      plot_circle(x = 0, y = 0, radius = 1, n = 100, lwd = 1,
-                  border = graphics::par("fg"))
+      arkhe::circle(x = 0, y = 0, radius = 1, lwd = 1,
+                    border = graphics::par("fg"), n = 100)
     }
 
     graphics::arrows(
@@ -296,33 +296,6 @@ print_variance <- function(object, axis) {
   sprintf("%s (%g%%)", names(v)[[axis]], v[[axis]])
 }
 
-#' Draw a Circle
-#'
-#' @param x,y A length-one [`numeric`] vector giving the coordinates of the
-#'  center of the circle.
-#' @param radius A length-one [`numeric`] vector giving the radius of the
-#'  circle.
-#' @param n A length-on [`integer`] vector specifying the number of vertices to
-#'  draw the circle.
-#' @param ... Further parameters to be passed to [graphics::polygon()].
-#' @examples
-#' \dontrun{
-#' plot(NA, xlim = c(-1, 1), ylim = c(-1, 1),
-#'      axes = FALSE, ann = FALSE, asp = 1)
-#' plot_circle(0, 0, 0.5)
-#' }
-#' @keywords internal
-#' @author N. Frerebeau
-#' @noRd
-plot_circle <- function(x, y, radius, ..., n = 100) {
-  angle.inc <- 2 * pi / n
-  angles <- seq(0, 2 * pi - angle.inc, by = angle.inc)
-
-  xv <- cos(angles) * radius + x
-  yv <- sin(angles) * radius + y
-  graphics::polygon(xv, yv, ...)
-}
-
 # Returns a [`data.frame`] with the following columns:
 #   * `label`, `supplementary`, `mass`, `sum`, `contribution`, `cos2`,
 #   * `x`, `y`, `group`, `data`, `observation`
@@ -336,7 +309,7 @@ prepare_coord <- function(object, margin, ..., axes = c(1, 2), active = TRUE,
 
   k <- get_order(object, margin = margin)
   if (!is.null(group)) {
-    assert_length(group, nrow(data))
+    arkhe::assert_length(group, nrow(data))
     group <- group[k]
   } else if (has_groups(object, margin = margin)) {
     group <- get_groups(object, margin = margin)
@@ -374,7 +347,7 @@ prepare_param <- function(x, ..., highlight = NULL, alpha = FALSE) {
     highlight <- match.arg(highlight, choices = choices, several.ok = FALSE)
     highlight <- x[[highlight]]
   }
-  if (length(highlight) > 1) assert_length(highlight, n)
+  if (length(highlight) > 1) arkhe::assert_length(highlight, n)
 
   ## Colors
   col <- scale_color(x = highlight, col = col, alpha = alpha)
@@ -426,7 +399,7 @@ prepare_legend <- function(x, args, points = TRUE, lines = TRUE) {
       pr <- pr[pr <= max(h) & pr >= min(h)]
       i <- order(h, method = "radix")[!duplicated(h)]
 
-      col <- grDevices::colorRamp(x$col[i])(scale_range(pr, from = range(h)))
+      col <- grDevices::colorRamp(x$col[i])(arkhe::scale_range(pr, from = range(h)))
       col <- grDevices::rgb(col, maxColorValue = 255)
 
       leg <- list(legend = pr, col = col)
@@ -464,7 +437,7 @@ scale_color <- function(x, col = NULL, alpha = FALSE) {
   if (is.double(x)) {
     ## Continuous scale
     if (is.null(col)) col <- grDevices::hcl.colors(12, "YlOrRd", rev = TRUE)
-    x <- scale_range(x) # Rescale to [0,1]
+    x <- arkhe::scale_range(x) # Rescale to [0,1]
     col <- grDevices::colorRamp(col)(x)
     col <- grDevices::rgb(col, maxColorValue = 255)
     ## Alpha transparency
@@ -500,5 +473,5 @@ scale_size <- function(x, size = NULL, what = "cex") {
     return(size)
   }
 
-  scale_range(x, to = range(size))
+  arkhe::scale_range(x, to = range(size))
 }

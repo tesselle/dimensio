@@ -9,6 +9,8 @@ setGeneric("dimnames")
 setGeneric("loadings")
 setGeneric("biplot")
 
+setGeneric("bootstrap", package = "arkhe")
+
 # Extract ======================================================================
 ## Get -------------------------------------------------------------------------
 #' Extract Loadings
@@ -203,9 +205,8 @@ NULL
 #' @param object A [`CA-class`] or [`PCA-class`] object.
 #' @param n A non-negative [`integer`] giving the number of bootstrap
 #'  replications.
-#' @return#'
+#' @return
 #'  Returns a [`BootstrapCA-class`] or a [`BootstrapPCA-class`] object.
-#' @param ... Currently not used.
 #' @example inst/examples/ex-bootstrap.R
 #' @references
 #'  Greenacre, Michael J. *Theory and Applications of Correspondence
@@ -217,11 +218,9 @@ NULL
 #' @author N. Frerebeau
 #' @docType methods
 #' @family resampling methods
-#' @aliases bootstrap-method
-setGeneric(
-  name = "bootstrap",
-  def = function(object, ...) standardGeneric("bootstrap")
-)
+#' @rdname bootstrap
+#' @name boot
+NULL
 
 # Results ======================================================================
 ### Data -----------------------------------------------------------------------

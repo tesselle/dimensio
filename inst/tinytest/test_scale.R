@@ -2,9 +2,6 @@ xcont <- seq(1, 2, by = 0.2)
 xint <- c(1L, 2L, 3L, 4L, 5L)
 xcha <- c("A", "B", "C", "D", "E")
 
-# Rescale continuous vector ====================================================
-expect_identical(dimensio:::scale_range(5:10), c(0, 0.2, 0.4, 0.6, 0.8, 1))
-
 # Color scale ==================================================================
 expect_identical(dimensio:::scale_color(x = NULL, col = NULL), graphics::par("col"))
 expect_identical(dimensio:::scale_color(x = NULL, col = "red"), "red")

@@ -10,7 +10,7 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., margin = 1, principal = TRUE) {
     ## Validation
-    assert_length(margin, 1)
+    arkhe::assert_length(margin, 1)
 
     ## Get data
     coords <- get_coordinates(x, margin = margin, principal = principal)

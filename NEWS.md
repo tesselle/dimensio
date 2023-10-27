@@ -1,4 +1,6 @@
 # dimensio 0.4.1.9000
+## Internals
+* Import **arkhe**.
 
 # dimensio 0.4.1
 ## Bugfixes & changes
