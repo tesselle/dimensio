@@ -58,7 +58,7 @@ tools to explore the results of the analysis.
       doi:10.5281/zenodo.4478530 <https://doi.org/10.5281/zenodo.4478530>,
       R package version 0.4.1, <https://packages.tesselle.org/dimensio/>.
 
-    Une entrée BibTeX pour les utilisateurs LaTeX est
+    A BibTeX entry for LaTeX users is
 
       @Manual{,
         author = {Nicolas Frerebeau},

@@ -7,7 +7,9 @@ Authors@R: c(
     person("Jean-Baptiste", "Fourvel", , "jean-baptiste.fourvel@univ-amu.fr", role = "ctb",
            comment = c(ORCID = "0000-0002-1061-4642", affiliation = "CNRS")),
     person("Brice", "Lebrun", , "brice.lebrun@u-bordeaux-montaigne.fr", role = "ctb",
-           comment = c(ORCID = "0000-0001-7503-8685", affiliation = "Université Bordeaux Montaigne"))
+           comment = c(ORCID = "0000-0001-7503-8685", affiliation = "Université Bordeaux Montaigne")),
+    person("Université Bordeaux Montaigne", role = "fnd"),
+    person("CNRS", role = "fnd")
   )
 Maintainer: Nicolas Frerebeau <nicolas.frerebeau@u-bordeaux-montaigne.fr>
 Description: Simple Principal Components Analysis (PCA) and Correspondence
