@@ -829,3 +829,38 @@ setGeneric(
 #' @name summary
 #' @rdname summary
 NULL
+
+# Tools ========================================================================
+#' Complete Disjunctive Table
+#'
+#' Computes the complete disjunctive table of a factor table.
+#' @param object A [`data.frame`].
+#' @param exclude A `vector` of values to be excluded when forming the set of
+#'  levels (see [factor()]). If `NULL` (the default), will make `NA` an extra
+#'  level.
+#' @param ... Currently not used.
+#' @return A [`data.frame`].
+#' @example inst/examples/ex-cdt.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family tools
+#' @aliases cdt-method
+setGeneric(
+  name = "cdt",
+  def = function(object, ...) standardGeneric("cdt")
+)
+
+#' Burt Table
+#'
+#' Computes the burt table of a factor table.
+#' @param object A [`data.frame`].
+#' @return A symetric [`matrix`].
+#' @example inst/examples/ex-cdt.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family tools
+#' @aliases burt-method
+setGeneric(
+  name = "burt",
+  def = function(object) standardGeneric("burt")
+)

@@ -78,6 +78,7 @@ Collate:
     'summary.R'
     'svd.R'
     'tidy.R'
+    'tools.R'
     'viz_contributions.R'
     'viz_coordinates.R'
     'viz_cos2.R'

@@ -1,4 +1,8 @@
 # dimensio 0.4.1.9000
+## New classes and methods
+* Add `cdt()` to compute the complete disjunctive table of a factor table.
+* Add `burt()` to compute the Burt table of a factor table.
+
 ## Internals
 * Import **arkhe**.
 
