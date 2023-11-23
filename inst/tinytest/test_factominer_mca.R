@@ -38,6 +38,10 @@ if (at_home() && requireNamespace("FactoMineR", quietly = TRUE)) {
     current = as.data.frame(res_facto$var$coord),
     target = coord_col[!coord_col$.sup, -ncol(coord_col)]
   )
+  expect_equivalent(
+    rownames(res_facto$var$coord),
+    rownames(coord_col[!coord_col$.sup, -ncol(coord_col)])
+  )
 
   # Supplementary column coordinates
   expect_equivalent(

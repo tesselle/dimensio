@@ -7,12 +7,22 @@
 \alias{burt,data.frame-method}
 \title{Burt Table}
 \usage{
-burt(object)
+burt(object, ...)
 
-\S4method{burt}{data.frame}(object)
+\S4method{burt}{data.frame}(object, exclude = NULL, abbrev = TRUE)
 }
 \arguments{
 \item{object}{A \code{\link{data.frame}}.}
+
+\item{...}{Currently not used.}
+
+\item{exclude}{A \code{vector} of values to be excluded when forming the set of
+levels (see \code{\link[=factor]{factor()}}). If \code{NULL} (the default), will make \code{NA} an extra
+level.}
+
+\item{abbrev}{A \code{\link{logical}} scalar: should the column names be abbreviated?
+If \code{FALSE}, these are of the form 'factor_level' but if \code{abbrev = TRUE} they
+are just 'level' which will suffice if the factors have distinct levels.}
 }
 \value{
 A symetric \code{\link{matrix}}.

@@ -878,6 +878,9 @@ setGeneric(
 #' @param exclude A `vector` of values to be excluded when forming the set of
 #'  levels (see [factor()]). If `NULL` (the default), will make `NA` an extra
 #'  level.
+#' @param abbrev A [`logical`] scalar: should the column names be abbreviated?
+#'  If `FALSE`, these are of the form 'factor_level' but if `abbrev = TRUE` they
+#'  are just 'level' which will suffice if the factors have distinct levels.
 #' @param ... Currently not used.
 #' @return A [`data.frame`].
 #' @example inst/examples/ex-cdt.R
@@ -894,6 +897,8 @@ setGeneric(
 #'
 #' Computes the burt table of a factor table.
 #' @param object A [`data.frame`].
+#' @inheritParams cdt
+#' @param ... Currently not used.
 #' @return A symetric [`matrix`].
 #' @example inst/examples/ex-cdt.R
 #' @author N. Frerebeau
@@ -902,5 +907,5 @@ setGeneric(
 #' @aliases burt-method
 setGeneric(
   name = "burt",
-  def = function(object) standardGeneric("burt")
+  def = function(object, ...) standardGeneric("burt")
 )

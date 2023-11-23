@@ -8,29 +8,34 @@ NULL
 setMethod(
   f = "cdt",
   signature = c(object = "matrix"),
-  definition = function(object, exclude = NULL) {
+  definition = function(object, exclude = NULL, abbrev = TRUE) {
     ## Fix colnames
     if (is.null(colnames(object))) {
       colnames(object) <- paste0("V", seq_len(ncol(object)))
     }
 
-    d <- lapply(
-      X = seq_len(ncol(object)),
-      FUN = function(i, x, exclude) {
-        xi <- x[, i]
-        xi <- factor(x = xi, levels = sort(unique(xi)), exclude = exclude)
-        n <- length(xi)
-        z <- matrix(0, nrow = n, ncol = nlevels(xi))
-        z[seq_len(n) + n * (unclass(xi) - 1)] <- 1
-        colnames(z) <- paste(colnames(x)[i], levels(xi), sep = "_")
+    d <- apply(
+      X = object,
+      MARGIN = 2,
+      FUN = function(cl, exclude) {
+        cl <- factor(x = cl, exclude = exclude)
+        n <- length(cl)
+        z <- matrix(0, nrow = n, ncol = nlevels(cl))
+        z[seq_len(n) + n * (unclass(cl) - 1)] <- 1
+        dimnames(z) <- list(names(cl), levels(cl))
         z
       },
-      x = object,
-      exclude = exclude
+      exclude = exclude,
+      simplify = FALSE
     )
-    d <- do.call(cbind, d)
-    rownames(d) <- rownames(object)
-    d
+    mtx <- do.call(cbind, d)
+
+    if (!abbrev) {
+      n <- vapply(X = d, FUN = ncol, FUN.VALUE = integer(1))
+      colnames(mtx) <- paste(rep(colnames(object), n), colnames(mtx), sep = "_")
+    }
+
+    mtx
   }
 )
 
@@ -40,9 +45,9 @@ setMethod(
 setMethod(
   f = "cdt",
   signature = c(object = "data.frame"),
-  definition = function(object) {
+  definition = function(object, exclude = NULL, abbrev = TRUE) {
     object <- as.matrix(object)
-    methods::callGeneric(object)
+    methods::callGeneric(object, exclude = exclude, abbrev = abbrev)
   }
 )
 
@@ -52,8 +57,8 @@ setMethod(
 setMethod(
   f = "burt",
   signature = c(object = "data.frame"),
-  definition = function(object) {
-    x <- cdt(object)
+  definition = function(object, exclude = NULL, abbrev = TRUE) {
+    x <- cdt(object, exclude = exclude, abbrev = abbrev)
     crossprod(x, x)
   }
 )
