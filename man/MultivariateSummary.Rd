@@ -30,6 +30,7 @@ A virtual S4 class to store the summary of a multivariate data analysis.
 \seealso{
 Other class: 
 \code{\link{CA-class}},
+\code{\link{MCA-class}},
 \code{\link{MultivariateAnalysis}},
 \code{\link{MultivariateBootstrap}},
 \code{\link{MultivariateResults}},

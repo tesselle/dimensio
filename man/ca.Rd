@@ -86,6 +86,7 @@ Paris: Dunod, 2006.
 \code{\link[=svd]{svd()}}
 
 Other multivariate analysis: 
+\code{\link{mca}()},
 \code{\link{pca}()},
 \code{\link{predict}()}
 }

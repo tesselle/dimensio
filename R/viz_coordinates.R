@@ -314,12 +314,12 @@ prepare_coord <- function(object, margin, ..., axes = c(1, 2), active = TRUE,
   } else if (has_groups(object, margin = margin)) {
     group <- get_groups(object, margin = margin)
   } else {
-    group <- rep(NA_character_, length(k))
+    group <- rep(NA_character_, nrow(data))
   }
   data$group <- group
 
   type <- ifelse(margin == 1, "row", "column")
-  data$data <- rep(type, length(k))
+  data$data <- rep(type, nrow(data))
 
   ## Subset
   if (active & !sup) data <- data[!data$supplementary, ]

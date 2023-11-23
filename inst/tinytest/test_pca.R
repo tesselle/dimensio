@@ -5,9 +5,6 @@ row_zeros <- countries
 row_zeros[1, ] <- NA
 expect_error(pca(row_zeros), "Missing values detected.")
 
-expect_error(pca(countries, sup_row = "row1"), "must be a numeric vector")
-expect_error(pca(countries, sup_col = "col1"), "must be a numeric vector")
-
 res <- pca(countries, center = TRUE, scale = FALSE, rank = 5)
 expect_stdout(show(res), "Principal Components Analysis")
 expect_equal(rownames(res), rownames(countries))

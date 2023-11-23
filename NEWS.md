@@ -2,6 +2,7 @@
 ## New classes and methods
 * Add `cdt()` to compute the complete disjunctive table of a factor table.
 * Add `burt()` to compute the Burt table of a factor table.
+* Add `mca()` to compute multiple correspondence analysis.
 
 ## Internals
 * Import **arkhe**.

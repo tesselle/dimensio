@@ -19,6 +19,7 @@ replications.}
 \seealso{
 Other class: 
 \code{\link{CA-class}},
+\code{\link{MCA-class}},
 \code{\link{MultivariateAnalysis}},
 \code{\link{MultivariateResults}},
 \code{\link{MultivariateSummary}},

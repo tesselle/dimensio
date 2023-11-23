@@ -135,6 +135,39 @@ setGeneric(
   valueClass = "CA"
 )
 
+# MCA ==========================================================================
+#' Multiple Correspondence Analysis
+#'
+#' Computes a multiple correspondence analysis.
+#' @param object A \eqn{m \times p}{m x p} numeric [`matrix`] or a
+#'  [`data.frame`].
+#' @param rank An [`integer`] value specifying the maximal number of
+#'  components to be kept in the results. If `NULL` (the default),
+#'  \eqn{min(m, p) - 1} components will be returned.
+#' @param sup_row A `vector` specifying the indices of the supplementary rows.
+#' @param sup_col A `vector` specifying the indices of the supplementary
+#'  categorical columns.
+#' @param sup_quanti A `vector` specifying the indices of the supplementary
+#'  quantitative columns.
+#' @param ... Currently not used.
+#' @return
+#'  A [`MCA-class`] object.
+# @example inst/examples/ex-mca.R
+#' @seealso [svd()], [cdt()]
+#' @references
+#'  Lebart, L., Piron, M. and Morineau, A. *Statistique exploratoire
+#'  multidimensionnelle: visualisation et inférence en fouille de données*.
+#'  Paris: Dunod, 2006.
+#' @author N. Frerebeau
+#' @docType methods
+#' @family multivariate analysis
+#' @aliases mca-method
+setGeneric(
+  name = "mca",
+  def = function(object, ...) standardGeneric("mca"),
+  valueClass = "MCA"
+)
+
 # PCA ==========================================================================
 #' Principal Components Analysis
 #'

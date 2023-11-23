@@ -157,6 +157,22 @@
   contains = c("MultivariateBootstrap", "CA")
 )
 
+# MCA ==========================================================================
+#' MCA Results
+#'
+#' An S4 class to store the results of a multiple correspondence analysis.
+#' @example inst/examples/ex-mca.R
+#' @author N. Frerebeau
+#' @family class
+#' @docType class
+#' @exportClass MCA
+#' @aliases MCA-class
+#' @keywords internal
+.MCA <- setClass(
+  Class = "MCA",
+  contains = "CA"
+)
+
 # PCA ==========================================================================
 #' PCA Results
 #'

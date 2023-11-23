@@ -55,8 +55,8 @@ setMethod(
     if (is.null(names_col)) names_col <- as.character(seq_len(ncol(object)))
 
     # Subset
-    is_row_sup <- is_supplementary(sup_row, nrow(object))
-    is_col_sup <- is_supplementary(sup_col, ncol(object))
+    is_row_sup <- is_supplementary(sup_row, nrow(object), names = rownames(object))
+    is_col_sup <- is_supplementary(sup_col, ncol(object), names = colnames(object))
     N <- object[!is_row_sup, !is_col_sup, drop = FALSE]
 
     # Dimension of the solution

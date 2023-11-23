@@ -67,6 +67,7 @@ Collate:
     'get_inertia.R'
     'get_variance.R'
     'loadings.R'
+    'mca.R'
     'mutators.R'
     'pca.R'
     'predicates.R'

@@ -98,6 +98,7 @@ Paris: Dunod, 2006.
 
 Other multivariate analysis: 
 \code{\link{ca}()},
+\code{\link{mca}()},
 \code{\link{predict}()}
 }
 \author{

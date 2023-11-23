@@ -15,21 +15,22 @@ setMethod(
 
     ## Get data
     coords <- get_coordinates(x, margin = margin, principal = principal)
-    weight <- data.frame(
-      mass = get_masses(x, margin = margin)
-    )
-    contrib <- data.frame(
-      contribution = joint_contributions(x, margin = margin, axes = axes)
-    )
 
+    weight <- get_masses(x, margin = margin)
+    contrib <- joint_contributions(x, margin = margin, axes = axes)
+    sum <- joint_coordinates(x, margin = margin, axes = axes, principal = principal)
+    cos2 <- joint_cos2(x, margin = margin, axes = axes)
+
+    ## If standard coordinates, remove supplementary observations
+    keep <- if (principal) seq_len(nrow(coords)) else which(!coords$.sup)
     data.frame(
       coords[, axes, drop = FALSE],
       label = rownames(coords),
-      supplementary = coords$.sup,
-      mass = weight[match(rownames(coords), rownames(weight)), ],
-      sum = joint_coordinates(x, margin = margin, axes = axes),
-      contribution = contrib[match(rownames(coords), rownames(contrib)), ],
-      cos2 = joint_cos2(x, margin = margin, axes = axes),
+      supplementary = coords$.sup[keep],
+      mass = weight[keep],
+      sum = sum[keep],
+      contribution = contrib[keep],
+      cos2 = cos2[keep],
       row.names = NULL
     )
   }
@@ -71,9 +72,10 @@ joint <- function(object, what, ...) {
   fun(object, ...)
 }
 
-joint_coordinates <- function(object, ..., margin = 1, axes = c(1, 2)) {
+joint_coordinates <- function(object, ..., margin = 1, axes = c(1, 2),
+                              principal = TRUE) {
   axes <- axes[c(1, 2)]
-  coord <- get_coordinates(object, margin = margin)
+  coord <- get_coordinates(object, margin = margin, principal = principal)
   rowSums(coord[, axes]^2)
 }
 

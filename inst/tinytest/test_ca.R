@@ -7,9 +7,6 @@ expect_error(ca(row_zeros), "Empty rows detected.")
 col_zeros[, 1] <- 0
 expect_error(ca(col_zeros), "Empty columns detected.")
 
-expect_error(ca(benthos, sup_row = "row1"), "must be a numeric vector")
-expect_error(ca(benthos, sup_col = "col1"), "must be a numeric vector")
-
 res <- ca(benthos, rank = 10)
 expect_stdout(show(res), "Correspondence Analysis")
 expect_equal(rownames(res), rownames(benthos))

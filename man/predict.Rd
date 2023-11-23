@@ -45,6 +45,7 @@ predict(X, Z, margin = 2)
 \seealso{
 Other multivariate analysis: 
 \code{\link{ca}()},
+\code{\link{mca}()},
 \code{\link{pca}()}
 }
 \author{
