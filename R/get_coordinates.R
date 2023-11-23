@@ -12,18 +12,23 @@ setMethod(
   definition = function(x, margin = 1, principal = TRUE, sup_name = ".sup") {
     margin <- margin[[1L]]
     if (margin == 1) {
-      coords <- if (principal) x@rows@principal else x@rows@standard
+      coords <- x@rows@principal
       suppl <- x@rows@supplement
       id <- x@rows@names
     }
     if (margin == 2) {
-      coords <- if (principal) x@columns@principal else x@columns@standard
+      coords <- x@columns@principal
       suppl <- x@columns@supplement
       id <- x@columns@names
     }
 
+    # P = sqrt(eigenvalue) X S
+    if (!principal) {
+      coords <- t(t(coords) / x@singular_values)
+    }
+
     coords <- as.data.frame(coords, row.names = id)
-    coords[[sup_name]] <- if (principal) suppl else suppl[!suppl]
+    coords[[sup_name]] <- suppl
 
     coords
   }

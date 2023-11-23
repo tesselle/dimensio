@@ -16,21 +16,20 @@ setMethod(
     ## Get data
     coords <- get_coordinates(x, margin = margin, principal = principal)
 
-    weight <- get_masses(x, margin = margin)
-    contrib <- joint_contributions(x, margin = margin, axes = axes)
+    mass <- contrib <- rep(NA_real_, nrow(coords))
+    mass[!coords$.sup] <- get_masses(x, margin = margin)
+    contrib[!coords$.sup] <- joint_contributions(x, margin = margin, axes = axes)
     sum <- joint_coordinates(x, margin = margin, axes = axes, principal = principal)
     cos2 <- joint_cos2(x, margin = margin, axes = axes)
 
-    ## If standard coordinates, remove supplementary observations
-    keep <- if (principal) seq_len(nrow(coords)) else which(!coords$.sup)
     data.frame(
       coords[, axes, drop = FALSE],
       label = rownames(coords),
-      supplementary = coords$.sup[keep],
-      mass = weight[keep],
-      sum = sum[keep],
-      contribution = contrib[keep],
-      cos2 = cos2[keep],
+      supplementary = coords$.sup,
+      mass = mass,
+      sum = sum,
+      contribution = contrib,
+      cos2 = cos2,
       row.names = NULL
     )
   }
