@@ -70,6 +70,14 @@ Analysis}. London: Academic Press, 1984.
 Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire
 multidimensionnelle: visualisation et inférence en fouille de données}.
 Paris: Dunod, 2006.
+
+Lockyear, K. (2013). Applying Bootstrapped Correspondence Analysis to
+Archaeological Data. \emph{Journal of Archaeological Science}, 40(12): 4744-4753.
+\doi{10.1016/j.jas.2012.08.035}.
+
+Ringrose, T. J. (1992). Bootstrapping and Correspondence Analysis in
+Archaeology. \emph{Journal of Archaeological Science}, 19(6): 615-629.
+\doi{10.1016/0305-4403(92)90032-X}.
 }
 \author{
 N. Frerebeau

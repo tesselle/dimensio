@@ -244,6 +244,14 @@ NULL
 #'  Lebart, L., Piron, M. and Morineau, A. *Statistique exploratoire
 #'  multidimensionnelle: visualisation et inférence en fouille de données*.
 #'  Paris: Dunod, 2006.
+#'
+#'  Lockyear, K. (2013). Applying Bootstrapped Correspondence Analysis to
+#'  Archaeological Data. *Journal of Archaeological Science*, 40(12): 4744-4753.
+#'  \doi{10.1016/j.jas.2012.08.035}.
+#'
+#'  Ringrose, T. J. (1992). Bootstrapping and Correspondence Analysis in
+#'  Archaeology. *Journal of Archaeological Science*, 19(6): 615-629.
+#'  \doi{10.1016/0305-4403(92)90032-X}.
 #' @author N. Frerebeau
 #' @docType methods
 #' @family resampling methods
@@ -498,11 +506,11 @@ setGeneric(
 #'  displayed. Invisibly returns `x`.
 #' @example inst/examples/ex-biplot.R
 #' @references
-#'  Aitchison, J. and Greenacre, M. (2002). Biplots of Compositional Data.
+#'  Aitchison, J. and Greenacre, M. J. (2002). Biplots of Compositional Data.
 #'  *Journal of the Royal Statistical Society: Series C (Applied Statistics)*,
 #'  51(4): 375-92. \doi{10.1111/1467-9876.00275}.
 #'
-#'  Greenacre, M. J. *Biplots in Practice*. Bilbao: Fundación BBVA, 2010.
+#'  Greenacre, M. J. (2010). *Biplots in Practice*. Bilbao: Fundación BBVA.
 #' @author N. Frerebeau
 #' @docType methods
 #' @family plot methods
