@@ -9,26 +9,13 @@ setMethod(
   f = "ca",
   signature = c(object = "data.frame"),
   definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL) {
-    # Remove non-numeric variables, if any
-    quali <- !vapply(object, FUN = is.numeric, FUN.VALUE = logical(1))
-    if (any(quali)) {
-      old <- object
-      object <- object[, -c(which(quali), sup_col), drop = FALSE]
-      if (!is.null(sup_col)) {
-        object <- cbind(object, old[, sup_col, drop = FALSE])
-        sup_col <- utils::tail(seq_along(object), length(sup_col))
-      }
-      # Generate message
-      tot <- sum(quali)
-      msg <- "%d qualitative %s removed: %s."
-      txt <- ngettext(tot, "variable was", "variables were")
-      col <- paste(colnames(old)[quali], collapse = ", ")
-      message(sprintf(msg, tot, txt, col))
-    }
+    ## Remove non-numeric variables, if any
+    clean <- drop_variable(object, f = is.numeric, negate = TRUE,
+                           sup = sup_col, extra = NULL, what = "qualitative")
 
-    object <- as.matrix(object)
+    object <- as.matrix(clean$data)
     methods::callGeneric(object = object, rank = rank,
-                         sup_row = sup_row, sup_col = sup_col)
+                         sup_row = sup_row, sup_col = clean$sup)
   }
 )
 
@@ -40,8 +27,7 @@ setMethod(
   signature = c(object = "matrix"),
   definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL) {
     ## Check missing values
-    if (anyNA(object))
-      stop("Missing values detected.", call. = FALSE)
+    if (anyNA(object)) stop("Missing values detected.", call. = FALSE)
 
     ## Fix dimension names
     names_row <- rownames(object)
@@ -50,8 +36,8 @@ setMethod(
     if (is.null(names_col)) names_col <- as.character(seq_len(ncol(object)))
 
     ## Subset
-    is_row_sup <- is_supplementary(sup_row, nrow(object), names = rownames(object))
-    is_col_sup <- is_supplementary(sup_col, ncol(object), names = colnames(object))
+    is_row_sup <- find_variable(sup_row, nrow(object), names = rownames(object))
+    is_col_sup <- find_variable(sup_col, ncol(object), names = colnames(object))
     N <- object[!is_row_sup, !is_col_sup, drop = FALSE]
 
     ## Dimension of the solution

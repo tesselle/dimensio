@@ -48,11 +48,9 @@ variance?}
 to be kept in the results. If \code{NULL} (the default), \eqn{p - 1} components
 will be returned.}
 
-\item{sup_row}{A \code{\link{numeric}} or \code{\link{logical}} vector specifying the indices of
-the supplementary rows (individuals).}
+\item{sup_row}{A \code{vector} specifying the indices of the supplementary rows.}
 
-\item{sup_col}{A \code{\link{numeric}} or \code{\link{logical}} vector specifying the indices of
-the supplementary columns (variables).}
+\item{sup_col}{A \code{vector} specifying the indices of the supplementary columns.}
 
 \item{weight_row}{A \code{\link{numeric}} vector specifying the active row (individual)
 weights. If \code{NULL} (the default), uniform weights are used. Row weights are

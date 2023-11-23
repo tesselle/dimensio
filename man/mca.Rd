@@ -5,11 +5,14 @@
 \alias{mca}
 \alias{mca-method}
 \alias{mca,data.frame-method}
+\alias{mca,matrix-method}
 \title{Multiple Correspondence Analysis}
 \usage{
 mca(object, ...)
 
 \S4method{mca}{data.frame}(object, rank = NULL, sup_row = NULL, sup_col = NULL, sup_quanti = NULL)
+
+\S4method{mca}{matrix}(object, rank = NULL, sup_row = NULL, sup_col = NULL, sup_quanti = NULL)
 }
 \arguments{
 \item{object}{A \eqn{m \times p}{m x p} numeric \code{\link{matrix}} or a

@@ -25,3 +25,90 @@ weighted_mean <- function(x, w) {
 weighted_sd <- function(x, w) {
   sqrt(as.vector(crossprod(w, x^2)))
 }
+
+#' Column Index
+#'
+#' @param index A [`numeric`] vector.
+#' @param n An [`integer`] value.
+#' @param names A [`character`] vector.
+#' @return A [`logical`] vector.
+#' @keywords internal
+#' @noRd
+find_variable <- function(index, n, names = NULL) {
+  x <- logical(n)
+
+  if (is.null(index)) return(x)
+
+  if (is.logical(index)) {
+    arkhe::assert_length(index, n)
+    return(index)
+  }
+
+  if (is.character(index)) {
+    index <- match(index, names)
+    index <- index[!is.na(index)]
+    if (length(index) == 0) return(x)
+  }
+
+  if (is.numeric(index)) {
+    x[index] <- TRUE
+    return(x)
+  }
+
+  arkhe::assert_type(index, "numeric")
+}
+
+#' Remove Columns Using a Predicate
+#'
+#' @param x A [`data.frame`].
+#' @param what A predicate [`function`].
+#' @param negate A [`logical`] scalar: should the negation of `f` be used
+#'  instead of `f`?
+#' @param sup A `vector` specifying the indices of the supplementary columns.
+#' @param extra A `vector` specifying the indices of the extra columns.
+#' @param what A [`character`] string to be used in the message.
+#' @param verbose A [`logical`] scalar: should \R report extra information on
+#'  progress?
+#' @details
+#'  Side effect: move `sup` and `extra` columns at the end of `x`.
+#' @return A `list` with the following elements: `data`, `sup` and `extra`.
+#' @keywords internal
+#' @noRd
+drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
+                          what = "extra", verbose = getOption("dimensio.verbose")) {
+  if (negate) f <- Negate(f)
+  not_ok <- vapply(x, FUN = f, FUN.VALUE = logical(1))
+
+  if (any(not_ok)) {
+    is_extra <- find_variable(extra, ncol(x), names = colnames(x))
+    is_sup <- find_variable(sup, ncol(x), names = colnames(x))
+
+    old <- x
+    x <- x[, !(not_ok | is_sup | is_extra), drop = FALSE]
+
+    if (any(is_sup)) {
+      sup <- seq_len(sum(is_sup)) + ncol(x)
+      x <- cbind(x, old[, is_sup, drop = FALSE])
+    }
+    if (any(is_extra)) {
+      extra <- seq_len(sum(is_extra)) + ncol(x)
+      x <- cbind(x, old[, is_extra, drop = FALSE])
+    }
+
+    # Generate message
+    not_ok[is_sup | is_extra] <- FALSE
+    if (any(not_ok) && verbose) {
+      tot <- sum(not_ok)
+      msg <- "%d %s %s removed: %s."
+      txt <- ngettext(tot, "variable was", "variables were")
+      col <- paste(colnames(old)[not_ok], collapse = ", ")
+      message(sprintf(msg, tot, what, txt, col))
+    }
+  }
+
+  list(
+    data = x,
+    sup = sup,
+    extra = extra
+  )
+}

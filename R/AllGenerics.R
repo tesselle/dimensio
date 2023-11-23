@@ -106,10 +106,8 @@ NULL
 #' @param rank An [`integer`] value specifying the maximal number of
 #'  components to be kept in the results. If `NULL` (the default),
 #'  \eqn{min(m, p) - 1} components will be returned.
-#' @param sup_row A [`numeric`] or [`logical`] vector specifying the indices of
-#'  the supplementary rows.
-#' @param sup_col A [`numeric`] or [`logical`] vector specifying the indices of
-#'  the supplementary columns.
+#' @param sup_row A `vector` specifying the indices of the supplementary rows.
+#' @param sup_col A `vector` specifying the indices of the supplementary columns.
 #' @param ... Currently not used.
 #' @return
 #'  A [`CA-class`] object.
@@ -182,10 +180,8 @@ setGeneric(
 #' @param rank An [`integer`] value specifying the maximal number of components
 #'  to be kept in the results. If `NULL` (the default), \eqn{p - 1} components
 #'  will be returned.
-#' @param sup_row A [`numeric`] or [`logical`] vector specifying the indices of
-#'  the supplementary rows (individuals).
-#' @param sup_col A [`numeric`] or [`logical`] vector specifying the indices of
-#'  the supplementary columns (variables).
+#' @param sup_row A `vector` specifying the indices of the supplementary rows.
+#' @param sup_col A `vector` specifying the indices of the supplementary columns.
 #' @param weight_row A [`numeric`] vector specifying the active row (individual)
 #'  weights. If `NULL` (the default), uniform weights are used. Row weights are
 #'  internally normalized to sum 1

@@ -9,35 +9,6 @@ is_centered <- function(x) {
 is_scaled <- function(x) {
   !all(x@scale == 1)
 }
-#' @param index A [`numeric`] vector.
-#' @param n An [`integer`] value.
-#' @param names A [`character`] vector.
-#' @return A [`logical`] vector.
-#' @keywords internal
-#' @noRd
-is_supplementary <- function(index, n, names = NULL) {
-  x <- logical(n)
-
-  if (is.null(index)) return(x)
-
-  if (is.logical(index)) {
-    arkhe::assert_length(index, n)
-    return(index)
-  }
-
-  if (is.character(index)) {
-    index <- match(index, names)
-    index <- index[!is.na(index)]
-    if (length(index) == 0) return(x)
-  }
-
-  if (is.numeric(index)) {
-    x[index] <- TRUE
-    return(x)
-  }
-
-  arkhe::assert_type(index, "numeric")
-}
 
 has_supplementary <- function(x, margin = 1) {
   margin <- margin[[1L]]

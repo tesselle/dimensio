@@ -24,11 +24,9 @@ ca(object, ...)
 components to be kept in the results. If \code{NULL} (the default),
 \eqn{min(m, p) - 1} components will be returned.}
 
-\item{sup_row}{A \code{\link{numeric}} or \code{\link{logical}} vector specifying the indices of
-the supplementary rows.}
+\item{sup_row}{A \code{vector} specifying the indices of the supplementary rows.}
 
-\item{sup_col}{A \code{\link{numeric}} or \code{\link{logical}} vector specifying the indices of
-the supplementary columns.}
+\item{sup_col}{A \code{vector} specifying the indices of the supplementary columns.}
 }
 \value{
 A \code{\linkS4class{CA}} object.
