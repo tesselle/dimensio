@@ -4,6 +4,9 @@
 * Add `burt()` to compute the Burt table of a factor table.
 * Add `mca()` to compute multiple correspondence analysis.
 
+## Enhancements
+* `biplot()` allows to produce a symetric CA biplot.
+
 ## Internals
 * Import **arkhe**.
 

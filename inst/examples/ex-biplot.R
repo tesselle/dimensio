@@ -19,6 +19,9 @@ data("benthos")
 ## Compute correspondence analysis
 X <- ca(benthos)
 
+## Symetric CA biplot
+biplot(X, labels = "columns")
+
 ## Row principal CA biplot
 biplot(X, type = "row", labels = "columns")
 

@@ -10,10 +10,11 @@ setMethod(
   f = "biplot",
   signature = c(x = "CA"),
   definition = function(x, ..., axes = c(1, 2),
-                        type = c("rows", "columns", "contributions"),
+                        type = c("symetric", "rows", "columns", "contributions"),
                         active = TRUE, sup = TRUE,
-                        labels = "columns",
-                        col.rows = "#004488", col.columns = "#BB5566",
+                        labels = NULL,
+                        col.rows = "#E69F00", col.columns = "#56B4E9",
+                        col.sup_rows = "#009E73", col.sup_columns = "#F0E442",
                         cex.rows = graphics::par("cex"),
                         cex.columns = graphics::par("cex"),
                         pch.rows = 16, pch.columns = 17,
@@ -23,6 +24,10 @@ setMethod(
     type <- match.arg(type, several.ok = FALSE)
 
     ## Type of biplot
+    if (type == "symetric") {
+      princ_row <- TRUE
+      princ_col <- TRUE
+    }
     if (type == "rows") {
       princ_row <- TRUE
       princ_col <- FALSE
@@ -58,6 +63,7 @@ setMethod(
       ...,
       rows = TRUE, columns = TRUE, labels = labels,
       col.rows = col.rows, col.columns = col.columns,
+      col.sup_rows = col.sup_rows, col.sup_columns = col.sup_columns,
       pch.rows = pch.rows, pch.columns = pch.columns,
       cex.rows = cex.rows,
       cex.columns = cex.columns,
@@ -81,7 +87,8 @@ setMethod(
   definition = function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
                         active = TRUE, sup = TRUE,
                         labels = "variables",
-                        col.rows = "#004488", col.columns = "#BB5566",
+                        col.rows = "#E69F00", col.columns = "#56B4E9",
+                        col.sup_rows = "#009E73", col.sup_columns = "#F0E442",
                         pch.rows = 16, pch.columns = 17,
                         lty = "solid", lwd = 2,
                         xlim = NULL, ylim = NULL,
@@ -121,6 +128,7 @@ setMethod(
       ...,
       rows = TRUE, columns = FALSE, labels = labels,
       col.rows = col.rows, col.columns = col.columns,
+      col.sup_rows = col.sup_rows, col.sup_columns = col.sup_columns,
       pch.rows = pch.rows, pch.columns = pch.columns,
       xlim = xlim, ylim = ylim,
       main = main, sub = sub,
@@ -136,7 +144,8 @@ setMethod(
 
 viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
                        labels = c("rows", "columns", "individuals", "variables"),
-                       col.rows = "#004488", col.columns = "#BB5566",
+                       col.rows = "#E69F00", col.columns = "#56B4E9",
+                       col.sup_rows = "#009E73", col.sup_columns = "#F0E442",
                        pch.rows = 16, pch.columns = 17,
                        cex.rows = graphics::par("cex"),
                        cex.columns = graphics::par("cex"),
@@ -168,11 +177,15 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   graphics::abline(h = 0, lty = "dashed", lwd = 1, col = graphics::par("fg"))
   graphics::abline(v = 0, lty = "dashed", lwd = 1, col = graphics::par("fg"))
   if (rows) {
-    graphics::points(x = coord_row$x, y = coord_row$y, col = col.rows,
+    row_factor <- as.factor(coord_row$observation)
+    graphics::points(x = coord_row$x, y = coord_row$y,
+                     col = c(col.rows, col.sup_rows)[row_factor],
                      pch = pch.rows, cex = cex.rows)
   }
   if (columns) {
-    graphics::points(x = coord_col$x, y = coord_col$y, col = col.columns,
+    col_factor <- as.factor(coord_col$observation)
+    graphics::points(x = coord_col$x, y = coord_col$y,
+                     col = c(col.columns, col.sup_columns)[col_factor],
                      pch = pch.columns, cex = cex.columns)
   }
 

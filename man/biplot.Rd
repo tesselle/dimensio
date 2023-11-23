@@ -11,12 +11,14 @@
   x,
   ...,
   axes = c(1, 2),
-  type = c("rows", "columns", "contributions"),
+  type = c("symetric", "rows", "columns", "contributions"),
   active = TRUE,
   sup = TRUE,
-  labels = "columns",
-  col.rows = "#004488",
-  col.columns = "#BB5566",
+  labels = NULL,
+  col.rows = "#E69F00",
+  col.columns = "#56B4E9",
+  col.sup_rows = "#009E73",
+  col.sup_columns = "#F0E442",
   cex.rows = graphics::par("cex"),
   cex.columns = graphics::par("cex"),
   pch.rows = 16,
@@ -35,8 +37,10 @@
   active = TRUE,
   sup = TRUE,
   labels = "variables",
-  col.rows = "#004488",
-  col.columns = "#BB5566",
+  col.rows = "#E69F00",
+  col.columns = "#56B4E9",
+  col.sup_rows = "#009E73",
+  col.sup_columns = "#F0E442",
   pch.rows = 16,
   pch.columns = 17,
   lty = "solid",
@@ -69,7 +73,10 @@ plotted?}
 "\code{rows}"/"\code{individuals}" and/or "\code{columns}"/"\code{variables}" names must be
 drawn. Any unambiguous substring can be given.}
 
-\item{col.rows, col.columns}{A color specification.}
+\item{col.rows, col.columns}{A color specification for the active observations.}
+
+\item{col.sup_rows, col.sup_columns}{A color specification for the
+supplementary observation.}
 
 \item{cex.rows, cex.columns}{A numerical vector giving the amount by which
 plotting characters and symbols should be scaled relative to the default.}
@@ -128,9 +135,18 @@ individuals approximates the Mahalanobis distance between rows.}
 \section{CA Biplots}{
 
 \describe{
-\item{\code{rows}}{Row principal biplot.}
-\item{\code{columns}}{Column principal biplot.}
-\item{\code{contribution}}{Contribution biplot}.
+\item{\code{symetric} (symetric biplot)}{Represents the row and column profiles
+simultaneously in a common space: rows and columns are in standard
+coordinates. Note that the the inter-distance between any row and column
+items is not meaningful.}
+\item{\code{rows} (asymetric biplot)}{Row principal biplot (row-metric-preserving)
+with rows in principal coordinates and columns in standard coordinates.}
+\item{\code{columns} (asymetric biplot)}{Column principal biplot
+(column-metric-preserving) with rows in standard coordinates and columns in
+principal coordinates.}
+\item{\code{contribution} (asymetric biplot)}{Contribution biplot with rows in
+principal coordinates and columns in standard coordinates multiplied by the
+square roots of their masses.}
 }
 }
 
@@ -155,6 +171,9 @@ data("benthos")
 
 ## Compute correspondence analysis
 X <- ca(benthos)
+
+## Symetric CA biplot
+biplot(X, labels = "columns")
 
 ## Row principal CA biplot
 biplot(X, type = "row", labels = "columns")

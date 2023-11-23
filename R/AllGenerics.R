@@ -495,7 +495,9 @@ setGeneric(
 #' @param labels A [`character`] vector specifying whether
 #'  "`rows`"/"`individuals`" and/or "`columns`"/"`variables`" names must be
 #'  drawn. Any unambiguous substring can be given.
-#' @param col.rows,col.columns A color specification.
+#' @param col.rows,col.columns A color specification for the active observations.
+#' @param col.sup_rows,col.sup_columns A color specification for the
+#'  supplementary observation.
 #' @param pch.rows,pch.columns A symbol specification.
 #' @param cex.rows,cex.columns A numerical vector giving the amount by which
 #'  plotting characters and symbols should be scaled relative to the default.
@@ -535,9 +537,18 @@ setGeneric(
 #'  }
 #' @section CA Biplots:
 #'  \describe{
-#'   \item{`rows`}{Row principal biplot.}
-#'   \item{`columns`}{Column principal biplot.}
-#'   \item{`contribution`}{Contribution biplot}.
+#'   \item{`symetric` (symetric biplot)}{Represents the row and column profiles
+#'   simultaneously in a common space: rows and columns are in standard
+#'   coordinates. Note that the the inter-distance between any row and column
+#'   items is not meaningful.}
+#'   \item{`rows` (asymetric biplot)}{Row principal biplot (row-metric-preserving)
+#'   with rows in principal coordinates and columns in standard coordinates.}
+#'   \item{`columns` (asymetric biplot)}{Column principal biplot
+#'   (column-metric-preserving) with rows in standard coordinates and columns in
+#'   principal coordinates.}
+#'   \item{`contribution` (asymetric biplot)}{Contribution biplot with rows in
+#'   principal coordinates and columns in standard coordinates multiplied by the
+#'   square roots of their masses.}
 #'  }
 #' @return
 #'  `biplot()` is called for its side-effects: it results in a graphic being
