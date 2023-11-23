@@ -161,7 +161,7 @@
 #' MCA Results
 #'
 #' An S4 class to store the results of a multiple correspondence analysis.
-#' @example inst/examples/ex-mca.R
+# @example inst/examples/ex-mca.R
 #' @author N. Frerebeau
 #' @family class
 #' @docType class

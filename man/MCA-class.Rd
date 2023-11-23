@@ -8,21 +8,6 @@
 \description{
 An S4 class to store the results of a multiple correspondence analysis.
 }
-\examples{
-# data(tea, package = "FactoMineR")
-# res.mca <- FactoMineR::MCA(tea, ind.sup = 1:5, quanti.sup=19, quali.sup=20:36, graph = FALSE)
-# plot(res.mca,invisible=c("var","quanti.sup"),cex=0.7)
-# plot(res.mca,invisible=c("ind","quali.sup","quanti.sup"),cex=0.8)
-# plot(res.mca,cex=0.7)
-#
-# kk <- mca(tea, sup_quanti = 19, sup_col = 20:36)
-#
-# viz_rows(kk)
-# viz_columns(kk, highlight = "obs")
-# biplot(kk)
-#
-# augment(kk, margin = 1)
-}
 \seealso{
 Other class: 
 \code{\link{CA-class}},
