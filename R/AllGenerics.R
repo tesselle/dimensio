@@ -311,59 +311,6 @@ setGeneric(
   valueClass = "array"
 )
 
-#' Tidy Coordinates
-#'
-#' @param x A [`CA-class`] or [`PCA-class`] object.
-#' @param margin A length-one [`numeric`] vector giving the subscript
-#'  which the data will be returned: `1` indicates individuals/rows (the
-#'  default), `2` indicates variables/columns.
-#' @param axes A length-two [`numeric`] vector giving the dimensions
-#'  to be for which to compute results.
-#' @param principal A [`logical`] scalar: should principal coordinates be
-#'  returned? If `FALSE`, standard coordinates are returned.
-#' @param ... Currently not used.
-#' @return
-#'  `tidy()` returns a long [`data.frame`] with the following columns:
-#'    \describe{
-#'     \item{`label`}{Row/column names of the original data.}
-#'     \item{`component`}{Component.}
-#'     \item{`supplementary`}{Whether an observation is active or
-#'     supplementary.}
-#'     \item{`coordinate`}{Coordinates.}
-#'     \item{`contribution`}{Contributions to the definition of the components.}
-#'     \item{`cos2`}{\eqn{cos^2}{cos2}.}
-#'    }
-#'
-#'  `augment()` returns a wide [`data.frame`] of the row/column coordinates
-#'    along `axes` and the following columns:
-#'    \describe{
-#'     \item{`label`}{Row/column names of the original data.}
-#'     \item{`supplementary`}{Whether an observation is active or
-#'     supplementary.}
-#'     \item{`mass`}{Weight/mass of each observation.}
-#'     \item{`sum`}{Sum of squared coordinates along `axes`.}
-#'     \item{`contribution`}{Joint contributions to the definition of `axes`.}
-#'     \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
-#'    }
-#' @example inst/examples/ex-coordinates.R
-#' @author N. Frerebeau
-#' @docType methods
-#' @family tidy methods
-#' @aliases tidy-method
-setGeneric(
-  name = "tidy",
-  def = function(x, ...) standardGeneric("tidy"),
-  valueClass = "data.frame"
-)
-
-#' @rdname tidy
-#' @aliases augment-method
-setGeneric(
-  name = "augment",
-  def = function(x, ...) standardGeneric("augment"),
-  valueClass = "data.frame"
-)
-
 ## Eigenvalues -----------------------------------------------------------------
 #' Get Eigenvalues
 #'
@@ -873,6 +820,59 @@ setGeneric(
 #' @name summary
 #' @rdname summary
 NULL
+
+#' Tidy Coordinates
+#'
+#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param margin A length-one [`numeric`] vector giving the subscript
+#'  which the data will be returned: `1` indicates individuals/rows (the
+#'  default), `2` indicates variables/columns.
+#' @param axes A length-two [`numeric`] vector giving the dimensions
+#'  to be for which to compute results.
+#' @param principal A [`logical`] scalar: should principal coordinates be
+#'  returned? If `FALSE`, standard coordinates are returned.
+#' @param ... Currently not used.
+#' @return
+#'  `tidy()` returns a long [`data.frame`] with the following columns:
+#'    \describe{
+#'     \item{`label`}{Row/column names of the original data.}
+#'     \item{`component`}{Component.}
+#'     \item{`supplementary`}{Whether an observation is active or
+#'     supplementary.}
+#'     \item{`coordinate`}{Coordinates.}
+#'     \item{`contribution`}{Contributions to the definition of the components.}
+#'     \item{`cos2`}{\eqn{cos^2}{cos2}.}
+#'    }
+#'
+#'  `augment()` returns a wide [`data.frame`] of the row/column coordinates
+#'    along `axes` and the following columns:
+#'    \describe{
+#'     \item{`label`}{Row/column names of the original data.}
+#'     \item{`supplementary`}{Whether an observation is active or
+#'     supplementary.}
+#'     \item{`mass`}{Weight/mass of each observation.}
+#'     \item{`sum`}{Sum of squared coordinates along `axes`.}
+#'     \item{`contribution`}{Joint contributions to the definition of `axes`.}
+#'     \item{`cos2`}{Joint \eqn{cos^2}{cos2} along `axes`.}
+#'    }
+#' @example inst/examples/ex-coordinates.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family summary
+#' @aliases tidy-method
+setGeneric(
+  name = "tidy",
+  def = function(x, ...) standardGeneric("tidy"),
+  valueClass = "data.frame"
+)
+
+#' @rdname tidy
+#' @aliases augment-method
+setGeneric(
+  name = "augment",
+  def = function(x, ...) standardGeneric("augment"),
+  valueClass = "data.frame"
+)
 
 # Tools ========================================================================
 #' Complete Disjunctive Table

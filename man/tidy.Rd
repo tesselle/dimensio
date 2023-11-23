@@ -80,7 +80,11 @@ head(tidy(X, margin = 2))
 head(augment(X, margin = 1, axes = c(1, 2)))
 head(augment(X, margin = 2, axes = c(1, 2)))
 }
+\seealso{
+Other summary: 
+\code{\link{summary}()}
+}
 \author{
 N. Frerebeau
 }
-\concept{tidy methods}
+\concept{summary}

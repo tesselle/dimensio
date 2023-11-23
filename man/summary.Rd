@@ -43,6 +43,10 @@ summary(X, margin = 1)
 ## Columns summary
 summary(X, margin = 2)
 }
+\seealso{
+Other summary: 
+\code{\link{tidy}()}
+}
 \author{
 N. Frerebeau
 }
