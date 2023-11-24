@@ -4,11 +4,12 @@
 \name{CA-class}
 \alias{CA-class}
 \alias{.CA}
-\alias{BootstrapCA-class}
-\alias{.BootstrapCA}
 \title{CA Results}
 \description{
 An S4 class to store the results of a simple correspondence analysis.
+}
+\note{
+This class inherits from \code{\linkS4class{MultivariateAnalysis}}.
 }
 \examples{
 ## Data from Lebart et al. 2006, p. 170-172
@@ -46,6 +47,8 @@ get_eigenvalues(X)
 }
 \seealso{
 Other class: 
+\code{\link{BootstrapCA-class}},
+\code{\link{BootstrapPCA-class}},
 \code{\link{MCA-class}},
 \code{\link{MultivariateAnalysis}},
 \code{\link{MultivariateBootstrap}},

@@ -12,8 +12,8 @@ get_distances(x, ...)
 \S4method{get_distances}{MultivariateAnalysis}(x, margin = 1)
 }
 \arguments{
-\item{x}{An object from which to get element(s) (a \code{\linkS4class{CA}} or
-\code{\linkS4class{PCA}} object).}
+\item{x}{An object from which to get element(s) (a \code{\linkS4class{CA}},
+\code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object).}
 
 \item{...}{Currently not used.}
 
@@ -22,10 +22,7 @@ data will be returned: \code{1} indicates individuals/rows (the default), \code{
 indicates variables/columns.}
 }
 \value{
-\itemize{
-\item \code{get_distances()} returns a \code{\link{numeric}} vector of squared distance to
-the centroide.
-}
+A \code{\link{numeric}} vector of squared distance to the centroide.
 }
 \description{
 Get Distances

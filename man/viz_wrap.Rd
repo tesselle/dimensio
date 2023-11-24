@@ -36,8 +36,8 @@ viz_tolerance(x, ...)
 \S4method{viz_hull}{BootstrapCA}(x, ..., margin = 1, axes = c(1, 2))
 }
 \arguments{
-\item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}} or
-\code{\linkS4class{PCA}} object).}
+\item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}},
+\code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object).}
 
 \item{...}{Further \link[graphics:par]{graphical parameters} to be passed to
 \code{\link[graphics:polygon]{graphics::polygon()}}.}

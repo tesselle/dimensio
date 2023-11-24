@@ -27,7 +27,7 @@ viz_points(
 )
 }
 \arguments{
-\item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+\item{x}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
 
 \item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
 which the data will be returned: \code{1} indicates individuals/rows (the

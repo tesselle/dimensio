@@ -8,8 +8,13 @@
 \description{
 An S4 class to store the results of a multiple correspondence analysis.
 }
+\note{
+This class inherits from \code{\linkS4class{CA}}.
+}
 \seealso{
 Other class: 
+\code{\link{BootstrapCA-class}},
+\code{\link{BootstrapPCA-class}},
 \code{\link{CA-class}},
 \code{\link{MultivariateAnalysis}},
 \code{\link{MultivariateBootstrap}},

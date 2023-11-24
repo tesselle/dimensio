@@ -73,7 +73,7 @@ viz_columns(x, ...)
 \S4method{viz_variables}{BootstrapPCA}(x, ..., axes = c(1, 2))
 }
 \arguments{
-\item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+\item{x}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Further \link[graphics:par]{graphical parameters} (see details).}
 

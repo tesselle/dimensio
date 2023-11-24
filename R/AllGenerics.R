@@ -263,8 +263,8 @@ NULL
 ### Data -----------------------------------------------------------------------
 #' Get Original Data
 #'
-#' @param x An object from which to get element(s) (a [`CA-class`] or
-#'  [`PCA-class`] object).
+#' @param x An object from which to get element(s) (a [`CA-class`],
+#'  [`MCA-class`] or [`PCA-class`] object).
 #' @param ... Currently not used.
 #' @return
 #'  Returns a [`data.frame`] of original data.
@@ -281,8 +281,8 @@ setGeneric(
 ## Coordinates -----------------------------------------------------------------
 #' Get Coordinates
 #'
-#' @param x An object from which to get element(s) (a [`CA-class`] or
-#'  [`PCA-class`] object).
+#' @param x An object from which to get element(s) (a [`CA-class`],
+#'  [`MCA-class`] or [`PCA-class`] object).
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
@@ -318,8 +318,8 @@ setGeneric(
 ## Eigenvalues -----------------------------------------------------------------
 #' Get Eigenvalues
 #'
-#' @param x An object from which to get element(s) (a [`CA-class`] or
-#'  [`PCA-class`] object).
+#' @param x An object from which to get element(s) (a [`CA-class`],
+#'  [`MCA-class`] or [`PCA-class`] object).
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
@@ -362,8 +362,8 @@ setGeneric(
 ## Contributions ---------------------------------------------------------------
 #' Get Contributions
 #'
-#' @param x An object from which to get element(s) (a [`CA-class`] or
-#'  [`PCA-class`] object).
+#' @param x An object from which to get element(s) (a [`CA-class`],
+#'  [`MCA-class`] or [`PCA-class`] object).
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
@@ -410,15 +410,14 @@ setGeneric(
 ## Distances -------------------------------------------------------------------
 #' Get Distances
 #'
-#' @param x An object from which to get element(s) (a [`CA-class`] or
-#'  [`PCA-class`] object).
+#' @param x An object from which to get element(s) (a [`CA-class`],
+#'  [`MCA-class`] or [`PCA-class`] object).
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
 #' @param ... Currently not used.
 #' @return
-#'  * `get_distances()` returns a [`numeric`] vector of squared distance to
-#'  the centroide.
+#'  A [`numeric`] vector of squared distance to the centroide.
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
@@ -433,7 +432,7 @@ setGeneric(
 ## Biplot ----------------------------------------------------------------------
 #' Biplot
 #'
-#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
 #' @param axes A length-two [`numeric`] vector giving the dimensions to be
 #'  plotted.
 #' @param type A [`character`] string specifying the biplot to be plotted
@@ -476,17 +475,17 @@ setGeneric(
 #'  separately.
 #' @section PCA Biplots:
 #'  \describe{
-#'   \item{`form`}{Form biplot (row-metric-preserving). The form biplot favors
-#'   the representation of the individuals: the distance between the individuals
+#'   \item{`form` (row-metric-preserving)}{The form biplot favors the
+#'   representation of the individuals: the distance between the individuals
 #'   approximates the Euclidean distance between rows. In the form biplot the
 #'   length of a vector approximates the quality of the representation of the
 #'   variable.}
-#'   \item{`covariance`}{Covariance biplot (column-metric-preserving). The
-#'   covariance biplot favors the representation of the variables: the length of
-#'   a vector approximates the standard deviation of the variable and the cosine
-#'   of the angle formed by two vectors approximates the correlation between the
-#'   two variables. In the covariance biplot the distance between the
-#'   individuals approximates the Mahalanobis distance between rows.}
+#'   \item{`covariance` (column-metric-preserving)}{The covariance biplot favors
+#'   the representation of the variables: the length of a vector approximates
+#'   the standard deviation of the variable and the cosine of the angle formed
+#'   by two vectors approximates the correlation between the two variables. In
+#'   the covariance biplot the distance between the individuals approximates the
+#'   Mahalanobis distance between rows.}
 #'  }
 #' @section CA Biplots:
 #'  \describe{
@@ -608,7 +607,7 @@ setGeneric(
 #' Scree Plot
 #'
 #' Plot eigenvalues (scree plot) or variances histogram.
-#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
 #' @param eigenvalues A [`logical`] scalar: should the eigenvalues be plotted
 #'  instead of variance/inertia?
 #' @param cumulative A [`logical`] scalar: should the cumulative percentages of
@@ -639,7 +638,7 @@ NULL
 #' Visualize Contributions and cos2
 #'
 #' Plots contributions histogram and \eqn{cos^2}{cos2} scatterplot.
-#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
@@ -685,8 +684,8 @@ setGeneric(
 #'  * `wrap_hull()` computes convex hull of a set of observations.
 #'  * `wrap_confidence()` computes a confidence ellipse.
 #'  * `wrap_tolerance()` computes a tolerance ellipse.
-#' @param x An object from which to wrap observations (a [`CA-class`] or
-#'  [`PCA-class`] object).
+#' @param x An object from which to wrap observations (a [`CA-class`],
+#'  [`MCA-class`] or [`PCA-class`] object).
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
@@ -731,8 +730,8 @@ setGeneric(
 
 #' Plot Envelopes
 #'
-#' @param x An object from which to wrap observations (a [`CA-class`] or
-#'  [`PCA-class`] object).
+#' @param x An object from which to wrap observations (a [`CA-class`],
+#'  [`MCA-class`] or [`PCA-class`] object).
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
@@ -778,7 +777,7 @@ setGeneric(
 #' Object Summaries
 #'
 #' Provides a summary of the results of a multivariate data analysis.
-#' @param object A [`CA-class`] or [`PCA-class`] object.
+#' @param object A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be summarized: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
@@ -798,7 +797,7 @@ NULL
 
 #' Tidy Coordinates
 #'
-#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
 #' @param margin A length-one [`numeric`] vector giving the subscript
 #'  which the data will be returned: `1` indicates individuals/rows (the
 #'  default), `2` indicates variables/columns.

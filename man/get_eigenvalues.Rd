@@ -27,8 +27,8 @@ get_variance(x, ...)
 \S4method{get_variance}{MultivariateAnalysis}(x, digits = 2)
 }
 \arguments{
-\item{x}{An object from which to get element(s) (a \code{\linkS4class{CA}} or
-\code{\linkS4class{PCA}} object).}
+\item{x}{An object from which to get element(s) (a \code{\linkS4class{CA}},
+\code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object).}
 
 \item{...}{Currently not used.}
 

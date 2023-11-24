@@ -4,8 +4,6 @@
 \name{PCA-class}
 \alias{PCA-class}
 \alias{.PCA}
-\alias{BootstrapPCA-class}
-\alias{.BootstrapPCA}
 \title{PCA Results}
 \description{
 An S4 class to store the results of a principal components analysis.
@@ -20,6 +18,9 @@ dataset (active individuals only).}
 initial dataset (active individuals only).}
 }}
 
+\note{
+This class inherits from \code{\linkS4class{MultivariateAnalysis}}.
+}
 \examples{
 ## Load data
 data("iris")
@@ -41,6 +42,8 @@ get_eigenvalues(X)
 }
 \seealso{
 Other class: 
+\code{\link{BootstrapCA-class}},
+\code{\link{BootstrapPCA-class}},
 \code{\link{CA-class}},
 \code{\link{MCA-class}},
 \code{\link{MultivariateAnalysis}},

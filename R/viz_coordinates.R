@@ -218,7 +218,7 @@ setMethod(
 # Helpers ======================================================================
 #' Build a Factor Map
 #'
-#' @param x A [`CA-class`] or [`PCA-class`] object.
+#' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
 #' @param labels A [`logical`] scalar: should labels be drawn?
 #' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
 #'  The default value, `NULL`, indicates that the range of the

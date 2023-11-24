@@ -27,8 +27,8 @@ wrap_tolerance(x, ...)
 \S4method{wrap_hull}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL)
 }
 \arguments{
-\item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}} or
-\code{\linkS4class{PCA}} object).}
+\item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}},
+\code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object).}
 
 \item{...}{Currently not used.}
 

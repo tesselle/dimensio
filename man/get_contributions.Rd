@@ -27,8 +27,8 @@ get_cos2(x, ...)
 \S4method{get_cos2}{MultivariateAnalysis}(x, margin = 1, sup_name = ".sup")
 }
 \arguments{
-\item{x}{An object from which to get element(s) (a \code{\linkS4class{CA}} or
-\code{\linkS4class{PCA}} object).}
+\item{x}{An object from which to get element(s) (a \code{\linkS4class{CA}},
+\code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object).}
 
 \item{...}{Currently not used.}
 

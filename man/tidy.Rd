@@ -19,7 +19,7 @@ augment(x, ...)
 \S4method{tidy}{MultivariateAnalysis}(x, ..., margin = 1, principal = TRUE)
 }
 \arguments{
-\item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+\item{x}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Currently not used.}
 

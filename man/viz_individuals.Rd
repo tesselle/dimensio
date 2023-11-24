@@ -52,7 +52,7 @@ viz_rows(x, ...)
 )
 }
 \arguments{
-\item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+\item{x}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Further \link[graphics:par]{graphical parameters} (see details).}
 

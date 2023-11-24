@@ -18,6 +18,8 @@ replications.}
 
 \seealso{
 Other class: 
+\code{\link{BootstrapCA-class}},
+\code{\link{BootstrapPCA-class}},
 \code{\link{CA-class}},
 \code{\link{MCA-class}},
 \code{\link{MultivariateAnalysis}},

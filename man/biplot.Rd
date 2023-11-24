@@ -50,7 +50,7 @@
 )
 }
 \arguments{
-\item{x}{A \code{\linkS4class{CA}} or \code{\linkS4class{PCA}} object.}
+\item{x}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
 
 \item{...}{Currently not used.}
 
@@ -122,17 +122,17 @@ separately.
 \section{PCA Biplots}{
 
 \describe{
-\item{\code{form}}{Form biplot (row-metric-preserving). The form biplot favors
-the representation of the individuals: the distance between the individuals
+\item{\code{form} (row-metric-preserving)}{The form biplot favors the
+representation of the individuals: the distance between the individuals
 approximates the Euclidean distance between rows. In the form biplot the
 length of a vector approximates the quality of the representation of the
 variable.}
-\item{\code{covariance}}{Covariance biplot (column-metric-preserving). The
-covariance biplot favors the representation of the variables: the length of
-a vector approximates the standard deviation of the variable and the cosine
-of the angle formed by two vectors approximates the correlation between the
-two variables. In the covariance biplot the distance between the
-individuals approximates the Mahalanobis distance between rows.}
+\item{\code{covariance} (column-metric-preserving)}{The covariance biplot favors
+the representation of the variables: the length of a vector approximates
+the standard deviation of the variable and the cosine of the angle formed
+by two vectors approximates the correlation between the two variables. In
+the covariance biplot the distance between the individuals approximates the
+Mahalanobis distance between rows.}
 }
 }
 
