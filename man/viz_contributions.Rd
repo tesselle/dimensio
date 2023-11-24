@@ -52,8 +52,7 @@ viz_cos2(x, ...)
 data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
 indicates variables/columns.}
 
-\item{axes}{A length-one \code{\link{numeric}} vector giving the dimensions to be
-plotted.}
+\item{axes}{A \code{\link{numeric}} vector giving the dimensions to be plotted.}
 
 \item{sort}{A \code{\link{logical}} scalar: should the data be sorted?}
 

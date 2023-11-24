@@ -12,7 +12,7 @@ if (at_home()) {
 
   # Symetric CA biplot
   plot_biplot_symetric <- function() biplot(X, type = "symetric", labels = NULL)
-  expect_snapshot_plot(plot_biplot_symetric, "plot_biplot_symetric")
+  expect_snapshot_plot(plot_biplot_symetric, "CA_biplot_symetric")
 
   # Row principal CA biplot
   plot_biplot_row <- function() biplot(X, type = "row", labels = NULL)

@@ -439,19 +439,17 @@ setGeneric(
 #' @param type A [`character`] string specifying the biplot to be plotted
 #'  (see below). It must be one of "`rows`", "`columns`", "`contribution`" (CA),
 #'  "`form`" or "`covariance`" (PCA). Any unambiguous substring can be given.
-#' @param active A [`logical`] scalar: should the active observations be
-#'  plotted?
-#' @param sup A [`logical`] scalar: should the supplementary observations be
-#'  plotted?
 #' @param labels A [`character`] vector specifying whether
 #'  "`rows`"/"`individuals`" and/or "`columns`"/"`variables`" names must be
 #'  drawn. Any unambiguous substring can be given.
-#' @param col.rows,col.columns A color specification for the active observations.
-#' @param col.sup_rows,col.sup_columns A color specification for the
-#'  supplementary observation.
-#' @param pch.rows,pch.columns A symbol specification.
-#' @param cex.rows,cex.columns A numerical vector giving the amount by which
-#'  plotting characters and symbols should be scaled relative to the default.
+#' @param col.rows A length-two `vector` of color specification for the active
+#'  and supplementary rows.
+#' @param col.columns A length-two `vector` of color specification for the
+#'  active and supplementary columns.
+#' @param pch,pch.rows,pch.columns A symbol specification.
+#' @param cex,cex.rows,cex.columns A [`numeric`] vector giving the amount by
+#'  which plotting characters and symbols should be scaled relative to the
+#'  default.
 #' @param lty,lwd A specification for the line type and width.
 #' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
 #'  The default value, `NULL`, indicates that the range of the
@@ -461,6 +459,10 @@ setGeneric(
 #'  [finite][is.finite()] values to be plotted should be used.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param legend A [`list`] of additional arguments to be passed to
+#'  [graphics::legend()]; names of the list are used as argument names.
+#'  If `NULL`, no legend is displayed.
+#' @inheritParams prepare
 #' @param ... Currently not used.
 #' @details
 #'  A biplot is the simultaneous representation of rows and columns of a
@@ -522,37 +524,7 @@ NULL
 #' Visualize Individuals Factor Map
 #'
 #' Plots row/individual principal coordinates.
-#' @param x A [`CA-class`] or [`PCA-class`] object.
-#' @param axes A length-two [`numeric`] vector giving the dimensions to be
-#'  plotted.
-#' @param active A [`logical`] scalar: should the active observations be
-#'  plotted?
-#' @param sup A [`logical`] scalar: should the supplementary observations be
-#'  plotted?
-#' @param labels A [`logical`] scalar: should labels be drawn?
-#' @param highlight A vector specifying the information to be highlighted.
-#'  If `NULL` (the default), no highlighting is applied.
-#'  It will only be mapped if at least one [graphical parameters][graphics::par]
-#'  is explicitly specified (see examples).
-#'  If a single `character` string is passed, it must be one of "`observation`",
-#'  "`mass`", "`sum`", "`contribution`" or "`cos2`" (see [`augment()`]).
-#'  Any unambiguous substring can be given.
-#' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
-#'  The default value, `NULL`, indicates that the range of the
-#'  [finite][is.finite()] values to be plotted should be used.
-#' @param ylim A length-two [`numeric`] vector giving the y limits of the plot.
-#'  The default value, `NULL`, indicates that the range of the
-#'  [finite][is.finite()] values to be plotted should be used.
-#' @param main A [`character`] string giving a main title for the plot.
-#' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param panel.first An an `expression` to be evaluated after the plot axes are
-#'  set up but before any plotting takes place. This can be useful for drawing
-#'  background grids.
-#' @param panel.last An `expression` to be evaluated after plotting has taken
-#'  place but before the axes, title and box are added.
-#' @param legend A [`list`] of additional arguments to be passed to
-#'  [graphics::legend()]; names of the list are used as argument names.
-#'  If `NULL`, no legend is displayed.
+#' @inheritParams viz_points
 #' @param ... Further [graphical parameters][graphics::par] (see details).
 #' @details
 #'  Commonly used [graphical parameters][graphics::par] are:
@@ -593,7 +565,7 @@ setGeneric(
 #' Visualize Variables Factor Map
 #'
 #' Plots column/variable principal coordinates.
-#' @inheritParams viz_individuals
+#' @inheritParams viz_points
 #' @details
 #'  Commonly used [graphical parameters][graphics::par] are:
 #'  \describe{
@@ -671,8 +643,7 @@ NULL
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
-#' @param axes A length-one [`numeric`] vector giving the dimensions to be
-#'  plotted.
+#' @param axes A [`numeric`] vector giving the dimensions to be plotted.
 #' @param active A [`logical`] scalar: should the active observations be
 #'  plotted?
 #' @param sup A [`logical`] scalar: should the supplementary observations be

@@ -89,12 +89,10 @@ plotted?}
 \item{labels}{A \code{\link{logical}} scalar: should labels be drawn?}
 
 \item{highlight}{A vector specifying the information to be highlighted.
-If \code{NULL} (the default), no highlighting is applied.
-It will only be mapped if at least one \link[graphics:par]{graphical parameters}
-is explicitly specified (see examples).
-If a single \code{character} string is passed, it must be one of "\code{observation}",
-"\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}" (see \code{\link[=augment]{augment()}}).
-Any unambiguous substring can be given.}
+If \code{NULL} (the default), no highlighting is applied. If a single \code{character}
+string is passed, it must be one of "\code{observation}", "\code{mass}", "\code{sum}",
+"\code{contribution}" or "\code{cos2}" (see \code{\link[=augment]{augment()}}). Any unambiguous substring
+can be given.}
 
 \item{xlim}{A length-two \code{\link{numeric}} vector giving the x limits of the plot.
 The default value, \code{NULL}, indicates that the range of the
@@ -108,7 +106,7 @@ The default value, \code{NULL}, indicates that the range of the
 
 \item{sub}{A \code{\link{character}} string giving a subtitle for the plot.}
 
-\item{panel.first}{An an \code{expression} to be evaluated after the plot axes are
+\item{panel.first}{An \code{expression} to be evaluated after the plot axes are
 set up but before any plotting takes place. This can be useful for drawing
 background grids.}
 

@@ -11,15 +11,14 @@ setMethod(
   signature = c(x = "CA"),
   definition = function(x, ..., axes = c(1, 2),
                         type = c("symetric", "rows", "columns", "contributions"),
-                        active = TRUE, sup = TRUE,
-                        labels = NULL,
-                        col.rows = "#E69F00", col.columns = "#56B4E9",
-                        col.sup_rows = "#009E73", col.sup_columns = "#F0E442",
+                        active = TRUE, sup = TRUE, labels = NULL,
+                        col.rows = c("#E69F00", "#009E73"),
+                        col.columns = c("#56B4E9", "#F0E442"),
                         cex.rows = graphics::par("cex"),
                         cex.columns = graphics::par("cex"),
                         pch.rows = 16, pch.columns = 17,
-                        xlim = NULL, ylim = NULL,
-                        main = NULL, sub = NULL) {
+                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
+                        legend = list(x = "topleft")) {
     ## Validation
     type <- match.arg(type, several.ok = FALSE)
 
@@ -42,35 +41,36 @@ setMethod(
     }
 
     ## Get data
-    coord_row <-  prepare_coord(x, margin = 1, axes = axes,
-                                active = active, sup = sup,
-                                principal = princ_row)
-    coord_col <-  prepare_coord(x, margin = 2, axes = axes,
-                                active = active, sup = sup,
-                                principal = princ_col)
+    coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
+                          principal = princ_row, highlight = "observation",
+                          col = col.rows, pch = pch.rows,
+                          cex = cex.rows, lty = 0)
+    coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
+                          principal = princ_col, highlight = "observation",
+                          col = col.columns, pch = pch.columns,
+                          cex = cex.columns, lty = 0)
 
     ## Graphical parameters
     if (type == "contributions") {
-      coord_row$x <- coord_row$x * sqrt(coord_row$mass)
-      coord_row$y <- coord_row$y * sqrt(coord_row$mass)
+      mass_row <- get_masses(x, margin = 1)
+      mass_col <- get_masses(x, margin = 2)
 
-      cex.rows <- cex.rows + (coord_row$mass / max(coord_row$mass))
-      cex.columns <- cex.columns + (coord_col$mass / max(coord_col$mass))
+      coord_row$x <- coord_row$x * sqrt(mass_row)
+      coord_row$y <- coord_row$y * sqrt(mass_row)
+
+      coord_row$cex <- cex.rows + (mass_row / max(mass_row))
+      coord_col$cex <- cex.columns + (mass_col / max(mass_col))
     }
 
     viz_biplot(
       coord_row, coord_col,
-      ...,
       rows = TRUE, columns = TRUE, labels = labels,
-      col.rows = col.rows, col.columns = col.columns,
-      col.sup_rows = col.sup_rows, col.sup_columns = col.sup_columns,
-      pch.rows = pch.rows, pch.columns = pch.columns,
-      cex.rows = cex.rows,
-      cex.columns = cex.columns,
       xlim = xlim, ylim = ylim,
       main = main, sub = sub,
       xlab = print_variance(x, axes[[1]]),
-      ylab = print_variance(x, axes[[2]])
+      ylab = print_variance(x, axes[[2]]),
+      legend = legend,
+      ...
     )
 
     invisible(x)
@@ -85,14 +85,12 @@ setMethod(
   f = "biplot",
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
-                        active = TRUE, sup = TRUE,
-                        labels = "variables",
-                        col.rows = "#E69F00", col.columns = "#56B4E9",
-                        col.sup_rows = "#009E73", col.sup_columns = "#F0E442",
-                        pch.rows = 16, pch.columns = 17,
-                        lty = "solid", lwd = 2,
-                        xlim = NULL, ylim = NULL,
-                        main = NULL, sub = NULL) {
+                        active = TRUE, sup = TRUE, labels = "variables",
+                        col.rows = c("#E69F00", "#009E73"),
+                        col.columns = c("#56B4E9", "#F0E442"),
+                        pch = 16, cex = 1, lty = 1, lwd = 2,
+                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
+                        legend = list(x = "topleft")) {
     ## Validation
     type <- match.arg(type, several.ok = FALSE)
 
@@ -107,53 +105,79 @@ setMethod(
     }
 
     ## Get data
-    coord_row <-  prepare_coord(x, margin = 1, axes = axes,
-                                active = active, sup = sup,
-                                principal = princ_row)
-    coord_col <-  prepare_coord(x, margin = 2, axes = axes,
-                                active = active, sup = sup,
-                                principal = princ_col)
+    coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
+                          principal = princ_row, highlight = "observation",
+                          col = col.rows, pch = pch, cex = cex, lty = 0)
+    coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
+                          principal = princ_col, highlight = "observation",
+                          col = col.columns, lty = lty, lwd = lwd, pch = NA)
 
     arrows_col <- function() {
       graphics::arrows(
         x0 = 0, y0 = 0,
         x1 = coord_col$x, y1 = coord_col$y,
         length = 0.10, angle = 30,
-        col = col.columns, lty = lty, lwd = lwd
+        col = coord_col$col, lty = coord_col$lty, lwd = coord_col$lwd
       )
     }
 
     viz_biplot(
       coord_row, coord_col,
-      ...,
       rows = TRUE, columns = FALSE, labels = labels,
-      col.rows = col.rows, col.columns = col.columns,
-      col.sup_rows = col.sup_rows, col.sup_columns = col.sup_columns,
-      pch.rows = pch.rows, pch.columns = pch.columns,
       xlim = xlim, ylim = ylim,
       main = main, sub = sub,
       xlab = print_variance(x, axes[[1]]),
       ylab = print_variance(x, axes[[2]]),
       panel.first = arrows_col(),
-      panel.last = NULL
+      legend = legend,
+      ...
     )
 
     invisible(x)
   }
 )
 
+# Helpers ======================================================================
+#' Build a Biplot
+#'
+#' @param coord_row A [`data.frame`] returned by [prepare()].
+#' @param coord_col A [`data.frame`] returned by [prepare()].
+#' @param row A [`logical`] scalar: should the rows be drawn?
+#' @param columns A [`logical`] scalar: should the columns be drawn?
+#' @param labels A [`character`] vector specifying whether
+#'  "`rows`"/"`individuals`" and/or "`columns`"/"`variables`" names must be
+#'  drawn. Any unambiguous substring can be given.
+#' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
+#'  The default value, `NULL`, indicates that the range of the
+#'  [finite][is.finite()] values to be plotted should be used.
+#' @param ylim A length-two [`numeric`] vector giving the y limits of the plot.
+#'  The default value, `NULL`, indicates that the range of the
+#'  [finite][is.finite()] values to be plotted should be used.
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param xlab,ylab A [`character`] vector giving the x and y axis labels.
+#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
+#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
+#'  plot?
+#' @param ann A [`logical`] scalar: should the default annotation (title and x
+#'  and y axis labels) appear on the plot?
+#' @param panel.first An `expression` to be evaluated after the plot axes are
+#'  set up but before any plotting takes place. This can be useful for drawing
+#'  background grids.
+#' @param panel.last An `expression` to be evaluated after plotting has taken
+#'  place but before the axes, title and box are added.
+#' @param legend A [`list`] of additional arguments to be passed to
+#'  [graphics::legend()]; names of the list are used as argument names.
+#'  If `NULL`, no legend is displayed.
+#' @author N. Frerebeau
+#' @keywords internal
 viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
                        labels = c("rows", "columns", "individuals", "variables"),
-                       col.rows = "#E69F00", col.columns = "#56B4E9",
-                       col.sup_rows = "#009E73", col.sup_columns = "#F0E442",
-                       pch.rows = 16, pch.columns = 17,
-                       cex.rows = graphics::par("cex"),
-                       cex.columns = graphics::par("cex"),
                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
-                       xlab = NULL, ylab = NULL,
-                       axes = TRUE, frame.plot = axes,
+                       xlab = NULL, ylab = NULL, axes = TRUE, frame.plot = axes,
                        ann = graphics::par("ann"),
-                       panel.first = NULL, panel.last = NULL) {
+                       panel.first = NULL, panel.last = NULL,
+                       legend = list(x = "topleft")) {
 
   ## Save and restore graphical parameters
   ## pty: square plotting region, independent of device size
@@ -177,16 +201,12 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   graphics::abline(h = 0, lty = "dashed", lwd = 1, col = graphics::par("fg"))
   graphics::abline(v = 0, lty = "dashed", lwd = 1, col = graphics::par("fg"))
   if (rows) {
-    row_factor <- as.factor(coord_row$observation)
-    graphics::points(x = coord_row$x, y = coord_row$y,
-                     col = c(col.rows, col.sup_rows)[row_factor],
-                     pch = pch.rows, cex = cex.rows)
+    graphics::points(x = coord_row$x, y = coord_row$y, col = coord_row$col,
+                     pch = coord_row$pch, cex = coord_row$cex)
   }
   if (columns) {
-    col_factor <- as.factor(coord_col$observation)
-    graphics::points(x = coord_col$x, y = coord_col$y,
-                     col = c(col.columns, col.sup_columns)[col_factor],
-                     pch = pch.columns, cex = cex.columns)
+    graphics::points(x = coord_col$x, y = coord_col$y, col = coord_col$col,
+                     pch = coord_col$pch, cex = coord_col$cex)
   }
 
   ## Labels
@@ -194,11 +214,11 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {
       viz_labels(x = coord_row$x, y = coord_row$y, labels = coord_row$label,
-                 col = col.rows, ...)
+                 col = coord_row$col, cex = coord_row$cex)
     }
     if (any(labels == "columns") | any(labels == "variables")) {
       viz_labels(x = coord_col$x, y = coord_col$y, labels = coord_col$label,
-                 col = col.columns, ...)
+                 col = coord_col$col, cex = coord_col$cex)
     }
   }
 
@@ -220,4 +240,10 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   if (ann) {
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
+
+  ## Legend
+  coord_row$z <- paste(coord_row$z, "ind.", sep = " ")
+  coord_col$z <- paste(coord_col$z, "var.", sep = " ")
+  coord <- rbind(coord_row, coord_col)
+  prepare_legend(coord, legend, points = TRUE, lines = T)
 }

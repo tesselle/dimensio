@@ -15,10 +15,8 @@
   active = TRUE,
   sup = TRUE,
   labels = NULL,
-  col.rows = "#E69F00",
-  col.columns = "#56B4E9",
-  col.sup_rows = "#009E73",
-  col.sup_columns = "#F0E442",
+  col.rows = c("#E69F00", "#009E73"),
+  col.columns = c("#56B4E9", "#F0E442"),
   cex.rows = graphics::par("cex"),
   cex.columns = graphics::par("cex"),
   pch.rows = 16,
@@ -26,7 +24,8 @@
   xlim = NULL,
   ylim = NULL,
   main = NULL,
-  sub = NULL
+  sub = NULL,
+  legend = list(x = "topleft")
 )
 
 \S4method{biplot}{PCA}(
@@ -37,18 +36,17 @@
   active = TRUE,
   sup = TRUE,
   labels = "variables",
-  col.rows = "#E69F00",
-  col.columns = "#56B4E9",
-  col.sup_rows = "#009E73",
-  col.sup_columns = "#F0E442",
-  pch.rows = 16,
-  pch.columns = 17,
-  lty = "solid",
+  col.rows = c("#E69F00", "#009E73"),
+  col.columns = c("#56B4E9", "#F0E442"),
+  pch = 16,
+  cex = 1,
+  lty = 1,
   lwd = 2,
   xlim = NULL,
   ylim = NULL,
   main = NULL,
-  sub = NULL
+  sub = NULL,
+  legend = list(x = "topleft")
 )
 }
 \arguments{
@@ -73,15 +71,11 @@ plotted?}
 "\code{rows}"/"\code{individuals}" and/or "\code{columns}"/"\code{variables}" names must be
 drawn. Any unambiguous substring can be given.}
 
-\item{col.rows, col.columns}{A color specification for the active observations.}
+\item{col.rows}{A length-two \code{vector} of color specification for the active
+and supplementary rows.}
 
-\item{col.sup_rows, col.sup_columns}{A color specification for the
-supplementary observation.}
-
-\item{cex.rows, cex.columns}{A numerical vector giving the amount by which
-plotting characters and symbols should be scaled relative to the default.}
-
-\item{pch.rows, pch.columns}{A symbol specification.}
+\item{col.columns}{A length-two \code{vector} of color specification for the
+active and supplementary columns.}
 
 \item{xlim}{A length-two \code{\link{numeric}} vector giving the x limits of the plot.
 The default value, \code{NULL}, indicates that the range of the
@@ -94,6 +88,16 @@ The default value, \code{NULL}, indicates that the range of the
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
 \item{sub}{A \code{\link{character}} string giving a subtitle for the plot.}
+
+\item{legend}{A \code{\link{list}} of additional arguments to be passed to
+\code{\link[graphics:legend]{graphics::legend()}}; names of the list are used as argument names.
+If \code{NULL}, no legend is displayed.}
+
+\item{pch, pch.rows, pch.columns}{A symbol specification.}
+
+\item{cex, cex.rows, cex.columns}{A \code{\link{numeric}} vector giving the amount by
+which plotting characters and symbols should be scaled relative to the
+default.}
 
 \item{lty, lwd}{A specification for the line type and width.}
 }

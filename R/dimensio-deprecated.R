@@ -433,3 +433,32 @@ plot_points <- function(object, margin, axes, active = TRUE, sup = TRUE,
     ggplot2::scale_y_continuous(name = print_variance(object, axes[[2]])) +
     ggplot2::coord_fixed()
 }
+
+prepare_coord <- function(object, margin, axes = c(1, 2), active = TRUE,
+                          sup = TRUE, principal = TRUE, group = NULL) {
+  ## Prepare data
+  data <- augment(object, margin = margin, axes = axes, principal = principal)
+  data$x <- data[[1]]
+  data$y <- data[[2]]
+
+  k <- get_order(object, margin = margin)
+  if (!is.null(group)) {
+    assert_length(group, nrow(data))
+    group <- group[k]
+  } else if (has_groups(object, margin = margin)) {
+    group <- get_groups(object, margin = margin)
+  } else {
+    group <- rep(NA_character_, length(k))
+  }
+  data$group <- group
+
+  type <- ifelse(margin == 1, "row", "column")
+  data$data <- rep(type, length(k))
+
+  ## Subset
+  if (active & !sup) data <- data[!data$supplementary, ]
+  if (!active & sup) data <- data[data$supplementary, ]
+  data$observation <- ifelse(data$supplementary, "suppl.", "active")
+
+  data
+}

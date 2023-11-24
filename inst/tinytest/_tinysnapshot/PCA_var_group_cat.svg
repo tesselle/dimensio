@@ -69,9 +69,9 @@
 </g>
 <g clip-path='url(#cpODAuNjR8NDUyLjE2fDU5LjA0fDQzMC41Ng==)'>
 <rect x='80.64' y='59.04' width='81.91' height='43.20' style='stroke-width: 0.75; fill: #FFFFFF;' />
-<line x1='91.44' y1='73.44' x2='113.04' y2='73.44' style='stroke-width: 0.75; stroke: #FDE333; stroke-dasharray: 4.00,4.00;' />
-<line x1='91.44' y1='87.84' x2='113.04' y2='87.84' style='stroke-width: 0.75; stroke: #4B0055;' />
-<text x='123.84' y='77.81' style='font-size: 12.00px; font-family: "Arial";' textLength='33.31px' lengthAdjust='spacingAndGlyphs'>Sepal</text>
-<text x='123.84' y='92.21' style='font-size: 12.00px; font-family: "Arial";' textLength='29.60px' lengthAdjust='spacingAndGlyphs'>Petal</text>
+<line x1='91.44' y1='73.44' x2='113.04' y2='73.44' style='stroke-width: 0.75; stroke: #4B0055;' />
+<line x1='91.44' y1='87.84' x2='113.04' y2='87.84' style='stroke-width: 0.75; stroke: #FDE333; stroke-dasharray: 4.00,4.00;' />
+<text x='123.84' y='77.81' style='font-size: 12.00px; font-family: "Arial";' textLength='29.60px' lengthAdjust='spacingAndGlyphs'>Petal</text>
+<text x='123.84' y='92.21' style='font-size: 12.00px; font-family: "Arial";' textLength='33.31px' lengthAdjust='spacingAndGlyphs'>Sepal</text>
 </g>
 </svg>
