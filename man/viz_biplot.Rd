@@ -30,6 +30,8 @@ viz_biplot(
 
 \item{coord_col}{A \code{\link{data.frame}} returned by \code{\link[=prepare]{prepare()}}.}
 
+\item{rows}{A \code{\link{logical}} scalar: should the rows be drawn?}
+
 \item{columns}{A \code{\link{logical}} scalar: should the columns be drawn?}
 
 \item{labels}{A \code{\link{character}} vector specifying whether
@@ -68,8 +70,6 @@ place but before the axes, title and box are added.}
 \item{legend}{A \code{\link{list}} of additional arguments to be passed to
 \code{\link[graphics:legend]{graphics::legend()}}; names of the list are used as argument names.
 If \code{NULL}, no legend is displayed.}
-
-\item{row}{A \code{\link{logical}} scalar: should the rows be drawn?}
 }
 \description{
 Build a Biplot

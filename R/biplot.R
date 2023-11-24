@@ -142,7 +142,7 @@ setMethod(
 #'
 #' @param coord_row A [`data.frame`] returned by [prepare()].
 #' @param coord_col A [`data.frame`] returned by [prepare()].
-#' @param row A [`logical`] scalar: should the rows be drawn?
+#' @param rows A [`logical`] scalar: should the rows be drawn?
 #' @param columns A [`logical`] scalar: should the columns be drawn?
 #' @param labels A [`character`] vector specifying whether
 #'  "`rows`"/"`individuals`" and/or "`columns`"/"`variables`" names must be
