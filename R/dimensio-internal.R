@@ -208,7 +208,7 @@ prepare <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
 prepare_legend <- function(x, args, points = TRUE, lines = TRUE) {
   h <- x$z
 
-  if (!is.null(h) && is.list(args) && length(args) > 0) {
+  if (!is.null(h) && length(unique(h)) > 1 && is.list(args) && length(args) > 0) {
     if (is.double(h)) {
       ## Continuous scale
       im <- grDevices::as.raster(x$col)
