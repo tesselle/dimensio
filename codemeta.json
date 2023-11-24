@@ -2,19 +2,19 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "dimensio",
-  "description": "Simple Principal Components Analysis (PCA) and Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis. It also includes methods for partial bootstrap validation described in Greenacre (1984) <isbn:978-0-12-299050-2> and Lebart et al. (2006) <isbn:978-2-10-049616-7>.",
+  "description": "Simple Principal Components Analysis (PCA) and (Multiple) Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis. It also includes methods for partial bootstrap validation described in Greenacre (1984) <isbn:978-0-12-299050-2> and Lebart et al. (2006) <isbn:978-2-10-049616-7>.",
   "name": "dimensio: Multivariate Data Analysis",
   "relatedLink": ["https://packages.tesselle.org/dimensio/", "https://CRAN.R-project.org/package=dimensio"],
   "codeRepository": "https://github.com/tesselle/dimensio",
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.4.1.9000",
+  "version": "0.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.1 (2023-06-16)",
+  "runtimePlatform": "R version 4.3.2 (2023-10-31)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -44,6 +44,16 @@
       "familyName": "Lebrun",
       "email": "brice.lebrun@u-bordeaux-montaigne.fr",
       "@id": "https://orcid.org/0000-0001-7503-8685"
+    }
+  ],
+  "funder": [
+    {
+      "@type": "Organization",
+      "name": "Université Bordeaux Montaigne"
+    },
+    {
+      "@type": "Organization",
+      "name": "CNRS"
     }
   ],
   "maintainer": [
@@ -162,22 +172,35 @@
     },
     "2": {
       "@type": "SoftwareApplication",
+      "identifier": "arkhe",
+      "name": "arkhe",
+      "version": ">= 1.4.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=arkhe"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
       "identifier": "graphics",
       "name": "graphics"
     },
-    "3": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "grDevices",
       "name": "grDevices"
     },
-    "4": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
     "SystemRequirements": null
   },
-  "fileSize": "1016.963KB",
+  "fileSize": "1083.325KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -192,7 +215,7 @@
       "name": "{dimensio: Multivariate Data Analysis}",
       "identifier": "10.5281/zenodo.4478530",
       "url": "https://packages.tesselle.org/dimensio/",
-      "description": "R package version 0.4.1.9000",
+      "description": "R package version 0.5.0",
       "@id": "https://doi.org/10.5281/zenodo.4478530",
       "sameAs": "https://doi.org/10.5281/zenodo.4478530"
     }
