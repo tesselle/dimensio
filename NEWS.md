@@ -1,3 +1,5 @@
+# dimensio 0.5.0.9000
+
 # dimensio 0.5.0
 ## New classes and methods
 * Add `cdt()` to compute the complete disjunctive table of a factor table.
