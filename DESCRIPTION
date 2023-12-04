@@ -34,7 +34,7 @@ Suggests:
     ggplot2,
     khroma,
     knitr,
-    rmarkdown,
+    markdown,
     rsvg,
     svglite,
     tinysnapshot,

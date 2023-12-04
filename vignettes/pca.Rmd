@@ -1,14 +1,14 @@
 ---
 title: "Principal Components Analysis"
-output: 
-  rmarkdown::html_vignette:
-    number_sections: yes
-    fig_caption: yes
-    toc: true
+output:
+  markdown::html_format:
+    options:
+      toc: true
+      number_sections: true
 bibliography: bibliography.bib
 vignette: >
   %\VignetteIndexEntry{Principal Components Analysis}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
