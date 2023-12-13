@@ -86,7 +86,7 @@ setMethod(
       n_sup <- nrow(res_sup)
       if (n_sup > n_max) {
         res_sup <- res_sup[seq_len(n_max), ]
-        extra_sup <- sprintf("(%s more)", n_sup)
+        extra_sup <- sprintf("(%s more)", n_sup - n_max)
       }
       is_na <- apply(X = res_sup, MARGIN = 2, FUN = anyNA)
       res_sup <- res_sup[, !is_na]
@@ -101,7 +101,7 @@ setMethod(
       n_act <- nrow(res_act)
       if (n_act > n_max) {
         res_act <- res_act[seq_len(n_max), ]
-        extra_act <- sprintf("(%s more)", n_act)
+        extra_act <- sprintf("(%s more)", n_act - n_max)
       }
       sum_act <- c(sprintf("\nActive %s:", mar), utils::capture.output(res_act))
     }

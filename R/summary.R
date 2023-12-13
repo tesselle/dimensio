@@ -11,34 +11,15 @@ setMethod(
   signature = c(object = "CA"),
   definition = function(object, margin = 1, active = TRUE, sup = TRUE,
                         rank = 3) {
-    ## Eigenvalues
-    eig <- get_eigenvalues(object)
-
-    ## Results
-    inert <- get_inertia(object, margin = margin) * 1000
-    coord <- get_coordinates(object, margin = margin)
-    contrib <- get_contributions(object, margin = margin)
-    cos2 <- get_cos2(object, margin = margin)
-
-    values <- build_summary(inertia = inert, coord = coord, contrib = contrib,
-                            cos2 = cos2, rank = rank, prefix = "CA")
-
-    ## Remove data
-    is_sup <- coord$.sup
-    if (!active) {
-      values <- values[is_sup, ]
-      is_sup <- is_sup[is_sup]
-    }
-    if (!sup) {
-      values <- values[!is_sup, ]
-      is_sup <- is_sup[!is_sup]
-    }
+    ## Get data
+    values <- build_summary(object, margin = margin, rank = rank,
+                            active = active, sup = sup)
 
     .SummaryCA(
       data = object@data,
-      eigenvalues = as.matrix(eig),
-      results = as.matrix(values),
-      supplement = is_sup,
+      eigenvalues = as.matrix(values$eigenvalues),
+      results = as.matrix(values$results),
+      supplement = values$supplement,
       margin = as.integer(margin)
     )
   }
@@ -53,41 +34,31 @@ setMethod(
   signature = c(object = "PCA"),
   definition = function(object, margin = 1, active = TRUE, sup = TRUE,
                         rank = 3) {
-    ## Eigenvalues
-    eig <- get_eigenvalues(object)
-
-    ## Results
-    inert <- get_distances(object, margin = margin)
-    coord <- get_coordinates(object, margin = margin)
-    contrib <- get_contributions(object, margin = margin)
-    cos2 <- get_cos2(object, margin = margin)
-
-    values <- build_summary(inertia = inert, coord = coord, contrib = contrib,
-                            cos2 = cos2, rank = rank, prefix = "PC")
-
-    ## Remove data
-    is_sup <- coord$.sup
-    if (!active) {
-      values <- values[is_sup, ]
-      is_sup <- is_sup[is_sup]
-    }
-    if (!sup) {
-      values <- values[!is_sup, ]
-      is_sup <- is_sup[!is_sup]
-    }
+    ## Get data
+    values <- build_summary(object, margin = margin, rank = rank,
+                            active = active, sup = sup)
 
     .SummaryPCA(
       data = object@data,
-      eigenvalues = as.matrix(eig),
-      results = as.matrix(values),
-      supplement = is_sup,
+      eigenvalues = as.matrix(values$eigenvalues),
+      results = as.matrix(values$results),
+      supplement = values$supplement,
       margin = as.integer(margin)
     )
   }
 )
 
-build_summary <- function(inertia, coord, contrib, cos2,
-                          rank = 3, prefix = "PC") {
+build_summary <- function(object, margin, rank = 3, active = TRUE, sup = TRUE,
+                          prefix = "F") {
+  ## Get data
+  eig <- get_eigenvalues(object)
+  inertia <- get_distances(object, margin = margin)
+  coord <- get_coordinates(object, margin = margin)
+  contrib <- get_contributions(object, margin = margin)
+  cos2 <- get_cos2(object, margin = margin)
+
+  if (inherits(object, "CA")) inertia <- inertia * 1000
+
   ## Fix lengths
   n <- nrow(coord)
   m <- nrow(contrib)
@@ -105,8 +76,21 @@ build_summary <- function(inertia, coord, contrib, cos2,
     values[[j]] <- v
   }
   values <- data.frame(inertia = inertia, values)
-  if (prefix == "PC") colnames(values)[1] <- "dist"
+  if (inherits(object, "PCA")) colnames(values)[1] <- "dist"
   rownames(values) <- rownames(coord)
 
-  values
+
+  ## Remove data
+  is_sup <- coord$.sup
+  if (!active && !sup) active <- TRUE
+  if (!active) {
+    values <- values[is_sup, ]
+    is_sup <- is_sup[is_sup]
+  }
+  if (!sup) {
+    values <- values[!is_sup, ]
+    is_sup <- is_sup[!is_sup]
+  }
+
+  list(eigenvalues = eig, results = values, supplement = is_sup)
 }
