@@ -81,6 +81,11 @@ they result in a graphic being displayed. Invisibly return \code{x}.
 \description{
 Plots contributions histogram and \eqn{cos^2}{cos2} scatterplot.
 }
+\details{
+The red dashed line indicates the expected average contribution (variables
+with a contribution larger than this cutoff can be considered as important
+in contributing to the component).
+}
 \examples{
 ## Load data
 data("iris")
@@ -92,7 +97,7 @@ X <- pca(iris, scale = TRUE)
 head(get_contributions(X, margin = 1))
 
 ## Plot contributions
-viz_contributions(X)
+viz_contributions(X, axes = 1)
 
 ## Plot cos2
 viz_cos2(X)

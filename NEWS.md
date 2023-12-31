@@ -1,4 +1,6 @@
 # dimensio 0.5.0.9000
+## Enhancements
+* `viz_controbutions()` displays the expected average contribution.
 
 # dimensio 0.5.0
 ## New classes and methods

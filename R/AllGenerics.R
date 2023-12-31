@@ -657,6 +657,10 @@ NULL
 #' @param col,border A [`character`] string specifying the bars infilling and
 #'  border colors.
 #' @param ... Extra parameters to be passed to [graphics::barplot()].
+#' @details
+#'  The red dashed line indicates the expected average contribution (variables
+#'  with a contribution larger than this cutoff can be considered as important
+#'  in contributing to the component).
 #' @return
 #'  `viz_contributions()` and `viz_cos2()` are called for their side-effects:
 #'  they result in a graphic being displayed. Invisibly return `x`.

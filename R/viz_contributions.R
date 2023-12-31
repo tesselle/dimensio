@@ -15,10 +15,16 @@ setMethod(
     data <- prepare_contrib(x, margin = margin, axes = axes, sort = sort,
                             decreasing = decreasing, limit = limit)
 
-    ylab <- sprintf("Contributions to %s (%%)",
-                    paste0("F", axes, collapse = "-"))
+    ## Expected average contribution
+    theo <- 100 / length(data$y)
+    if (length(axes) > 1) {
+      eig <- get_eigenvalues(x)[axes, 1]
+      theo <- sum(theo * eig) / sum(eig)
+    }
 
     ## Bar plot
+    msg <- "Contributions to %s (%%)"
+    ylab <- sprintf(msg, paste0("F", axes, collapse = "-"))
     mid <- graphics::barplot(
       height = data$y,
       names.arg = data$x,
@@ -30,6 +36,7 @@ setMethod(
       las = 1,
       ...
     )
+    graphics::abline(h = theo, lty = 2, col = "red")
 
     invisible(x)
   }
