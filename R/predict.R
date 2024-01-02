@@ -10,7 +10,7 @@ setMethod(
   f = "predict",
   signature = c(object = "CA"),
   definition = function(object, newdata, margin = 1) {
-    # Coerce to matrix
+    ## Coerce to matrix
     if (missing(newdata)) {
       data <- object@data
       data <- data[!object@rows@supplement, !object@columns@supplement, drop = FALSE]
@@ -18,24 +18,44 @@ setMethod(
       data <- as.matrix(newdata)
     }
 
-    # TODO: keep only matching rows/columns
+    ## TODO: keep only matching rows/columns
 
-    # Get standard coordinates
+    ## Get standard coordinates
     if (margin == 1) {
       data <- data / rowSums(data)
       std <- object@columns@standard
     }
-
     if (margin == 2) {
       data <- t(data) / colSums(data)
       std <- object@rows@standard
     }
 
-    # Compute principal coordinates
+    ## Compute principal coordinates
     coords <- crossprod(t(data), std)
     coords <- as.data.frame(coords)
     colnames(coords) <- paste0("F", seq_along(coords))
     return(coords)
+  }
+)
+
+# MCA ==========================================================================
+#' @export
+#' @rdname predict
+#' @aliases predict,MCA-method
+setMethod(
+  f = "predict",
+  signature = c(object = "MCA"),
+  definition = function(object, newdata, margin = 1) {
+    ## Coerce to matrix
+    if (missing(newdata)) {
+      data <- object@data
+      data <- data[!object@rows@supplement, !object@columns@supplement, drop = FALSE]
+    } else {
+      ## Complete disjunctive table
+      data <- cdt(newdata)
+    }
+
+    methods::callNextMethod(object = object, newdata = data, margin = margin)
   }
 )
 
@@ -47,7 +67,7 @@ setMethod(
   f = "predict",
   signature = c(object = "PCA"),
   definition = function(object, newdata, margin = 1) {
-    # Coerce to matrix
+    ## Coerce to matrix
     if (missing(newdata)) {
       data <- object@data
       data <- data[!object@rows@supplement, !object@columns@supplement]
@@ -55,7 +75,7 @@ setMethod(
       data <- as.matrix(newdata)
     }
 
-    # Get standard coordinates
+    ## Get standard coordinates
     var_mean <- object@center
     var_sd <- object@scale
 
@@ -77,7 +97,7 @@ setMethod(
       newdata <- newdata * w
     }
 
-    # Compute principal coordinates
+    ## Compute principal coordinates
     coords <- crossprod(newdata, std)
     coords <- as.data.frame(coords)
     colnames(coords) <- paste0("F", seq_along(coords))

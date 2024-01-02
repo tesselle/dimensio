@@ -1,4 +1,7 @@
 # dimensio 0.5.0.9000
+## New classes and methods
+* Add `predict()` method for MCA.
+
 ## Enhancements
 * `viz_controbutions()` displays the expected average contribution.
 

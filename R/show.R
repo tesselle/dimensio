@@ -17,7 +17,27 @@ setMethod(
       format_header("Correspondence Analysis (CA)"),
       sprintf("* Row variable: %d categories%s.", sum(!row_sup), row_txt),
       sprintf("* Column variable: %d categories%s.", sum(!col_sup), col_txt),
-      "",
+      sprintf("* %d components.", dim(object)),
+      sep = "\n"
+    )
+    invisible(object)
+  }
+)
+setMethod(
+  f = "show",
+  signature = "MCA",
+  definition = function(object) {
+    row_sup <- object@rows@supplement
+    col_sup <- object@columns@supplement
+
+    sup_txt <- " (+ %d supplementary)"
+    row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
+    col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
+
+    cat(
+      format_header("Multiple Correspondence Analysis (MCA)"),
+      sprintf("* Row variable: %d categories%s.", sum(!row_sup), row_txt),
+      sprintf("* Column variable: %d categories%s.", sum(!col_sup), col_txt),
       sprintf("* %d components.", dim(object)),
       sep = "\n"
     )
@@ -43,7 +63,6 @@ setMethod(
       format_header("Principal Components Analysis (PCA)"),
       sprintf("* %d individuals%s.", sum(!row_sup), row_txt),
       sprintf("* %d variables%s.", sum(!col_sup), col_txt),
-      "",
       sprintf("* %d components.", dim(object)),
       var_center,
       var_scale,

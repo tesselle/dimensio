@@ -4,10 +4,13 @@
 \name{predict}
 \alias{predict}
 \alias{predict,CA-method}
+\alias{predict,MCA-method}
 \alias{predict,PCA-method}
 \title{Predict New Coordinates}
 \usage{
 \S4method{predict}{CA}(object, newdata, margin = 1)
+
+\S4method{predict}{MCA}(object, newdata, margin = 1)
 
 \S4method{predict}{PCA}(object, newdata, margin = 1)
 }
