@@ -694,7 +694,7 @@ setGeneric(
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
 #' @param axes A length-two [`numeric`] vector giving the dimensions
-#'  to be for which to compute results.
+#'  for which to compute results.
 #' @param group A vector specifying the group an observation belongs to.
 #' @param level A [`numeric`] vector specifying the confidence/tolerance level.
 #' @param ... Currently not used.
@@ -740,7 +740,7 @@ setGeneric(
 #'  data will be returned: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
 #' @param axes A length-two [`numeric`] vector giving the dimensions
-#'  to be for which to compute results.
+#'  for which to compute results.
 #' @param group A vector specifying the group an observation belongs to.
 #' @param level A [`numeric`] vector specifying the confidence/tolerance level.
 #' @param ... Further [graphical parameters][graphics::par] to be passed to
@@ -806,7 +806,7 @@ NULL
 #'  which the data will be returned: `1` indicates individuals/rows (the
 #'  default), `2` indicates variables/columns.
 #' @param axes A length-two [`numeric`] vector giving the dimensions
-#'  to be for which to compute results.
+#'  for which to compute results.
 #' @param principal A [`logical`] scalar: should principal coordinates be
 #'  returned? If `FALSE`, standard coordinates are returned.
 #' @param ... Currently not used.

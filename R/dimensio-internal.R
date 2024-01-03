@@ -252,13 +252,13 @@ prepare_legend <- function(x, args, points = TRUE, lines = TRUE) {
 
 scale_color <- function(x, col = NULL, alpha = FALSE) {
   if (is.null(x)) {
-    if (is.null(col)) col <- graphics::par("col")
+    col <- col %||% graphics::par("col")
     return(col)
   }
 
   if (is.double(x)) {
     ## Continuous scale
-    if (is.null(col)) col <- grDevices::hcl.colors(12, "YlOrRd", rev = TRUE)
+    col <- col %||% grDevices::hcl.colors(12, "YlOrRd", rev = TRUE)
     x <- arkhe::scale_range(x) # Rescale to [0,1]
     col <- grDevices::colorRamp(col)(x)
     col <- grDevices::rgb(col, maxColorValue = 255)
@@ -267,7 +267,7 @@ scale_color <- function(x, col = NULL, alpha = FALSE) {
   } else {
     ## Discrete scale
     n_col <- length(unique(x))
-    if (is.null(col)) col <- grDevices::hcl.colors(n_col, "viridis")
+    col <- col %||% grDevices::hcl.colors(n_col, "viridis")
     col <- recycle(col, n_col)
     col <- col[as.factor(x)]
   }

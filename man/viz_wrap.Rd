@@ -47,7 +47,7 @@ data will be returned: \code{1} indicates individuals/rows (the default), \code{
 indicates variables/columns.}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
-to be for which to compute results.}
+for which to compute results.}
 
 \item{group}{A vector specifying the group an observation belongs to.}
 
