@@ -31,8 +31,10 @@ setMethod(
   definition = function(object, center = TRUE, scale = TRUE, rank = NULL,
                         sup_row = NULL, sup_col = NULL,
                         weight_row = NULL, weight_col = NULL) {
-    # Check missing values
+    ## Check missing values
     if (anyNA(object)) stop("Missing values detected.", call. = FALSE)
+    ## Check dimensions
+    if (any(dim(object) == 0)) stop("Empty matrix.", call. = FALSE)
 
     # Fix dimension names
     names_row <- rownames(object)
