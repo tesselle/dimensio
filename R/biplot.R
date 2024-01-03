@@ -214,11 +214,11 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {
       viz_labels(x = coord_row$x, y = coord_row$y, labels = coord_row$label,
-                 col = coord_row$col, cex = coord_row$cex)
+                 top = NULL, col = coord_row$col, cex = coord_row$cex)
     }
     if (any(labels == "columns") | any(labels == "variables")) {
       viz_labels(x = coord_col$x, y = coord_col$y, labels = coord_col$label,
-                 col = coord_col$col, cex = coord_col$cex)
+                 top = NULL, col = coord_col$col, cex = coord_col$cex)
     }
   }
 
@@ -245,5 +245,5 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   coord_row$z <- paste(coord_row$z, "ind.", sep = " ")
   coord_col$z <- paste(coord_col$z, "var.", sep = " ")
   coord <- rbind(coord_row, coord_col)
-  prepare_legend(coord, legend, points = TRUE, lines = T)
+  prepare_legend(coord, legend, points = TRUE, lines = TRUE)
 }

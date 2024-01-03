@@ -101,7 +101,7 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = TRUE, highlight = NULL,
+                        labels = TRUE, top = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
@@ -148,8 +148,8 @@ setMethod(
 
     ## Labels
     if (labels && nrow(coord) > 1) {
-      viz_labels(x = coord$x, y = coord$y, labels = coord$label,
-                 col = coord$col, cex = coord$cex)
+      viz_labels(x = x, labels = coord$label, margin = 2, axes = axes,
+                 top = top, col = coord$col, cex = coord$cex)
     }
 
     ## Evaluate post-plot and pre-axis expressions
@@ -220,6 +220,10 @@ setMethod(
 #'
 #' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
 #' @param labels A [`logical`] scalar: should labels be drawn?
+#' @param top An [`integer`] specifying the number of labels to draw.
+#'  Only the labels of the `top` \eqn{n} observations contributing the most to
+#'  the factorial map will be drawn. If `NULL`, all labels are drawn.
+#'  Only used if `labels` is `TRUE`.
 #' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
 #'  The default value, `NULL`, indicates that the range of the
 #'  [finite][is.finite()] values to be plotted should be used.
@@ -246,7 +250,7 @@ setMethod(
 #' @author N. Frerebeau
 #' @keywords internal
 viz_points <- function(x, margin, axes, ...,
-                       active = TRUE, sup = TRUE, labels = FALSE,
+                       active = TRUE, sup = TRUE, labels = FALSE, top = 10,
                        highlight = NULL, xlim = NULL, ylim = NULL,
                        main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
                        ann = graphics::par("ann"), frame.plot = TRUE,
@@ -287,9 +291,9 @@ viz_points <- function(x, margin, axes, ...,
   )
 
   ## Labels
-  if (labels) {
-    viz_labels(x = coord$x, y = coord$y, labels = coord$label,
-               col = coord$col, cex = coord$cex)
+  if (!isFALSE(labels)) {
+    viz_labels(x = x, labels = coord$label, margin = margin, axes = axes,
+               top = top, col = coord$col, cex = coord$cex)
   }
 
   ## Evaluate post-plot and pre-axis expressions

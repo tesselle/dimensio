@@ -156,8 +156,6 @@ viz_individuals(X, highlight = iris$Species, pch = 21:23,
 viz_variables(X, highlight = c("Petal", "Petal", "Sepal", "Sepal"),
               col = c("#EE7733", "#0077BB"),
               lty = c(1, 3))
-
-
 }
 \seealso{
 Other plot methods: 

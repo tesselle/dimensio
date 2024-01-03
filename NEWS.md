@@ -2,8 +2,11 @@
 ## New classes and methods
 * Add `predict()` method for MCA.
 
+## Bugfixes & changes
+* By default, `viz_individuals()`, `viz_row()`, `viz_variables()` and `viz_columns()` only display labels of the 10 observations contributing the most to the factorial map.
+
 ## Enhancements
-* `viz_controbutions()` displays the expected average contribution.
+* `viz_contributions()` displays the expected average contribution.
 
 # dimensio 0.5.0
 ## New classes and methods

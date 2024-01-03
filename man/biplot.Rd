@@ -168,7 +168,7 @@ Y <- pca(countries, scale = FALSE, weight_row = row_w, weight_col = col_w)
 biplot(Y, type = "form")
 
 ## Column-metric-preserving biplot (covariance biplot)
-biplot(Y, type = "covariance")
+biplot(Y, type = "covariance", legend = list(x = "bottomright"))
 
 ## Replicate examples from Greenacre 2007, p. 79-88
 data("benthos")
@@ -177,16 +177,16 @@ data("benthos")
 X <- ca(benthos)
 
 ## Symetric CA biplot
-biplot(X, labels = "columns")
+biplot(X, labels = "columns", legend = list(x = "bottomright"))
 
 ## Row principal CA biplot
-biplot(X, type = "row", labels = "columns")
+biplot(X, type = "row", labels = "columns", legend = list(x = "bottomright"))
 
 ## Column principal CA biplot
-biplot(X, type = "column", labels = "columns")
+biplot(X, type = "column", labels = "columns", legend = list(x = "bottomright"))
 
 ## Contribution CA biplot
-biplot(X, type = "contrib", labels = NULL)
+biplot(X, type = "contrib", labels = NULL, legend = list(x = "bottomright"))
 }
 \references{
 Aitchison, J. and Greenacre, M. J. (2002). Biplots of Compositional Data.
