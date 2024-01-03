@@ -4,138 +4,138 @@ NULL
 
 # CA ===========================================================================
 #' @export
+#' @method biplot CA
+biplot.CA <- function(x, ..., axes = c(1, 2),
+                      type = c("symetric", "rows", "columns", "contributions"),
+                      active = TRUE, sup = TRUE, labels = NULL,
+                      col.rows = c("#E69F00", "#009E73"),
+                      col.columns = c("#56B4E9", "#F0E442"),
+                      cex.rows = graphics::par("cex"),
+                      cex.columns = graphics::par("cex"),
+                      pch.rows = 16, pch.columns = 17,
+                      xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
+                      legend = list(x = "topleft")) {
+  ## Validation
+  type <- match.arg(type, several.ok = FALSE)
+
+  ## Type of biplot
+  if (type == "symetric") {
+    princ_row <- TRUE
+    princ_col <- TRUE
+  }
+  if (type == "rows") {
+    princ_row <- TRUE
+    princ_col <- FALSE
+  }
+  if (type == "columns") {
+    princ_row <- FALSE
+    princ_col <- TRUE
+  }
+  if (type == "contributions") {
+    princ_row <- FALSE
+    princ_col <- TRUE
+  }
+
+  ## Get data
+  coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
+                        principal = princ_row, highlight = "observation",
+                        col = col.rows, pch = pch.rows,
+                        cex = cex.rows, lty = 0)
+  coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
+                        principal = princ_col, highlight = "observation",
+                        col = col.columns, pch = pch.columns,
+                        cex = cex.columns, lty = 0)
+
+  ## Graphical parameters
+  if (type == "contributions") {
+    mass_row <- get_masses(x, margin = 1)
+    mass_col <- get_masses(x, margin = 2)
+
+    coord_row$x <- coord_row$x * sqrt(mass_row)
+    coord_row$y <- coord_row$y * sqrt(mass_row)
+
+    coord_row$cex <- cex.rows + (mass_row / max(mass_row))
+    coord_col$cex <- cex.columns + (mass_col / max(mass_col))
+  }
+
+  viz_biplot(
+    coord_row, coord_col,
+    rows = TRUE, columns = TRUE, labels = labels,
+    xlim = xlim, ylim = ylim,
+    main = main, sub = sub,
+    xlab = print_variance(x, axes[[1]]),
+    ylab = print_variance(x, axes[[2]]),
+    legend = legend,
+    ...
+  )
+
+  invisible(x)
+}
+
+#' @export
 #' @rdname biplot
 #' @aliases biplot,CA-method
-setMethod(
-  f = "biplot",
-  signature = c(x = "CA"),
-  definition = function(x, ..., axes = c(1, 2),
-                        type = c("symetric", "rows", "columns", "contributions"),
-                        active = TRUE, sup = TRUE, labels = NULL,
-                        col.rows = c("#E69F00", "#009E73"),
-                        col.columns = c("#56B4E9", "#F0E442"),
-                        cex.rows = graphics::par("cex"),
-                        cex.columns = graphics::par("cex"),
-                        pch.rows = 16, pch.columns = 17,
-                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
-                        legend = list(x = "topleft")) {
-    ## Validation
-    type <- match.arg(type, several.ok = FALSE)
-
-    ## Type of biplot
-    if (type == "symetric") {
-      princ_row <- TRUE
-      princ_col <- TRUE
-    }
-    if (type == "rows") {
-      princ_row <- TRUE
-      princ_col <- FALSE
-    }
-    if (type == "columns") {
-      princ_row <- FALSE
-      princ_col <- TRUE
-    }
-    if (type == "contributions") {
-      princ_row <- FALSE
-      princ_col <- TRUE
-    }
-
-    ## Get data
-    coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
-                          principal = princ_row, highlight = "observation",
-                          col = col.rows, pch = pch.rows,
-                          cex = cex.rows, lty = 0)
-    coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
-                          principal = princ_col, highlight = "observation",
-                          col = col.columns, pch = pch.columns,
-                          cex = cex.columns, lty = 0)
-
-    ## Graphical parameters
-    if (type == "contributions") {
-      mass_row <- get_masses(x, margin = 1)
-      mass_col <- get_masses(x, margin = 2)
-
-      coord_row$x <- coord_row$x * sqrt(mass_row)
-      coord_row$y <- coord_row$y * sqrt(mass_row)
-
-      coord_row$cex <- cex.rows + (mass_row / max(mass_row))
-      coord_col$cex <- cex.columns + (mass_col / max(mass_col))
-    }
-
-    viz_biplot(
-      coord_row, coord_col,
-      rows = TRUE, columns = TRUE, labels = labels,
-      xlim = xlim, ylim = ylim,
-      main = main, sub = sub,
-      xlab = print_variance(x, axes[[1]]),
-      ylab = print_variance(x, axes[[2]]),
-      legend = legend,
-      ...
-    )
-
-    invisible(x)
-  }
-)
+setMethod("biplot", c(x = "CA"), biplot.CA)
 
 # PCA ==========================================================================
 #' @export
+#' @method biplot PCA
+biplot.PCA <- function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
+                       active = TRUE, sup = TRUE, labels = "variables",
+                       col.rows = c("#E69F00", "#009E73"),
+                       col.columns = c("#56B4E9", "#F0E442"),
+                       pch = 16, cex = 1, lty = 1, lwd = 2,
+                       xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
+                       legend = list(x = "topleft")) {
+  ## Validation
+  type <- match.arg(type, several.ok = FALSE)
+
+  ## Type of biplot
+  if (type == "form") {
+    princ_row <- TRUE
+    princ_col <- FALSE
+  }
+  if (type == "covariance") {
+    princ_row <- FALSE
+    princ_col <- TRUE
+  }
+
+  ## Get data
+  coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
+                        principal = princ_row, highlight = "observation",
+                        col = col.rows, pch = pch, cex = cex, lty = 0)
+  coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
+                        principal = princ_col, highlight = "observation",
+                        col = col.columns, lty = lty, lwd = lwd, pch = NA)
+
+  arrows_col <- function() {
+    graphics::arrows(
+      x0 = 0, y0 = 0,
+      x1 = coord_col$x, y1 = coord_col$y,
+      length = 0.10, angle = 30,
+      col = coord_col$col, lty = coord_col$lty, lwd = coord_col$lwd
+    )
+  }
+
+  viz_biplot(
+    coord_row, coord_col,
+    rows = TRUE, columns = FALSE, labels = labels,
+    xlim = xlim, ylim = ylim,
+    main = main, sub = sub,
+    xlab = print_variance(x, axes[[1]]),
+    ylab = print_variance(x, axes[[2]]),
+    panel.first = arrows_col(),
+    legend = legend,
+    ...
+  )
+
+  invisible(x)
+}
+
+#' @export
 #' @rdname biplot
 #' @aliases biplot,PCA-method
-setMethod(
-  f = "biplot",
-  signature = c(x = "PCA"),
-  definition = function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
-                        active = TRUE, sup = TRUE, labels = "variables",
-                        col.rows = c("#E69F00", "#009E73"),
-                        col.columns = c("#56B4E9", "#F0E442"),
-                        pch = 16, cex = 1, lty = 1, lwd = 2,
-                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
-                        legend = list(x = "topleft")) {
-    ## Validation
-    type <- match.arg(type, several.ok = FALSE)
-
-    ## Type of biplot
-    if (type == "form") {
-      princ_row <- TRUE
-      princ_col <- FALSE
-    }
-    if (type == "covariance") {
-      princ_row <- FALSE
-      princ_col <- TRUE
-    }
-
-    ## Get data
-    coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
-                          principal = princ_row, highlight = "observation",
-                          col = col.rows, pch = pch, cex = cex, lty = 0)
-    coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
-                          principal = princ_col, highlight = "observation",
-                          col = col.columns, lty = lty, lwd = lwd, pch = NA)
-
-    arrows_col <- function() {
-      graphics::arrows(
-        x0 = 0, y0 = 0,
-        x1 = coord_col$x, y1 = coord_col$y,
-        length = 0.10, angle = 30,
-        col = coord_col$col, lty = coord_col$lty, lwd = coord_col$lwd
-      )
-    }
-
-    viz_biplot(
-      coord_row, coord_col,
-      rows = TRUE, columns = FALSE, labels = labels,
-      xlim = xlim, ylim = ylim,
-      main = main, sub = sub,
-      xlab = print_variance(x, axes[[1]]),
-      ylab = print_variance(x, axes[[2]]),
-      panel.first = arrows_col(),
-      legend = legend,
-      ...
-    )
-
-    invisible(x)
-  }
-)
+setMethod("biplot", c(x = "PCA"), biplot.PCA)
 
 # Helpers ======================================================================
 #' Build a Biplot

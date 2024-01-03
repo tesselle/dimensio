@@ -7,12 +7,14 @@
 \alias{summary,PCA-method}
 \title{Object Summaries}
 \usage{
-\S4method{summary}{CA}(object, margin = 1, active = TRUE, sup = TRUE, rank = 3)
+\S4method{summary}{CA}(object, ..., margin = 1, active = TRUE, sup = TRUE, rank = 3)
 
-\S4method{summary}{PCA}(object, margin = 1, active = TRUE, sup = TRUE, rank = 3)
+\S4method{summary}{PCA}(object, ..., margin = 1, active = TRUE, sup = TRUE, rank = 3)
 }
 \arguments{
 \item{object}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
+
+\item{...}{Currently not used.}
 
 \item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
 data will be summarized: \code{1} indicates individuals/rows (the default), \code{2}

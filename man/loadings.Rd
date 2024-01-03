@@ -6,10 +6,12 @@
 \alias{loadings,PCA-method}
 \title{Extract Loadings}
 \usage{
-\S4method{loadings}{PCA}(x)
+\S4method{loadings}{PCA}(x, ...)
 }
 \arguments{
 \item{x}{A \code{\linkS4class{PCA}} object.}
+
+\item{...}{Currently not used.}
 }
 \value{
 Returns variable loadings (i.e. the coefficients of the linear combination
@@ -19,8 +21,7 @@ of the original variables).
 Extract loadingsin principal components analysis.
 }
 \note{
-\code{loadings()} is only implemented for consistency with
-\pkg{[stats][stats::loadings]}.
+\code{loadings()} is only implemented for consistency with \code{\link[stats:loadings]{stats::loadings()}}.
 }
 \seealso{
 Other mutators: 

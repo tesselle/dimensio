@@ -17,12 +17,12 @@ setGeneric("bootstrap", package = "arkhe")
 #'
 #' Extract loadingsin principal components analysis.
 #' @param x A [`PCA-class`] object.
+#' @param ... Currently not used.
 #' @return
 #'  Returns variable loadings (i.e. the coefficients of the linear combination
 #'  of the original variables).
 #' @note
-#'  `loadings()` is only implemented for consistency with
-#'  \pkg{[stats][stats::loadings]}.
+#'  `loadings()` is only implemented for consistency with [stats::loadings()].
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
@@ -791,6 +791,7 @@ setGeneric(
 #'  summarized?
 #' @param sup A [`logical`] scalar: should the supplementary observations be
 #'  summarized?
+#' @param ... Currently not used.
 #' @example inst/examples/ex-summary.R
 #' @author N. Frerebeau
 #' @docType methods

@@ -4,51 +4,52 @@ NULL
 
 # CA ===========================================================================
 #' @export
+#' @method summary CA
+summary.CA <- function(object, ..., margin = 1, active = TRUE, sup = TRUE,
+                       rank = 3) {
+  ## Get data
+  values <- build_summary(object, margin = margin, rank = rank,
+                          active = active, sup = sup)
+
+  .SummaryCA(
+    data = object@data,
+    eigenvalues = as.matrix(values$eigenvalues),
+    results = as.matrix(values$results),
+    supplement = values$supplement,
+    margin = as.integer(margin)
+  )
+}
+
+#' @export
 #' @rdname summary
 #' @aliases summary,CA-method
-setMethod(
-  f = "summary",
-  signature = c(object = "CA"),
-  definition = function(object, margin = 1, active = TRUE, sup = TRUE,
-                        rank = 3) {
-    ## Get data
-    values <- build_summary(object, margin = margin, rank = rank,
-                            active = active, sup = sup)
-
-    .SummaryCA(
-      data = object@data,
-      eigenvalues = as.matrix(values$eigenvalues),
-      results = as.matrix(values$results),
-      supplement = values$supplement,
-      margin = as.integer(margin)
-    )
-  }
-)
+setMethod("summary", c(object = "CA"), summary.CA)
 
 # PCA ==========================================================================
 #' @export
+#' @method summary PCA
+summary.PCA <- function(object, ..., margin = 1, active = TRUE, sup = TRUE,
+                        rank = 3) {
+  ## Get data
+  values <- build_summary(object, margin = margin, rank = rank,
+                          active = active, sup = sup)
+
+  .SummaryPCA(
+    data = object@data,
+    eigenvalues = as.matrix(values$eigenvalues),
+    results = as.matrix(values$results),
+    supplement = values$supplement,
+    margin = as.integer(margin)
+  )
+}
+
+#' @export
 #' @rdname summary
 #' @aliases summary,PCA-method
-setMethod(
-  f = "summary",
-  signature = c(object = "PCA"),
-  definition = function(object, margin = 1, active = TRUE, sup = TRUE,
-                        rank = 3) {
-    ## Get data
-    values <- build_summary(object, margin = margin, rank = rank,
-                            active = active, sup = sup)
+setMethod("summary", c(object = "PCA"), summary.PCA)
 
-    .SummaryPCA(
-      data = object@data,
-      eigenvalues = as.matrix(values$eigenvalues),
-      results = as.matrix(values$results),
-      supplement = values$supplement,
-      margin = as.integer(margin)
-    )
-  }
-)
-
-build_summary <- function(object, margin, rank = 3, active = TRUE, sup = TRUE,
+build_summary <- function(object, margin, rank = 3,
+                          active = TRUE, sup = TRUE,
                           prefix = "F") {
   ## Get data
   eig <- get_eigenvalues(object)
@@ -68,6 +69,7 @@ build_summary <- function(object, margin, rank = 3, active = TRUE, sup = TRUE,
   }
 
   ## Bind columns
+  rank <- min(rank, dim(object))
   dim_keep <- seq_len(rank)
   values <- vector(mode = "list", length = rank)
   for (j in dim_keep) {
@@ -78,7 +80,6 @@ build_summary <- function(object, margin, rank = 3, active = TRUE, sup = TRUE,
   values <- data.frame(inertia = inertia, values)
   if (inherits(object, "PCA")) colnames(values)[1] <- "dist"
   rownames(values) <- rownames(coord)
-
 
   ## Remove data
   is_sup <- coord$.sup
