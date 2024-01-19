@@ -172,14 +172,25 @@ prepare <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
   ## Colors
   col <- scale_color(x = highlight, col = col, alpha = alpha)
   bg <- scale_color(x = highlight, col = bg, alpha = alpha)
-  ## Symbol
-  pch <- scale_symbole(x = highlight, symb = pch)
-  ## Size
-  cex <- scale_size(x = highlight, size = cex)
-  ## Line type
-  lty <- scale_symbole(x = highlight, symb = lty)
-  ## Line width
-  lwd <- scale_size(x = highlight, size = lwd)
+  if (!is.double(highlight)) { # Discrete scales
+    ## Symbol
+    pch <- scale_symbol(x = highlight, symb = pch, what = "pch")
+    ## Size
+    cex <- cex %||% graphics::par("cex")
+    ## Line type
+    lty <- scale_symbol(x = highlight, symb = lty, what = "lty")
+    ## Line width
+    lwd <- lwd %||% graphics::par("lwd")
+  } else { # Continuous scales
+    ## Symbol
+    pch <- pch %||% graphics::par("pch")
+    ## Size
+    cex <- scale_size(x = highlight, size = cex, what = "cex")
+    ## Line type
+    lty <- lty %||% graphics::par("lty")
+    ## Line width
+    lwd <- scale_size(x = highlight, size = lwd, what = "lwd")
+  }
 
   data.frame(
     x = data[[1]],
@@ -258,56 +269,29 @@ scale_color <- function(x, col = NULL, alpha = FALSE) {
 
   if (is.double(x)) {
     ## Continuous scale
-    col <- col %||% grDevices::hcl.colors(12, "YlOrRd", rev = TRUE)
-    x <- arkhe::scale_range(x) # Rescale to [0,1]
-    col <- grDevices::colorRamp(col)(x)
-    col <- grDevices::rgb(col, maxColorValue = 255)
-    ## Alpha transparency
+    col <- arkhe::palette_color_continuous(x, palette = col)
     if (alpha) col <- grDevices::adjustcolor(col, alpha.f = alpha)
   } else {
     ## Discrete scale
-    n_col <- length(unique(x))
-    col <- col %||% grDevices::hcl.colors(n_col, "viridis")
-    col <- recycle(col, n_col)
-    col <- col[as.factor(x)]
+    col <- arkhe::palette_color_discrete(x, palette = col)
   }
 
   col
 }
-
-scale_symbole <- function(x, symb = NULL, what = "pch") {
-  if (is.double(x) && length(symb) > 1) {
-    warning("Continuous value supplied to discrete scale.", call. = FALSE)
+scale_symbol <- function(x, symb = NULL, what = "pch") {
+  if (is.null(x)) {
+    symb <- symb %||% graphics::par(what)
+    return(symb)
   }
 
-  if (is.null(symb)) symb <- graphics::par(what)
-  if (is.null(x)) return(symb)
-
-  n_symb <- length(unique(x))
-  symb <- recycle(symb, n_symb)
-  symb <- symb[as.factor(x)]
-  symb
+  arkhe::palette_shape(x = x, palette = symb)
 }
-
 scale_size <- function(x, size = NULL, what = "cex") {
-  if (is.null(size)) size <- graphics::par(what)
-  if (!is.double(x)) {
-    if (length(size) > 1)
-      warning("Discrete value supplied to continuous scale.", call. = FALSE)
+  if (is.null(x)) {
+    size <- size %||% graphics::par(what)
     return(size)
   }
 
-  arkhe::scale_range(x, to = range(size))
+  arkhe::palette_size(x = x, palette = size)
 }
 
-recycle <- function(x, n, verbose = getOption("dimensio.verbose")) {
-  if (length(x) >= n) return(x[seq_len(n)])
-
-  if (verbose && length(x) > 1) {
-    arg <- deparse(substitute(x))
-    msg <- sprintf("Note that %s was recycled to length %d.", sQuote(arg), n)
-    message(msg)
-  }
-  x <- rep_len(x, length.out = n)
-  x
-}

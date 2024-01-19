@@ -31,8 +31,9 @@ setMethod(
   signature = c(x = "BootstrapCA"),
   definition = function(x, ..., axes = c(1, 2)) {
     group <- get_groups(x, margin = 1)
-    viz_points(x, margin = 1, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, highlight = group, ...)
+    pch <- rep(16, length(group))
+    viz_points(x, ..., margin = 1, axes = axes, active = TRUE, sup = TRUE,
+               labels = FALSE, highlight = group, pch = pch)
     invisible(x)
   }
 )
@@ -81,14 +82,15 @@ setMethod(
 
 #' @export
 #' @rdname viz_variables
-#' @aliases viz_columns,BootstrapCA-method
+#' @aliases viz_columns,MultivariateBootstrap-method
 setMethod(
   f = "viz_columns",
-  signature = c(x = "BootstrapCA"),
-  definition = function(x, ..., axes = c(1, 2)) {
+  signature = c(x = "MultivariateBootstrap"),
+  definition = function(x, ..., axes = c(1, 2), pch = 16) {
     group <- get_groups(x, margin = 2)
-    viz_points(x, margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, highlight = group, ...)
+    pch <- rep(16, length(group))
+    viz_points(x, ..., margin = 2, axes = axes, active = TRUE, sup = TRUE,
+               labels = FALSE, highlight = group, pch = pch)
     invisible(x)
   }
 )
@@ -209,8 +211,9 @@ setMethod(
   signature = c(x = "BootstrapPCA"),
   definition = function(x, ..., axes = c(1, 2)) {
     group <- get_groups(x, margin = 2)
+    pch <- rep(16, length(group))
     viz_points(x, ..., margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, highlight = group)
+               labels = FALSE, highlight = group, pch = pch)
     invisible(x)
   }
 )

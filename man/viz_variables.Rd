@@ -7,7 +7,7 @@
 \alias{viz_columns}
 \alias{viz_columns-method}
 \alias{viz_columns,MultivariateAnalysis-method}
-\alias{viz_columns,BootstrapCA-method}
+\alias{viz_columns,MultivariateBootstrap-method}
 \alias{viz_variables,PCA-method}
 \alias{viz_variables,CA-method}
 \alias{viz_variables,BootstrapPCA-method}
@@ -34,7 +34,7 @@ viz_columns(x, ...)
   legend = list(x = "topleft")
 )
 
-\S4method{viz_columns}{BootstrapCA}(x, ..., axes = c(1, 2))
+\S4method{viz_columns}{MultivariateBootstrap}(x, ..., axes = c(1, 2), pch = 16)
 
 \S4method{viz_variables}{PCA}(
   x,

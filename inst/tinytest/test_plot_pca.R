@@ -49,7 +49,8 @@ if (at_home()) {
   # Variables
   group_num <- c(1, 2, 3, 4)
   plot_var_group_num <- function() viz_variables(res, labels = FALSE,
-                                                 highlight = group_num)
+                                                 highlight = group_num,
+                                                 lwd = 1)
   expect_snapshot_plot(plot_var_group_num, "PCA_var_group_num")
 
   group_cat <- c("Sepal", "Sepal", "Petal", "Petal")

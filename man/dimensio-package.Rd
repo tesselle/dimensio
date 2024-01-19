@@ -3,7 +3,6 @@
 \docType{package}
 \name{dimensio-package}
 \alias{dimensio-package}
-\alias{_PACKAGE}
 \alias{dimensio}
 \title{dimensio: Multivariate Data Analysis}
 \description{
