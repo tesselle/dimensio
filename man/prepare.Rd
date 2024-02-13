@@ -15,7 +15,7 @@ prepare(
   highlight = NULL,
   col = NULL,
   bg = NULL,
-  pch = NULL,
+  pch = 16,
   cex = NULL,
   lty = NULL,
   lwd = NULL,

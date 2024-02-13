@@ -34,7 +34,7 @@ viz_columns(x, ...)
   legend = list(x = "topleft")
 )
 
-\S4method{viz_columns}{MultivariateBootstrap}(x, ..., axes = c(1, 2), pch = 16)
+\S4method{viz_columns}{MultivariateBootstrap}(x, ..., axes = c(1, 2))
 
 \S4method{viz_variables}{PCA}(
   x,

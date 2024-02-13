@@ -148,7 +148,7 @@ drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
 #' @keywords internal
 prepare <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
                     sup = TRUE, principal = TRUE, highlight = NULL,
-                    col = NULL, bg = NULL, pch = NULL, cex = NULL,
+                    col = NULL, bg = NULL, pch = 16, cex = NULL,
                     lty = NULL, lwd = NULL, alpha = FALSE) {
   ## Prepare data
   data <- augment(x, margin = margin, axes = axes, principal = principal)
@@ -174,6 +174,7 @@ prepare <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
   bg <- scale_color(x = highlight, col = bg, alpha = alpha)
   if (!is.double(highlight)) { # Discrete scales
     ## Symbol
+    if (length(pch) == 1) pch <- rep(pch, length.out = n)
     pch <- scale_symbol(x = highlight, symb = pch, what = "pch")
     ## Size
     cex <- cex %||% graphics::par("cex")
