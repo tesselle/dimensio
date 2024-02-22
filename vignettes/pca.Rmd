@@ -71,9 +71,9 @@ viz_contributions(X, margin = 2, axes = c(1, 2))
 
 # PCA biplot
 
-A biplot is the simultaneous representation of rows and columns of a rectangular dataset. It is the generalization of a scatterplot to the case of mutlivariate data: it allows to visualize as much information as possible in a single graph [@greenacre2010].
+A biplot is the simultaneous representation of rows and columns of a rectangular dataset. It is the generalization of a scatterplot to the case of mutlivariate data: it allows to visualize as much information as possible in a single graph (Greenacre, 2010).
 
-**dimensio** allows to display two types of biplots: a *form biplot* (*row-metric-preserving* biplot) or a *covariance biplot* (*column-metric-preserving* biplot). See @greenacre2010 for more details about biplots.
+**dimensio** allows to display two types of biplots: a *form biplot* (*row-metric-preserving* biplot) or a *covariance biplot* (*column-metric-preserving* biplot). See Greenacre (2010) for more details about biplots.
 
 The form biplot favors the representation of the individuals: the distance between the individuals approximates the Euclidean distance between rows. In the form biplot the length of a vector approximates the quality of the representation of the variable.
 
@@ -81,7 +81,7 @@ The form biplot favors the representation of the individuals: the distance betwe
 biplot(X, type = "form", label = "variables")
 ```
 
-The covariance biplot favors the representation of the variables: the length of a vector approximates the standard deviation of the variable and the cosine of the angle formed by two vectors approximates the correlation between the two variables [@greenacre2010]. In the covariance biplot the distance between the individuals approximates the Mahalanobis distance between rows.
+The covariance biplot favors the representation of the variables: the length of a vector approximates the standard deviation of the variable and the cosine of the angle formed by two vectors approximates the correlation between the two variables (Greenacre, 2010). In the covariance biplot the distance between the individuals approximates the Mahalanobis distance between rows.
 
 ```{r biplot-columns}
 biplot(X, type = "covariance", label = "variables")
@@ -186,3 +186,5 @@ ggplot2::ggplot(data = iris_augment) +
 ```
 
 # References
+
+Greenacre, M. J. (2010). *Biplots in Practice*. Bilbao: Fundación BBVA.
