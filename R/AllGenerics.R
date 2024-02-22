@@ -9,7 +9,9 @@ setGeneric("dimnames")
 setGeneric("loadings")
 setGeneric("biplot")
 
-setGeneric("bootstrap", package = "arkhe")
+# Import S4 generics ===========================================================
+#' @importMethodsFrom arkhe bootstrap
+NULL
 
 # Extract ======================================================================
 ## Get -------------------------------------------------------------------------
