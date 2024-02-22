@@ -1,17 +1,12 @@
 # Test against FactoMineR
 if (at_home() && requireNamespace("FactoMineR", quietly = TRUE)) {
-  library("FactoMineR")
+  data(decathlon, package = "FactoMineR")
 
-  mtx <- matrix(data = sample(1:100, 1000, TRUE), ncol = 10)
-  df <- as.data.frame(mtx)
-
-  is_sup_rows <- sort(sample(1:10, 3, FALSE))
-  is_sup_cols <- sort(sample(1:10, 4, FALSE))
-
-  res_facto <- FactoMineR::PCA(df, scale.unit = TRUE, ind.sup = is_sup_rows,
-                               quanti.sup = is_sup_cols, graph = FALSE)
-  res_dim <- pca(df, scale = TRUE, sup_row = is_sup_rows,
-                 sup_col = is_sup_cols)
+  res_facto <- FactoMineR::PCA(decathlon, ncp = 5, ind.sup = 1:3,
+                               quanti.sup = 11:12, quali.sup=13,
+                               graph = FALSE)
+  res_dim <- pca(decathlon, scale = TRUE, rank = 5,
+                 sup_row = 1:3, sup_col = 11:12, sup_quali = 13)
 
   # Get coordinates
   coord_row <- get_coordinates(res_dim, margin = 1)

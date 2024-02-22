@@ -1,7 +1,6 @@
 # Test against FactoMineR
 if (at_home() && requireNamespace("FactoMineR", quietly = TRUE)) {
-  library("FactoMineR")
-  data(tea)
+  data(tea, package = "FactoMineR")
 
   res_facto <- FactoMineR::MCA(tea, ncp = 5, ind.sup = 1:3, quanti.sup = 19,
                                quali.sup = 20:36, graph = FALSE)

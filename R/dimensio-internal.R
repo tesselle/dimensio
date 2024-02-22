@@ -59,7 +59,8 @@ find_variable <- function(index, n, names = NULL) {
 #'  progress?
 #' @details
 #'  Side effect: move `sup` and `extra` columns at the end of `x`.
-#' @return A `list` with the following elements: `data`, `sup` and `extra`.
+#' @return A `list` with the following elements: `data` (a `data.frame`),
+#'  `sup` (an `integer` vector) and `extra` (a `data.frame` or `NULL`).
 #' @keywords internal
 #' @noRd
 drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
@@ -75,12 +76,13 @@ drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
     x <- x[, !(not_ok | is_sup | is_extra), drop = FALSE]
 
     if (any(is_sup)) {
+      ## Move supplementary variables at the end
       sup <- seq_len(sum(is_sup)) + ncol(x)
       x <- cbind(x, old[, is_sup, drop = FALSE])
     }
     if (any(is_extra)) {
-      extra <- seq_len(sum(is_extra)) + ncol(x)
-      x <- cbind(x, old[, is_extra, drop = FALSE])
+      ## Remove extra variable
+      extra <- old[, is_extra, drop = FALSE]
     }
 
     # Generate message

@@ -14,10 +14,15 @@ setMethod(
     clean <- drop_variable(object, f = is.numeric, negate = FALSE,
                            sup = sup_col, extra = sup_quanti, what = "quantitative")
 
+    ## Compute MCA
     object <- as.matrix(clean$data)
-    methods::callGeneric(object = object, rank = rank,
-                         sup_row = sup_row, sup_col = clean$sup,
-                         sup_quanti = clean$extra)
+    results <- methods::callGeneric(object = object, rank = rank,
+                                    sup_row = sup_row, sup_col = clean$sup)
+
+    ## Add supplementary quantitative variables
+    if (!is.null(sup_quanti)) set_extra(results) <- as.matrix(clean$extra)
+
+    results
   }
 )
 
@@ -27,14 +32,11 @@ setMethod(
 setMethod(
   f = "mca",
   signature = c(object = "matrix"),
-  definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL,
-                        sup_quanti = NULL) {
+  definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL) {
     ## Subset
     is_row_sup <- find_variable(sup_row, nrow(object), names = rownames(object))
     is_col_sup <- find_variable(sup_col, ncol(object), names = colnames(object))
-    is_quanti_sup <- find_variable(sup_quanti, ncol(object), names = colnames(object))
-    is_active <- !(is_col_sup | is_quanti_sup)
-    N <- object[, is_active, drop = FALSE]
+    N <- object[, !is_col_sup, drop = FALSE]
 
     ## Complete disjunctive table
     Z <- cdt(N)
@@ -52,7 +54,7 @@ setMethod(
     }
 
     ## Compute
-    ndim <- min(rank, ncol(Z_tot) - sum(is_active))
+    ndim <- min(rank, ncol(Z_tot) - sum(!is_col_sup))
     results <- ca(Z_tot, rank = ndim, sup_row = sup_row, sup_col = sup_col)
 
     .MCA(results)

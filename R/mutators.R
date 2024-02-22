@@ -21,7 +21,14 @@ get_order <- function(x, margin = 1) {
   if (margin == 2) ord <- x@columns@order
   ord
 }
-
+get_extra <- function(x) {
+  x@extra
+}
+`set_extra<-` <- function(x, value) {
+  x@extra <- value
+  methods::validObject(x)
+  x
+}
 # Dimensions ===================================================================
 #' @export
 #' @method dim MultivariateAnalysis

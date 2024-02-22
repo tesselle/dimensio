@@ -9,16 +9,25 @@ setMethod(
   f = "pca",
   signature = c(object = "data.frame"),
   definition = function(object, center = TRUE, scale = TRUE, rank = NULL,
-                        sup_row = NULL, sup_col = NULL,
+                        sup_row = NULL, sup_col = NULL, sup_quali = NULL,
                         weight_row = NULL, weight_col = NULL) {
     ## Remove non-numeric variables, if any
     clean <- drop_variable(object, f = is.numeric, negate = TRUE,
-                           sup = sup_col, extra = NULL, what = "qualitative")
+                           sup = sup_col, extra = sup_quali,
+                           what = "qualitative")
 
+    ## Compute PCA
     object <- as.matrix(clean$data)
-    methods::callGeneric(object = object, center = center, scale = scale,
-                         rank = rank, sup_row = sup_row, sup_col = clean$sup,
-                         weight_row = weight_row, weight_col = weight_col)
+    results <- methods::callGeneric(
+      object = object, center = center, scale = scale,
+      rank = rank, sup_row = sup_row, sup_col = clean$sup,
+      weight_row = weight_row, weight_col = weight_col
+    )
+
+    ## Add supplementary quantitative variables
+    if (!is.null(sup_quali)) set_extra(results) <- as.matrix(clean$extra)
+
+    results
   }
 )
 

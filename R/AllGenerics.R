@@ -184,6 +184,8 @@ setGeneric(
 #'  will be returned.
 #' @param sup_row A `vector` specifying the indices of the supplementary rows.
 #' @param sup_col A `vector` specifying the indices of the supplementary columns.
+#' @param sup_quali A `vector` specifying the indices of the supplementary
+#'  qualitative columns.
 #' @param weight_row A [`numeric`] vector specifying the active row (individual)
 #'  weights. If `NULL` (the default), uniform weights are used. Row weights are
 #'  internally normalized to sum 1

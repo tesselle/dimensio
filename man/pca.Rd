@@ -17,6 +17,7 @@ pca(object, ...)
   rank = NULL,
   sup_row = NULL,
   sup_col = NULL,
+  sup_quali = NULL,
   weight_row = NULL,
   weight_col = NULL
 )
@@ -51,6 +52,9 @@ will be returned.}
 \item{sup_row}{A \code{vector} specifying the indices of the supplementary rows.}
 
 \item{sup_col}{A \code{vector} specifying the indices of the supplementary columns.}
+
+\item{sup_quali}{A \code{vector} specifying the indices of the supplementary
+qualitative columns.}
 
 \item{weight_row}{A \code{\link{numeric}} vector specifying the active row (individual)
 weights. If \code{NULL} (the default), uniform weights are used. Row weights are

@@ -26,11 +26,6 @@ setMethod(
   f = "ca",
   signature = c(object = "matrix"),
   definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL) {
-    ## Check missing values
-    if (anyNA(object)) stop("Missing values detected.", call. = FALSE)
-    ## Check dimensions
-    if (any(dim(object) == 0)) stop("Empty matrix.", call. = FALSE)
-
     ## Fix dimension names
     names_row <- rownames(object)
     names_col <- colnames(object)
@@ -41,6 +36,11 @@ setMethod(
     is_row_sup <- find_variable(sup_row, nrow(object), names = rownames(object))
     is_col_sup <- find_variable(sup_col, ncol(object), names = colnames(object))
     N <- object[!is_row_sup, !is_col_sup, drop = FALSE]
+
+    ## Check missing values
+    if (anyNA(N)) stop("Missing values detected.", call. = FALSE)
+    ## Check dimensions
+    if (any(dim(N) == 0)) stop("Empty matrix.", call. = FALSE)
 
     ## Dimension of the solution
     ndim <- min(rank, dim(N) - 1)

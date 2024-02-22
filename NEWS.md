@@ -7,6 +7,7 @@
 
 ## Enhancements
 * `viz_contributions()` displays the expected average contribution.
+* `pca()` gained a new argument to specify supplementary qualitative variables.
 
 # dimensio 0.5.0
 ## New classes and methods

@@ -1,16 +1,10 @@
 # Test against FactoMineR
 if (at_home() && requireNamespace("FactoMineR", quietly = TRUE)) {
-  library("FactoMineR")
+  data(children, package = "FactoMineR")
 
-  mtx <- matrix(data = sample(1:10, 1000, TRUE), ncol = 10)
-  df <- as.data.frame(mtx)
-
-  is_sup_rows <- sort(sample(1:10, 3, FALSE))
-  is_sup_cols <- sort(sample(1:10, 4, FALSE))
-
-  res_facto <- FactoMineR::CA(df, row.sup = is_sup_rows, col.sup = is_sup_cols,
+  res_facto <- FactoMineR::CA(children, row.sup = 15:18, col.sup = 6:8,
                               graph = FALSE)
-  res_dim <- ca(df, sup_row = is_sup_rows, sup_col = is_sup_cols)
+  res_dim <- ca(children, sup_row = 15:18, sup_col = 6:8)
 
   # Get coordinates
   coord_row <- get_coordinates(res_dim, margin = 1)
