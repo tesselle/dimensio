@@ -76,8 +76,7 @@ library(dimensio)
 data(iris)
 
 ## Compute PCA
-## (non numeric variables are automatically removed)
-X <- pca(iris, center = TRUE, scale = TRUE)
+X <- pca(iris, center = TRUE, scale = TRUE, sup_quali = "Species")
 ```
 
 ### Extract

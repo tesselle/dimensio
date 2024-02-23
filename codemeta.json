@@ -2,13 +2,13 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "dimensio",
-  "description": "Simple Principal Components Analysis (PCA) and (Multiple) Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis. It also includes methods for partial bootstrap validation described in Greenacre (1984) <isbn:978-0-12-299050-2> and Lebart et al. (2006) <isbn:978-2-10-049616-7>.",
+  "description": "Simple Principal Components Analysis (PCA) and (Multiple) Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis. It also includes methods for partial bootstrap validation described in Greenacre (1984, ISBN: 978-0-12-299050-2) and Lebart et al. (2006, ISBN: 978-2-10-049616-7).",
   "name": "dimensio: Multivariate Data Analysis",
   "relatedLink": ["https://packages.tesselle.org/dimensio/", "https://CRAN.R-project.org/package=dimensio"],
   "codeRepository": "https://github.com/tesselle/dimensio",
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.5.0.9000",
+  "version": "0.6.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -68,18 +68,6 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "ggplot2",
-      "name": "ggplot2",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
       "provider": {
@@ -104,15 +92,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "rmarkdown",
-      "name": "rmarkdown",
+      "identifier": "markdown",
+      "name": "markdown",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+      "sameAs": "https://CRAN.R-project.org/package=markdown"
     },
     {
       "@type": "SoftwareApplication",
@@ -174,7 +162,7 @@
       "@type": "SoftwareApplication",
       "identifier": "arkhe",
       "name": "arkhe",
-      "version": ">= 1.4.0",
+      "version": ">= 1.6.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -200,11 +188,11 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1083.336KB",
+  "fileSize": "1094.783KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
-      "datePublished": "2023",
+      "datePublished": "2024",
       "author": [
         {
           "@type": "Person",
@@ -215,7 +203,7 @@
       "name": "{dimensio: Multivariate Data Analysis}",
       "identifier": "10.5281/zenodo.4478530",
       "url": "https://packages.tesselle.org/dimensio/",
-      "description": "R package version 0.5.0.9000",
+      "description": "R package version 0.6.0",
       "@id": "https://doi.org/10.5281/zenodo.4478530",
       "sameAs": "https://doi.org/10.5281/zenodo.4478530"
     }
