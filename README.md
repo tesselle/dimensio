@@ -60,7 +60,7 @@ tools to explore the results of the analysis.
 
     A BibTeX entry for LaTeX users is
 
-      @Manual{,
+      @Manual{R-dimensio,
         author = {Nicolas Frerebeau},
         title = {{dimensio: Multivariate Data Analysis}},
         year = {2024},

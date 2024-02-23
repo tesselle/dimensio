@@ -1,3 +1,5 @@
+# dimensio 0.6.0.9000
+
 # dimensio 0.6.0
 ## New classes and methods
 * Add `predict()` method for MCA.
