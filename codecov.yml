@@ -2,6 +2,7 @@ comment: false
 
 ignore:
   - "R/dimensio-deprecated.R"
+  - "R/dimensio-defunct.R"
   - "R/zzz.R"
 
 coverage:

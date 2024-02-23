@@ -31,7 +31,6 @@ Imports:
     grDevices,
     methods
 Suggests: 
-    ggplot2,
     khroma,
     knitr,
     markdown,
@@ -54,6 +53,7 @@ Collate:
     'ca.R'
     'coerce.R'
     'data.R'
+    'dimensio-defunct.R'
     'dimensio-deprecated.R'
     'dimensio-internal.R'
     'dimensio-package.R'
