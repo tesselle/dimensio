@@ -10,12 +10,12 @@ setMethod(
   f = "viz_rows",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, highlight = NULL,
+                        labels = FALSE, top = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
-               labels = labels, highlight = highlight,
+               labels = labels, top = top, highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -45,12 +45,12 @@ setMethod(
   f = "viz_individuals",
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, highlight = NULL,
+                        labels = FALSE, top = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
-               labels = labels, highlight = highlight,
+               labels = labels, top = top, highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -66,12 +66,12 @@ setMethod(
   f = "viz_columns",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, highlight = NULL,
+                        labels = FALSE, top = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
-               labels = labels, highlight = highlight,
+               labels = labels, top = top, highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -189,12 +189,12 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "CA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, highlight = NULL,
+                        labels = FALSE, top = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
-               labels = labels, highlight = highlight,
+               labels = labels, top = top, highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)

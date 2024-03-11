@@ -24,6 +24,7 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
+  top = 10,
   highlight = NULL,
   xlim = NULL,
   ylim = NULL,
@@ -61,6 +62,7 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
+  top = 10,
   highlight = NULL,
   xlim = NULL,
   ylim = NULL,
@@ -88,6 +90,11 @@ plotted?}
 plotted?}
 
 \item{labels}{A \code{\link{logical}} scalar: should labels be drawn?}
+
+\item{top}{An \code{\link{integer}} specifying the number of labels to draw.
+Only the labels of the \code{top} \eqn{n} observations contributing the most to
+the factorial map will be drawn. If \code{NULL}, all labels are drawn.
+Only used if \code{labels} is \code{TRUE}.}
 
 \item{highlight}{A vector specifying the information to be highlighted.
 If \code{NULL} (the default), no highlighting is applied. If a single \code{character}
@@ -117,11 +124,6 @@ place but before the axes, title and box are added.}
 \item{legend}{A \code{\link{list}} of additional arguments to be passed to
 \code{\link[graphics:legend]{graphics::legend()}}; names of the list are used as argument names.
 If \code{NULL}, no legend is displayed.}
-
-\item{top}{An \code{\link{integer}} specifying the number of labels to draw.
-Only the labels of the \code{top} \eqn{n} observations contributing the most to
-the factorial map will be drawn. If \code{NULL}, all labels are drawn.
-Only used if \code{labels} is \code{TRUE}.}
 }
 \value{
 \verb{viz_*()} is called for its side-effects: it results in a graphic

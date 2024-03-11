@@ -1,4 +1,6 @@
 # dimensio 0.6.0.9000
+## Bugfixes & changes
+* The default number of labeled points can now be changed in `viz_individuals()`, `viz_row()`, `viz_variables()` and `viz_columns()`.
 
 # dimensio 0.6.0
 ## New classes and methods
