@@ -49,7 +49,8 @@ indicates variables/columns.}
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
 for which to compute results.}
 
-\item{group}{A vector specifying the group an observation belongs to.}
+\item{group}{A vector specifying the group an observation belongs to, or a
+single \code{character} string giving the name of a categorical variable.}
 
 \item{level}{A \code{\link{numeric}} vector specifying the confidence/tolerance level.}
 }
@@ -65,22 +66,17 @@ Plot Envelopes
 data("iris")
 
 ## Compute principal components analysis
-X <- pca(iris, scale = TRUE)
-
-## Convex hull coordinates
-hulls <- wrap_hull(X, margin = 1, group = iris$Species)
-
-## Confidence ellipse coordinates
-conf <- wrap_confidence(X, margin = 1, group = iris$Species,
-                        level = c(0.68, 0.95))
-
-## Tolerance ellipse coordinates
-conf <- wrap_confidence(X, margin = 1, group = iris$Species, level = 0.95)
+X <- pca(iris, scale = TRUE, sup_quali = "Species")
 
 ## Plot with convex hulls
 col <- c("#004488", "#DDAA33", "#BB5566")
-viz_rows(X, highlight = iris$Species, col = col)
-viz_hull(X, group = iris$Species, border = col)
+viz_rows(X, highlight = "Species", col = col)
+viz_hull(X, group = "Species", border = col)
+
+## Plot with tolerance ellipses
+col <- c("#004488", "#DDAA33", "#BB5566")
+viz_rows(X, highlight = "Species", col = col)
+viz_tolerance(X, group = "Species", border = col)
 }
 \seealso{
 Other plot methods: 

@@ -119,9 +119,9 @@ drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
 #'  plotted?
 #' @param highlight A vector specifying the information to be highlighted.
 #'  If `NULL` (the default), no highlighting is applied. If a single `character`
-#'  string is passed, it must be one of "`observation`", "`mass`", "`sum`",
-#'  "`contribution`" or "`cos2`" (see [`augment()`]). Any unambiguous substring
-#'  can be given.
+#'  string is passed, it must be the name of a categorical variable, or one of
+#'  "`observation`", "`mass`", "`sum`", "`contribution`" or "`cos2`"
+#'  (see [`augment()`]).
 #  It will only be mapped if at least one [graphical parameters][graphics::par]
 #  is explicitly specified (see examples).
 #' @param col The colors for lines and points.
@@ -164,9 +164,16 @@ prepare <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
   data$observation <- "active"
   data$observation[data$supplementary] <- "suppl."
   if (length(highlight) == 1) {
-    choices <- c("mass", "sum", "contribution", "cos2", "observation")
-    highlight <- match.arg(highlight, choices = choices, several.ok = FALSE)
-    highlight <- data[[highlight]]
+    high <- NULL
+    if (has_extra(x)) {
+      high <- get_extra(x)[[highlight]] %||% data[[highlight]]
+    }
+    if (is.null(high)) {
+      choices <- c("mass", "sum", "contribution", "cos2", "observation")
+      highlight <- match.arg(highlight, choices = choices, several.ok = FALSE)
+      high <- data[[highlight]]
+    }
+    highlight <- high
   }
   if (length(highlight) > 1) arkhe::assert_length(highlight, n)
 

@@ -22,7 +22,11 @@ get_order <- function(x, margin = 1) {
   ord
 }
 get_extra <- function(x) {
-  x@extra
+  as.data.frame(x@extra)
+}
+has_extra <- function(x) {
+  extra <- get_extra(x)
+  NROW(extra) > 0 && NCOL(extra) > 0
 }
 `set_extra<-` <- function(x, value) {
   x@extra <- value

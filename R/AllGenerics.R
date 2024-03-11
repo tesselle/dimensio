@@ -699,7 +699,8 @@ setGeneric(
 #'  indicates variables/columns.
 #' @param axes A length-two [`numeric`] vector giving the dimensions
 #'  for which to compute results.
-#' @param group A vector specifying the group an observation belongs to.
+#' @param group A vector specifying the group an observation belongs to, or a
+#'  single `character` string giving the name of a categorical variable.
 #' @param level A [`numeric`] vector specifying the confidence/tolerance level.
 #' @param ... Currently not used.
 #' @return
@@ -738,21 +739,13 @@ setGeneric(
 
 #' Plot Envelopes
 #'
-#' @param x An object from which to wrap observations (a [`CA-class`],
-#'  [`MCA-class`] or [`PCA-class`] object).
-#' @param margin A length-one [`numeric`] vector giving the subscript which the
-#'  data will be returned: `1` indicates individuals/rows (the default), `2`
-#'  indicates variables/columns.
-#' @param axes A length-two [`numeric`] vector giving the dimensions
-#'  for which to compute results.
-#' @param group A vector specifying the group an observation belongs to.
-#' @param level A [`numeric`] vector specifying the confidence/tolerance level.
+#' @inheritParams wrap
 #' @param ... Further [graphical parameters][graphics::par] to be passed to
 #'  [graphics::polygon()].
 #' @return
 #'  `viz_*()`is called for its side-effects: it results in a graphic being
 #'  displayed. Invisibly returns `x`.
-#' @example inst/examples/ex-wrap.R
+#' @example inst/examples/ex-envelopes.R
 #' @author N. Frerebeau
 #' @docType methods
 #' @family plot methods

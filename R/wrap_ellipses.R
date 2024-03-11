@@ -17,7 +17,8 @@ setMethod(
 
     ## Add groups, if any
     k <- get_order(x, margin = margin)
-    if (!is.null(group)) {
+    if (length(group) == 1) group <- get_extra(x)[[group]]
+    if (length(group) > 0) {
       arkhe::assert_length(group, nrow(data))
       group <- group[k]
     } else if (has_groups(x, margin = margin)) {
@@ -25,7 +26,6 @@ setMethod(
     } else {
       group <- rep("", length(k))
     }
-    group <- as.character(group)
 
     ## Compute ellipse
     data <- split(data, f = group)
@@ -57,7 +57,8 @@ setMethod(
 
     ## Add groups, if any
     k <- get_order(x, margin = margin)
-    if (!is.null(group)) {
+    if (length(group) == 1) group <- get_extra(x)[[group]]
+    if (length(group) > 0) {
       arkhe::assert_length(group, nrow(data))
       group <- group[k]
     } else if (has_groups(x, margin = margin)) {

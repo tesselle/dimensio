@@ -45,9 +45,9 @@ returned? If \code{FALSE}, standard coordinates are returned.}
 
 \item{highlight}{A vector specifying the information to be highlighted.
 If \code{NULL} (the default), no highlighting is applied. If a single \code{character}
-string is passed, it must be one of "\code{observation}", "\code{mass}", "\code{sum}",
-"\code{contribution}" or "\code{cos2}" (see \code{\link[=augment]{augment()}}). Any unambiguous substring
-can be given.}
+string is passed, it must be the name of a categorical variable, or one of
+"\code{observation}", "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}"
+(see \code{\link[=augment]{augment()}}).}
 
 \item{col}{The colors for lines and points.}
 

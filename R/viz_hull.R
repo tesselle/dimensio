@@ -17,10 +17,10 @@ setMethod(
     col <- list(...)$col %||% NA
     lty <- list(...)$lty %||% graphics::par("lty")
     lwd <- list(...)$lwd %||% graphics::par("lwd")
-    if (length(border) != n) border <- rep(border, length.out = n)
-    if (length(col) != n) col <- rep(col, length.out = n)
-    if (length(lty) != n) lty <- rep(lty, length.out = n)
-    if (length(lwd) != n) lwd <- rep(lwd, length.out = n)
+    if (length(border) == 1) border <- rep(border, length.out = n)
+    if (length(col) == 1) col <- rep(col, length.out = n)
+    if (length(lty) == 1) lty <- rep(lty, length.out = n)
+    if (length(lwd) == 1) lwd <- rep(lwd, length.out = n)
 
     for (i in seq_along(hull)) {
       graphics::polygon(x = hull[[i]], border = border[i],
