@@ -29,6 +29,7 @@ has_extra <- function(x) {
   NROW(extra) > 0 && NCOL(extra) > 0
 }
 `set_extra<-` <- function(x, value) {
+  value <- value[get_order(x, margin = 1), , drop = FALSE]
   x@extra <- value
   methods::validObject(x)
   x

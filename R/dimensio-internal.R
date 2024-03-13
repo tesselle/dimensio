@@ -163,10 +163,14 @@ prepare <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
   ## Highlight
   data$observation <- "active"
   data$observation[data$supplementary] <- "suppl."
+  if (length(highlight) > 1) {
+    arkhe::assert_length(highlight, n)
+    highlight <- highlight[get_order(x, margin = margin)]
+  }
   if (length(highlight) == 1) {
     high <- NULL
     if (has_extra(x)) {
-      high <- get_extra(x)[[highlight]] %||% data[[highlight]]
+      high <- get_extra(x)[[highlight]]
     }
     if (is.null(high)) {
       choices <- c("mass", "sum", "contribution", "cos2", "observation")
@@ -175,7 +179,6 @@ prepare <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
     }
     highlight <- high
   }
-  if (length(highlight) > 1) arkhe::assert_length(highlight, n)
 
   ## Graphical parameters
   ## Colors

@@ -9,8 +9,7 @@ if (at_home()) {
   data("iris")
 
   # PCA - Plot coordinates =====================================================
-  sup_ind <- seq(from = 1, to = 150, by = 5)
-  res <- pca(iris, sup_row = sup_ind, sup_col = 4, sup_quali = 5)
+  res <- pca(iris, sup_row = 1:10, sup_col = 4, sup_quali = 5)
 
   for (i in c(TRUE, FALSE)) {
     for (j in c(TRUE, FALSE)) {
@@ -19,6 +18,9 @@ if (at_home()) {
       expect_snapshot_plot(plot_ind, sprintf("PCA_ind_%d-%d", i, j))
     }
   }
+
+  plot_ind_sup_extra <- function() viz_individuals(res,  highlight = "Species")
+  plot_ind_sup_extra <- function() viz_individuals(res,  highlight = iris$Species)
 
   for (i in c(TRUE, FALSE)) {
     for (j in c(TRUE, FALSE)) {

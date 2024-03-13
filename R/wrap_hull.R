@@ -12,17 +12,18 @@ setMethod(
     ## Get coordinates
     data <- get_coordinates(x, margin = margin)
     data <- data[, axes]
+    n <- nrow(data)
 
     ## Add groups, if any
-    k <- get_order(x, margin = margin)
-    if (length(group) == 1) group <- get_extra(x)[[group]]
-    if (length(group) > 0) {
-      arkhe::assert_length(group, nrow(data))
-      group <- group[k]
+    if (length(group) > 1) {
+      arkhe::assert_length(group, n)
+      group <- group[get_order(x, margin = margin)]
+    } else if (length(group) == 1) {
+      group <- get_extra(x)[[group]]
     } else if (has_groups(x, margin = margin)) {
       group <- get_groups(x, margin = margin)
     } else {
-      group <- rep("", length(k))
+      group <- rep("", n)
     }
     group <- as.character(group)
 
