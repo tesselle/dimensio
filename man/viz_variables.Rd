@@ -24,7 +24,7 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
-  top = 10,
+  labels_top = 10,
   highlight = NULL,
   xlim = NULL,
   ylim = NULL,
@@ -44,7 +44,7 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = TRUE,
-  top = 10,
+  labels_top = 10,
   highlight = NULL,
   xlim = NULL,
   ylim = NULL,
@@ -62,7 +62,7 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
-  top = 10,
+  labels_top = 10,
   highlight = NULL,
   xlim = NULL,
   ylim = NULL,
@@ -91,7 +91,7 @@ plotted?}
 
 \item{labels}{A \code{\link{logical}} scalar: should labels be drawn?}
 
-\item{top}{An \code{\link{integer}} specifying the number of labels to draw.
+\item{labels_top}{An \code{\link{integer}} specifying the number of labels to draw.
 Only the labels of the \code{top} \eqn{n} observations contributing the most to
 the factorial map will be drawn. If \code{NULL}, all labels are drawn.
 Only used if \code{labels} is \code{TRUE}.}
