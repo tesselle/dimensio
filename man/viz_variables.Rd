@@ -24,7 +24,7 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
-  labels_top = 10,
+  labels_max = 10,
   highlight = NULL,
   xlim = NULL,
   ylim = NULL,
@@ -44,7 +44,7 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = TRUE,
-  labels_top = 10,
+  labels_max = 10,
   highlight = NULL,
   xlim = NULL,
   ylim = NULL,
@@ -62,7 +62,7 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
-  labels_top = 10,
+  labels_max = 10,
   highlight = NULL,
   xlim = NULL,
   ylim = NULL,
@@ -91,9 +91,9 @@ plotted?}
 
 \item{labels}{A \code{\link{logical}} scalar: should labels be drawn?}
 
-\item{labels_top}{An \code{\link{integer}} specifying the number of labels to draw.
-Only the labels of the \code{top} \eqn{n} observations contributing the most to
-the factorial map will be drawn. If \code{NULL}, all labels are drawn.
+\item{labels_max}{An \code{\link{integer}} specifying the number of labels to draw.
+Only the labels of the \eqn{n} variables contributing the most to the
+factorial map will be drawn. If \code{NULL}, all labels are drawn.
 Only used if \code{labels} is \code{TRUE}.}
 
 \item{highlight}{A vector specifying the information to be highlighted.

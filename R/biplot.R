@@ -213,12 +213,20 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   if (!is.null(labels)) {
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {
-      viz_labels(x = coord_row$x, y = coord_row$y, labels = coord_row$label,
-                 top = NULL, col = coord_row$col, cex = coord_row$cex)
+      arkhe::label_auto(
+        x = coord_row$x, y = coord_row$y,
+        labels = coord_row$label,
+        cex = coord_row$cex,
+        col = coord_row$col
+      )
     }
     if (any(labels == "columns") | any(labels == "variables")) {
-      viz_labels(x = coord_col$x, y = coord_col$y, labels = coord_col$label,
-                 top = NULL, col = coord_col$col, cex = coord_col$cex)
+      arkhe::label_auto(
+        x = coord_col$x, y = coord_col$y,
+        labels = coord_col$label,
+        cex = coord_col$cex,
+        col = coord_col$col
+      )
     }
   }
 

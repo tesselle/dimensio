@@ -528,6 +528,10 @@ NULL
 #'
 #' Plots row/individual principal coordinates.
 #' @inheritParams viz_points
+#' @param labels_max An [`integer`] specifying the number of labels to draw.
+#'  Only the labels of the \eqn{n} observations with highest \eqn{cos^2}{cos2}
+#'  values will be drawn. If `NULL`, all labels are drawn.
+#'  Only used if `labels` is `TRUE`.
 #' @param ... Further [graphical parameters][graphics::par] (see details).
 #' @details
 #'  Commonly used [graphical parameters][graphics::par] are:
@@ -569,6 +573,10 @@ setGeneric(
 #'
 #' Plots column/variable principal coordinates.
 #' @inheritParams viz_points
+#' @param labels_max An [`integer`] specifying the number of labels to draw.
+#'  Only the labels of the \eqn{n} variables contributing the most to the
+#'  factorial map will be drawn. If `NULL`, all labels are drawn.
+#'  Only used if `labels` is `TRUE`.
 #' @details
 #'  Commonly used [graphical parameters][graphics::par] are:
 #'  \describe{

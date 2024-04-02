@@ -4,53 +4,59 @@ NULL
 
 #' Non-Overlapping Text Labels
 #'
-#' @param x,y A [`numeric`] vector giving the x and y coordinates of a set of
-#'  points. If `y` is missing, `x` must be a [`CA-class`], [`MCA-class`] or
-#'  [`PCA-class`] object.
-#' @param z A [`numeric`] vector giving an extra variable for subsetting.
-#' @param labels A [`character`] vector specifying the text to be written.
-#' @param margin A length-one [`numeric`] vector giving the subscript
-#'  which the data will be returned: `1` indicates individuals/rows (the
-#'  default), `2` indicates variables/columns.
-#' @param axes A length-two [`numeric`] vector giving the dimensions to be
-#'  plotted.
+#' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
 #' @param top An [`integer`] specifying the number of labels to draw.
-#'  Only the labels of the `top` \eqn{n} observations along `z` will be drawn.
+#'  Only the labels of the `top` \eqn{n} observations will be drawn.
 #'  If `NULL`, all labels are drawn.
 #' @param box A [`logical`] scalar: should a box be drawn underneath labels?
 #' @param segment A [`logical`] scalar: should segments be drawn?
+#' @param ... Further [graphical parameters][graphics::par], particularly,
+#'  character expansion, `cex` and color, `col`.
+#' @inheritParams prepare
+#' @author N. Frerebeau
+#' @docType methods
+# @family plot methods
+#' @aliases viz_labels-method
 #' @keywords internal
-viz_labels <- function(x, y, z, labels, ..., margin = 1, axes = c(1, 2),
-                       top = 10, box = FALSE, segment = FALSE,
-                       cex = graphics::par("cex"),
-                       col = graphics::par("fg"),
-                       bg = graphics::par("bg"),
-                       font = graphics::par("font")) {
-  ## Get coordinates
-  if (missing(y)) {
-    if (missing(z)) {
-      z <- joint_contributions(x, margin = margin, axes = axes)
+#' @export
+setGeneric(
+  name = "viz_labels",
+  def = function(x, ...) standardGeneric("viz_labels")
+)
+
+#' @rdname viz_labels
+#' @aliases viz_labels,MultivariateAnalysis-method
+setMethod(
+  f = "viz_labels",
+  signature = c(x = "MultivariateAnalysis"),
+  definition = function(x, margin, ..., axes = c(1, 2),
+                        active = TRUE, sup = TRUE,
+                        highlight = NULL, top = 10,
+                        box = FALSE, segment = FALSE) {
+    ## Prepare data
+    coord <- prepare(x, margin = margin, axes = axes, active = active,
+                     sup = sup, highlight = highlight, ...)
+
+    ## Select
+    if (!is.null(top) && top > 0) {
+      top <- min(nrow(coord), top)
+      if (is.numeric(coord$z)) {
+        ## Get order
+        k <- order(coord$z, decreasing = TRUE)[seq_len(top)]
+        ## Subset
+        coord <- coord[k, , drop = FALSE]
+      }
     }
-    coord <- prepare(x, margin = margin, axes = axes)
-    x <- coord$x
-    y <- coord$y
+
+    ## Clean
+    coord <- coord[!is.na(coord$cex), , drop = FALSE]
+
+    arkhe::label_auto(
+      x = coord$x, y = coord$y,
+      labels = coord$label,
+      segment = segment, box = box,
+      cex = coord$cex,
+      col = coord$col
+    )
   }
-
-  if (!is.null(top) && top > 0) {
-    ## Reorder
-    top <- min(length(x), top)
-    k <- order(z, decreasing = TRUE)[seq_len(top)]
-
-    ## Subset
-    x <- x[k]
-    y <- y[k]
-    labels <- labels[k]
-    if (length(cex) > 1) cex <- cex[k]
-    if (length(col) > 1) col <- col[k]
-    if (length(bg) > 1) bg <- bg[k]
-    if (length(font) > 1) font <- font[k]
-  }
-
-  arkhe::label_auto(x = x, y = y, labels = labels, segment = segment, box = box,
-                    cex = cex, col = col, bg = bg, font = font, ...)
-}
+)

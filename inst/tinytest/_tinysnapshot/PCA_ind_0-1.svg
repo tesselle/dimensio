@@ -30,16 +30,16 @@
 <g clip-path='url(#cpODAuNjR8NDUyLjE2fDU5LjA0fDQzMC41Ng==)'>
 <line x1='80.64' y1='261.40' x2='452.16' y2='261.40' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
 <line x1='539.33' y1='430.56' x2='539.33' y2='59.04' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
-<circle cx='271.44' cy='204.19' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='302.78' cy='354.47' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='255.84' cy='314.45' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='266.64' cy='347.82' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='250.66' cy='183.95' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='277.01' cy='72.80' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='230.02' cy='266.51' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='276.86' cy='238.01' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='261.36' cy='416.80' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='297.74' cy='326.78' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
+<polygon points='271.44,199.99 275.08,206.29 267.81,206.29 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='302.78,350.27 306.42,356.57 299.15,356.57 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='255.84,310.25 259.48,316.55 252.21,316.55 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='266.64,343.62 270.27,349.92 263.00,349.92 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='250.66,179.75 254.30,186.05 247.03,186.05 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='277.01,68.60 280.65,74.90 273.37,74.90 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='230.02,262.32 233.65,268.61 226.38,268.61 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='276.86,233.81 280.50,240.11 273.23,240.11 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='261.36,412.60 264.99,418.90 257.72,418.90 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='297.74,322.58 301.38,328.88 294.10,328.88 ' style='stroke-width: 0.75; stroke: #FDE333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHw1MDQuMDA=)'>
 <line x1='142.92' y1='430.56' x2='407.19' y2='430.56' style='stroke-width: 0.75;' />

@@ -10,12 +10,13 @@ setMethod(
   f = "viz_rows",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, labels_top = 10, highlight = NULL,
+                        labels = FALSE, labels_max = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
-               labels = labels, labels_top = labels_top, highlight = highlight,
+               labels = labels, labels_max = labels_max,
+               labels_what = "cos2", highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -45,12 +46,13 @@ setMethod(
   f = "viz_individuals",
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, labels_top = 10, highlight = NULL,
+                        labels = FALSE, labels_max = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
-               labels = labels, labels_top = labels_top, highlight = highlight,
+               labels = labels, labels_max = labels_max,
+               labels_what = "cos2", highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -66,12 +68,13 @@ setMethod(
   f = "viz_columns",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, labels_top = 10, highlight = NULL,
+                        labels = FALSE, labels_max = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
-               labels = labels, labels_top = labels_top, highlight = highlight,
+               labels = labels, labels_max = labels_max,
+               labels_what = "contribution", highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -101,7 +104,7 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = TRUE, labels_top = 10, highlight = NULL,
+                        labels = TRUE, labels_max = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
@@ -147,9 +150,11 @@ setMethod(
     )
 
     ## Labels
-    if (labels && nrow(coord) > 1) {
-      viz_labels(x = x, labels = coord$label, margin = 2, axes = axes,
-                 top = labels_top, col = coord$col, cex = coord$cex)
+    if (!isFALSE(labels)) {
+      origin <- get_order(x, margin = 2)
+      viz_labels(x, margin = 2, axes = axes, active = active, sup = sup,
+                 highlight = "contribution", top = labels_max,
+                 col = coord$col, cex = coord$cex, reorder = FALSE)
     }
 
     ## Evaluate post-plot and pre-axis expressions
@@ -189,12 +194,13 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "CA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, labels_top = 10, highlight = NULL,
+                        labels = FALSE, labels_max = 10, highlight = NULL,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
-               labels = labels, labels_top = labels_top, highlight = highlight,
+               labels = labels, labels_max = labels_max,
+               labels_what = "contribution", highlight = highlight,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -220,10 +226,12 @@ setMethod(
 #'
 #' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
 #' @param labels A [`logical`] scalar: should labels be drawn?
-#' @param labels_top An [`integer`] specifying the number of labels to draw.
+#' @param labels_max An [`integer`] specifying the number of labels to draw.
 #'  Only the labels of the `top` \eqn{n} observations contributing the most to
 #'  the factorial map will be drawn. If `NULL`, all labels are drawn.
 #'  Only used if `labels` is `TRUE`.
+#' @param labels_what A [`character`] string specifying how to select the
+#'  labels to be drawn.
 #' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
 #'  The default value, `NULL`, indicates that the range of the
 #'  [finite][is.finite()] values to be plotted should be used.
@@ -251,7 +259,7 @@ setMethod(
 #' @keywords internal
 viz_points <- function(x, margin, axes, ...,
                        active = TRUE, sup = TRUE,
-                       labels = FALSE, labels_top = 10,
+                       labels = FALSE, labels_max = 10, labels_what = NULL,
                        highlight = NULL, xlim = NULL, ylim = NULL,
                        main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
                        ann = graphics::par("ann"), frame.plot = TRUE,
@@ -293,8 +301,9 @@ viz_points <- function(x, margin, axes, ...,
 
   ## Labels
   if (!isFALSE(labels)) {
-    viz_labels(x = x, labels = coord$label, margin = margin, axes = axes,
-               top = labels_top, col = coord$col, cex = coord$cex)
+    viz_labels(x, margin = margin, axes = axes, active = active, sup = sup,
+               highlight = labels_what, top = labels_max,
+               col = coord$col, cex = coord$cex, reorder = FALSE)
   }
 
   ## Evaluate post-plot and pre-axis expressions

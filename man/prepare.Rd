@@ -7,12 +7,12 @@
 prepare(
   x,
   margin,
-  ...,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
   principal = TRUE,
   highlight = NULL,
+  reorder = TRUE,
   col = NULL,
   bg = NULL,
   pch = 16,
@@ -28,8 +28,6 @@ prepare(
 \item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
 which the data will be returned: \code{1} indicates individuals/rows (the
 default), \code{2} indicates variables/columns.}
-
-\item{...}{Currently not used.}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -60,6 +58,8 @@ a single character or an integer code for one of a set of graphics symbols.}
 and symbols should be scaled relative to the default.}
 
 \item{lty, lwd}{A specification for the line type and width.}
+
+\item{...}{Currently not used.}
 }
 \value{
 A \code{\link{data.frame}} with the following columns:
@@ -68,6 +68,7 @@ A \code{\link{data.frame}} with the following columns:
 \item{\code{y}}{Coordinates along y.}
 \item{\code{z}}{Variable to be highlighted.}
 \item{\code{label}}{Label.}
+\item{\code{sup}}{Is supplementary?}
 \item{\code{col}}{Color for lines and points.}
 \item{\code{bg}}{Background color.}
 \item{\code{pch}}{Symbol.}

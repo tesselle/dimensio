@@ -30,11 +30,11 @@
 <g clip-path='url(#cpODAuNjR8NDUyLjE2fDU5LjA0fDQzMC41Ng==)'>
 <line x1='80.64' y1='365.54' x2='452.16' y2='365.54' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
 <line x1='188.03' y1='430.56' x2='188.03' y2='59.04' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
-<circle cx='375.42' cy='110.13' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='262.11' cy='72.80' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='157.38' cy='205.05' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='207.43' cy='416.80' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
-<circle cx='263.67' cy='300.68' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
+<polygon points='375.42,105.93 379.06,112.23 371.79,112.23 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='262.11,68.60 265.75,74.90 258.48,74.90 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='157.38,200.85 161.01,207.15 153.74,207.15 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='207.43,412.60 211.06,418.90 203.79,418.90 ' style='stroke-width: 0.75; stroke: #FDE333;' />
+<polygon points='263.67,296.48 267.31,302.78 260.04,302.78 ' style='stroke-width: 0.75; stroke: #FDE333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHw1MDQuMDA=)'>
 <line x1='123.40' y1='430.56' x2='446.56' y2='430.56' style='stroke-width: 0.75;' />
