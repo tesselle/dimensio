@@ -56,7 +56,7 @@ tools to explore the results of the analysis.
       Frerebeau N (2024). _dimensio: Multivariate Data Analysis_.
       Université Bordeaux Montaigne, Pessac, France.
       doi:10.5281/zenodo.4478530 <https://doi.org/10.5281/zenodo.4478530>,
-      R package version 0.6.0, <https://packages.tesselle.org/dimensio/>.
+      R package version 0.7.0, <https://packages.tesselle.org/dimensio/>.
 
     A BibTeX entry for LaTeX users is
 
@@ -66,7 +66,7 @@ tools to explore the results of the analysis.
         year = {2024},
         organization = {Université Bordeaux Montaigne},
         address = {Pessac, France},
-        note = {R package version 0.6.0},
+        note = {R package version 0.7.0},
         doi = {10.5281/zenodo.4478530},
         url = {https://packages.tesselle.org/dimensio/},
       }

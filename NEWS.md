@@ -1,4 +1,4 @@
-# dimensio 0.6.0.9000
+# dimensio 0.7.0
 ## Bugfixes & changes
 * Fix highlighting in `viz_individuals()` and `viz_row()`.
 * The default number of labeled points can now be changed in `viz_individuals()`, `viz_row()`, `viz_variables()` and `viz_columns()`.
