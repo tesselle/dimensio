@@ -1,3 +1,5 @@
+# dimensio 0.7.0.9000
+
 # dimensio 0.7.0
 ## Bugfixes & changes
 * Fix highlighting in `viz_individuals()` and `viz_row()`.
