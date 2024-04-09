@@ -131,7 +131,6 @@ drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
 #' @param cex A numerical vector giving the amount by which plotting characters
 #'  and symbols should be scaled relative to the default.
 #' @param lty,lwd A specification for the line type and width.
-#' @param ... Currently not used.
 #' @return
 #'  A [`data.frame`] with the following columns:
 #'    \describe{

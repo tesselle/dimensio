@@ -58,8 +58,6 @@ a single character or an integer code for one of a set of graphics symbols.}
 and symbols should be scaled relative to the default.}
 
 \item{lty, lwd}{A specification for the line type and width.}
-
-\item{...}{Currently not used.}
 }
 \value{
 A \code{\link{data.frame}} with the following columns:
