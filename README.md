@@ -8,7 +8,7 @@
 [![R-CMD-check](https://github.com/tesselle/dimensio/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/dimensio/actions)
 [![codecov](https://codecov.io/gh/tesselle/dimensio/branch/main/graph/badge.svg?token=0mcb7gbZu3)](https://app.codecov.io/gh/tesselle/dimensio)
 [![CodeFactor](https://www.codefactor.io/repository/github/tesselle/dimensio/badge/main)](https://www.codefactor.io/repository/github/tesselle/dimensio/overview/main)
-[![Dependencies](https://tinyverse.netlify.com/badge/dimensio)](https://cran.r-project.org/package=dimensio)
+[![Dependencies](https://tinyverse.netlify.app/badge/dimensio)](https://cran.r-project.org/package=dimensio)
 
 <a href="https://tesselle.r-universe.dev/dimensio"
 class="pkgdown-devel"><img
