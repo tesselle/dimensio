@@ -20,7 +20,7 @@ setMethod(
                                     sup_row = sup_row, sup_col = clean$sup)
 
     ## Add supplementary quantitative variables
-    if (!is.null(sup_quanti)) set_extra(results) <- as.matrix(clean$extra)
+    if (!is.null(clean$extra)) set_extra(results) <- clean$extra
 
     results
   }

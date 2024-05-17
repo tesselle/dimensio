@@ -49,7 +49,7 @@
 #' @slot singular_values A [`numeric`] vector giving the singular values.
 #' @slot rows A [`MultivariateResults-class`] object.
 #' @slot columns A [`MultivariateResults-class`] object.
-#' @slot extra A [`matrix`] of extra variables.
+#' @slot extra A [`list`] of extra variables.
 #' @section Subset:
 #'  In the code snippets below, `x` is a `MultivariateAnalysis` object.
 #'  \describe{
@@ -70,7 +70,7 @@
     singular_values = "numeric",
     rows = "MultivariateResults",
     columns = "MultivariateResults",
-    extra = "matrix"
+    extra = "list"
   ),
   contains = "VIRTUAL"
 )

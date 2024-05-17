@@ -22,7 +22,7 @@ A virtual S4 class to store the output of a multivariate data analysis.
 
 \item{\code{columns}}{A \code{\linkS4class{MultivariateResults}} object.}
 
-\item{\code{extra}}{A \code{\link{matrix}} of extra variables.}
+\item{\code{extra}}{A \code{\link{list}} of extra variables.}
 }}
 
 \section{Subset}{

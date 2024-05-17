@@ -25,7 +25,7 @@ setMethod(
     )
 
     ## Add supplementary quantitative variables
-    if (!is.null(sup_quali)) set_extra(results) <- as.matrix(clean$extra)
+    if (!is.null(clean$extra)) set_extra(results) <- clean$extra
 
     results
   }
