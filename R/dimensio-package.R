@@ -33,6 +33,7 @@
 "_PACKAGE"
 
 #' @import arkhe
+#' @importFrom graffiti label
 #' @importFrom grDevices adjustcolor as.raster chull colorRamp hcl.colors rgb
 #' @importFrom methods Arith as as<- callGeneric callNextMethod
 #' .hasSlot initialize is new setClass setClassUnion

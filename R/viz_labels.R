@@ -8,8 +8,9 @@ NULL
 #' @param top An [`integer`] specifying the number of labels to draw.
 #'  Only the labels of the `top` \eqn{n} observations will be drawn.
 #'  If `NULL`, all labels are drawn.
-#' @param box A [`logical`] scalar: should a box be drawn underneath labels?
-#' @param segment A [`logical`] scalar: should segments be drawn?
+#' @param type A [`character`] string specifying the shape of the field.
+#'  It must be one of "`text`", "`shadow`" or "`box`". Any unambiguous substring
+#'  can be given.
 #' @param ... Further [graphical parameters][graphics::par], particularly,
 #'  character expansion, `cex` and color, `col`.
 #' @inheritParams prepare
@@ -32,7 +33,7 @@ setMethod(
   definition = function(x, margin, ..., axes = c(1, 2),
                         active = TRUE, sup = TRUE,
                         highlight = NULL, top = 10,
-                        box = FALSE, segment = FALSE) {
+                        type = "shadow") {
     ## Prepare data
     coord <- prepare(x, margin = margin, axes = axes, active = active,
                      sup = sup, highlight = highlight, ...)
@@ -51,12 +52,14 @@ setMethod(
     ## Clean
     coord <- coord[!is.na(coord$cex), , drop = FALSE]
 
-    arkhe::label_auto(
-      x = coord$x, y = coord$y,
+    graffiti::label(
+      x = coord$x,
+      y = coord$y,
       labels = coord$label,
-      segment = segment, box = box,
+      type = type,
       cex = coord$cex,
-      col = coord$col
+      col = coord$col,
+      xpd = TRUE
     )
   }
 )

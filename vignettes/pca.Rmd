@@ -78,13 +78,13 @@ A biplot is the simultaneous representation of rows and columns of a rectangular
 The form biplot favors the representation of the individuals: the distance between the individuals approximates the Euclidean distance between rows. In the form biplot the length of a vector approximates the quality of the representation of the variable.
 
 ```{r biplot-rows}
-biplot(X, type = "form", label = "variables")
+biplot(X, type = "form", labels = "variables")
 ```
 
 The covariance biplot favors the representation of the variables: the length of a vector approximates the standard deviation of the variable and the cosine of the angle formed by two vectors approximates the correlation between the two variables (Greenacre, 2010). In the covariance biplot the distance between the individuals approximates the Mahalanobis distance between rows.
 
 ```{r biplot-columns}
-biplot(X, type = "covariance", label = "variables")
+biplot(X, type = "covariance", labels = "variables")
 ```
 
 Biplots have the drawbacks of their advantages: they can quickly become difficult to read as they display a lot of information at once. It may then be preferable to visualize the results for individuals and variables separately.

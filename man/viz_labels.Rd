@@ -18,8 +18,7 @@ viz_labels(x, ...)
   sup = TRUE,
   highlight = NULL,
   top = 10,
-  box = FALSE,
-  segment = FALSE
+  type = "shadow"
 )
 }
 \arguments{
@@ -51,9 +50,9 @@ string is passed, it must be the name of a categorical variable, or one of
 Only the labels of the \code{top} \eqn{n} observations will be drawn.
 If \code{NULL}, all labels are drawn.}
 
-\item{box}{A \code{\link{logical}} scalar: should a box be drawn underneath labels?}
-
-\item{segment}{A \code{\link{logical}} scalar: should segments be drawn?}
+\item{type}{A \code{\link{character}} string specifying the shape of the field.
+It must be one of "\code{text}", "\code{shadow}" or "\code{box}". Any unambiguous substring
+can be given.}
 }
 \description{
 Non-Overlapping Text Labels
