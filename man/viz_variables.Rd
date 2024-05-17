@@ -24,8 +24,10 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
-  labels_max = 10,
   highlight = NULL,
+  color = NULL,
+  symbol = 16,
+  size = c(1, 3),
   xlim = NULL,
   ylim = NULL,
   main = NULL,
@@ -43,9 +45,11 @@ viz_columns(x, ...)
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
-  labels = TRUE,
-  labels_max = 10,
+  labels = list(how = "contribution", n = 10),
   highlight = NULL,
+  color = NULL,
+  symbol = NULL,
+  size = 1,
   xlim = NULL,
   ylim = NULL,
   main = NULL,
@@ -62,8 +66,10 @@ viz_columns(x, ...)
   active = TRUE,
   sup = TRUE,
   labels = FALSE,
-  labels_max = 10,
   highlight = NULL,
+  color = NULL,
+  symbol = 16,
+  size = c(1, 3),
   xlim = NULL,
   ylim = NULL,
   main = NULL,
@@ -78,7 +84,7 @@ viz_columns(x, ...)
 \arguments{
 \item{x}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
 
-\item{...}{Further \link[graphics:par]{graphical parameters} (see details).}
+\item{...}{Currently not used.}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -89,18 +95,25 @@ plotted?}
 \item{sup}{A \code{\link{logical}} scalar: should the supplementary observations be
 plotted?}
 
-\item{labels}{A \code{\link{logical}} scalar: should labels be drawn?}
-
-\item{labels_max}{An \code{\link{integer}} specifying the number of labels to draw.
-Only the labels of the \eqn{n} variables contributing the most to the
-factorial map will be drawn. If \code{NULL}, all labels are drawn.
-Only used if \code{labels} is \code{TRUE}.}
+\item{labels}{A \code{\link{logical}} scalar: should labels be drawn? Labeling a large
+number of points can be computationally expensive and make the graph
+difficult to read. A selection of points to label can be provided using a
+\code{list} of two named elements, \code{how} (a string specifying how to select the
+labels to be drawn) and \code{n} (an integer specifying the number of labels to
+be drawx). See examples below.}
 
 \item{highlight}{A vector specifying the information to be highlighted.
 If \code{NULL} (the default), no highlighting is applied. If a single \code{character}
 string is passed, it must be the name of a categorical variable, or one of
 "\code{observation}", "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}"
 (see \code{\link[=augment]{augment()}}).}
+
+\item{color}{The colors for lines and points (will be mapped to \code{highlight}).}
+
+\item{symbol}{A vector of plotting characters or symbols.}
+
+\item{size}{A length-two \code{\link{numeric}} vector giving range of possible sizes
+(greater than 0; (will be mapped to \code{highlight}).}
 
 \item{xlim}{A length-two \code{\link{numeric}} vector giving the x limits of the plot.
 The default value, \code{NULL}, indicates that the range of the
@@ -132,23 +145,6 @@ being displayed. Invisibly returns \code{x}.
 \description{
 Plots column/variable principal coordinates.
 }
-\details{
-Commonly used \link[graphics:par]{graphical parameters} are:
-\describe{
-\item{\code{pch}}{A vector of plotting characters or symbols. This can either be
-a single character or an integer code for one of a set of
-graphics symbols.}
-\item{\code{cex}}{A numerical vector giving the amount by which plotting
-characters and symbols should be scaled relative to the
-default.}
-\item{\code{lty}}{A vector of line types.}
-\item{\code{lwd}}{A vector of line widths.}
-\item{\code{col}}{The colors for lines and points. Multiple colors can be
-specified so that each point can be given its own color.}
-\item{\code{bg}}{The background color for the open plot symbols given by
-\code{pch = 21:25}.}
-}
-}
 \note{
 Be careful: graphical parameters are silently recycled.
 }
@@ -162,31 +158,31 @@ X <- pca(iris, scale = TRUE)
 ## Plot individuals
 viz_individuals(X, panel.last = graphics::grid())
 
+## Labels of the 10 individuals with highest cos2
+viz_individuals(X, labels = list(how = "cos2", n = 10))
+
 ## Plot variables
 viz_variables(X, panel.last = graphics::grid())
 
 ## Graphical parameters
 ## Continuous values
-viz_individuals(X, highlight = iris$Petal.Length, pch = 16)
-viz_individuals(X, highlight = iris$Petal.Length, pch = 16,
-                col = grDevices::hcl.colors(12, "RdPu"))
-viz_individuals(X, highlight = iris$Petal.Length, pch = 16,
-                col = grDevices::hcl.colors(12, "RdPu"),
-                cex = c(1, 2))
+viz_individuals(X, highlight = iris$Petal.Length, symbol = 16, size = c(1, 2))
+viz_individuals(X, highlight = iris$Petal.Length, symbol = 16, size = c(1, 2),
+                color = grDevices::hcl.colors(12, "RdPu"))
 
 viz_variables(X, highlight = "contribution",
-              col = grDevices::hcl.colors(12, "BluGrn", rev = TRUE),
-              lwd = c(1, 5))
+              color = grDevices::hcl.colors(12, "BluGrn", rev = TRUE),
+              size = c(0, 1))
 
 ## Discrete values
-viz_individuals(X, highlight = iris$Species, pch = 21:23)
-viz_individuals(X, highlight = iris$Species, pch = 21:23,
-                bg = c("#004488", "#DDAA33", "#BB5566"),
-                col = "black")
+viz_individuals(X, highlight = iris$Species, symbol = 21:23)
+viz_individuals(X, highlight = iris$Species, symbol = 21:23,
+                fill = c("#004488", "#DDAA33", "#BB5566"),
+                color = "black")
 
 viz_variables(X, highlight = c("Petal", "Petal", "Sepal", "Sepal"),
-              col = c("#EE7733", "#0077BB"),
-              lty = c(1, 3))
+              color = c("#EE7733", "#0077BB"),
+              symbol = c(1, 3))
 }
 \seealso{
 Other plot methods: 

@@ -528,25 +528,7 @@ NULL
 #'
 #' Plots row/individual principal coordinates.
 #' @inheritParams viz_points
-#' @param labels_max An [`integer`] specifying the number of labels to draw.
-#'  Only the labels of the \eqn{n} observations with highest \eqn{cos^2}{cos2}
-#'  values will be drawn. If `NULL`, all labels are drawn.
-#'  Only used if `labels` is `TRUE`.
 #' @param ... Further [graphical parameters][graphics::par] (see details).
-#' @details
-#'  Commonly used [graphical parameters][graphics::par] are:
-#'  \describe{
-#'   \item{`pch`}{A vector of plotting characters or symbols. This can either be
-#'                a single character or an integer code for one of a set of
-#'                graphics symbols.}
-#'   \item{`cex`}{A numerical vector giving the amount by which plotting
-#'                characters and symbols should be scaled relative to the
-#'                default.}
-#'   \item{`col`}{The colors for lines and points. Multiple colors can be
-#'                specified so that each point can be given its own color.}
-#'   \item{`bg`}{The background color for the open plot symbols given by
-#'               `pch = 21:25`.}
-#'  }
 #' @return
 #'  `viz_*()` is called for its side-effects: it results in a graphic
 #'  being displayed. Invisibly returns `x`.
@@ -573,26 +555,6 @@ setGeneric(
 #'
 #' Plots column/variable principal coordinates.
 #' @inheritParams viz_points
-#' @param labels_max An [`integer`] specifying the number of labels to draw.
-#'  Only the labels of the \eqn{n} variables contributing the most to the
-#'  factorial map will be drawn. If `NULL`, all labels are drawn.
-#'  Only used if `labels` is `TRUE`.
-#' @details
-#'  Commonly used [graphical parameters][graphics::par] are:
-#'  \describe{
-#'   \item{`pch`}{A vector of plotting characters or symbols. This can either be
-#'                a single character or an integer code for one of a set of
-#'                graphics symbols.}
-#'   \item{`cex`}{A numerical vector giving the amount by which plotting
-#'                characters and symbols should be scaled relative to the
-#'                default.}
-#'   \item{`lty`}{A vector of line types.}
-#'   \item{`lwd`}{A vector of line widths.}
-#'   \item{`col`}{The colors for lines and points. Multiple colors can be
-#'                specified so that each point can be given its own color.}
-#'   \item{`bg`}{The background color for the open plot symbols given by
-#'               `pch = 21:25`.}
-#'  }
 #' @return
 #'  `viz_*()` is called for its side-effects: it results in a graphic
 #'  being displayed. Invisibly returns `x`.

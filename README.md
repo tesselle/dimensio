@@ -94,7 +94,7 @@ remotes::install_github("tesselle/dimensio")
 
 ``` r
 ## Install extra packages (if needed)
-# install.packages("khroma")
+# install.packages("khroma") # Color schemes
 
 ## Load packages
 library(dimensio)
@@ -156,24 +156,24 @@ biplot(X, type = "form")
 viz_individuals(
   x = X, 
   highlight = iris$Species, 
-  col = khroma::color("high contrast")(3), 
-  pch = 16
+  symbol = 16,
+  color = c("#004488", "#DDAA33", "#BB5566")
 )
 ## Add ellipses
 viz_tolerance(
   x = X, 
   group = iris$Species, 
   level = 0.95,
-  border = khroma::color("high contrast")(3)
+  border = c("#004488", "#DDAA33", "#BB5566")
 )
 
 ## Highlight petal length
 viz_individuals(
   x = X,
   highlight = iris$Petal.Length,
-  col = khroma::color("iridescent")(255), 
-  cex = c(1, 2),
-  pch = 16
+  color = khroma::color("iridescent")(255), 
+  size = c(1, 2),
+  symbol = 16
 )
 ```
 

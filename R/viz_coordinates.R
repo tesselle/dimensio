@@ -10,13 +10,14 @@ setMethod(
   f = "viz_rows",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, labels_max = 10, highlight = NULL,
+                        labels = FALSE, highlight = NULL,
+                        color = NULL, symbol = 16, size = c(1, 3),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
-               labels = labels, labels_max = labels_max,
-               labels_what = "cos2", highlight = highlight,
+               labels = labels, highlight = highlight,
+               color = color, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -46,13 +47,14 @@ setMethod(
   f = "viz_individuals",
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, labels_max = 10, highlight = NULL,
+                        labels = FALSE, highlight = NULL,
+                        color = NULL, symbol = 16, size = c(1, 3),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
-               labels = labels, labels_max = labels_max,
-               labels_what = "cos2", highlight = highlight,
+               labels = labels, highlight = highlight,
+               color = color, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -68,13 +70,14 @@ setMethod(
   f = "viz_columns",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, labels_max = 10, highlight = NULL,
+                        labels = FALSE, highlight = NULL,
+                        color = NULL, symbol = 16, size = c(1, 3),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
-               labels = labels, labels_max = labels_max,
-               labels_what = "contribution", highlight = highlight,
+               labels = labels, highlight = highlight,
+               color = color, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -104,13 +107,17 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = TRUE, labels_max = 10, highlight = NULL,
+                        labels = list(how = "contribution", n = 10),
+                        highlight = NULL,
+                        color = NULL, symbol = NULL, size = 1,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     ## Prepare data
     coord <- prepare(x, margin = 2, axes = axes, active = active,
-                     sup = sup, highlight = highlight, ...)
+                     sup = sup, highlight = highlight,
+                     color = color, line_type = symbol,
+                     line_width = size, ...)
 
     ## Save and restore graphical parameters
     ## pty: square plotting region, independent of device size
@@ -138,8 +145,8 @@ setMethod(
 
     ## Scaled variables?
     if (is_scaled(x)) {
-      arkhe::circle(x = 0, y = 0, radius = 1, lwd = 1,
-                    border = graphics::par("fg"), n = 100)
+      graffiti::circle(x = 0, y = 0, radius = 1, lwd = 1,
+                       border = graphics::par("fg"), n = 100)
     }
 
     graphics::arrows(
@@ -150,11 +157,9 @@ setMethod(
     )
 
     ## Labels
-    if (!isFALSE(labels)) {
-      origin <- get_order(x, margin = 2)
-      viz_labels(x, margin = 2, axes = axes, active = active, sup = sup,
-                 highlight = "contribution", top = labels_max,
-                 col = coord$col, cex = coord$cex, reorder = FALSE)
+    if (isTRUE(labels)) labels <- list()
+    if (is.list(labels)) {
+      viz_labels(coord, select = labels$how, n = labels$n)
     }
 
     ## Evaluate post-plot and pre-axis expressions
@@ -194,13 +199,14 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "CA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, labels_max = 10, highlight = NULL,
+                        labels = FALSE, highlight = NULL,
+                        color = NULL, symbol = 16, size = c(1, 3),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
-               labels = labels, labels_max = labels_max,
-               labels_what = "contribution", highlight = highlight,
+               labels = labels, highlight = highlight,
+               color = color, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
                legend = legend, ...)
@@ -225,13 +231,12 @@ setMethod(
 #' Build a Factor Map
 #'
 #' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
-#' @param labels A [`logical`] scalar: should labels be drawn?
-#' @param labels_max An [`integer`] specifying the number of labels to draw.
-#'  Only the labels of the `top` \eqn{n} observations contributing the most to
-#'  the factorial map will be drawn. If `NULL`, all labels are drawn.
-#'  Only used if `labels` is `TRUE`.
-#' @param labels_what A [`character`] string specifying how to select the
-#'  labels to be drawn.
+#' @param labels A [`logical`] scalar: should labels be drawn? Labeling a large
+#'  number of points can be computationally expensive and make the graph
+#'  difficult to read. A selection of points to label can be provided using a
+#'  `list` of two named elements, `how` (a string specifying how to select the
+#'  labels to be drawn) and `n` (an integer specifying the number of labels to
+#'  be drawx). See examples below.
 #' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
 #'  The default value, `NULL`, indicates that the range of the
 #'  [finite][is.finite()] values to be plotted should be used.
@@ -253,21 +258,25 @@ setMethod(
 #' @param legend A [`list`] of additional arguments to be passed to
 #'  [graphics::legend()]; names of the list are used as argument names.
 #'  If `NULL`, no legend is displayed.
-#' @param ... Further [graphical parameters][graphics::par] (see details).
+#' @param ... Currently not used.
+#' @param symbol A vector of plotting characters or symbols.
 #' @inheritParams prepare
 #' @author N. Frerebeau
 #' @keywords internal
 viz_points <- function(x, margin, axes, ...,
                        active = TRUE, sup = TRUE,
-                       labels = FALSE, labels_max = 10, labels_what = NULL,
-                       highlight = NULL, xlim = NULL, ylim = NULL,
+                       labels = list(how = "contribution", n = 10),
+                       highlight = NULL, color = NULL,
+                       symbol = 16, size = c(1, 3),
+                       xlim = NULL, ylim = NULL,
                        main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
                        ann = graphics::par("ann"), frame.plot = TRUE,
                        panel.first = NULL, panel.last = NULL,
                        legend = list(x = "topleft")) {
   ## Prepare data
   coord <- prepare(x, margin = margin, axes = axes, active = active,
-                   sup = sup, highlight = highlight, ...)
+                   sup = sup, highlight = highlight,
+                   color = color, shape = symbol, size = size, ...)
 
   ## Save and restore graphical parameters
   ## pty: square plotting region, independent of device size
@@ -300,10 +309,9 @@ viz_points <- function(x, margin, axes, ...,
   )
 
   ## Labels
-  if (!isFALSE(labels)) {
-    viz_labels(x, margin = margin, axes = axes, active = active, sup = sup,
-               highlight = labels_what, top = labels_max,
-               col = coord$col, cex = coord$cex, reorder = FALSE)
+  if (isTRUE(labels)) labels <- list()
+  if (is.list(labels)) {
+    viz_labels(coord, select = labels$how, n = labels$n)
   }
 
   ## Evaluate post-plot and pre-axis expressions
@@ -338,4 +346,39 @@ viz_points <- function(x, margin, axes, ...,
 print_variance <- function(object, axis) {
   v <- get_variance(object, digits = 1) # Get percentage of variance
   sprintf("%s (%g%%)", names(v)[[axis]], v[[axis]])
+}
+
+#' Non-Overlapping Text Labels
+#'
+#' @param x A [`data.frame`] (typically returned by [prepare()]).
+#' @param select A [`character`] string specifying the variable to select
+#'  labels. If `NULL`, all labels are drawn.
+#' @param n An [`integer`] specifying the number of labels to draw.
+#'  Only the labels of the top \eqn{n} observations according to `select` will
+#'  be drawn. If `NULL`, all labels are drawn.
+#' @param type A [`character`] string specifying the shape of the field.
+#'  It must be one of "`text`", "`shadow`" or "`box`". Any unambiguous substring
+#'  can be given.
+#' @param ... Currently not used.
+#' @author N. Frerebeau
+#' @keywords internal
+viz_labels <- function(x, select = "contribution", n = 10,
+                       type = "shadow", ...) {
+  ## Select
+  if (!is.null(select) && !is.null(n) && n > 0) {
+    top <- min(nrow(x), n)
+    how <- x[[select]]
+    k <- order(how, decreasing = TRUE)[seq_len(top)] # Get order
+    x <- x[k, , drop = FALSE] # Subset
+  }
+
+  graffiti::label(
+    x = x$x,
+    y = x$y,
+    labels = x$label,
+    type = type,
+    col = x$col,
+    # cex = x$cex,
+    xpd = TRUE
+  )
 }

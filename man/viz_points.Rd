@@ -11,10 +11,11 @@ viz_points(
   ...,
   active = TRUE,
   sup = TRUE,
-  labels = FALSE,
-  labels_max = 10,
-  labels_what = NULL,
+  labels = list(how = "contribution", n = 10),
   highlight = NULL,
+  color = NULL,
+  symbol = 16,
+  size = c(1, 3),
   xlim = NULL,
   ylim = NULL,
   main = NULL,
@@ -38,7 +39,7 @@ default), \code{2} indicates variables/columns.}
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
 
-\item{...}{Further \link[graphics:par]{graphical parameters} (see details).}
+\item{...}{Currently not used.}
 
 \item{active}{A \code{\link{logical}} scalar: should the active observations be
 plotted?}
@@ -46,21 +47,25 @@ plotted?}
 \item{sup}{A \code{\link{logical}} scalar: should the supplementary observations be
 plotted?}
 
-\item{labels}{A \code{\link{logical}} scalar: should labels be drawn?}
-
-\item{labels_max}{An \code{\link{integer}} specifying the number of labels to draw.
-Only the labels of the \code{top} \eqn{n} observations contributing the most to
-the factorial map will be drawn. If \code{NULL}, all labels are drawn.
-Only used if \code{labels} is \code{TRUE}.}
-
-\item{labels_what}{A \code{\link{character}} string specifying how to select the
-labels to be drawn.}
+\item{labels}{A \code{\link{logical}} scalar: should labels be drawn? Labeling a large
+number of points can be computationally expensive and make the graph
+difficult to read. A selection of points to label can be provided using a
+\code{list} of two named elements, \code{how} (a string specifying how to select the
+labels to be drawn) and \code{n} (an integer specifying the number of labels to
+be drawx). See examples below.}
 
 \item{highlight}{A vector specifying the information to be highlighted.
 If \code{NULL} (the default), no highlighting is applied. If a single \code{character}
 string is passed, it must be the name of a categorical variable, or one of
 "\code{observation}", "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}"
 (see \code{\link[=augment]{augment()}}).}
+
+\item{color}{The colors for lines and points (will be mapped to \code{highlight}).}
+
+\item{symbol}{A vector of plotting characters or symbols.}
+
+\item{size}{A length-two \code{\link{numeric}} vector giving range of possible sizes
+(greater than 0; (will be mapped to \code{highlight}).}
 
 \item{xlim}{A length-two \code{\link{numeric}} vector giving the x limits of the plot.
 The default value, \code{NULL}, indicates that the range of the

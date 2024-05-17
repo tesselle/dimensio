@@ -122,15 +122,14 @@ drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
 #'  string is passed, it must be the name of a categorical variable, or one of
 #'  "`observation`", "`mass`", "`sum`", "`contribution`" or "`cos2`"
 #'  (see [`augment()`]).
-#  It will only be mapped if at least one [graphical parameters][graphics::par]
-#  is explicitly specified (see examples).
-#' @param col The colors for lines and points.
-#' @param bg The background color for the open plot symbols given by `pch = 21:25`.
-#' @param pch A vector of plotting characters or symbols. This can either be
-#' a single character or an integer code for one of a set of graphics symbols.
-#' @param cex A numerical vector giving the amount by which plotting characters
-#'  and symbols should be scaled relative to the default.
-#' @param lty,lwd A specification for the line type and width.
+#' @param color The colors for lines and points (will be mapped to `highlight`).
+#' @param shape A vector of plotting characters or symbols (will be mapped to
+#'  `highlight`). This can either be a single character or an integer code for
+#'  one of a set of graphics symbols.
+#' @param size A length-two [`numeric`] vector giving range of possible sizes
+#'  (greater than 0; (will be mapped to `highlight`).
+#' @param line_type,line_width A specification for the line type and width (will
+#'  be mapped to `highlight`).
 #' @return
 #'  A [`data.frame`] with the following columns:
 #'    \describe{
@@ -151,8 +150,18 @@ drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
 prepare <- function(x, margin, axes = c(1, 2), active = TRUE,
                     sup = TRUE, principal = TRUE,
                     highlight = NULL, reorder = TRUE,
-                    col = NULL, bg = NULL, pch = 16, cex = NULL,
-                    lty = NULL, lwd = NULL, alpha = FALSE) {
+                    color = NULL, fill = NULL,
+                    shape = 16, size = c(1, 3),
+                    line_type = NULL, line_width = size, ...) {
+  ## /!\ Backward compatibility /!\
+  dots <- list(...)
+  color <- dots$col %||% color
+  fill <- dots$bg %||% fill
+  size <- dots$cex %||% size
+  shape <- dots$pch %||% shape
+  ltype <- dots$lty %||% line_type
+  lwidth <- dots$lwd %||% line_width
+
   ## Prepare data
   data <- augment(x, margin = margin, axes = axes, principal = principal)
   n <- nrow(data)
@@ -164,25 +173,31 @@ prepare <- function(x, margin, axes = c(1, 2), active = TRUE,
     arkhe::assert_length(highlight, n)
     if (reorder) highlight <- highlight[origin]
   }
-  if (reorder) {
-    if (length(col) == n) col <- col[origin]
-    if (length(bg) == n) bg <- bg[origin]
-    if (length(pch) == n) pch <- pch[origin]
-    if (length(lty) == n) lty <- lty[origin]
-    if (length(cex) == n) cex <- cex[origin]
-    if (length(lwd) == n) lwd <- lwd[origin]
-  }
 
   ## Recode
-  data$observation <- "active"
-  data$observation[data$supplementary] <- "suppl."
+  data$observation <- ifelse(data$supplementary, "suppl.", "active")
+
+  ## Graphical parameters
+  f <- function(x, n) {
+    if (length(x) == 1) x <- rep(x, n)
+    x
+  }
+
+  color <- f(color, n)
+  fill <- f(fill, n)
+  size <- f(size, n)
+  shape <- f(shape, n)
+  ltype <- f(ltype, n)
+  lwidth <- f(lwidth, n)
 
   ## Highlight
   if (length(highlight) == 1) {
     high <- NULL
+    ## Look for a variable in the original data
     if (has_extra(x)) {
       high <- get_extra(x)[[highlight]]
     }
+    ## If nothing is found, look for statistical information
     if (is.null(high)) {
       choices <- c("mass", "sum", "contribution", "cos2", "observation")
       highlight <- match.arg(highlight, choices = choices, several.ok = FALSE)
@@ -190,53 +205,45 @@ prepare <- function(x, margin, axes = c(1, 2), active = TRUE,
     }
     highlight <- high
   }
+  if (is.null(highlight)) {
+    highlight <- character(n)
+    fill <- fill %||% graphics::par("bg")
+    color <- color %||% graphics::par("col")
+  }
 
-  ## Graphical parameters
-  ## Colors
-  col <- scale_color(x = highlight, col = col, alpha = alpha)
-  bg <- scale_color(x = highlight, col = bg, alpha = alpha)
-
-  if (length(pch) == 1) pch <- rep(pch, length.out = n)
-  if (length(lty) == 1) lty <- rep(lty, length.out = n)
-  if (length(cex) == 1) cex <- rep(cex, length.out = n)
-  if (length(lwd) == 1) lwd <- rep(lwd, length.out = n)
-  if (!is.double(highlight)) { # Discrete scales
-    ## Symbol
-    pch <- scale_symbol(x = highlight, symb = pch, what = "pch")
-    ## Line type
-    lty <- scale_symbol(x = highlight, symb = lty, what = "lty")
-    ## Size
-    cex <- cex %||% graphics::par("cex")
-    ## Line width
-    lwd <- lwd %||% graphics::par("lwd")
-  } else { # Continuous scales
-    ## Symbol
-    pch <- pch %||% graphics::par("pch")
-    ## Line type
-    lty <- lty %||% graphics::par("lty")
-    ## Size
-    cex <- scale_size(x = highlight, size = cex, what = "cex")
-    ## Line width
-    lwd <- scale_size(x = highlight, size = lwd, what = "lwd")
+  color <- graffiti::palette_color(colors = color)(highlight) # Colors
+  fill <- graffiti::palette_color(colors = fill)(highlight) # Background
+  if (!is.double(highlight)) {
+    ## Discrete scales
+    shape <- graffiti::palette_shape(symbol = shape)(highlight) # Symbol
+    ltype <- graffiti::palette_line(types = ltype)(highlight) # Line type
+    size <- size[[1L]] %||% graphics::par("size") # Size
+    lwidth <- lwidth[[1L]] %||% graphics::par("lwd") # Line width
+  } else {
+    ## Continuous scales
+    shape <- shape[[1L]] %||% graphics::par("pch") # Symbol
+    ltype <- ltype[[1L]] %||% graphics::par("lty") # Line type
+    size <- graffiti::palette_size_range(range = size)(highlight)
+    lwidth <- graffiti::palette_size_range(range = lwidth)(highlight)
   }
 
   coord <- data.frame(
-    x = data[[1]],
-    y = data[[2]],
-    z = highlight %||% character(n),
+    data,
+    x = data[[1L]],
+    y = data[[2L]],
+    z = highlight,
     label = data$label,
-    sup = data$supplementary,
-    col = col,
-    bg = bg,
-    pch = pch,
-    cex = cex,
-    lty = lty,
-    lwd = lwd
+    col = color,
+    bg = fill,
+    pch = shape,
+    cex = size,
+    lty = ltype,
+    lwd = lwidth
   )
 
   ## Subset
-  if (active & !sup) coord <- coord[!coord$sup, , drop = FALSE]
-  if (!active & sup) coord <- coord[coord$sup, , drop = FALSE]
+  if (active & !sup) coord <- coord[!coord$supplementary, , drop = FALSE]
+  if (!active & sup) coord <- coord[coord$supplementary, , drop = FALSE]
 
   coord
 }
@@ -257,13 +264,13 @@ prepare_legend <- function(x, args, points = TRUE, lines = TRUE) {
   if (!is.null(h) && length(unique(h)) > 1 && is.list(args) && length(args) > 0) {
     if (is.double(h)) {
       ## Continuous scale
-      im <- grDevices::as.raster(x$col)
+      # im <- grDevices::as.raster(x$col)
 
       pr <- pretty(h, n = ifelse(nrow(x) > 5, 5, nrow(x)))
       pr <- pr[pr <= max(h) & pr >= min(h)]
       i <- order(h, method = "radix")[!duplicated(h)]
 
-      col <- grDevices::colorRamp(x$col[i])(arkhe::scale_range(pr, from = range(h)))
+      col <- grDevices::colorRamp(x$col[i])(graffiti::scale_range(pr, from = range(h)))
       col <- grDevices::rgb(col, maxColorValue = 255)
 
       leg <- list(legend = pr, col = col)
@@ -295,41 +302,3 @@ prepare_legend <- function(x, args, points = TRUE, lines = TRUE) {
     do.call(graphics::legend, args = leg)
   }
 }
-
-scale_color <- function(x, col = NULL, alpha = FALSE) {
-  if (is.null(x) || all(is.na(x))) {
-    col <- col %||% graphics::par("col")
-    return(col)
-  }
-  if (length(col) == length(x)) return(col)
-
-  if (is.double(x)) {
-    ## Continuous scale
-    col <- arkhe::palette_color_continuous(x, palette = col)
-    if (alpha) col <- grDevices::adjustcolor(col, alpha.f = alpha)
-  } else {
-    ## Discrete scale
-    col <- arkhe::palette_color_discrete(x, palette = col)
-  }
-
-  col
-}
-scale_symbol <- function(x, symb = NULL, what = "pch") {
-  if (is.null(x) || all(is.na(x))) {
-    symb <- symb %||% graphics::par(what)
-    return(symb)
-  }
-  if (length(symb) == length(x)) return(symb)
-
-  arkhe::palette_shape(x = x, palette = symb)
-}
-scale_size <- function(x, size = NULL, what = "cex") {
-  if (is.null(x) || all(is.na(x))) {
-    size <- size %||% graphics::par(what)
-    return(size)
-  }
-  if (length(size) == length(x)) return(size)
-
-  arkhe::palette_size(x = x, palette = size)
-}
-

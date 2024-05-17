@@ -13,13 +13,13 @@ prepare(
   principal = TRUE,
   highlight = NULL,
   reorder = TRUE,
-  col = NULL,
-  bg = NULL,
-  pch = 16,
-  cex = NULL,
-  lty = NULL,
-  lwd = NULL,
-  alpha = FALSE
+  color = NULL,
+  fill = NULL,
+  shape = 16,
+  size = c(1, 3),
+  line_type = NULL,
+  line_width = size,
+  ...
 )
 }
 \arguments{
@@ -47,17 +47,17 @@ string is passed, it must be the name of a categorical variable, or one of
 "\code{observation}", "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}"
 (see \code{\link[=augment]{augment()}}).}
 
-\item{col}{The colors for lines and points.}
+\item{color}{The colors for lines and points (will be mapped to \code{highlight}).}
 
-\item{bg}{The background color for the open plot symbols given by \code{pch = 21:25}.}
+\item{shape}{A vector of plotting characters or symbols (will be mapped to
+\code{highlight}). This can either be a single character or an integer code for
+one of a set of graphics symbols.}
 
-\item{pch}{A vector of plotting characters or symbols. This can either be
-a single character or an integer code for one of a set of graphics symbols.}
+\item{size}{A length-two \code{\link{numeric}} vector giving range of possible sizes
+(greater than 0; (will be mapped to \code{highlight}).}
 
-\item{cex}{A numerical vector giving the amount by which plotting characters
-and symbols should be scaled relative to the default.}
-
-\item{lty, lwd}{A specification for the line type and width.}
+\item{line_type, line_width}{A specification for the line type and width (will
+be mapped to \code{highlight}).}
 }
 \value{
 A \code{\link{data.frame}} with the following columns:

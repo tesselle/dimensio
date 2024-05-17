@@ -39,12 +39,12 @@ biplot.CA <- function(x, ..., axes = c(1, 2),
   ## Get data
   coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
                         principal = princ_row, highlight = "observation",
-                        col = col.rows, pch = pch.rows,
-                        cex = cex.rows, lty = 0)
+                        color = col.rows, shape = pch.rows,
+                        size = cex.rows, line_type = 0)
   coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
                         principal = princ_col, highlight = "observation",
-                        col = col.columns, pch = pch.columns,
-                        cex = cex.columns, lty = 0)
+                        color = col.columns, shape = pch.columns,
+                        size = cex.columns, line_type = 0)
 
   ## Graphical parameters
   if (type == "contributions") {
@@ -103,10 +103,10 @@ biplot.PCA <- function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
   ## Get data
   coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
                         principal = princ_row, highlight = "observation",
-                        col = col.rows, pch = pch, cex = cex, lty = 0)
+                        color = col.rows, shape = pch, size = cex, line_type = 0)
   coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
                         principal = princ_col, highlight = "observation",
-                        col = col.columns, lty = lty, lwd = lwd, pch = NA)
+                        color = col.columns, line_type = lty, line_width = lwd, shape = NA)
 
   arrows_col <- function() {
     graphics::arrows(
@@ -213,19 +213,25 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   if (!is.null(labels)) {
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {
-      arkhe::label_auto(
-        x = coord_row$x, y = coord_row$y,
+      graffiti::label(
+        x = coord_row$x,
+        y = coord_row$y,
         labels = coord_row$label,
+        type = "shadow",
         cex = coord_row$cex,
-        col = coord_row$col
+        col = coord_row$col,
+        xpd = TRUE
       )
     }
     if (any(labels == "columns") | any(labels == "variables")) {
-      arkhe::label_auto(
-        x = coord_col$x, y = coord_col$y,
+      graffiti::label(
+        x = coord_col$x,
+        y = coord_col$y,
         labels = coord_col$label,
+        type = "shadow",
         cex = coord_col$cex,
-        col = coord_col$col
+        col = coord_col$col,
+        xpd = TRUE
       )
     }
   }
