@@ -1,3 +1,5 @@
+# dimensio 0.8.0.9000
+
 # dimensio 0.8.0
 ## Enhancements
 * Improve aesthetic mapping in scatterplots.
