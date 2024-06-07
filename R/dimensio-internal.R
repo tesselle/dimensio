@@ -211,20 +211,20 @@ prepare <- function(x, margin, axes = c(1, 2), active = TRUE,
     color <- color %||% graphics::par("col")
   }
 
-  color <- graffiti::palette_color(colors = color)(highlight) # Colors
-  fill <- graffiti::palette_color(colors = fill)(highlight) # Background
+  color <- palette_color(colors = color)(highlight) # Colors
+  fill <- palette_color(colors = fill)(highlight) # Background
   if (!is.double(highlight)) {
     ## Discrete scales
-    shape <- graffiti::palette_shape(symbol = shape)(highlight) # Symbol
-    ltype <- graffiti::palette_line(types = ltype)(highlight) # Line type
+    shape <- palette_shape(symbols = shape)(highlight) # Symbol
+    ltype <- palette_line(types = ltype)(highlight) # Line type
     size <- size[[1L]] %||% graphics::par("size") # Size
     lwidth <- lwidth[[1L]] %||% graphics::par("lwd") # Line width
   } else {
     ## Continuous scales
     shape <- shape[[1L]] %||% graphics::par("pch") # Symbol
     ltype <- ltype[[1L]] %||% graphics::par("lty") # Line type
-    size <- graffiti::palette_size_range(range = size)(highlight)
-    lwidth <- graffiti::palette_size_range(range = lwidth)(highlight)
+    size <- palette_size_range(range = size)(highlight)
+    lwidth <- palette_size_range(range = lwidth)(highlight)
   }
 
   coord <- data.frame(
@@ -270,7 +270,7 @@ prepare_legend <- function(x, args, points = TRUE, lines = TRUE) {
       pr <- pr[pr <= max(h) & pr >= min(h)]
       i <- order(h, method = "radix")[!duplicated(h)]
 
-      col <- grDevices::colorRamp(x$col[i])(graffiti::scale_range(pr, from = range(h)))
+      col <- grDevices::colorRamp(x$col[i])(scale_range(pr, from = range(h)))
       col <- grDevices::rgb(col, maxColorValue = 255)
 
       leg <- list(legend = pr, col = col)

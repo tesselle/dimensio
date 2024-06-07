@@ -213,7 +213,7 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   if (!is.null(labels)) {
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {
-      graffiti::label(
+      label(
         x = coord_row$x,
         y = coord_row$y,
         labels = coord_row$label,
@@ -224,7 +224,7 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
       )
     }
     if (any(labels == "columns") | any(labels == "variables")) {
-      graffiti::label(
+      label(
         x = coord_col$x,
         y = coord_col$y,
         labels = coord_col$label,

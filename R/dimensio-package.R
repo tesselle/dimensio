@@ -33,12 +33,11 @@
 "_PACKAGE"
 
 #' @import arkhe
-#' @importFrom graffiti label
 #' @importFrom grDevices adjustcolor as.raster chull colorRamp hcl.colors rgb
 #' @importFrom methods Arith as as<- callGeneric callNextMethod
 #' .hasSlot initialize is new setClass setClassUnion
 #' setGeneric setMethod slot slot<- slotNames validObject .valueClassTest
-#' @importFrom stats aggregate approx cov na.omit qchisq qf rmultinom
+#' @importFrom stats aggregate approx cov na.omit qchisq qf rmultinom runif
 #' @importFrom utils capture.output modifyList stack tail
 NULL
 

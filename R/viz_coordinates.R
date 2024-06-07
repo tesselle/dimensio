@@ -145,8 +145,8 @@ setMethod(
 
     ## Scaled variables?
     if (is_scaled(x)) {
-      graffiti::circle(x = 0, y = 0, radius = 1, lwd = 1,
-                       border = graphics::par("fg"), n = 100)
+      circle(x = 0, y = 0, radius = 1, lwd = 1,
+             border = graphics::par("fg"), n = 100)
     }
 
     graphics::arrows(
@@ -372,7 +372,7 @@ viz_labels <- function(x, select = "contribution", n = 10,
     x <- x[k, , drop = FALSE] # Subset
   }
 
-  graffiti::label(
+  label(
     x = x$x,
     y = x$y,
     labels = x$label,
