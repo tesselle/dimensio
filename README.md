@@ -51,28 +51,17 @@ as [**FactoMineR**](http://factominer.free.fr/),
 is designed to be as simple as possible, providing all the necessary
 tools to explore the results of the analysis.
 
-    To cite dimensio in publications use:
+------------------------------------------------------------------------
 
-      Frerebeau N (2024). _dimensio: Multivariate Data Analysis_.
-      Université Bordeaux Montaigne, Pessac, France.
-      doi:10.5281/zenodo.4478530 <https://doi.org/10.5281/zenodo.4478530>,
-      R package version 0.7.0, <https://packages.tesselle.org/dimensio/>.
+To cite dimensio in publications use:
 
-    A BibTeX entry for LaTeX users is
+Frerebeau N (2024). *dimensio: Multivariate Data Analysis*. Université
+Bordeaux Montaigne, Pessac, France. <doi:10.5281/zenodo.4478530>
+<https://doi.org/10.5281/zenodo.4478530>, R package version 0.8.0,
+<https://packages.tesselle.org/dimensio/>.
 
-      @Manual{R-dimensio,
-        author = {Nicolas Frerebeau},
-        title = {{dimensio: Multivariate Data Analysis}},
-        year = {2024},
-        organization = {Université Bordeaux Montaigne},
-        address = {Pessac, France},
-        note = {R package version 0.7.0},
-        doi = {10.5281/zenodo.4478530},
-        url = {https://packages.tesselle.org/dimensio/},
-      }
-
-    This package is a part of the tesselle project
-    <https://www.tesselle.org>.
+This package is a part of the tesselle project
+<https://www.tesselle.org>.
 
 ## Installation
 

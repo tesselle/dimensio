@@ -38,8 +38,11 @@ Simple Principal Components Analysis (PCA; see `vignette("pca")`) and (Multiple)
 
 There are many very good packages for multivariate data analysis (such as [**FactoMineR**](http://factominer.free.fr/), [**ade4**](https://pbil.univ-lyon1.fr/ade4/), [**vegan**](https://rpubs.com/brouwern/veganpca) or [**ca**](https://cran.r-project.org/package=ca), all extended by [**FactoExtra**](https://rpkgs.datanovia.com/factoextra/)). **dimensio** is designed to be as simple as possible, providing all the necessary tools to explore the results of the analysis.
 
-```{r citation, echo=FALSE, comment=''}
-utils::citation("dimensio")
+---
+
+```{r citation, echo=FALSE, comment='', results='asis'}
+cite <- utils::citation("dimensio")
+print(cite, bibtex = FALSE)
 ```
 
 ## Installation

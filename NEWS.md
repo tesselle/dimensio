@@ -1,4 +1,10 @@
-# dimensio 0.7.0.9000
+# dimensio 0.8.0
+## Enhancements
+* Improve aesthetic mapping in scatterplots.
+* Faster computation of non-overlapping labels.
+
+## Internals
+* Store supplementary variables in a list in `MultivariateAnalysis` object.
 
 # dimensio 0.7.0
 ## Bugfixes & changes
