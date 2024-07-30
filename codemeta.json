@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/tesselle/dimensio",
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.0 (2024-04-24)",
+  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -66,18 +66,6 @@
     }
   ],
   "softwareSuggestions": [
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "khroma",
-      "name": "khroma",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=khroma"
-    },
     {
       "@type": "SoftwareApplication",
       "identifier": "knitr",
@@ -162,7 +150,7 @@
       "@type": "SoftwareApplication",
       "identifier": "arkhe",
       "name": "arkhe",
-      "version": ">= 1.6.0",
+      "version": ">= 1.7.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -183,12 +171,25 @@
     },
     "5": {
       "@type": "SoftwareApplication",
+      "identifier": "khroma",
+      "name": "khroma",
+      "version": ">= 1.13.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=khroma"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
       "identifier": "methods",
       "name": "methods"
     },
     "SystemRequirements": null
   },
-  "fileSize": "1139.883KB",
+  "fileSize": "1119.212KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -203,7 +204,7 @@
       "name": "{dimensio: Multivariate Data Analysis}",
       "identifier": "10.5281/zenodo.4478530",
       "url": "https://packages.tesselle.org/dimensio/",
-      "description": "R package version 0.8.0",
+      "description": "R package version 0.8.1",
       "@id": "https://doi.org/10.5281/zenodo.4478530",
       "sameAs": "https://doi.org/10.5281/zenodo.4478530"
     }
