@@ -4,6 +4,12 @@
 \name{reexports}
 \alias{reexports}
 \alias{bootstrap}
+\alias{palette_color_continuous}
+\alias{palette_color_discrete}
+\alias{palette_color_picker}
+\alias{palette_shape}
+\alias{palette_line}
+\alias{palette_size_range}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -12,5 +18,7 @@ below to see their documentation.
 
 \describe{
   \item{arkhe}{\code{\link[arkhe]{bootstrap}}}
+
+  \item{khroma}{\code{\link[khroma]{palette_color_continuous}}, \code{\link[khroma]{palette_color_discrete}}, \code{\link[khroma]{palette_color_picker}}, \code{\link[khroma:palette_shape]{palette_line}}, \code{\link[khroma]{palette_shape}}, \code{\link[khroma]{palette_size_range}}}
 }}
 

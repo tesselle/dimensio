@@ -453,7 +453,6 @@ setGeneric(
 #' @param cex,cex.rows,cex.columns A [`numeric`] vector giving the amount by
 #'  which plotting characters and symbols should be scaled relative to the
 #'  default.
-#' @param lty,lwd A specification for the line type and width.
 #' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
 #'  The default value, `NULL`, indicates that the range of the
 #'  [finite][is.finite()] values to be plotted should be used.
@@ -532,8 +531,8 @@ NULL
 #' @return
 #'  `viz_*()` is called for its side-effects: it results in a graphic
 #'  being displayed. Invisibly returns `x`.
-#' @note
-#'  Be careful: graphical parameters are silently recycled.
+#' @section Aesthetics:
+#'  TBD
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -555,11 +554,10 @@ setGeneric(
 #'
 #' Plots column/variable principal coordinates.
 #' @inheritParams viz_points
+#' @inheritSection viz_individuals Aesthetics
 #' @return
 #'  `viz_*()` is called for its side-effects: it results in a graphic
 #'  being displayed. Invisibly returns `x`.
-#' @note
-#'  Be careful: graphical parameters are silently recycled.
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods

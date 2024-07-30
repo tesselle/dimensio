@@ -11,7 +11,7 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
-                        color = NULL, symbol = 16, size = c(1, 3),
+                        color = NULL, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
@@ -31,10 +31,10 @@ setMethod(
 setMethod(
   f = "viz_rows",
   signature = c(x = "BootstrapCA"),
-  definition = function(x, ..., axes = c(1, 2)) {
+  definition = function(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE) {
     group <- get_groups(x, margin = 1)
     viz_points(x, ..., margin = 1, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, highlight = group)
+               labels = FALSE, highlight = group, color = color, symbol = symbol)
     invisible(x)
   }
 )
@@ -48,7 +48,7 @@ setMethod(
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
-                        color = NULL, symbol = 16, size = c(1, 3),
+                        color = NULL, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
@@ -71,7 +71,7 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
-                        color = NULL, symbol = 16, size = c(1, 3),
+                        color = NULL, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
@@ -91,10 +91,10 @@ setMethod(
 setMethod(
   f = "viz_columns",
   signature = c(x = "MultivariateBootstrap"),
-  definition = function(x, ..., axes = c(1, 2)) {
+  definition = function(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE) {
     group <- get_groups(x, margin = 2)
     viz_points(x, ..., margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, highlight = group)
+               labels = FALSE, highlight = group, color = color, symbol = symbol)
     invisible(x)
   }
 )
@@ -200,7 +200,7 @@ setMethod(
   signature = c(x = "CA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, highlight = NULL,
-                        color = NULL, symbol = 16, size = c(1, 3),
+                        color = NULL, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
@@ -219,10 +219,10 @@ setMethod(
 setMethod(
   f = "viz_variables",
   signature = c(x = "BootstrapPCA"),
-  definition = function(x, ..., axes = c(1, 2)) {
+  definition = function(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE) {
     group <- get_groups(x, margin = 2)
     viz_points(x, ..., margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, highlight = group)
+               labels = FALSE, highlight = group, color = color, symbol = symbol)
     invisible(x)
   }
 )
@@ -267,7 +267,7 @@ viz_points <- function(x, margin, axes, ...,
                        active = TRUE, sup = TRUE,
                        labels = list(how = "contribution", n = 10),
                        highlight = NULL, color = NULL,
-                       symbol = 16, size = c(1, 3),
+                       symbol = NULL, size = c(1, 6),
                        xlim = NULL, ylim = NULL,
                        main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
                        ann = graphics::par("ann"), frame.plot = TRUE,

@@ -24,8 +24,8 @@ viz_rows(x, ...)
   labels = FALSE,
   highlight = NULL,
   color = NULL,
-  symbol = 16,
-  size = c(1, 3),
+  symbol = FALSE,
+  size = c(1, 6),
   xlim = NULL,
   ylim = NULL,
   main = NULL,
@@ -35,7 +35,7 @@ viz_rows(x, ...)
   legend = list(x = "topleft")
 )
 
-\S4method{viz_rows}{BootstrapCA}(x, ..., axes = c(1, 2))
+\S4method{viz_rows}{BootstrapCA}(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE)
 
 \S4method{viz_individuals}{PCA}(
   x,
@@ -46,8 +46,8 @@ viz_rows(x, ...)
   labels = FALSE,
   highlight = NULL,
   color = NULL,
-  symbol = 16,
-  size = c(1, 3),
+  symbol = FALSE,
+  size = c(1, 6),
   xlim = NULL,
   ylim = NULL,
   main = NULL,
@@ -84,12 +84,13 @@ string is passed, it must be the name of a categorical variable, or one of
 "\code{observation}", "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}"
 (see \code{\link[=augment]{augment()}}).}
 
-\item{color}{The colors for lines and points (will be mapped to \code{highlight}).}
+\item{color}{The colors for lines and points (will be mapped to \code{highlight}).
+Ignored if set to \code{FALSE}.}
 
 \item{symbol}{A vector of plotting characters or symbols.}
 
 \item{size}{A length-two \code{\link{numeric}} vector giving range of possible sizes
-(greater than 0; (will be mapped to \code{highlight}).}
+(greater than 0; will be mapped to \code{highlight}). Ignored if set to \code{FALSE}.}
 
 \item{xlim}{A length-two \code{\link{numeric}} vector giving the x limits of the plot.
 The default value, \code{NULL}, indicates that the range of the
@@ -121,9 +122,11 @@ being displayed. Invisibly returns \code{x}.
 \description{
 Plots row/individual principal coordinates.
 }
-\note{
-Be careful: graphical parameters are silently recycled.
+\section{Aesthetics}{
+
+TBD
 }
+
 \examples{
 ## Load data
 data("iris")

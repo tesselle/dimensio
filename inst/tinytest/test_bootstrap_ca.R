@@ -22,13 +22,13 @@ if (at_home()) {
   expect_true(dimensio:::has_groups(Y, margin = 2))
 
   plot_boot_row <- function() {
-    viz_rows(Y, axes = c(1, 2))
+    viz_rows(Y, axes = c(1, 2), color = NULL)
     viz_hull(Y, margin = 1)
   }
   expect_snapshot_plot(plot_boot_row, "CA_boot_row")
 
   plot_boot_col <- function() {
-    viz_columns(Y, axes = c(1, 2))
+    viz_columns(Y, axes = c(1, 2), color = NULL)
     viz_hull(Y, margin = 2)
   }
   expect_snapshot_plot(plot_boot_col, "CA_boot_col")

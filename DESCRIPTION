@@ -29,9 +29,9 @@ Imports:
     arkhe (>= 1.6.0),
     graphics,
     grDevices,
+    khroma (>= 1.13.0),
     methods
 Suggests: 
-    khroma,
     knitr,
     markdown,
     rsvg,

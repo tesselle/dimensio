@@ -30,7 +30,7 @@
 <g clip-path='url(#cpODAuNjR8NDUyLjE2fDU5LjA0fDQzMC41Ng==)'>
 <line x1='80.64' y1='346.72' x2='452.16' y2='346.72' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
 <line x1='156.52' y1='430.56' x2='156.52' y2='59.04' style='stroke-width: 0.75; stroke-dasharray: 4.00,4.00;' />
-<circle cx='266.40' cy='244.80' r='2.70' style='stroke-width: 0.75; stroke: #4B0055;' />
+<polygon points='266.40,240.60 270.04,246.90 262.76,246.90 ' style='stroke-width: 0.75; stroke: #DC050C;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHw1MDQuMDA=)'>
 <line x1='156.52' y1='430.56' x2='414.52' y2='430.56' style='stroke-width: 0.75;' />

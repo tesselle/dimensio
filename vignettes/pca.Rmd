@@ -158,7 +158,6 @@ viz_individuals(
   highlight = iris$Petal.Length,
   color = khroma::color("YlOrBr")(12), # Custom color scale
   size = c(1, 2), # Custom size scale
-  symbol = 16,
   legend = list(x = "bottomleft")
 )
 ```
@@ -170,7 +169,6 @@ viz_individuals(
   highlight = "cos2",
   color = khroma::color("iridescent")(12), # Custom color scale
   size = c(1, 2), # Custom size scale
-  symbol = 16,
   legend = list(x = "bottomleft")
 )
 ```

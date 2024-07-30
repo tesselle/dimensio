@@ -14,9 +14,9 @@ prepare(
   highlight = NULL,
   reorder = TRUE,
   color = NULL,
-  fill = NULL,
-  shape = 16,
-  size = c(1, 3),
+  fill = FALSE,
+  shape = NULL,
+  size = c(1, 6),
   line_type = NULL,
   line_width = size,
   ...
@@ -47,17 +47,18 @@ string is passed, it must be the name of a categorical variable, or one of
 "\code{observation}", "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}"
 (see \code{\link[=augment]{augment()}}).}
 
-\item{color}{The colors for lines and points (will be mapped to \code{highlight}).}
+\item{color}{The colors for lines and points (will be mapped to \code{highlight}).
+Ignored if set to \code{FALSE}.}
 
 \item{shape}{A vector of plotting characters or symbols (will be mapped to
 \code{highlight}). This can either be a single character or an integer code for
-one of a set of graphics symbols.}
+one of a set of graphics symbols. Ignored if set to \code{FALSE}.}
 
 \item{size}{A length-two \code{\link{numeric}} vector giving range of possible sizes
-(greater than 0; (will be mapped to \code{highlight}).}
+(greater than 0; will be mapped to \code{highlight}). Ignored if set to \code{FALSE}.}
 
 \item{line_type, line_width}{A specification for the line type and width (will
-be mapped to \code{highlight}).}
+be mapped to \code{highlight}). Ignored if set to \code{FALSE}.}
 }
 \value{
 A \code{\link{data.frame}} with the following columns:

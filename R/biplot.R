@@ -84,7 +84,6 @@ biplot.PCA <- function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
                        active = TRUE, sup = TRUE, labels = "variables",
                        col.rows = c("#E69F00", "#009E73"),
                        col.columns = c("#56B4E9", "#F0E442"),
-                       pch = 16, cex = 1, lty = 1, lwd = 2,
                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                        legend = list(x = "topleft")) {
   ## Validation
@@ -103,10 +102,10 @@ biplot.PCA <- function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
   ## Get data
   coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
                         principal = princ_row, highlight = "observation",
-                        color = col.rows, shape = pch, size = cex, line_type = 0)
+                        color = col.rows, line_type = NA, ...)
   coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
                         principal = princ_col, highlight = "observation",
-                        color = col.columns, line_type = lty, line_width = lwd, shape = NA)
+                        color = col.columns, shape = NA, ...)
 
   arrows_col <- function() {
     graphics::arrows(

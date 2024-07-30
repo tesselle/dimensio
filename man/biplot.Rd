@@ -38,10 +38,6 @@
   labels = "variables",
   col.rows = c("#E69F00", "#009E73"),
   col.columns = c("#56B4E9", "#F0E442"),
-  pch = 16,
-  cex = 1,
-  lty = 1,
-  lwd = 2,
   xlim = NULL,
   ylim = NULL,
   main = NULL,
@@ -98,8 +94,6 @@ If \code{NULL}, no legend is displayed.}
 \item{cex, cex.rows, cex.columns}{A \code{\link{numeric}} vector giving the amount by
 which plotting characters and symbols should be scaled relative to the
 default.}
-
-\item{lty, lwd}{A specification for the line type and width.}
 }
 \value{
 \code{biplot()} is called for its side-effects: it results in a graphic being

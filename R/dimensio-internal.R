@@ -123,13 +123,14 @@ drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
 #'  "`observation`", "`mass`", "`sum`", "`contribution`" or "`cos2`"
 #'  (see [`augment()`]).
 #' @param color The colors for lines and points (will be mapped to `highlight`).
+#'  Ignored if set to `FALSE`.
 #' @param shape A vector of plotting characters or symbols (will be mapped to
 #'  `highlight`). This can either be a single character or an integer code for
-#'  one of a set of graphics symbols.
+#'  one of a set of graphics symbols. Ignored if set to `FALSE`.
 #' @param size A length-two [`numeric`] vector giving range of possible sizes
-#'  (greater than 0; (will be mapped to `highlight`).
+#'  (greater than 0; will be mapped to `highlight`). Ignored if set to `FALSE`.
 #' @param line_type,line_width A specification for the line type and width (will
-#'  be mapped to `highlight`).
+#'  be mapped to `highlight`). Ignored if set to `FALSE`.
 #' @return
 #'  A [`data.frame`] with the following columns:
 #'    \describe{
@@ -150,18 +151,9 @@ drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
 prepare <- function(x, margin, axes = c(1, 2), active = TRUE,
                     sup = TRUE, principal = TRUE,
                     highlight = NULL, reorder = TRUE,
-                    color = NULL, fill = NULL,
-                    shape = 16, size = c(1, 3),
+                    color = NULL, fill = FALSE,
+                    shape = NULL, size = c(1, 6),
                     line_type = NULL, line_width = size, ...) {
-  ## /!\ Backward compatibility /!\
-  dots <- list(...)
-  color <- dots$col %||% color
-  fill <- dots$bg %||% fill
-  size <- dots$cex %||% size
-  shape <- dots$pch %||% shape
-  ltype <- dots$lty %||% line_type
-  lwidth <- dots$lwd %||% line_width
-
   ## Prepare data
   data <- augment(x, margin = margin, axes = axes, principal = principal)
   n <- nrow(data)
@@ -176,19 +168,6 @@ prepare <- function(x, margin, axes = c(1, 2), active = TRUE,
 
   ## Recode
   data$observation <- ifelse(data$supplementary, "suppl.", "active")
-
-  ## Graphical parameters
-  f <- function(x, n) {
-    if (length(x) == 1) x <- rep(x, n)
-    x
-  }
-
-  color <- f(color, n)
-  fill <- f(fill, n)
-  size <- f(size, n)
-  shape <- f(shape, n)
-  ltype <- f(ltype, n)
-  lwidth <- f(lwidth, n)
 
   ## Highlight
   if (length(highlight) == 1) {
@@ -205,26 +184,36 @@ prepare <- function(x, margin, axes = c(1, 2), active = TRUE,
     }
     highlight <- high
   }
-  if (is.null(highlight)) {
-    highlight <- character(n)
-    fill <- fill %||% graphics::par("bg")
-    color <- color %||% graphics::par("col")
-  }
 
-  color <- palette_color(colors = color)(highlight) # Colors
-  fill <- palette_color(colors = fill)(highlight) # Background
-  if (!is.double(highlight)) {
-    ## Discrete scales
-    shape <- palette_shape(symbols = shape)(highlight) # Symbol
-    ltype <- palette_line(types = ltype)(highlight) # Line type
-    size <- size[[1L]] %||% graphics::par("size") # Size
-    lwidth <- lwidth[[1L]] %||% graphics::par("lwd") # Line width
+  ## Graphical parameters
+  f <- function(x, n) {
+    if (length(x) == 1) x <- rep(x, n)
+    x
+  }
+  dots <- list(...)
+  col <- f(dots$col %||% graphics::par("col"), n)
+  bg <- f(dots$bg %||% graphics::par("bg"), n)
+  pch <- f(dots$pch %||% 16, n)
+  cex <- f(dots$cex %||% graphics::par("cex"), n)
+  lty <- f(dots$lty %||% graphics::par("lty"), n)
+  lwd <- f(dots$lwd %||% graphics::par("lwd"), n)
+
+  if (!is.null(highlight)) {
+    if (!is.double(highlight)) {
+      ## Discrete scales
+      if (!isFALSE(color)) col <- khroma::palette_color_discrete(colors = color)(highlight)
+      if (!isFALSE(fill)) bg <- khroma::palette_color_discrete(colors = fill)(highlight)
+      if (!isFALSE(shape)) pch <- khroma::palette_shape(symbols = shape)(highlight)
+      if (!isFALSE(line_type)) lty <- khroma::palette_line(types = line_type)(highlight)
+    } else {
+      ## Continuous scales
+      if (!isFALSE(color)) col <- khroma::palette_color_continuous(colors = color)(highlight)
+      if (!isFALSE(fill)) bg <- khroma::palette_color_continuous(colors = fill)(highlight)
+      if (!isFALSE(size)) cex <- khroma::palette_size_range(range = size)(highlight)
+      if (!isFALSE(line_width)) lwd <- khroma::palette_size_range(range = line_width)(highlight)
+    }
   } else {
-    ## Continuous scales
-    shape <- shape[[1L]] %||% graphics::par("pch") # Symbol
-    ltype <- ltype[[1L]] %||% graphics::par("lty") # Line type
-    size <- palette_size_range(range = size)(highlight)
-    lwidth <- palette_size_range(range = lwidth)(highlight)
+    highlight <- character(n)
   }
 
   coord <- data.frame(
@@ -233,12 +222,12 @@ prepare <- function(x, margin, axes = c(1, 2), active = TRUE,
     y = data[[2L]],
     z = highlight,
     label = data$label,
-    col = color,
-    bg = fill,
-    pch = shape,
-    cex = size,
-    lty = ltype,
-    lwd = lwidth
+    col = col,
+    bg = bg,
+    pch = pch,
+    cex = cex,
+    lty = lty,
+    lwd = lwd
   )
 
   ## Subset
