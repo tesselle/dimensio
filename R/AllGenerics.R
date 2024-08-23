@@ -14,6 +14,49 @@ setGeneric("biplot")
 NULL
 
 # Extract ======================================================================
+#' Groups
+#'
+#' Retrieves or defines the groups to which the observations belong.
+#' @param x An object from which to get or set `groups`.
+#' @param margin A length-one [`numeric`] vector: `1` indicates individuals/rows
+#'  (the default), `2` indicates variables/columns.
+#' @param value A possible value for the `groups` of `x`.
+#' @param ... Currently not used.
+#' @return
+#'  * `set_groups()` returns an object of the same sort as `x` with the new
+#'    group names assigned.
+#'  * `get_groups()` returns a [`character`] vector giving the group names of `x`.
+#'  * `has_groups()` returns a [`logical`] scalar specifying whether or not `x`
+#'    has groups.
+# @example inst/examples/ex-mutators.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @name groups
+#' @rdname groups
+NULL
+
+#' @rdname groups
+#' @aliases get_groups-method
+setGeneric(
+  name = "get_groups",
+  def = function(x, ...) standardGeneric("get_groups")
+)
+
+#' @rdname groups
+#' @aliases set_groups-method
+setGeneric(
+  name = "set_groups<-",
+  def = function(x, value) standardGeneric("set_groups<-")
+)
+
+#' @rdname groups
+#' @aliases has_groups-method
+setGeneric(
+  name = "has_groups",
+  def = function(x, ...) standardGeneric("has_groups")
+)
+
 ## Get -------------------------------------------------------------------------
 #' Extract Loadings
 #'
@@ -274,7 +317,7 @@ NULL
 #'  Returns a [`data.frame`] of original data.
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutators
+#' @family getters
 #' @aliases get_data-method
 setGeneric(
   name = "get_data",
@@ -303,7 +346,7 @@ setGeneric(
 #' @example inst/examples/ex-coordinates.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutators
+#' @family getters
 #' @aliases get_coordinates-method
 setGeneric(
   name = "get_coordinates",
@@ -339,7 +382,7 @@ setGeneric(
 #'  * `get_inertia()` returns a [`numeric`] vector.
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutators
+#' @family getters
 #' @aliases get_eigenvalues-method
 setGeneric(
   name = "get_eigenvalues",
@@ -387,7 +430,7 @@ setGeneric(
 #'    is a supplementary point or not.
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutators
+#' @family getters
 #' @aliases get_contributions-method
 setGeneric(
   name = "get_contributions",
@@ -424,7 +467,7 @@ setGeneric(
 #'  A [`numeric`] vector of squared distance to the centroide.
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutators
+#' @family getters
 #' @aliases get_distances-method
 setGeneric(
   name = "get_distances",

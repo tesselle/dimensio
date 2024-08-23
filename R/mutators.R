@@ -9,12 +9,6 @@ get_masses <- function(x, margin = 1) {
   if (margin == 2) mass <- x@columns@weights
   mass
 }
-get_groups <- function(x, margin = 1) {
-  margin <- margin[[1L]]
-  if (margin == 1) grp <- x@rows@groups
-  if (margin == 2) grp <- x@columns@groups
-  grp
-}
 get_order <- function(x, margin = 1) {
   margin <- margin[[1L]]
   if (margin == 1) ord <- x@rows@order
@@ -38,6 +32,49 @@ has_extra <- function(x) {
   methods::validObject(x)
   x
 }
+# Groups =======================================================================
+#' @export
+#' @rdname groups
+#' @aliases get_groups,MultivariateAnalysis-method
+setMethod(
+  f = "get_groups",
+  signature = "MultivariateAnalysis",
+  definition = function(x, margin = 1) {
+    margin <- margin[[1L]]
+    if (margin == 1) grp <- x@rows@groups
+    if (margin == 2) grp <- x@columns@groups
+    grp
+  }
+)
+
+#' @export
+#' @rdname groups
+#' @aliases set_groups,MultivariateAnalysis-method
+setReplaceMethod(
+  f = "set_groups",
+  signature = "MultivariateAnalysis",
+  definition = function(x) {
+    if (is.null(value)) value <- character(0)
+    x@rows@groups <- value
+    methods::validObject(x)
+    x
+  }
+)
+
+#' @export
+#' @rdname groups
+#' @aliases has_groups,MultivariateAnalysis-method
+setMethod(
+  f = "has_groups",
+  signature = "MultivariateAnalysis",
+  definition = function(x, margin = 1) {
+    margin <- margin[[1L]]
+    if (margin == 1) grp <- x@rows@groups
+    if (margin == 2) grp <- x@columns@groups
+    length(grp) > 0
+  }
+)
+
 # Dimensions ===================================================================
 #' @export
 #' @method dim MultivariateAnalysis

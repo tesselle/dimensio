@@ -7,6 +7,9 @@ reference:
 - title: Analysis
   contents:
   - has_concept("multivariate analysis")
+- title: Results
+  contents:
+  - has_concept("getters")
 - title: Resampling
   contents:
   - has_concept("resampling methods")

@@ -57,16 +57,13 @@ is a supplementary point or not.
 Get Contributions
 }
 \seealso{
-Other mutators: 
-\code{\link{dimnames}()},
+Other getters: 
 \code{\link{get_coordinates}()},
 \code{\link{get_data}()},
 \code{\link{get_distances}()},
-\code{\link{get_eigenvalues}()},
-\code{\link{loadings}()},
-\code{\link{subset}()}
+\code{\link{get_eigenvalues}()}
 }
 \author{
 N. Frerebeau
 }
-\concept{mutators}
+\concept{getters}
