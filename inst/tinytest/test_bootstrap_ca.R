@@ -18,8 +18,8 @@ if (at_home()) {
   expect_equal_to_reference(get_coordinates(Y, margin = 2), file = "_snaps/ca_col_bootstrap.rds")
   expect_equal(dim(get_replications(Y, margin = 2)), c(4L, 3L, 30L))
 
-  expect_true(has_groups(Y, margin = 1))
-  expect_true(has_groups(Y, margin = 2))
+  expect_true(dimensio:::has_groups(Y, margin = 1))
+  expect_true(dimensio:::has_groups(Y, margin = 2))
 
   plot_boot_row <- function() {
     viz_rows(Y, axes = c(1, 2), color = NULL)

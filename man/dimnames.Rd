@@ -31,7 +31,6 @@ Retrieve or set the dimnames of an object.
 }
 \seealso{
 Other mutators: 
-\code{\link{groups}},
 \code{\link{loadings}()},
 \code{\link{subset}()}
 }

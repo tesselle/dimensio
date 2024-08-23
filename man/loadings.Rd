@@ -26,7 +26,6 @@ Extract loadingsin principal components analysis.
 \seealso{
 Other mutators: 
 \code{\link{dimnames}()},
-\code{\link{groups}},
 \code{\link{subset}()}
 }
 \author{

@@ -70,7 +70,6 @@ X[["rows"]]
 \seealso{
 Other mutators: 
 \code{\link{dimnames}()},
-\code{\link{groups}},
 \code{\link{loadings}()}
 }
 \author{
