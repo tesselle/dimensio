@@ -4,16 +4,16 @@
 \alias{viz_labels}
 \title{Non-Overlapping Text Labels}
 \usage{
-viz_labels(x, select = "contribution", n = 10, type = "shadow", ...)
+viz_labels(x, filter = "contribution", n = 10, type = "shadow", ...)
 }
 \arguments{
 \item{x}{A \code{\link{data.frame}} (typically returned by \code{\link[=prepare_plot]{prepare_plot()}}).}
 
-\item{select}{A \code{\link{character}} string specifying the variable to select
-labels. If \code{NULL}, all labels are drawn.}
+\item{filter}{A \code{\link{character}} string specifying the variable used to filter
+observations. If \code{NULL}, all labels are drawn.}
 
 \item{n}{An \code{\link{integer}} specifying the number of labels to draw.
-Only the labels of the top \eqn{n} observations according to \code{select} will
+Only the labels of the top \eqn{n} observations according to \code{filter} will
 be drawn. If \code{NULL}, all labels are drawn.}
 
 \item{type}{A \code{\link{character}} string specifying the shape of the field.

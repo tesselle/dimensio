@@ -110,7 +110,7 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = list(how = "contribution", n = 10),
+                        labels = list(filter = "contribution", n = 10),
                         extra_quali = NULL, extra_quanti = NULL,
                         color = NULL, symbol = NULL, size = 1,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
@@ -163,7 +163,7 @@ setMethod(
     ## Labels
     if (isTRUE(labels)) labels <- list()
     if (is.list(labels)) {
-      viz_labels(coord, select = labels$how, n = labels$n)
+      viz_labels(coord, filter = labels$filter, n = labels$n)
     }
 
     ## Evaluate post-plot and pre-axis expressions
@@ -239,9 +239,9 @@ setMethod(
 #' @param labels A [`logical`] scalar: should labels be drawn? Labeling a large
 #'  number of points can be computationally expensive and make the graph
 #'  difficult to read. A selection of points to label can be provided using a
-#'  `list` of two named elements, `how` (a string specifying how to select the
-#'  labels to be drawn) and `n` (an integer specifying the number of labels to
-#'  be drawx). See examples below.
+#'  `list` of two named elements, `filter` (a string specifying how to filter
+#'  the labels to be drawn) and `n` (an integer specifying the number of labels
+#'  to be drawn). See examples below.
 #' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
 #'  The default value, `NULL`, indicates that the range of the
 #'  [finite][is.finite()] values to be plotted should be used.
@@ -269,7 +269,7 @@ setMethod(
 #' @keywords internal
 viz_points <- function(x, margin, axes, ...,
                        active = TRUE, sup = TRUE,
-                       labels = list(how = "contribution", n = 10),
+                       labels = list(filter = "contribution", n = 10),
                        extra_quali = NULL, extra_quanti = NULL,
                        color = NULL, fill = NULL,
                        symbol = NULL, size = c(1, 6),
@@ -318,7 +318,7 @@ viz_points <- function(x, margin, axes, ...,
   ## Labels
   if (isTRUE(labels)) labels <- list()
   if (is.list(labels)) {
-    viz_labels(coord, select = labels$how, n = labels$n)
+    viz_labels(coord, filter = labels$filter, n = labels$n)
   }
 
   ## Evaluate post-plot and pre-axis expressions
@@ -353,10 +353,10 @@ viz_points <- function(x, margin, axes, ...,
 #' Non-Overlapping Text Labels
 #'
 #' @param x A [`data.frame`] (typically returned by [prepare_plot()]).
-#' @param select A [`character`] string specifying the variable to select
-#'  labels. If `NULL`, all labels are drawn.
+#' @param filter A [`character`] string specifying the variable used to filter
+#'  observations. If `NULL`, all labels are drawn.
 #' @param n An [`integer`] specifying the number of labels to draw.
-#'  Only the labels of the top \eqn{n} observations according to `select` will
+#'  Only the labels of the top \eqn{n} observations according to `filter` will
 #'  be drawn. If `NULL`, all labels are drawn.
 #' @param type A [`character`] string specifying the shape of the field.
 #'  It must be one of "`text`", "`shadow`" or "`box`". Any unambiguous substring
@@ -364,12 +364,12 @@ viz_points <- function(x, margin, axes, ...,
 #' @param ... Currently not used.
 #' @author N. Frerebeau
 #' @keywords internal
-viz_labels <- function(x, select = "contribution", n = 10,
+viz_labels <- function(x, filter = "contribution", n = 10,
                        type = "shadow", ...) {
   ## Select
-  if (!is.null(select) && !is.null(n) && n > 0) {
+  if (!is.null(filter) && !is.null(n) && n > 0) {
     top <- min(nrow(x), n)
-    how <- x[[select]]
+    how <- x[[filter]]
     k <- order(how, decreasing = TRUE)[seq_len(top)] # Get order
     x <- x[k, , drop = FALSE] # Subset
   }

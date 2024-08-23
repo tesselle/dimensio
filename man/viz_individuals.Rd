@@ -76,9 +76,9 @@ plotted?}
 \item{labels}{A \code{\link{logical}} scalar: should labels be drawn? Labeling a large
 number of points can be computationally expensive and make the graph
 difficult to read. A selection of points to label can be provided using a
-\code{list} of two named elements, \code{how} (a string specifying how to select the
-labels to be drawn) and \code{n} (an integer specifying the number of labels to
-be drawx). See examples below.}
+\code{list} of two named elements, \code{filter} (a string specifying how to filter
+the labels to be drawn) and \code{n} (an integer specifying the number of labels
+to be drawn). See examples below.}
 
 \item{extra_quali}{An optional vector of qualitative data for aesthetics
 mapping.}

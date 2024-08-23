@@ -129,7 +129,7 @@ viz_individuals(
 ## Label the 10 individuals with highest cos2
 viz_individuals(
   x = X,
-  labels = list(how = "cos2", n = 10),
+  labels = list(filter = "cos2", n = 10),
   extra_quali = iris$Species,
   color = c("#4477AA", "#EE6677", "#228833"),
   symbol = c(15, 16, 17),
