@@ -36,7 +36,8 @@ if (at_home()) {
   res <- pca(iris, sup_quali = 5)
 
   # Individuals
-  plot_ind_quali <- function() viz_individuals(res, extra_quali = iris$Species)
+  plot_ind_quali <- function() viz_individuals(res, extra_quali = iris$Species,
+                                               symbol = c(1, 2, 3))
   expect_snapshot_plot(plot_ind_quali, "PCA_ind_highlight_quali")
 
   plot_ind_cos2 <- function() viz_individuals(res, extra_quanti = "cos2", size = c(0, 3))
@@ -46,8 +47,9 @@ if (at_home()) {
   expect_snapshot_plot(plot_ind_contrib, "PCA_var_highlight_contrib")
 
   plot_ind_group <- function() viz_individuals(res, extra_quali = iris$Species,
-                                               symbol = c(1, 2, 3))
-  expect_snapshot_plot(plot_ind_group, "PCA_ind_group")
+                                               extra_quanti = "contrib",
+                                               size = c(0, 1))
+  expect_snapshot_plot(plot_ind_group, "PCA_ind_highlight_quali_quanti")
 
   # Variables
   group_num <- c(1, 2, 3, 4)
