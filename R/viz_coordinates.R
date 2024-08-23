@@ -10,13 +10,14 @@ setMethod(
   f = "viz_rows",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, highlight = NULL,
+                        labels = FALSE, extra_quali = NULL, extra_quanti = NULL,
                         color = NULL, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
-               labels = labels, highlight = highlight,
+               labels = labels,
+               extra_quali = extra_quali, extra_quanti = extra_quanti,
                color = color, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
@@ -32,9 +33,9 @@ setMethod(
   f = "viz_rows",
   signature = c(x = "BootstrapCA"),
   definition = function(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE) {
-    group <- get_groups(x, margin = 1)
     viz_points(x, ..., margin = 1, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, highlight = group, color = color, symbol = symbol)
+               labels = FALSE, extra_quali = get_groups(x, margin = 1),
+               color = color, symbol = symbol)
     invisible(x)
   }
 )
@@ -47,13 +48,14 @@ setMethod(
   f = "viz_individuals",
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, highlight = NULL,
+                        labels = FALSE, extra_quali = NULL, extra_quanti = NULL,
                         color = NULL, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 1, axes = axes, active = active, sup = sup,
-               labels = labels, highlight = highlight,
+               labels = labels,
+               extra_quali = extra_quali, extra_quanti = extra_quanti,
                color = color, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
@@ -70,13 +72,14 @@ setMethod(
   f = "viz_columns",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, highlight = NULL,
+                        labels = FALSE, extra_quali = NULL, extra_quanti = NULL,
                         color = NULL, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
-               labels = labels, highlight = highlight,
+               labels = labels,
+               extra_quali = extra_quali, extra_quanti = extra_quanti,
                color = color, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
@@ -92,9 +95,9 @@ setMethod(
   f = "viz_columns",
   signature = c(x = "MultivariateBootstrap"),
   definition = function(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE) {
-    group <- get_groups(x, margin = 2)
     viz_points(x, ..., margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, highlight = group, color = color, symbol = symbol)
+               labels = FALSE, extra_quali = get_groups(x, margin = 2),
+               color = color, symbol = symbol)
     invisible(x)
   }
 )
@@ -108,16 +111,17 @@ setMethod(
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = list(how = "contribution", n = 10),
-                        highlight = NULL,
+                        extra_quali = NULL, extra_quanti = NULL,
                         color = NULL, symbol = NULL, size = 1,
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     ## Prepare data
-    coord <- prepare(x, margin = 2, axes = axes, active = active,
-                     sup = sup, highlight = highlight,
-                     color = color, line_type = symbol,
-                     line_width = size, ...)
+    coord <- prepare_plot(x, margin = 2, axes = axes,
+                          active = active, sup = sup,
+                          extra_quali = extra_quali, extra_quanti = extra_quanti,
+                          color = color, line_type = symbol,
+                          line_width = size, ...)
 
     ## Save and restore graphical parameters
     ## pty: square plotting region, independent of device size
@@ -199,13 +203,14 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "CA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
-                        labels = FALSE, highlight = NULL,
+                        labels = FALSE, extra_quali = NULL, extra_quanti = NULL,
                         color = NULL, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
                         legend = list(x = "topleft")) {
     viz_points(x, margin = 2, axes = axes, active = active, sup = sup,
-               labels = labels, highlight = highlight,
+               labels = labels,
+               extra_quali = extra_quali, extra_quanti = extra_quanti,
                color = color, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
@@ -220,9 +225,9 @@ setMethod(
   f = "viz_variables",
   signature = c(x = "BootstrapPCA"),
   definition = function(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE) {
-    group <- get_groups(x, margin = 2)
     viz_points(x, ..., margin = 2, axes = axes, active = TRUE, sup = TRUE,
-               labels = FALSE, highlight = group, color = color, symbol = symbol)
+               labels = FALSE, extra_quali = get_groups(x, margin = 2),
+               color = color, symbol = symbol)
     invisible(x)
   }
 )
@@ -259,14 +264,14 @@ setMethod(
 #'  [graphics::legend()]; names of the list are used as argument names.
 #'  If `NULL`, no legend is displayed.
 #' @param ... Currently not used.
-#' @param symbol A vector of plotting characters or symbols.
-#' @inheritParams prepare
+#' @inheritParams prepare_plot
 #' @author N. Frerebeau
 #' @keywords internal
 viz_points <- function(x, margin, axes, ...,
                        active = TRUE, sup = TRUE,
                        labels = list(how = "contribution", n = 10),
-                       highlight = NULL, color = NULL,
+                       extra_quali = NULL, extra_quanti = NULL,
+                       color = NULL, fill = NULL,
                        symbol = NULL, size = c(1, 6),
                        xlim = NULL, ylim = NULL,
                        main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
@@ -274,9 +279,11 @@ viz_points <- function(x, margin, axes, ...,
                        panel.first = NULL, panel.last = NULL,
                        legend = list(x = "topleft")) {
   ## Prepare data
-  coord <- prepare(x, margin = margin, axes = axes, active = active,
-                   sup = sup, highlight = highlight,
-                   color = color, shape = symbol, size = size, ...)
+  coord <- prepare_plot(x, margin = margin, axes = axes,
+                        active = active, sup = sup,
+                        extra_quali = extra_quali, extra_quanti = extra_quanti,
+                        color = color, fill = fill,
+                        symbol = symbol, size = size, ...)
 
   ## Save and restore graphical parameters
   ## pty: square plotting region, independent of device size
@@ -343,14 +350,9 @@ viz_points <- function(x, margin, axes, ...,
   invisible(coord)
 }
 
-print_variance <- function(object, axis) {
-  v <- get_variance(object, digits = 1) # Get percentage of variance
-  sprintf("%s (%g%%)", names(v)[[axis]], v[[axis]])
-}
-
 #' Non-Overlapping Text Labels
 #'
-#' @param x A [`data.frame`] (typically returned by [prepare()]).
+#' @param x A [`data.frame`] (typically returned by [prepare_plot()]).
 #' @param select A [`character`] string specifying the variable to select
 #'  labels. If `NULL`, all labels are drawn.
 #' @param n An [`integer`] specifying the number of labels to draw.
@@ -381,4 +383,201 @@ viz_labels <- function(x, select = "contribution", n = 10,
     # cex = x$cex,
     xpd = TRUE
   )
+}
+
+#' Prepare Data for Plotting
+#'
+#' @param x A [`MultivariateAnalysis-class`] object.
+#' @param margin A length-one [`numeric`] vector giving the subscript
+#'  which the data will be returned: `1` indicates individuals/rows (the
+#'  default), `2` indicates variables/columns.
+#' @param axes A length-two [`numeric`] vector giving the dimensions to be
+#'  plotted.
+#' @param active A [`logical`] scalar: should the active observations be
+#'  plotted?
+#' @param sup A [`logical`] scalar: should the supplementary observations be
+#'  plotted?
+#' @param principal A [`logical`] scalar: should principal coordinates be
+#'  returned? If `FALSE`, standard coordinates are returned.
+#' @param extra_quali An optional vector of qualitative data for aesthetics
+#'  mapping.
+#' @param extra_quanti An optional vector of quantitative data for aesthetics
+#'  mapping. If a single [`character`] string is passed, it must be one of
+#'  "`observation`", "`mass`", "`sum`", "`contribution`" or "`cos2`"
+#'  (see [`augment()`]).
+#' @param color The colors for lines and points (will be mapped to
+#'  `extra_quanti` or `extra_quali`; if both are set, the latter has priority).
+#'  Ignored if set to `FALSE`.
+#' @param symbol A vector of plotting characters or symbols (will be mapped to
+#'  `extra_quali`). This can either be a single character or an integer code for
+#'  one of a set of graphics symbols. If `symbol` is a named a named vector,
+#'  then the symbols will be associated with their name within `extra_quali`.
+#'  Ignored if set to `FALSE`.
+#' @param size A length-two [`numeric`] vector giving range of possible sizes
+#'  (greater than 0; will be mapped to `extra_quanti`).
+#'  Ignored if set to `FALSE`.
+#' @param line_type A specification for the line type (will be mapped to
+#'  `extra_quali`). If `line_type` is a named a named vector, then the line
+#'  types will be associated with their name within `extra_quali`.
+#'  Ignored if set to `FALSE`.
+#' @param line_width A specification for the line type and width (will
+#'  be mapped to `extra_quanti`).
+#'  Ignored if set to `FALSE`.
+#' @return
+#'  A [`data.frame`] with the following columns:
+#'    \describe{
+#'     \item{`x`}{Coordinates along x.}
+#'     \item{`y`}{Coordinates along y.}
+#'     \item{`extra_quali`}{Extra qualitative variable to be highlighted.}
+#'     \item{`extra_quanti`}{Extra quantitative variable to be highlighted.}
+#'     \item{`label`}{Label.}
+#'     \item{`sup`}{Is supplementary?}
+#'     \item{`col`}{Color for lines and symbols.}
+#'     \item{`bg`}{Background color for symbols.}
+#'     \item{`pch`}{Symbols.}
+#'     \item{`cex`}{Symbol sizes.}
+#'     \item{`lty`}{Line types.}
+#'     \item{`lwd`}{Line widths.}
+#'    }
+#' @author N. Frerebeau
+#' @keywords internal
+prepare_plot <- function(x, margin, axes = c(1, 2), active = TRUE,
+                    sup = TRUE, principal = TRUE,
+                    extra_quali = NULL, extra_quanti = NULL,
+                    color = NULL, fill = FALSE,
+                    symbol = NULL, size = c(1, 6),
+                    line_type = NULL, line_width = size, ...) {
+  ## /!\ Backward compatibility /!\
+  extra_quanti <- list(...)$highlight %||% extra_quanti
+
+  ## Prepare data
+  data <- augment(x, margin = margin, axes = axes, principal = principal)
+  n <- nrow(data)
+
+  ## Recode
+  data$observation <- ifelse(data$supplementary, "suppl.", "active")
+
+  ## Recycle graphical parameters if of length one
+  f <- function(x, n) { if (length(x) == 1) rep(x, n) else x }
+  dots <- list(...)
+  col <- f(dots$col %||% graphics::par("col"), n)
+  bg <- f(dots$bg %||% graphics::par("bg"), n)
+  pch <- f(dots$pch %||% 16, n)
+  cex <- f(dots$cex %||% graphics::par("cex"), n)
+  lty <- f(dots$lty %||% graphics::par("lty"), n)
+  lwd <- f(dots$lwd %||% graphics::par("lwd"), n)
+
+  ## Highlight quantitative information
+  if (length(extra_quanti) == 1) {
+    choices <- c("mass", "sum", "contribution", "cos2")
+    extra_quanti <- match.arg(extra_quanti, choices = choices, several.ok = FALSE)
+    extra_quanti <- data[[extra_quanti]]
+  }
+  if (length(extra_quanti) > 0) {
+    arkhe::assert_length(extra_quanti, n)
+    ## Continuous scales
+    if (!isFALSE(color)) col <- khroma::palette_color_continuous(colors = color)(extra_quanti)
+    if (!isFALSE(fill)) bg <- khroma::palette_color_continuous(colors = fill)(extra_quanti)
+    if (!isFALSE(size)) cex <- khroma::palette_size_range(range = size)(extra_quanti)
+    if (!isFALSE(line_width)) lwd <- khroma::palette_size_range(range = line_width)(extra_quanti)
+  } else {
+    extra_quanti <- rep(NA_real_, n)
+  }
+
+  ## Highlight qualitative information
+  if (length(extra_quali) == 1) {
+    choices <- c("observation")
+    extra_quali <- match.arg(extra_quali, choices = choices, several.ok = FALSE)
+    extra_quali <- data[[extra_quali]]
+  }
+  if (length(extra_quali) > 0) {
+    arkhe::assert_length(extra_quali, n)
+    ## Discrete scales
+    if (!isFALSE(color)) col <- khroma::palette_color_discrete(colors = color)(extra_quali)
+    if (!isFALSE(fill)) bg <- khroma::palette_color_discrete(colors = fill)(extra_quali)
+    if (!isFALSE(symbol)) pch <- khroma::palette_shape(symbols = symbol)(extra_quali)
+    if (!isFALSE(line_type)) lty <- khroma::palette_line(types = line_type)(extra_quali)
+  } else {
+    extra_quali <- rep(NA_character_, n)
+  }
+
+  coord <- data.frame(
+    data,
+    x = data[[1L]],
+    y = data[[2L]],
+    extra_quali = extra_quali,
+    extra_quanti = extra_quanti,
+    label = data$label,
+    col = col,
+    bg = bg,
+    pch = pch,
+    cex = cex,
+    lty = lty,
+    lwd = lwd
+  )
+
+  ## Subset
+  if (active & !sup) coord <- coord[!coord$supplementary, , drop = FALSE]
+  if (!active & sup) coord <- coord[coord$supplementary, , drop = FALSE]
+
+  coord
+}
+
+#' Build a Legend
+#'
+#' @param x A [`data.frame`] returned by [prepare_plot()].
+#' @param args A [`list`] of additional arguments to be passed to
+#'  [graphics::legend()]; names of the list are used as argument names.
+#'  If `NULL` or empty, no legend is displayed.
+#' @param points A [`logical`] scalar: legend for points?
+#' @param lines A [`logical`] scalar: legend for lines?
+#' @author N. Frerebeau
+#' @keywords internal
+prepare_legend <- function(x, args, points = TRUE, lines = TRUE) {
+  quanti <- x$extra_quanti
+  quali <- x$extra_quali
+
+  if (!is.list(args) || length(args) == 0) return(NULL)
+  if (all(is.na(quanti)) && all(is.na(quali))) return(NULL)
+
+  ## Continuous scale
+  if (!all(is.na(quanti))) {
+    quanti <- quanti[!is.na(quanti)]
+    # im <- grDevices::as.raster(x$col)
+
+    pr <- pretty(quanti, n = ifelse(nrow(x) > 5, 5, nrow(x)))
+    pr <- pr[pr <= max(quanti) & pr >= min(quanti)]
+    i <- order(quanti, method = "radix")[!duplicated(quanti)]
+
+    col <- grDevices::colorRamp(x$col[i])(scale_range(pr, from = range(quanti)))
+    col <- grDevices::rgb(col, maxColorValue = 255)
+
+    leg <- list(legend = pr, col = col)
+    if (points) {
+      cex <- stats::approx(x = quanti[i], y = x$cex[i], xout = pr, ties = "ordered")$y
+      leg <- utils::modifyList(leg, list(pch = unique(x$pch), pt.cex = cex))
+    }
+    if (lines) {
+      lwd <- stats::approx(x = quanti[i], y = x$lwd[i], xout = pr, ties = "ordered")$y
+      leg <- utils::modifyList(leg, list(lty = unique(x$lty), lwd = lwd))
+    }
+  }
+  ## Discrete scale
+  if (!all(is.na(quali))) {
+    param <- stats::aggregate(
+      x[, c("col", "bg", "pch", "lty")],
+      by = list(leg = quali),
+      FUN = unique
+    )
+    leg <- list(legend = param$leg, col = param$col)
+    if (points) {
+      leg <- utils::modifyList(leg, list(pt.bg = param$bg, pch = param$pch))
+    }
+    if (lines) {
+      leg <- utils::modifyList(leg, list(lty = param$lty))
+    }
+  }
+
+  leg <- utils::modifyList(leg, args)
+  do.call(graphics::legend, args = leg)
 }

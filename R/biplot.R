@@ -37,14 +37,14 @@ biplot.CA <- function(x, ..., axes = c(1, 2),
   }
 
   ## Get data
-  coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
-                        principal = princ_row, highlight = "observation",
-                        color = col.rows, shape = pch.rows,
-                        size = cex.rows, line_type = 0)
-  coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
-                        principal = princ_col, highlight = "observation",
-                        color = col.columns, shape = pch.columns,
-                        size = cex.columns, line_type = 0)
+  coord_row <-  prepare_plot(x, margin = 1, axes = axes, active = active, sup = sup,
+                             principal = princ_row, extra_quali = "observation",
+                             color = col.rows, symbol = pch.rows,
+                             size = cex.rows, line_type = 0)
+  coord_col <-  prepare_plot(x, margin = 2, axes = axes, active = active, sup = sup,
+                             principal = princ_col, extra_quali = "observation",
+                             color = col.columns, symbol = pch.columns,
+                             size = cex.columns, line_type = 0)
 
   ## Graphical parameters
   if (type == "contributions") {
@@ -100,12 +100,12 @@ biplot.PCA <- function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
   }
 
   ## Get data
-  coord_row <-  prepare(x, margin = 1, axes = axes, active = active, sup = sup,
-                        principal = princ_row, highlight = "observation",
-                        color = col.rows, line_type = NA, ...)
-  coord_col <-  prepare(x, margin = 2, axes = axes, active = active, sup = sup,
-                        principal = princ_col, highlight = "observation",
-                        color = col.columns, shape = NA, ...)
+  coord_row <-  prepare_plot(x, margin = 1, axes = axes, active = active, sup = sup,
+                             principal = princ_row, extra_quali = "observation",
+                             color = col.rows, line_type = NA, ...)
+  coord_col <-  prepare_plot(x, margin = 2, axes = axes, active = active, sup = sup,
+                             principal = princ_col, extra_quali = "observation",
+                             color = col.columns, symbol = NA, ...)
 
   arrows_col <- function() {
     graphics::arrows(
@@ -139,8 +139,8 @@ setMethod("biplot", c(x = "PCA"), biplot.PCA)
 # Helpers ======================================================================
 #' Build a Biplot
 #'
-#' @param coord_row A [`data.frame`] returned by [prepare()].
-#' @param coord_col A [`data.frame`] returned by [prepare()].
+#' @param coord_row A [`data.frame`] returned by [prepare_plot()].
+#' @param coord_col A [`data.frame`] returned by [prepare_plot()].
 #' @param rows A [`logical`] scalar: should the rows be drawn?
 #' @param columns A [`logical`] scalar: should the columns be drawn?
 #' @param labels A [`character`] vector specifying whether
@@ -255,8 +255,8 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   }
 
   ## Legend
-  coord_row$z <- paste(coord_row$z, "ind.", sep = " ")
-  coord_col$z <- paste(coord_col$z, "var.", sep = " ")
+  coord_row$extra_quali <- paste(coord_row$extra_quali, "ind.", sep = " ")
+  coord_col$extra_quali <- paste(coord_col$extra_quali, "var.", sep = " ")
   coord <- rbind(coord_row, coord_col)
   prepare_legend(coord, legend, points = TRUE, lines = TRUE)
 }

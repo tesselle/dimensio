@@ -14,11 +14,11 @@ if (at_home()) {
   for (i in c(TRUE, FALSE)) {
     for (j in c(TRUE, FALSE)) {
       plot_row <- function() viz_rows(res, axes = c(1, 2), active = i, sup = j,
-                                      highlight = "observation", symbol = c(1, 2))
+                                      extra_quali = "observation", symbol = c(1, 2))
       expect_snapshot_plot(plot_row, sprintf("CA_row_%d-%d", i, j))
 
       plot_col <- function() viz_columns(res, axes = c(1, 2), active = i, sup = j,
-                                         highlight = "observation", symbol = c(1, 2))
+                                         extra_quali = "observation", symbol = c(1, 2))
       expect_snapshot_plot(plot_col, sprintf("CA_col_%d-%d", i, j))
     }
   }

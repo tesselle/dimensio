@@ -26,9 +26,9 @@ viz_biplot(
 )
 }
 \arguments{
-\item{coord_row}{A \code{\link{data.frame}} returned by \code{\link[=prepare]{prepare()}}.}
+\item{coord_row}{A \code{\link{data.frame}} returned by \code{\link[=prepare_plot]{prepare_plot()}}.}
 
-\item{coord_col}{A \code{\link{data.frame}} returned by \code{\link[=prepare]{prepare()}}.}
+\item{coord_col}{A \code{\link{data.frame}} returned by \code{\link[=prepare_plot]{prepare_plot()}}.}
 
 \item{rows}{A \code{\link{logical}} scalar: should the rows be drawn?}
 

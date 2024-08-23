@@ -15,8 +15,8 @@ if (at_home()) {
   expect_equal_to_reference(get_coordinates(Y, margin = 2), file = "_snaps/pca_col_bootstrap.rds")
   expect_equal(dim(get_replications(Y)), c(4L, 3L, 30L))
 
-  expect_false(dimensio:::has_groups(Y, margin = 1))
-  expect_true(dimensio:::has_groups(Y, margin = 2))
+  expect_false(has_groups(Y, margin = 1))
+  expect_true(has_groups(Y, margin = 2))
 
   plot_boot_col <- function() {
     viz_variables(Y, axes = c(1, 2), color = NULL)

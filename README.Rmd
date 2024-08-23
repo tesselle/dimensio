@@ -110,7 +110,7 @@ biplot(X, type = "form")
 ## Highlight species
 viz_individuals(
   x = X, 
-  highlight = iris$Species, 
+  extra_quali = iris$Species, 
   color = c("#004488", "#DDAA33", "#BB5566")
 )
 ## Add ellipses
@@ -124,7 +124,7 @@ viz_tolerance(
 ## Highlight petal length
 viz_individuals(
   x = X,
-  highlight = iris$Petal.Length,
+  extra_quanti = iris$Petal.Length,
   color = khroma::color("iridescent")(255), 
   size = c(1, 2),
 )

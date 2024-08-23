@@ -57,7 +57,7 @@ To cite dimensio in publications use:
 
 Frerebeau N (2024). *dimensio: Multivariate Data Analysis*. Université
 Bordeaux Montaigne, Pessac, France. <doi:10.5281/zenodo.4478530>
-<https://doi.org/10.5281/zenodo.4478530>, R package version 0.8.1,
+<https://doi.org/10.5281/zenodo.4478530>, R package version 0.8.1.9000,
 <https://packages.tesselle.org/dimensio/>.
 
 This package is a part of the tesselle project
@@ -141,7 +141,7 @@ biplot(X, type = "form")
 ## Highlight species
 viz_individuals(
   x = X, 
-  highlight = iris$Species, 
+  extra_quali = iris$Species, 
   color = c("#004488", "#DDAA33", "#BB5566")
 )
 ## Add ellipses
@@ -155,7 +155,7 @@ viz_tolerance(
 ## Highlight petal length
 viz_individuals(
   x = X,
-  highlight = iris$Petal.Length,
+  extra_quanti = iris$Petal.Length,
   color = khroma::color("iridescent")(255), 
   size = c(1, 2),
 )

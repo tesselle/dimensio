@@ -39,8 +39,7 @@ indicates variables/columns.}
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
 for which to compute results.}
 
-\item{group}{A vector specifying the group an observation belongs to, or a
-single \code{character} string giving the name of a categorical variable.}
+\item{group}{A vector specifying the group an observation belongs to.}
 
 \item{level}{A \code{\link{numeric}} vector specifying the confidence/tolerance level.}
 }

@@ -507,7 +507,7 @@ setGeneric(
 #' @param legend A [`list`] of additional arguments to be passed to
 #'  [graphics::legend()]; names of the list are used as argument names.
 #'  If `NULL`, no legend is displayed.
-#' @inheritParams prepare
+#' @inheritParams prepare_plot
 #' @param ... Currently not used.
 #' @details
 #'  A biplot is the simultaneous representation of rows and columns of a
@@ -710,8 +710,7 @@ setGeneric(
 #'  indicates variables/columns.
 #' @param axes A length-two [`numeric`] vector giving the dimensions
 #'  for which to compute results.
-#' @param group A vector specifying the group an observation belongs to, or a
-#'  single `character` string giving the name of a categorical variable.
+#' @param group A vector specifying the group an observation belongs to.
 #' @param level A [`numeric`] vector specifying the confidence/tolerance level.
 #' @param ... Currently not used.
 #' @return

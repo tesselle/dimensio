@@ -7,7 +7,7 @@
 viz_labels(x, select = "contribution", n = 10, type = "shadow", ...)
 }
 \arguments{
-\item{x}{A \code{\link{data.frame}} (typically returned by \code{\link[=prepare]{prepare()}}).}
+\item{x}{A \code{\link{data.frame}} (typically returned by \code{\link[=prepare_plot]{prepare_plot()}}).}
 
 \item{select}{A \code{\link{character}} string specifying the variable to select
 labels. If \code{NULL}, all labels are drawn.}
