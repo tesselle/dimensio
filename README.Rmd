@@ -1,5 +1,7 @@
 ---
 output: github_document
+bibliography: vignettes/bibliography.bib
+nocite: '@*'
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -126,7 +128,7 @@ viz_individuals(
   x = X,
   extra_quanti = iris$Petal.Length,
   color = khroma::color("iridescent")(255), 
-  size = c(1, 2),
+  size = c(1, 2)
 )
 ```
 
@@ -140,3 +142,5 @@ screeplot(X, eigenvalues = FALSE, cumulative = TRUE)
 
 ## Contributing
 Please note that the **dimensio** project is released with a [Contributor Code of Conduct](https://www.tesselle.org/conduct.html). By contributing to this project, you agree to abide by its terms.
+
+## References
