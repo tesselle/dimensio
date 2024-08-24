@@ -18,3 +18,18 @@ setMethod(
     z
   }
 )
+
+#' @export
+#' @rdname get_eigenvalues
+#' @aliases get_eigenvalues,PCOA-method
+setMethod(
+  f = "get_eigenvalues",
+  signature = c(x = "PCOA"),
+  definition = function(x) {
+    eig <- x@eigenvalues
+
+    z <- data.frame(eig)
+    colnames(z) <- c("eigenvalues")
+    z
+  }
+)

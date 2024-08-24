@@ -71,6 +71,8 @@ Collate:
     'mca.R'
     'mutators.R'
     'pca.R'
+    'pcoa.R'
+    'plot.R'
     'predicates.R'
     'predict.R'
     'reexport.R'

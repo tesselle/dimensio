@@ -45,7 +45,8 @@ Other class:
 \code{\link{MultivariateAnalysis}},
 \code{\link{MultivariateBootstrap}},
 \code{\link{MultivariateSummary}},
-\code{\link{PCA-class}}
+\code{\link{PCA-class}},
+\code{\link{PCOA-class}}
 }
 \author{
 N. Frerebeau

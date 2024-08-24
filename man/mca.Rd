@@ -49,6 +49,7 @@ Paris: Dunod, 2006.
 Other multivariate analysis: 
 \code{\link{ca}()},
 \code{\link{pca}()},
+\code{\link{pcoa}()},
 \code{\link{predict}()}
 }
 \author{

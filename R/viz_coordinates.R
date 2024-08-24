@@ -467,14 +467,13 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
   data$observation <- ifelse(data$supplementary, "suppl.", "active")
 
   ## Recycle graphical parameters if of length one
-  f <- function(x, n) { if (length(x) == 1) rep(x, n) else x }
   dots <- list(...)
-  col <- f(dots$col %||% graphics::par("col"), n)
-  bg <- f(dots$bg %||% graphics::par("bg"), n)
-  pch <- f(dots$pch %||% 16, n)
-  cex <- f(dots$cex %||% graphics::par("cex"), n)
-  lty <- f(dots$lty %||% graphics::par("lty"), n)
-  lwd <- f(dots$lwd %||% graphics::par("lwd"), n)
+  col <- recycle(dots$col %||% graphics::par("col"), n)
+  bg <- recycle(dots$bg %||% graphics::par("bg"), n)
+  pch <- recycle(dots$pch %||% 16, n)
+  cex <- recycle(dots$cex %||% graphics::par("cex"), n)
+  lty <- recycle(dots$lty %||% graphics::par("lty"), n)
+  lwd <- recycle(dots$lwd %||% graphics::par("lwd"), n)
 
   ## Highlight quantitative information
   if (length(extra_quanti) == 1) {

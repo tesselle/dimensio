@@ -7,6 +7,7 @@
 \alias{get_replications}
 \alias{get_replications-method}
 \alias{get_coordinates,MultivariateAnalysis-method}
+\alias{get_coordinates,PCOA-method}
 \alias{get_replications,MultivariateBootstrap-method}
 \alias{get_replications,BootstrapPCA-method}
 \title{Get Coordinates}
@@ -16,6 +17,8 @@ get_coordinates(x, ...)
 get_replications(x, ...)
 
 \S4method{get_coordinates}{MultivariateAnalysis}(x, margin = 1, principal = TRUE, sup_name = ".sup")
+
+\S4method{get_coordinates}{PCOA}(x)
 
 \S4method{get_replications}{MultivariateBootstrap}(x, margin = 1)
 

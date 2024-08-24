@@ -1,5 +1,9 @@
 # HELPERS
 
+recycle <- function(x, n) {
+  if (length(x) == 1) rep(x, n) else x
+}
+
 print_variance <- function(object, axis) {
   v <- get_variance(object, digits = 1) # Get percentage of variance
   sprintf("%s (%g%%)", names(v)[[axis]], v[[axis]])

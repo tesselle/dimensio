@@ -93,3 +93,54 @@ screeplot.MultivariateAnalysis <- function(x, ..., eigenvalues = FALSE, cumulati
 #' @rdname screeplot
 #' @aliases screeplot,MultivariateAnalysis-method
 setMethod("screeplot", c(x = "MultivariateAnalysis"), screeplot.MultivariateAnalysis)
+
+#' @export
+#' @method screeplot PCOA
+screeplot.PCOA <- function(x, ..., labels = FALSE, limit = NULL,
+                           col = "grey90", border = "grey10") {
+  ## TODO
+  horiz <- FALSE
+
+  ## Prepare data
+  data <- get_eigenvalues(x)
+  data$x <- seq_len(nrow(data))
+  data$y <- data[[1L]]
+  data$labels <- round(data$y, digits = 1)
+
+  ## Subset
+  if (!is.null(limit)) {
+    limit <- min(nrow(data), limit)
+    data <- data[seq_len(limit), , drop = FALSE]
+  }
+
+  ## Bar plot
+  ylab <- "Eigenvalues"
+  mid <- graphics::barplot(
+    height = data$y,
+    names.arg = data$x,
+    horiz = horiz,
+    xlab = if (horiz) ylab else NULL,
+    ylab = if (horiz) NULL else ylab,
+    ylim = c(0, max(data$y)) * 1.05,
+    col = col,
+    border = border,
+    las = 1,
+    ...
+  )
+
+  if (labels) {
+    graphics::text(
+      x = mid,
+      y = data$y,
+      labels = data$labels,
+      pos = 3
+    )
+  }
+
+  invisible(x)
+}
+
+#' @export
+#' @rdname screeplot
+#' @aliases screeplot,PCOA-method
+setMethod("screeplot", c(x = "PCOA"), screeplot.PCOA)

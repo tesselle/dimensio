@@ -1,5 +1,8 @@
 # CLASSES DEFINITION
 
+# Register S3 classes ==========================================================
+setOldClass("dist")
+
 # MultivariateAnalysis =========================================================
 ## Results ---------------------------------------------------------------------
 #' Multivariate Data Analysis Results
@@ -228,6 +231,34 @@
 .BootstrapPCA <- setClass(
   Class = "BootstrapPCA",
   contains = c("MultivariateBootstrap", "PCA")
+)
+
+# PCO ==========================================================================
+#' PCoA Results
+#'
+#' An S4 class to store the results of a principal coordinates analysis.
+#' @slot points A `numeric` matrix whose rows give the coordinates of the points
+#'  chosen to represent the dissimilarities.
+#' @slot eigenvalues A [`numeric`] vector giving the eigenvalues computed during
+#'  the scaling process.
+#' @slot GOF A length-two [`numeric`] vector.
+#' @slot groups A [`character`] vector specifying the class for each
+#'  observation.
+#' @example inst/examples/ex-pcoa.R
+#' @author N. Frerebeau
+#' @family class
+#' @docType class
+#' @exportClass PCOA
+#' @aliases PCOA-class
+#' @keywords internal
+.PCOA <- setClass(
+  Class = "PCOA",
+  slots = c(
+    points = "matrix",
+    eigenvalues = "numeric",
+    GOF = "numeric",
+    groups = "character"
+  )
 )
 
 # Initialize ===================================================================

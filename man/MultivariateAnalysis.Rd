@@ -43,7 +43,8 @@ Other class:
 \code{\link{MultivariateBootstrap}},
 \code{\link{MultivariateResults}},
 \code{\link{MultivariateSummary}},
-\code{\link{PCA-class}}
+\code{\link{PCA-class}},
+\code{\link{PCOA-class}}
 }
 \author{
 N. Frerebeau

@@ -5,6 +5,7 @@
 \alias{screeplot}
 \alias{screeplot-method}
 \alias{screeplot,MultivariateAnalysis-method}
+\alias{screeplot,PCOA-method}
 \title{Scree Plot}
 \usage{
 \S4method{screeplot}{MultivariateAnalysis}(
@@ -19,6 +20,15 @@
   col.cumulative = "red",
   lty.cumulative = "solid",
   lwd.cumulative = 2
+)
+
+\S4method{screeplot}{PCOA}(
+  x,
+  ...,
+  labels = FALSE,
+  limit = NULL,
+  col = "grey90",
+  border = "grey10"
 )
 }
 \arguments{
@@ -68,6 +78,7 @@ screeplot(X, cumulative = TRUE)
 \seealso{
 Other plot methods: 
 \code{\link{biplot}()},
+\code{\link{plot}()},
 \code{\link{viz_contributions}()},
 \code{\link{viz_individuals}()},
 \code{\link{viz_variables}()},

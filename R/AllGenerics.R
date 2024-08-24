@@ -211,6 +211,32 @@ setGeneric(
   valueClass = "PCA"
 )
 
+# PCoA =========================================================================
+#' Principal Coordinates Analysis
+#'
+#' Computes classical (metric) multidimensional scaling.
+#' @param object A [distance structure][stats::dist()].
+#' @param rank An [`integer`] value specifying the maximal number dimension of
+#'  the space which the data are to be represented in.
+#' @param ... Currently not used.
+#' @return
+#'  A [`PCOA-class`] object.
+#' @references
+#'  Gower, J. C. (1966). Some Distance Properties of Latent Root and Vector
+#'  Methods Used in Multivariate Analysis. *Biometrika*, 53(3‑4): 325-338.
+#'  \doi{10.1093/biomet/53.3-4.325}.
+#' @example inst/examples/ex-pcoa.R
+#' @seealso [stats::cmdscale()]
+#' @author N. Frerebeau
+#' @docType methods
+#' @family multivariate analysis
+#' @aliases pcoa-method
+setGeneric(
+  name = "pcoa",
+  def = function(object, ...) standardGeneric("pcoa"),
+  valueClass = "PCOA"
+)
+
 # Predict ======================================================================
 #' Predict New Coordinates
 #'
@@ -433,6 +459,18 @@ setGeneric(
 )
 
 # Plot =========================================================================
+#' Plot Coordinates
+#'
+#' @param x An \R object.
+#' @param ... Further [graphical parameters][graphics::par].
+#' @inheritParams viz_points
+#' @author N. Frerebeau
+#' @docType methods
+#' @family plot methods
+#' @name plot
+#' @rdname plot
+NULL
+
 ## Biplot ----------------------------------------------------------------------
 #' Biplot
 #'

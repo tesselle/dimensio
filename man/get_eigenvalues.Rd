@@ -10,6 +10,7 @@
 \alias{get_variance}
 \alias{get_variance-method}
 \alias{get_eigenvalues,MultivariateAnalysis-method}
+\alias{get_eigenvalues,PCOA-method}
 \alias{get_inertia,MultivariateAnalysis-method}
 \alias{get_variance,MultivariateAnalysis-method}
 \title{Get Eigenvalues}
@@ -21,6 +22,8 @@ get_inertia(x, ...)
 get_variance(x, ...)
 
 \S4method{get_eigenvalues}{MultivariateAnalysis}(x)
+
+\S4method{get_eigenvalues}{PCOA}(x)
 
 \S4method{get_inertia}{MultivariateAnalysis}(x, margin = 1)
 

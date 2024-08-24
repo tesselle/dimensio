@@ -34,6 +34,17 @@ setMethod(
   }
 )
 
+#' @export
+#' @rdname get_coordinates
+#' @aliases get_coordinates,PCOA-method
+setMethod(
+  f = "get_coordinates",
+  signature = c(x = "PCOA"),
+  definition = function(x) {
+    as.data.frame(x@points)
+  }
+)
+
 # Replications =================================================================
 #' @export
 #' @rdname get_coordinates

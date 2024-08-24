@@ -37,7 +37,8 @@
 #' @importFrom methods Arith as as<- callGeneric callNextMethod
 #' .hasSlot initialize is new setClass setClassUnion
 #' setGeneric setMethod slot slot<- slotNames validObject .valueClassTest
-#' @importFrom stats aggregate approx cov na.omit qchisq qf rmultinom runif
+#' @importFrom stats aggregate approx cmdscale cov na.omit qchisq qf rmultinom
+#' runif
 #' @importFrom utils capture.output modifyList stack tail
 NULL
 

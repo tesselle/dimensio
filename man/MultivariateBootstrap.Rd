@@ -25,7 +25,8 @@ Other class:
 \code{\link{MultivariateAnalysis}},
 \code{\link{MultivariateResults}},
 \code{\link{MultivariateSummary}},
-\code{\link{PCA-class}}
+\code{\link{PCA-class}},
+\code{\link{PCOA-class}}
 }
 \author{
 N. Frerebeau

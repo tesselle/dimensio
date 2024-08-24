@@ -75,6 +75,7 @@ hulls <- wrap_hull(X, margin = 1, group = "Species")
 \seealso{
 Other plot methods: 
 \code{\link{biplot}()},
+\code{\link{plot}()},
 \code{\link{screeplot}()},
 \code{\link{viz_contributions}()},
 \code{\link{viz_individuals}()},
