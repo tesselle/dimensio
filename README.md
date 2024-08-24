@@ -156,7 +156,7 @@ viz_tolerance(
 viz_individuals(
   x = X,
   extra_quanti = iris$Petal.Length,
-  color = khroma::color("iridescent")(255), 
+  color = color("iridescent")(255), 
   size = c(1, 2)
 )
 ```

@@ -4,6 +4,7 @@
 \name{reexports}
 \alias{reexports}
 \alias{bootstrap}
+\alias{color}
 \alias{palette_color_continuous}
 \alias{palette_color_discrete}
 \alias{palette_color_picker}
@@ -19,6 +20,6 @@ below to see their documentation.
 \describe{
   \item{arkhe}{\code{\link[arkhe]{bootstrap}}}
 
-  \item{khroma}{\code{\link[khroma]{palette_color_continuous}}, \code{\link[khroma]{palette_color_discrete}}, \code{\link[khroma]{palette_color_picker}}, \code{\link[khroma:palette_shape]{palette_line}}, \code{\link[khroma]{palette_shape}}, \code{\link[khroma]{palette_size_range}}}
+  \item{khroma}{\code{\link[khroma:colour]{color}}, \code{\link[khroma]{palette_color_continuous}}, \code{\link[khroma]{palette_color_discrete}}, \code{\link[khroma]{palette_color_picker}}, \code{\link[khroma:palette_shape]{palette_line}}, \code{\link[khroma]{palette_shape}}, \code{\link[khroma]{palette_size_range}}}
 }}
 
