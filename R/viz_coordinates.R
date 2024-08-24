@@ -454,7 +454,10 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
                          symbol = NULL, size = c(1, 6),
                          line_type = NULL, line_width = size) {
   ## /!\ Backward compatibility /!\
-  extra_quanti <- list(...)$highlight %||% extra_quanti
+  high <- list(...)$highlight
+  if (length(high) == 1) {
+    if (high == "observation") extra_quali <- high else extra_quanti <- high
+  }
 
   ## Prepare data
   data <- augment(x, margin = margin, axes = axes, principal = principal)
