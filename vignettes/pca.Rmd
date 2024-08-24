@@ -125,7 +125,18 @@ viz_individuals(
 )
 ```
 
-```{r}
+```{r plot-ind-highligh}
+## Highlight one species
+viz_individuals(
+  x = X,
+  extra_quali = iris$Species,
+  color = c(versicolor = "black"), # Named vector
+  symbol = c(15, 16, 17), # Custom symbols
+  legend = list(x = "bottomright")
+)
+```
+
+```{r plot-ind-lab}
 ## Label the 10 individuals with highest cos2
 viz_individuals(
   x = X,
