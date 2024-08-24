@@ -15,7 +15,7 @@ viz_points(
   extra_quali = NULL,
   extra_quanti = NULL,
   color = NULL,
-  fill = NULL,
+  fill = FALSE,
   symbol = NULL,
   size = c(1, 6),
   xlim = NULL,
@@ -65,6 +65,10 @@ mapping. If a single \code{\link{character}} string is passed, it must be one of
 (see \code{\link[=augment]{augment()}}).}
 
 \item{color}{The colors for lines and points (will be mapped to
+\code{extra_quanti} or \code{extra_quali}; if both are set, the latter has priority).
+Ignored if set to \code{FALSE}.}
+
+\item{fill}{The background colors for points (will be mapped to
 \code{extra_quanti} or \code{extra_quali}; if both are set, the latter has priority).
 Ignored if set to \code{FALSE}.}
 

@@ -527,12 +527,10 @@ NULL
 #'
 #' Plots row/individual principal coordinates.
 #' @inheritParams viz_points
-#' @param ... Further [graphical parameters][graphics::par] (see details).
+#' @param ... Further [graphical parameters][graphics::par].
 #' @return
 #'  `viz_*()` is called for its side-effects: it results in a graphic
 #'  being displayed. Invisibly returns `x`.
-#' @section Aesthetics:
-#'  TBD
 #' @example inst/examples/ex-plot.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -554,7 +552,7 @@ setGeneric(
 #'
 #' Plots column/variable principal coordinates.
 #' @inheritParams viz_points
-#' @inheritSection viz_individuals Aesthetics
+#' @param ... Further [graphical parameters][graphics::par].
 #' @return
 #'  `viz_*()` is called for its side-effects: it results in a graphic
 #'  being displayed. Invisibly returns `x`.

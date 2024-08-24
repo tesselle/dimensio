@@ -7,6 +7,7 @@
 prepare_plot(
   x,
   margin,
+  ...,
   axes = c(1, 2),
   active = TRUE,
   sup = TRUE,
@@ -18,8 +19,7 @@ prepare_plot(
   symbol = NULL,
   size = c(1, 6),
   line_type = NULL,
-  line_width = size,
-  ...
+  line_width = size
 )
 }
 \arguments{
@@ -28,6 +28,8 @@ prepare_plot(
 \item{margin}{A length-one \code{\link{numeric}} vector giving the subscript
 which the data will be returned: \code{1} indicates individuals/rows (the
 default), \code{2} indicates variables/columns.}
+
+\item{...}{Further \link[graphics:par]{graphical parameters}.}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -50,6 +52,10 @@ mapping. If a single \code{\link{character}} string is passed, it must be one of
 (see \code{\link[=augment]{augment()}}).}
 
 \item{color}{The colors for lines and points (will be mapped to
+\code{extra_quanti} or \code{extra_quali}; if both are set, the latter has priority).
+Ignored if set to \code{FALSE}.}
+
+\item{fill}{The background colors for points (will be mapped to
 \code{extra_quanti} or \code{extra_quali}; if both are set, the latter has priority).
 Ignored if set to \code{FALSE}.}
 

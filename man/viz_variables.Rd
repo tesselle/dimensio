@@ -27,6 +27,7 @@ viz_columns(x, ...)
   extra_quali = NULL,
   extra_quanti = NULL,
   color = NULL,
+  fill = FALSE,
   symbol = FALSE,
   size = c(1, 6),
   xlim = NULL,
@@ -38,7 +39,14 @@ viz_columns(x, ...)
   legend = list(x = "topleft")
 )
 
-\S4method{viz_columns}{MultivariateBootstrap}(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE)
+\S4method{viz_columns}{MultivariateBootstrap}(
+  x,
+  ...,
+  axes = c(1, 2),
+  color = FALSE,
+  fill = FALSE,
+  symbol = FALSE
+)
 
 \S4method{viz_variables}{PCA}(
   x,
@@ -71,6 +79,7 @@ viz_columns(x, ...)
   extra_quali = NULL,
   extra_quanti = NULL,
   color = NULL,
+  fill = FALSE,
   symbol = FALSE,
   size = c(1, 6),
   xlim = NULL,
@@ -82,12 +91,19 @@ viz_columns(x, ...)
   legend = list(x = "topleft")
 )
 
-\S4method{viz_variables}{BootstrapPCA}(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE)
+\S4method{viz_variables}{BootstrapPCA}(
+  x,
+  ...,
+  axes = c(1, 2),
+  color = FALSE,
+  fill = FALSE,
+  symbol = FALSE
+)
 }
 \arguments{
 \item{x}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
 
-\item{...}{Currently not used.}
+\item{...}{Further \link[graphics:par]{graphical parameters}.}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -114,6 +130,10 @@ mapping. If a single \code{\link{character}} string is passed, it must be one of
 (see \code{\link[=augment]{augment()}}).}
 
 \item{color}{The colors for lines and points (will be mapped to
+\code{extra_quanti} or \code{extra_quali}; if both are set, the latter has priority).
+Ignored if set to \code{FALSE}.}
+
+\item{fill}{The background colors for points (will be mapped to
 \code{extra_quanti} or \code{extra_quali}; if both are set, the latter has priority).
 Ignored if set to \code{FALSE}.}
 
@@ -157,11 +177,6 @@ being displayed. Invisibly returns \code{x}.
 \description{
 Plots column/variable principal coordinates.
 }
-\section{Aesthetics}{
-
-TBD
-}
-
 \examples{
 ## Load data
 data("iris")

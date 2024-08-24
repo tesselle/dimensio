@@ -25,6 +25,7 @@ viz_rows(x, ...)
   extra_quali = NULL,
   extra_quanti = NULL,
   color = NULL,
+  fill = FALSE,
   symbol = FALSE,
   size = c(1, 6),
   xlim = NULL,
@@ -36,7 +37,7 @@ viz_rows(x, ...)
   legend = list(x = "topleft")
 )
 
-\S4method{viz_rows}{BootstrapCA}(x, ..., axes = c(1, 2), color = FALSE, symbol = FALSE)
+\S4method{viz_rows}{BootstrapCA}(x, ..., axes = c(1, 2), color = FALSE, fill = FALSE, symbol = FALSE)
 
 \S4method{viz_individuals}{PCA}(
   x,
@@ -48,6 +49,7 @@ viz_rows(x, ...)
   extra_quali = NULL,
   extra_quanti = NULL,
   color = NULL,
+  fill = FALSE,
   symbol = FALSE,
   size = c(1, 6),
   xlim = NULL,
@@ -62,7 +64,7 @@ viz_rows(x, ...)
 \arguments{
 \item{x}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
 
-\item{...}{Further \link[graphics:par]{graphical parameters} (see details).}
+\item{...}{Further \link[graphics:par]{graphical parameters}.}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
 plotted.}
@@ -89,6 +91,10 @@ mapping. If a single \code{\link{character}} string is passed, it must be one of
 (see \code{\link[=augment]{augment()}}).}
 
 \item{color}{The colors for lines and points (will be mapped to
+\code{extra_quanti} or \code{extra_quali}; if both are set, the latter has priority).
+Ignored if set to \code{FALSE}.}
+
+\item{fill}{The background colors for points (will be mapped to
 \code{extra_quanti} or \code{extra_quali}; if both are set, the latter has priority).
 Ignored if set to \code{FALSE}.}
 
@@ -132,11 +138,6 @@ being displayed. Invisibly returns \code{x}.
 \description{
 Plots row/individual principal coordinates.
 }
-\section{Aesthetics}{
-
-TBD
-}
-
 \examples{
 ## Load data
 data("iris")
