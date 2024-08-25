@@ -26,10 +26,12 @@ setMethod(
   f = "get_eigenvalues",
   signature = c(x = "PCOA"),
   definition = function(x) {
-    eig <- x@eigenvalues
+    eig <- x@eigenvalues# Eigenvalues
+    pvar <- eig / sum(eig) * 100 # Percentage
+    cvar <- cumsum(pvar) # Cumulative percentage
 
-    z <- data.frame(eig)
-    colnames(z) <- c("eigenvalues")
+    z <- data.frame(eig, pvar, cvar)
+    colnames(z) <- c("eigenvalues", "variance", "cumulative")
     z
   }
 )
