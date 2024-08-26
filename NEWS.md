@@ -1,3 +1,5 @@
+# dimensio 0.9.0.9000
+
 # dimensio 0.9.0
 ## New classes and methods
 * Add `pcoa()` to compute principal coordinates analysis.

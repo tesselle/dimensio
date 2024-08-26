@@ -53,6 +53,9 @@ identifiers:
 - description: The versioned DOI for version 0.8.1.
   type: doi
   value: 10.5281/zenodo.13135650
+- description: The versioned DOI for version 0.9.0
+  type: doi
+  value: 10.5281/zenodo.13375140
 abstract: 'Simple Principal Components Analysis (PCA) and (Multiple) Correspondence
   Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides
   S4 classes and methods to compute, extract, summarize and visualize results of multivariate
