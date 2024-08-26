@@ -76,19 +76,19 @@ decomposition.
 data("iris")
 
 ## Compute principal components analysis
-X <- pca(iris, scale = TRUE, sup_row = sample(150, 10), sup_col = 2)
-
-## Get row coordinates
-head(get_coordinates(X, margin = 1))
-
-## Get column coordinates
-head(get_coordinates(X, margin = 2))
-
-## Get correlations between variables and dimensions
-head(get_correlations(X))
+X <- pca(iris)
 
 ## Get eigenvalues
 get_eigenvalues(X)
+
+## Get individual cos2
+head(get_cos2(X, margin = 1))
+
+## Get variable contributions
+get_contributions(X, margin = 2)
+
+## Get correlations between variables and dimensions
+get_correlations(X)
 }
 \references{
 Lebart, L., Piron, M. and Morineau, A. \emph{Statistique exploratoire

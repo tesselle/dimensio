@@ -32,6 +32,9 @@ expect_equal_to_reference(get_distances(res, margin = 1), file = "_snaps/ca_row_
 expect_equal_to_reference(get_distances(res, margin = 2), file = "_snaps/ca_col_distances.rds")
 
 # Inertias
+chi2 <- suppressWarnings(stats::chisq.test(benthos)$statistic / sum(benthos))
+expect_equivalent(sum(get_inertia(res)), chi2)
+
 expect_equal_to_reference(get_inertia(res, margin = 1), file = "_snaps/ca_row_inertia.rds")
 expect_equal_to_reference(get_inertia(res, margin = 2), file = "_snaps/ca_col_inertia.rds")
 

@@ -44,7 +44,7 @@ create for supplementary points attribution (see below).}
 \item \code{get_contributions()} returns a \code{\link{data.frame}} of contributions to the
 definition of the principal dimensions.
 \item \code{get_correlations()} returns a \code{\link{data.frame}} of correlations between
-variables and dimensions (\code{PCA}). An extra column (named after \code{sup_name})
+variables and dimensions. An extra column (named after \code{sup_name})
 is added specifying whether an observation is a supplementary point or
 not.
 \item \code{get_cos2()} returns a \code{\link{data.frame}} of \eqn{cos^2}{cos2} values (i.e.
@@ -60,7 +60,6 @@ Get Contributions
 Other getters: 
 \code{\link{get_coordinates}()},
 \code{\link{get_data}()},
-\code{\link{get_distances}()},
 \code{\link{get_eigenvalues}()}
 }
 \author{

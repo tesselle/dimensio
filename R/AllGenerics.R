@@ -360,9 +360,12 @@ setGeneric(
 #'  * `get_eigenvalues()` returns a [`data.frame`] with the following columns:
 #'    `eigenvalues`, `variance` (percentage of variance) and `cumulative`
 #'    (cumulative percentage of variance).
-#'  * `get_variance()` returns a [`numeric`] vector giving the percentage of
-#'    explained variance of each dimension.
-#'  * `get_inertia()` returns a [`numeric`] vector.
+#'  * `get_variance()` returns a [`numeric`] vector giving the amount of
+#'    variance explained by each (principal) component.
+#'  * `get_distance()`returns a [`numeric`] vector of squared distance to the
+#'    centroid.
+#'  * `get_inertia()` returns a [`numeric`] vector giving the inertia (weighted
+#'    squared distance to the centroid).
 #' @author N. Frerebeau
 #' @docType methods
 #' @family getters
@@ -374,18 +377,26 @@ setGeneric(
 )
 
 #' @rdname get_eigenvalues
-#' @aliases get_inertia-method
-setGeneric(
-  name = "get_inertia",
-  def = function(x, ...) standardGeneric("get_inertia"),
-  valueClass = "numeric"
-)
-
-#' @rdname get_eigenvalues
 #' @aliases get_variance-method
 setGeneric(
   name = "get_variance",
   def = function(x, ...) standardGeneric("get_variance"),
+  valueClass = "numeric"
+)
+
+#' @rdname get_eigenvalues
+#' @aliases get_distances-method
+setGeneric(
+  name = "get_distances",
+  def = function(x, ...) standardGeneric("get_distances"),
+  valueClass = "numeric"
+)
+
+#' @rdname get_eigenvalues
+#' @aliases get_inertia-method
+setGeneric(
+  name = "get_inertia",
+  def = function(x, ...) standardGeneric("get_inertia"),
   valueClass = "numeric"
 )
 
@@ -404,7 +415,7 @@ setGeneric(
 #'  * `get_contributions()` returns a [`data.frame`] of contributions to the
 #'    definition of the principal dimensions.
 #'  * `get_correlations()` returns a [`data.frame`] of correlations between
-#'    variables and dimensions (`PCA`). An extra column (named after `sup_name`)
+#'    variables and dimensions. An extra column (named after `sup_name`)
 #'    is added specifying whether an observation is a supplementary point or
 #'    not.
 #'  * `get_cos2()` returns a [`data.frame`] of \eqn{cos^2}{cos2} values (i.e.
@@ -435,27 +446,6 @@ setGeneric(
   name = "get_cos2",
   def = function(x, ...) standardGeneric("get_cos2"),
   valueClass = "data.frame"
-)
-
-## Distances -------------------------------------------------------------------
-#' Get Distances
-#'
-#' @param x An object from which to get element(s) (a [`CA-class`],
-#'  [`MCA-class`] or [`PCA-class`] object).
-#' @param margin A length-one [`numeric`] vector giving the subscript which the
-#'  data will be returned: `1` indicates individuals/rows (the default), `2`
-#'  indicates variables/columns.
-#' @param ... Currently not used.
-#' @return
-#'  A [`numeric`] vector of squared distance to the centroide.
-#' @author N. Frerebeau
-#' @docType methods
-#' @family getters
-#' @aliases get_distances-method
-setGeneric(
-  name = "get_distances",
-  def = function(x, ...) standardGeneric("get_distances"),
-  valueClass = "numeric"
 )
 
 # Plot =========================================================================

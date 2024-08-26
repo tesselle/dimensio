@@ -65,13 +65,8 @@ setMethod(
     w_row <- if (is.null(weight_row)) rep(1, nrow(N)) else weight_row
     w_col <- if (is.null(weight_col)) rep(1, ncol(N)) else weight_col
     w_row <- w_row / sum(w_row)
-    W_row <- sqrt(w_row)
-    W_col <- sqrt(w_col)
 
     # Build matrix
-    # matrix * vector is faster (!) than:
-    # matrix %*% t(vector)
-    # t(t(matrix) * vector)
     s_row <- sqrt(w_row)
     s_col <- sqrt(w_col)
     W_row1 <- matrix(s_row, nrow = i, ncol = j, byrow = FALSE)

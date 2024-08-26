@@ -28,22 +28,16 @@ viz_rows(X, labels = TRUE)
 viz_columns(X, labels = TRUE)
 
 ## Get row coordinates
-head(get_coordinates(X, margin = 1))
+get_coordinates(X, margin = 1)
 
 ## Get column coordinates
-head(get_coordinates(X, margin = 2))
+get_coordinates(X, margin = 2)
 
-## Get row distances to centroid
-head(get_distances(X, margin = 1))
-
-## Get row inertias
-head(get_inertia(X, margin = 1))
+## Get total inertia
+sum(get_inertia(X))
 
 ## Get row contributions
-head(get_contributions(X, margin = 1))
-
-## Get eigenvalues
-get_eigenvalues(X)
+get_contributions(X, margin = 1)
 }
 \seealso{
 Other class: 

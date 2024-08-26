@@ -27,7 +27,6 @@ Get Original Data
 Other getters: 
 \code{\link{get_contributions}()},
 \code{\link{get_coordinates}()},
-\code{\link{get_distances}()},
 \code{\link{get_eigenvalues}()}
 }
 \author{

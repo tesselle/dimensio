@@ -3,7 +3,7 @@
 NULL
 
 #' @export
-#' @rdname get_distances
+#' @rdname get_eigenvalues
 #' @aliases get_distances,MultivariateAnalysis-method
 setMethod(
   f = "get_distances",

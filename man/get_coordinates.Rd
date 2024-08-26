@@ -75,7 +75,6 @@ head(augment(X, margin = 2, axes = c(1, 2)))
 Other getters: 
 \code{\link{get_contributions}()},
 \code{\link{get_data}()},
-\code{\link{get_distances}()},
 \code{\link{get_eigenvalues}()}
 }
 \author{
