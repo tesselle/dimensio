@@ -8,7 +8,7 @@ message: 'To cite package "dimensio" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'dimensio: Multivariate Data Analysis'
-version: 0.8.1.9000
+version: 0.9.0
 doi: 10.5281/zenodo.4478530
 identifiers:
 - description: The concept DOI.
@@ -77,7 +77,7 @@ preferred-citation:
   institution:
     name: Université Bordeaux Montaigne
     address: Pessac, France
-  notes: R package version 0.8.1.9000
+  notes: R package version 0.9.0
   doi: 10.5281/zenodo.4478530
   url: https://packages.tesselle.org/dimensio/
 repository: https://CRAN.R-project.org/package=dimensio

@@ -16,7 +16,7 @@ src="https://tesselle.r-universe.dev/badges/dimensio"
 alt="r-universe" /></a>
 <a href="https://cran.r-project.org/package=dimensio"
 class="pkgdown-release"><img
-src="http://www.r-pkg.org/badges/version/dimensio"
+src="https://www.r-pkg.org/badges/version/dimensio"
 alt="CRAN Version" /></a> <a
 href="https://cran.r-project.org/web/checks/check_results_dimensio.html"
 class="pkgdown-release"><img
@@ -24,7 +24,7 @@ src="https://badges.cranchecks.info/worst/dimensio.svg"
 alt="CRAN checks" /></a>
 <a href="https://cran.r-project.org/package=dimensio"
 class="pkgdown-release"><img
-src="http://cranlogs.r-pkg.org/badges/dimensio"
+src="https://cranlogs.r-pkg.org/badges/dimensio"
 alt="CRAN Downloads" /></a>
 
 [![Project Status: Active – The project has reached a stable, usable
@@ -57,7 +57,7 @@ To cite dimensio in publications use:
 
 Frerebeau N (2024). *dimensio: Multivariate Data Analysis*. Université
 Bordeaux Montaigne, Pessac, France. <doi:10.5281/zenodo.4478530>
-<https://doi.org/10.5281/zenodo.4478530>, R package version 0.8.1.9000,
+<https://doi.org/10.5281/zenodo.4478530>, R package version 0.9.0,
 <https://packages.tesselle.org/dimensio/>.
 
 This package is a part of the tesselle project
