@@ -241,6 +241,8 @@ setOldClass("dist")
 #'  chosen to represent the dissimilarities.
 #' @slot eigenvalues A [`numeric`] vector giving the eigenvalues computed during
 #'  the scaling process.
+#' @slot method A [`character`] string giving the distance that has been used to
+#'  create the distance structure.
 #' @slot GOF A length-two [`numeric`] vector.
 #' @slot groups A [`character`] vector specifying the class for each
 #'  observation.
@@ -257,6 +259,7 @@ setOldClass("dist")
     points = "matrix",
     eigenvalues = "numeric",
     GOF = "numeric",
+    method = "character",
     groups = "character"
   )
 )

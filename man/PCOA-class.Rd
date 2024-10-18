@@ -17,6 +17,9 @@ chosen to represent the dissimilarities.}
 \item{\code{eigenvalues}}{A \code{\link{numeric}} vector giving the eigenvalues computed during
 the scaling process.}
 
+\item{\code{method}}{A \code{\link{character}} string giving the distance that has been used to
+create the distance structure.}
+
 \item{\code{GOF}}{A length-two \code{\link{numeric}} vector.}
 
 \item{\code{groups}}{A \code{\link{character}} vector specifying the class for each
