@@ -29,7 +29,7 @@ Imports:
     arkhe (>= 1.7.0),
     graphics,
     grDevices,
-    khroma (>= 1.13.0),
+    khroma (>= 1.14.0),
     methods
 Suggests: 
     knitr,

@@ -8,23 +8,29 @@ NULL
 setMethod(
   f = "viz_hull",
   signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, ..., margin = 1, axes = c(1, 2), group = NULL) {
+  definition = function(x, ..., margin = 1, axes = c(1, 2), group = NULL,
+                        color = NULL, fill = FALSE, symbol = FALSE) {
     hull <- wrap_hull(x, margin = margin, axes = axes, group = group)
     n <- length(hull)
 
-    ## Graphical parameters
-    border <- list(...)$border %||% graphics::par("col")
-    col <- list(...)$col %||% NA
-    lty <- list(...)$lty %||% graphics::par("lty")
-    lwd <- list(...)$lwd %||% graphics::par("lwd")
-    if (length(border) == 1) border <- rep(border, length.out = n)
-    if (length(col) == 1) col <- rep(col, length.out = n)
-    if (length(lty) == 1) lty <- rep(lty, length.out = n)
-    if (length(lwd) == 1) lwd <- rep(lwd, length.out = n)
+    ## Recycle graphical parameters if of length one
+    dots <- list(...)
+    col <- recycle(dots$border %||% graphics::par("bg"), n)
+    bg <- recycle(dots$col %||% NA, n)
+    lty <- recycle(dots$lty %||% graphics::par("lty"), n)
+    lwd <- recycle(dots$lwd %||% graphics::par("lwd"), n)
+
+    if (n > 1) {
+      ## Discrete scales
+      extra_quali <- names(hull)
+      if (!isFALSE(color)) col <- khroma::palette_color_discrete(colors = color)(extra_quali)
+      if (!isFALSE(fill)) bg <- khroma::palette_color_discrete(colors = fill)(extra_quali)
+      if (!isFALSE(symbol)) lty <- khroma::palette_line(types = symbol)(extra_quali)
+    }
 
     for (i in seq_along(hull)) {
-      graphics::polygon(x = hull[[i]], border = border[i],
-                        col = col[i], lty = lty[i], lwd = lwd[i])
+      graphics::polygon(x = hull[[i]], border = col[i],
+                        col = bg[i], lty = lty[i], lwd = lwd[i])
     }
 
     invisible(x)
@@ -37,7 +43,8 @@ setMethod(
 setMethod(
   f = "viz_hull",
   signature = c(x = "BootstrapCA"),
-  definition = function(x, ..., margin = 1, axes = c(1, 2)) {
+  definition = function(x, ..., margin = 1, axes = c(1, 2),
+                        color = NULL, fill = FALSE, symbol = FALSE) {
     group <- get_groups(x, margin = margin)
     methods::callNextMethod(x, margin = margin, axes = axes, group = group, ...)
     invisible(x)

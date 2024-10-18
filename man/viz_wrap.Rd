@@ -23,17 +23,72 @@ viz_confidence(x, ...)
 
 viz_tolerance(x, ...)
 
-\S4method{viz_tolerance}{MultivariateAnalysis}(x, ..., margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
+\S4method{viz_tolerance}{MultivariateAnalysis}(
+  x,
+  ...,
+  margin = 1,
+  axes = c(1, 2),
+  group = NULL,
+  level = 0.95,
+  color = NULL,
+  fill = FALSE,
+  symbol = FALSE
+)
 
-\S4method{viz_tolerance}{BootstrapCA}(x, ..., margin = 1, axes = c(1, 2), level = 0.95)
+\S4method{viz_tolerance}{BootstrapCA}(
+  x,
+  ...,
+  margin = 1,
+  axes = c(1, 2),
+  level = 0.95,
+  color = NULL,
+  fill = FALSE,
+  symbol = FALSE
+)
 
-\S4method{viz_confidence}{MultivariateAnalysis}(x, ..., margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
+\S4method{viz_confidence}{MultivariateAnalysis}(
+  x,
+  ...,
+  margin = 1,
+  axes = c(1, 2),
+  group = NULL,
+  level = 0.95,
+  color = NULL,
+  fill = FALSE,
+  symbol = FALSE
+)
 
-\S4method{viz_confidence}{BootstrapCA}(x, ..., margin = 1, axes = c(1, 2), level = 0.95)
+\S4method{viz_confidence}{BootstrapCA}(
+  x,
+  ...,
+  margin = 1,
+  axes = c(1, 2),
+  level = 0.95,
+  color = NULL,
+  fill = FALSE,
+  symbol = FALSE
+)
 
-\S4method{viz_hull}{MultivariateAnalysis}(x, ..., margin = 1, axes = c(1, 2), group = NULL)
+\S4method{viz_hull}{MultivariateAnalysis}(
+  x,
+  ...,
+  margin = 1,
+  axes = c(1, 2),
+  group = NULL,
+  color = NULL,
+  fill = FALSE,
+  symbol = FALSE
+)
 
-\S4method{viz_hull}{BootstrapCA}(x, ..., margin = 1, axes = c(1, 2))
+\S4method{viz_hull}{BootstrapCA}(
+  x,
+  ...,
+  margin = 1,
+  axes = c(1, 2),
+  color = NULL,
+  fill = FALSE,
+  symbol = FALSE
+)
 }
 \arguments{
 \item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}},
@@ -52,6 +107,15 @@ for which to compute results.}
 \item{group}{A vector specifying the group an observation belongs to.}
 
 \item{level}{A \code{\link{numeric}} vector specifying the confidence/tolerance level.}
+
+\item{color}{The colors for borders (will be mapped to \code{group}).
+Ignored if set to \code{FALSE}.}
+
+\item{fill}{The background colors (will be mapped to \code{group}).
+Ignored if set to \code{FALSE}.}
+
+\item{symbol}{A vector of symbols (will be mapped to \code{group}).
+Ignored if set to \code{FALSE}.}
 }
 \value{
 \verb{viz_*()}is called for its side-effects: it results in a graphic being
@@ -70,12 +134,12 @@ X <- pca(iris, scale = TRUE, sup_quali = "Species")
 ## Plot with convex hulls
 col <- c("#004488", "#DDAA33", "#BB5566")
 viz_rows(X, extra_quali = iris$Species, color = col)
-viz_hull(X, group = iris$Species, border = col)
+viz_hull(X, group = iris$Species, color = col)
 
 ## Plot with tolerance ellipses
 col <- c("#004488", "#DDAA33", "#BB5566")
 viz_rows(X, extra_quali = iris$Species, color = col)
-viz_tolerance(X, group = iris$Species, border = col)
+viz_tolerance(X, group = iris$Species, color = col)
 }
 \seealso{
 Other plot methods: 

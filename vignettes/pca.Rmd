@@ -153,13 +153,13 @@ viz_individuals(
 viz_individuals(x = X, extra_quali = iris$Species,
                 color = c("#004488", "#DDAA33", "#BB5566"))
 viz_tolerance(x = X, group = iris$Species, level = 0.95,
-              border = c("#004488", "#DDAA33", "#BB5566"))
+              color = c("#004488", "#DDAA33", "#BB5566"))
 
 ## Add convex hull
 viz_individuals(x = X, extra_quali = iris$Species,
                 color = c("#004488", "#DDAA33", "#BB5566"))
 viz_hull(x = X, group = iris$Species, level = 0.95,
-         border = c("#004488", "#DDAA33", "#BB5566"))
+         color = c("#004488", "#DDAA33", "#BB5566"))
 ```
 
 ```{r plot-ind-petal}

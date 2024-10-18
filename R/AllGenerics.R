@@ -733,6 +733,12 @@ setGeneric(
 #' Plot Envelopes
 #'
 #' @inheritParams wrap
+#' @param color The colors for borders (will be mapped to `group`).
+#'  Ignored if set to `FALSE`.
+#' @param fill The background colors (will be mapped to `group`).
+#'  Ignored if set to `FALSE`.
+#' @param symbol A vector of symbols (will be mapped to `group`).
+#'  Ignored if set to `FALSE`.
 #' @param ... Further [graphical parameters][graphics::par] to be passed to
 #'  [graphics::polygon()].
 #' @return

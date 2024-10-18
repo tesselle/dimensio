@@ -120,7 +120,7 @@ viz_tolerance(
   x = X, 
   group = iris$Species, 
   level = 0.95,
-  border = c("#004488", "#DDAA33", "#BB5566")
+  color = c("#004488", "#DDAA33", "#BB5566")
 )
 
 ## Highlight petal length
