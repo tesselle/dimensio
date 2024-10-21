@@ -73,6 +73,7 @@ head(augment(X, margin = 2, axes = c(1, 2)))
 }
 \seealso{
 Other getters: 
+\code{\link{export}()},
 \code{\link{get_contributions}()},
 \code{\link{get_data}()},
 \code{\link{get_eigenvalues}()}

@@ -58,6 +58,7 @@ Get Contributions
 }
 \seealso{
 Other getters: 
+\code{\link{export}()},
 \code{\link{get_coordinates}()},
 \code{\link{get_data}()},
 \code{\link{get_eigenvalues}()}

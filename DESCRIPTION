@@ -30,7 +30,8 @@ Imports:
     graphics,
     grDevices,
     khroma (>= 1.14.0),
-    methods
+    methods,
+    utils
 Suggests: 
     knitr,
     markdown,
@@ -58,6 +59,7 @@ Collate:
     'dimensio-deprecated.R'
     'dimensio-internal.R'
     'dimensio-package.R'
+    'export.R'
     'get_contributions.R'
     'get_coordinates.R'
     'get_correlations.R'

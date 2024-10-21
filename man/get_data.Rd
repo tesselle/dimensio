@@ -25,6 +25,7 @@ Get Original Data
 }
 \seealso{
 Other getters: 
+\code{\link{export}()},
 \code{\link{get_contributions}()},
 \code{\link{get_coordinates}()},
 \code{\link{get_eigenvalues}()}

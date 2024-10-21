@@ -1,4 +1,6 @@
 # dimensio 0.9.0.9000
+## New classes and methods
+* Add `export()` to create a Zip archive of all results in CSV format.
 
 # dimensio 0.9.0
 ## New classes and methods
