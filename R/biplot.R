@@ -212,26 +212,10 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   if (!is.null(labels)) {
     labels <- match.arg(labels, several.ok = TRUE)
     if (any(labels == "rows") | any(labels == "individuals")) {
-      label(
-        x = coord_row$x,
-        y = coord_row$y,
-        labels = coord_row$label,
-        type = "shadow",
-        cex = coord_row$cex,
-        col = coord_row$col,
-        xpd = TRUE
-      )
+      viz_labels(coord_row, filter = NULL)
     }
     if (any(labels == "columns") | any(labels == "variables")) {
-      label(
-        x = coord_col$x,
-        y = coord_col$y,
-        labels = coord_col$label,
-        type = "shadow",
-        cex = coord_col$cex,
-        col = coord_col$col,
-        xpd = TRUE
-      )
+      viz_labels(coord_col, filter = NULL)
     }
   }
 

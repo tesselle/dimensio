@@ -25,6 +25,9 @@ can be given.}
 \description{
 Non-Overlapping Text Labels
 }
+\details{
+Only labels in the plotting region (given by \code{par("usr")}) will be drawn.
+}
 \author{
 N. Frerebeau
 }

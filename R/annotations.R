@@ -38,12 +38,13 @@ label <- function(x, y = NULL, labels = seq_along(x$x),
   labs <- compute_labels(x = x$x, y = x$y, labels = labels)
 
   ## Draw labels
-  switch(
+  fun <- switch(
     type,
-    text = graphics::text(labs, labels = labels, ...),
-    shadow = text_shadow(labs, labels = labels, ...),
-    box = text_box(labs, labels = labels, ...)
+    text = graphics::text,
+    shadow = text_shadow,
+    box = text_box
   )
+  fun(labs, labels = labels, ...)
 
   invisible(labs)
 }

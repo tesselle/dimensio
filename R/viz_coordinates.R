@@ -364,6 +364,8 @@ viz_points <- function(x, margin, axes, ...,
 #'  It must be one of "`text`", "`shadow`" or "`box`". Any unambiguous substring
 #'  can be given.
 #' @param ... Currently not used.
+#' @details
+#'  Only labels in the plotting region (given by `par("usr")`) will be drawn.
 #' @author N. Frerebeau
 #' @keywords internal
 viz_labels <- function(x, filter = "contribution", n = 10,
@@ -375,6 +377,14 @@ viz_labels <- function(x, filter = "contribution", n = 10,
     k <- order(how, decreasing = TRUE)[seq_len(top)] # Get order
     x <- x[k, , drop = FALSE] # Subset
   }
+
+  ## Filter
+  xlim <- graphics::par("usr")[c(1, 2)]
+  ylim <- graphics::par("usr")[c(3, 4)]
+  x_filter <- x$x >= min(xlim) & x$x <= max(xlim)
+  y_filter <- x$y >= min(ylim) & x$y <= max(ylim)
+  xy_filter <- which(x_filter & y_filter)
+  x <- x[xy_filter, , drop = FALSE]
 
   label(
     x = x$x,
