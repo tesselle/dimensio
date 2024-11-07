@@ -41,7 +41,7 @@ viz_tolerance(x, ...)
   margin = 1,
   axes = c(1, 2),
   level = 0.95,
-  color = NULL,
+  color = FALSE,
   fill = FALSE,
   symbol = FALSE
 )
@@ -64,7 +64,7 @@ viz_tolerance(x, ...)
   margin = 1,
   axes = c(1, 2),
   level = 0.95,
-  color = NULL,
+  color = FALSE,
   fill = FALSE,
   symbol = FALSE
 )
@@ -85,7 +85,7 @@ viz_tolerance(x, ...)
   ...,
   margin = 1,
   axes = c(1, 2),
-  color = NULL,
+  color = FALSE,
   fill = FALSE,
   symbol = FALSE
 )

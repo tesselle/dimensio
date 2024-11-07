@@ -44,9 +44,10 @@ setMethod(
   f = "viz_hull",
   signature = c(x = "BootstrapCA"),
   definition = function(x, ..., margin = 1, axes = c(1, 2),
-                        color = NULL, fill = FALSE, symbol = FALSE) {
+                        color = FALSE, fill = FALSE, symbol = FALSE) {
     group <- get_groups(x, margin = margin)
-    methods::callNextMethod(x, margin = margin, axes = axes, group = group, ...)
+    methods::callNextMethod(x, margin = margin, axes = axes, group = group,
+                            color = color, fill = fill, symbol = symbol, ...)
     invisible(x)
   }
 )

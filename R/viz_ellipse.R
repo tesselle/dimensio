@@ -23,7 +23,7 @@ setMethod(
   f = "viz_tolerance",
   signature = c(x = "BootstrapCA"),
   definition = function(x, ..., margin = 1, axes = c(1, 2), level = 0.95,
-                        color = NULL, fill = FALSE, symbol = FALSE) {
+                        color = FALSE, fill = FALSE, symbol = FALSE) {
     group <- get_groups(x, margin = margin)
     methods::callNextMethod(x, margin = margin, axes = axes,
                             group = group, level = level,
@@ -53,7 +53,7 @@ setMethod(
   f = "viz_confidence",
   signature = c(x = "BootstrapCA"),
   definition = function(x, ..., margin = 1, axes = c(1, 2), level = 0.95,
-                        color = NULL, fill = FALSE, symbol = FALSE) {
+                        color = FALSE, fill = FALSE, symbol = FALSE) {
     group <- get_groups(x, margin = margin)
     methods::callNextMethod(x, margin = margin, axes = axes,
                             group = group, level = level,
