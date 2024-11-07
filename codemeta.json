@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/tesselle/dimensio",
   "issueTracker": "https://github.com/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.9.0.9000",
+  "version": "0.10.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -150,7 +150,7 @@
       "@type": "SoftwareApplication",
       "identifier": "arkhe",
       "name": "arkhe",
-      "version": ">= 1.7.0",
+      "version": ">= 1.8.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -173,7 +173,7 @@
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
-      "version": ">= 1.13.0",
+      "version": ">= 1.14.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -187,9 +187,14 @@
       "identifier": "methods",
       "name": "methods"
     },
+    "7": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "1146.058KB",
+  "fileSize": "1157.177KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -204,7 +209,7 @@
       "name": "{dimensio: Multivariate Data Analysis}",
       "identifier": "10.5281/zenodo.4478530",
       "url": "https://packages.tesselle.org/dimensio/",
-      "description": "R package version 0.9.0.9000",
+      "description": "R package version 0.10.0",
       "@id": "https://doi.org/10.5281/zenodo.4478530",
       "sameAs": "https://doi.org/10.5281/zenodo.4478530"
     }
