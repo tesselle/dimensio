@@ -3,6 +3,7 @@
 * Add `export()` to create a Zip archive of all results in CSV format.
 
 ## Internals
+* Translate into French.
 * Compute the position and draw only the labels in the plotting region.
 * Add type checking of arguments.
 

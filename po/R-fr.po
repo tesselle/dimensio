@@ -1,0 +1,26 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: dimensio 0.9.0.9000\n"
+"POT-Creation-Date: 2024-11-07 13:50+0100\n"
+"PO-Revision-Date: 2024-11-07 13:50+0100\n"
+"Last-Translator: Nicolas Frerebeau <nicolas.frerebeau@u-bordeaux-montaigne.fr>\n"
+"Language-Team: fr\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ca.R:63
+msgid "Empty rows detected."
+msgstr "Certaines lignes sont vides."
+
+#: ca.R:65
+msgid "Empty columns detected."
+msgstr "Certaines colonnes sont vides."
+
+#: dimensio-internal.R:101
+msgid "%d %s variable was removed: %s."
+msgid_plural "%d %s variables were removed: %s."
+msgstr[0] "%d variable %s a été supprimée : %s."
+msgstr[1] "%d variables %ss ont été supprimées : %s."

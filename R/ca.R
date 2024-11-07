@@ -60,9 +60,9 @@ setMethod(
     ## /!\ Important: we need to clean the data before processing
     ## Empty rows/columns must be removed to avoid error in svd()
     if (any(w_row == 0))
-      stop("Empty rows detected.", call. = FALSE)
+      stop(gettext("Empty rows detected."), call. = FALSE)
     if (any(w_col == 0))
-      stop("Empty columns detected.", call. = FALSE)
+      stop(gettext("Empty columns detected."), call. = FALSE)
 
     ## Build matrix
     ## matrix * vector is faster (!) than:
