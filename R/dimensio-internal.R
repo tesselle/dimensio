@@ -98,10 +98,10 @@ drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
     not_ok[is_sup | is_extra] <- FALSE
     if (any(not_ok) && verbose) {
       tot <- sum(not_ok)
-      msg <- "%d %s %s removed: %s."
-      txt <- ngettext(tot, "variable was", "variables were")
+      msg <- ngettext(tot, "%d %s variable was removed: %s.",
+                      "%d %s variables were removed: %s.")
       col <- paste(colnames(old)[not_ok], collapse = ", ")
-      message(sprintf(msg, tot, what, txt, col))
+      message(sprintf(msg, tot, what, col))
     }
   }
 

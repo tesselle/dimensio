@@ -283,7 +283,8 @@ viz_points <- function(x, margin, axes, ...,
   ## Prepare data
   coord <- prepare_plot(x, margin = margin, axes = axes,
                         active = active, sup = sup,
-                        extra_quali = extra_quali, extra_quanti = extra_quanti,
+                        extra_quali = extra_quali,
+                        extra_quanti = extra_quanti,
                         color = color, fill = fill,
                         symbol = symbol, size = size, ...)
 
@@ -463,6 +464,13 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
                          color = NULL, fill = FALSE,
                          symbol = NULL, size = c(1, 6),
                          line_type = NULL, line_width = size) {
+  ## Validation
+  arkhe::assert_scalar(margin, "numeric")
+  arkhe::assert_type(axes, "numeric")
+  arkhe::assert_length(axes, 2)
+  arkhe::assert_scalar(sup, "logical")
+  arkhe::assert_scalar(principal, "logical")
+
   ## /!\ Backward compatibility /!\
   high <- list(...)$highlight
   if (length(high) == 1) {
@@ -492,6 +500,8 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
     extra_quanti <- data[[extra_quanti]]
   }
   if (length(extra_quanti) > 0) {
+    extra_quanti <- as.vector(extra_quanti)
+    arkhe::assert_type(extra_quanti, "numeric")
     arkhe::assert_length(extra_quanti, n)
     ## Continuous scales
     if (!isFALSE(color)) col <- khroma::palette_color_continuous(colors = color)(extra_quanti)
@@ -512,6 +522,7 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
     extra_quali <- data[[extra_quali]]
   }
   if (!isFALSE(extra_quali) && length(extra_quali) > 0) {
+    extra_quali <- as.vector(extra_quali)
     arkhe::assert_length(extra_quali, n)
     ## Discrete scales
     if (!isFALSE(color)) col <- khroma::palette_color_discrete(colors = color)(extra_quali)

@@ -11,6 +11,11 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1, axes = c(1, 2), group = NULL,
                         level = 0.95) {
+    ## Validation
+    arkhe::assert_scalar(margin, "numeric")
+    arkhe::assert_type(axes, "numeric")
+    arkhe::assert_length(axes, 2)
+
     ## Get coordinates
     data <- get_coordinates(x, margin = margin)
     data <- data[, axes]
@@ -53,6 +58,11 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1, axes = c(1, 2), group = NULL,
                         level = 0.95) {
+    ## Validation
+    arkhe::assert_scalar(margin, "numeric")
+    arkhe::assert_type(axes, "numeric")
+    arkhe::assert_length(axes, 2)
+
     ## Get coordinates
     data <- get_coordinates(x, margin = margin)
     data <- data[, axes]

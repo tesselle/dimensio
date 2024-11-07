@@ -38,9 +38,10 @@ setMethod(
     N <- object[!is_row_sup, !is_col_sup, drop = FALSE]
 
     ## Check missing values
-    if (anyNA(N)) stop("Missing values detected.", call. = FALSE)
+    arkhe::assert_missing(N)
+
     ## Check dimensions
-    if (any(dim(N) == 0)) stop("Empty matrix.", call. = FALSE)
+    arkhe::assert_filled(N)
 
     ## Dimension of the solution
     ndim <- min(rank, dim(N) - 1)
@@ -56,6 +57,13 @@ setMethod(
     w_row <- rowSums(P, na.rm = FALSE)
     w_col <- colSums(P, na.rm = FALSE)
 
+    ## /!\ Important: we need to clean the data before processing
+    ## Empty rows/columns must be removed to avoid error in svd()
+    if (any(w_row == 0))
+      stop("Empty rows detected.", call. = FALSE)
+    if (any(w_col == 0))
+      stop("Empty columns detected.", call. = FALSE)
+
     ## Build matrix
     ## matrix * vector is faster (!) than:
     # matrix %*% t(vector)
@@ -66,13 +74,6 @@ setMethod(
     W_col1 <- matrix(s_col, nrow = i, ncol = j, byrow = TRUE)
     W_row2 <- matrix(s_row, nrow = i, ncol = ndim, byrow = FALSE)
     W_col2 <- matrix(s_col, nrow = j, ncol = ndim, byrow = FALSE)
-
-    ## /!\ Important: we need to clean the data before processing
-    ## Empty rows/columns must be removed to avoid error in svd()
-    if (any(w_row == 0))
-      stop("Empty rows detected.", call. = FALSE)
-    if (any(w_col == 0))
-      stop("Empty columns detected.", call. = FALSE)
 
     ## Calcul des écarts à l'indépendance
     M <- P - tcrossprod(w_row, w_col)

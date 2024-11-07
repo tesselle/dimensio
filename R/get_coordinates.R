@@ -10,7 +10,10 @@ setMethod(
   f = "get_coordinates",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1, principal = TRUE, sup_name = ".sup") {
-    margin <- margin[[1L]]
+    arkhe::assert_scalar(margin, "numeric")
+    arkhe::assert_scalar(principal, "logical")
+    arkhe::assert_scalar(sup_name, "character")
+
     if (margin == 1) {
       coords <- x@rows@principal
       suppl <- x@rows@supplement

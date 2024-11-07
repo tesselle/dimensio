@@ -42,7 +42,7 @@ setMethod(
     Z <- cdt(N)
 
     ## Check missing values
-    if (anyNA(Z)) stop("Missing values detected.", call. = FALSE)
+    arkhe::assert_missing(Z)
 
     ## Get supplementary columns
     Z_tot <- Z

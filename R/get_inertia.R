@@ -9,6 +9,8 @@ setMethod(
   f = "get_inertia",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1) {
+    arkhe::assert_scalar(margin, "numeric")
+
     if (margin == 1) {
       masses <- x@rows@weights
       d2 <- x@rows@distances

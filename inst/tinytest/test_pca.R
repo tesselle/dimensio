@@ -3,7 +3,7 @@ data("countries")
 
 row_zeros <- countries
 row_zeros[1, ] <- NA
-expect_error(pca(row_zeros), "Missing values detected.")
+expect_error(pca(row_zeros))
 
 res <- pca(countries, center = TRUE, scale = FALSE, rank = 5)
 expect_stdout(show(res), "Principal Components Analysis")

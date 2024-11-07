@@ -12,6 +12,8 @@ setMethod(
   definition = function(object, n = 30) {
     ## Data replication
     n <- as.integer(n)
+    arkhe::assert_scalar(n, "integer")
+
     data <- object@data
     data <- data[!object@rows@supplement, !object@columns@supplement]
     repl <- stats::rmultinom(n = n, size = sum(data), prob = data)
@@ -64,6 +66,8 @@ setMethod(
   definition = function(object, n = 30) {
     ## Get data
     n <- as.integer(n)
+    arkhe::assert_scalar(n, "integer")
+
     data <- object@data
     data <- data[!object@rows@supplement, !object@columns@supplement]
     U <- object@rows@standard

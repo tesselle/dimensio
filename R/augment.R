@@ -10,7 +10,9 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., margin = 1, axes = c(1, 2), principal = TRUE) {
     ## Validation
-    arkhe::assert_length(margin, 1)
+    arkhe::assert_scalar(margin, "numeric")
+    arkhe::assert_scalar(principal, "logical")
+    arkhe::assert_type(axes, "numeric")
     arkhe::assert_length(axes, 2)
 
     ## Get data

@@ -4,6 +4,7 @@
 
 ## Internals
 * Compute the position and draw only the labels in the plotting region.
+* Add type checking of arguments.
 
 # dimensio 0.9.0
 ## New classes and methods

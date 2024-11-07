@@ -9,7 +9,8 @@ setMethod(
   f = "get_contributions",
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, margin = 1) {
-    margin <- margin[[1L]]
+    arkhe::assert_scalar(margin, "numeric")
+
     if (margin == 1) contrib <- x@rows@contributions
     if (margin == 2) contrib <- x@columns@contributions
 

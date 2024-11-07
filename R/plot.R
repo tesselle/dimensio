@@ -11,6 +11,9 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
                       ann = graphics::par("ann"), frame.plot = TRUE,
                       panel.first = NULL, panel.last = NULL) {
   ## Prepare data
+  arkhe::assert_type(axes, "numeric")
+  arkhe::assert_length(axes, 2)
+
   coord <- get_coordinates(x)
   coord$x <- coord[[axes[[1L]]]]
   coord$y <- coord[[axes[[2L]]]]
@@ -25,6 +28,7 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
 
   ## Highlight quantitative information
   if (length(extra_quanti) > 0) {
+    arkhe::assert_type(extra_quanti, "numeric")
     arkhe::assert_length(extra_quanti, n)
     if (!isFALSE(color)) col <- khroma::palette_color_continuous(colors = color)(extra_quanti)
     if (!isFALSE(fill)) bg <- khroma::palette_color_continuous(colors = fill)(extra_quanti)
