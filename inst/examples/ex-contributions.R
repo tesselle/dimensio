@@ -11,4 +11,4 @@ head(get_contributions(X, margin = 1))
 viz_contributions(X, axes = 1)
 
 ## Plot cos2
-viz_cos2(X)
+viz_cos2(X, axes = 1)

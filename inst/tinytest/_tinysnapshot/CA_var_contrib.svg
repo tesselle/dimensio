@@ -41,7 +41,7 @@
 <text x='364.03' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='22.90px' lengthAdjust='spacingAndGlyphs'>S23</text>
 <text x='403.08' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='22.90px' lengthAdjust='spacingAndGlyphs'>S18</text>
 <text x='442.13' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='22.90px' lengthAdjust='spacingAndGlyphs'>S19</text>
-<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='139.60px' lengthAdjust='spacingAndGlyphs'>Contributions to F1 (%)</text>
+<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='133.34px' lengthAdjust='spacingAndGlyphs'>Contribution to F1 (%)</text>
 <line x1='59.04' y1='426.88' x2='59.04' y2='85.49' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='426.88' x2='51.84' y2='426.88' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='378.11' x2='51.84' y2='378.11' style='stroke-width: 0.75;' />

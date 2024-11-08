@@ -1,5 +1,10 @@
 # HELPERS
 
+## https://michaelchirico.github.io/potools/articles/developers.html
+tr_ <- function(...) {
+  enc2utf8(gettext(paste0(...), domain = "R-dimensio"))
+}
+
 recycle <- function(x, n) {
   if (length(x) == 1) rep(x, n) else x
 }

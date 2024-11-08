@@ -32,7 +32,7 @@ viz_cos2(x, ...)
   x,
   ...,
   margin = 2,
-  axes = c(1, 2),
+  axes = 1,
   active = TRUE,
   sup = TRUE,
   sort = TRUE,
@@ -100,7 +100,7 @@ head(get_contributions(X, margin = 1))
 viz_contributions(X, axes = 1)
 
 ## Plot cos2
-viz_cos2(X)
+viz_cos2(X, axes = 1)
 }
 \seealso{
 Other plot methods: 

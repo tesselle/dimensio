@@ -36,7 +36,7 @@
 <text x='246.87' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='61.86px' lengthAdjust='spacingAndGlyphs'>Timo_ovat</text>
 <text x='324.98' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='62.65px' lengthAdjust='spacingAndGlyphs'>Amph_falc</text>
 <text x='403.08' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='56.26px' lengthAdjust='spacingAndGlyphs'>Abra_pris</text>
-<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='158.48px' lengthAdjust='spacingAndGlyphs'>Contributions to F1-F2 (%)</text>
+<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='152.22px' lengthAdjust='spacingAndGlyphs'>Contribution to F1-F2 (%)</text>
 <line x1='59.04' y1='426.88' x2='59.04' y2='67.00' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='426.88' x2='51.84' y2='426.88' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='375.47' x2='51.84' y2='375.47' style='stroke-width: 0.75;' />

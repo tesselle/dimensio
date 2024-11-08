@@ -6,6 +6,8 @@ if (at_home()) {
   options(tinysnapshot_tol = 200) # pixels
   options(tinysnapshot_os = "Linux")
 
+  Sys.setlocale("LC_MESSAGES", 'en_GB.UTF-8') # Force locale
+
   data("iris")
 
   # PCA - Plot coordinates =====================================================

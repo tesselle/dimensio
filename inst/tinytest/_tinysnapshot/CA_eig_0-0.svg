@@ -41,7 +41,7 @@
 <text x='364.03' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>8</text>
 <text x='403.08' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>9</text>
 <text x='442.13' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='15.28px' lengthAdjust='spacingAndGlyphs'>10</text>
-<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='38.87px' lengthAdjust='spacingAndGlyphs'>Inertia</text>
+<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='139.03px' lengthAdjust='spacingAndGlyphs'>Explained variance (%)</text>
 <line x1='59.04' y1='430.56' x2='59.04' y2='92.49' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='430.56' x2='51.84' y2='430.56' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='374.22' x2='51.84' y2='374.22' style='stroke-width: 0.75;' />

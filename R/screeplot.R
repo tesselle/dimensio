@@ -32,11 +32,11 @@ screeplot.MultivariateAnalysis <- function(x, ..., eigenvalues = FALSE, cumulati
   if (eigenvalues) {
     data$y <- data[[1L]]
     data$labels <- round(data$y, digits = 1)
-    ylab <- "Eigenvalues"
+    ylab <- tr_("Eigenvalues")
   } else {
     data$y <- data[[2L]]
     data$labels <- paste0(round(data$y, digits = 1), "%")
-    ylab <- if (methods::is(x, "CA")) "Inertia" else "Explained variance (%)"
+    ylab <- tr_("Explained variance (%)")
   }
 
   k <- max(data$y) / max(data$z)
@@ -81,7 +81,7 @@ screeplot.MultivariateAnalysis <- function(x, ..., eigenvalues = FALSE, cumulati
                    col = col.cumulative, col.ticks = col.cumulative,
                    col.axis = col.cumulative, las = 1)
     graphics::mtext(
-      text = sprintf("Cumulative percentage of %s", tolower(ylab)),
+      text = tr_("Cumulative variance (%)"),
       side = 4, line = 3, col = col.cumulative
     )
   }
@@ -114,7 +114,7 @@ screeplot.PCOA <- function(x, ..., labels = FALSE, limit = NULL,
   }
 
   ## Bar plot
-  ylab <- "Eigenvalues"
+  ylab <- tr_("Eigenvalues")
   mid <- graphics::barplot(
     height = data$y,
     names.arg = data$x,

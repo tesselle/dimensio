@@ -8,7 +8,7 @@ NULL
 setMethod(
   f = "viz_cos2",
   signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, ..., margin = 2, axes = c(1, 2), active = TRUE,
+  definition = function(x, ..., margin = 2, axes = 1, active = TRUE,
                         sup = TRUE, sort = TRUE, decreasing = TRUE,
                         limit = 10, horiz = FALSE,
                         col = "grey90", border = "grey10") {
@@ -17,7 +17,7 @@ setMethod(
                          active = active, sup = sup, sort = sort,
                          decreasing = decreasing, limit = limit)
 
-    xx <- sprintf("along %s", paste0("F", axes, collapse = "-"))
+    xx <- paste0("(F", axes, ")", collapse = "-")
     ylab <- bquote(paste(plain(cos)^2~.(xx)))
 
     ## Bar plot

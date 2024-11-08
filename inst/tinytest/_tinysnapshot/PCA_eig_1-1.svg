@@ -73,6 +73,6 @@
 <text x='459.36' y='222.64' style='font-size: 12.00px;fill: #FF0000; font-family: "Arial";' textLength='15.28px' lengthAdjust='spacingAndGlyphs'>60</text>
 <text x='459.36' y='151.87' style='font-size: 12.00px;fill: #FF0000; font-family: "Arial";' textLength='15.28px' lengthAdjust='spacingAndGlyphs'>80</text>
 <text x='459.36' y='81.11' style='font-size: 12.00px;fill: #FF0000; font-family: "Arial";' textLength='22.92px' lengthAdjust='spacingAndGlyphs'>100</text>
-<text transform='translate(499.68,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px;fill: #FF0000; font-family: "Arial";' textLength='232.27px' lengthAdjust='spacingAndGlyphs'>Cumulative percentage of eigenvalues</text>
+<text transform='translate(499.68,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px;fill: #FF0000; font-family: "Arial";' textLength='148.61px' lengthAdjust='spacingAndGlyphs'>Cumulative variance (%)</text>
 </g>
 </svg>

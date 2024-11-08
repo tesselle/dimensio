@@ -1,3 +1,5 @@
+Sys.setlocale("LC_MESSAGES", 'en_GB.UTF-8') # Force locale
+
 # MCA ==========================================================================
 if (requireNamespace("MASS", quietly = TRUE)) {
   data(farms, package = "MASS")

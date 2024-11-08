@@ -23,7 +23,7 @@ setMethod(
     }
 
     ## Bar plot
-    msg <- "Contributions to %s (%%)"
+    msg <- tr_("Contribution to %s (%%)")
     ylab <- sprintf(msg, paste0("F", axes, collapse = "-"))
     mid <- graphics::barplot(
       height = data$y,
