@@ -36,7 +36,11 @@ screeplot.MultivariateAnalysis <- function(x, ..., eigenvalues = FALSE, cumulati
   } else {
     data$y <- data[[2L]]
     data$labels <- paste0(round(data$y, digits = 1), "%")
-    ylab <- tr_("Explained variance (%)")
+    if (methods::is(x, "CA")) {
+      ylab <- tr_("Proportion of inertia (%)")
+    } else {
+      ylab <- tr_("Explained variance (%)")
+    }
   }
 
   k <- max(data$y) / max(data$z)
@@ -66,6 +70,11 @@ screeplot.MultivariateAnalysis <- function(x, ..., eigenvalues = FALSE, cumulati
   }
 
   if (cumulative && !horiz) {
+    if (methods::is(x, "CA")) {
+      ylab2 <- tr_("Cumulative inertia (%)")
+    } else {
+      ylab2 <- tr_("Cumulative variance (%)")
+    }
     tick_labels <- seq(from = 0, to = 100, by = 20)
     tick_at <- tick_labels * k
     graphics::lines(
@@ -81,7 +90,7 @@ screeplot.MultivariateAnalysis <- function(x, ..., eigenvalues = FALSE, cumulati
                    col = col.cumulative, col.ticks = col.cumulative,
                    col.axis = col.cumulative, las = 1)
     graphics::mtext(
-      text = tr_("Cumulative variance (%)"),
+      text = ylab2,
       side = 4, line = 3, col = col.cumulative
     )
   }
