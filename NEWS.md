@@ -1,4 +1,6 @@
 # dimensio 0.10.0.9000
+## Bugfixes & changes
+* Fix ellipses default border color.
 
 # dimensio 0.10.0
 ## New classes and methods

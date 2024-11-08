@@ -75,7 +75,7 @@ setMethod(
 
   ## Recycle graphical parameters if of length one
   dots <- list(...)
-  col <- recycle(dots$border %||% graphics::par("bg"), n)
+  col <- recycle(dots$border %||% graphics::par("fg"), n)
   bg <- recycle(dots$col %||% NA, n)
   lty <- recycle(dots$lty %||% graphics::par("lty"), n)
   lwd <- recycle(dots$lwd %||% graphics::par("lwd"), n)
