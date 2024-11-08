@@ -56,6 +56,9 @@ identifiers:
 - description: The versioned DOI for version 0.9.0
   type: doi
   value: 10.5281/zenodo.13375140
+- description: The versioned DOI for version 0.10.0
+  type: doi
+  value: 10.5281/zenodo.14054667
 - description: The CRAN DOI
   type: doi
   value: 10.32614/cran.package.dimensio
