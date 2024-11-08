@@ -14,7 +14,7 @@ setMethod(
     col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
 
     cat(
-      format_header(tr_("Correspondence Analysis (CA)")),
+      paste0(tr_("Correspondence Analysis (CA)"), ":"),
       sprintf(tr_("* Row variable: %d categories%s."), sum(!row_sup), row_txt),
       sprintf(tr_("* Column variable: %d categories%s."), sum(!col_sup), col_txt),
       sep = "\n"
@@ -22,6 +22,7 @@ setMethod(
     invisible(object)
   }
 )
+
 setMethod(
   f = "show",
   signature = "MCA",
@@ -34,7 +35,7 @@ setMethod(
     col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
 
     cat(
-      format_header(tr_("Multiple Correspondence Analysis (MCA)")),
+      paste0(tr_("Multiple Correspondence Analysis (MCA)"), ":"),
       sprintf(tr_("* Row variable: %d categories%s."), sum(!row_sup), row_txt),
       sprintf(tr_("* Column variable: %d categories%s."), sum(!col_sup), col_txt),
       sep = "\n"
@@ -42,6 +43,7 @@ setMethod(
     invisible(object)
   }
 )
+
 setMethod(
   f = "show",
   signature = "PCA",
@@ -65,11 +67,24 @@ setMethod(
     }
 
     cat(
-      format_header(tr_("Principal Components Analysis (PCA)")),
+      paste0(tr_("Principal Components Analysis (PCA)"), ":"),
       sprintf(tr_("* %d individuals%s."), sum(!row_sup), row_txt),
       sprintf(tr_("* %d variables%s."), sum(!col_sup), col_txt),
       var_center,
       var_scale,
+      sep = "\n"
+    )
+    invisible(object)
+  }
+)
+
+setMethod(
+  f = "show",
+  signature = "PCOA",
+  definition = function(object) {
+    cat(
+      paste0(tr_("Principal Coordinate Analysis (PCoA)"), ":"),
+      sprintf(tr_("* Method: %s."), object@method),
       sep = "\n"
     )
     invisible(object)

@@ -233,7 +233,7 @@ setOldClass("dist")
   contains = c("MultivariateBootstrap", "PCA")
 )
 
-# PCO ==========================================================================
+# PCOA =========================================================================
 #' PCoA Results
 #'
 #' An S4 class to store the results of a principal coordinates analysis.
