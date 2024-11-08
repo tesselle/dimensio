@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dimensio 0.10.0.9000\n"
-"POT-Creation-Date: 2024-11-08 11:12+0100\n"
+"POT-Creation-Date: 2024-11-08 12:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,6 +29,54 @@ msgstr ""
 
 #: screeplot.R:84
 msgid "Cumulative variance (%)"
+msgstr ""
+
+#: show.R:12 show.R:32 show.R:52
+msgid "(+ %d supplementary)"
+msgstr ""
+
+#: show.R:17 show.R:89
+msgid "Correspondence Analysis (CA)"
+msgstr ""
+
+#: show.R:18 show.R:38
+msgid "* Row variable: %d categories%s."
+msgstr ""
+
+#: show.R:19 show.R:39
+msgid "* Column variable: %d categories%s."
+msgstr ""
+
+#: show.R:37
+msgid "Multiple Correspondence Analysis (MCA)"
+msgstr ""
+
+#: show.R:57
+msgid "* Variables were shifted to be zero centered."
+msgstr ""
+
+#: show.R:59
+msgid "* Variables were NOT shifted to be zero centered."
+msgstr ""
+
+#: show.R:62
+msgid "* Variables were scaled to unit variance."
+msgstr ""
+
+#: show.R:64
+msgid "* Variables were NOT scaled to unit variance."
+msgstr ""
+
+#: show.R:68 show.R:93
+msgid "Principal Components Analysis (PCA)"
+msgstr ""
+
+#: show.R:69
+msgid "* %d individuals%s."
+msgstr ""
+
+#: show.R:70
+msgid "* %d variables%s."
 msgstr ""
 
 #: viz_contributions.R:26

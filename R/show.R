@@ -9,15 +9,14 @@ setMethod(
     row_sup <- object@rows@supplement
     col_sup <- object@columns@supplement
 
-    sup_txt <- " (+ %d supplementary)"
+    sup_txt <- tr_(" (+ %d supplementary)")
     row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
     col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
 
     cat(
-      format_header("Correspondence Analysis (CA)"),
-      sprintf("* Row variable: %d categories%s.", sum(!row_sup), row_txt),
-      sprintf("* Column variable: %d categories%s.", sum(!col_sup), col_txt),
-      sprintf("* %d components.", dim(object)),
+      format_header(tr_("Correspondence Analysis (CA)")),
+      sprintf(tr_("* Row variable: %d categories%s."), sum(!row_sup), row_txt),
+      sprintf(tr_("* Column variable: %d categories%s."), sum(!col_sup), col_txt),
       sep = "\n"
     )
     invisible(object)
@@ -30,15 +29,14 @@ setMethod(
     row_sup <- object@rows@supplement
     col_sup <- object@columns@supplement
 
-    sup_txt <- " (+ %d supplementary)"
+    sup_txt <- tr_(" (+ %d supplementary)")
     row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
     col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
 
     cat(
-      format_header("Multiple Correspondence Analysis (MCA)"),
-      sprintf("* Row variable: %d categories%s.", sum(!row_sup), row_txt),
-      sprintf("* Column variable: %d categories%s.", sum(!col_sup), col_txt),
-      sprintf("* %d components.", dim(object)),
+      format_header(tr_("Multiple Correspondence Analysis (MCA)")),
+      sprintf(tr_("* Row variable: %d categories%s."), sum(!row_sup), row_txt),
+      sprintf(tr_("* Column variable: %d categories%s."), sum(!col_sup), col_txt),
       sep = "\n"
     )
     invisible(object)
@@ -51,19 +49,25 @@ setMethod(
     row_sup <- object@rows@supplement
     col_sup <- object@columns@supplement
 
-    sup_txt <- " (+ %d supplementary)"
+    sup_txt <- tr_(" (+ %d supplementary)")
     row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
     col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
 
-    var_center <- sprintf("* Variables were%s shifted to be zero centered.",
-                          ifelse(is_centered(object), "", " NOT"))
-    var_scale <- sprintf("* Variables were%s scaled to unit variance.",
-                         ifelse(is_scaled(object), "", " NOT"))
+    if (is_centered(object)) {
+      var_center <- tr_("* Variables were shifted to be zero centered.")
+    } else {
+      var_center <- tr_("* Variables were NOT shifted to be zero centered.")
+    }
+    if (is_scaled(object)) {
+      var_scale <- tr_("* Variables were scaled to unit variance.")
+    } else {
+      var_scale <- tr_("* Variables were NOT scaled to unit variance.")
+    }
+
     cat(
-      format_header("Principal Components Analysis (PCA)"),
-      sprintf("* %d individuals%s.", sum(!row_sup), row_txt),
-      sprintf("* %d variables%s.", sum(!col_sup), col_txt),
-      sprintf("* %d components.", dim(object)),
+      format_header(tr_("Principal Components Analysis (PCA)")),
+      sprintf(tr_("* %d individuals%s."), sum(!row_sup), row_txt),
+      sprintf(tr_("* %d variables%s."), sum(!col_sup), col_txt),
       var_center,
       var_scale,
       sep = "\n"
@@ -82,11 +86,11 @@ setMethod(
 
     if (methods::is(object, "SummaryCA")) {
       analysis <- c("rows", "columns")
-      title <- "Correspondence Analysis (CA)"
+      title <- tr_("Correspondence Analysis (CA)")
     }
     if (methods::is(object, "SummaryPCA")) {
       analysis <- c("individuals", "variables")
-      title <- "Principal Components Analysis (PCA)"
+      title <- tr_("Principal Components Analysis (PCA)")
     }
 
     ## Get data

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dimensio 0.9.0.9000\n"
-"POT-Creation-Date: 2024-11-08 11:12+0100\n"
+"POT-Creation-Date: 2024-11-08 12:01+0100\n"
 "PO-Revision-Date: 2024-11-07 13:50+0100\n"
 "Last-Translator: Nicolas Frerebeau <nicolas.frerebeau@u-bordeaux-montaigne."
 "fr>\n"
@@ -31,6 +31,54 @@ msgstr "Variance expliquée (%)"
 #: screeplot.R:84
 msgid "Cumulative variance (%)"
 msgstr "Variance cumulée (%)"
+
+#: show.R:12 show.R:32 show.R:52
+msgid "(+ %d supplementary)"
+msgstr "(+ %d supplémentaires)"
+
+#: show.R:17 show.R:89
+msgid "Correspondence Analysis (CA)"
+msgstr "Analyse factorielle des correspondances (AFC)"
+
+#: show.R:18 show.R:38
+msgid "* Row variable: %d categories%s."
+msgstr "* Variable ligne: %d catégories%s."
+
+#: show.R:19 show.R:39
+msgid "* Column variable: %d categories%s."
+msgstr "* Variable colonne: %d catégories%s."
+
+#: show.R:37
+msgid "Multiple Correspondence Analysis (MCA)"
+msgstr "Analyse des correspondances multiples (ACM)"
+
+#: show.R:57
+msgid "* Variables were shifted to be zero centered."
+msgstr "* Les variables ont été centrées."
+
+#: show.R:59
+msgid "* Variables were NOT shifted to be zero centered."
+msgstr "* Les variables N'ONT PAS été centrées."
+
+#: show.R:62
+msgid "* Variables were scaled to unit variance."
+msgstr "* Les variables ont été réduites."
+
+#: show.R:64
+msgid "* Variables were NOT scaled to unit variance."
+msgstr "* Les variables N'ONT PAS été réduites."
+
+#: show.R:68 show.R:93
+msgid "Principal Components Analysis (PCA)"
+msgstr "Analyse en composantes principales (ACP)"
+
+#: show.R:69
+msgid "* %d individuals%s."
+msgstr "* %d individus%s."
+
+#: show.R:70
+msgid "* %d variables%s."
+msgstr "* %d variables%s."
 
 #: viz_contributions.R:26
 msgid "Contribution to %s (%%)"
