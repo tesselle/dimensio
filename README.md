@@ -173,6 +173,20 @@ screeplot(X, eigenvalues = FALSE, cumulative = TRUE)
 
 <img src="man/figures/README-plot-var-1.png" width="50%" /><img src="man/figures/README-plot-var-2.png" width="50%" />
 
+## Translation
+
+This package provides translations of user-facing communications, like
+messages, warnings and errors, and graphical elements (axis labels). The
+preferred language is by default taken from the locale. This can be
+overridden by setting of the environment variable `LANGUAGE` (you only
+need to do this once per session):
+
+``` r
+Sys.setenv(LANGUAGE = "<language code>")
+```
+
+Languages currently available are English (`en`) and French (`fr`).
+
 ## Contributing
 
 Please note that the **dimensio** project is released with a

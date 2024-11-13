@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = NULL
 )
-Sys.setlocale("LC_MESSAGES", 'en_GB.UTF-8') # Force locale
+Sys.setenv(LANGUAGE = "en") # Force locale
 ```
 
 # dimensio <img width=120px src="man/figures/logo.png" align="right" />
@@ -103,6 +103,10 @@ The package allows to quickly visualize the results:
 
 The `viz_*()` functions allow to highlight additional information by varying different graphical elements (color, transparency, shape and size of symbols...).
 
+```{r seed, echo=FALSE}
+set.seed(12345)
+```
+
 ```{r biplot, fig.width=7, fig.height=7, fig.align='center'}
 ## Form biplot
 biplot(X, type = "form")
@@ -140,7 +144,18 @@ viz_variables(X)
 screeplot(X, eigenvalues = FALSE, cumulative = TRUE)
 ```
 
+## Translation
+
+This package provides translations of user-facing communications, like messages, warnings and errors, and graphical elements (axis labels). The preferred language is by default taken from the locale. This can be overridden by setting of the environment variable `LANGUAGE` (you only need to do this once per session):
+
+``` r
+Sys.setenv(LANGUAGE = "<language code>")
+```
+
+Languages currently available are English (`en`) and French (`fr`).
+
 ## Contributing
+
 Please note that the **dimensio** project is released with a [Contributor Code of Conduct](https://www.tesselle.org/conduct.html). By contributing to this project, you agree to abide by its terms.
 
 ## References
