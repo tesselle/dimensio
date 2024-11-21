@@ -420,7 +420,7 @@ viz_labels <- function(x, filter = "contribution", n = 10,
 #'  (see [`augment()`]).
 #' @param color The colors for lines and points (will be mapped to
 #'  `extra_quanti` or `extra_quali`; if both are set, the latter has priority).
-#'  Ignored if set to `FALSE`.
+#'  Ignored if set to `FALSE`. If `NULL`, the default color scheme will be used.
 #' @param fill The background colors for points (will be mapped to
 #'  `extra_quanti` or `extra_quali`; if both are set, the latter has priority).
 #'  Ignored if set to `FALSE`.

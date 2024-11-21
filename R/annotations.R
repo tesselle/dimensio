@@ -18,7 +18,7 @@
 #'  `label()` is called it for its side-effects: it results in a graphic
 #'  being displayed.
 #' @seealso [graphics::text()]
-#' @note
+#' @source
 #'  This function is modeled after [car::pointLabel()] (originally from the
 #'  \pkg{maptools} package).
 #' @author N. Frerebeau

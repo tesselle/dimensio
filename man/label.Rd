@@ -3,6 +3,10 @@
 \name{label}
 \alias{label}
 \title{Non-Overlapping Text Labels}
+\source{
+This function is modeled after \code{\link[car:pointLabel]{car::pointLabel()}} (originally from the
+\pkg{maptools} package).
+}
 \usage{
 label(
   x,
@@ -33,10 +37,6 @@ being displayed.
 }
 \description{
 Optimize the location of text labels to minimize overplotting text.
-}
-\note{
-This function is modeled after \code{\link[car:pointLabel]{car::pointLabel()}} (originally from the
-\pkg{maptools} package).
 }
 \seealso{
 \code{\link[graphics:text]{graphics::text()}}

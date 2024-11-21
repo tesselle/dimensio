@@ -109,7 +109,7 @@ for which to compute results.}
 \item{level}{A \code{\link{numeric}} vector specifying the confidence/tolerance level.}
 
 \item{color}{The colors for borders (will be mapped to \code{group}).
-Ignored if set to \code{FALSE}.}
+Ignored if set to \code{FALSE}. If \code{NULL}, the default color scheme will be used.}
 
 \item{fill}{The background colors (will be mapped to \code{group}).
 Ignored if set to \code{FALSE}.}
