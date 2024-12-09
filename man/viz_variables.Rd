@@ -45,7 +45,8 @@ viz_columns(x, ...)
   axes = c(1, 2),
   color = FALSE,
   fill = FALSE,
-  symbol = FALSE
+  symbol = FALSE,
+  legend = NULL
 )
 
 \S4method{viz_variables}{PCA}(
@@ -97,7 +98,8 @@ viz_columns(x, ...)
   axes = c(1, 2),
   color = FALSE,
   fill = FALSE,
-  symbol = FALSE
+  symbol = FALSE,
+  legend = NULL
 )
 }
 \arguments{

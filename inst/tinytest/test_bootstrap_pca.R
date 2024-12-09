@@ -18,7 +18,7 @@ if (at_home() && Sys.info()["sysname"] == "Linux") {
   expect_true(dimensio:::has_groups(Y, margin = 2))
 
   plot_boot_col <- function() {
-    viz_variables(Y, axes = c(1, 2), color = NULL)
+    viz_variables(Y, axes = c(1, 2), color = NULL, legend = list(x = "topleft"))
     viz_tolerance(Y, margin = 2, level = c(0.68, 0.95))
   }
   expect_snapshot_plot(plot_boot_col, "PCA_boot_col")

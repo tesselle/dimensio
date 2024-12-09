@@ -37,7 +37,15 @@ viz_rows(x, ...)
   legend = list(x = "topleft")
 )
 
-\S4method{viz_rows}{BootstrapCA}(x, ..., axes = c(1, 2), color = FALSE, fill = FALSE, symbol = FALSE)
+\S4method{viz_rows}{BootstrapCA}(
+  x,
+  ...,
+  axes = c(1, 2),
+  color = FALSE,
+  fill = FALSE,
+  symbol = FALSE,
+  legend = NULL
+)
 
 \S4method{viz_individuals}{PCA}(
   x,
