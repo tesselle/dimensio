@@ -1,4 +1,4 @@
-# dimensio 0.10.0.9000
+# dimensio 0.10.1
 ## Bugfixes & changes
 * Fix ellipses default border color.
 
@@ -6,8 +6,10 @@
 ## New classes and methods
 * Add `export()` to create a Zip archive of all results in CSV format.
 
-## Internals
+## Enhancements
 * Translate into French.
+
+## Internals
 * Compute the position and draw only the labels in the plotting region.
 * Add type checking of arguments.
 

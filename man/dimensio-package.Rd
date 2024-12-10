@@ -14,7 +14,7 @@ Simple Principal Components Analysis (PCA) and (Multiple) Correspondence Analysi
 \tabular{ll}{
 \strong{Package:} \tab dimensio \cr
 \strong{Type:} \tab Package \cr
-\strong{Version:} \tab 0.10.0 \cr
+\strong{Version:} \tab 0.10.1 \cr
 \strong{License:} \tab GPL-3 \cr
 \strong{Zenodo:} \tab \doi{10.5281/zenodo.4478530} \cr
 }
