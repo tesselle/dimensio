@@ -10,12 +10,19 @@
 \usage{
 mca(object, ...)
 
-\S4method{mca}{data.frame}(object, rank = NULL, sup_row = NULL, sup_col = NULL, sup_quanti = NULL)
+\S4method{mca}{data.frame}(
+  object,
+  rank = NULL,
+  sup_row = NULL,
+  sup_col = NULL,
+  sup_quanti = NULL,
+  autoclean = TRUE
+)
 
 \S4method{mca}{matrix}(object, rank = NULL, sup_row = NULL, sup_col = NULL)
 }
 \arguments{
-\item{object}{A \eqn{m \times p}{m x p} numeric \code{\link{matrix}} or a
+\item{object}{A \eqn{m \times p}{m x p} \code{numeric} \code{\link{matrix}} or a
 \code{\link{data.frame}}.}
 
 \item{...}{Currently not used.}
@@ -31,6 +38,9 @@ categorical columns.}
 
 \item{sup_quanti}{A \code{vector} specifying the indices of the supplementary
 quantitative columns.}
+
+\item{autoclean}{A \code{\link{logical}} scalar: should numeric variables be
+automatically removed (except \code{sup_quanti})?}
 }
 \value{
 A \code{\linkS4class{MCA}} object.

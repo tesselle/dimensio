@@ -1,4 +1,6 @@
 # dimensio 0.10.1.9000
+## Enhancements
+* `ca()`, `mca()` and `pca()` gained a new `autoclean` argument to enable/disable automatic variable removal.
 
 # dimensio 0.10.1
 ## Bugfixes & changes

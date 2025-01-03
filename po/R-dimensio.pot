@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: dimensio 0.10.0.9000\n"
-"POT-Creation-Date: 2024-11-08 14:23+0100\n"
+"Project-Id-Version: dimensio 0.10.1.9000\n"
+"POT-Creation-Date: 2025-01-03 18:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,12 +11,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ca.R:63
+#: ca.R:62
 msgid "Empty rows detected."
 msgstr ""
 
-#: ca.R:65
+#: ca.R:64
 msgid "Empty columns detected."
+msgstr ""
+
+#: dimensio-internal.R:95
+msgid "Some variables are invalid: %s."
 msgstr ""
 
 #: screeplot.R:35 screeplot.R:126
@@ -99,7 +103,7 @@ msgstr ""
 msgid "Contribution to %s (%%)"
 msgstr ""
 
-#: dimensio-internal.R:106
+#: dimensio-internal.R:124
 msgid "%d %s variable was removed: %s."
 msgid_plural "%d %s variables were removed: %s."
 msgstr[0] ""

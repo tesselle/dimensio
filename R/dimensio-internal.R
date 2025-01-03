@@ -63,55 +63,73 @@ find_variable <- function(index, n, names = NULL) {
 #' Remove Columns Using a Predicate
 #'
 #' @param x A [`data.frame`].
-#' @param what A predicate [`function`].
+#' @param f A predicate [`function`].
 #' @param negate A [`logical`] scalar: should the negation of `f` be used
 #'  instead of `f`?
 #' @param sup A `vector` specifying the indices of the supplementary columns.
 #' @param extra A `vector` specifying the indices of the extra columns.
+#' @param auto A [`logical`] scalar: should invalid variables be automatically
+#'  removed?
 #' @param what A [`character`] string to be used in the message.
 #' @param verbose A [`logical`] scalar: should \R report extra information on
 #'  progress?
 #' @details
 #'  Side effect: move `sup` and `extra` columns at the end of `x`.
-#' @return A `list` with the following elements: `data` (a `data.frame`),
+#' @return A `list` with the following elements: `data` (a `matrix`),
 #'  `sup` (an `integer` vector) and `extra` (a `data.frame` or `NULL`).
 #' @keywords internal
 #' @noRd
 drop_variable <- function(x, f, negate = FALSE, sup = NULL, extra = NULL,
-                          what = "extra", verbose = getOption("dimensio.verbose")) {
+                          auto = TRUE, what = "extra",
+                          verbose = getOption("dimensio.verbose")) {
+  ## Check variables
   if (negate) f <- Negate(f)
   not_ok <- vapply(x, FUN = f, FUN.VALUE = logical(1))
 
+  ## Get extra variables
+  is_extra <- find_variable(extra, ncol(x), names = colnames(x))
+  is_sup <- find_variable(sup, ncol(x), names = colnames(x))
+
+  ## Quit
+  if (!auto && any(not_ok & !is_extra)) {
+    msg <- tr_("Some variables are invalid: %s.")
+    col <- paste(colnames(x)[not_ok & !is_extra], collapse = ", ")
+    stop(sprintf(msg, col), call. = FALSE)
+  }
+
+  ## Extract extra variables, if any
+  if (any(is_extra)) {
+    extra <- x[, is_extra, drop = FALSE]
+  }
+
+  ## Remove supplementary/extra variables, if any
+  tmp <- x
+  x <- x[, !(not_ok | is_sup | is_extra), drop = FALSE]
+
+  ## Move supplementary variables at the end, if any
+  is_sup_ok <- is_sup & !not_ok
+  if (any(is_sup_ok)) {
+    sup <- seq_len(sum(is_sup_ok)) + ncol(x)
+    x <- cbind(x, tmp[, is_sup_ok, drop = FALSE])
+  } else {
+    # warning("!", call. = FALSE)
+    sup <- NULL
+  }
+
+  ## Generate message
   if (any(not_ok)) {
-    is_extra <- find_variable(extra, ncol(x), names = colnames(x))
-    is_sup <- find_variable(sup, ncol(x), names = colnames(x))
-
-    old <- x
-    x <- x[, !(not_ok | is_sup | is_extra), drop = FALSE]
-
-    if (any(is_sup)) {
-      ## Move supplementary variables at the end
-      sup <- seq_len(sum(is_sup)) + ncol(x)
-      x <- cbind(x, old[, is_sup, drop = FALSE])
-    }
-    if (any(is_extra)) {
-      ## Remove extra variable
-      extra <- old[, is_extra, drop = FALSE]
-    }
-
-    # Generate message
     not_ok[is_sup | is_extra] <- FALSE
     if (any(not_ok) && verbose) {
       tot <- sum(not_ok)
       msg <- ngettext(tot, "%d %s variable was removed: %s.",
                       "%d %s variables were removed: %s.")
-      col <- paste(colnames(old)[not_ok], collapse = ", ")
+      col <- paste(colnames(tmp)[not_ok], collapse = ", ")
       message(sprintf(msg, tot, what, col))
     }
   }
 
   list(
-    data = x,
+    data = as.matrix(x),
     sup = sup,
     extra = extra
   )

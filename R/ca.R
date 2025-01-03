@@ -8,13 +8,12 @@ NULL
 setMethod(
   f = "ca",
   signature = c(object = "data.frame"),
-  definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL) {
+  definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL,
+                        autoclean = TRUE) {
     ## Remove non-numeric variables, if any
-    clean <- drop_variable(object, f = is.numeric, negate = TRUE,
-                           sup = sup_col, extra = NULL, what = "qualitative")
-
-    object <- as.matrix(clean$data)
-    methods::callGeneric(object = object, rank = rank,
+    clean <- drop_variable(object, f = is.numeric, negate = TRUE, sup = sup_col,
+                           extra = NULL, auto = autoclean, what = "qualitative")
+    methods::callGeneric(object = clean$data, rank = rank,
                          sup_row = sup_row, sup_col = clean$sup)
   }
 )

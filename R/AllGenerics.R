@@ -103,13 +103,15 @@ NULL
 #'
 #' Computes a simple correspondence analysis based on the singular value
 #' decomposition.
-#' @param object A \eqn{m \times p}{m x p} numeric [`matrix`] or a
+#' @param object A \eqn{m \times p}{m x p} `numeric` [`matrix`] or a
 #'  [`data.frame`].
 #' @param rank An [`integer`] value specifying the maximal number of
 #'  components to be kept in the results. If `NULL` (the default),
 #'  \eqn{min(m, p) - 1} components will be returned.
 #' @param sup_row A `vector` specifying the indices of the supplementary rows.
 #' @param sup_col A `vector` specifying the indices of the supplementary columns.
+#' @param autoclean A [`logical`] scalar: should non-numeric variables be
+#'  automatically removed?
 #' @param ... Currently not used.
 #' @return
 #'  A [`CA-class`] object.
@@ -139,7 +141,7 @@ setGeneric(
 #' Multiple Correspondence Analysis
 #'
 #' Computes a multiple correspondence analysis.
-#' @param object A \eqn{m \times p}{m x p} numeric [`matrix`] or a
+#' @param object A \eqn{m \times p}{m x p} `numeric` [`matrix`] or a
 #'  [`data.frame`].
 #' @param rank An [`integer`] value specifying the maximal number of
 #'  components to be kept in the results. If `NULL` (the default),
@@ -149,6 +151,8 @@ setGeneric(
 #'  categorical columns.
 #' @param sup_quanti A `vector` specifying the indices of the supplementary
 #'  quantitative columns.
+#' @param autoclean A [`logical`] scalar: should numeric variables be
+#'  automatically removed (except `sup_quanti`)?
 #' @param ... Currently not used.
 #' @return
 #'  A [`MCA-class`] object.
@@ -173,7 +177,7 @@ setGeneric(
 #'
 #' Computes a principal components analysis based on the singular value
 #' decomposition.
-#' @param object A \eqn{m \times p}{m x p} numeric [`matrix`] or a
+#' @param object A \eqn{m \times p}{m x p} `numeric` [`matrix`] or a
 #'  [`data.frame`].
 #' @param center A [`logical`] scalar: should the variables be shifted to be
 #'  zero centered?
@@ -192,6 +196,8 @@ setGeneric(
 #' @param weight_col A [`numeric`] vector specifying the active column
 #'  (variable) weights. If `NULL` (the default), uniform weights (1) are
 #'  used.
+#' @param autoclean A [`logical`] scalar: should non-numeric variables be
+#'  automatically removed (except `sup_quali`)?
 #' @param ... Currently not used.
 #' @return
 #'  A [`PCA-class`] object.
