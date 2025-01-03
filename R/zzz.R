@@ -1,7 +1,7 @@
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.dimensio <- list(
-    dimensio.verbose = TRUE,
+    dimensio.verbose = interactive(),
     dimensio.digits = 3,
     dimensio.max.print = 10
   )

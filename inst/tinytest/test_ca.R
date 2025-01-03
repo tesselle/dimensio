@@ -1,4 +1,4 @@
-Sys.setlocale("LC_MESSAGES", 'en_GB.UTF-8') # Force locale
+Sys.setenv(LANGUAGE = "en") # Force locale
 
 # CA ===========================================================================
 data("benthos")
@@ -43,15 +43,9 @@ expect_equal_to_reference(get_inertia(res, margin = 2), file = "_snaps/ca_col_in
 # Eigenvalues
 expect_equal_to_reference(get_eigenvalues(res), file = "_snaps/ca_eigenvalues.rds")
 
-# CA - data.frame ==============================================================
-cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 20)
-df <- as.data.frame(cts)
-df$test <- character(5)
-
-expect_message(ca(df, sup_col = 1:5), "qualitative variable was removed")
-
 # Predict new coordinates ======================================================
 cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
+cts <- as.data.frame(cts)
 
 res <- ca(cts)
 new_rows <- predict(res, cts, margin = 1)

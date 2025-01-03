@@ -7,6 +7,11 @@
 #'  **Zenodo:** \tab \doi{10.5281/zenodo.4478530} \cr
 #' }
 #'
+#' @section Package options:
+#'  \pkg{dimensio} uses the following [options()] to configure behavior:
+#'  * `dimensio.verbose`: a [`logical`] scalar. Should \R report extra
+#'    information on progress? Defaults to [interactive()].
+#'
 #' @author
 #' **Full list of authors and contributors** (alphabetic order)
 #'

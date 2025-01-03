@@ -1,4 +1,4 @@
-Sys.setlocale("LC_MESSAGES", 'en_GB.UTF-8') # Force locale
+Sys.setenv(LANGUAGE = "en") # Force locale
 
 # MCA ==========================================================================
 if (requireNamespace("MASS", quietly = TRUE)) {
@@ -30,13 +30,6 @@ if (requireNamespace("MASS", quietly = TRUE)) {
 
   # Eigenvalues
   expect_equal_to_reference(get_eigenvalues(res), file = "_snaps/mca_eigenvalues.rds")
-
-  # MCA - data.frame =============================================================
-  cts <- matrix(data = sample(LETTERS, 100, TRUE), ncol = 20)
-  df <- as.data.frame(cts)
-  df$test <- numeric(5)
-
-  expect_message(mca(df, sup_col = 1:5), "quantitative variable was removed")
 
   # Predict new coordinates ======================================================
   res <- mca(farms)

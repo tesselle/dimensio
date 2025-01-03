@@ -1,5 +1,9 @@
 data("iris")
 
+options("dimensio.verbose" = TRUE)
+expect_message(dimensio:::drop_variable(iris, f = is.numeric, negate = TRUE, auto = TRUE))
+options("dimensio.verbose" = FALSE)
+
 expect_equal(
   dimensio:::drop_variable(iris, f = is.numeric, negate = TRUE, auto = TRUE),
   list(data = as.matrix(iris[, 1:4]), sup = NULL, extra = NULL)
