@@ -29,7 +29,7 @@ Creates a Zip archive of all results in CSV format.
 data("iris")
 
 ## Compute principal components analysis
-X <- pca(iris)
+X <- pca(iris, sup_quali = "Species")
 
 ## Export results
 export(X, file = "results.zip")

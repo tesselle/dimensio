@@ -10,7 +10,7 @@ setMethod(
   signature = c(object = "data.frame"),
   definition = function(object, center = TRUE, scale = TRUE, rank = NULL,
                         sup_row = NULL, sup_col = NULL, sup_quali = NULL,
-                        weight_row = NULL, weight_col = NULL, autoclean = TRUE) {
+                        weight_row = NULL, weight_col = NULL, autoclean = FALSE) {
     ## Remove non-numeric variables, if any
     clean <- drop_variable(object, f = is.numeric, negate = TRUE,
                            sup = sup_col, extra = sup_quali, auto = autoclean,

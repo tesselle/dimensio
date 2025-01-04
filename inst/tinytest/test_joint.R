@@ -16,7 +16,7 @@ expect_equal_to_reference(cos2, file = "_snaps/ca_joint_cos2.rds")
 
 # Principal Components Analysis ================================================
 data("iris")
-res <- pca(iris)
+res <- pca(iris, sup_quali = 5)
 
 # Coordinates
 coord <- dimensio:::joint(res, "coord", axes = c(1, 2))

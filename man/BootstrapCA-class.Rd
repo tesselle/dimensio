@@ -42,7 +42,7 @@ viz_hull(Y, margin = 2)
 ## Bootstrap on PCA
 ## Compute principal components analysis
 data("iris")
-X <- pca(iris)
+X <- pca(iris, sup_quali = "Species")
 
 ## Bootstrap (30 replicates)
 Y <- bootstrap(X, n = 30)

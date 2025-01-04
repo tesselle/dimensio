@@ -26,7 +26,7 @@ This class inherits from \code{\linkS4class{MultivariateAnalysis}}.
 data("iris")
 
 ## Compute principal components analysis
-X <- pca(iris)
+X <- pca(iris, sup_quali = "Species")
 
 ## Get eigenvalues
 get_eigenvalues(X)

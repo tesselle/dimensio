@@ -91,7 +91,7 @@ in contributing to the component).
 data("iris")
 
 ## Compute principal components analysis
-X <- pca(iris, scale = TRUE)
+X <- pca(iris, scale = TRUE, sup_quali = "Species")
 
 ## Get row contributions
 head(get_contributions(X, margin = 1))

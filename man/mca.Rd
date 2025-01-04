@@ -16,7 +16,7 @@ mca(object, ...)
   sup_row = NULL,
   sup_col = NULL,
   sup_quanti = NULL,
-  autoclean = TRUE
+  autoclean = FALSE
 )
 
 \S4method{mca}{matrix}(object, rank = NULL, sup_row = NULL, sup_col = NULL)

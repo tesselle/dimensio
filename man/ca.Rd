@@ -10,7 +10,7 @@
 \usage{
 ca(object, ...)
 
-\S4method{ca}{data.frame}(object, rank = NULL, sup_row = NULL, sup_col = NULL, autoclean = TRUE)
+\S4method{ca}{data.frame}(object, rank = NULL, sup_row = NULL, sup_col = NULL, autoclean = FALSE)
 
 \S4method{ca}{matrix}(object, rank = NULL, sup_row = NULL, sup_col = NULL)
 }

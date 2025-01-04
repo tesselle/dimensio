@@ -65,7 +65,7 @@ Tidy Coordinates
 data("iris")
 
 ## Compute principal components analysis
-X <- pca(iris, scale = TRUE, sup_row = 5:10)
+X <- pca(iris, scale = TRUE, sup_row = 5:10, sup_quali = "Species")
 
 ## Get row principal coordinates
 head(get_coordinates(X, margin = 1, principal = TRUE))

@@ -8,7 +8,7 @@ if (at_home() && Sys.info()["sysname"] == "Linux") {
 
   data("iris")
 
-  X <- pca(iris)
+  X <- pca(iris, sup_quali = 5)
   Y <- with_seed(12345, bootstrap(X, n = 30))
 
   expect_equal_to_reference(get_coordinates(Y, margin = 2), file = "_snaps/pca_col_bootstrap.rds")

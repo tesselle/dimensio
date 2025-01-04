@@ -20,7 +20,7 @@ pca(object, ...)
   sup_quali = NULL,
   weight_row = NULL,
   weight_col = NULL,
-  autoclean = TRUE
+  autoclean = FALSE
 )
 
 \S4method{pca}{matrix}(
@@ -80,7 +80,7 @@ decomposition.
 data("iris")
 
 ## Compute principal components analysis
-X <- pca(iris)
+X <- pca(iris, sup_quali = "Species")
 
 ## Get eigenvalues
 get_eigenvalues(X)
