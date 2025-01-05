@@ -812,6 +812,13 @@ setGeneric(
 #'  summarized?
 #' @param sup A [`logical`] scalar: should the supplementary observations be
 #'  summarized?
+#' @param x A [`MultivariateSummary-class`] object.
+#' @param row.names A [`character`] vector giving the row names for the data
+#'  frame, or `NULL`.
+#' @param optional A [`logical`] scalar: should the names of the variables in
+#'  the data frame be checked? If `FALSE` then the names of the variables in the
+#'  data frame are checked to ensure that they are syntactically valid variable
+#'  names and are not duplicated.
 #' @param ... Currently not used.
 #' @example inst/examples/ex-summary.R
 #' @author N. Frerebeau

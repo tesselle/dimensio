@@ -10,42 +10,20 @@ is_scaled <- function(x) {
   !all(x@scale == 1)
 }
 
-has_supplementary <- function(x, margin = 1) {
-  margin <- margin[[1L]]
-  if (margin == 1) supp <- any(x@rows@supplement)
-  if (margin == 2) supp <- any(x@columns@supplement)
-  supp
-}
-
 get_masses <- function(x, margin = 1) {
   margin <- margin[[1L]]
   if (margin == 1) mass <- x@rows@weights
   if (margin == 2) mass <- x@columns@weights
   mass
 }
+
 get_order <- function(x, margin = 1) {
   margin <- margin[[1L]]
   if (margin == 1) ord <- x@rows@order
   if (margin == 2) ord <- x@columns@order
   ord
 }
-get_extra <- function(x) {
-  as.data.frame(x@extra)
-}
-has_extra <- function(x) {
-  extra <- get_extra(x)
-  NROW(extra) > 0 && NCOL(extra) > 0
-}
-`set_extra<-` <- function(x, value) {
-  value <- lapply(
-    X = value,
-    FUN = function(val, i) { val[i] },
-    i = get_order(x, margin = 1)
-  )
-  x@extra <- value
-  methods::validObject(x)
-  x
-}
+
 # Groups =======================================================================
 get_groups <- function(x, margin = 1) {
   margin <- margin[[1L]]

@@ -15,6 +15,16 @@
 \S4method{summary}{PCA}(object, ..., margin = 1, active = TRUE, sup = TRUE, rank = 3)
 }
 \arguments{
+\item{x}{A \code{\linkS4class{MultivariateSummary}} object.}
+
+\item{row.names}{A \code{\link{character}} vector giving the row names for the data
+frame, or \code{NULL}.}
+
+\item{optional}{A \code{\link{logical}} scalar: should the names of the variables in
+the data frame be checked? If \code{FALSE} then the names of the variables in the
+data frame are checked to ensure that they are syntactically valid variable
+names and are not duplicated.}
+
 \item{...}{Currently not used.}
 
 \item{object}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}

@@ -2,6 +2,19 @@
 #' @include AllGenerics.R
 NULL
 
+# To data.frame ================================================================
+#' @export
+#' @method as.data.frame MultivariateSummary
+as.data.frame.MultivariateSummary <- function(x, row.names = NULL, optional = FALSE, ...) {
+  as.data.frame(x@results, row.names = row.names, optional = optional, ...)
+}
+
+#' @export
+#' @rdname summary
+#' @aliases as.data.frame,MultivariateSummary-method
+setMethod("as.data.frame", "MultivariateSummary", as.data.frame.MultivariateSummary)
+
+# To list ======================================================================
 #' @method as.list MultivariateResults
 as.list.MultivariateResults <- function(x, ...) {
   list(
