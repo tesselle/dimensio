@@ -292,8 +292,8 @@ NULL
 #' @author N. Frerebeau
 #' @docType methods
 #' @family resampling methods
+#' @name bootstrap
 #' @rdname bootstrap
-#' @name boot
 NULL
 
 # Results ======================================================================

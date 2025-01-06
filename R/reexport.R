@@ -1,9 +1,3 @@
-# REEXPORT FROM ARKHE
-
-#' @importFrom arkhe bootstrap
-#' @export
-arkhe::bootstrap
-
 # REEXPORT FROM KHROMA
 
 #' @importFrom khroma color
