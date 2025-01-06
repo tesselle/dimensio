@@ -16,7 +16,7 @@ mca(object, ...)
   sup_row = NULL,
   sup_col = NULL,
   sup_quanti = NULL,
-  autoclean = FALSE
+  autodetect = FALSE
 )
 
 \S4method{mca}{matrix}(object, rank = NULL, sup_row = NULL, sup_col = NULL)
@@ -39,7 +39,7 @@ categorical columns.}
 \item{sup_quanti}{A \code{vector} specifying the indices of the supplementary
 quantitative columns.}
 
-\item{autoclean}{A \code{\link{logical}} scalar: should numeric variables be
+\item{autodetect}{A \code{\link{logical}} scalar: should numeric variables be
 automatically removed (except \code{sup_quanti})?}
 }
 \value{

@@ -111,7 +111,7 @@ NULL
 #'  \eqn{min(m, p) - 1} components will be returned.
 #' @param sup_row A `vector` specifying the indices of the supplementary rows.
 #' @param sup_col A `vector` specifying the indices of the supplementary columns.
-#' @param autoclean A [`logical`] scalar: should non-numeric variables be
+#' @param autodetect A [`logical`] scalar: should non-numeric variables be
 #'  automatically removed?
 #' @param ... Currently not used.
 #' @return
@@ -152,7 +152,7 @@ setGeneric(
 #'  categorical columns.
 #' @param sup_quanti A `vector` specifying the indices of the supplementary
 #'  quantitative columns.
-#' @param autoclean A [`logical`] scalar: should numeric variables be
+#' @param autodetect A [`logical`] scalar: should numeric variables be
 #'  automatically removed (except `sup_quanti`)?
 #' @param ... Currently not used.
 #' @return
@@ -197,7 +197,7 @@ setGeneric(
 #' @param weight_col A [`numeric`] vector specifying the active column
 #'  (variable) weights. If `NULL` (the default), uniform weights (1) are
 #'  used.
-#' @param autoclean A [`logical`] scalar: should non-numeric variables be
+#' @param autodetect A [`logical`] scalar: should non-numeric variables be
 #'  automatically removed (except `sup_quali`)?
 #' @param ... Currently not used.
 #' @return

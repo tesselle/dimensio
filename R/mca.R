@@ -9,10 +9,10 @@ setMethod(
   f = "mca",
   signature = c(object = "data.frame"),
   definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL,
-                        sup_quanti = NULL, autoclean = FALSE) {
+                        sup_quanti = NULL, autodetect = FALSE) {
     ## Remove numeric variables, if any
     clean <- drop_variable(object, f = is.numeric, negate = FALSE,
-                           sup = sup_col, extra = sup_quanti, auto = autoclean,
+                           sup = sup_col, extra = sup_quanti, auto = autodetect,
                            what = "quantitative")
 
     ## Compute MCA

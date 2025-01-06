@@ -20,7 +20,7 @@ pca(object, ...)
   sup_quali = NULL,
   weight_row = NULL,
   weight_col = NULL,
-  autoclean = FALSE
+  autodetect = FALSE
 )
 
 \S4method{pca}{matrix}(
@@ -65,7 +65,7 @@ internally normalized to sum 1}
 (variable) weights. If \code{NULL} (the default), uniform weights (1) are
 used.}
 
-\item{autoclean}{A \code{\link{logical}} scalar: should non-numeric variables be
+\item{autodetect}{A \code{\link{logical}} scalar: should non-numeric variables be
 automatically removed (except \code{sup_quali})?}
 }
 \value{

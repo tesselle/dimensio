@@ -3,7 +3,10 @@
 * Add `describe()` to quickly describe a `MultivariateAnalysis` object.
 
 ## Enhancements
-* `ca()`, `mca()` and `pca()` gained a new `autoclean` argument to enable/disable automatic variable removal.
+* `ca()`, `mca()` and `pca()` gained a new `autodetect` argument to enable/disable automatic of numeric variables.
+
+## Bugfixes & changes
+* Numeric variables are no longer automatically detected by default in `ca()`, `mca()` and `pca()`.
 
 # dimensio 0.10.1
 ## Bugfixes & changes
