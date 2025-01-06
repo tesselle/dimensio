@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dimensio 0.10.1.9000\n"
-"POT-Creation-Date: 2025-01-03 18:04+0100\n"
+"POT-Creation-Date: 2025-01-06 13:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Some variables are invalid: %s."
 msgstr ""
 
-#: screeplot.R:35 screeplot.R:126
+#: screeplot.R:35 screeplot.R:126 show.R:119
 msgid "Eigenvalues"
 msgstr ""
 
@@ -47,7 +47,7 @@ msgstr ""
 msgid "(+ %d supplementary)"
 msgstr ""
 
-#: show.R:17 show.R:104
+#: show.R:17 show.R:105
 msgid "Correspondence Analysis (CA)"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgstr ""
 msgid "* Variables were NOT scaled to unit variance."
 msgstr ""
 
-#: show.R:70 show.R:108
+#: show.R:70 show.R:110
 msgid "Principal Components Analysis (PCA)"
 msgstr ""
 
@@ -97,6 +97,38 @@ msgstr ""
 
 #: show.R:87
 msgid "* Method: %s."
+msgstr ""
+
+#: show.R:103
+msgid "Active rows"
+msgstr ""
+
+#: show.R:103
+msgid "Active columns"
+msgstr ""
+
+#: show.R:104
+msgid "Supplementary rows"
+msgstr ""
+
+#: show.R:104
+msgid "Supplementary columns"
+msgstr ""
+
+#: show.R:108
+msgid "Active individuals"
+msgstr ""
+
+#: show.R:108
+msgid "Active variables"
+msgstr ""
+
+#: show.R:109
+msgid "Supplementary individuals"
+msgstr ""
+
+#: show.R:109
+msgid "Supplementary variables"
 msgstr ""
 
 #: viz_contributions.R:26

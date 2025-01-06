@@ -803,11 +803,13 @@ setGeneric(
 #'
 #' Provides a summary of the results of a multivariate data analysis.
 #' @param object A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
+#' @param axes A length-two [`numeric`] vector giving the dimensions to be
+#'  summarized.
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
 #'  data will be summarized: `1` indicates individuals/rows (the default), `2`
 #'  indicates variables/columns.
 #' @param rank An [`integer`] value specifying the maximal number of components
-#'  to be kept in the results.
+#'  to be kept in the results. Deprecated, use `axes` instead.
 #' @param active A [`logical`] scalar: should the active observations be
 #'  summarized?
 #' @param sup A [`logical`] scalar: should the supplementary observations be

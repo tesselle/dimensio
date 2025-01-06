@@ -10,9 +10,25 @@
 \usage{
 \S4method{as.data.frame}{MultivariateSummary}(x, row.names = NULL, optional = FALSE, ...)
 
-\S4method{summary}{CA}(object, ..., margin = 1, active = TRUE, sup = TRUE, rank = 3)
+\S4method{summary}{CA}(
+  object,
+  ...,
+  axes = c(1, 2),
+  margin = 1,
+  active = TRUE,
+  sup = TRUE,
+  rank = NULL
+)
 
-\S4method{summary}{PCA}(object, ..., margin = 1, active = TRUE, sup = TRUE, rank = 3)
+\S4method{summary}{PCA}(
+  object,
+  ...,
+  axes = c(1, 2),
+  margin = 1,
+  active = TRUE,
+  sup = TRUE,
+  rank = NULL
+)
 }
 \arguments{
 \item{x}{A \code{\linkS4class{MultivariateSummary}} object.}
@@ -29,6 +45,9 @@ names and are not duplicated.}
 
 \item{object}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}
 
+\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions to be
+summarized.}
+
 \item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
 data will be summarized: \code{1} indicates individuals/rows (the default), \code{2}
 indicates variables/columns.}
@@ -40,7 +59,7 @@ summarized?}
 summarized?}
 
 \item{rank}{An \code{\link{integer}} value specifying the maximal number of components
-to be kept in the results.}
+to be kept in the results. Deprecated, use \code{axes} instead.}
 }
 \description{
 Provides a summary of the results of a multivariate data analysis.

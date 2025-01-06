@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dimensio 0.9.0.9000\n"
-"POT-Creation-Date: 2025-01-03 18:02+0100\n"
+"POT-Creation-Date: 2025-01-06 13:01+0100\n"
 "PO-Revision-Date: 2024-11-07 13:50+0100\n"
 "Last-Translator: Nicolas Frerebeau <nicolas.frerebeau@u-bordeaux-montaigne."
 "fr>\n"
@@ -24,7 +24,7 @@ msgstr "Certaines colonnes sont vides."
 msgid "Some variables are invalid: %s."
 msgstr "Certaines variables sont invalides : %s."
 
-#: screeplot.R:35 screeplot.R:126
+#: screeplot.R:35 screeplot.R:126 show.R:119
 msgid "Eigenvalues"
 msgstr "Valeurs propres"
 
@@ -48,7 +48,7 @@ msgstr "Variance cumulée (%)"
 msgid "(+ %d supplementary)"
 msgstr "(+ %d supplémentaires)"
 
-#: show.R:17 show.R:104
+#: show.R:17 show.R:105
 msgid "Correspondence Analysis (CA)"
 msgstr "Analyse factorielle des correspondances (AFC)"
 
@@ -80,7 +80,7 @@ msgstr "* Les variables ont été réduites."
 msgid "* Variables were NOT scaled to unit variance."
 msgstr "* Les variables N'ONT PAS été réduites."
 
-#: show.R:70 show.R:108
+#: show.R:70 show.R:110
 msgid "Principal Components Analysis (PCA)"
 msgstr "Analyse en composantes principales (ACP)"
 
@@ -99,6 +99,38 @@ msgstr "Analyse en coordonnées principales (ACoP)"
 #: show.R:87
 msgid "* Method: %s."
 msgstr "* Méthode: %s."
+
+#: show.R:103
+msgid "Active rows"
+msgstr "Lignes actives"
+
+#: show.R:103
+msgid "Active columns"
+msgstr "Colonnes actives"
+
+#: show.R:104
+msgid "Supplementary rows"
+msgstr "Lignes supplémentaires"
+
+#: show.R:104
+msgid "Supplementary columns"
+msgstr "Colonnes supplémentaires"
+
+#: show.R:108
+msgid "Active individuals"
+msgstr "Individus actifs"
+
+#: show.R:108
+msgid "Active variables"
+msgstr "Variables actives"
+
+#: show.R:109
+msgid "Supplementary individuals"
+msgstr "Individus supplémentaires"
+
+#: show.R:109
+msgid "Supplementary variables"
+msgstr "Variables supplémentaires"
 
 #: viz_contributions.R:26
 msgid "Contribution to %s (%%)"
