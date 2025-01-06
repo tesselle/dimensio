@@ -11,6 +11,7 @@ setGeneric("biplot")
 
 # Import S4 generics ===========================================================
 #' @importMethodsFrom arkhe bootstrap
+#' @importMethodsFrom arkhe describe
 NULL
 
 # Extract ======================================================================
@@ -828,6 +829,20 @@ setGeneric(
 #' @family summary
 #' @name summary
 #' @rdname summary
+NULL
+
+#' Object Description
+#'
+#' @param x A [`CA-class`], [`MCA-class`] or [`PCA-class`] object.
+#' @param ... Further parameters to be passed to [cat()].
+#' @return
+#'  `describe()` is called for its side-effects. Invisibly returns `x`.
+#' @example inst/examples/ex-summary.R
+#' @author N. Frerebeau
+#' @family summary
+#' @docType methods
+#' @rdname describe
+#' @name describe
 NULL
 
 #' Tidy Coordinates

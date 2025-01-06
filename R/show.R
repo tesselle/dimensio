@@ -6,17 +6,9 @@ setMethod(
   f = "show",
   signature = "CA",
   definition = function(object) {
-    row_sup <- object@rows@supplement
-    col_sup <- object@columns@supplement
-
-    sup_txt <- tr_(" (+ %d supplementary)")
-    row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
-    col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
-
     cat(
-      paste0(tr_("Correspondence Analysis (CA)"), ":"),
-      sprintf(tr_("* Row variable: %d categories%s."), sum(!row_sup), row_txt),
-      sprintf(tr_("* Column variable: %d categories%s."), sum(!col_sup), col_txt),
+      tr_("Correspondence Analysis (CA):"),
+      utils::capture.output(describe(object)),
       sep = "\n"
     )
     invisible(object)
@@ -27,17 +19,9 @@ setMethod(
   f = "show",
   signature = "MCA",
   definition = function(object) {
-    row_sup <- object@rows@supplement
-    col_sup <- object@columns@supplement
-
-    sup_txt <- tr_(" (+ %d supplementary)")
-    row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
-    col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
-
     cat(
-      paste0(tr_("Multiple Correspondence Analysis (MCA)"), ":"),
-      sprintf(tr_("* Row variable: %d categories%s."), sum(!row_sup), row_txt),
-      sprintf(tr_("* Column variable: %d categories%s."), sum(!col_sup), col_txt),
+      tr_("Multiple Correspondence Analysis (MCA):"),
+      utils::capture.output(describe(object)),
       sep = "\n"
     )
     invisible(object)
@@ -48,30 +32,9 @@ setMethod(
   f = "show",
   signature = "PCA",
   definition = function(object) {
-    row_sup <- object@rows@supplement
-    col_sup <- object@columns@supplement
-
-    sup_txt <- tr_(" (+ %d supplementary)")
-    row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
-    col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
-
-    if (is_centered(object)) {
-      var_center <- tr_("* Variables were shifted to be zero centered.")
-    } else {
-      var_center <- tr_("* Variables were NOT shifted to be zero centered.")
-    }
-    if (is_scaled(object)) {
-      var_scale <- tr_("* Variables were scaled to unit variance.")
-    } else {
-      var_scale <- tr_("* Variables were NOT scaled to unit variance.")
-    }
-
     cat(
-      paste0(tr_("Principal Components Analysis (PCA)"), ":"),
-      sprintf(tr_("* %d individuals%s."), sum(!row_sup), row_txt),
-      sprintf(tr_("* %d variables%s."), sum(!col_sup), col_txt),
-      var_center,
-      var_scale,
+      tr_("Principal Components Analysis (PCA):"),
+      utils::capture.output(describe(object)),
       sep = "\n"
     )
     invisible(object)
@@ -83,7 +46,7 @@ setMethod(
   signature = "PCOA",
   definition = function(object) {
     cat(
-      paste0(tr_("Principal Coordinate Analysis (PCoA)"), ":"),
+      tr_("Principal Coordinate Analysis (PCoA):"),
       sprintf(tr_("* Method: %s."), object@method),
       sep = "\n"
     )

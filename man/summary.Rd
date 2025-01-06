@@ -79,6 +79,7 @@ summary(X, margin = 2)
 }
 \seealso{
 Other summary: 
+\code{\link{describe}()},
 \code{\link{tidy}()}
 }
 \author{

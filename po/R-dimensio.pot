@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dimensio 0.10.1.9000\n"
-"POT-Creation-Date: 2025-01-06 13:01+0100\n"
+"POT-Creation-Date: 2025-01-06 19:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Some variables are invalid: %s."
 msgstr ""
 
-#: screeplot.R:35 screeplot.R:126 show.R:119
+#: screeplot.R:35 screeplot.R:126 show.R:82
 msgid "Eigenvalues"
 msgstr ""
 
@@ -43,92 +43,100 @@ msgstr ""
 msgid "Cumulative variance (%)"
 msgstr ""
 
-#: show.R:12 show.R:33 show.R:54
-msgid "(+ %d supplementary)"
+#: show.R:10
+msgid "Correspondence Analysis (CA):"
 msgstr ""
 
-#: show.R:17 show.R:105
-msgid "Correspondence Analysis (CA)"
+#: show.R:23
+msgid "Multiple Correspondence Analysis (MCA):"
 msgstr ""
 
-#: show.R:18 show.R:39
-msgid "* Row variable: %d categories%s."
+#: show.R:36
+msgid "Principal Components Analysis (PCA):"
 msgstr ""
 
-#: show.R:19 show.R:40
-msgid "* Column variable: %d categories%s."
+#: show.R:49
+msgid "Principal Coordinate Analysis (PCoA):"
 msgstr ""
 
-#: show.R:38
-msgid "Multiple Correspondence Analysis (MCA)"
-msgstr ""
-
-#: show.R:59
-msgid "* Variables were shifted to be zero centered."
-msgstr ""
-
-#: show.R:61
-msgid "* Variables were NOT shifted to be zero centered."
-msgstr ""
-
-#: show.R:64
-msgid "* Variables were scaled to unit variance."
-msgstr ""
-
-#: show.R:66
-msgid "* Variables were NOT scaled to unit variance."
-msgstr ""
-
-#: show.R:70 show.R:110
-msgid "Principal Components Analysis (PCA)"
-msgstr ""
-
-#: show.R:71
-msgid "* %d individuals%s."
-msgstr ""
-
-#: show.R:72
-msgid "* %d variables%s."
-msgstr ""
-
-#: show.R:86
-msgid "Principal Coordinate Analysis (PCoA)"
-msgstr ""
-
-#: show.R:87
+#: show.R:50
 msgid "* Method: %s."
 msgstr ""
 
-#: show.R:103
+#: show.R:66
 msgid "Active rows"
 msgstr ""
 
-#: show.R:103
+#: show.R:66
 msgid "Active columns"
 msgstr ""
 
-#: show.R:104
+#: show.R:67
 msgid "Supplementary rows"
 msgstr ""
 
-#: show.R:104
+#: show.R:67
 msgid "Supplementary columns"
 msgstr ""
 
-#: show.R:108
+#: show.R:68
+msgid "Correspondence Analysis (CA)"
+msgstr ""
+
+#: show.R:71
 msgid "Active individuals"
 msgstr ""
 
-#: show.R:108
+#: show.R:71
 msgid "Active variables"
 msgstr ""
 
-#: show.R:109
+#: show.R:72
 msgid "Supplementary individuals"
 msgstr ""
 
-#: show.R:109
+#: show.R:72
 msgid "Supplementary variables"
+msgstr ""
+
+#: show.R:73
+msgid "Principal Components Analysis (PCA)"
+msgstr ""
+
+#: summary.R:38 summary.R:85
+msgid "(+ %d supplementary)"
+msgstr ""
+
+#: summary.R:43
+msgid "* Row variable: %d categories%s."
+msgstr ""
+
+#: summary.R:44
+msgid "* Column variable: %d categories%s."
+msgstr ""
+
+#: summary.R:90
+msgid "* Variables were shifted to be zero centered."
+msgstr ""
+
+#: summary.R:92
+msgid "* Variables were NOT shifted to be zero centered."
+msgstr ""
+
+#: summary.R:95
+msgid "* Variables were scaled to unit variance."
+msgstr ""
+
+#: summary.R:97
+msgid "* Variables were NOT scaled to unit variance."
+msgstr ""
+
+#: summary.R:101
+msgid "* %d individuals%s."
+msgstr ""
+
+#: summary.R:102
+msgid "* %d variables%s."
 msgstr ""
 
 #: viz_contributions.R:26

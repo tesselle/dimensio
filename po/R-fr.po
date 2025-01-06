@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dimensio 0.9.0.9000\n"
-"POT-Creation-Date: 2025-01-06 13:01+0100\n"
+"POT-Creation-Date: 2025-01-06 19:31+0100\n"
 "PO-Revision-Date: 2024-11-07 13:50+0100\n"
 "Last-Translator: Nicolas Frerebeau <nicolas.frerebeau@u-bordeaux-montaigne."
 "fr>\n"
@@ -24,7 +24,7 @@ msgstr "Certaines colonnes sont vides."
 msgid "Some variables are invalid: %s."
 msgstr "Certaines variables sont invalides : %s."
 
-#: screeplot.R:35 screeplot.R:126 show.R:119
+#: screeplot.R:35 screeplot.R:126 show.R:82
 msgid "Eigenvalues"
 msgstr "Valeurs propres"
 
@@ -44,93 +44,101 @@ msgstr "Inertie cumulée (%)"
 msgid "Cumulative variance (%)"
 msgstr "Variance cumulée (%)"
 
-#: show.R:12 show.R:33 show.R:54
-msgid "(+ %d supplementary)"
-msgstr "(+ %d supplémentaires)"
+#: show.R:10
+msgid "Correspondence Analysis (CA):"
+msgstr "Analyse factorielle des correspondances (AFC) :"
 
-#: show.R:17 show.R:105
-msgid "Correspondence Analysis (CA)"
-msgstr "Analyse factorielle des correspondances (AFC)"
+#: show.R:23
+msgid "Multiple Correspondence Analysis (MCA):"
+msgstr "Analyse des correspondances multiples (ACM) :"
 
-#: show.R:18 show.R:39
-msgid "* Row variable: %d categories%s."
-msgstr "* Variable ligne: %d catégories%s."
+#: show.R:36
+msgid "Principal Components Analysis (PCA):"
+msgstr "Analyse en composantes principales (ACP) :"
 
-#: show.R:19 show.R:40
-msgid "* Column variable: %d categories%s."
-msgstr "* Variable colonne: %d catégories%s."
+#: show.R:49
+msgid "Principal Coordinate Analysis (PCoA):"
+msgstr "Analyse en coordonnées principales (ACoP) :"
 
-#: show.R:38
-msgid "Multiple Correspondence Analysis (MCA)"
-msgstr "Analyse des correspondances multiples (ACM)"
-
-#: show.R:59
-msgid "* Variables were shifted to be zero centered."
-msgstr "* Les variables ont été centrées."
-
-#: show.R:61
-msgid "* Variables were NOT shifted to be zero centered."
-msgstr "* Les variables N'ONT PAS été centrées."
-
-#: show.R:64
-msgid "* Variables were scaled to unit variance."
-msgstr "* Les variables ont été réduites."
+#: show.R:50
+msgid "* Method: %s."
+msgstr "* Méthode : %s."
 
 #: show.R:66
-msgid "* Variables were NOT scaled to unit variance."
-msgstr "* Les variables N'ONT PAS été réduites."
-
-#: show.R:70 show.R:110
-msgid "Principal Components Analysis (PCA)"
-msgstr "Analyse en composantes principales (ACP)"
-
-#: show.R:71
-msgid "* %d individuals%s."
-msgstr "* %d individus%s."
-
-#: show.R:72
-msgid "* %d variables%s."
-msgstr "* %d variables%s."
-
-#: show.R:86
-msgid "Principal Coordinate Analysis (PCoA)"
-msgstr "Analyse en coordonnées principales (ACoP)"
-
-#: show.R:87
-msgid "* Method: %s."
-msgstr "* Méthode: %s."
-
-#: show.R:103
 msgid "Active rows"
 msgstr "Lignes actives"
 
-#: show.R:103
+#: show.R:66
 msgid "Active columns"
 msgstr "Colonnes actives"
 
-#: show.R:104
+#: show.R:67
 msgid "Supplementary rows"
 msgstr "Lignes supplémentaires"
 
-#: show.R:104
+#: show.R:67
 msgid "Supplementary columns"
 msgstr "Colonnes supplémentaires"
 
-#: show.R:108
+#: show.R:68
+msgid "Correspondence Analysis (CA)"
+msgstr "Analyse factorielle des correspondances (AFC)"
+
+#: show.R:71
 msgid "Active individuals"
 msgstr "Individus actifs"
 
-#: show.R:108
+#: show.R:71
 msgid "Active variables"
 msgstr "Variables actives"
 
-#: show.R:109
+#: show.R:72
 msgid "Supplementary individuals"
 msgstr "Individus supplémentaires"
 
-#: show.R:109
+#: show.R:72
 msgid "Supplementary variables"
 msgstr "Variables supplémentaires"
+
+#: show.R:73
+msgid "Principal Components Analysis (PCA)"
+msgstr "Analyse en composantes principales (ACP)"
+
+#: summary.R:38 summary.R:85
+msgid "(+ %d supplementary)"
+msgstr "(+ %d supplémentaires)"
+
+#: summary.R:43
+msgid "* Row variable: %d categories%s."
+msgstr "* Variable ligne : %d catégories%s."
+
+#: summary.R:44
+msgid "* Column variable: %d categories%s."
+msgstr "* Variable colonne : %d catégories%s."
+
+#: summary.R:90
+msgid "* Variables were shifted to be zero centered."
+msgstr "* Les variables ont été centrées."
+
+#: summary.R:92
+msgid "* Variables were NOT shifted to be zero centered."
+msgstr "* Les variables N'ONT PAS été centrées."
+
+#: summary.R:95
+msgid "* Variables were scaled to unit variance."
+msgstr "* Les variables ont été réduites."
+
+#: summary.R:97
+msgid "* Variables were NOT scaled to unit variance."
+msgstr "* Les variables N'ONT PAS été réduites."
+
+#: summary.R:101
+msgid "* %d individuals%s."
+msgstr "* %d individus%s."
+
+#: summary.R:102
+msgid "* %d variables%s."
+msgstr "* %d variables%s."
 
 #: viz_contributions.R:26
 msgid "Contribution to %s (%%)"

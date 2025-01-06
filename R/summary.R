@@ -25,6 +25,30 @@ summary.CA <- function(object, ..., axes = c(1, 2), margin = 1,
 #' @aliases summary,CA-method
 setMethod("summary", c(object = "CA"), summary.CA)
 
+#' @export
+#' @rdname describe
+#' @aliases describe,CA-method
+setMethod(
+  f = "describe",
+  signature = signature(x = "CA"),
+  definition = function(x, ...) {
+    row_sup <- x@rows@supplement
+    col_sup <- x@columns@supplement
+
+    sup_txt <- tr_(" (+ %d supplementary)")
+    row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
+    col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
+
+    cat(
+      sprintf(tr_("* Row variable: %d categories%s."), sum(!row_sup), row_txt),
+      sprintf(tr_("* Column variable: %d categories%s."), sum(!col_sup), col_txt),
+      ...,
+      sep = "\n"
+    )
+    invisible(x)
+  }
+)
+
 # PCA ==========================================================================
 #' @export
 #' @method summary PCA
@@ -48,6 +72,44 @@ summary.PCA <- function(object, ..., axes = c(1, 2), margin = 1,
 #' @aliases summary,PCA-method
 setMethod("summary", c(object = "PCA"), summary.PCA)
 
+#' @export
+#' @rdname describe
+#' @aliases describe,PCA-method
+setMethod(
+  f = "describe",
+  signature = signature(x = "PCA"),
+  definition = function(x, ...) {
+    row_sup <- x@rows@supplement
+    col_sup <- x@columns@supplement
+
+    sup_txt <- tr_(" (+ %d supplementary)")
+    row_txt <- if (any(row_sup)) sprintf(sup_txt, sum(row_sup)) else ""
+    col_txt <- if (any(col_sup)) sprintf(sup_txt, sum(col_sup)) else ""
+
+    if (is_centered(x)) {
+      var_center <- tr_("* Variables were shifted to be zero centered.")
+    } else {
+      var_center <- tr_("* Variables were NOT shifted to be zero centered.")
+    }
+    if (is_scaled(x)) {
+      var_scale <- tr_("* Variables were scaled to unit variance.")
+    } else {
+      var_scale <- tr_("* Variables were NOT scaled to unit variance.")
+    }
+
+    cat(
+      sprintf(tr_("* %d individuals%s."), sum(!row_sup), row_txt),
+      sprintf(tr_("* %d variables%s."), sum(!col_sup), col_txt),
+      var_center,
+      var_scale,
+      ...,
+      sep = "\n"
+    )
+    invisible(x)
+  }
+)
+
+# Helpers ======================================================================
 build_summary <- function(object, axes, margin, rank = NULL,
                           active = TRUE, sup = TRUE,
                           prefix = "F") {

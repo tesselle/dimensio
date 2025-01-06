@@ -82,6 +82,7 @@ head(augment(X, margin = 2, axes = c(1, 2)))
 }
 \seealso{
 Other summary: 
+\code{\link{describe}()},
 \code{\link{summary}()}
 }
 \author{

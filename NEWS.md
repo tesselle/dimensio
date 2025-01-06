@@ -1,4 +1,7 @@
 # dimensio 0.10.1.9000
+## New classes and methods
+* Add `describe()` to quickly describe a `MultivariateAnalysis` object.
+
 ## Enhancements
 * `ca()`, `mca()` and `pca()` gained a new `autoclean` argument to enable/disable automatic variable removal.
 
