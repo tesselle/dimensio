@@ -759,6 +759,9 @@ setGeneric(
 #' Plot Envelopes
 #'
 #' @inheritParams wrap
+#' @param type A [`character`] string specifying the ellipse to draw.
+#'  It must be one of "`tolerance`" or "`confidence`").
+#'  Any unambiguous substring can be given.
 #' @param color The colors for borders (will be mapped to `group`).
 #'  Ignored if set to `FALSE`. If `NULL`, the default color scheme will be used.
 #' @param fill The background colors (will be mapped to `group`).
@@ -774,25 +777,27 @@ setGeneric(
 #' @author N. Frerebeau
 #' @docType methods
 #' @family plot methods
-#' @name viz_wrap
-#' @rdname viz_wrap
-NULL
+#' @aliases viz_ellipses-method
+setGeneric(
+  name = "viz_ellipses",
+  def = function(x, ...) standardGeneric("viz_ellipses")
+)
 
-#' @rdname viz_wrap
+#' @rdname viz_ellipses
 #' @aliases viz_hull-method
 setGeneric(
   name = "viz_hull",
   def = function(x, ...) standardGeneric("viz_hull")
 )
 
-#' @rdname viz_wrap
+#' @rdname viz_ellipses
 #' @aliases viz_confidence-method
 setGeneric(
   name = "viz_confidence",
   def = function(x, ...) standardGeneric("viz_confidence")
 )
 
-#' @rdname viz_wrap
+#' @rdname viz_ellipses
 #' @aliases viz_tolerance-method
 setGeneric(
   name = "viz_tolerance",

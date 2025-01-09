@@ -101,9 +101,9 @@ Other plot methods:
 \code{\link{biplot}()},
 \code{\link{screeplot}()},
 \code{\link{viz_contributions}()},
+\code{\link{viz_ellipses}()},
 \code{\link{viz_individuals}()},
 \code{\link{viz_variables}()},
-\code{\link{viz_wrap}},
 \code{\link{wrap}}
 }
 \author{

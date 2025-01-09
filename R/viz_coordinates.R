@@ -11,6 +11,7 @@ setMethod(
   signature = c(x = "MultivariateAnalysis"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, extra_quali = NULL, extra_quanti = NULL,
+                        ellipse = NULL, hull = NULL,
                         color = NULL, fill = FALSE, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
@@ -21,6 +22,7 @@ setMethod(
                color = color, fill = fill, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
+               ellipse = ellipse, hull = hull,
                legend = legend)
     invisible(x)
   }
@@ -50,6 +52,7 @@ setMethod(
   signature = c(x = "PCA"),
   definition = function(x, ..., axes = c(1, 2), active = TRUE, sup = TRUE,
                         labels = FALSE, extra_quali = NULL, extra_quanti = NULL,
+                        ellipse = NULL, hull = NULL,
                         color = NULL, fill = FALSE, symbol = FALSE, size = c(1, 6),
                         xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                         panel.first = NULL, panel.last = NULL,
@@ -60,6 +63,7 @@ setMethod(
                color = color, fill = fill, symbol = symbol, size = size,
                xlim = xlim, ylim = ylim, main = main, sub = sub,
                panel.first = panel.first, panel.last = panel.last,
+               ellipse = ellipse, hull = hull,
                legend = legend)
     invisible(x)
   }
@@ -262,6 +266,10 @@ setMethod(
 #'  background grids.
 #' @param panel.last An `expression` to be evaluated after plotting has taken
 #'  place but before the axes, title and box are added.
+#' @param ellipse A [`list`] of additional arguments to be passed to
+#'  [viz_ellipses()]; names of the list are used as argument names.
+#'  If `NULL`, no ellipse are displayed.
+#' @param hull A [`logical`] scalar: should convex hulls be displayed?
 #' @param legend A [`list`] of additional arguments to be passed to
 #'  [graphics::legend()]; names of the list are used as argument names.
 #'  If `NULL`, no legend is displayed.
@@ -279,6 +287,7 @@ viz_points <- function(x, margin, axes, ...,
                        main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
                        ann = graphics::par("ann"), frame.plot = TRUE,
                        panel.first = NULL, panel.last = NULL,
+                       ellipse = NULL, hull = FALSE,
                        legend = list(x = "topleft")) {
   ## Prepare data
   coord <- prepare_plot(x, margin = margin, axes = axes,
@@ -345,6 +354,24 @@ viz_points <- function(x, margin, axes, ...,
       xlab = xlab %||% print_variance(x, axes[[1]]),
       ylab = ylab %||% print_variance(x, axes[[2]])
     )
+  }
+
+  group <- coord$extra_quali
+  if (all(is.na(group))) group[] <- ""
+
+  ## Add ellipse
+  if (is.list(ellipse) && length(ellipse) > 0) {
+    args_ell <- list(x = x, group = group, margin = margin, axes = axes,
+                     color = color, fill = FALSE, symbol = FALSE)
+    ellipse <- modifyList(args_ell, val = ellipse)
+    do.call(viz_ellipses, ellipse)
+  }
+
+  ## Add convex hull
+  if (isTRUE(hull)) {
+    args_hull <- list(x = x, group = group, margin = margin, axes = axes,
+                      color = color, fill = FALSE, symbol = FALSE)
+    do.call(viz_hull, args_hull)
   }
 
   ## Legend
@@ -495,9 +522,14 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
 
   ## Highlight quantitative information
   if (length(extra_quanti) == 1) {
-    choices <- c("mass", "sum", "contribution", "cos2")
-    extra_quanti <- match.arg(extra_quanti, choices = choices, several.ok = FALSE)
-    extra_quanti <- data[[extra_quanti]]
+    extra <- get_extra(x)[[extra_quanti]]
+    if (length(extra) > 1) {
+      extra_quanti <- extra
+    } else {
+      choices <- c("mass", "sum", "contribution", "cos2")
+      extra_quanti <- match.arg(extra_quanti, choices = choices, several.ok = FALSE)
+      extra_quanti <- data[[extra_quanti]]
+    }
   }
   if (length(extra_quanti) > 0) {
     extra_quanti <- as.vector(extra_quanti)
@@ -517,9 +549,14 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
     extra_quali <- get_groups(x, margin = margin)
   }
   if (is.character(extra_quali) && length(extra_quali) == 1) {
-    choices <- c("observation")
-    extra_quali <- match.arg(extra_quali, choices = choices, several.ok = FALSE)
-    extra_quali <- data[[extra_quali]]
+    extra <- get_extra(x)[[extra_quali]]
+    if (length(extra) > 1) {
+      extra_quali <- extra
+    } else {
+      choices <- c("observation")
+      extra_quali <- match.arg(extra_quali, choices = choices, several.ok = FALSE)
+      extra_quali <- data[[extra_quali]]
+    }
   }
   if (!isFALSE(extra_quali) && length(extra_quali) > 0) {
     extra_quali <- as.vector(extra_quali)

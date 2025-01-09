@@ -3,7 +3,7 @@
 NULL
 
 #' @export
-#' @rdname viz_wrap
+#' @rdname viz_ellipses
 #' @aliases viz_hull,MultivariateAnalysis-method
 setMethod(
   f = "viz_hull",
@@ -38,7 +38,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname viz_wrap
+#' @rdname viz_ellipses
 #' @aliases viz_hull,BootstrapCA-method
 setMethod(
   f = "viz_hull",

@@ -15,6 +15,7 @@ setMethod(
     arkhe::assert_scalar(margin, "numeric")
     arkhe::assert_type(axes, "numeric")
     arkhe::assert_length(axes, 2)
+    arkhe::assert_type(level, "numeric")
 
     ## Get coordinates
     data <- get_coordinates(x, margin = margin)

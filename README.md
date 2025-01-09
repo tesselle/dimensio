@@ -141,15 +141,9 @@ biplot(X, type = "form")
 ## Highlight species
 viz_individuals(
   x = X, 
-  extra_quali = iris$Species, 
-  color = c("#004488", "#DDAA33", "#BB5566")
-)
-## Add ellipses
-viz_tolerance(
-  x = X, 
-  group = iris$Species, 
-  level = 0.95,
-  color = c("#004488", "#DDAA33", "#BB5566")
+  extra_quali = "Species",
+  color = c("#004488", "#DDAA33", "#BB5566"),
+  ellipse = list(type = "tolerance", level = 0.95) # Add ellipses
 )
 
 ## Highlight petal length
