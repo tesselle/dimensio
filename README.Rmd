@@ -116,7 +116,7 @@ biplot(X, type = "form")
 ## Highlight species
 viz_individuals(
   x = X, 
-  extra_quali = "Species",
+  extra_quali = iris$Species,
   color = c("#004488", "#DDAA33", "#BB5566"),
   ellipse = list(type = "tolerance", level = 0.95) # Add ellipses
 )

@@ -1,4 +1,4 @@
-# dimensio 0.10.1.9000
+# dimensio 0.11.0
 ## New classes and methods
 * Add `describe()` to quickly describe a `MultivariateAnalysis` object.
 * Add `viz_ellipses()` to draw tolerance/confidence ellipses.
