@@ -69,8 +69,7 @@ X[["rows"]]
 }
 \seealso{
 Other mutators: 
-\code{\link{dimnames}()},
-\code{\link{loadings}()}
+\code{\link{dimnames}()}
 }
 \author{
 N. Frerebeau

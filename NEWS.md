@@ -10,6 +10,7 @@
 
 ## Bugfixes & changes
 * Numeric variables are no longer automatically detected by default in `ca()`, `mca()` and `pca()`.
+* Remove `loadings()`.
 
 # dimensio 0.10.1
 ## Bugfixes & changes

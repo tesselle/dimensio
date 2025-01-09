@@ -15,24 +15,6 @@ setGeneric("biplot")
 NULL
 
 # Extract ======================================================================
-## Get -------------------------------------------------------------------------
-#' Extract Loadings
-#'
-#' Extract loadingsin principal components analysis.
-#' @param x A [`PCA-class`] object.
-#' @param ... Currently not used.
-#' @return
-#'  Returns variable loadings (i.e. the coefficients of the linear combination
-#'  of the original variables).
-#' @note
-#'  `loadings()` is only implemented for consistency with [stats::loadings()].
-#' @author N. Frerebeau
-#' @docType methods
-#' @family mutators
-#' @name loadings
-#' @rdname loadings
-NULL
-
 ## Dimnames --------------------------------------------------------------------
 #' Dimnames of an Object
 #'
