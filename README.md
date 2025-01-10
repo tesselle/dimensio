@@ -151,7 +151,7 @@ viz_individuals(
   x = X,
   extra_quanti = iris$Petal.Length,
   color = color("iridescent")(255), 
-  size = c(1, 2)
+  size = c(1, 3)
 )
 ```
 

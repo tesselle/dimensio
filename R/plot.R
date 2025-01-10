@@ -32,7 +32,7 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
     arkhe::assert_length(extra_quanti, n)
     if (!isFALSE(color)) col <- khroma::palette_color_continuous(colors = color)(extra_quanti)
     if (!isFALSE(fill)) bg <- khroma::palette_color_continuous(colors = fill)(extra_quanti)
-    if (!isFALSE(size)) cex <- khroma::palette_size_range(range = size)(extra_quanti)
+    if (!isFALSE(size)) cex <- khroma::palette_size_sequential(range = size)(extra_quanti)
   }
   ## Highlight qualitative information
   if (is.null(extra_quali) && length(x@groups) > 0) {

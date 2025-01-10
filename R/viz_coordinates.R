@@ -538,8 +538,8 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
     ## Continuous scales
     if (!isFALSE(color)) col <- khroma::palette_color_continuous(colors = color)(extra_quanti)
     if (!isFALSE(fill)) bg <- khroma::palette_color_continuous(colors = fill)(extra_quanti)
-    if (!isFALSE(size)) cex <- khroma::palette_size_range(range = size)(extra_quanti)
-    if (!isFALSE(line_width)) lwd <- khroma::palette_size_range(range = line_width)(extra_quanti)
+    if (!isFALSE(size)) cex <- khroma::palette_size_sequential(range = size)(extra_quanti)
+    if (!isFALSE(line_width)) lwd <- khroma::palette_size_sequential(range = line_width)(extra_quanti)
   } else {
     extra_quanti <- rep(NA_real_, n)
   }
@@ -616,13 +616,15 @@ prepare_legend <- function(x, args, points = TRUE, lines = TRUE) {
 
     pr <- pretty(quanti, n = ifelse(nrow(x) > 5, 5, nrow(x)))
     pr <- pr[pr <= max(quanti) & pr >= min(quanti)]
-    i <- order(quanti, method = "radix")[!duplicated(quanti)]
+    i <- order(quanti, method = "radix")
+    i <- setdiff(i, which(duplicated(quanti)))
 
     col <- grDevices::colorRamp(x$col[i])(scale_range(pr, from = range(quanti)))
     col <- grDevices::rgb(col, maxColorValue = 255)
 
     leg <- list(legend = pr, col = col)
     if (points) {
+      k <- duplicated(quanti)
       cex <- stats::approx(x = quanti[i], y = x$cex[i], xout = pr, ties = "ordered")$y
       leg <- utils::modifyList(leg, list(pch = unique(x$pch), pt.cex = cex))
     }

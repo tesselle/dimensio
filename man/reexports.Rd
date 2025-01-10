@@ -9,7 +9,7 @@
 \alias{palette_color_picker}
 \alias{palette_shape}
 \alias{palette_line}
-\alias{palette_size_range}
+\alias{palette_size_sequential}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -17,6 +17,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{khroma}{\code{\link[khroma:colour]{color}}, \code{\link[khroma]{palette_color_continuous}}, \code{\link[khroma]{palette_color_discrete}}, \code{\link[khroma]{palette_color_picker}}, \code{\link[khroma:palette_shape]{palette_line}}, \code{\link[khroma]{palette_shape}}, \code{\link[khroma]{palette_size_range}}}
+  \item{khroma}{\code{\link[khroma:colour]{color}}, \code{\link[khroma]{palette_color_continuous}}, \code{\link[khroma]{palette_color_discrete}}, \code{\link[khroma]{palette_color_picker}}, \code{\link[khroma:palette_shape]{palette_line}}, \code{\link[khroma]{palette_shape}}, \code{\link[khroma:palette_size]{palette_size_sequential}}}
 }}
 

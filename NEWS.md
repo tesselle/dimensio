@@ -1,4 +1,6 @@
 # dimensio 0.11.0.9000
+## Bugfixes & changes
+* Fix legend in `viz_individuals()`.
 
 # dimensio 0.11.0
 ## New classes and methods
