@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 if (at_home()) {
   using("tinysnapshot")
   options(tinysnapshot_device = "svglite")
@@ -5,8 +7,6 @@ if (at_home()) {
   options(tinysnapshot_width = 7)
   options(tinysnapshot_tol = 200) # pixels
   options(tinysnapshot_os = "Linux")
-
-  Sys.setenv(LANGUAGE = "en") # Force locale
 
   data("benthos")
 

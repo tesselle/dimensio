@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 # Correspondence Analysis ======================================================
 data("colours")
 res <- ca(colours)

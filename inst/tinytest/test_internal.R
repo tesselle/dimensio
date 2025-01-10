@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 data("iris")
 
 options("dimensio.verbose" = TRUE)

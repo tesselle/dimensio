@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 # Test against FactoMineR
 if (at_home() && requireNamespace("FactoMineR", quietly = TRUE)) {
   data(tea, package = "FactoMineR")

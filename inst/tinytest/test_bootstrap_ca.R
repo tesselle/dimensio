@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 if (at_home() && Sys.info()["sysname"] == "Linux") {
   source("helpers.R")
   using("tinysnapshot")

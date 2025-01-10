@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 # Complete disjunctive table ===================================================
 x <- data.frame(
   A = c("a", "b", "a"),

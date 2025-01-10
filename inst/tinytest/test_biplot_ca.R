@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 # CA Biplot ====================================================================
 if (at_home()) {
   using("tinysnapshot")

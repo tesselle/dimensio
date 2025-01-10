@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 # Correspondence Analysis ======================================================
 cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
 res <- ca(cts, sup_row = 10:15)
