@@ -5,8 +5,8 @@
   "description": "Simple Principal Components Analysis (PCA) and (Multiple) Correspondence Analysis (CA) based on the Singular Value Decomposition (SVD). This package provides S4 classes and methods to compute, extract, summarize and visualize results of multivariate data analysis. It also includes methods for partial bootstrap validation described in Greenacre (1984, ISBN: 978-0-12-299050-2) and Lebart et al. (2006, ISBN: 978-2-10-049616-7).",
   "name": "dimensio: Multivariate Data Analysis",
   "relatedLink": ["https://packages.tesselle.org/dimensio/", "https://CRAN.R-project.org/package=dimensio"],
-  "codeRepository": "https://github.com/tesselle/dimensio",
-  "issueTracker": "https://github.com/tesselle/dimensio/issues",
+  "codeRepository": "https://codeberg.org/tesselle/dimensio",
+  "issueTracker": "https://codeberg.org/tesselle/dimensio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
   "version": "0.11.0",
   "programmingLanguage": {
@@ -214,9 +214,5 @@
       "sameAs": "https://doi.org/10.5281/zenodo.4478530"
     }
   ],
-  "releaseNotes": "https://github.com/tesselle/dimensio/blob/master/NEWS.md",
-  "readme": "https://github.com/tesselle/dimensio/blob/main/README.md",
-  "contIntegration": ["https://github.com/tesselle/dimensio/actions", "https://app.codecov.io/gh/tesselle/dimensio"],
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "keywords": ["r-package", "multivariate-analysis", "data-analysis"]
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

@@ -20,9 +20,9 @@ Description: Simple Principal Components Analysis (PCA) and (Multiple)
     described in Greenacre (1984, ISBN: 978-0-12-299050-2) and Lebart et
     al. (2006, ISBN: 978-2-10-049616-7).
 License: GPL (>= 3)
-URL: https://packages.tesselle.org/dimensio/,
-    https://github.com/tesselle/dimensio
-BugReports: https://github.com/tesselle/dimensio/issues
+URL: https://codeberg.org/tesselle/dimensio,
+    https://packages.tesselle.org/dimensio/
+BugReports: https://codeberg.org/tesselle/dimensio/issues
 Depends: 
     R (>= 3.5)
 Imports: 

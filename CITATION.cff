@@ -94,7 +94,7 @@ preferred-citation:
   doi: 10.5281/zenodo.4478530
   url: https://packages.tesselle.org/dimensio/
 repository: https://CRAN.R-project.org/package=dimensio
-repository-code: https://github.com/tesselle/dimensio
+repository-code: https://codeberg.org/tesselle/dimensio
 url: https://packages.tesselle.org/dimensio/
 contact:
 - family-names: Frerebeau

@@ -31,9 +31,9 @@ information on progress? Defaults to \code{\link[=interactive]{interactive()}}.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://codeberg.org/tesselle/dimensio}
   \item \url{https://packages.tesselle.org/dimensio/}
-  \item \url{https://github.com/tesselle/dimensio}
-  \item Report bugs at \url{https://github.com/tesselle/dimensio/issues}
+  \item Report bugs at \url{https://codeberg.org/tesselle/dimensio/issues}
 }
 
 }
