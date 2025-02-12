@@ -150,3 +150,73 @@ Languages currently available are English (`en`) and French (`fr`).
 Please note that the **dimensio** project is released with a [Contributor Code of Conduct](https://www.tesselle.org/conduct.html). By contributing to this project, you agree to abide by its terms.
 
 ## References
+
+```{r metadata, include=FALSE}
+## Update codemeta.json
+codemetar::write_codemeta(verbose = FALSE)
+
+## Update CITATION.cff
+cff_keys <- list(
+  identifiers = list(
+    list(description = "The concept DOI.",
+         type = "doi",
+         value = "10.5281/zenodo.4478530"),
+    list(description = "The versioned DOI for version 0.1.0.",
+         type = "doi",
+         value = "10.5281/zenodo.4478531"),
+    list(description = "The versioned DOI for version 0.2.0.",
+         type = "doi",
+         value = "10.5281/zenodo.4709122"),
+    list(description = "The versioned DOI for version 0.2.1.",
+         type = "doi",
+         value = "10.5281/zenodo.4769401"),
+    list(description = "The versioned DOI for version 0.2.2.",
+         type = "doi",
+         value = "10.5281/zenodo.5515458"),
+    list(description = "The versioned DOI for version 0.3.0.",
+         type = "doi",
+         value = "10.5281/zenodo.6993004"),
+    list(description = "The versioned DOI for version 0.3.1.",
+         type = "doi",
+         value = "10.5281/zenodo.7798592"),
+    list(description = "The versioned DOI for version 0.4.0.",
+         type = "doi",
+         value = "10.5281/zenodo.8277200"),
+    list(description = "The versioned DOI for version 0.4.1.",
+         type = "doi",
+         value = "10.5281/zenodo.10022325"),
+    list(description = "The versioned DOI for version 0.5.0.",
+         type = "doi",
+         value = "10.5281/zenodo.10207582"),
+    list(description = "The versioned DOI for version 0.6.0.",
+         type = "doi",
+         value = "10.5281/zenodo.10696035"),
+    list(description = "The versioned DOI for version 0.7.0.",
+         type = "doi",
+         value = "10.5281/zenodo.10948604"),
+    list(description = "The versioned DOI for version 0.8.0.",
+         type = "doi",
+         value = "10.5281/zenodo.11518715"),
+    list(description = "The versioned DOI for version 0.8.1.",
+         type = "doi",
+         value = "10.5281/zenodo.13135650"),
+    list(description = "The versioned DOI for version 0.9.0",
+         type = "doi",
+         value = "10.5281/zenodo.13375140"),
+    list(description = "The versioned DOI for version 0.10.0",
+         type = "doi",
+         value = "10.5281/zenodo.14054667"),
+    list(description = "The versioned DOI for version 0.10.1",
+         type = "doi",
+         value = "10.5281/zenodo.14356468"),
+    list(description = "The versioned DOI for version 0.11.0",
+         type = "doi",
+         value = "10.5281/zenodo.14623616"),
+    list(description = "The CRAN DOI",
+         type = "doi",
+         value = "10.32614/cran.package.dimensio")
+  )
+)
+cff <- cffr::cff_create("DESCRIPTION", keys = cff_keys)
+if (cffr::cff_validate(cff)) cffr::cff_write(cff, outfile = "CITATION.cff")
+```

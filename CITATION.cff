@@ -102,9 +102,9 @@ contact:
   email: nicolas.frerebeau@u-bordeaux-montaigne.fr
   orcid: https://orcid.org/0000-0001-5759-4944
 keywords:
-- data analysis
-- multivariate analysis
-- r package
+- data-analysis
+- multivariate-analysis
+- r-package
 references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
