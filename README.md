@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Code
+coverage](https://packages.tesselle.org/dimensio/coverage/badge.svg)](https://packages.tesselle.org/dimensio/coverage/)
 [![Dependencies](https://tinyverse.netlify.app/badge/dimensio)](https://cran.r-project.org/package=dimensio)
 
 <a href="https://tesselle.r-universe.dev/dimensio"

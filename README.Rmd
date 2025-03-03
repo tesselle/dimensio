@@ -19,6 +19,7 @@ Sys.setenv(LANGUAGE = "en") # Force locale
 # dimensio <img width=120px src="man/figures/logo.png" align="right" />
 
 <!-- badges: start -->
+[![Code coverage](https://packages.tesselle.org/dimensio/coverage/badge.svg)](https://packages.tesselle.org/dimensio/coverage/)
 [![Dependencies](https://tinyverse.netlify.app/badge/dimensio)](https://cran.r-project.org/package=dimensio)
 
 [![r-universe](https://tesselle.r-universe.dev/badges/dimensio)](https://tesselle.r-universe.dev/dimensio){.pkgdown-devel}
