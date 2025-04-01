@@ -5,11 +5,14 @@
 \alias{export}
 \alias{export-method}
 \alias{export,MultivariateAnalysis-method}
+\alias{export,PCOA-method}
 \title{Export Results}
 \usage{
 export(object, ...)
 
 \S4method{export}{MultivariateAnalysis}(object, file, flags = "-r9Xj", ...)
+
+\S4method{export}{PCOA}(object, file, flags = "-r9Xj", ...)
 }
 \arguments{
 \item{object}{A \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object.}

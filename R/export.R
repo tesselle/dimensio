@@ -5,6 +5,7 @@ NULL
 # The -r9X flags specify that the zip command should recursively search
 # sub-directories, use maximum compression, and remove depreciated file fields.
 # The -j flag allows the file names to be stored rather than the full file path.
+
 #' @export
 #' @rdname export
 #' @aliases export,MultivariateAnalysis-method
@@ -28,6 +29,34 @@ setMethod(
     )
     export_results(object, path = dir_path, margin = 1)
     export_results(object, path = dir_path, margin = 2)
+
+    ## Zip
+    status <- utils::zip(zipfile = file, files = dir_path, flags = flags, ...)
+    invisible(status)
+  }
+)
+
+#' @export
+#' @rdname export
+#' @aliases export,PCOA-method
+setMethod(
+  f = "export",
+  signature = c(object = "PCOA"),
+  definition = function(object, file, flags = "-r9Xj", ...) {
+    ## Create temporary directory
+    dir_path <- tempfile(pattern = "export_")
+    dir.create(path = dir_path)
+    on.exit(unlink(x = dir_path))
+
+    ## Write results
+    utils::write.csv(
+      x = get_coordinates(object),
+      file = make_file_name(dir_path, "coordinates")
+    )
+    utils::write.csv(
+      x = get_eigenvalues(object),
+      file = make_file_name(dir_path, "eigenvalues")
+    )
 
     ## Zip
     status <- utils::zip(zipfile = file, files = dir_path, flags = flags, ...)
