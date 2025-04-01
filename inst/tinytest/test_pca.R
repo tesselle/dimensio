@@ -9,6 +9,7 @@ expect_error(pca(row_zeros))
 
 res <- pca(countries, center = TRUE, scale = FALSE, rank = 5)
 expect_stdout(show(res), "Principal Components Analysis")
+expect_equal(dim(res), 5L)
 expect_equal(rownames(res), rownames(countries))
 expect_equal(colnames(res), colnames(countries))
 expect_equal(dimnames(res), dimnames(countries))

@@ -30,4 +30,7 @@ if (at_home()) {
   ellipse <- list(type = "tolerance", level = 0.95)
   plot_pcoa_tol <- function() plot(X, extra_quali = iris$Species, ellipse = ellipse)
   expect_snapshot_plot(plot_pcoa_tol, "PCOA_tolerance")
+
+  screeplot_pcoa <- function() screeplot(X)
+  expect_snapshot_plot(screeplot_pcoa, "PCOA_eig")
 }

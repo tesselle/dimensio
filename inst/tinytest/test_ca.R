@@ -11,6 +11,7 @@ expect_error(ca(col_zeros), "Empty columns detected.")
 
 res <- ca(benthos, rank = 10)
 expect_stdout(show(res), "Correspondence Analysis")
+expect_equal(dim(res), 10L)
 expect_equal(rownames(res), rownames(benthos))
 expect_equal(colnames(res), colnames(benthos))
 expect_equal(dimnames(res), dimnames(benthos))
