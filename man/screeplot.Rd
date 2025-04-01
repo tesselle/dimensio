@@ -80,10 +80,8 @@ Other plot methods:
 \code{\link{biplot}()},
 \code{\link{plot}()},
 \code{\link{viz_contributions}()},
-\code{\link{viz_ellipses}()},
 \code{\link{viz_individuals}()},
-\code{\link{viz_variables}()},
-\code{\link{wrap}}
+\code{\link{viz_variables}()}
 }
 \author{
 N. Frerebeau

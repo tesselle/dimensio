@@ -1,4 +1,8 @@
 # dimensio 0.12.0.9000
+## New classes and methods
+* Add `wrap_hull()`, `viz_hull()` methods for `PCOA` class.
+* Add `wrap_tolerance()`, `viz_tolerance()` methods for `PCOA` class.
+* Add `wrap_confidence()`, `viz_confidence()` methods for `PCOA` class.
 
 # dimensio 0.12.0
 ## Bugfixes & changes

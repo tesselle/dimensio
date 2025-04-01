@@ -6,6 +6,7 @@ NULL
 #' @method plot PCOA
 plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
                       extra_quali = NULL, extra_quanti = NULL,
+                      ellipse = NULL, hull = NULL,
                       color = NULL, fill = FALSE, symbol = FALSE, size = c(1, 6),
                       xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                       ann = graphics::par("ann"), frame.plot = TRUE,
@@ -80,6 +81,22 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
       cex = cex,
       xpd = TRUE
     )
+  }
+
+  if (!isFALSE(extra_quali) && length(extra_quali) > 0) {
+    ## Add ellipse
+    if (is.list(ellipse) && length(ellipse) > 0) {
+      args_ell <- list(x = x, group = extra_quali, axes = axes,
+                       color = color, fill = FALSE, symbol = FALSE)
+      ellipse <- modifyList(args_ell, val = ellipse)
+      do.call(viz_ellipses, ellipse)
+    }
+    ## Add convex hull
+    if (isTRUE(hull)) {
+      args_hull <- list(x = x, group = extra_quali, axes = axes,
+                        color = color, fill = FALSE, symbol = FALSE)
+      do.call(viz_hull, args_hull)
+    }
   }
 
   ## Evaluate post-plot and pre-axis expressions

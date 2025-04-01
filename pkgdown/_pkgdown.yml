@@ -16,6 +16,7 @@ reference:
 - title: Visualization
   contents:
   - has_concept("plot methods")
+  - has_concept("envelopes")
 - title: Summary
   contents:
   - has_concept("summary")

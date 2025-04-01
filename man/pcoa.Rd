@@ -40,6 +40,20 @@ screeplot(X)
 
 ## Plot results
 plot(X, extra_quali = iris$Species)
+
+## Add convex hulls
+plot(
+  x = X,
+  extra_quali = iris$Species,
+  hull = TRUE
+)
+
+## Add tolerance ellipses
+plot(
+  x = X,
+  extra_quali = iris$Species,
+  ellipse = list(type = "tolerance", level = 0.95)
+)
 }
 \references{
 Gower, J. C. (1966). Some Distance Properties of Latent Root and Vector

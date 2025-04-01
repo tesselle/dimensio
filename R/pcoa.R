@@ -21,7 +21,11 @@ setMethod(
     points <- res$points
     colnames(points) <- paste0("F", seq_len(NCOL(points)))
 
-    .PCOA(points = points, eigenvalues = res$eig, GOF= res$GOF,
-          method = attr(object, "method") %||% character(0))
+    .PCOA(
+      points = points,
+      eigenvalues = res$eig,
+      GOF= res$GOF,
+      method = attr(object, "method") %||% character(0)
+    )
   }
 )

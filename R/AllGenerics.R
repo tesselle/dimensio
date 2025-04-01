@@ -688,12 +688,9 @@ setGeneric(
 )
 
 # Envelopes ====================================================================
-#' Wrap Observations
+#' Convex Hulls
 #'
-#' @description
-#'  * `wrap_hull()` computes convex hull of a set of observations.
-#'  * `wrap_confidence()` computes a confidence ellipse.
-#'  * `wrap_tolerance()` computes a tolerance ellipse.
+#' Plots convex hull of a set of observations.
 #' @param x An object from which to wrap observations (a [`CA-class`],
 #'  [`MCA-class`] or [`PCA-class`] object).
 #' @param margin A length-one [`numeric`] vector giving the subscript which the
@@ -702,48 +699,6 @@ setGeneric(
 #' @param axes A length-two [`numeric`] vector giving the dimensions
 #'  for which to compute results.
 #' @param group A vector specifying the group an observation belongs to.
-#' @param level A [`numeric`] vector specifying the confidence/tolerance level.
-#' @param ... Currently not used.
-#' @return
-#'  `wrap_*()` returns a [`data.frame`] of envelope `x` and `y` coordinates.
-#'
-#'  An extra column named `group` is added specifying the group an observation
-#'  belongs to.
-#' @example inst/examples/ex-wrap.R
-#' @author N. Frerebeau
-#' @docType methods
-#' @family plot methods
-#' @name wrap
-#' @rdname wrap
-NULL
-
-#' @rdname wrap
-#' @aliases wrap_hull-method
-setGeneric(
-  name = "wrap_hull",
-  def = function(x, ...) standardGeneric("wrap_hull")
-)
-
-#' @rdname wrap
-#' @aliases wrap_confidence-method
-setGeneric(
-  name = "wrap_confidence",
-  def = function(x, ...) standardGeneric("wrap_confidence")
-)
-
-#' @rdname wrap
-#' @aliases wrap_tolerance-method
-setGeneric(
-  name = "wrap_tolerance",
-  def = function(x, ...) standardGeneric("wrap_tolerance")
-)
-
-#' Plot Envelopes
-#'
-#' @inheritParams wrap
-#' @param type A [`character`] string specifying the ellipse to draw.
-#'  It must be one of "`tolerance`" or "`confidence`").
-#'  Any unambiguous substring can be given.
 #' @param color The colors for borders (will be mapped to `group`).
 #'  Ignored if set to `FALSE`. If `NULL`, the default color scheme will be used.
 #' @param fill The background colors (will be mapped to `group`).
@@ -753,37 +708,104 @@ setGeneric(
 #' @param ... Further [graphical parameters][graphics::par] to be passed to
 #'  [graphics::polygon()].
 #' @return
-#'  `viz_*()`is called for its side-effects: it results in a graphic being
+#'  `wrap_hull()` returns a [`data.frame`] of envelope `x` and `y` coordinates.
+#'  An extra column named `group` is added specifying the group an observation
+#'  belongs to.
+#'
+#'  `viz_hull()`is called for its side-effects: it results in a graphic being
 #'  displayed. Invisibly returns `x`.
-#' @example inst/examples/ex-envelopes.R
+#' @example inst/examples/ex-hull.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family plot methods
-#' @aliases viz_ellipses-method
-setGeneric(
-  name = "viz_ellipses",
-  def = function(x, ...) standardGeneric("viz_ellipses")
-)
-
-#' @rdname viz_ellipses
+#' @family envelopes
 #' @aliases viz_hull-method
 setGeneric(
   name = "viz_hull",
   def = function(x, ...) standardGeneric("viz_hull")
 )
 
-#' @rdname viz_ellipses
+#' @rdname viz_hull
+#' @aliases wrap_hull-method
+setGeneric(
+  name = "wrap_hull",
+  def = function(x, ...) standardGeneric("wrap_hull")
+)
+
+#' Ellipses
+#'
+#' Plots ellipses.
+#' @inheritParams viz_hull
+#' @param level A [`numeric`] vector specifying the confidence/tolerance level.
+#' @param type A [`character`] string specifying the ellipse to draw.
+#'  It must be one of "`tolerance`" or "`confidence`").
+#'  Any unambiguous substring can be given.
+#' @return
+#'  `viz_ellipses()`is called for its side-effects: it results in a graphic
+#'  being displayed. Invisibly returns `x`.
+#' @example inst/examples/ex-ellipses.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family envelopes
+#' @aliases viz_ellipses-method
+setGeneric(
+  name = "viz_ellipses",
+  def = function(x, ...) standardGeneric("viz_ellipses")
+)
+
+#' Confidence Ellipses
+#'
+#' Plots confidence ellipses.
+#' @inheritParams viz_ellipses
+#' @return
+#'  `wrap_confidence()` returns a [`data.frame`] of envelope `x` and `y`
+#'  coordinates. An extra column named `group` is added specifying the group an
+#'  observation belongs to.
+#'
+#'  `viz_confidence()`is called for its side-effects: it results in a graphic
+#'  being displayed. Invisibly returns `x`.
+#' @example inst/examples/ex-confidence.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family envelopes
 #' @aliases viz_confidence-method
 setGeneric(
   name = "viz_confidence",
   def = function(x, ...) standardGeneric("viz_confidence")
 )
 
-#' @rdname viz_ellipses
+#' @rdname viz_confidence
+#' @aliases wrap_confidence-method
+setGeneric(
+  name = "wrap_confidence",
+  def = function(x, ...) standardGeneric("wrap_confidence")
+)
+
+#' Tolerance Ellipses
+#'
+#' Plots tolerance ellipses.
+#' @inheritParams viz_ellipses
+#' @return
+#'  `wrap_tolerance()` returns a [`data.frame`] of envelope `x` and `y`
+#'  coordinates. An extra column named `group` is added specifying the group an
+#'  observation belongs to.
+#'
+#'  `viz_tolerance()`is called for its side-effects: it results in a graphic
+#'  being displayed. Invisibly returns `x`.
+#' @example inst/examples/ex-tolerance.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family envelopes
 #' @aliases viz_tolerance-method
 setGeneric(
   name = "viz_tolerance",
   def = function(x, ...) standardGeneric("viz_tolerance")
+)
+
+#' @rdname viz_tolerance
+#' @aliases wrap_tolerance-method
+setGeneric(
+  name = "wrap_tolerance",
+  def = function(x, ...) standardGeneric("wrap_tolerance")
 )
 
 # Summarize ====================================================================

@@ -13,6 +13,8 @@
   labels = FALSE,
   extra_quali = NULL,
   extra_quanti = NULL,
+  ellipse = NULL,
+  hull = NULL,
   color = NULL,
   fill = FALSE,
   symbol = FALSE,
@@ -49,6 +51,12 @@ mapping.}
 mapping. If a single \code{\link{character}} string is passed, it must be one of
 "\code{observation}", "\code{mass}", "\code{sum}", "\code{contribution}" or "\code{cos2}"
 (see \code{\link[=augment]{augment()}}).}
+
+\item{ellipse}{A \code{\link{list}} of additional arguments to be passed to
+\code{\link[=viz_ellipses]{viz_ellipses()}}; names of the list are used as argument names.
+If \code{NULL}, no ellipse are displayed.}
+
+\item{hull}{A \code{\link{logical}} scalar: should convex hulls be displayed?}
 
 \item{color}{The colors for lines and points (will be mapped to
 \code{extra_quanti} or \code{extra_quali}; if both are set, the latter has priority).
@@ -101,10 +109,8 @@ Other plot methods:
 \code{\link{biplot}()},
 \code{\link{screeplot}()},
 \code{\link{viz_contributions}()},
-\code{\link{viz_ellipses}()},
 \code{\link{viz_individuals}()},
-\code{\link{viz_variables}()},
-\code{\link{wrap}}
+\code{\link{viz_variables}()}
 }
 \author{
 N. Frerebeau

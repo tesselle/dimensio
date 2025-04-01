@@ -3,7 +3,7 @@
 NULL
 
 #' @export
-#' @rdname wrap
+#' @rdname viz_hull
 #' @aliases wrap_hull,MultivariateAnalysis-method
 setMethod(
   f = "wrap_hull",
@@ -31,6 +31,42 @@ setMethod(
       group <- rep("", n)
     }
     group <- as.character(group)
+
+    data <- split(data, f = group)
+    lapply(
+      X = data,
+      FUN = function(x) {
+        ## Drop NAs
+        x <- stats::na.omit(x)
+        if (nrow(x) == 0) return(NULL)
+
+        i <- grDevices::chull(x[, c(1, 2)])
+        x[c(i, i[1]), , drop = FALSE]
+      }
+    )
+  }
+)
+
+#' @export
+#' @rdname viz_hull
+#' @aliases wrap_hull,PCOA-method
+setMethod(
+  f = "wrap_hull",
+  signature = c(x = "PCOA"),
+  definition = function(x, axes = c(1, 2), group = NULL) {
+    ## Validation
+    arkhe::assert_type(axes, "numeric")
+    arkhe::assert_length(axes, 2)
+
+    ## Get coordinates
+    data <- get_coordinates(x)
+    data <- data[, axes]
+    n <- nrow(data)
+
+    ## Add groups, if any
+    if (length(group) == 0) group <- rep("", n)
+    group <- as.character(group)
+    arkhe::assert_length(group, n)
 
     data <- split(data, f = group)
     lapply(
