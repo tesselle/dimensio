@@ -10,7 +10,8 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
                       color = NULL, fill = FALSE, symbol = FALSE, size = c(1, 6),
                       xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                       ann = graphics::par("ann"), frame.plot = TRUE,
-                      panel.first = NULL, panel.last = NULL) {
+                      panel.first = NULL, panel.last = NULL,
+                      legend = list(x = "topleft")) {
   ## Prepare data
   arkhe::assert_type(axes, "numeric")
   arkhe::assert_length(axes, 2)
@@ -36,10 +37,7 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
     if (!isFALSE(size)) cex <- khroma::palette_size_sequential(range = size)(extra_quanti)
   }
   ## Highlight qualitative information
-  if (is.null(extra_quali) && length(x@groups) > 0) {
-    extra_quali <- x@groups
-  }
-  if (!isFALSE(extra_quali) && length(extra_quali) > 0) {
+  if (length(extra_quali) > 0) {
     arkhe::assert_length(extra_quali, n)
     if (!isFALSE(color)) col <- khroma::palette_color_discrete(colors = color)(extra_quali)
     if (!isFALSE(fill)) bg <- khroma::palette_color_discrete(colors = fill)(extra_quali)
@@ -83,7 +81,7 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
     )
   }
 
-  if (!isFALSE(extra_quali) && length(extra_quali) > 0) {
+  if (length(extra_quali) > 0) {
     ## Add ellipse
     if (is.list(ellipse) && length(ellipse) > 0) {
       args_ell <- list(x = x, group = extra_quali, axes = axes,
@@ -121,6 +119,14 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
       ylab = colnames(coord)[axes[[2]]]
     )
   }
+
+  ## Legend
+  coord <- data.frame(
+    extra_quanti = if (length(extra_quanti) > 0) extra_quanti else rep(NA, n),
+    extra_quali = if (length(extra_quali) > 0) extra_quali else rep(NA, n),
+    cex = cex, col = col, bg = bg, pch = pch, lty = rep(NA, n)
+  )
+  prepare_legend(coord, legend, points = TRUE, lines = FALSE)
 
   invisible(x)
 }

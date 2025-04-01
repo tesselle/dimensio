@@ -17,8 +17,11 @@ if (at_home()) {
   options(tinysnapshot_tol = 200) # pixels
   options(tinysnapshot_os = "Linux")
 
-  plot_pcoa <- function() plot(X, extra_quali = iris$Species)
-  expect_snapshot_plot(plot_pcoa, "PCOA")
+  plot_pcoa_quali <- function() plot(X, extra_quali = iris$Species)
+  expect_snapshot_plot(plot_pcoa_quali, "PCOA_quali")
+
+  plot_pcoa_quanti <- function() plot(X, extra_quanti = iris$Sepal.Length)
+  expect_snapshot_plot(plot_pcoa_quanti, "PCOA_quanti")
 
   plot_pcoa_hull <- function() plot(X, extra_quali = iris$Species, hull = TRUE)
   expect_snapshot_plot(plot_pcoa_hull, "PCOA_hull")
