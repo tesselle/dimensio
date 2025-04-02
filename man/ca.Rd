@@ -10,7 +10,14 @@
 \usage{
 ca(object, ...)
 
-\S4method{ca}{data.frame}(object, rank = NULL, sup_row = NULL, sup_col = NULL, autodetect = FALSE)
+\S4method{ca}{data.frame}(
+  object,
+  rank = NULL,
+  sup_row = NULL,
+  sup_col = NULL,
+  sup_quali = NULL,
+  autodetect = FALSE
+)
 
 \S4method{ca}{matrix}(object, rank = NULL, sup_row = NULL, sup_col = NULL)
 }
@@ -27,6 +34,9 @@ components to be kept in the results. If \code{NULL} (the default),
 \item{sup_row}{A \code{vector} specifying the indices of the supplementary rows.}
 
 \item{sup_col}{A \code{vector} specifying the indices of the supplementary columns.}
+
+\item{sup_quali}{A \code{vector} specifying the indices of the supplementary
+qualitative columns.}
 
 \item{autodetect}{A \code{\link{logical}} scalar: should non-numeric variables be
 automatically removed?}

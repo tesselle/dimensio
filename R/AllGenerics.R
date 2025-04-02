@@ -93,6 +93,8 @@ NULL
 #'  \eqn{min(m, p) - 1} components will be returned.
 #' @param sup_row A `vector` specifying the indices of the supplementary rows.
 #' @param sup_col A `vector` specifying the indices of the supplementary columns.
+#' @param sup_quali A `vector` specifying the indices of the supplementary
+#'  qualitative columns.
 #' @param autodetect A [`logical`] scalar: should non-numeric variables be
 #'  automatically removed?
 #' @param ... Currently not used.

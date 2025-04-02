@@ -9,12 +9,21 @@ setMethod(
   f = "ca",
   signature = c(object = "data.frame"),
   definition = function(object, rank = NULL, sup_row = NULL, sup_col = NULL,
-                        autodetect = FALSE) {
+                        sup_quali = NULL, autodetect = FALSE) {
     ## Remove non-numeric variables, if any
-    clean <- drop_variable(object, f = is.numeric, negate = TRUE, sup = sup_col,
-                           extra = NULL, auto = autodetect, what = "qualitative")
-    methods::callGeneric(object = clean$data, rank = rank,
-                         sup_row = sup_row, sup_col = clean$sup)
+    clean <- drop_variable(object, f = is.numeric, negate = TRUE,
+                           sup = sup_col, extra = sup_quali,
+                           auto = autodetect, what = "qualitative")
+    ## Compute PCA
+    results <- methods::callGeneric(
+      object = clean$data, rank = rank,
+      sup_row = sup_row, sup_col = clean$sup
+    )
+
+    ## Add supplementary quantitative variables
+    if (!is.null(clean$extra)) set_extra(results) <- clean$extra
+
+    results
   }
 )
 

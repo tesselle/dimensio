@@ -13,8 +13,8 @@ setMethod(
                         weight_row = NULL, weight_col = NULL, autodetect = FALSE) {
     ## Remove non-numeric variables, if any
     clean <- drop_variable(object, f = is.numeric, negate = TRUE,
-                           sup = sup_col, extra = sup_quali, auto = autodetect,
-                           what = "qualitative")
+                           sup = sup_col, extra = sup_quali,
+                           auto = autodetect, what = "qualitative")
 
     ## Compute PCA
     results <- methods::callGeneric(
