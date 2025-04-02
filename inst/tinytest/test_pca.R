@@ -39,6 +39,9 @@ expect_equal_to_reference(get_inertia(res, margin = 2), file = "_snaps/pca_col_i
 # Eigenvalues
 expect_equal_to_reference(get_eigenvalues(res), file = "_snaps/pca_eigenvalues.rds")
 
+# Correlations
+expect_equal_to_reference(get_correlations(res), file = "_snaps/pca_correlations.rds")
+
 # Predict new coordinates ======================================================
 cts <- matrix(data = sample(1:10, 100, TRUE), ncol = 5)
 cts <- as.data.frame(cts)
