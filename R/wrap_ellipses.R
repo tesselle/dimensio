@@ -40,6 +40,9 @@ setMethod(
     lapply(
       X = data,
       FUN = function(x, level) {
+        x <- stats::na.omit(x) # Drop NAs
+        if (nrow(x) < 3) return(NULL)
+
         df1 <- ncol(x) - 1
         df2 <- nrow(x) - 2
         radius <- sqrt(stats::qf(p = level, df1, df2) * df1 / df2)
@@ -77,6 +80,9 @@ setMethod(
     lapply(
       X = data,
       FUN = function(x, level) {
+        x <- stats::na.omit(x) # Drop NAs
+        if (nrow(x) < 3) return(NULL)
+
         df1 <- ncol(x) - 1
         df2 <- nrow(x) - 2
         radius <- sqrt(stats::qf(p = level, df1, df2) * df1 / df2)
@@ -125,8 +131,7 @@ setMethod(
     lapply(
       X = data,
       FUN = function(x, level) {
-        ## Drop NAs
-        x <- stats::na.omit(x)
+        x <- stats::na.omit(x) # Drop NAs
         if (nrow(x) < 3) return(NULL)
 
         df <- ncol(x) - 1
@@ -165,8 +170,7 @@ setMethod(
     lapply(
       X = data,
       FUN = function(x, level) {
-        ## Drop NAs
-        x <- stats::na.omit(x)
+        x <- stats::na.omit(x) # Drop NAs
         if (nrow(x) < 3) return(NULL)
 
         df <- ncol(x) - 1

@@ -7,6 +7,7 @@
 
 ## Bugfixes & changes
 * Fix legend in `biplot()`.
+* Skip ellipse computation if there are less than three observations.
 
 # dimensio 0.12.0
 ## Bugfixes & changes
