@@ -8,11 +8,10 @@ NULL
 biplot.CA <- function(x, ..., axes = c(1, 2),
                       type = c("symetric", "rows", "columns", "contributions"),
                       active = TRUE, sup = TRUE, labels = NULL,
-                      col.rows = c("#E69F00", "#009E73"),
-                      col.columns = c("#56B4E9", "#F0E442"),
-                      cex.rows = graphics::par("cex"),
-                      cex.columns = graphics::par("cex"),
-                      pch.rows = 16, pch.columns = 17,
+                      col.rows = c("#E69F00", "#E69F00"),
+                      col.columns = c("#56B4E9", "#56B4E9"),
+                      pch.rows = c(16, 1), pch.columns = c(17, 2),
+                      size = c(1, 3),
                       xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                       legend = list(x = "topleft")) {
   ## Validation
@@ -34,17 +33,16 @@ biplot.CA <- function(x, ..., axes = c(1, 2),
   if (type == "contributions") {
     princ_row <- FALSE
     princ_col <- TRUE
+    sup <- FALSE # Override
   }
 
   ## Get data
   coord_row <-  prepare_plot(x, margin = 1, axes = axes, active = active, sup = sup,
                              principal = princ_row, extra_quali = "observation",
-                             color = col.rows, symbol = pch.rows,
-                             size = cex.rows, line_type = 0)
+                             color = col.rows, symbol = pch.rows, line_type = 0)
   coord_col <-  prepare_plot(x, margin = 2, axes = axes, active = active, sup = sup,
                              principal = princ_col, extra_quali = "observation",
-                             color = col.columns, symbol = pch.columns,
-                             size = cex.columns, line_type = 0)
+                             color = col.columns, symbol = pch.columns, line_type = 0)
 
   ## Graphical parameters
   if (type == "contributions") {
@@ -54,13 +52,14 @@ biplot.CA <- function(x, ..., axes = c(1, 2),
     coord_row$x <- coord_row$x * sqrt(mass_row)
     coord_row$y <- coord_row$y * sqrt(mass_row)
 
-    coord_row$cex <- cex.rows + (mass_row / max(mass_row))
-    coord_col$cex <- cex.columns + (mass_col / max(mass_col))
+    coord_row$cex <- khroma::palette_size_sequential(size)(mass_row)
+    coord_col$cex <- khroma::palette_size_sequential(size)(mass_col)
   }
 
-  viz_biplot(
+  coord <- viz_biplot(
     coord_row, coord_col,
-    rows = TRUE, columns = TRUE, labels = labels,
+    rows = TRUE, columns = TRUE,
+    labels = labels,
     xlim = xlim, ylim = ylim,
     main = main, sub = sub,
     xlab = print_variance(x, axes[[1]]),
@@ -68,6 +67,9 @@ biplot.CA <- function(x, ..., axes = c(1, 2),
     legend = legend,
     ...
   )
+
+  ## Add legend
+  prepare_legend(coord, legend, points = TRUE, lines = FALSE)
 
   invisible(x)
 }
@@ -82,8 +84,9 @@ setMethod("biplot", c(x = "CA"), biplot.CA)
 #' @method biplot PCA
 biplot.PCA <- function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
                        active = TRUE, sup = TRUE, labels = "variables",
-                       col.rows = c("#E69F00", "#009E73"),
-                       col.columns = c("#56B4E9", "#F0E442"),
+                       col.rows = c("#E69F00", "#E69F00"),
+                       col.columns = c("#56B4E9", "#56B4E9"),
+                       pch.rows = c(16, 1), lty.columns = c(1, 3),
                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                        legend = list(x = "topleft")) {
   ## Validation
@@ -102,10 +105,12 @@ biplot.PCA <- function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
   ## Get data
   coord_row <-  prepare_plot(x, margin = 1, axes = axes, active = active, sup = sup,
                              principal = princ_row, extra_quali = "observation",
-                             color = col.rows, line_type = NA, ...)
+                             color = col.rows, symbol = pch.rows,
+                             line_type = NA, ...)
   coord_col <-  prepare_plot(x, margin = 2, axes = axes, active = active, sup = sup,
                              principal = princ_col, extra_quali = "observation",
-                             color = col.columns, symbol = NA, ...)
+                             color = col.columns, symbol = NA,
+                             line_type = lty.columns, ...)
 
   arrows_col <- function() {
     graphics::arrows(
@@ -116,7 +121,7 @@ biplot.PCA <- function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
     )
   }
 
-  viz_biplot(
+  coord <- viz_biplot(
     coord_row, coord_col,
     rows = TRUE, columns = FALSE, labels = labels,
     xlim = xlim, ylim = ylim,
@@ -127,6 +132,9 @@ biplot.PCA <- function(x, ..., axes = c(1, 2), type = c("form", "covariance"),
     legend = legend,
     ...
   )
+
+  ## Add legend
+  prepare_legend(coord, legend, points = TRUE, lines = TRUE)
 
   invisible(x)
 }
@@ -165,18 +173,16 @@ setMethod("biplot", c(x = "PCA"), biplot.PCA)
 #'  background grids.
 #' @param panel.last An `expression` to be evaluated after plotting has taken
 #'  place but before the axes, title and box are added.
-#' @param legend A [`list`] of additional arguments to be passed to
-#'  [graphics::legend()]; names of the list are used as argument names.
-#'  If `NULL`, no legend is displayed.
+#' @return A [`data.frame`] to be passed to [prepare_legend()].
 #' @author N. Frerebeau
 #' @keywords internal
+#' @noRd
 viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
                        labels = c("rows", "columns", "individuals", "variables"),
                        xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                        xlab = NULL, ylab = NULL, axes = TRUE, frame.plot = axes,
                        ann = graphics::par("ann"),
-                       panel.first = NULL, panel.last = NULL,
-                       legend = list(x = "topleft")) {
+                       panel.first = NULL, panel.last = NULL) {
 
   ## Save and restore graphical parameters
   ## pty: square plotting region, independent of device size
@@ -241,6 +247,5 @@ viz_biplot <- function(coord_row, coord_col, ..., rows = TRUE, columns = TRUE,
   ## Legend
   coord_row$extra_quali <- paste(coord_row$extra_quali, "ind.", sep = " ")
   coord_col$extra_quali <- paste(coord_col$extra_quali, "var.", sep = " ")
-  coord <- rbind(coord_row, coord_col)
-  prepare_legend(coord, legend, points = TRUE, lines = TRUE)
+  rbind(coord_row, coord_col)
 }

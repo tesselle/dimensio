@@ -15,12 +15,11 @@
   active = TRUE,
   sup = TRUE,
   labels = NULL,
-  col.rows = c("#E69F00", "#009E73"),
-  col.columns = c("#56B4E9", "#F0E442"),
-  cex.rows = graphics::par("cex"),
-  cex.columns = graphics::par("cex"),
-  pch.rows = 16,
-  pch.columns = 17,
+  col.rows = c("#E69F00", "#E69F00"),
+  col.columns = c("#56B4E9", "#56B4E9"),
+  pch.rows = c(16, 1),
+  pch.columns = c(17, 2),
+  size = c(1, 3),
   xlim = NULL,
   ylim = NULL,
   main = NULL,
@@ -36,8 +35,10 @@
   active = TRUE,
   sup = TRUE,
   labels = "variables",
-  col.rows = c("#E69F00", "#009E73"),
-  col.columns = c("#56B4E9", "#F0E442"),
+  col.rows = c("#E69F00", "#E69F00"),
+  col.columns = c("#56B4E9", "#56B4E9"),
+  pch.rows = c(16, 1),
+  lty.columns = c(1, 3),
   xlim = NULL,
   ylim = NULL,
   main = NULL,
@@ -67,11 +68,14 @@ plotted?}
 "\code{rows}"/"\code{individuals}" and/or "\code{columns}"/"\code{variables}" names must be
 drawn. Any unambiguous substring can be given.}
 
-\item{col.rows}{A length-two \code{vector} of color specification for the active
-and supplementary rows.}
+\item{col.rows, col.columns}{A length-two \code{vector} of color specification for
+the active and supplementary rows/columns.}
 
-\item{col.columns}{A length-two \code{vector} of color specification for the
-active and supplementary columns.}
+\item{pch.rows, pch.columns}{A length-two \code{vector} of symbol specification for
+the active and supplementary rows/columns.}
+
+\item{size}{A length-two \code{\link{numeric}} vector giving range of possible sizes
+(greater than 0). Only used if \code{type} is "\code{contribution}" (CA).}
 
 \item{xlim}{A length-two \code{\link{numeric}} vector giving the x limits of the plot.
 The default value, \code{NULL}, indicates that the range of the
@@ -89,11 +93,8 @@ The default value, \code{NULL}, indicates that the range of the
 \code{\link[graphics:legend]{graphics::legend()}}; names of the list are used as argument names.
 If \code{NULL}, no legend is displayed.}
 
-\item{pch, pch.rows, pch.columns}{A symbol specification.}
-
-\item{cex, cex.rows, cex.columns}{A \code{\link{numeric}} vector giving the amount by
-which plotting characters and symbols should be scaled relative to the
-default.}
+\item{lty.columns}{A length-two \code{vector} of line type specification for
+the active and supplementary columns.}
 }
 \value{
 \code{biplot()} is called for its side-effects: it results in a graphic being

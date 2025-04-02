@@ -480,14 +480,14 @@ NULL
 #' @param labels A [`character`] vector specifying whether
 #'  "`rows`"/"`individuals`" and/or "`columns`"/"`variables`" names must be
 #'  drawn. Any unambiguous substring can be given.
-#' @param col.rows A length-two `vector` of color specification for the active
-#'  and supplementary rows.
-#' @param col.columns A length-two `vector` of color specification for the
-#'  active and supplementary columns.
-#' @param pch,pch.rows,pch.columns A symbol specification.
-#' @param cex,cex.rows,cex.columns A [`numeric`] vector giving the amount by
-#'  which plotting characters and symbols should be scaled relative to the
-#'  default.
+#' @param col.rows,col.columns A length-two `vector` of color specification for
+#'  the active and supplementary rows/columns.
+#' @param pch.rows,pch.columns A length-two `vector` of symbol specification for
+#'  the active and supplementary rows/columns.
+#' @param lty.columns A length-two `vector` of line type specification for
+#'  the active and supplementary columns.
+#' @param size A length-two [`numeric`] vector giving range of possible sizes
+#'  (greater than 0). Only used if `type` is "`contribution`" (CA).
 #' @param xlim A length-two [`numeric`] vector giving the x limits of the plot.
 #'  The default value, `NULL`, indicates that the range of the
 #'  [finite][is.finite()] values to be plotted should be used.

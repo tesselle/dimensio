@@ -17,10 +17,20 @@ if (at_home()) {
   X <- pca(countries, scale = FALSE, weight_row = row_w, weight_col = col_w)
 
   # Row-metric-preserving biplot
-  plot_biplot_row <- function() biplot(X, type = "form", labels = NULL, lwd = 2)
-  expect_snapshot_plot(plot_biplot_row, "PCA_biplot_row")
+  biplot_row <- function() biplot(X, type = "form", labels = NULL, lwd = 2)
+  expect_snapshot_plot(biplot_row, "PCA_biplot_row")
 
   # Column-metric-preserving biplot
-  plot_biplot_col <- function() biplot(X, type = "covariance", labels = NULL, lwd = 2)
-  expect_snapshot_plot(plot_biplot_col, "PCA_biplot_column")
+  biplot_col <- function() biplot(X, type = "covariance", labels = NULL, lwd = 2)
+  expect_snapshot_plot(biplot_col, "PCA_biplot_column")
+
+  # Supplementary individuals
+  X <- pca(countries, scale = FALSE, sup_row = c(1, 3, 5))
+  biplot_sup_row <- function() biplot(X, type = "covariance", labels = NULL)
+  expect_snapshot_plot(biplot_sup_row, "PCA_biplot_sup_row")
+
+  # Supplementary columns
+  X <- pca(countries, scale = FALSE, sup_col = c(1, 3))
+  biplot_sup_col <- function() biplot(X, type = "covariance", labels = NULL)
+  expect_snapshot_plot(biplot_sup_row, "PCA_biplot_sup_col")
 }
