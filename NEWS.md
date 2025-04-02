@@ -1,9 +1,12 @@
-# dimensio 0.12.0.9000
+# dimensio 0.13.0
 ## New classes and methods
 * Add `export()` method for `PCOA` class.
 * Add `wrap_hull()`, `viz_hull()` methods for `PCOA` class.
 * Add `wrap_tolerance()`, `viz_tolerance()` methods for `PCOA` class.
 * Add `wrap_confidence()`, `viz_confidence()` methods for `PCOA` class.
+
+## Bugfixes & changes
+* Fix legend in `biplot()`.
 
 # dimensio 0.12.0
 ## Bugfixes & changes

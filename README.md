@@ -56,7 +56,7 @@ To cite dimensio in publications use:
 
 Frerebeau N (2025). *dimensio: Multivariate Data Analysis*. Université
 Bordeaux Montaigne, Pessac, France. <doi:10.5281/zenodo.4478530>
-<https://doi.org/10.5281/zenodo.4478530>, R package version 0.12.0,
+<https://doi.org/10.5281/zenodo.4478530>, R package version 0.13.0,
 <https://packages.tesselle.org/dimensio/>.
 
 This package is a part of the tesselle project

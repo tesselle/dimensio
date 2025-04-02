@@ -1,11 +1,13 @@
 Package: dimensio
 Title: Multivariate Data Analysis
-Version: 0.12.0.9000
+Version: 0.13.0
 Authors@R: c(
     person("Nicolas", "Frerebeau", , "nicolas.frerebeau@u-bordeaux-montaigne.fr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-5759-4944")),
     person("Jean-Baptiste", "Fourvel", , "jean-baptiste.fourvel@univ-amu.fr", role = "ctb",
            comment = c(ORCID = "0000-0002-1061-4642")),
+    person("Camille", "Thabard", , "camille.thabard@univ-tlse2.fr", role = "ctb",
+           comment = c(ORCID = "0000-0002-3196-7658")),
     person("Brice", "Lebrun", role = "art",
            comment = c(ORCID = "0000-0001-7503-8685", "Logo designer")),
     person("Université Bordeaux Montaigne", role = "fnd",
