@@ -37,6 +37,7 @@ Imports:
     methods,
     utils
 Suggests: 
+    fontquiver,
     knitr,
     markdown,
     rsvg,

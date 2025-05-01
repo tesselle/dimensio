@@ -160,32 +160,32 @@
 <line x1='132.46' y1='430.56' x2='132.46' y2='437.76' style='stroke-width: 0.75;' />
 <line x1='239.55' y1='430.56' x2='239.55' y2='437.76' style='stroke-width: 0.75;' />
 <line x1='346.63' y1='430.56' x2='346.63' y2='437.76' style='stroke-width: 0.75;' />
-<text x='132.46' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='23.43px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='239.55' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='19.09px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='346.63' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='19.09px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='132.46' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='20.68px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='239.55' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='16.68px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='346.63' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='16.68px' lengthAdjust='spacingAndGlyphs'>0.5</text>
 <line x1='80.64' y1='395.17' x2='80.64' y2='73.91' style='stroke-width: 0.75;' />
 <line x1='80.64' y1='395.17' x2='73.44' y2='395.17' style='stroke-width: 0.75;' />
 <line x1='80.64' y1='288.08' x2='73.44' y2='288.08' style='stroke-width: 0.75;' />
 <line x1='80.64' y1='180.99' x2='73.44' y2='180.99' style='stroke-width: 0.75;' />
 <line x1='80.64' y1='73.91' x2='73.44' y2='73.91' style='stroke-width: 0.75;' />
-<text x='66.24' y='399.54' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='23.43px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='66.24' y='292.45' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='19.09px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='66.24' y='185.37' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='19.09px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='66.24' y='78.28' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='19.09px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='66.24' y='399.30' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='20.68px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='66.24' y='292.21' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='16.68px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='66.24' y='185.12' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='16.68px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='66.24' y='78.03' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='16.68px' lengthAdjust='spacingAndGlyphs'>1.0</text>
 <polygon points='80.64,430.56 452.16,430.56 452.16,59.04 80.64,59.04 ' style='stroke-width: 0.75;' />
-<text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='65.86px' lengthAdjust='spacingAndGlyphs'>F1 (89.4%)</text>
-<text transform='translate(34.56,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='58.22px' lengthAdjust='spacingAndGlyphs'>F2 (9.5%)</text>
+<text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='59.36px' lengthAdjust='spacingAndGlyphs'>F1 (89.4%)</text>
+<text transform='translate(34.56,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='52.68px' lengthAdjust='spacingAndGlyphs'>F2 (9.5%)</text>
 </g>
 <g clip-path='url(#cpODAuNjR8NDUyLjE2fDU5LjA0fDQzMC41Ng==)'>
-<rect x='80.64' y='59.04' width='71.58' height='72.00' style='stroke-width: 0.75; fill: #FFFFFF;' />
+<rect x='80.64' y='59.04' width='65.70' height='72.00' style='stroke-width: 0.75; fill: #FFFFFF;' />
 <circle cx='91.44' cy='73.44' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #1965B0;' />
 <circle cx='91.44' cy='87.84' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #4EB265;' />
 <circle cx='91.44' cy='102.24' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #F7F056;' />
 <circle cx='91.44' cy='116.64' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #DC050C;' />
-<text x='102.24' y='77.81' style='font-size: 12.00px; font-family: "Arial";' textLength='33.52px' lengthAdjust='spacingAndGlyphs'>blond</text>
-<text x='102.24' y='92.21' style='font-size: 12.00px; font-family: "Arial";' textLength='27.77px' lengthAdjust='spacingAndGlyphs'>brun</text>
-<text x='102.24' y='106.61' style='font-size: 12.00px; font-family: "Arial";' textLength='44.58px' lengthAdjust='spacingAndGlyphs'>chatain</text>
-<text x='102.24' y='121.01' style='font-size: 12.00px; font-family: "Arial";' textLength='26.73px' lengthAdjust='spacingAndGlyphs'>roux</text>
+<text x='102.24' y='77.57' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='29.36px' lengthAdjust='spacingAndGlyphs'>blond</text>
+<text x='102.24' y='91.97' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='24.02px' lengthAdjust='spacingAndGlyphs'>brun</text>
+<text x='102.24' y='106.37' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='38.70px' lengthAdjust='spacingAndGlyphs'>chatain</text>
+<text x='102.24' y='120.77' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='23.35px' lengthAdjust='spacingAndGlyphs'>roux</text>
 <polygon points='438.40,306.99 432.17,337.60 411.12,318.65 396.47,300.45 382.54,267.57 412.85,278.46 427.43,287.49 435.47,299.49 438.40,306.99 ' style='stroke-width: 0.75; stroke: #1965B0;' />
 <polygon points='164.55,356.29 94.40,366.18 103.73,314.58 149.15,305.58 164.97,317.89 170.39,328.76 164.55,356.29 ' style='stroke-width: 0.75; stroke: #4EB265;' />
 <polygon points='222.92,281.87 219.97,290.64 200.79,304.74 195.85,297.38 191.42,290.74 185.64,278.90 183.89,268.99 194.57,248.53 222.30,254.63 225.49,263.52 222.92,281.87 ' style='stroke-width: 0.75; stroke: #F7F056;' />

@@ -31,12 +31,12 @@
 <rect x='347.76' y='407.91' width='32.54' height='18.97' style='stroke-width: 0.75; stroke: #1A1A1A; fill: #E5E5E5;' />
 <rect x='386.81' y='410.23' width='32.54' height='16.66' style='stroke-width: 0.75; stroke: #1A1A1A; fill: #E5E5E5;' />
 <rect x='425.86' y='414.08' width='32.54' height='12.80' style='stroke-width: 0.75; stroke: #1A1A1A; fill: #E5E5E5;' />
-<text x='90.67' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='56.62px' lengthAdjust='spacingAndGlyphs'>Myri_ocul</text>
-<text x='168.77' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='55.36px' lengthAdjust='spacingAndGlyphs'>Amph_fili</text>
-<text x='246.87' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='61.86px' lengthAdjust='spacingAndGlyphs'>Timo_ovat</text>
-<text x='324.98' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='62.65px' lengthAdjust='spacingAndGlyphs'>Amph_falc</text>
-<text x='403.08' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='56.26px' lengthAdjust='spacingAndGlyphs'>Abra_pris</text>
-<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='152.22px' lengthAdjust='spacingAndGlyphs'>Contribution to F1-F2 (%)</text>
+<text x='90.67' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='51.36px' lengthAdjust='spacingAndGlyphs'>Myri_ocul</text>
+<text x='168.77' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='49.36px' lengthAdjust='spacingAndGlyphs'>Amph_fili</text>
+<text x='246.87' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='55.58px' lengthAdjust='spacingAndGlyphs'>Timo_ovat</text>
+<text x='324.98' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='56.71px' lengthAdjust='spacingAndGlyphs'>Amph_falc</text>
+<text x='403.08' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='51.36px' lengthAdjust='spacingAndGlyphs'>Abra_pris</text>
+<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='135.38px' lengthAdjust='spacingAndGlyphs'>Contribution to F1-F2 (%)</text>
 <line x1='59.04' y1='426.88' x2='59.04' y2='67.00' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='426.88' x2='51.84' y2='426.88' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='375.47' x2='51.84' y2='375.47' style='stroke-width: 0.75;' />
@@ -46,14 +46,14 @@
 <line x1='59.04' y1='169.82' x2='51.84' y2='169.82' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='118.41' x2='51.84' y2='118.41' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='67.00' x2='51.84' y2='67.00' style='stroke-width: 0.75;' />
-<text x='44.64' y='431.26' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='44.64' y='379.84' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='44.64' y='328.43' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>4</text>
-<text x='44.64' y='277.02' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>6</text>
-<text x='44.64' y='225.61' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>8</text>
-<text x='44.64' y='174.19' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='15.28px' lengthAdjust='spacingAndGlyphs'>10</text>
-<text x='44.64' y='122.78' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='15.28px' lengthAdjust='spacingAndGlyphs'>12</text>
-<text x='44.64' y='71.37' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='15.28px' lengthAdjust='spacingAndGlyphs'>14</text>
+<text x='44.64' y='431.01' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='44.64' y='379.60' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='44.64' y='328.19' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='44.64' y='276.77' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>6</text>
+<text x='44.64' y='225.36' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>8</text>
+<text x='44.64' y='173.95' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='44.64' y='122.54' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>12</text>
+<text x='44.64' y='71.12' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>14</text>
 </g>
 <defs>
   <clipPath id='cpNTkuMDR8NDczLjc2fDU5LjA0fDQzMC41Ng=='>
