@@ -5,180 +5,189 @@ NULL
 # Confidence ===================================================================
 #' @export
 #' @rdname viz_confidence
-#' @aliases wrap_confidence,MultivariateAnalysis-method
+#' @aliases wrap_confidence,numeric,numeric-method
 setMethod(
   f = "wrap_confidence",
-  signature = c(x = "MultivariateAnalysis"),
-  definition = function(x, margin = 1, axes = c(1, 2), group = NULL,
-                        level = 0.95) {
+  signature = c(x = "numeric", y = "numeric"),
+  definition = function(x, y, group = NULL, level = 0.95) {
     ## Validation
-    arkhe::assert_scalar(margin, "numeric")
-    arkhe::assert_type(axes, "numeric")
-    arkhe::assert_length(axes, 2)
+    n <- length(x)
+    arkhe::assert_length(y, n)
     arkhe::assert_type(level, "numeric")
 
-    ## Get coordinates
-    data <- get_coordinates(x, margin = margin)
-    data <- data[, axes]
-    n <- nrow(data)
-
     ## Add groups, if any
-    if (length(group) > 1) {
-      arkhe::assert_length(group, n)
-      group <- group[get_order(x, margin = margin)]
-    } else if (length(group) == 1) {
-      group <- get_extra(x)[[group]]
-    } else if (has_groups(x, margin = margin)) {
-      group <- get_groups(x, margin = margin)
-    } else {
-      group <- rep("", n)
-    }
+    if (is.null(group)) group <- rep("", n)
     group <- as.character(group)
+    arkhe::assert_length(group, n)
+
+    ## Clean
+    ok <- !is.na(x) & !is.na(y) & !is.na(group)
+    x <- x[ok]
+    y <- y[ok]
+    group <- group[ok]
 
     ## Compute ellipse
-    data <- split(data, f = group)
+    index <- split(seq_len(n), f = group)
     lapply(
-      X = data,
-      FUN = function(x, level) {
-        x <- stats::na.omit(x) # Drop NAs
-        if (nrow(x) < 3) return(NULL)
+      X = index,
+      FUN = function(i) {
+        xi <- x[i]
+        yi <- y[i]
+        if (length(xi) < 3) return(NULL)
 
-        df1 <- ncol(x) - 1
-        df2 <- nrow(x) - 2
+        df1 <- 1
+        df2 <- length(xi) - 2
         radius <- sqrt(stats::qf(p = level, df1, df2) * df1 / df2)
-        wrap_ellipse(x[, 1], x[, 2], radius = radius)
-      },
-      level = level
+        wrap_ellipse(xi, yi, radius = radius)
+      }
     )
   }
 )
 
 #' @export
 #' @rdname viz_confidence
-#' @aliases wrap_confidence,PCOA-method
+#' @aliases wrap_confidence,MultivariateAnalysis,missing-method
 setMethod(
   f = "wrap_confidence",
-  signature = c(x = "PCOA"),
-  definition = function(x, axes = c(1, 2), group = NULL, level = 0.95) {
-    ## Validation
-    arkhe::assert_type(axes, "numeric")
-    arkhe::assert_length(axes, 2)
-    arkhe::assert_type(level, "numeric")
-
-    ## Get coordinates
-    data <- get_coordinates(x)
-    data <- data[, axes]
-    n <- nrow(data)
-
-    ## Add groups, if any
-    if (length(group) == 0) group <- rep("", n)
-    group <- as.character(group)
-    arkhe::assert_length(group, n)
-
-    ## Compute ellipse
-    data <- split(data, f = group)
-    lapply(
-      X = data,
-      FUN = function(x, level) {
-        x <- stats::na.omit(x) # Drop NAs
-        if (nrow(x) < 3) return(NULL)
-
-        df1 <- ncol(x) - 1
-        df2 <- nrow(x) - 2
-        radius <- sqrt(stats::qf(p = level, df1, df2) * df1 / df2)
-        wrap_ellipse(x[, 1], x[, 2], radius = radius)
-      },
-      level = level
-    )
-  }
-)
-
-# Tolerance ====================================================================
-#' @export
-#' @rdname viz_tolerance
-#' @aliases wrap_tolerance,MultivariateAnalysis-method
-setMethod(
-  f = "wrap_tolerance",
-  signature = c(x = "MultivariateAnalysis"),
+  signature = c(x = "MultivariateAnalysis", y = "missing"),
   definition = function(x, margin = 1, axes = c(1, 2), group = NULL,
                         level = 0.95) {
     ## Validation
     arkhe::assert_scalar(margin, "numeric")
     arkhe::assert_type(axes, "numeric")
     arkhe::assert_length(axes, 2)
-    arkhe::assert_type(level, "numeric")
 
     ## Get coordinates
     data <- get_coordinates(x, margin = margin)
     data <- data[, axes]
-    n <- nrow(data)
 
     ## Add groups, if any
     if (length(group) > 1) {
-      arkhe::assert_length(group, n)
       group <- group[get_order(x, margin = margin)]
     } else if (length(group) == 1) {
       group <- get_extra(x)[[group]]
     } else if (has_groups(x, margin = margin)) {
       group <- get_groups(x, margin = margin)
-    } else {
-      group <- rep("", n)
     }
-    group <- as.character(group)
 
     ## Compute ellipse
-    data <- split(data, f = group)
-    lapply(
-      X = data,
-      FUN = function(x, level) {
-        x <- stats::na.omit(x) # Drop NAs
-        if (nrow(x) < 3) return(NULL)
+    methods::callGeneric(x = data[, 1], y = data[, 2],
+                         group = group, level = level)
+  }
+)
 
-        df <- ncol(x) - 1
+#' @export
+#' @rdname viz_confidence
+#' @aliases wrap_confidence,PCOA,missing-method
+setMethod(
+  f = "wrap_confidence",
+  signature = c(x = "PCOA", y = "missing"),
+  definition = function(x, axes = c(1, 2), group = NULL, level = 0.95) {
+    ## Validation
+    arkhe::assert_type(axes, "numeric")
+    arkhe::assert_length(axes, 2)
+
+    ## Get coordinates
+    data <- get_coordinates(x)
+    data <- data[, axes]
+
+    ## Compute ellipse
+    methods::callGeneric(x = data[, 1], y = data[, 2],
+                         group = group, level = level)
+  }
+)
+
+# Tolerance ====================================================================
+#' @export
+#' @rdname viz_tolerance
+#' @aliases wrap_tolerance,numeric,numeric-method
+setMethod(
+  f = "wrap_tolerance",
+  signature = c(x = "numeric", y = "numeric"),
+  definition = function(x, y, group = NULL, level = 0.95) {
+    ## Validation
+    n <- length(x)
+    arkhe::assert_length(y, n)
+    arkhe::assert_type(level, "numeric")
+
+    ## Add groups, if any
+    if (is.null(group)) group <- rep("", n)
+    group <- as.character(group)
+    arkhe::assert_length(group, n)
+
+    ## Clean
+    ok <- !is.na(x) & !is.na(y) & !is.na(group)
+    x <- x[ok]
+    y <- y[ok]
+    group <- group[ok]
+
+    ## Compute ellipse
+    index <- split(seq_len(n), f = group)
+    lapply(
+      X = index,
+      FUN = function(i) {
+        xi <- x[i]
+        yi <- y[i]
+        if (length(xi) < 3) return(NULL)
+
+        df <- 1
         radius <- sqrt(stats::qchisq(p = level, df = df))
-        wrap_ellipse(x[, 1], x[, 2], radius = radius)
-      },
-      level = level
+        wrap_ellipse(xi, yi, radius = radius)
+      }
     )
   }
 )
 
 #' @export
 #' @rdname viz_tolerance
-#' @aliases wrap_tolerance,PCOA-method
+#' @aliases wrap_tolerance,MultivariateAnalysis,missing-method
 setMethod(
   f = "wrap_tolerance",
-  signature = c(x = "PCOA"),
+  signature = c(x = "MultivariateAnalysis", y = "missing"),
+  definition = function(x, margin = 1, axes = c(1, 2), group = NULL,
+                        level = 0.95) {
+    ## Validation
+    arkhe::assert_scalar(margin, "numeric")
+    arkhe::assert_type(axes, "numeric")
+    arkhe::assert_length(axes, 2)
+
+    ## Get coordinates
+    data <- get_coordinates(x, margin = margin)
+    data <- data[, axes]
+
+    ## Add groups, if any
+    if (length(group) > 1) {
+      group <- group[get_order(x, margin = margin)]
+    } else if (length(group) == 1) {
+      group <- get_extra(x)[[group]]
+    } else if (has_groups(x, margin = margin)) {
+      group <- get_groups(x, margin = margin)
+    }
+
+    ## Compute ellipse
+    methods::callGeneric(x = data[, 1], y = data[, 2],
+                         group = group, level = level)
+  }
+)
+
+#' @export
+#' @rdname viz_tolerance
+#' @aliases wrap_tolerance,PCOA,missing-method
+setMethod(
+  f = "wrap_tolerance",
+  signature = c(x = "PCOA", y = "missing"),
   definition = function(x, axes = c(1, 2), group = NULL, level = 0.95) {
     ## Validation
     arkhe::assert_type(axes, "numeric")
     arkhe::assert_length(axes, 2)
-    arkhe::assert_type(level, "numeric")
 
     ## Get coordinates
     data <- get_coordinates(x)
     data <- data[, axes]
-    n <- nrow(data)
-
-    ## Add groups, if any
-    if (length(group) == 0) group <- rep("", n)
-    group <- as.character(group)
-    arkhe::assert_length(group, n)
 
     ## Compute ellipse
-    data <- split(data, f = group)
-    lapply(
-      X = data,
-      FUN = function(x, level) {
-        x <- stats::na.omit(x) # Drop NAs
-        if (nrow(x) < 3) return(NULL)
-
-        df <- ncol(x) - 1
-        radius <- sqrt(stats::qchisq(p = level, df = df))
-        wrap_ellipse(x[, 1], x[, 2], radius = radius)
-      },
-      level = level
-    )
+    methods::callGeneric(x = data[, 1], y = data[, 2],
+                         group = group, level = level)
   }
 )
 

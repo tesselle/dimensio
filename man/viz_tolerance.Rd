@@ -7,18 +7,31 @@
 \alias{viz_tolerance-method}
 \alias{wrap_tolerance}
 \alias{wrap_tolerance-method}
-\alias{viz_tolerance,MultivariateAnalysis-method}
-\alias{viz_tolerance,BootstrapCA-method}
-\alias{viz_tolerance,PCOA-method}
-\alias{wrap_tolerance,MultivariateAnalysis-method}
-\alias{wrap_tolerance,PCOA-method}
+\alias{viz_tolerance,numeric,numeric-method}
+\alias{viz_tolerance,MultivariateAnalysis,missing-method}
+\alias{viz_tolerance,BootstrapCA,missing-method}
+\alias{viz_tolerance,PCOA,missing-method}
+\alias{wrap_tolerance,numeric,numeric-method}
+\alias{wrap_tolerance,MultivariateAnalysis,missing-method}
+\alias{wrap_tolerance,PCOA,missing-method}
 \title{Tolerance Ellipses}
 \usage{
-viz_tolerance(x, ...)
+viz_tolerance(x, y, ...)
 
-wrap_tolerance(x, ...)
+wrap_tolerance(x, y, ...)
 
-\S4method{viz_tolerance}{MultivariateAnalysis}(
+\S4method{viz_tolerance}{numeric,numeric}(
+  x,
+  y,
+  ...,
+  group = NULL,
+  level = 0.95,
+  color = NULL,
+  fill = FALSE,
+  symbol = FALSE
+)
+
+\S4method{viz_tolerance}{MultivariateAnalysis,missing}(
   x,
   ...,
   margin = 1,
@@ -30,7 +43,7 @@ wrap_tolerance(x, ...)
   symbol = FALSE
 )
 
-\S4method{viz_tolerance}{BootstrapCA}(
+\S4method{viz_tolerance}{BootstrapCA,missing}(
   x,
   ...,
   margin = 1,
@@ -41,7 +54,7 @@ wrap_tolerance(x, ...)
   symbol = FALSE
 )
 
-\S4method{viz_tolerance}{PCOA}(
+\S4method{viz_tolerance}{PCOA,missing}(
   x,
   ...,
   axes = c(1, 2),
@@ -52,23 +65,19 @@ wrap_tolerance(x, ...)
   symbol = FALSE
 )
 
-\S4method{wrap_tolerance}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
+\S4method{wrap_tolerance}{numeric,numeric}(x, y, group = NULL, level = 0.95)
 
-\S4method{wrap_tolerance}{PCOA}(x, axes = c(1, 2), group = NULL, level = 0.95)
+\S4method{wrap_tolerance}{MultivariateAnalysis,missing}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
+
+\S4method{wrap_tolerance}{PCOA,missing}(x, axes = c(1, 2), group = NULL, level = 0.95)
 }
 \arguments{
-\item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}},
-\code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object).}
+\item{x, y}{A \code{\link{numeric}} vector. If \code{y} is missing, \code{x} must be an object
+from which to wrap observations (a \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or
+\code{\linkS4class{PCA}} object).}
 
 \item{...}{Further \link[graphics:par]{graphical parameters} to be passed to
 \code{\link[graphics:polygon]{graphics::polygon()}}.}
-
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
-data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
-indicates variables/columns.}
-
-\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
-for which to compute results.}
 
 \item{group}{A vector specifying the group an observation belongs to.}
 
@@ -82,6 +91,13 @@ Ignored if set to \code{FALSE}.}
 
 \item{symbol}{A vector of symbols (will be mapped to \code{group}).
 Ignored if set to \code{FALSE}.}
+
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
+data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
+indicates variables/columns.}
+
+\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
+for which to compute results.}
 }
 \value{
 \code{wrap_tolerance()} returns a \code{\link{data.frame}} of envelope \code{x} and \code{y}

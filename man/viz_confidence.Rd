@@ -7,18 +7,31 @@
 \alias{viz_confidence-method}
 \alias{wrap_confidence}
 \alias{wrap_confidence-method}
-\alias{viz_confidence,MultivariateAnalysis-method}
-\alias{viz_confidence,BootstrapCA-method}
-\alias{viz_confidence,PCOA-method}
-\alias{wrap_confidence,MultivariateAnalysis-method}
-\alias{wrap_confidence,PCOA-method}
+\alias{viz_confidence,numeric,numeric-method}
+\alias{viz_confidence,MultivariateAnalysis,missing-method}
+\alias{viz_confidence,BootstrapCA,missing-method}
+\alias{viz_confidence,PCOA,missing-method}
+\alias{wrap_confidence,numeric,numeric-method}
+\alias{wrap_confidence,MultivariateAnalysis,missing-method}
+\alias{wrap_confidence,PCOA,missing-method}
 \title{Confidence Ellipses}
 \usage{
-viz_confidence(x, ...)
+viz_confidence(x, y, ...)
 
-wrap_confidence(x, ...)
+wrap_confidence(x, y, ...)
 
-\S4method{viz_confidence}{MultivariateAnalysis}(
+\S4method{viz_confidence}{numeric,numeric}(
+  x,
+  y,
+  ...,
+  group = NULL,
+  level = 0.95,
+  color = NULL,
+  fill = FALSE,
+  symbol = FALSE
+)
+
+\S4method{viz_confidence}{MultivariateAnalysis,missing}(
   x,
   ...,
   margin = 1,
@@ -30,7 +43,7 @@ wrap_confidence(x, ...)
   symbol = FALSE
 )
 
-\S4method{viz_confidence}{BootstrapCA}(
+\S4method{viz_confidence}{BootstrapCA,missing}(
   x,
   ...,
   margin = 1,
@@ -41,7 +54,7 @@ wrap_confidence(x, ...)
   symbol = FALSE
 )
 
-\S4method{viz_confidence}{PCOA}(
+\S4method{viz_confidence}{PCOA,missing}(
   x,
   ...,
   axes = c(1, 2),
@@ -52,23 +65,19 @@ wrap_confidence(x, ...)
   symbol = FALSE
 )
 
-\S4method{wrap_confidence}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
+\S4method{wrap_confidence}{numeric,numeric}(x, y, group = NULL, level = 0.95)
 
-\S4method{wrap_confidence}{PCOA}(x, axes = c(1, 2), group = NULL, level = 0.95)
+\S4method{wrap_confidence}{MultivariateAnalysis,missing}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
+
+\S4method{wrap_confidence}{PCOA,missing}(x, axes = c(1, 2), group = NULL, level = 0.95)
 }
 \arguments{
-\item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}},
-\code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object).}
+\item{x, y}{A \code{\link{numeric}} vector. If \code{y} is missing, \code{x} must be an object
+from which to wrap observations (a \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or
+\code{\linkS4class{PCA}} object).}
 
 \item{...}{Further \link[graphics:par]{graphical parameters} to be passed to
 \code{\link[graphics:polygon]{graphics::polygon()}}.}
-
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
-data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
-indicates variables/columns.}
-
-\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
-for which to compute results.}
 
 \item{group}{A vector specifying the group an observation belongs to.}
 
@@ -82,6 +91,13 @@ Ignored if set to \code{FALSE}.}
 
 \item{symbol}{A vector of symbols (will be mapped to \code{group}).
 Ignored if set to \code{FALSE}.}
+
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
+data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
+indicates variables/columns.}
+
+\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
+for which to compute results.}
 }
 \value{
 \code{wrap_confidence()} returns a \code{\link{data.frame}} of envelope \code{x} and \code{y}

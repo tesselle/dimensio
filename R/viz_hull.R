@@ -4,10 +4,25 @@ NULL
 
 #' @export
 #' @rdname viz_hull
-#' @aliases viz_hull,MultivariateAnalysis-method
+#' @aliases viz_hull,numeric,numeric-method
 setMethod(
   f = "viz_hull",
-  signature = c(x = "MultivariateAnalysis"),
+  signature = c(x = "numeric", y = "numeric"),
+  definition = function(x, y, ..., group = NULL,
+                        color = NULL, fill = FALSE, symbol = FALSE) {
+    hull <- wrap_hull(x, y, group = group)
+    .viz_hull(hull, ..., color = color, fill = fill, symbol = symbol)
+
+    invisible(list(x = x, y = y))
+  }
+)
+
+#' @export
+#' @rdname viz_hull
+#' @aliases viz_hull,MultivariateAnalysis,missing-method
+setMethod(
+  f = "viz_hull",
+  signature = c(x = "MultivariateAnalysis", y = "missing"),
   definition = function(x, ..., margin = 1, axes = c(1, 2), group = NULL,
                         color = NULL, fill = FALSE, symbol = FALSE) {
     hull <- wrap_hull(x, margin = margin, axes = axes, group = group)
@@ -19,10 +34,10 @@ setMethod(
 
 #' @export
 #' @rdname viz_hull
-#' @aliases viz_hull,BootstrapCA-method
+#' @aliases viz_hull,BootstrapCA,missing-method
 setMethod(
   f = "viz_hull",
-  signature = c(x = "BootstrapCA"),
+  signature = c(x = "BootstrapCA", y = "missing"),
   definition = function(x, ..., margin = 1, axes = c(1, 2),
                         color = FALSE, fill = FALSE, symbol = FALSE) {
     group <- get_groups(x, margin = margin)
@@ -34,10 +49,10 @@ setMethod(
 
 #' @export
 #' @rdname viz_hull
-#' @aliases viz_hull,PCOA-method
+#' @aliases viz_hull,PCOA,missing-method
 setMethod(
   f = "viz_hull",
-  signature = c(x = "PCOA"),
+  signature = c(x = "PCOA", y = "missing"),
   definition = function(x, ..., axes = c(1, 2), group = NULL,
                         color = FALSE, fill = FALSE, symbol = FALSE) {
     hull <- wrap_hull(x, axes = axes, group = group)

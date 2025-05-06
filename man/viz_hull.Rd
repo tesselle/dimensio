@@ -6,18 +6,22 @@
 \alias{viz_hull-method}
 \alias{wrap_hull}
 \alias{wrap_hull-method}
-\alias{viz_hull,MultivariateAnalysis-method}
-\alias{viz_hull,BootstrapCA-method}
-\alias{viz_hull,PCOA-method}
-\alias{wrap_hull,MultivariateAnalysis-method}
-\alias{wrap_hull,PCOA-method}
+\alias{viz_hull,numeric,numeric-method}
+\alias{viz_hull,MultivariateAnalysis,missing-method}
+\alias{viz_hull,BootstrapCA,missing-method}
+\alias{viz_hull,PCOA,missing-method}
+\alias{wrap_hull,numeric,numeric-method}
+\alias{wrap_hull,MultivariateAnalysis,missing-method}
+\alias{wrap_hull,PCOA,missing-method}
 \title{Convex Hulls}
 \usage{
-viz_hull(x, ...)
+viz_hull(x, y, ...)
 
-wrap_hull(x, ...)
+wrap_hull(x, y, ...)
 
-\S4method{viz_hull}{MultivariateAnalysis}(
+\S4method{viz_hull}{numeric,numeric}(x, y, ..., group = NULL, color = NULL, fill = FALSE, symbol = FALSE)
+
+\S4method{viz_hull}{MultivariateAnalysis,missing}(
   x,
   ...,
   margin = 1,
@@ -28,7 +32,7 @@ wrap_hull(x, ...)
   symbol = FALSE
 )
 
-\S4method{viz_hull}{BootstrapCA}(
+\S4method{viz_hull}{BootstrapCA,missing}(
   x,
   ...,
   margin = 1,
@@ -38,7 +42,7 @@ wrap_hull(x, ...)
   symbol = FALSE
 )
 
-\S4method{viz_hull}{PCOA}(
+\S4method{viz_hull}{PCOA,missing}(
   x,
   ...,
   axes = c(1, 2),
@@ -48,23 +52,19 @@ wrap_hull(x, ...)
   symbol = FALSE
 )
 
-\S4method{wrap_hull}{MultivariateAnalysis}(x, margin = 1, axes = c(1, 2), group = NULL)
+\S4method{wrap_hull}{numeric,numeric}(x, y, group = NULL)
 
-\S4method{wrap_hull}{PCOA}(x, axes = c(1, 2), group = NULL)
+\S4method{wrap_hull}{MultivariateAnalysis,missing}(x, margin = 1, axes = c(1, 2), group = NULL)
+
+\S4method{wrap_hull}{PCOA,missing}(x, axes = c(1, 2), group = NULL)
 }
 \arguments{
-\item{x}{An object from which to wrap observations (a \code{\linkS4class{CA}},
-\code{\linkS4class{MCA}} or \code{\linkS4class{PCA}} object).}
+\item{x, y}{A \code{\link{numeric}} vector. If \code{y} is missing, \code{x} must be an object
+from which to wrap observations (a \code{\linkS4class{CA}}, \code{\linkS4class{MCA}} or
+\code{\linkS4class{PCA}} object).}
 
 \item{...}{Further \link[graphics:par]{graphical parameters} to be passed to
 \code{\link[graphics:polygon]{graphics::polygon()}}.}
-
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
-data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
-indicates variables/columns.}
-
-\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
-for which to compute results.}
 
 \item{group}{A vector specifying the group an observation belongs to.}
 
@@ -76,6 +76,13 @@ Ignored if set to \code{FALSE}.}
 
 \item{symbol}{A vector of symbols (will be mapped to \code{group}).
 Ignored if set to \code{FALSE}.}
+
+\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
+data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
+indicates variables/columns.}
+
+\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
+for which to compute results.}
 }
 \value{
 \code{wrap_hull()} returns a \code{\link{data.frame}} of envelope \code{x} and \code{y} coordinates.
