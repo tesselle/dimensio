@@ -29,8 +29,6 @@ viz_ellipses(x, y, ...)
   group = NULL,
   type = c("tolerance", "confidence"),
   level = 0.95,
-  margin = 1,
-  axes = c(1, 2),
   color = NULL,
   fill = FALSE,
   symbol = FALSE
@@ -42,7 +40,6 @@ viz_ellipses(x, y, ...)
   group = NULL,
   type = c("tolerance", "confidence"),
   level = 0.95,
-  axes = c(1, 2),
   color = NULL,
   fill = FALSE,
   symbol = FALSE
@@ -72,13 +69,6 @@ Ignored if set to \code{FALSE}.}
 
 \item{symbol}{A vector of symbols (will be mapped to \code{group}).
 Ignored if set to \code{FALSE}.}
-
-\item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
-data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
-indicates variables/columns.}
-
-\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
-for which to compute results.}
 }
 \value{
 \code{viz_ellipses()}is called for its side-effects: it results in a graphic

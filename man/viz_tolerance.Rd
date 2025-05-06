@@ -9,7 +9,7 @@
 \alias{wrap_tolerance-method}
 \alias{viz_tolerance,numeric,numeric-method}
 \alias{viz_tolerance,MultivariateAnalysis,missing-method}
-\alias{viz_tolerance,BootstrapCA,missing-method}
+\alias{viz_tolerance,MultivariateBootstrap,missing-method}
 \alias{viz_tolerance,PCOA,missing-method}
 \alias{wrap_tolerance,numeric,numeric-method}
 \alias{wrap_tolerance,MultivariateAnalysis,missing-method}
@@ -34,8 +34,6 @@ wrap_tolerance(x, y, ...)
 \S4method{viz_tolerance}{MultivariateAnalysis,missing}(
   x,
   ...,
-  margin = 1,
-  axes = c(1, 2),
   group = NULL,
   level = 0.95,
   color = NULL,
@@ -43,11 +41,9 @@ wrap_tolerance(x, y, ...)
   symbol = FALSE
 )
 
-\S4method{viz_tolerance}{BootstrapCA,missing}(
+\S4method{viz_tolerance}{MultivariateBootstrap,missing}(
   x,
   ...,
-  margin = 1,
-  axes = c(1, 2),
   level = 0.95,
   color = FALSE,
   fill = FALSE,
@@ -57,7 +53,6 @@ wrap_tolerance(x, y, ...)
 \S4method{viz_tolerance}{PCOA,missing}(
   x,
   ...,
-  axes = c(1, 2),
   group = NULL,
   level = 0.95,
   color = NULL,

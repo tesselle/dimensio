@@ -20,7 +20,7 @@ setMethod(
     ell <- fun(x, y, group = group, level = level)
     .viz_ellipses(ell, color = color, fill = fill, symbol = symbol, ...)
 
-    invisible(x)
+    invisible(list(x = x, y = y))
   }
 )
 
@@ -31,8 +31,7 @@ setMethod(
   f = "viz_ellipses",
   signature = c(x = "MultivariateAnalysis", y = "missing"),
   definition = function(x, ..., group = NULL,
-                        type = c("tolerance", "confidence"),
-                        level = 0.95, margin = 1, axes = c(1, 2),
+                        type = c("tolerance", "confidence"), level = 0.95,
                         color = NULL, fill = FALSE, symbol = FALSE) {
     type <- match.arg(type, several.ok = FALSE)
     fun <- switch(
@@ -40,7 +39,8 @@ setMethod(
       tolerance = wrap_tolerance,
       confidence = wrap_confidence
     )
-    ell <- fun(x, margin = margin, axes = axes, group = group, level = level)
+    ell <- fun(x, margin = get_margin(), axes = get_axes(),
+               group = group, level = level)
     .viz_ellipses(ell, color = color, fill = fill, symbol = symbol, ...)
 
     invisible(x)
@@ -54,8 +54,7 @@ setMethod(
   f = "viz_ellipses",
   signature = c(x = "PCOA", y = "missing"),
   definition = function(x, ..., group = NULL,
-                        type = c("tolerance", "confidence"),
-                        level = 0.95, axes = c(1, 2),
+                        type = c("tolerance", "confidence"), level = 0.95,
                         color = NULL, fill = FALSE, symbol = FALSE) {
     type <- match.arg(type, several.ok = FALSE)
     fun <- switch(
@@ -63,7 +62,7 @@ setMethod(
       tolerance = wrap_tolerance,
       confidence = wrap_confidence
     )
-    ell <- fun(x, axes = axes, group = group, level = level)
+    ell <- fun(x, axes = get_axes(), group = group, level = level)
     .viz_ellipses(ell, color = color, fill = fill, symbol = symbol, ...)
 
     invisible(x)
@@ -118,6 +117,7 @@ setMethod(
                         color = NULL, fill = FALSE, symbol = FALSE) {
     viz_ellipses(x, y, group = group, type = "tolerance", level = level,
                  color = color, fill = fill, symbol = symbol, ...)
+    invisible(list(x = x, y = y))
   }
 )
 
@@ -127,26 +127,24 @@ setMethod(
 setMethod(
   f = "viz_tolerance",
   signature = c(x = "MultivariateAnalysis", y = "missing"),
-  definition = function(x, ..., margin = 1, axes = c(1, 2), group = NULL,
-                        level = 0.95, color = NULL, fill = FALSE, symbol = FALSE) {
-    viz_ellipses(x, type = "tolerance", level = level,
-                 margin = margin, axes = axes, group = group,
+  definition = function(x, ..., group = NULL, level = 0.95,
+                        color = NULL, fill = FALSE, symbol = FALSE) {
+    viz_ellipses(x, group = group, type = "tolerance", level = level,
                  color = color, fill = fill, symbol = symbol, ...)
+    invisible(x)
   }
 )
 
 #' @export
 #' @rdname viz_tolerance
-#' @aliases viz_tolerance,BootstrapCA,missing-method
+#' @aliases viz_tolerance,MultivariateBootstrap,missing-method
 setMethod(
   f = "viz_tolerance",
-  signature = c(x = "BootstrapCA", y = "missing"),
-  definition = function(x, ..., margin = 1, axes = c(1, 2), level = 0.95,
+  signature = c(x = "MultivariateBootstrap", y = "missing"),
+  definition = function(x, ..., level = 0.95,
                         color = FALSE, fill = FALSE, symbol = FALSE) {
-    group <- get_groups(x, margin = margin)
-    methods::callNextMethod(x, margin = margin, axes = axes,
-                            group = group, level = level,
-                            color = color, fill = fill, symbol = symbol, ...)
+    viz_ellipses(x, group = NULL, type = "tolerance", level = level,
+                 color = color, fill = fill, symbol = symbol, ...)
     invisible(x)
   }
 )
@@ -157,11 +155,11 @@ setMethod(
 setMethod(
   f = "viz_tolerance",
   signature = c(x = "PCOA", y = "missing"),
-  definition = function(x, ..., axes = c(1, 2), group = NULL, level = 0.95,
+  definition = function(x, ..., group = NULL, level = 0.95,
                         color = NULL, fill = FALSE, symbol = FALSE) {
-    viz_ellipses(x, type = "tolerance", level = level,
-                 axes = axes, group = group,
+    viz_ellipses(x, group = group, type = "tolerance", level = level,
                  color = color, fill = fill, symbol = symbol, ...)
+    invisible(x)
   }
 )
 
@@ -176,6 +174,7 @@ setMethod(
                         color = NULL, fill = FALSE, symbol = FALSE) {
     viz_ellipses(x, y, group = group, type = "confidence", level = level,
                  color = color, fill = fill, symbol = symbol, ...)
+    invisible(list(x = x, y = y))
   }
 )
 
@@ -185,26 +184,24 @@ setMethod(
 setMethod(
   f = "viz_confidence",
   signature = c(x = "MultivariateAnalysis", y = "missing"),
-  definition = function(x, ..., margin = 1, axes = c(1, 2), group = NULL,
-                        level = 0.95, color = NULL, fill = FALSE, symbol = FALSE) {
-    viz_ellipses(x, type = "confidence", level = level,
-                 margin = margin, axes = axes, group = group,
+  definition = function(x, ..., group = NULL, level = 0.95,
+                        color = NULL, fill = FALSE, symbol = FALSE) {
+    viz_ellipses(x, group = group, type = "confidence", level = level,
                  color = color, fill = fill, symbol = symbol, ...)
+    invisible(x)
   }
 )
 
 #' @export
 #' @rdname viz_confidence
-#' @aliases viz_confidence,BootstrapCA,missing-method
+#' @aliases viz_confidence,MultivariateBootstrap,missing-method
 setMethod(
   f = "viz_confidence",
-  signature = c(x = "BootstrapCA", y = "missing"),
-  definition = function(x, ..., margin = 1, axes = c(1, 2), level = 0.95,
+  signature = c(x = "MultivariateBootstrap", y = "missing"),
+  definition = function(x, ..., level = 0.95,
                         color = FALSE, fill = FALSE, symbol = FALSE) {
-    group <- get_groups(x, margin = margin)
-    methods::callNextMethod(x, margin = margin, axes = axes,
-                            group = group, level = level,
-                            color = color, fill = fill, symbol = symbol, ...)
+    viz_ellipses(x, group = NULL, type = "confidence", level = level,
+                 color = color, fill = fill, symbol = symbol, ...)
     invisible(x)
   }
 )
@@ -217,8 +214,8 @@ setMethod(
   signature = c(x = "PCOA", y = "missing"),
   definition = function(x, ..., axes = c(1, 2), group = NULL, level = 0.95,
                         color = NULL, fill = FALSE, symbol = FALSE) {
-    viz_ellipses(x, ..., type = "confidence", level = level,
-                 axes = axes, group = group,
-                 color = color, fill = fill, symbol = symbol)
+    viz_ellipses(x, group = group, type = "confidence", level = level,
+                 color = color, fill = fill, symbol = symbol, ...)
+    invisible(x)
   }
 )

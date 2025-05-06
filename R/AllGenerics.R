@@ -758,6 +758,7 @@ setGeneric(
 #' Confidence Ellipses
 #'
 #' Plots confidence ellipses.
+#' @inheritParams viz_hull
 #' @inheritParams viz_ellipses
 #' @return
 #'  `wrap_confidence()` returns a [`data.frame`] of envelope `x` and `y`
@@ -786,6 +787,7 @@ setGeneric(
 #' Tolerance Ellipses
 #'
 #' Plots tolerance ellipses.
+#' @inheritParams viz_hull
 #' @inheritParams viz_ellipses
 #' @return
 #'  `wrap_tolerance()` returns a [`data.frame`] of envelope `x` and `y`

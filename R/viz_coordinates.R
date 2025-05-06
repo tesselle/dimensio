@@ -2,6 +2,19 @@
 #' @include AllGenerics.R
 NULL
 
+# Internal environment =========================================================
+the <- new.env(parent = emptyenv())
+the$margin <- 1     # Updated by prepare_plot()
+the$axes <- c(1, 2) # Updated by prepare_plot()
+
+get_margin <- function(...) {
+  get("margin", envir = the)
+}
+
+get_axes <- function(...) {
+  get("axes", envir = the)
+}
+
 # Rows =========================================================================
 #' @export
 #' @rdname viz_individuals
@@ -361,7 +374,7 @@ viz_points <- function(x, margin, axes, ...,
 
   ## Add ellipse
   if (is.list(ellipse) && length(ellipse) > 0) {
-    args_ell <- list(x = x, group = group, margin = margin, axes = axes,
+    args_ell <- list(x = x, group = group,
                      color = color, fill = FALSE, symbol = FALSE)
     ellipse <- modifyList(args_ell, val = ellipse)
     do.call(viz_ellipses, ellipse)
@@ -369,7 +382,7 @@ viz_points <- function(x, margin, axes, ...,
 
   ## Add convex hull
   if (isTRUE(hull)) {
-    args_hull <- list(x = x, group = group, margin = margin, axes = axes,
+    args_hull <- list(x = x, group = group,
                       color = color, fill = FALSE, symbol = FALSE)
     do.call(viz_hull, args_hull)
   }
@@ -497,6 +510,10 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
   arkhe::assert_length(axes, 2)
   arkhe::assert_scalar(sup, "logical")
   arkhe::assert_scalar(principal, "logical")
+
+  ## Set margin and axes
+  assign("margin", value = margin, envir = the)
+  assign("axes", value = axes, envir = the)
 
   ## /!\ Backward compatibility /!\
   high <- list(...)$highlight

@@ -11,8 +11,7 @@ setMethod(
   definition = function(x, y, ..., group = NULL,
                         color = NULL, fill = FALSE, symbol = FALSE) {
     hull <- wrap_hull(x, y, group = group)
-    .viz_hull(hull, ..., color = color, fill = fill, symbol = symbol)
-
+    .viz_hull(hull, color = color, fill = fill, symbol = symbol, ...)
     invisible(list(x = x, y = y))
   }
 )
@@ -23,26 +22,23 @@ setMethod(
 setMethod(
   f = "viz_hull",
   signature = c(x = "MultivariateAnalysis", y = "missing"),
-  definition = function(x, ..., margin = 1, axes = c(1, 2), group = NULL,
+  definition = function(x, ..., group = NULL,
                         color = NULL, fill = FALSE, symbol = FALSE) {
-    hull <- wrap_hull(x, margin = margin, axes = axes, group = group)
-    .viz_hull(hull, ..., color = color, fill = fill, symbol = symbol)
-
+    hull <- wrap_hull(x, margin = get_margin(), axes = get_axes(), group = group)
+    .viz_hull(hull, color = color, fill = fill, symbol = symbol, ...)
     invisible(x)
   }
 )
 
 #' @export
 #' @rdname viz_hull
-#' @aliases viz_hull,BootstrapCA,missing-method
+#' @aliases viz_hull,MultivariateBootstrap,missing-method
 setMethod(
   f = "viz_hull",
-  signature = c(x = "BootstrapCA", y = "missing"),
-  definition = function(x, ..., margin = 1, axes = c(1, 2),
-                        color = FALSE, fill = FALSE, symbol = FALSE) {
-    group <- get_groups(x, margin = margin)
-    methods::callNextMethod(x, margin = margin, axes = axes, group = group,
-                            color = color, fill = fill, symbol = symbol, ...)
+  signature = c(x = "MultivariateBootstrap", y = "missing"),
+  definition = function(x, ..., color = FALSE, fill = FALSE, symbol = FALSE) {
+    hull <- wrap_hull(x, margin = get_margin(), axes = get_axes(), group = NULL)
+    .viz_hull(hull, color = color, fill = fill, symbol = symbol, ...)
     invisible(x)
   }
 )
@@ -53,11 +49,10 @@ setMethod(
 setMethod(
   f = "viz_hull",
   signature = c(x = "PCOA", y = "missing"),
-  definition = function(x, ..., axes = c(1, 2), group = NULL,
+  definition = function(x, ..., group = NULL,
                         color = FALSE, fill = FALSE, symbol = FALSE) {
-    hull <- wrap_hull(x, axes = axes, group = group)
-    .viz_hull(hull, ..., color = color, fill = fill, symbol = symbol)
-
+    hull <- wrap_hull(x, axes = get_axes(), group = group)
+    .viz_hull(hull, color = color, fill = fill, symbol = symbol, ...)
     invisible(x)
   }
 )

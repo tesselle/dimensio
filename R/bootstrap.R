@@ -109,15 +109,20 @@ setMethod(
     ## Set names
     names_col <- rep_len(object@columns@names, j * (n + 1))
 
-    new_col <- .MultivariateResults(
-      object@columns,
+    new_col <- build_results(
       names = make.unique(names_col, sep = "_"),
       principal = rbind(object@columns@principal, new_coord),
-      cosine = rbind(object@columns@cosine, new_cos),
+      standard = object@columns@standard,
+      contributions = object@columns@contributions,
       distances = c(object@columns@distances, new_dist),
-      supplement = c(object@columns@supplement, !logical(j * n)),
-      groups = names_col
+      cosine = rbind(object@columns@cosine, new_cos),
+      weights = object@columns@weights,
+      supplement = c(object@columns@supplement, !logical(j * n))
     )
+
+    ## Set groups
+    new_col@groups <- names_col
+
     .BootstrapPCA(
       object,
       columns = new_col,

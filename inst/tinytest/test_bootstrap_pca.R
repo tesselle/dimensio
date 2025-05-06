@@ -17,7 +17,7 @@ if (at_home() && Sys.info()["sysname"] == "Linux") {
 
   plot_boot_col <- function() {
     viz_variables(Y, axes = c(1, 2), color = NULL, legend = list(x = "topleft"))
-    viz_tolerance(Y, margin = 2, level = c(0.68, 0.95))
+    viz_tolerance(Y, level = c(0.68, 0.95), color = NULL)
   }
   expect_snapshot_plot(plot_boot_col, "PCA_boot_col")
 }

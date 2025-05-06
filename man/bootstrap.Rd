@@ -42,14 +42,14 @@ get_replications(Y, margin = 2)
 
 ## Plot with ellipses
 viz_rows(Y)
-viz_tolerance(Y, margin = 1, level = c(0.68, 0.95))
+viz_tolerance(Y, level = c(0.68, 0.95))
 
 viz_columns(Y)
-viz_tolerance(Y, margin = 2, level = c(0.68, 0.95))
+viz_tolerance(Y, level = c(0.68, 0.95))
 
 ## Plot with convex hulls
 viz_columns(Y)
-viz_hull(Y, margin = 2)
+viz_hull(Y)
 
 ## Bootstrap on PCA
 ## Compute principal components analysis
@@ -61,7 +61,7 @@ Y <- bootstrap(X, n = 30)
 
 ## Plot with ellipses
 viz_variables(Y)
-viz_tolerance(Y, margin = 2, level = c(0.68, 0.95))
+viz_tolerance(Y, level = c(0.68, 0.95))
 }
 \references{
 Greenacre, Michael J. \emph{Theory and Applications of Correspondence

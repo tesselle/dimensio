@@ -20,13 +20,13 @@ if (at_home() && Sys.info()["sysname"] == "Linux") {
 
   plot_boot_row <- function() {
     viz_rows(Y, axes = c(1, 2), color = NULL, legend = list(x = "topleft"))
-    viz_hull(Y, margin = 1, color = NULL)
+    viz_hull(Y, color = NULL)
   }
   expect_snapshot_plot(plot_boot_row, "CA_boot_row")
 
   plot_boot_col <- function() {
     viz_columns(Y, axes = c(1, 2), color = NULL, legend = list(x = "topleft"))
-    viz_hull(Y, margin = 2, color = NULL)
+    viz_hull(Y, color = NULL)
   }
   expect_snapshot_plot(plot_boot_col, "CA_boot_col")
 }

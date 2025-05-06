@@ -9,7 +9,7 @@
 \alias{wrap_confidence-method}
 \alias{viz_confidence,numeric,numeric-method}
 \alias{viz_confidence,MultivariateAnalysis,missing-method}
-\alias{viz_confidence,BootstrapCA,missing-method}
+\alias{viz_confidence,MultivariateBootstrap,missing-method}
 \alias{viz_confidence,PCOA,missing-method}
 \alias{wrap_confidence,numeric,numeric-method}
 \alias{wrap_confidence,MultivariateAnalysis,missing-method}
@@ -34,8 +34,6 @@ wrap_confidence(x, y, ...)
 \S4method{viz_confidence}{MultivariateAnalysis,missing}(
   x,
   ...,
-  margin = 1,
-  axes = c(1, 2),
   group = NULL,
   level = 0.95,
   color = NULL,
@@ -43,11 +41,9 @@ wrap_confidence(x, y, ...)
   symbol = FALSE
 )
 
-\S4method{viz_confidence}{BootstrapCA,missing}(
+\S4method{viz_confidence}{MultivariateBootstrap,missing}(
   x,
   ...,
-  margin = 1,
-  axes = c(1, 2),
   level = 0.95,
   color = FALSE,
   fill = FALSE,
@@ -92,12 +88,12 @@ Ignored if set to \code{FALSE}.}
 \item{symbol}{A vector of symbols (will be mapped to \code{group}).
 Ignored if set to \code{FALSE}.}
 
+\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
+for which to compute results.}
+
 \item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
 data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
 indicates variables/columns.}
-
-\item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
-for which to compute results.}
 }
 \value{
 \code{wrap_confidence()} returns a \code{\link{data.frame}} of envelope \code{x} and \code{y}

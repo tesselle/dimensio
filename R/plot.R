@@ -6,16 +6,18 @@ NULL
 #' @method plot PCOA
 plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
                       extra_quali = NULL, extra_quanti = NULL,
-                      ellipse = NULL, hull = NULL,
+                      ellipse = NULL, hull = FALSE,
                       color = NULL, fill = FALSE, symbol = FALSE, size = c(1, 6),
                       xlim = NULL, ylim = NULL, main = NULL, sub = NULL,
                       ann = graphics::par("ann"), frame.plot = TRUE,
                       panel.first = NULL, panel.last = NULL,
                       legend = list(x = "topleft")) {
-  ## Prepare data
+  ## Set axes
   arkhe::assert_type(axes, "numeric")
   arkhe::assert_length(axes, 2)
+  assign("axes", value = axes, envir = the)
 
+  ## Prepare data
   coord <- get_coordinates(x)
   coord$x <- coord[[axes[[1L]]]]
   coord$y <- coord[[axes[[2L]]]]

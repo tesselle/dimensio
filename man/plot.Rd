@@ -14,7 +14,7 @@
   extra_quali = NULL,
   extra_quanti = NULL,
   ellipse = NULL,
-  hull = NULL,
+  hull = FALSE,
   color = NULL,
   fill = FALSE,
   symbol = FALSE,

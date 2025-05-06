@@ -8,7 +8,7 @@
 \alias{wrap_hull-method}
 \alias{viz_hull,numeric,numeric-method}
 \alias{viz_hull,MultivariateAnalysis,missing-method}
-\alias{viz_hull,BootstrapCA,missing-method}
+\alias{viz_hull,MultivariateBootstrap,missing-method}
 \alias{viz_hull,PCOA,missing-method}
 \alias{wrap_hull,numeric,numeric-method}
 \alias{wrap_hull,MultivariateAnalysis,missing-method}
@@ -21,36 +21,11 @@ wrap_hull(x, y, ...)
 
 \S4method{viz_hull}{numeric,numeric}(x, y, ..., group = NULL, color = NULL, fill = FALSE, symbol = FALSE)
 
-\S4method{viz_hull}{MultivariateAnalysis,missing}(
-  x,
-  ...,
-  margin = 1,
-  axes = c(1, 2),
-  group = NULL,
-  color = NULL,
-  fill = FALSE,
-  symbol = FALSE
-)
+\S4method{viz_hull}{MultivariateAnalysis,missing}(x, ..., group = NULL, color = NULL, fill = FALSE, symbol = FALSE)
 
-\S4method{viz_hull}{BootstrapCA,missing}(
-  x,
-  ...,
-  margin = 1,
-  axes = c(1, 2),
-  color = FALSE,
-  fill = FALSE,
-  symbol = FALSE
-)
+\S4method{viz_hull}{MultivariateBootstrap,missing}(x, ..., color = FALSE, fill = FALSE, symbol = FALSE)
 
-\S4method{viz_hull}{PCOA,missing}(
-  x,
-  ...,
-  axes = c(1, 2),
-  group = NULL,
-  color = FALSE,
-  fill = FALSE,
-  symbol = FALSE
-)
+\S4method{viz_hull}{PCOA,missing}(x, ..., group = NULL, color = FALSE, fill = FALSE, symbol = FALSE)
 
 \S4method{wrap_hull}{numeric,numeric}(x, y, group = NULL)
 
