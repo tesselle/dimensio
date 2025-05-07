@@ -62,7 +62,14 @@ wrap_tolerance(x, y, ...)
 
 \S4method{wrap_tolerance}{numeric,numeric}(x, y, group = NULL, level = 0.95)
 
-\S4method{wrap_tolerance}{MultivariateAnalysis,missing}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
+\S4method{wrap_tolerance}{MultivariateAnalysis,missing}(
+  x,
+  margin = 1,
+  axes = c(1, 2),
+  group = NULL,
+  level = 0.95,
+  principal = TRUE
+)
 
 \S4method{wrap_tolerance}{PCOA,missing}(x, axes = c(1, 2), group = NULL, level = 0.95)
 }
@@ -93,6 +100,9 @@ indicates variables/columns.}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
 for which to compute results.}
+
+\item{principal}{A \code{\link{logical}} scalar: should principal coordinates be
+used? If \code{FALSE}, standard coordinates are returned.}
 }
 \value{
 \code{wrap_tolerance()} returns a \code{\link{data.frame}} of envelope \code{x} and \code{y}

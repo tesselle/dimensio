@@ -24,7 +24,8 @@ setMethod(
   signature = c(x = "MultivariateAnalysis", y = "missing"),
   definition = function(x, ..., group = NULL,
                         color = NULL, fill = FALSE, symbol = FALSE) {
-    hull <- wrap_hull(x, margin = get_margin(), axes = get_axes(), group = group)
+    hull <- wrap_hull(x, margin = get_margin(), axes = get_axes(),
+                      group = group, principal = get_principal())
     .viz_hull(hull, color = color, fill = fill, symbol = symbol, ...)
     invisible(x)
   }
@@ -37,7 +38,8 @@ setMethod(
   f = "viz_hull",
   signature = c(x = "MultivariateBootstrap", y = "missing"),
   definition = function(x, ..., color = FALSE, fill = FALSE, symbol = FALSE) {
-    hull <- wrap_hull(x, margin = get_margin(), axes = get_axes(), group = NULL)
+    hull <- wrap_hull(x, margin = get_margin(), axes = get_axes(),
+                      group = NULL, principal = get_principal())
     .viz_hull(hull, color = color, fill = fill, symbol = symbol, ...)
     invisible(x)
   }

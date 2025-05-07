@@ -40,7 +40,7 @@ setMethod(
       confidence = wrap_confidence
     )
     ell <- fun(x, margin = get_margin(), axes = get_axes(),
-               group = group, level = level)
+               group = group, level = level, principal = get_principal())
     .viz_ellipses(ell, color = color, fill = fill, symbol = symbol, ...)
 
     invisible(x)

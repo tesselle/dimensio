@@ -702,6 +702,8 @@ setGeneric(
 #' @param axes A length-two [`numeric`] vector giving the dimensions
 #'  for which to compute results.
 #' @param group A vector specifying the group an observation belongs to.
+#' @param principal A [`logical`] scalar: should principal coordinates be
+#'  used? If `FALSE`, standard coordinates are returned.
 #' @param color The colors for borders (will be mapped to `group`).
 #'  Ignored if set to `FALSE`. If `NULL`, the default color scheme will be used.
 #' @param fill The background colors (will be mapped to `group`).

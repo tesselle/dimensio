@@ -63,7 +63,14 @@ wrap_confidence(x, y, ...)
 
 \S4method{wrap_confidence}{numeric,numeric}(x, y, group = NULL, level = 0.95)
 
-\S4method{wrap_confidence}{MultivariateAnalysis,missing}(x, margin = 1, axes = c(1, 2), group = NULL, level = 0.95)
+\S4method{wrap_confidence}{MultivariateAnalysis,missing}(
+  x,
+  margin = 1,
+  axes = c(1, 2),
+  group = NULL,
+  level = 0.95,
+  principal = TRUE
+)
 
 \S4method{wrap_confidence}{PCOA,missing}(x, axes = c(1, 2), group = NULL, level = 0.95)
 }
@@ -94,6 +101,9 @@ for which to compute results.}
 \item{margin}{A length-one \code{\link{numeric}} vector giving the subscript which the
 data will be returned: \code{1} indicates individuals/rows (the default), \code{2}
 indicates variables/columns.}
+
+\item{principal}{A \code{\link{logical}} scalar: should principal coordinates be
+used? If \code{FALSE}, standard coordinates are returned.}
 }
 \value{
 \code{wrap_confidence()} returns a \code{\link{data.frame}} of envelope \code{x} and \code{y}

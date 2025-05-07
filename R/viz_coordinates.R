@@ -4,8 +4,9 @@ NULL
 
 # Internal environment =========================================================
 the <- new.env(parent = emptyenv())
-the$margin <- 1     # Updated by prepare_plot()
-the$axes <- c(1, 2) # Updated by prepare_plot()
+the$margin <- 1       # Updated by prepare_plot()
+the$axes <- c(1, 2)   # Updated by prepare_plot()
+the$principal <- TRUE # Updated by prepare_plot()
 
 get_margin <- function(...) {
   get("margin", envir = the)
@@ -13,6 +14,10 @@ get_margin <- function(...) {
 
 get_axes <- function(...) {
   get("axes", envir = the)
+}
+
+get_principal <- function(...) {
+  get("principal", envir = the)
 }
 
 # Rows =========================================================================
@@ -514,6 +519,7 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
   ## Set margin and axes
   assign("margin", value = margin, envir = the)
   assign("axes", value = axes, envir = the)
+  assign("principal", value = principal, envir = the)
 
   ## /!\ Backward compatibility /!\
   high <- list(...)$highlight

@@ -29,7 +29,7 @@ wrap_hull(x, y, ...)
 
 \S4method{wrap_hull}{numeric,numeric}(x, y, group = NULL)
 
-\S4method{wrap_hull}{MultivariateAnalysis,missing}(x, margin = 1, axes = c(1, 2), group = NULL)
+\S4method{wrap_hull}{MultivariateAnalysis,missing}(x, margin = 1, axes = c(1, 2), group = NULL, principal = TRUE)
 
 \S4method{wrap_hull}{PCOA,missing}(x, axes = c(1, 2), group = NULL)
 }
@@ -58,6 +58,9 @@ indicates variables/columns.}
 
 \item{axes}{A length-two \code{\link{numeric}} vector giving the dimensions
 for which to compute results.}
+
+\item{principal}{A \code{\link{logical}} scalar: should principal coordinates be
+used? If \code{FALSE}, standard coordinates are returned.}
 }
 \value{
 \code{wrap_hull()} returns a \code{\link{data.frame}} of envelope \code{x} and \code{y} coordinates.
