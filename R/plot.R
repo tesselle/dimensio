@@ -23,7 +23,8 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
   coord$y <- coord[[axes[[2L]]]]
   n <- NROW(coord)
 
-  ## Recycle graphical parameters if of length one
+  ## Set graphical parameters
+  ## (recycle if of length one)
   dots <- list(...)
   col <- recycle(dots$col %||% graphics::par("col"), n)
   bg <- recycle(dots$bg %||% graphics::par("bg"), n)
@@ -34,16 +35,26 @@ plot.PCOA <- function(x, ..., axes = c(1, 2), labels = FALSE,
   if (length(extra_quanti) > 0) {
     arkhe::assert_type(extra_quanti, "numeric")
     arkhe::assert_length(extra_quanti, n)
-    if (!isFALSE(color)) col <- khroma::palette_color_continuous(colors = color)(extra_quanti)
-    if (!isFALSE(fill)) bg <- khroma::palette_color_continuous(colors = fill)(extra_quanti)
-    if (!isFALSE(size)) cex <- khroma::palette_size_sequential(range = size)(extra_quanti)
+    ## Continuous scales
+    ## (ignored if col, bg and cex are set by user)
+    if (is.null(dots$col) && !isFALSE(color))
+      col <- khroma::palette_color_continuous(colors = color)(extra_quanti)
+    if (is.null(dots$bg) && !isFALSE(fill))
+      bg <- khroma::palette_color_continuous(colors = fill)(extra_quanti)
+    if (is.null(dots$cex) && !isFALSE(size))
+      cex <- khroma::palette_size_sequential(range = size)(extra_quanti)
   }
   ## Highlight qualitative information
   if (length(extra_quali) > 0) {
     arkhe::assert_length(extra_quali, n)
-    if (!isFALSE(color)) col <- khroma::palette_color_discrete(colors = color)(extra_quali)
-    if (!isFALSE(fill)) bg <- khroma::palette_color_discrete(colors = fill)(extra_quali)
-    if (!isFALSE(symbol)) pch <- khroma::palette_shape(symbols = symbol)(extra_quali)
+    ## Discrete scales
+    ## (ignored if col, bg and pch are set by user)
+    if (is.null(dots$col) && !isFALSE(color))
+      col <- khroma::palette_color_discrete(colors = color)(extra_quali)
+    if (is.null(dots$bg) && !isFALSE(fill))
+      bg <- khroma::palette_color_discrete(colors = fill)(extra_quali)
+    if (is.null(dots$pch) && !isFALSE(symbol))
+      pch <- khroma::palette_shape(symbols = symbol)(extra_quali)
   }
 
   ## Save and restore graphical parameters

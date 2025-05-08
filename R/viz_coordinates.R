@@ -521,12 +521,6 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
   assign("axes", value = axes, envir = the)
   assign("principal", value = principal, envir = the)
 
-  ## /!\ Backward compatibility /!\
-  high <- list(...)$highlight
-  if (length(high) == 1) {
-    if (high == "observation") extra_quali <- high else extra_quanti <- high
-  }
-
   ## Prepare data
   data <- augment(x, margin = margin, axes = axes, principal = principal)
   n <- nrow(data)
@@ -534,7 +528,8 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
   ## Recode
   data$observation <- ifelse(data$supplementary, "suppl.", "active")
 
-  ## Recycle graphical parameters if of length one
+  ## Set graphical parameters
+  ## (recycle if of length one)
   dots <- list(...)
   col <- recycle(dots$col %||% graphics::par("col"), n)
   bg <- recycle(dots$bg %||% graphics::par("bg"), n)
@@ -559,10 +554,15 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
     arkhe::assert_type(extra_quanti, "numeric")
     arkhe::assert_length(extra_quanti, n)
     ## Continuous scales
-    if (!isFALSE(color)) col <- khroma::palette_color_continuous(colors = color)(extra_quanti)
-    if (!isFALSE(fill)) bg <- khroma::palette_color_continuous(colors = fill)(extra_quanti)
-    if (!isFALSE(size)) cex <- khroma::palette_size_sequential(range = size)(extra_quanti)
-    if (!isFALSE(line_width)) lwd <- khroma::palette_size_sequential(range = line_width)(extra_quanti)
+    ## (ignored if col, bg, cex and lwd are set by user)
+    if (is.null(dots$col) && !isFALSE(color))
+      col <- khroma::palette_color_continuous(colors = color)(extra_quanti)
+    if (is.null(dots$bg) && !isFALSE(fill))
+      bg <- khroma::palette_color_continuous(colors = fill)(extra_quanti)
+    if (is.null(dots$cex) && !isFALSE(size))
+      cex <- khroma::palette_size_sequential(range = size)(extra_quanti)
+    if (is.null(dots$lwd) && !isFALSE(line_width))
+      lwd <- khroma::palette_size_sequential(range = line_width)(extra_quanti)
   } else {
     extra_quanti <- rep(NA_real_, n)
   }
@@ -585,10 +585,15 @@ prepare_plot <- function(x, margin, ..., axes = c(1, 2), active = TRUE,
     extra_quali <- as.vector(extra_quali)
     arkhe::assert_length(extra_quali, n)
     ## Discrete scales
-    if (!isFALSE(color)) col <- khroma::palette_color_discrete(colors = color)(extra_quali)
-    if (!isFALSE(fill)) bg <- khroma::palette_color_discrete(colors = fill)(extra_quali)
-    if (!isFALSE(symbol)) pch <- khroma::palette_shape(symbols = symbol)(extra_quali)
-    if (!isFALSE(line_type)) lty <- khroma::palette_line(types = line_type)(extra_quali)
+    ## (ignored if col, bg, pch and lty are set by user)
+    if (is.null(dots$col) && !isFALSE(color))
+      col <- khroma::palette_color_discrete(colors = color)(extra_quali)
+    if (is.null(dots$bg) && !isFALSE(fill))
+      bg <- khroma::palette_color_discrete(colors = fill)(extra_quali)
+    if (is.null(dots$pch) && !isFALSE(symbol))
+      pch <- khroma::palette_shape(symbols = symbol)(extra_quali)
+    if (is.null(dots$lty) && !isFALSE(line_type))
+      lty <- khroma::palette_line(types = line_type)(extra_quali)
   } else {
     extra_quali <- rep(NA_character_, n)
   }

@@ -74,12 +74,12 @@ setMethod(
   if (n > 1) {
     ## Discrete scales
     extra_quali <- names(x)
-    if (!isFALSE(color))
-      col <- khroma::palette_color_discrete(colors = color)(extra_quali)
-    if (!isFALSE(fill))
-      bg <- khroma::palette_color_discrete(colors = fill)(extra_quali)
-    if (!isFALSE(symbol))
-      lty <- khroma::palette_line(types = symbol)(extra_quali)
+    if (is.null(dots$border) && !isFALSE(color))
+      col <- khroma::palette_color_discrete(color)(extra_quali)
+    if (is.null(dots$col) && !isFALSE(fill))
+      bg <- khroma::palette_color_discrete(fill)(extra_quali)
+    if (is.null(dots$lty) && !isFALSE(symbol))
+      lty <- khroma::palette_line(symbol)(extra_quali)
   }
 
   for (i in seq_along(x)) {
