@@ -266,7 +266,8 @@ setOldClass("dist")
 
 # Initialize ===================================================================
 build_results <- function(names, principal, standard, contributions,
-                          distances, cosine, weights, supplement) {
+                          distances, cosine, weights, supplement,
+                          groups = NULL) {
   ## /!\ Reorder active/supplementary points /!\
   ## Computation moves all supplementary points at the end of the results
   new_i <- seq_len(nrow(principal))
@@ -275,6 +276,9 @@ build_results <- function(names, principal, standard, contributions,
     sup_i <- utils::tail(new_i, n = sum(supplement))
     new_i <- c(new_i[!supplement], new_i[supplement])
     names <- names[new_i]
+    if (length(groups) > 0) {
+      groups <- groups[new_i]
+    }
   }
 
   ## Prepare names
@@ -298,6 +302,7 @@ build_results <- function(names, principal, standard, contributions,
     distances = distances,
     weights = weights,
     supplement = sort(supplement),
-    order = new_i
+    order = new_i,
+    groups = groups %||% character(0)
   )
 }

@@ -27,7 +27,7 @@ setMethod(
     group <- group[ok]
 
     ## Compute ellipse
-    index <- split(seq_len(n), f = group)
+    index <- split(seq_along(group), f = group)
     lapply(
       X = index,
       FUN = function(i) {

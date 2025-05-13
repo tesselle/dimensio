@@ -117,11 +117,9 @@ setMethod(
       distances = c(object@columns@distances, new_dist),
       cosine = rbind(object@columns@cosine, new_cos),
       weights = object@columns@weights,
-      supplement = c(object@columns@supplement, !logical(j * n))
+      supplement = c(object@columns@supplement, !logical(j * n)),
+      groups = names_col
     )
-
-    ## Set groups
-    new_col@groups <- names_col
 
     .BootstrapPCA(
       object,
