@@ -1,36 +1,22 @@
 #' @details
 #' \tabular{ll}{
-#'  **Package:** \tab dimensio \cr
-#'  **Type:** \tab Package \cr
-#'  **Version:** \tab 0.13.0 \cr
-#'  **License:** \tab GPL-3 \cr
-#'  **Zenodo:** \tab \doi{10.5281/zenodo.4478530} \cr
+#'  **Version** \tab 0.13.0 \cr
+#'  **License** \tab GPL-3 \cr
+#'  **CRAN DOI** \tab \doi{10.32614/CRAN.package.dimensio} \cr
+#'  **Zenodo DOI** \tab \doi{10.5281/zenodo.4478530} \cr
 #' }
-#'
-#' @section Package options:
-#'  \pkg{dimensio} uses the following [options()] to configure behavior:
-#'  * `dimensio.verbose`: a [`logical`] scalar. Should \R report extra
-#'    information on progress? Defaults to [interactive()].
-#'
-#' @author
-#' **Full list of authors and contributors** (alphabetic order)
-#'
-#' \tabular{ll}{
-#'  Jean-Baptiste Fourvel \tab *CNRS, France* \cr
-#'  Nicolas Frerebeau \tab *Université Bordeaux Montaigne, France* \cr
-#'  Brice Lebrun \tab *Université Bordeaux Montaigne, France* \cr
-#' }
-#'
-#' **Package maintainer**
-#'
-#' Nicolas Frerebeau\cr
-#' \email{nicolas.frerebeau@@u-bordeaux-montaigne.fr}
 #'
 #' Archéosciences Bordeaux (UMR 6034)\cr
 #' Maison de l'Archéologie\cr
 #' Université Bordeaux Montaigne\cr
 #' F-33607 Pessac cedex\cr
 #' France
+#'
+#' @section Package options:
+#'  \pkg{dimensio} uses the following [options()] to configure behavior:
+#'  * `dimensio.verbose`: a [`logical`] scalar. Should \R report extra
+#'    information on progress? Defaults to [interactive()].
+#'
 #' @name dimensio-package
 #' @aliases dimensio
 #' @docType package

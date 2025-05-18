@@ -12,12 +12,17 @@ Simple Principal Components Analysis (PCA) and (Multiple) Correspondence Analysi
 }
 \details{
 \tabular{ll}{
-\strong{Package:} \tab dimensio \cr
-\strong{Type:} \tab Package \cr
-\strong{Version:} \tab 0.13.0 \cr
-\strong{License:} \tab GPL-3 \cr
-\strong{Zenodo:} \tab \doi{10.5281/zenodo.4478530} \cr
+\strong{Version} \tab 0.13.0 \cr
+\strong{License} \tab GPL-3 \cr
+\strong{CRAN DOI} \tab \doi{10.32614/CRAN.package.dimensio} \cr
+\strong{Zenodo DOI} \tab \doi{10.5281/zenodo.4478530} \cr
 }
+
+Archéosciences Bordeaux (UMR 6034)\cr
+Maison de l'Archéologie\cr
+Université Bordeaux Montaigne\cr
+F-33607 Pessac cedex\cr
+France
 }
 \section{Package options}{
 
@@ -32,29 +37,23 @@ information on progress? Defaults to \code{\link[=interactive]{interactive()}}.
 Useful links:
 \itemize{
   \item \url{https://codeberg.org/tesselle/dimensio}
+  \item \url{https://tesselle.r-universe.dev/dimensio}
   \item \url{https://packages.tesselle.org/dimensio/}
   \item Report bugs at \url{https://codeberg.org/tesselle/dimensio/issues}
 }
 
 }
 \author{
-\strong{Full list of authors and contributors} (alphabetic order)
+\strong{Maintainer}: Nicolas Frerebeau \email{nicolas.frerebeau@u-bordeaux-montaigne.fr} (\href{https://orcid.org/0000-0001-5759-4944}{ORCID})
 
-\tabular{ll}{
-Jean-Baptiste Fourvel \tab \emph{CNRS, France} \cr
-Nicolas Frerebeau \tab \emph{Université Bordeaux Montaigne, France} \cr
-Brice Lebrun \tab \emph{Université Bordeaux Montaigne, France} \cr
+Other contributors:
+\itemize{
+  \item Jean-Baptiste Fourvel \email{jean-baptiste.fourvel@univ-amu.fr} (\href{https://orcid.org/0000-0002-1061-4642}{ORCID}) [contributor]
+  \item Camille Thabard \email{camille.thabard@univ-tlse2.fr} (\href{https://orcid.org/0000-0002-3196-7658}{ORCID}) [contributor]
+  \item Brice Lebrun (\href{https://orcid.org/0000-0001-7503-8685}{ORCID}) (Logo designer) [artist]
+  \item Université Bordeaux Montaigne (03pbgwk21) [funder]
+  \item CNRS (02feahw73) [funder]
 }
 
-\strong{Package maintainer}
-
-Nicolas Frerebeau\cr
-\email{nicolas.frerebeau@u-bordeaux-montaigne.fr}
-
-Archéosciences Bordeaux (UMR 6034)\cr
-Maison de l'Archéologie\cr
-Université Bordeaux Montaigne\cr
-F-33607 Pessac cedex\cr
-France
 }
 \keyword{internal}

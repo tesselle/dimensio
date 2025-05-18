@@ -25,6 +25,7 @@ Description: Simple Principal Components Analysis (PCA) and (Multiple)
     al. (2006, ISBN: 978-2-10-049616-7).
 License: GPL (>= 3)
 URL: https://codeberg.org/tesselle/dimensio,
+    https://tesselle.r-universe.dev/dimensio,
     https://packages.tesselle.org/dimensio/
 BugReports: https://codeberg.org/tesselle/dimensio/issues
 Depends: 
