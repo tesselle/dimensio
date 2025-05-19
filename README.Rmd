@@ -19,7 +19,6 @@ Sys.setenv(LANGUAGE = "en") # Force locale
 # dimensio <img width=120px src="man/figures/logo.png" align="right" />
 
 <!-- badges: start -->
-[![status-badge](https://ci.codeberg.org/api/badges/14689/status.svg)](https://ci.codeberg.org/repos/14689){.pkgdown-devel}
 [![Code coverage](https://packages.tesselle.org/dimensio/coverage/badge.svg)](https://packages.tesselle.org/dimensio/coverage/){.pkgdown-devel}
 [![Dependencies](https://tinyverse.netlify.app/badge/dimensio)](https://cran.r-project.org/package=dimensio){.pkgdown-devel}
 

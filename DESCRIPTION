@@ -1,6 +1,6 @@
 Package: dimensio
 Title: Multivariate Data Analysis
-Version: 0.13.0.9000
+Version: 0.14.0
 Authors@R: c(
     person("Nicolas", "Frerebeau", , "nicolas.frerebeau@u-bordeaux-montaigne.fr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-5759-4944")),
@@ -25,8 +25,8 @@ Description: Simple Principal Components Analysis (PCA) and (Multiple)
     al. (2006, ISBN: 978-2-10-049616-7).
 License: GPL (>= 3)
 URL: https://codeberg.org/tesselle/dimensio,
-    https://tesselle.r-universe.dev/dimensio,
-    https://packages.tesselle.org/dimensio/
+    https://packages.tesselle.org/dimensio/,
+    https://tesselle.r-universe.dev/dimensio
 BugReports: https://codeberg.org/tesselle/dimensio/issues
 Depends: 
     R (>= 3.5)
@@ -50,7 +50,7 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.2.9000
 X-schema.org-isPartOf: https://www.tesselle.org
 X-schema.org-keywords: data-analysis, multivariate-analysis, r-package
 Collate: 

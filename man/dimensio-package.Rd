@@ -12,7 +12,7 @@ Simple Principal Components Analysis (PCA) and (Multiple) Correspondence Analysi
 }
 \details{
 \tabular{ll}{
-\strong{Version} \tab 0.13.0 \cr
+\strong{Version} \tab 0.14.0 \cr
 \strong{License} \tab GPL-3 \cr
 \strong{CRAN DOI} \tab \doi{10.32614/CRAN.package.dimensio} \cr
 \strong{Zenodo DOI} \tab \doi{10.5281/zenodo.4478530} \cr
@@ -51,8 +51,8 @@ Other contributors:
   \item Jean-Baptiste Fourvel \email{jean-baptiste.fourvel@univ-amu.fr} (\href{https://orcid.org/0000-0002-1061-4642}{ORCID}) [contributor]
   \item Camille Thabard \email{camille.thabard@univ-tlse2.fr} (\href{https://orcid.org/0000-0002-3196-7658}{ORCID}) [contributor]
   \item Brice Lebrun (\href{https://orcid.org/0000-0001-7503-8685}{ORCID}) (Logo designer) [artist]
-  \item Université Bordeaux Montaigne (03pbgwk21) [funder]
-  \item CNRS (02feahw73) [funder]
+  \item Université Bordeaux Montaigne (\href{https://ror.org/03pbgwk21}{ROR}) [funder]
+  \item CNRS (\href{https://ror.org/02feahw73}{ROR}) [funder]
 }
 
 }
