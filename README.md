@@ -9,6 +9,10 @@
 class="pkgdown-devel"><img
 src="https://packages.tesselle.org/dimensio/coverage/badge.svg"
 alt="Code coverage" /></a>
+<a href="https://packages.tesselle.org/dimensio/coverage/"
+class="pkgdown-devel"><img
+src="https://packages.tesselle.org/dimensio/coverage/badge.svg"
+alt="Code coverage" /></a>
 <a href="https://cran.r-project.org/package=dimensio"
 class="pkgdown-devel"><img
 src="https://tinyverse.netlify.app/badge/dimensio"

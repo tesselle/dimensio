@@ -20,6 +20,7 @@ Sys.setenv(LANGUAGE = "en") # Force locale
 
 <!-- badges: start -->
 [![Code coverage](https://packages.tesselle.org/dimensio/coverage/badge.svg)](https://packages.tesselle.org/dimensio/coverage/){.pkgdown-devel}
+[![Code coverage](https://packages.tesselle.org/dimensio/coverage/badge.svg)](https://packages.tesselle.org/dimensio/coverage/){.pkgdown-devel}
 [![Dependencies](https://tinyverse.netlify.app/badge/dimensio)](https://cran.r-project.org/package=dimensio){.pkgdown-devel}
 
 [![r-universe](https://tesselle.r-universe.dev/badges/dimensio)](https://tesselle.r-universe.dev/dimensio){.pkgdown-devel}
